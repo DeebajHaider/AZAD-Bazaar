@@ -19,7 +19,7 @@ export default function Product() {
     title: 'Sample Product Title',
     price: 299,
     originalPrice: 349,
-    image: 'https://placehold.co/600x400?text=Product+Image',
+    image: 'https://via.placeholder.com/600x400?text=Product',
     description: 'This is a sample product description. Replace with real product details when available.',
     inStock: true,
     stockCount: 10

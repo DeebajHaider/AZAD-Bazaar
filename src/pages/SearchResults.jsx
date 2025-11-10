@@ -15,7 +15,7 @@ const DUMMY_RESULTS = [
     category: 'Vegetables',
     inStock: true,
     stock: 24,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Potatoes'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const DUMMY_RESULTS = [
     category: 'Personal Care',
     inStock: true,
     stock: 10,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Soap'
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const DUMMY_RESULTS = [
     category: 'Grains',
     inStock: true,
     stock: 8,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Rice'
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ const DUMMY_RESULTS = [
     category: 'Dairy',
     inStock: false,
     stock: 0,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Milk'
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ const DUMMY_RESULTS = [
     category: 'Meat',
     inStock: true,
     stock: 6,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Chicken'
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ const DUMMY_RESULTS = [
     category: 'Personal Care',
     inStock: true,
     stock: 20,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Toothpaste'
   },
   {
     id: 7,
@@ -87,7 +87,7 @@ const DUMMY_RESULTS = [
     category: 'Vegetables',
     inStock: true,
     stock: 30,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Tomatoes'
   },
   {
     id: 8,
@@ -99,7 +99,7 @@ const DUMMY_RESULTS = [
     category: 'Bakery',
     inStock: false,
     stock: 0,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Bread'
   },
   {
     id: 9,
@@ -111,7 +111,7 @@ const DUMMY_RESULTS = [
     category: 'Dairy',
     inStock: true,
     stock: 12,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Eggs'
   },
   {
     id: 10,
@@ -123,7 +123,7 @@ const DUMMY_RESULTS = [
     category: 'Household',
     inStock: true,
     stock: 5,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Detergent'
   },
   {
     id: 11,
@@ -135,7 +135,7 @@ const DUMMY_RESULTS = [
     category: 'Beverages',
     inStock: true,
     stock: 9,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=OJ'
   },
   {
     id: 12,
@@ -147,7 +147,7 @@ const DUMMY_RESULTS = [
     category: 'Vegetables',
     inStock: true,
     stock: 40,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Onions'
   },
   {
     id: 13,
@@ -159,7 +159,7 @@ const DUMMY_RESULTS = [
     category: 'Household',
     inStock: true,
     stock: 15,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Toilet+Paper'
   },
   {
     id: 14,
@@ -171,7 +171,7 @@ const DUMMY_RESULTS = [
     category: 'Dairy',
     inStock: true,
     stock: 22,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Yogurt'
   },
   {
     id: 15,
@@ -183,7 +183,7 @@ const DUMMY_RESULTS = [
     category: 'Fruits',
     inStock: true,
     stock: 18,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Banana'
   },
   {
     id: 16,
@@ -195,7 +195,7 @@ const DUMMY_RESULTS = [
     category: 'Personal Care',
     inStock: true,
     stock: 7,
-    image: 'https://placehold.co/300x200'
+    image: 'https://via.placeholder.com/300x200?text=Sanitizer'
   }
 ]
 

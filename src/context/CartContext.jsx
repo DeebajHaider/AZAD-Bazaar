@@ -6,7 +6,7 @@ const SAMPLE_INITIAL = [
   {
     itemCode: 'ITEM001',
     itemName: 'Bazaar Select Dar Chini 100g',
-    itemPhoto: 'https://placehold.co/80',
+    itemPhoto: 'https://via.placeholder.com/80?text=Spice',
     itemPrice: 119,
     itemOldPrice: 159,
     quantity: 1,
@@ -14,7 +14,7 @@ const SAMPLE_INITIAL = [
   {
     itemCode: 'ITEM002',
     itemName: 'Organic Turmeric Powder 200g',
-    itemPhoto: 'https://placehold.co/80',
+    itemPhoto: 'https://via.placeholder.com/80?text=Turmeric',
     itemPrice: 299,
     itemOldPrice: 349,
     quantity: 2,
@@ -22,7 +22,7 @@ const SAMPLE_INITIAL = [
   {
     itemCode: 'ITEM003',
     itemName: 'Clove Premium 50g',
-    itemPhoto: 'https://placehold.co/80',
+    itemPhoto: 'https://via.placeholder.com/80?text=Clove',
     itemPrice: 199,
     itemOldPrice: 249,
     quantity: 3,
