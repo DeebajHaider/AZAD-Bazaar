@@ -12,7 +12,7 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 128,
     category: 'Vegetables',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const DUMMY_RESULTS = [
     rating: 4.8,
     reviews: 75,
     category: 'Personal Care',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const DUMMY_RESULTS = [
     rating: 4.2,
     reviews: 45,
     category: 'Grains',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 92,
     category: 'Dairy',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const DUMMY_RESULTS = [
     rating: 4.7,
     reviews: 63,
     category: 'Meat',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const DUMMY_RESULTS = [
     rating: 4.4,
     reviews: 37,
     category: 'Personal Care',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 7,
@@ -72,7 +72,7 @@ const DUMMY_RESULTS = [
     rating: 4.3,
     reviews: 82,
     category: 'Vegetables',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 8,
@@ -82,7 +82,7 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 156,
     category: 'Bakery',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 9,
@@ -92,7 +92,7 @@ const DUMMY_RESULTS = [
     rating: 4.8,
     reviews: 203,
     category: 'Dairy',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 10,
@@ -102,7 +102,7 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 167,
     category: 'Household',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 11,
@@ -112,7 +112,7 @@ const DUMMY_RESULTS = [
     rating: 4.4,
     reviews: 89,
     category: 'Beverages',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 12,
@@ -122,7 +122,7 @@ const DUMMY_RESULTS = [
     rating: 4.2,
     reviews: 71,
     category: 'Vegetables',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 13,
@@ -132,7 +132,7 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 245,
     category: 'Household',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 14,
@@ -142,7 +142,7 @@ const DUMMY_RESULTS = [
     rating: 4.7,
     reviews: 112,
     category: 'Dairy',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 15,
@@ -152,7 +152,7 @@ const DUMMY_RESULTS = [
     rating: 4.3,
     reviews: 95,
     category: 'Fruits',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   },
   {
     id: 16,
@@ -162,7 +162,7 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 178,
     category: 'Personal Care',
-    image: 'https://placeholder.co/300x200'
+    image: 'https://placehold.co/300x200'
   }
 ]
 
