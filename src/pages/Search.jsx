@@ -1,29 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowLeft, Search as SearchIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Search() {
   const navigate = useNavigate()
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchTerm.trim()) {
+      navigate(`/search-results?q=${encodeURIComponent(searchTerm.trim())}`)
+    }
+  }
 
   return (
-    <div style={{minHeight:'100vh', background:'var(--color-bg)', color:'var(--color-text-primary)'}}>
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)]">
       {/* Header */}
-      <div style={{position:'sticky', top:0, background:'var(--color-surface)', borderBottom:'1px solid var(--color-border)', padding:'var(--space-2) var(--space-4)', display:'flex', alignItems:'center', gap:'var(--space-3)', zIndex:10}}>
-        <button onClick={() => navigate(-1)} style={{padding:'var(--space-1)', background:'none', border:'none', cursor:'pointer', color:'var(--color-text-primary)', display:'flex', alignItems:'center'}}>
+      <form onSubmit={handleSearch} className="sticky top-0 bg-[var(--color-surface)] border-b border-[var(--color-border)] p-2 flex items-center gap-3 z-10">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="p-1 bg-transparent border-none cursor-pointer text-[var(--color-text-primary)] flex items-center"
+        >
           <ArrowLeft size={24} />
         </button>
-        <div style={{flex:1}}>
+        <div className="flex-1 flex gap-2">
           <input
             autoFocus
             type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for items..."
-            style={{width:'100%', padding:'var(--space-2) var(--space-4)', background:'var(--color-surface-alt)', borderRadius:'var(--radius-md)', color:'var(--color-text-primary)', border:'none', outline:'none', fontSize:'inherit'}}
+            className="flex-1 py-2 px-4 bg-[var(--color-surface-alt)] rounded-md text-[var(--color-text-primary)] border-none outline-none text-base"
           />
+          <button
+            type="submit"
+            className="flex items-center justify-center px-4 bg-[var(--color-primary-500)] text-white rounded-md hover:bg-[var(--color-primary-600)] transition-colors"
+          >
+            <SearchIcon size={20} />
+          </button>
         </div>
-      </div>
+      </form>
 
       {/* Placeholder for search results */}
-      <div style={{padding:'var(--space-4)', textAlign:'center', color:'var(--color-text-muted)'}}>
+      <div className="p-4 text-center text-[var(--color-text-muted)]">
         Start typing to search...
       </div>
     </div>
