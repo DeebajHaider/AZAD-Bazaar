@@ -85,19 +85,21 @@
   width: 96px;
   gap: var(--space-1);
 }
-
 .counter-btn {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-lg);
+  font-size: calc(var(--font-size-lg) * 1.15);
   color: var(--color-text-secondary);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.12s ease;
   font-family: inherit;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
 }
 
 .counter-btn:hover {
