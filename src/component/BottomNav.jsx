@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Home, ShoppingCart, CreditCard, Settings } from 'lucide-react'
+import { Home, ShoppingCart, Settings } from 'lucide-react'
 
 const NavItem = ({ to, icon: Icon, label }) => {
   const location = useLocation()
@@ -41,7 +41,6 @@ export default function BottomNav() {
     <nav style={navStyle} aria-label="Bottom navigation">
       <NavItem to="/" icon={Home} label="Home" />
       <NavItem to="/cart" icon={ShoppingCart} label="Cart" />
-      <NavItem to="/checkout" icon={CreditCard} label="Checkout" />
       <NavItem to="/settings" icon={Settings} label="Settings" />
     </nav>
   )
