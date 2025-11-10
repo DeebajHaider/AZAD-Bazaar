@@ -44,3 +44,5 @@ debug.log
 
 # Vite
 .vite/
+
+venv
