@@ -210,7 +210,8 @@ export default function SearchResults() {
     priceRange: '',
     sortBy: 'relevance',
     discount: false,
-    inStock: false
+    inStock: false,
+    sortOrder: 'asc'
   })
 
   // Handle search submit
@@ -256,24 +257,21 @@ export default function SearchResults() {
       results = results.filter(item => item.inStock)
     }
 
-    // Apply sorting
+    // Apply sorting using sortBy and sortOrder
     switch (filters.sortBy) {
-      case 'price-low-high':
-        results.sort((a, b) => a.price - b.price)
+      case 'price':
+        results.sort((a, b) => (filters.sortOrder === 'asc' ? a.price - b.price : b.price - a.price))
         break
       case 'discount':
-        // sort by percentage off, highest first
+        // sort by percentage off
         results.sort((a, b) => {
           const da = (a.originalPrice - a.price) / a.originalPrice
           const db = (b.originalPrice - b.price) / b.originalPrice
-          return db - da
+          return filters.sortOrder === 'asc' ? da - db : db - da
         })
         break
-      case 'price-high-low':
-        results.sort((a, b) => b.price - a.price)
-        break
       case 'rating':
-        results.sort((a, b) => b.rating - a.rating)
+        results.sort((a, b) => (filters.sortOrder === 'asc' ? a.rating - b.rating : b.rating - a.rating))
         break
       case 'newest':
         // For dummy data, we'll just reverse the order as a simulation
@@ -298,6 +296,12 @@ export default function SearchResults() {
   const getTotalResults = () => {
     return getFilteredResults().length
   }
+
+  // When filters change, reset to first page to avoid out-of-range currentPage
+  useEffect(() => {
+    setCurrentPage(1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.category, filters.priceRange, filters.discount, filters.inStock, filters.sortBy, filters.sortOrder])
 
   // Filter panel will be rendered inline below the info area (dropdown style)
 
@@ -334,7 +338,7 @@ export default function SearchResults() {
         <p className="text-[var(--color-text-secondary)] mb-2">
           Search results for "{searchParams.get('q')}"
         </p>
-        <div className="flex justify-between items-center">
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <p className="text-[var(--color-text-muted)]">
             {getTotalResults()} results found
           </p>
@@ -353,32 +357,61 @@ export default function SearchResults() {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <span className="text-sm text-[var(--color-text-secondary)]">Sort by:</span>
-            <div className="inline-flex gap-2">
+            <div className="inline-flex gap-2 flex-wrap">
               <button
                 type="button"
-                onClick={() => setFilters({ ...filters, sortBy: 'price-low-high' })}
-                className={`px-3 py-1 rounded-md ${filters.sortBy === 'price-low-high' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                Price
+                onClick={() => {
+                  if (filters.sortBy === 'price') {
+                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                  } else {
+                    setFilters({ ...filters, sortBy: 'price', sortOrder: 'asc' })
+                  }
+                }}
+                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'price' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                <span>Price</span>
+                {filters.sortBy === 'price' && (
+                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+                )}
               </button>
+
               <button
                 type="button"
-                onClick={() => setFilters({ ...filters, sortBy: 'discount' })}
-                className={`px-3 py-1 rounded-md ${filters.sortBy === 'discount' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                Discount
+                onClick={() => {
+                  if (filters.sortBy === 'discount') {
+                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                  } else {
+                    setFilters({ ...filters, sortBy: 'discount', sortOrder: 'desc' })
+                  }
+                }}
+                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'discount' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                <span>Discount</span>
+                {filters.sortBy === 'discount' && (
+                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+                )}
               </button>
+
               <button
                 type="button"
-                onClick={() => setFilters({ ...filters, sortBy: 'rating' })}
-                className={`px-3 py-1 rounded-md ${filters.sortBy === 'rating' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                Rating
+                onClick={() => {
+                  if (filters.sortBy === 'rating') {
+                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                  } else {
+                    setFilters({ ...filters, sortBy: 'rating', sortOrder: 'desc' })
+                  }
+                }}
+                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'rating' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                <span>Rating</span>
+                {filters.sortBy === 'rating' && (
+                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+                )}
               </button>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             {/* Active filter badges */}
             {filters.category && (
-              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Category: {filters.category}</span>
+              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Category: {filters.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
             )}
             {filters.inStock && (
               <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">In stock</span>
@@ -386,72 +419,71 @@ export default function SearchResults() {
             {filters.discount && (
               <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">On discount</span>
             )}
-            {filters.sortBy && filters.sortBy !== 'relevance' && (
-              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Sorted: {filters.sortBy}</span>
-            )}
           </div>
         </div>
 
-        {/* Dropdown filters area (appears downwards) */}
-        {showFilters && (
-          <div className="mt-3 p-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm mb-1">Category</label>
-                <select
-                  value={filters.category}
-                  onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                  className="form-select w-full"
-                >
-                  <option value="">All Categories</option>
-                  <option value="vegetables">Vegetables</option>
-                  <option value="fruits">Fruits</option>
-                  <option value="dairy">Dairy</option>
-                  <option value="meat">Meat</option>
-                  <option value="grains">Grains</option>
-                  <option value="bakery">Bakery</option>
-                  <option value="beverages">Beverages</option>
-                  <option value="personal-care">Personal Care</option>
-                  <option value="household">Household</option>
-                </select>
-              </div>
+        {/* Filters now rendered below as a separate section (toggled) */}
+      </div>
 
-              <div>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={filters.inStock}
-                    onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-300"
-                  />
-                  <span>Only show items in stock</span>
-                </label>
-
-                <label className="flex items-center gap-2 mt-3">
-                  <input
-                    type="checkbox"
-                    checked={filters.discount}
-                    onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-300"
-                  />
-                  <span>Only show discounted items</span>
-                </label>
-              </div>
+      {/* Filters Section (separate from sorting) */}
+      {showFilters && (
+        <div className="p-4 border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div>
+              <label className="block text-sm mb-1">Category</label>
+              <select
+                value={filters.category}
+                onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+                className="form-select w-full"
+              >
+                <option value="">All Categories</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="fruits">Fruits</option>
+                <option value="dairy">Dairy</option>
+                <option value="meat">Meat</option>
+                <option value="grains">Grains</option>
+                <option value="bakery">Bakery</option>
+                <option value="beverages">Beverages</option>
+                <option value="personal-care">Personal Care</option>
+                <option value="household">Household</option>
+              </select>
             </div>
 
-            <div className="mt-4 flex gap-2">
-              <button
-                onClick={() => { setShowFilters(false); setCurrentPage(1) }}
-                className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-md"
-              >Apply</button>
-              <button
-                onClick={() => { setFilters({ category: '', priceRange: '', sortBy: 'relevance', discount: false, inStock: false }); setCurrentPage(1) }}
-                className="px-4 py-2 bg-[var(--color-surface-alt)] rounded-md"
-              >Clear</button>
+            <div>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={filters.inStock}
+                  onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-300"
+                />
+                <span>Only show items in stock</span>
+              </label>
+
+              <label className="flex items-center gap-2 mt-3">
+                <input
+                  type="checkbox"
+                  checked={filters.discount}
+                  onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-300"
+                />
+                <span>Only show discounted items</span>
+              </label>
             </div>
           </div>
-        )}
-      </div>
+
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={() => { setShowFilters(false); setCurrentPage(1) }}
+              className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-md"
+            >Apply</button>
+            <button
+              onClick={() => { setFilters({ category: '', priceRange: '', sortBy: 'relevance', discount: false, inStock: false, sortOrder: 'asc' }); setCurrentPage(1) }}
+              className="px-4 py-2 bg-[var(--color-surface-alt)] rounded-md"
+            >Clear</button>
+          </div>
+        </div>
+      )}
 
       {/* Results List */}
       <div className="p-4">

@@ -20,7 +20,9 @@ export default function Product() {
     price: 299,
     originalPrice: 349,
     image: 'https://placehold.co/600x400?text=Product+Image',
-    description: 'This is a sample product description. Replace with real product details when available.'
+    description: 'This is a sample product description. Replace with real product details when available.',
+    inStock: true,
+    stockCount: 10
   }
 
   const product = incoming || fallback
@@ -42,7 +44,19 @@ export default function Product() {
           </button>
 
           <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{product.title}</h1>
-          <div className="mt-2 text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {product.price}</div>
+          <div className="mt-2 flex items-center gap-3">
+            <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {product.price}</div>
+            {!product.inStock && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
+                Out of Stock
+              </span>
+            )}
+            {product.inStock && product.stockCount <= 5 && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
+                Only {product.stockCount} left
+              </span>
+            )}
+          </div>
 
           <div className="mt-6 text-sm text-gray-600">{product.description}</div>
         </div>
@@ -55,6 +69,7 @@ export default function Product() {
               {qty === 0 ? (
                 <button
                   onClick={() => {
+                    if (!product.inStock) return;
                     setQty(1)
                     // add to cart with quantity 1
                     addItem({
@@ -66,10 +81,11 @@ export default function Product() {
                       quantity: 1,
                     })
                   }}
-                  className="w-full text-white font-medium"
+                  disabled={!product.inStock}
+                  className={`w-full text-white font-medium ${!product.inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
                   style={{background:'var(--primary-color)', padding:'12px', borderRadius:12, boxShadow:'var(--shadow-sm)'}}
                 >
-                  Add to Cart
+                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
                 </button>
               ) : (
                 <div className="w-full" style={{display:'flex'}}>
@@ -90,10 +106,23 @@ export default function Product() {
                   <button
                     onClick={() => {
                       const next = qty + 1
+                      if (!product.inStock || (product.stockCount && next > product.stockCount)) return;
                       setQty(next)
                       updateQuantity(product.id ?? 'SAMPLE001', next)
                     }}
-                    style={{width:48, height:48, display:'flex', alignItems:'center', justifyContent:'center', borderRadius:12, border:'1px solid var(--color-border)', background:'var(--color-surface)'}}
+                    disabled={!product.inStock || (product.stockCount && qty >= product.stockCount)}
+                    style={{
+                      width:48, 
+                      height:48, 
+                      display:'flex', 
+                      alignItems:'center', 
+                      justifyContent:'center', 
+                      borderRadius:12, 
+                      border:'1px solid var(--color-border)', 
+                      background:'var(--color-surface)',
+                      opacity: (!product.inStock || (product.stockCount && qty >= product.stockCount)) ? '0.5' : '1',
+                      cursor: (!product.inStock || (product.stockCount && qty >= product.stockCount)) ? 'not-allowed' : 'pointer'
+                    }}
                   >
                     <Plus size={16} />
                   </button>
