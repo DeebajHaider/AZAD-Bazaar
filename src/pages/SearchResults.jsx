@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Search as SearchIcon, SlidersHorizontal, Star, X } from 'lucide-react'
+import { ArrowLeft, Search as SearchIcon, SlidersHorizontal } from 'lucide-react'
+import ItemCard from '../component/ItemCard'
 
 // Dummy data for demonstration
 const DUMMY_RESULTS = [
@@ -12,6 +13,8 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 128,
     category: 'Vegetables',
+    inStock: true,
+    stock: 24,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -22,6 +25,8 @@ const DUMMY_RESULTS = [
     rating: 4.8,
     reviews: 75,
     category: 'Personal Care',
+    inStock: true,
+    stock: 10,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -32,6 +37,8 @@ const DUMMY_RESULTS = [
     rating: 4.2,
     reviews: 45,
     category: 'Grains',
+    inStock: true,
+    stock: 8,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -42,6 +49,8 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 92,
     category: 'Dairy',
+    inStock: false,
+    stock: 0,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -52,6 +61,8 @@ const DUMMY_RESULTS = [
     rating: 4.7,
     reviews: 63,
     category: 'Meat',
+    inStock: true,
+    stock: 6,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -62,6 +73,8 @@ const DUMMY_RESULTS = [
     rating: 4.4,
     reviews: 37,
     category: 'Personal Care',
+    inStock: true,
+    stock: 20,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -72,6 +85,8 @@ const DUMMY_RESULTS = [
     rating: 4.3,
     reviews: 82,
     category: 'Vegetables',
+    inStock: true,
+    stock: 30,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -82,6 +97,8 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 156,
     category: 'Bakery',
+    inStock: false,
+    stock: 0,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -92,6 +109,8 @@ const DUMMY_RESULTS = [
     rating: 4.8,
     reviews: 203,
     category: 'Dairy',
+    inStock: true,
+    stock: 12,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -102,6 +121,8 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 167,
     category: 'Household',
+    inStock: true,
+    stock: 5,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -112,6 +133,8 @@ const DUMMY_RESULTS = [
     rating: 4.4,
     reviews: 89,
     category: 'Beverages',
+    inStock: true,
+    stock: 9,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -122,6 +145,8 @@ const DUMMY_RESULTS = [
     rating: 4.2,
     reviews: 71,
     category: 'Vegetables',
+    inStock: true,
+    stock: 40,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -132,6 +157,8 @@ const DUMMY_RESULTS = [
     rating: 4.6,
     reviews: 245,
     category: 'Household',
+    inStock: true,
+    stock: 15,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -142,6 +169,8 @@ const DUMMY_RESULTS = [
     rating: 4.7,
     reviews: 112,
     category: 'Dairy',
+    inStock: true,
+    stock: 22,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -152,6 +181,8 @@ const DUMMY_RESULTS = [
     rating: 4.3,
     reviews: 95,
     category: 'Fruits',
+    inStock: true,
+    stock: 18,
     image: 'https://placehold.co/300x200'
   },
   {
@@ -162,6 +193,8 @@ const DUMMY_RESULTS = [
     rating: 4.5,
     reviews: 178,
     category: 'Personal Care',
+    inStock: true,
+    stock: 7,
     image: 'https://placehold.co/300x200'
   }
 ]
@@ -176,7 +209,8 @@ export default function SearchResults() {
     category: '',
     priceRange: '',
     sortBy: 'relevance',
-    discount: false
+    discount: false,
+    inStock: false
   })
 
   // Handle search submit
@@ -211,15 +245,29 @@ export default function SearchResults() {
       )
     }
 
+
     // Apply discount filter
     if (filters.discount) {
       results = results.filter(item => item.price < item.originalPrice)
+    }
+
+    // Apply in-stock filter
+    if (filters.inStock) {
+      results = results.filter(item => item.inStock)
     }
 
     // Apply sorting
     switch (filters.sortBy) {
       case 'price-low-high':
         results.sort((a, b) => a.price - b.price)
+        break
+      case 'discount':
+        // sort by percentage off, highest first
+        results.sort((a, b) => {
+          const da = (a.originalPrice - a.price) / a.originalPrice
+          const db = (b.originalPrice - b.price) / b.originalPrice
+          return db - da
+        })
         break
       case 'price-high-low':
         results.sort((a, b) => b.price - a.price)
@@ -251,95 +299,7 @@ export default function SearchResults() {
     return getFilteredResults().length
   }
 
-  const FilterPanel = () => (
-    <div className="fixed inset-0 bg-black/50 z-50">
-      <div className="absolute right-0 top-0 h-full w-[80%] max-w-md bg-[var(--color-surface)] p-4 overflow-y-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-semibold">Filters & Sort</h3>
-          <button
-            onClick={() => setShowFilters(false)}
-            className="p-2 hover:bg-[var(--color-surface-alt)] rounded-full"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
-        {/* Sort Options */}
-        <div className="mb-6">
-          <h4 className="font-medium mb-3">Sort By</h4>
-          <select
-            value={filters.sortBy}
-            onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-            className="form-select w-full"
-          >
-            <option value="relevance">Relevance</option>
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <option value="rating">Highest Rated</option>
-            <option value="newest">Newest First</option>
-          </select>
-        </div>
-
-        {/* Category Filter */}
-        <div className="mb-6">
-          <h4 className="font-medium mb-3">Category</h4>
-          <select
-            value={filters.category}
-            onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-            className="form-select w-full"
-          >
-            <option value="">All Categories</option>
-            <option value="vegetables">Vegetables</option>
-            <option value="fruits">Fruits</option>
-            <option value="dairy">Dairy</option>
-            <option value="meat">Meat</option>
-            <option value="grains">Grains</option>
-            <option value="bakery">Bakery</option>
-            <option value="beverages">Beverages</option>
-            <option value="personal-care">Personal Care</option>
-            <option value="household">Household</option>
-          </select>
-        </div>
-
-        {/* Price Range */}
-        <div className="mb-6">
-          <h4 className="font-medium mb-3">Price Range</h4>
-          <select
-            value={filters.priceRange}
-            onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
-            className="form-select w-full"
-          >
-            <option value="">All Prices</option>
-            <option value="0-200">Under Rs 200</option>
-            <option value="200-500">Rs 200 - Rs 500</option>
-            <option value="500-1000">Rs 500 - Rs 1000</option>
-            <option value="1000-plus">Rs 1000+</option>
-          </select>
-        </div>
-
-        {/* Discount Filter */}
-        <div className="mb-6">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={filters.discount}
-              onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
-              className="w-5 h-5 rounded border-gray-300"
-            />
-            <span>On Discount</span>
-          </label>
-        </div>
-
-        {/* Apply Button */}
-        <button
-          onClick={() => setShowFilters(false)}
-          className="w-full bg-[var(--color-primary-500)] text-white py-3 rounded-md hover:bg-[var(--color-primary-600)] transition-colors"
-        >
-          Apply Filters
-        </button>
-      </div>
-    </div>
-  )
+  // Filter panel will be rendered inline below the info area (dropdown style)
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)]">
@@ -379,7 +339,7 @@ export default function SearchResults() {
             {getTotalResults()} results found
           </p>
           <button
-            onClick={() => setShowFilters(true)}
+            onClick={() => setShowFilters(prev => !prev)}
             className="flex items-center gap-2 py-2 px-4 bg-[var(--color-surface-alt)] rounded-md hover:bg-[var(--color-gray-200)] transition-colors"
           >
             <SlidersHorizontal size={20} />
@@ -388,40 +348,117 @@ export default function SearchResults() {
         </div>
       </div>
 
+      {/* Sorting, active filters and dropdown */}
+      <div className="p-4 border-b border-[var(--color-border)]">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-[var(--color-text-secondary)]">Sort by:</span>
+            <div className="inline-flex gap-2">
+              <button
+                type="button"
+                onClick={() => setFilters({ ...filters, sortBy: 'price-low-high' })}
+                className={`px-3 py-1 rounded-md ${filters.sortBy === 'price-low-high' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                Price
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilters({ ...filters, sortBy: 'discount' })}
+                className={`px-3 py-1 rounded-md ${filters.sortBy === 'discount' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                Discount
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilters({ ...filters, sortBy: 'rating' })}
+                className={`px-3 py-1 rounded-md ${filters.sortBy === 'rating' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+                Rating
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {/* Active filter badges */}
+            {filters.category && (
+              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Category: {filters.category}</span>
+            )}
+            {filters.inStock && (
+              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">In stock</span>
+            )}
+            {filters.discount && (
+              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">On discount</span>
+            )}
+            {filters.sortBy && filters.sortBy !== 'relevance' && (
+              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Sorted: {filters.sortBy}</span>
+            )}
+          </div>
+        </div>
+
+        {/* Dropdown filters area (appears downwards) */}
+        {showFilters && (
+          <div className="mt-3 p-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <label className="block text-sm mb-1">Category</label>
+                <select
+                  value={filters.category}
+                  onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+                  className="form-select w-full"
+                >
+                  <option value="">All Categories</option>
+                  <option value="vegetables">Vegetables</option>
+                  <option value="fruits">Fruits</option>
+                  <option value="dairy">Dairy</option>
+                  <option value="meat">Meat</option>
+                  <option value="grains">Grains</option>
+                  <option value="bakery">Bakery</option>
+                  <option value="beverages">Beverages</option>
+                  <option value="personal-care">Personal Care</option>
+                  <option value="household">Household</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={filters.inStock}
+                    onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
+                    className="w-5 h-5 rounded border-gray-300"
+                  />
+                  <span>Only show items in stock</span>
+                </label>
+
+                <label className="flex items-center gap-2 mt-3">
+                  <input
+                    type="checkbox"
+                    checked={filters.discount}
+                    onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
+                    className="w-5 h-5 rounded border-gray-300"
+                  />
+                  <span>Only show discounted items</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <button
+                onClick={() => { setShowFilters(false); setCurrentPage(1) }}
+                className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-md"
+              >Apply</button>
+              <button
+                onClick={() => { setFilters({ category: '', priceRange: '', sortBy: 'relevance', discount: false, inStock: false }); setCurrentPage(1) }}
+                className="px-4 py-2 bg-[var(--color-surface-alt)] rounded-md"
+              >Clear</button>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Results List */}
       <div className="p-4">
         <div className="space-y-4">
           {getCurrentPageResults().map((item) => (
-            <div
-              key={item.id}
-              onClick={() => navigate('/product', { state: { product: item } })}
-              className="flex gap-4 p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary-500)] transition-colors cursor-pointer"
-            >
-              <div className="w-24 h-24 bg-[var(--color-surface-alt)] rounded-md flex items-center justify-center">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover rounded-md" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-medium mb-1">{item.title}</h3>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="flex items-center text-yellow-500">
-                    <Star size={16} fill="currentColor" />
-                    <span className="ml-1">{item.rating}</span>
-                  </div>
-                  <span className="text-[var(--color-text-muted)] text-sm">
-                    ({item.reviews} reviews)
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold">Rs {item.price}</span>
-                  <span className="text-[var(--color-text-muted)] line-through text-sm">
-                    Rs {item.originalPrice}
-                  </span>
-                  <span className="text-[var(--color-success)] text-sm">
-                    {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% OFF
-                  </span>
-                </div>
-                <p className="text-[var(--color-text-muted)] text-sm mt-1">{item.category}</p>
-              </div>
+            <div key={item.id} onClick={() => navigate('/product', { state: { product: item } })}>
+              <ItemCard item={item} />
             </div>
           ))}
         </div>
@@ -527,8 +564,7 @@ export default function SearchResults() {
         </div>
       )}
 
-      {/* Filter Panel */}
-      {showFilters && <FilterPanel />}
+  {/* No floating panel — filters handled inline */}
     </div>
   )
 }
