@@ -99,7 +99,7 @@ export default function Home() {
         {/* Search Bar */}
         <div style={{padding:'var(--space-2) var(--space-4)', borderBottom:'1px solid var(--color-border)', background:'var(--color-surface)'}}>
           <button 
-            onClick={() => navigate('/search?q=')}
+            onClick={() => navigate('/search-results?q=')}
             style={{width:'100%', display:'flex', alignItems:'center', gap:'var(--space-2)', padding:'var(--space-2) var(--space-4)', background:'var(--color-surface-alt)', borderRadius:'var(--radius-md)', border:'none', cursor:'pointer', color:'var(--color-text-muted)', fontSize:'var(--font-size-sm)'}}
           >
             <Search size={18} />
