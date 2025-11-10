@@ -72,7 +72,16 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex-1 overflow-y-auto pb-20" style={{background:'var(--color-bg)', color:'var(--color-text-primary)'}}>
+      <style>{`
+        main.home-main::-webkit-scrollbar {
+          display: none;
+        }
+        main.home-main {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+      `}</style>
+      <main className="flex-1 overflow-y-auto pb-20 home-main" style={{background:'var(--color-bg)', color:'var(--color-text-primary)'}}>
         {/* Address Bar */}
         <button 
           onClick={() => navigate('/address')}
@@ -90,7 +99,7 @@ export default function Home() {
         {/* Search Bar */}
         <div style={{padding:'var(--space-2) var(--space-4)', borderBottom:'1px solid var(--color-border)', background:'var(--color-surface)'}}>
           <button 
-            onClick={() => navigate('/search')}
+            onClick={() => navigate('/search?q=')}
             style={{width:'100%', display:'flex', alignItems:'center', gap:'var(--space-2)', padding:'var(--space-2) var(--space-4)', background:'var(--color-surface-alt)', borderRadius:'var(--radius-md)', border:'none', cursor:'pointer', color:'var(--color-text-muted)', fontSize:'var(--font-size-sm)'}}
           >
             <Search size={18} />
@@ -104,10 +113,13 @@ export default function Home() {
           <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'8px', minHeight:'0'}}>
             {categories.map((category) => {
               const Icon = category.icon;
+              const categoryFilter = category.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
               return (
                 <button
                   key={category.name}
-                  onClick={() => { /* intentionally no-op for now */ }}
+                  onClick={() => { 
+                    navigate(`/search-results?q=&category=${categoryFilter}`);
+                  }}
                   style={categoryButtonStyle}
                 >
                   <Icon size={22} style={{color:'var(--color-primary-500)', marginBottom:'6px'}} />

@@ -6,6 +6,12 @@ export default function Checkout() {
   const [editingAddress, setEditingAddress] = useState(false)
   const [instructions, setInstructions] = useState('')
   const [payment, setPayment] = useState('cash')
+  const [cardDetails, setCardDetails] = useState({
+    cardholderName: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: ''
+  })
 
   // Example fees — replace with real values from your backend/cart
   const subtotal = 49.99
@@ -90,7 +96,54 @@ export default function Checkout() {
         </div>
 
         {payment === 'card' && (
-          <p style={{marginTop:'var(--space-3)', color:'var(--color-text-muted)', fontSize:'var(--font-size-sm)'}}>We'll collect card details on the next step (placeholder).</p>
+          <div style={{marginTop:'var(--space-4)', padding:'var(--space-4)', backgroundColor:'var(--color-surface)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`}}>
+            <h4 style={{fontSize:'var(--font-size-md)', fontWeight:600, marginBottom:'var(--space-3)', margin:0}}>Card Details</h4>
+            
+            <div style={{marginBottom:'var(--space-3)'}}>
+              <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>Cardholder Name</label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                value={cardDetails.cardholderName}
+                onChange={(e) => setCardDetails({...cardDetails, cardholderName: e.target.value})}
+                style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
+              />
+            </div>
+
+            <div style={{marginBottom:'var(--space-3)'}}>
+              <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>Card Number</label>
+              <input
+                type="text"
+                placeholder="1234 5678 9012 3456"
+                value={cardDetails.cardNumber}
+                onChange={(e) => setCardDetails({...cardDetails, cardNumber: e.target.value})}
+                style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
+              />
+            </div>
+
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'var(--space-3)', marginBottom:'var(--space-3)'}}>
+              <div>
+                <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>Expiry Date</label>
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  value={cardDetails.expiryDate}
+                  onChange={(e) => setCardDetails({...cardDetails, expiryDate: e.target.value})}
+                  style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
+                />
+              </div>
+              <div>
+                <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>CVV</label>
+                <input
+                  type="text"
+                  placeholder="123"
+                  value={cardDetails.cvv}
+                  onChange={(e) => setCardDetails({...cardDetails, cvv: e.target.value})}
+                  style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
+                />
+              </div>
+            </div>
+          </div>
         )}
       </section>
 

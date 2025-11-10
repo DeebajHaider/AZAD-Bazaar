@@ -206,7 +206,7 @@ export default function SearchResults() {
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({
-    category: '',
+    category: searchParams.get('category') || '',
     priceRange: '',
     sortBy: 'relevance',
     discount: false,
@@ -352,85 +352,35 @@ export default function SearchResults() {
         </div>
       </div>
 
-      {/* Sorting, active filters and dropdown */}
+      {/* Active filters badges */}
       <div className="p-4 border-b border-[var(--color-border)]">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-[var(--color-text-secondary)]">Sort by:</span>
-            <div className="inline-flex gap-2 flex-wrap">
-              <button
-                type="button"
-                onClick={() => {
-                  if (filters.sortBy === 'price') {
-                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
-                  } else {
-                    setFilters({ ...filters, sortBy: 'price', sortOrder: 'asc' })
-                  }
-                }}
-                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'price' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                <span>Price</span>
-                {filters.sortBy === 'price' && (
-                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (filters.sortBy === 'discount') {
-                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
-                  } else {
-                    setFilters({ ...filters, sortBy: 'discount', sortOrder: 'desc' })
-                  }
-                }}
-                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'discount' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                <span>Discount</span>
-                {filters.sortBy === 'discount' && (
-                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (filters.sortBy === 'rating') {
-                    setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
-                  } else {
-                    setFilters({ ...filters, sortBy: 'rating', sortOrder: 'desc' })
-                  }
-                }}
-                className={`px-3 py-1 rounded-md flex items-center gap-2 ${filters.sortBy === 'rating' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
-                <span>Rating</span>
-                {filters.sortBy === 'rating' && (
-                  <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
-                )}
-              </button>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            {/* Active filter badges */}
-            {filters.category && (
-              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">Category: {filters.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
-            )}
-            {filters.inStock && (
-              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">In stock</span>
-            )}
-            {filters.discount && (
-              <span className="text-sm bg-[var(--color-surface-alt)] px-2 py-1 rounded-md">On discount</span>
-            )}
-          </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          {filters.category && (
+            <span className="text-sm bg-[var(--color-primary-500)] text-white px-3 py-1 rounded-md">Category: {filters.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+          )}
+          {filters.inStock && (
+            <span className="text-sm bg-[var(--color-primary-500)] text-white px-3 py-1 rounded-md">In stock</span>
+          )}
+          {filters.discount && (
+            <span className="text-sm bg-[var(--color-primary-500)] text-white px-3 py-1 rounded-md">On discount</span>
+          )}
+          {(filters.category || filters.inStock || filters.discount) && (
+            <button
+              onClick={() => { setFilters({ category: '', priceRange: '', sortBy: 'relevance', discount: false, inStock: false, sortOrder: 'asc' }); setCurrentPage(1) }}
+              className="text-sm text-[var(--color-danger)] hover:underline"
+            >
+              Clear all
+            </button>
+          )}
         </div>
-
-        {/* Filters now rendered below as a separate section (toggled) */}
       </div>
 
-      {/* Filters Section (separate from sorting) */}
+      {/* Filters dropdown area */}
       {showFilters && (
-        <div className="p-4 border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+        <div className="p-4 border-b border-[var(--color-border)] bg-[var(--color-surface-alt)]">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-sm mb-1">Category</label>
+              <label className="block text-sm mb-2 font-medium">Category</label>
               <select
                 value={filters.category}
                 onChange={(e) => setFilters({ ...filters, category: e.target.value })}
@@ -450,24 +400,25 @@ export default function SearchResults() {
             </div>
 
             <div>
-              <label className="flex items-center gap-2">
+              <label className="block text-sm mb-2 font-medium">Options</label>
+              <label className="flex items-center gap-2 mb-2">
                 <input
                   type="checkbox"
                   checked={filters.inStock}
                   onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
                   className="w-5 h-5 rounded border-gray-300"
                 />
-                <span>Only show items in stock</span>
+                <span className="text-sm">Only in stock</span>
               </label>
 
-              <label className="flex items-center gap-2 mt-3">
+              <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={filters.discount}
                   onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
                   className="w-5 h-5 rounded border-gray-300"
                 />
-                <span>Only show discounted items</span>
+                <span className="text-sm">Only discounted</span>
               </label>
             </div>
           </div>
@@ -478,12 +429,68 @@ export default function SearchResults() {
               className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-md"
             >Apply</button>
             <button
-              onClick={() => { setFilters({ category: '', priceRange: '', sortBy: 'relevance', discount: false, inStock: false, sortOrder: 'asc' }); setCurrentPage(1) }}
+              onClick={() => { setShowFilters(false) }}
               className="px-4 py-2 bg-[var(--color-surface-alt)] rounded-md"
-            >Clear</button>
+            >Close</button>
           </div>
         </div>
       )}
+
+      {/* Sorting options */}
+      <div className="p-4 border-b border-[var(--color-border)]">
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-[var(--color-text-secondary)]">Sort by:</span>
+          <div className="inline-flex gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={() => {
+                if (filters.sortBy === 'price') {
+                  setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                } else {
+                  setFilters({ ...filters, sortBy: 'price', sortOrder: 'asc' })
+                }
+              }}
+              className={`px-3 py-1 rounded-md flex items-center gap-2 text-sm ${filters.sortBy === 'price' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+              <span>Price</span>
+              {filters.sortBy === 'price' && (
+                <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (filters.sortBy === 'discount') {
+                  setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                } else {
+                  setFilters({ ...filters, sortBy: 'discount', sortOrder: 'desc' })
+                }
+              }}
+              className={`px-3 py-1 rounded-md flex items-center gap-2 text-sm ${filters.sortBy === 'discount' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+              <span>Discount</span>
+              {filters.sortBy === 'discount' && (
+                <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (filters.sortBy === 'rating') {
+                  setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
+                } else {
+                  setFilters({ ...filters, sortBy: 'rating', sortOrder: 'desc' })
+                }
+              }}
+              className={`px-3 py-1 rounded-md flex items-center gap-2 text-sm ${filters.sortBy === 'rating' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-surface-alt)] text-[var(--color-text-primary)]'}`}>
+              <span>Rating</span>
+              {filters.sortBy === 'rating' && (
+                <span className="text-xs">{filters.sortOrder === 'asc' ? '▲' : '▼'}</span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* Results List */}
       <div className="p-4">
