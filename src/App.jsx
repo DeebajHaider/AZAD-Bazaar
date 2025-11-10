@@ -8,8 +8,7 @@ import Settings from './pages/Settings'
 export default function App() {
   return (
     <Router>
-      <div style={{fontFamily:'sans-serif'}}>
-
+      <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

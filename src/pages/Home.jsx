@@ -13,7 +13,6 @@ const categories = [
   { name: 'Snacks', icon: Cookie },
   { name: 'Dairy', icon: Milk },
   { name: 'Beverages', icon: Coffee },
-  // { name: 'Bakery', icon: Bread },
   { name: 'Seafood', icon: Fish },
   { name: 'Eggs', icon: Egg },
   { name: 'Meat', icon: Beef },
@@ -27,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="pb-40">
+      <main className="flex-1 overflow-y-auto pb-20">
         {/* Address Bar */}
         <button 
           onClick={() => navigate('/address')}

@@ -22,9 +22,11 @@ const NavItem = ({ to, icon: Icon, label }) => {
 export default function BottomNav() {
   const navStyle = {
     position: 'fixed',
-    left: 0,
-    right: 0,
+    left: '50%',
+    transform: 'translateX(-50%)',
     bottom: 0,
+    width: 'var(--mobile-width)',
+    maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

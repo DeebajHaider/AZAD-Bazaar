@@ -89,8 +89,8 @@ export default function Cart() {
         </div>
 
         {/* Free delivery progress bar (fixed above the checkout button) */}
-        <div className="fixed left-0 right-0 bottom-28 px-4 z-30 flex justify-center pointer-events-none">
-          <div className="w-full max-w-3xl pointer-events-auto">
+        <div className="absolute bottom-35 left-0 right-0 z-30 flex justify-center pointer-events-none">
+          <div className="w-full pointer-events-auto">
             {/* Top border progress */}
             <div className="h-1 bg-gray-200 rounded-t-md overflow-hidden">
               <div
@@ -111,13 +111,7 @@ export default function Cart() {
         </div>
 
         {/* Checkout button fixed near bottom, above BottomNav */}
-        {/*
-          NOTE: BottomNav uses `z-[1000]` and is fixed to bottom-0.
-          We set the checkout wrapper to a higher z-index and increase
-          bottom spacing so the button appears above the bar and
-          isn't visually covered on small screens.
-        */}
-        <div className="fixed left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none">
+        <div className="fixed left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none" style={{left: '50%', transform: 'translateX(-50%)', width: 'var(--mobile-width)', maxWidth: '100%'}}>
           <button
             onClick={() => navigate('/checkout')}
             className="mx-4 w-[calc(100%-2rem)] max-w-3xl bg-blue-600 text-white py-3 rounded-lg text-center text-lg font-medium pointer-events-auto"

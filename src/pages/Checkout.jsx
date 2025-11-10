@@ -22,7 +22,7 @@ export default function Checkout() {
 
   return (
     <>
-      <main style={{padding:20, maxWidth:800, margin:'0 auto', color:'var(--text-primary)', paddingBottom:72}}>
+      <main style={{padding:'16px', maxWidth:1000, margin:'0 auto', color:'var(--text-primary)', paddingBottom:72, width:'100%', boxSizing:'border-box'}}>
       <h2 style={{fontSize:20, fontWeight:600, marginBottom:16}}>Checkout</h2>
 
       {/* Address */}
