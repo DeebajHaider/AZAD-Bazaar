@@ -10,12 +10,7 @@ export default function App() {
     <Router>
       <div style={{fontFamily:'sans-serif'}}>
         <header style={{padding:12, borderBottom:'1px solid #eee', marginBottom:12}}>
-          <nav style={{display:'flex', gap:12}}>
-            <Link to="/">Home</Link>
-            <Link to="/cart">Cart</Link>
-            <Link to="/checkout">Checkout</Link>
-            <Link to="/settings">Settings</Link>
-          </nav>
+          <h1 style={{margin:0, fontSize:18}}>AZAD-Bazaar</h1>
         </header>
 
         <Routes>
