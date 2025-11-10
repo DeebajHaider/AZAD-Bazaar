@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useTheme } from '../context/ThemeContext'
 import BottomNav from '../component/BottomNav'
 
 export default function Settings() {
-  const [theme, setTheme] = useState('light')
+  const { theme, setTheme } = useTheme()
   const [colorblindMode, setColorblindMode] = useState('none')
   const [fontSize, setFontSize] = useState(16)
   const [formData, setFormData] = useState({
@@ -22,19 +23,17 @@ export default function Settings() {
     }))
   }
 
-  // Load persisted settings on mount (run first to avoid overwriting saved values)
+  // Load persisted fontSize on mount
   useEffect(() => {
     try {
-      const savedTheme = localStorage.getItem('azad_theme')
       const savedFont = localStorage.getItem('azad_fontSize')
-      if (savedTheme) setTheme(savedTheme)
       if (savedFont) setFontSize(Number(savedFont))
     } catch (err) {
       // ignore
     }
   }, [])
 
-  // Apply theme and font size to document and persist to localStorage
+  // Apply theme and font size to document and persist fontSize to localStorage
   useEffect(() => {
     try {
       if (theme === 'dark') {
@@ -46,8 +45,7 @@ export default function Settings() {
       }
       // set CSS variable for font size
       document.documentElement.style.setProperty('--app-font-size', `${fontSize}px`)
-      // persist
-      localStorage.setItem('azad_theme', theme)
+      // persist fontSize
       localStorage.setItem('azad_fontSize', String(fontSize))
     } catch (err) {
       // ignore in environments without document
@@ -70,7 +68,7 @@ export default function Settings() {
 
   return (
     <>
-      <main className="settings-page" style={{paddingBottom:72}}>
+      <main className="settings-page" style={{paddingBottom:'var(--space-20)'}}>
         <h2 className="section-title">Settings</h2>
 
         {/* Appearance Section */}

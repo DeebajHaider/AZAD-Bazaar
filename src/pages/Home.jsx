@@ -26,45 +26,45 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex-1 overflow-y-auto pb-20">
+      <main className="flex-1 overflow-y-auto pb-20" style={{background:'var(--color-bg)', color:'var(--color-text-primary)'}}>
         {/* Address Bar */}
         <button 
           onClick={() => navigate('/address')}
-          className="w-full px-4 py-2 flex items-center gap-2 bg-white border-b"
+          style={{width:'100%', padding:'var(--space-2) var(--space-4)', display:'flex', alignItems:'center', gap:'var(--space-2)', background:'var(--color-surface)', borderBottom:'1px solid var(--color-border)', border:'none', cursor:'pointer', color:'var(--color-text-primary)'}}
         >
-          <MapPin size={18} className="text-blue-600 flex-shrink-0" />
-          <div className="text-left">
-            <div className="text-xs text-gray-500">Delivery to:</div>
-            <div className="text-sm font-medium truncate">
+          <MapPin size={18} style={{color:'var(--color-primary-500)', flexShrink:0}} />
+          <div style={{textAlign:'left'}}>
+            <div style={{fontSize:'var(--font-size-xs)', color:'var(--color-text-secondary)'}}>Delivery to:</div>
+            <div style={{fontSize:'var(--font-size-sm)', fontWeight:500, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', color:'var(--color-text-primary)'}}>
               Etawah Society, Street 5, House Number 49
             </div>
           </div>
         </button>
 
         {/* Search Bar */}
-        <div className="px-4 py-2 border-b">
+        <div style={{padding:'var(--space-2) var(--space-4)', borderBottom:'1px solid var(--color-border)', background:'var(--color-surface)'}}>
           <button 
             onClick={() => navigate('/search')}
-            className="w-full flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-gray-500"
+            style={{width:'100%', display:'flex', alignItems:'center', gap:'var(--space-2)', padding:'var(--space-2) var(--space-4)', background:'var(--color-surface-alt)', borderRadius:'var(--radius-md)', border:'none', cursor:'pointer', color:'var(--color-text-muted)', fontSize:'var(--font-size-sm)'}}
           >
             <Search size={18} />
-            <span className="text-sm">Search for items...</span>
+            <span>Search for items...</span>
           </button>
         </div>
 
         {/* Categories Section */}
-        <div className="px-4 py-3">
-          <h2 className="text-lg font-semibold mb-3">Categories</h2>
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
+        <div style={{padding:'var(--space-3) var(--space-4)', background:'var(--color-bg)'}}>
+          <h2 style={{fontSize:'var(--font-size-lg)', fontWeight:600, marginBottom:'var(--space-3)', color:'var(--color-text-primary)'}}>Categories</h2>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'var(--space-3)', minHeight:'0'}}>
             {categories.map((category) => {
               const Icon = category.icon;
               return (
                 <button
                   key={category.name}
-                  className="flex flex-col items-center p-3 bg-white rounded-lg border shadow-sm"
+                  style={{display:'flex', flexDirection:'column', alignItems:'center', padding:'var(--space-3)', background:'var(--color-surface)', borderRadius:'var(--radius-md)', border:'1px solid var(--color-border)', boxShadow:'var(--shadow-sm)', cursor:'pointer', color:'var(--color-text-primary)'}}
                 >
-                  <Icon size={24} className="text-blue-600 mb-1" />
-                  <span className="text-xs text-center">{category.name}</span>
+                  <Icon size={24} style={{color:'var(--color-primary-500)', marginBottom:'var(--space-1)'}} />
+                  <span style={{fontSize:'var(--font-size-xs)', textAlign:'center', color:'var(--color-text-primary)'}}>{category.name}</span>
                 </button>
               );
             })}

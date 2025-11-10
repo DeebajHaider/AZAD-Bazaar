@@ -6,24 +6,24 @@ export default function Search() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{minHeight:'100vh', background:'var(--color-bg)', color:'var(--color-text-primary)'}}>
       {/* Header */}
-      <div className="sticky top-0 bg-white border-b px-4 py-2 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="p-1">
+      <div style={{position:'sticky', top:0, background:'var(--color-surface)', borderBottom:'1px solid var(--color-border)', padding:'var(--space-2) var(--space-4)', display:'flex', alignItems:'center', gap:'var(--space-3)', zIndex:10}}>
+        <button onClick={() => navigate(-1)} style={{padding:'var(--space-1)', background:'none', border:'none', cursor:'pointer', color:'var(--color-text-primary)', display:'flex', alignItems:'center'}}>
           <ArrowLeft size={24} />
         </button>
-        <div className="flex-1">
+        <div style={{flex:1}}>
           <input
             autoFocus
             type="text"
             placeholder="Search for items..."
-            className="w-full px-4 py-2 bg-gray-100 rounded-lg text-gray-900 focus:outline-none"
+            style={{width:'100%', padding:'var(--space-2) var(--space-4)', background:'var(--color-surface-alt)', borderRadius:'var(--radius-md)', color:'var(--color-text-primary)', border:'none', outline:'none', fontSize:'inherit'}}
           />
         </div>
       </div>
 
       {/* Placeholder for search results */}
-      <div className="p-4 text-center text-gray-500">
+      <div style={{padding:'var(--space-4)', textAlign:'center', color:'var(--color-text-muted)'}}>
         Start typing to search...
       </div>
     </div>

@@ -52,12 +52,12 @@ export default function Cart() {
 
   return (
     <>
-      <main style={{ padding: 0 }} className="pb-40">
-        <div className="sticky top-0 bg-white z-10 px-4 py-3 flex justify-between items-center border-b">
-          <h2 className="text-xl font-semibold">Cart</h2>
+      <main style={{ padding: 0, background: 'var(--color-bg)' }} className="pb-40">
+        <div style={{position:'sticky', top:0, background:'var(--color-surface)', zIndex:10, padding:'var(--space-3) var(--space-4)', display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid var(--color-border)'}}>
+          <h2 style={{fontSize:'var(--font-size-xl)', fontWeight:600, margin:0, color:'var(--color-text-primary)'}}>Cart</h2>
           <button
             onClick={handleClearCart}
-            className="text-sm text-red-500 font-medium"
+            style={{fontSize:'var(--font-size-sm)', color:'var(--color-danger)', fontWeight:500, background:'none', border:'none', cursor:'pointer'}}
           >
             Clear Cart
           </button>
@@ -66,13 +66,13 @@ export default function Cart() {
         <CartItemList items={cartItems} />
 
         {/* Total savings section */}
-        <div className="w-full px-4 py-3 bg-green-50 border-y">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Menu size={20} className="text-gray-600" />
+        <div style={{width:'100%', padding:'var(--space-3) var(--space-4)', background:'var(--color-success-light)', borderTop:'1px solid var(--color-border)', borderBottom:'1px solid var(--color-border)', color:'var(--color-text-primary)'}}>
+          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'var(--space-2)'}}>
+              <Menu size={20} style={{color:'var(--color-text-secondary)'}} />
               <div>
-                <div className="text-sm text-gray-600">Total Savings</div>
-                <div className="font-semibold text-green-600">
+                <div style={{fontSize:'var(--font-size-sm)', color:'var(--color-text-secondary)'}}>Total Savings</div>
+                <div style={{fontWeight:600, color:'var(--color-success)'}}>
                   Rs. {cartItems.reduce((sum, item) => 
                     sum + ((item.itemOldPrice - item.itemPrice) * item.quantity), 0
                   )}
@@ -81,7 +81,7 @@ export default function Cart() {
             </div>
             <button 
               onClick={() => navigate('/')} 
-              className="text-blue-600 font-medium text-sm"
+              style={{color:'var(--color-primary-500)', fontWeight:500, fontSize:'var(--font-size-sm)', background:'none', border:'none', cursor:'pointer'}}
             >
               Add more items
             </button>
@@ -89,19 +89,18 @@ export default function Cart() {
         </div>
 
         {/* Free delivery progress bar (fixed above the checkout button) */}
-        <div className="absolute bottom-35 left-0 right-0 z-30 flex justify-center pointer-events-none">
-          <div className="w-full pointer-events-auto">
+        <div style={{position:'absolute', bottom:140, left:0, right:0, zIndex:30, display:'flex', justifyContent:'center', pointerEvents:'none'}}>
+          <div style={{width:'100%', pointerEvents:'auto'}}>
             {/* Top border progress */}
-            <div className="h-1 bg-gray-200 rounded-t-md overflow-hidden">
+            <div style={{height:'4px', background:'var(--color-border)', borderTopLeftRadius:'var(--radius-md)', borderTopRightRadius:'var(--radius-md)', overflow:'hidden'}}>
               <div
-                className="h-1 bg-green-500"
-                style={{ width: `${progress * 100}%` }}
+                style={{height:'4px', background:'var(--color-success)', width:`${progress * 100}%`, transition:'width 0.3s ease'}}
               />
             </div>
 
-            <div className="bg-white border rounded-b-md px-4 py-3 flex items-center gap-3">
+            <div style={{background:'var(--color-surface)', border:'1px solid var(--color-border)', borderBottomLeftRadius:'var(--radius-md)', borderBottomRightRadius:'var(--radius-md)', padding:'var(--space-3) var(--space-4)', display:'flex', alignItems:'center', gap:'var(--space-3)', color:'var(--color-text-primary)'}}>
               <ShoppingCart size={20} />
-              <div className="text-sm text-gray-700">
+              <div style={{fontSize:'var(--font-size-sm)', color:'var(--color-text-secondary)'}}>
                 {amountLeft > 0
                   ? `Rs. ${amountLeft} away from free delivery`
                   : 'You have free delivery!'}
@@ -111,10 +110,12 @@ export default function Cart() {
         </div>
 
         {/* Checkout button fixed near bottom, above BottomNav */}
-        <div className="fixed left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none" style={{left: '50%', transform: 'translateX(-50%)', width: 'var(--mobile-width)', maxWidth: '100%'}}>
+        <div style={{position:'fixed', bottom:'80px', left:'50%', transform:'translateX(-50%)', display:'flex', justifyContent:'center', zIndex:1100, pointerEvents:'none', width:'var(--mobile-width)', maxWidth:'100%'}}>
           <button
             onClick={() => navigate('/checkout')}
-            className="mx-4 w-[calc(100%-2rem)] max-w-3xl bg-blue-600 text-white py-3 rounded-lg text-center text-lg font-medium pointer-events-auto"
+            style={{margin:'0 var(--space-4)', width:'calc(100% - 2 * var(--space-4))', maxWidth:'calc(var(--mobile-width) - 2 * var(--space-4))', background:'var(--color-primary-500)', color:'white', padding:'var(--space-3)', borderRadius:'var(--radius-md)', textAlign:'center', fontSize:'var(--font-size-lg)', fontWeight:500, pointerEvents:'auto', border:'none', cursor:'pointer', transition:'background 0.2s ease'}}
+            onMouseEnter={(e) => e.target.style.background = 'var(--color-primary-600)'}
+            onMouseLeave={(e) => e.target.style.background = 'var(--color-primary-500)'}
           >
             Checkout
           </button>

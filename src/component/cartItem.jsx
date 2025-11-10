@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
+import "./cartItem.css";
 
 const Counter = ({ quantity, setQuantity }) => {
   const decrement = () => {
     if (quantity > 1) setQuantity(quantity - 1);
-    else setQuantity(0); // can remove item here if needed
+    else setQuantity(0);
   };
 
   const increment = () => setQuantity(quantity + 1);
 
   return (
-    <div className="flex items-center justify-center border rounded-lg px-2 py-1 w-24">
+    <div className="counter">
       {quantity === 1 ? (
-        <button onClick={decrement} className="text-red-500">
+        <button onClick={decrement} className="counter-btn counter-btn-delete">
           <Trash2 size={18} />
         </button>
       ) : (
-        <button onClick={decrement} className="text-gray-600 text-lg">
+        <button onClick={decrement} className="counter-btn">
           −
         </button>
       )}
-      <span className="mx-3 text-sm text-gray-600">{quantity}</span>
-      <button onClick={increment} className="text-gray-600 text-lg">
+      <span className="counter-value">{quantity}</span>
+      <button onClick={increment} className="counter-btn">
         +
       </button>
     </div>
@@ -32,31 +33,27 @@ const CartItem = ({ item }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   return (
-    <div className="flex items-center bg-white rounded-lg shadow-sm w-full py-3 px-2 mb-2">
+    <div className="cart-item">
       {/* Image Section - 15% */}
-      <div className="w-[15%] flex justify-center items-center">
+      <div className="cart-item-image">
         <img
           src={item.itemPhoto}
           alt={item.itemName}
-          className="w-12 h-12 object-cover rounded-md border"
+          className="cart-item-img"
         />
       </div>
 
       {/* Middle Section - 60% */}
-      <div className="w-[60%] flex flex-col justify-center">
-        <p className="text-sm font-medium text-gray-800">{item.itemName}</p>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-900 font-semibold text-base">
-            Rs. {item.itemPrice}
-          </span>
-          <span className="text-gray-400 line-through text-sm">
-            Rs. {item.itemOldPrice}
-          </span>
+      <div className="cart-item-details">
+        <p className="cart-item-name">{item.itemName}</p>
+        <div className="cart-item-price">
+          <span className="price-current">Rs. {item.itemPrice}</span>
+          <span className="price-old">Rs. {item.itemOldPrice}</span>
         </div>
       </div>
 
       {/* Counter Section - 25% */}
-      <div className="w-[25%] flex justify-center items-center">
+      <div className="cart-item-counter">
         <Counter quantity={quantity} setQuantity={setQuantity} />
       </div>
     </div>
@@ -65,8 +62,8 @@ const CartItem = ({ item }) => {
 
 const CartItemList = ({ items }) => {
   return (
-    <div className="w-full p-4">
-      <div className="space-y-2">
+    <div className="cart-item-list">
+      <div className="cart-items">
         {items.map((item) => (
           <CartItem key={item.itemCode} item={item} />
         ))}

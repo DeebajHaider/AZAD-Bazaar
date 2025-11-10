@@ -22,16 +22,16 @@ export default function Checkout() {
 
   return (
     <>
-      <main style={{padding:'16px', maxWidth:1000, margin:'0 auto', color:'var(--text-primary)', paddingBottom:72, width:'100%', boxSizing:'border-box'}}>
-      <h2 style={{fontSize:20, fontWeight:600, marginBottom:16}}>Checkout</h2>
+      <main style={{padding:'var(--space-4)', maxWidth:1000, margin:'0 auto', color:'var(--color-text-primary)', paddingBottom:'var(--space-20)', width:'100%', boxSizing:'border-box'}}>
+      <h2 style={{fontSize:'var(--font-size-2xl)', fontWeight:600, marginBottom:'var(--space-4)'}}>Checkout</h2>
 
       {/* Address */}
-  <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid var(--border-color)'}}>
-        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8}}>
-          <h3 style={{margin:0, fontSize:16, fontWeight:600}}>Delivery Address</h3>
+  <section style={{marginBottom:'var(--space-5)', paddingBottom:'var(--space-5)', borderBottom:`1px solid var(--color-border)`}}>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'var(--space-2)'}}>
+          <h3 style={{margin:0, fontSize:'var(--font-size-lg)', fontWeight:600}}>Delivery Address</h3>
           <button
             onClick={() => setEditingAddress(prev => !prev)}
-            style={{border:'none', background:'transparent', color:'var(--primary-color)', cursor:'pointer'}}
+            style={{border:'none', background:'transparent', color:'var(--color-primary-500)', cursor:'pointer'}}
             aria-pressed={editingAddress}
           >
             {editingAddress ? 'Save' : 'Edit'}
@@ -43,27 +43,27 @@ export default function Checkout() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             rows={3}
-            style={{width:'100%', padding:12, borderRadius:8, border:'1px solid var(--border-color)'}}
+            style={{width:'100%', padding:'var(--space-3)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-surface)', color:'var(--color-text-primary)', fontFamily:'inherit'}}
           />
         ) : (
-          <p style={{margin:0, color:'var(--text-secondary)'}}>{address}</p>
+          <p style={{margin:0, color:'var(--color-text-secondary)'}}>{address}</p>
         )}
 
-  <label style={{display:'block', marginTop:12, marginBottom:6, color:'var(--text-secondary)'}}>Delivery instructions (optional)</label>
+  <label style={{display:'block', marginTop:'var(--space-3)', marginBottom:'var(--space-2)', color:'var(--color-text-secondary)', fontSize:'var(--font-size-sm)'}}>Delivery instructions (optional)</label>
         <input
           type="text"
           placeholder="Ex: Call this number, leave at door, gate code..."
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
-          style={{width:'100%', padding:12, borderRadius:8, border:'1px solid var(--border-color)'}}
+          style={{width:'100%', padding:'var(--space-3)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-surface)', color:'var(--color-text-primary)', fontFamily:'inherit'}}
         />
       </section>
 
       {/* Payment Options */}
-  <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid var(--border-color)'}}>
-        <h3 style={{fontSize:16, fontWeight:600, marginBottom:12}}>Payment</h3>
+  <section style={{marginBottom:'var(--space-5)', paddingBottom:'var(--space-5)', borderBottom:`1px solid var(--color-border)`}}>
+        <h3 style={{fontSize:'var(--font-size-lg)', fontWeight:600, marginBottom:'var(--space-3)'}}>Payment</h3>
 
-        <div style={{display:'flex', gap:8}}>
+        <div style={{display:'flex', gap:'var(--space-2)', color:'var(--color-text-primary)'}}>
           <label style={{flex:1}}>
             <input
               type="radio"
@@ -71,7 +71,7 @@ export default function Checkout() {
               value="cash"
               checked={payment === 'cash'}
               onChange={() => setPayment('cash')}
-              style={{marginRight:8}}
+              style={{marginRight:'var(--space-2)'}}
             />
             Cash on Delivery
           </label>
@@ -83,42 +83,42 @@ export default function Checkout() {
               value="card"
               checked={payment === 'card'}
               onChange={() => setPayment('card')}
-              style={{marginRight:8}}
+              style={{marginRight:'var(--space-2)'}}
             />
             Card
           </label>
         </div>
 
         {payment === 'card' && (
-          <p style={{marginTop:12, color:'var(--muted-color)', fontSize:14}}>We'll collect card details on the next step (placeholder).</p>
+          <p style={{marginTop:'var(--space-3)', color:'var(--color-text-muted)', fontSize:'var(--font-size-sm)'}}>We'll collect card details on the next step (placeholder).</p>
         )}
       </section>
 
       {/* Billing Details */}
-      <section style={{marginBottom:20}}>
-        <h3 style={{fontSize:16, fontWeight:600, marginBottom:12}}>Billing</h3>
+      <section style={{marginBottom:'var(--space-5)'}}>
+        <h3 style={{fontSize:'var(--font-size-lg)', fontWeight:600, marginBottom:'var(--space-3)'}}>Billing</h3>
 
-        <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'var(--muted-color)'}}>Subtotal</span>
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
+          <span style={{color:'var(--color-text-muted)'}}>Subtotal</span>
           <strong>${subtotal.toFixed(2)}</strong>
         </div>
 
-        <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'var(--muted-color)'}}>Service fee</span>
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
+          <span style={{color:'var(--color-text-muted)'}}>Service fee</span>
           <span>${serviceFee.toFixed(2)}</span>
         </div>
 
-        <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'var(--muted-color)'}}>Delivery fee</span>
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
+          <span style={{color:'var(--color-text-muted)'}}>Delivery fee</span>
           <span>${deliveryFee.toFixed(2)}</span>
         </div>
 
-        <div style={{display:'flex', justifyContent:'space-between', marginBottom:12}}>
-          <span style={{color:'var(--muted-color)'}}>Tax</span>
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-3)', color:'var(--color-text-primary)'}}>
+          <span style={{color:'var(--color-text-muted)'}}>Tax</span>
           <span>${tax.toFixed(2)}</span>
         </div>
 
-  <div style={{display:'flex', justifyContent:'space-between', paddingTop:12, borderTop:'1px solid var(--border-color)'}}>
+  <div style={{display:'flex', justifyContent:'space-between', paddingTop:'var(--space-3)', borderTop:`1px solid var(--color-border)`, color:'var(--color-text-primary)'}}>
           <strong>Total</strong>
           <strong>${total.toFixed(2)}</strong>
         </div>

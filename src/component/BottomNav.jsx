@@ -5,7 +5,7 @@ import { Home, ShoppingCart, CreditCard, Settings } from 'lucide-react'
 const NavItem = ({ to, icon: Icon, label }) => {
   const location = useLocation()
   const isActive = location.pathname === to
-  const color = isActive ? 'var(--primary-color)' : 'var(--text-secondary)'
+  const color = isActive ? 'var(--color-primary-500)' : 'var(--color-text-secondary)'
 
   return (
     <Link 
@@ -14,7 +14,7 @@ const NavItem = ({ to, icon: Icon, label }) => {
       className="flex flex-col items-center gap-1 text-xs"
     >
       <Icon size={20} color={color} />
-      <span style={{fontSize:12}}>{label}</span>
+      <span style={{fontSize:'var(--font-size-xs)'}}>{label}</span>
     </Link>
   )
 }
@@ -30,10 +30,10 @@ export default function BottomNav() {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: '10px 12px',
-    borderTop: '1px solid var(--border-color)',
-    background: 'var(--surface-color)',
-    boxShadow: '0 -1px 6px rgba(0,0,0,0.03)',
+    padding: 'var(--space-2) var(--space-3)',
+    borderTop: '1px solid var(--color-border)',
+    background: 'var(--color-surface)',
+    boxShadow: 'var(--shadow-nav)',
     zIndex: 1000,
   }
 
