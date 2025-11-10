@@ -48,7 +48,7 @@ export default function Product() {
         </div>
 
         {/* Bottom buttons - fixed above bottom nav */}
-        <div className="fixed left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none">
+        <div className="absolute left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none">
           <div className="w-full max-w-3xl mx-auto px-4 flex items-center gap-3 pointer-events-auto">
             {/* Add to cart area - either button or counter */}
             <div style={{flex:1}}>
