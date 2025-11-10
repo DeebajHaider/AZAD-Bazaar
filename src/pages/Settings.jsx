@@ -42,28 +42,56 @@ export default function Settings() {
         
         <div className="form-group">
           <label className="form-label">Theme</label>
-          <select 
-            value={theme}
-            onChange={(e) => setTheme(e.target.value)}
-            className="form-select"
-          >
-            <option value="light">Light Mode</option>
-            <option value="dark">Dark Mode</option>
-          </select>
+          <div className="button-group">
+            <button
+              type="button"
+              className={`mode-button ${theme === 'light' ? 'active' : ''}`}
+              onClick={() => setTheme('light')}
+            >
+              Light Mode
+            </button>
+            <button
+              type="button"
+              className={`mode-button ${theme === 'dark' ? 'active' : ''}`}
+              onClick={() => setTheme('dark')}
+            >
+              Dark Mode
+            </button>
+          </div>
         </div>
 
         <div className="form-group">
           <label className="form-label">Colorblind Mode</label>
-          <select 
-            value={colorblindMode}
-            onChange={(e) => setColorblindMode(e.target.value)}
-            className="form-select"
-          >
-            <option value="none">None</option>
-            <option value="protanopia">Protanopia</option>
-            <option value="deuteranopia">Deuteranopia</option>
-            <option value="tritanopia">Tritanopia</option>
-          </select>
+          <div className="button-group colorblind">
+            <button
+              type="button"
+              className={`mode-button ${colorblindMode === 'none' ? 'active' : ''}`}
+              onClick={() => setColorblindMode('none')}
+            >
+              Standard
+            </button>
+            <button
+              type="button"
+              className={`mode-button ${colorblindMode === 'protanopia' ? 'active' : ''}`}
+              onClick={() => setColorblindMode('protanopia')}
+            >
+              Protanopia
+            </button>
+            <button
+              type="button"
+              className={`mode-button ${colorblindMode === 'deuteranopia' ? 'active' : ''}`}
+              onClick={() => setColorblindMode('deuteranopia')}
+            >
+              Deuteranopia
+            </button>
+            <button
+              type="button"
+              className={`mode-button ${colorblindMode === 'tritanopia' ? 'active' : ''}`}
+              onClick={() => setColorblindMode('tritanopia')}
+            >
+              Tritanopia
+            </button>
+          </div>
         </div>
 
         <div className="form-group">
