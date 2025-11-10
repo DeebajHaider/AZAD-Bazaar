@@ -394,6 +394,7 @@ export default function SearchResults() {
           {getCurrentPageResults().map((item) => (
             <div
               key={item.id}
+              onClick={() => navigate('/product', { state: { product: item } })}
               className="flex gap-4 p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary-500)] transition-colors cursor-pointer"
             >
               <div className="w-24 h-24 bg-[var(--color-surface-alt)] rounded-md flex items-center justify-center">

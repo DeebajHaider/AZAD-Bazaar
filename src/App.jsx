@@ -14,19 +14,23 @@ import { CartProvider } from './context/CartContext'
 export default function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/search-results" element={<SearchResults />} />
-            <Route path="/address" element={<Address />} />
-          </Routes>
-        </div>
-      </Router>
+      <CartProvider>
+        <Router>
+          <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/view-cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/search-results" element={<SearchResults />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/address" element={<Address />} />
+            </Routes>
+          </div>
+        </Router>
+      </CartProvider>
     </ThemeProvider>
   )
 }

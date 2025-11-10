@@ -2,7 +2,7 @@ import React from 'react'
 import BottomNav from '../component/BottomNav'
 import { useState } from 'react'
 import { Heart, Plus, Minus, ArrowLeft } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
 export default function Product() {
@@ -11,7 +11,20 @@ export default function Product() {
   const [liked, setLiked] = useState(false)
   const { addItem, updateQuantity } = useCart()
 
-  const imgUrl = 'https://placehold.co/600x400?text=Product+Image'
+  const location = useLocation()
+  const incoming = location.state && location.state.product ? location.state.product : null
+
+  const fallback = {
+    id: 'SAMPLE001',
+    title: 'Sample Product Title',
+    price: 299,
+    originalPrice: 349,
+    image: 'https://placehold.co/600x400?text=Product+Image',
+    description: 'This is a sample product description. Replace with real product details when available.'
+  }
+
+  const product = incoming || fallback
+  const imgUrl = product.image
 
   return (
     <>
@@ -28,12 +41,10 @@ export default function Product() {
             <ArrowLeft size={18} />
           </button>
 
-          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>Sample Product Title</h1>
-          <div className="mt-2 text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. 299</div>
+          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{product.title}</h1>
+          <div className="mt-2 text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {product.price}</div>
 
-          <div className="mt-6 text-sm text-gray-600">
-            This is a sample product description. Replace with real product details when available.
-          </div>
+          <div className="mt-6 text-sm text-gray-600">{product.description}</div>
         </div>
 
         {/* Bottom buttons - fixed above bottom nav */}
@@ -47,11 +58,11 @@ export default function Product() {
                     setQty(1)
                     // add to cart with quantity 1
                     addItem({
-                      itemCode: 'SAMPLE001',
-                      itemName: 'Sample Product Title',
+                      itemCode: product.id ?? 'SAMPLE001',
+                      itemName: product.title,
                       itemPhoto: imgUrl,
-                      itemPrice: 299,
-                      itemOldPrice: 349,
+                      itemPrice: product.price,
+                      itemOldPrice: product.originalPrice ?? product.price,
                       quantity: 1,
                     })
                   }}
@@ -66,8 +77,8 @@ export default function Product() {
                     onClick={() => {
                       const next = Math.max(0, qty - 1)
                       setQty(next)
-                      if (next === 0) updateQuantity('SAMPLE001', 0)
-                      else updateQuantity('SAMPLE001', next)
+                      if (next === 0) updateQuantity(product.id ?? 'SAMPLE001', 0)
+                      else updateQuantity(product.id ?? 'SAMPLE001', next)
                     }}
                     style={{width:48, height:48, display:'flex', alignItems:'center', justifyContent:'center', borderRadius:12, border:'1px solid var(--color-border)', background:'var(--color-surface)'}}
                   >
@@ -80,7 +91,7 @@ export default function Product() {
                     onClick={() => {
                       const next = qty + 1
                       setQty(next)
-                      updateQuantity('SAMPLE001', next)
+                      updateQuantity(product.id ?? 'SAMPLE001', next)
                     }}
                     style={{width:48, height:48, display:'flex', alignItems:'center', justifyContent:'center', borderRadius:12, border:'1px solid var(--color-border)', background:'var(--color-surface)'}}
                   >
