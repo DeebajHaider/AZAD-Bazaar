@@ -1,4 +1,4 @@
-import React from 'react'
+import {useStates} from 'react'
 import BottomNav from '../component/BottomNav'
 
 export default function Settings() {

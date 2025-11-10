@@ -63,38 +63,11 @@ const CartItem = ({ item }) => {
   );
 };
 
-const CartItemList = () => {
-  const cartItems = [
-    {
-      itemCode: "ITEM001",
-      itemName: "Bazaar Select Dar Chini 100g",
-      itemPhoto: "https://placehold.co/80",
-      itemPrice: 119,
-      itemOldPrice: 159,
-      quantity: 1,
-    },
-    {
-      itemCode: "ITEM002",
-      itemName: "Organic Turmeric Powder 200g",
-      itemPhoto: "https://placehold.co/80",
-      itemPrice: 299,
-      itemOldPrice: 349,
-      quantity: 2,
-    },
-    {
-      itemCode: "ITEM003",
-      itemName: "Clove Premium 50g",
-      itemPhoto: "https://placehold.co/80",
-      itemPrice: 199,
-      itemOldPrice: 249,
-      quantity: 3,
-    },
-  ];
-
+const CartItemList = ({ items }) => {
   return (
     <div className="w-full h-screen text-white p-4 overflow-y-auto">
       <div className="space-y-2">
-        {cartItems.map((item) => (
+        {items.map((item) => (
           <CartItem key={item.itemCode} item={item} />
         ))}
       </div>
