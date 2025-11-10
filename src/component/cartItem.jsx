@@ -65,7 +65,7 @@ const CartItem = ({ item }) => {
 
 const CartItemList = ({ items }) => {
   return (
-    <div className="w-full h-screen text-white p-4 overflow-y-auto">
+    <div className="w-full p-4">
       <div className="space-y-2">
         {items.map((item) => (
           <CartItem key={item.itemCode} item={item} />
