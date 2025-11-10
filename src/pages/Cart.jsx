@@ -30,24 +30,7 @@ export default function Cart() {
 
         <CartItemList items={cartItems} onQuantityChange={updateQuantity} onRemove={removeItem} />
 
-        {/* Total savings section */}
-        <div style={{width:'100%', padding:'var(--space-3) var(--space-4)', background:'var(--color-success-light)', borderTop:'1px solid var(--color-border)', borderBottom:'1px solid var(--color-border)', color:'var(--color-text-primary)'}}>
-          <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-            <div style={{display:'flex', alignItems:'center', gap:'var(--space-2)'}}>
-              <Menu size={20} style={{color:'var(--color-text-secondary)'}} />
-              <div>
-                <div style={{fontSize:'var(--font-size-sm)', color:'var(--color-text-secondary)'}}>Total Savings</div>
-                <div style={{fontWeight:600, color:'var(--color-success)'}}>Rs. {savings}</div>
-              </div>
-            </div>
-            <button 
-              onClick={() => navigate('/')} 
-              style={{color:'var(--color-primary-500)', fontWeight:500, fontSize:'var(--font-size-sm)', background:'none', border:'none', cursor:'pointer'}}
-            >
-              Add more items
-            </button>
-          </div>
-        </div>
+
 
         {/* Free delivery progress bar (fixed above the checkout button) */}
         <div style={{position:'absolute', bottom:140, left:0, right:0, zIndex:30, display:'flex', justifyContent:'center', pointerEvents:'none'}}>
