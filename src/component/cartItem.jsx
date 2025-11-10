@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
 import "./cartItem.css";
 
-const Counter = ({ quantity, setQuantity }) => {
+const Counter = ({ quantity, onChange, onRemove }) => {
   const decrement = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
-    else setQuantity(0);
-  };
+    if (quantity > 1) onChange(quantity - 1)
+    else onRemove()
+  }
 
-  const increment = () => setQuantity(quantity + 1);
+  const increment = () => onChange(quantity + 1)
 
   return (
     <div className="counter">
@@ -26,21 +26,31 @@ const Counter = ({ quantity, setQuantity }) => {
         +
       </button>
     </div>
-  );
-};
+  )
+}
 
-const CartItem = ({ item }) => {
-  const [quantity, setQuantity] = useState(item.quantity);
+const CartItem = ({ item, onQuantityChange, onRemove }) => {
+  const [quantity, setQuantity] = useState(item.quantity || 0)
+
+  // sync when parent updates
+  React.useEffect(() => {
+    setQuantity(item.quantity || 0)
+  }, [item.quantity])
+
+  const handleChange = (next) => {
+    setQuantity(next)
+    onQuantityChange && onQuantityChange(item.itemCode, next)
+  }
+
+  const handleRemove = () => {
+    onRemove && onRemove(item.itemCode)
+  }
 
   return (
     <div className="cart-item">
       {/* Image Section - 15% */}
       <div className="cart-item-image">
-        <img
-          src={item.itemPhoto}
-          alt={item.itemName}
-          className="cart-item-img"
-        />
+        <img src={item.itemPhoto} alt={item.itemName} className="cart-item-img" />
       </div>
 
       {/* Middle Section - 60% */}
@@ -54,22 +64,22 @@ const CartItem = ({ item }) => {
 
       {/* Counter Section - 25% */}
       <div className="cart-item-counter">
-        <Counter quantity={quantity} setQuantity={setQuantity} />
+        <Counter quantity={quantity} onChange={handleChange} onRemove={handleRemove} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const CartItemList = ({ items }) => {
+const CartItemList = ({ items, onQuantityChange, onRemove }) => {
   return (
     <div className="cart-item-list">
       <div className="cart-items">
         {items.map((item) => (
-          <CartItem key={item.itemCode} item={item} />
+          <CartItem key={item.itemCode} item={item} onQuantityChange={onQuantityChange} onRemove={onRemove} />
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default CartItemList;

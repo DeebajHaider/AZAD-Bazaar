@@ -107,6 +107,7 @@ export default function Home() {
               return (
                 <button
                   key={category.name}
+                  onClick={() => navigate('/product')}
                   style={categoryButtonStyle}
                 >
                   <Icon size={22} style={{color:'var(--color-primary-500)', marginBottom:'6px'}} />
