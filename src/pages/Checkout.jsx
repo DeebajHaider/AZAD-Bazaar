@@ -22,16 +22,16 @@ export default function Checkout() {
 
   return (
     <>
-      <main style={{padding:20, maxWidth:800, margin:'0 auto', color:'#111827', paddingBottom:72}}>
+      <main style={{padding:20, maxWidth:800, margin:'0 auto', color:'var(--text-primary)', paddingBottom:72}}>
       <h2 style={{fontSize:20, fontWeight:600, marginBottom:16}}>Checkout</h2>
 
       {/* Address */}
-      <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid #e5e5e5'}}>
+  <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid var(--border-color)'}}>
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8}}>
           <h3 style={{margin:0, fontSize:16, fontWeight:600}}>Delivery Address</h3>
           <button
             onClick={() => setEditingAddress(prev => !prev)}
-            style={{border:'none', background:'transparent', color:'#3b82f6', cursor:'pointer'}}
+            style={{border:'none', background:'transparent', color:'var(--primary-color)', cursor:'pointer'}}
             aria-pressed={editingAddress}
           >
             {editingAddress ? 'Save' : 'Edit'}
@@ -43,24 +43,24 @@ export default function Checkout() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             rows={3}
-            style={{width:'100%', padding:12, borderRadius:8, border:'1px solid #d1d5db'}}
+            style={{width:'100%', padding:12, borderRadius:8, border:'1px solid var(--border-color)'}}
           />
         ) : (
-          <p style={{margin:0, color:'#374151'}}>{address}</p>
+          <p style={{margin:0, color:'var(--text-secondary)'}}>{address}</p>
         )}
 
-        <label style={{display:'block', marginTop:12, marginBottom:6, color:'#374151'}}>Delivery instructions (optional)</label>
+  <label style={{display:'block', marginTop:12, marginBottom:6, color:'var(--text-secondary)'}}>Delivery instructions (optional)</label>
         <input
           type="text"
           placeholder="Ex: Call this number, leave at door, gate code..."
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
-          style={{width:'100%', padding:12, borderRadius:8, border:'1px solid #d1d5db'}}
+          style={{width:'100%', padding:12, borderRadius:8, border:'1px solid var(--border-color)'}}
         />
       </section>
 
       {/* Payment Options */}
-      <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid #e5e5e5'}}>
+  <section style={{marginBottom:20, paddingBottom:20, borderBottom:'1px solid var(--border-color)'}}>
         <h3 style={{fontSize:16, fontWeight:600, marginBottom:12}}>Payment</h3>
 
         <div style={{display:'flex', gap:8}}>
@@ -90,7 +90,7 @@ export default function Checkout() {
         </div>
 
         {payment === 'card' && (
-          <p style={{marginTop:12, color:'#6b7280', fontSize:14}}>We'll collect card details on the next step (placeholder).</p>
+          <p style={{marginTop:12, color:'var(--muted-color)', fontSize:14}}>We'll collect card details on the next step (placeholder).</p>
         )}
       </section>
 
@@ -99,26 +99,26 @@ export default function Checkout() {
         <h3 style={{fontSize:16, fontWeight:600, marginBottom:12}}>Billing</h3>
 
         <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'#6b7280'}}>Subtotal</span>
+          <span style={{color:'var(--muted-color)'}}>Subtotal</span>
           <strong>${subtotal.toFixed(2)}</strong>
         </div>
 
         <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'#6b7280'}}>Service fee</span>
+          <span style={{color:'var(--muted-color)'}}>Service fee</span>
           <span>${serviceFee.toFixed(2)}</span>
         </div>
 
         <div style={{display:'flex', justifyContent:'space-between', marginBottom:8}}>
-          <span style={{color:'#6b7280'}}>Delivery fee</span>
+          <span style={{color:'var(--muted-color)'}}>Delivery fee</span>
           <span>${deliveryFee.toFixed(2)}</span>
         </div>
 
         <div style={{display:'flex', justifyContent:'space-between', marginBottom:12}}>
-          <span style={{color:'#6b7280'}}>Tax</span>
+          <span style={{color:'var(--muted-color)'}}>Tax</span>
           <span>${tax.toFixed(2)}</span>
         </div>
 
-        <div style={{display:'flex', justifyContent:'space-between', paddingTop:12, borderTop:'1px solid #e5e5e5'}}>
+  <div style={{display:'flex', justifyContent:'space-between', paddingTop:12, borderTop:'1px solid var(--border-color)'}}>
           <strong>Total</strong>
           <strong>${total.toFixed(2)}</strong>
         </div>

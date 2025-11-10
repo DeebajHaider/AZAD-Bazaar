@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import BottomNav from '../component/BottomNav'
 
 export default function Settings() {
@@ -21,6 +21,39 @@ export default function Settings() {
       [name]: value
     }))
   }
+
+  // Load persisted settings on mount (run first to avoid overwriting saved values)
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem('azad_theme')
+      const savedFont = localStorage.getItem('azad_fontSize')
+      if (savedTheme) setTheme(savedTheme)
+      if (savedFont) setFontSize(Number(savedFont))
+    } catch (err) {
+      // ignore
+    }
+  }, [])
+
+  // Apply theme and font size to document and persist to localStorage
+  useEffect(() => {
+    try {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark-theme')
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark-theme')
+        document.documentElement.classList.remove('dark')
+      }
+      // set CSS variable for font size
+      document.documentElement.style.setProperty('--app-font-size', `${fontSize}px`)
+      // persist
+      localStorage.setItem('azad_theme', theme)
+      localStorage.setItem('azad_fontSize', String(fontSize))
+    } catch (err) {
+      // ignore in environments without document
+      console.warn('Could not apply theme/font size', err)
+    }
+  }, [theme, fontSize])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -105,7 +138,7 @@ export default function Settings() {
               min="12"
               max="24"
               value={fontSize}
-              onChange={(e) => setFontSize(e.target.value)}
+              onChange={(e) => setFontSize(Number(e.target.value))}
               className="form-range"
             />
           </div>

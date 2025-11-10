@@ -5,23 +5,38 @@ import { Home, ShoppingCart, CreditCard, Settings } from 'lucide-react'
 const NavItem = ({ to, icon: Icon, label }) => {
   const location = useLocation()
   const isActive = location.pathname === to
-  
+  const color = isActive ? 'var(--primary-color)' : 'var(--text-secondary)'
+
   return (
     <Link 
       to={to} 
-      className={`flex flex-col items-center gap-1 text-xs ${
-        isActive ? 'text-blue-600' : 'text-gray-600'
-      }`}
+      style={{ color, textDecoration: 'none' }}
+      className="flex flex-col items-center gap-1 text-xs"
     >
-      <Icon size={40} />
-      <span>{label}</span>
+      <Icon size={20} color={color} />
+      <span style={{fontSize:12}}>{label}</span>
     </Link>
   )
 }
 
 export default function BottomNav() {
+  const navStyle = {
+    position: 'fixed',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: '10px 12px',
+    borderTop: '1px solid var(--border-color)',
+    background: 'var(--surface-color)',
+    boxShadow: '0 -1px 6px rgba(0,0,0,0.03)',
+    zIndex: 1000,
+  }
+
   return (
-    <nav className="fixed left-0 right-0 bottom-0 flex justify-around items-center p-3 bg-white border-t border-gray-100 shadow-sm z-[1000]">
+    <nav style={navStyle} aria-label="Bottom navigation">
       <NavItem to="/" icon={Home} label="Home" />
       <NavItem to="/cart" icon={ShoppingCart} label="Cart" />
       <NavItem to="/checkout" icon={CreditCard} label="Checkout" />
