@@ -1,0 +1,711 @@
+DB Schema 
+{
+  "Customer": {
+    "description": "Stores user info, addresses, cart, favourites, payment methods, and loyalty points. Loyalty coins are converted to vouchers in backend; cart and checkout store vouchers.",
+    "document": {
+      "_id": "ObjectId",
+      "name": "string",
+      "phone": "string",                      // unique, indexed
+      "email": "string",                      // optional
+      "profilePhoto": "string",               // optional URL
+      "addresses": [                          // embedded
+        {
+          "addressId": "UUID",
+          "label": "Home / Work / etc",
+          "addressText": "string",
+          "lat": "number",                    // for Google Maps integration
+          "lng": "number",
+          "isDefault": true/false
+        }
+      ],
+      "currentCart": {                         // embedded
+        "lastUpdated": "timestamp",
+        "items": [
+          {
+            "productId": "ObjectId",
+            "quantity": 2,
+            "addedAt": "timestamp",
+            "variant": "string"               // optional
+          }
+        ],
+        "vouchers": ["ObjectId"]              // applied vouchers
+      },
+      "favourites": ["ObjectId"],              // array of productIds
+      "paymentMethods": [                       // embedded, PCI-compliant tokens only
+        {
+          "name": "string",                    // user-friendly name for card
+          "cardToken": "string",               // token from payment gateway
+          "last4Digits": "string",
+          "cardType": "string",
+          "expiry": "MM/YY"
+        }
+      ],
+      "loyaltyCoins": 120,                      // converted to voucher on checkout
+      "recentOrders": ["ObjectId"]             // last 5–10 orders
+    }
+  },
+
+  "Product": {
+    "description": "Stores all product details, stock, pricing, category, brand info, and optional bulk discounts.",
+    "document": {
+      "_id": "ObjectId",
+      "name": "string",
+      "description": "string",
+      "images": ["string"],
+      "categoryId": "ObjectId",                // reference
+      "brandId": "ObjectId",                   // reference
+      "originalPrice": 100.00,
+      "discountedPrice": 90.00,
+      "stockQuantity": 100,
+      "reservedQuantity": 5,                   // items in carts but not checked out
+      "bulkDiscounts": [                        // optional
+        {
+          "quantity": 5,
+          "discountAmount": 10
+        }
+      ],
+      "isActive": true                          // soft delete flag
+    }
+  },
+
+  "Brand": {
+    "description": "Stores brand info and images, with soft delete flag for discontinued brands.",
+    "document": {
+      "_id": "ObjectId",
+      "name": "string",
+      "motto": "string",                        // optional
+      "images": ["string"],
+      "isActive": true
+    }
+  },
+
+  "Category": {
+    "description": "Stores categories; parentCategoryId allows hierarchy navigation for UI. Ancestors removed as requested.",
+    "document": {
+      "_id": "ObjectId",
+      "name": "string",
+      "image": "string",
+      "parentCategoryId": "ObjectId"           // optional
+    }
+  },
+
+  "Order": {
+    "description": "Stores order snapshots including product info, bulk discounts, applied vouchers, delivery info, and status history.",
+    "document": {
+      "_id": "ObjectId",
+      "customerId": "ObjectId",                // reference
+      "customName": "string",                  // optional
+      "address": {                             // embedded snapshot
+        "label": "string",
+        "addressText": "string",
+        "lat": "number",
+        "lng": "number"
+      },
+      "paymentMethod": {
+        "name": "string",
+        "type": "string",
+        "last4Digits": "string"
+      },
+      "products": [                            // denormalized snapshot
+        {
+          "productId": "ObjectId",
+          "name": "string",
+          "description": "string",
+          "photo": "string",
+          "quantity": 2,
+          "price": 90,
+          "bulkDiscounts": [                   // copied from product at order time
+            {
+              "quantity": 5,
+              "discountAmount": 10
+            }
+          ]
+        }
+      ],
+      "deliveryInstructions": "string",
+      "vouchersUsed": ["ObjectId"],            // multiple vouchers allowed
+      "coinsGenerated": 20,
+      "subtotal": 180,
+      "discountApplied": 20,
+      "totalPaid": 160,
+      "statusHistory": [
+        {"status": "pending", "timestamp": "ts"},
+        {"status": "confirmed", "timestamp": "ts"}
+      ],
+      "assignedDeliveryPersonId": "ObjectId"   // optional
+    }
+  },
+
+  "Voucher": {
+    "description": "Stores vouchers. Coins are converted to vouchers at checkout. Simplified: no product/category restriction.",
+    "document": {
+      "_id": "ObjectId",
+      "code": "string",                        // unique voucher code
+      "value": 10,                             // amount or percentage
+      "type": "flat/percentage/freeItem",
+      "startDate": "timestamp",
+      "endDate": "timestamp",
+      "usageLimit": 5,
+      "usedCount": 0,
+      "generatedBy": "admin/user",
+      "mustBeUsedBy": "customerId",            // optional
+      "isActive": true
+    }
+  }
+}
+
+
+
+MongoDb Current Rules
+Brand {
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'images',
+      'isActive',
+      'motto',
+      'name'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      images: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'string'
+        }
+      },
+      isActive: {
+        bsonType: 'bool'
+      },
+      motto: {
+        bsonType: 'string'
+      },
+      name: {
+        bsonType: 'string'
+      }
+    }
+  }
+}
+
+
+Category
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'image',
+      'name',
+      'parentCategoryId'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      image: {
+        bsonType: 'string'
+      },
+      name: {
+        bsonType: 'string'
+      },
+      parentCategoryId: {
+        bsonType: [
+          'null',
+          'objectId'
+        ]
+      }
+    }
+  }
+}
+
+
+Cuystomer
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'name',
+      'phone',
+      'addresses',
+      'currentCart',
+      'favourites',
+      'paymentMethods',
+      'loyaltyCoins'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      name: {
+        bsonType: 'string',
+        minLength: 2,
+        maxLength: 50
+      },
+      phone: {
+        bsonType: 'string',
+        pattern: '^[0-9]{10,15}$'
+      },
+      email: {
+        bsonType: 'string'
+      },
+      profilePhoto: {
+        bsonType: 'string'
+      },
+      addresses: {
+        bsonType: 'array',
+        minItems: 1,
+        items: {
+          bsonType: 'object',
+          required: [
+            'addressId',
+            'label',
+            'addressText',
+            'lat',
+            'lng',
+            'isDefault'
+          ],
+          properties: {
+            addressId: {
+              bsonType: 'string'
+            },
+            label: {
+              bsonType: 'string'
+            },
+            addressText: {
+              bsonType: 'string'
+            },
+            lat: {
+              bsonType: 'double'
+            },
+            lng: {
+              bsonType: 'double'
+            },
+            isDefault: {
+              bsonType: 'bool'
+            }
+          }
+        }
+      },
+      currentCart: {
+        bsonType: 'object',
+        required: [
+          'items',
+          'lastUpdated',
+          'vouchers'
+        ],
+        properties: {
+          items: {
+            bsonType: 'array',
+            items: {
+              bsonType: 'object',
+              required: [
+                'productId',
+                'quantity',
+                'addedAt'
+              ],
+              properties: {
+                productId: {
+                  bsonType: 'objectId'
+                },
+                quantity: {
+                  bsonType: 'int',
+                  minimum: 1
+                },
+                addedAt: {
+                  bsonType: 'date'
+                },
+                variant: {
+                  bsonType: 'string'
+                }
+              }
+            }
+          },
+          lastUpdated: {
+            bsonType: 'date'
+          },
+          vouchers: {
+            bsonType: 'array',
+            items: {
+              bsonType: 'objectId'
+            }
+          }
+        }
+      },
+      favourites: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'objectId'
+        }
+      },
+      paymentMethods: {
+        bsonType: 'array',
+        minItems: 1,
+        items: {
+          bsonType: 'object',
+          required: [
+            'name',
+            'cardToken',
+            'cardType',
+            'expiry',
+            'last4Digits'
+          ],
+          properties: {
+            name: {
+              bsonType: 'string'
+            },
+            cardToken: {
+              bsonType: 'string'
+            },
+            cardType: {
+              bsonType: 'string'
+            },
+            expiry: {
+              bsonType: 'string'
+            },
+            last4Digits: {
+              bsonType: 'string',
+              pattern: '^[0-9]{4}$'
+            }
+          }
+        }
+      },
+      loyaltyCoins: {
+        bsonType: 'int',
+        minimum: 0
+      },
+      recentOrders: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'objectId'
+        }
+      }
+    }
+  }
+}
+
+Order
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'customerId',
+      'address',
+      'paymentMethod',
+      'products',
+      'subtotal',
+      'discountApplied',
+      'totalPaid',
+      'statusHistory'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      customerId: {
+        bsonType: 'objectId'
+      },
+      customName: {
+        bsonType: 'string'
+      },
+      address: {
+        bsonType: 'object',
+        required: [
+          'label',
+          'addressText',
+          'lat',
+          'lng'
+        ],
+        properties: {
+          label: {
+            bsonType: 'string'
+          },
+          addressText: {
+            bsonType: 'string'
+          },
+          lat: {
+            bsonType: 'double'
+          },
+          lng: {
+            bsonType: 'double'
+          }
+        }
+      },
+      paymentMethod: {
+        bsonType: 'object',
+        required: [
+          'name',
+          'type',
+          'last4Digits'
+        ],
+        properties: {
+          name: {
+            bsonType: 'string'
+          },
+          type: {
+            bsonType: 'string'
+          },
+          last4Digits: {
+            bsonType: 'string',
+            pattern: '^[0-9]{4}$'
+          }
+        }
+      },
+      products: {
+        bsonType: 'array',
+        minItems: 1,
+        items: {
+          bsonType: 'object',
+          required: [
+            'productId',
+            'name',
+            'price',
+            'quantity'
+          ],
+          properties: {
+            productId: {
+              bsonType: 'objectId'
+            },
+            name: {
+              bsonType: 'string'
+            },
+            description: {
+              bsonType: 'string'
+            },
+            photo: {
+              bsonType: 'string'
+            },
+            quantity: {
+              bsonType: 'int',
+              minimum: 1
+            },
+            price: {
+              bsonType: 'double',
+              minimum: 0
+            },
+            bulkDiscounts: {
+              bsonType: 'array',
+              items: {
+                bsonType: 'object',
+                required: [
+                  'quantity',
+                  'discountAmount'
+                ],
+                properties: {
+                  quantity: {
+                    bsonType: 'int',
+                    minimum: 1
+                  },
+                  discountAmount: {
+                    bsonType: 'double',
+                    minimum: 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      vouchersUsed: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'objectId'
+        }
+      },
+      coinsGenerated: {
+        bsonType: 'int',
+        minimum: 0
+      },
+      subtotal: {
+        bsonType: 'double',
+        minimum: 0
+      },
+      discountApplied: {
+        bsonType: 'double',
+        minimum: 0
+      },
+      totalPaid: {
+        bsonType: 'double',
+        minimum: 0
+      },
+      statusHistory: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            'status',
+            'timestamp'
+          ],
+          properties: {
+            status: {
+              'enum': [
+                'pending',
+                'confirmed',
+                'shipped',
+                'delivered',
+                'canceled'
+              ]
+            },
+            timestamp: {
+              bsonType: 'date'
+            }
+          }
+        }
+      },
+      assignedDeliveryPersonId: {
+        bsonType: 'objectId'
+      }
+    }
+  }
+}
+
+
+product
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'name',
+      'categoryId',
+      'brandId',
+      'originalPrice',
+      'discountedPrice',
+      'stockQuantity',
+      'reservedQuantity',
+      'isActive'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      name: {
+        bsonType: 'string',
+        minLength: 2,
+        maxLength: 100
+      },
+      description: {
+        bsonType: 'string',
+        maxLength: 1000
+      },
+      images: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'string'
+        }
+      },
+      categoryId: {
+        bsonType: 'objectId'
+      },
+      brandId: {
+        bsonType: 'objectId'
+      },
+      originalPrice: {
+        bsonType: 'double',
+        minimum: 0
+      },
+      discountedPrice: {
+        bsonType: 'double',
+        minimum: 0
+      },
+      stockQuantity: {
+        bsonType: 'int',
+        minimum: 0
+      },
+      reservedQuantity: {
+        bsonType: 'int',
+        minimum: 0
+      },
+      bulkDiscounts: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            'quantity',
+            'discountAmount'
+          ],
+          properties: {
+            quantity: {
+              bsonType: 'int',
+              minimum: 1
+            },
+            discountAmount: {
+              bsonType: 'double',
+              minimum: 0
+            }
+          }
+        }
+      },
+      isActive: {
+        bsonType: 'bool'
+      }
+    }
+  }
+}
+
+Voucvher
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'code',
+      'endDate',
+      'generatedBy',
+      'isActive',
+      'mustBeUsedBy',
+      'startDate',
+      'type',
+      'usageLimit',
+      'usedCount',
+      'value'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      code: {
+        bsonType: 'string'
+      },
+      endDate: {
+        bsonType: 'string'
+      },
+      generatedBy: {
+        bsonType: 'string'
+      },
+      isActive: {
+        bsonType: 'bool'
+      },
+      mustBeUsedBy: {
+        bsonType: [
+          'objectId',
+          'null'
+        ]
+      },
+      startDate: {
+        bsonType: 'string'
+      },
+      type: {
+        bsonType: 'string'
+      },
+      usageLimit: {
+        bsonType: 'int'
+      },
+      usedCount: {
+        bsonType: 'int'
+      },
+      value: {
+        bsonType: 'int'
+      }
+    }
+  }
+}
+
+
+
+
+
