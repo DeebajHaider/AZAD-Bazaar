@@ -1,0 +1,1218 @@
+[
+  {
+    "_id": "6913963978d99d52f6676d13",
+    "name": "beauty",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d14",
+    "name": "mascara",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d16",
+    "name": "eyeshadow",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d18",
+    "name": "face powder",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d1a",
+    "name": "lipstick",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d1c",
+    "name": "nail polish",
+    "image": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d13"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d1e",
+    "name": "fragrances",
+    "image": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d1e"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d1f",
+    "name": "perfumes",
+    "image": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d1e"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d25",
+    "name": "furniture",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d26",
+    "name": "beds",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d28",
+    "name": "sofas",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d29",
+    "name": "bedside tables",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d2b",
+    "name": "office chairs",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d2d",
+    "name": "bathroom",
+    "image": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d25"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d2f",
+    "name": "groceries",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d30",
+    "name": "fruits",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/strawberry/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d32",
+    "name": "meat",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d33",
+    "name": "pet supplies",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/dog-food/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d34",
+    "name": "cat food",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/cat-food/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d35",
+    "name": "cooking essentials",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d36",
+    "name": "vegetables",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/cucumber/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d37",
+    "name": "dog food",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/dog-food/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d38",
+    "name": "dairy",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/eggs/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d39",
+    "name": "seafood",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/fish-steak/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3a",
+    "name": "condiments",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/honey-jar/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3b",
+    "name": "desserts",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3c",
+    "name": "beverages",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/nescafe-coffee/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3d",
+    "name": "coffee",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/nescafe-coffee/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3e",
+    "name": "health supplements",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/protein-powder/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d3f",
+    "name": "grains",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/rice/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d40",
+    "name": "household essentials",
+    "image": "https://cdn.dummyjson.com/product-images/groceries/tissue-paper-box/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d2f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d41",
+    "name": "home-decoration",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d42",
+    "name": "home decor",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d43",
+    "name": "swing",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d44",
+    "name": "photo frame",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/family-tree-photo-frame/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d45",
+    "name": "artificial plants",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/house-showpiece-plant/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d46",
+    "name": "plant accessories",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/plant-pot/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d47",
+    "name": "lighting",
+    "image": "https://cdn.dummyjson.com/product-images/home-decoration/table-lamp/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d41"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d48",
+    "name": "kitchen-accessories",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/lunch-box/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d49",
+    "name": "kitchen tools",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/kitchen-sieve/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4a",
+    "name": "utensils",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/spoon/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4b",
+    "name": "drinkware",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-aluminium-cup/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4c",
+    "name": "cups",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-aluminium-cup/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4d",
+    "name": "kitchen appliances",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/microwave-oven/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4e",
+    "name": "blenders",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/boxed-blender/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d4f",
+    "name": "cookware",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/pan/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d50",
+    "name": "woks",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/carbon-steel-wok/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d51",
+    "name": "cutting boards",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/chopping-board/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d52",
+    "name": "juicers",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/citrus-squeezer-yellow/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d53",
+    "name": "slicers",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/egg-slicer/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d54",
+    "name": "cooktops",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/electric-stove/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d55",
+    "name": "strainers",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/kitchen-sieve/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d56",
+    "name": "glasses",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/glass/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d57",
+    "name": "graters",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/grater-black/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d58",
+    "name": "ice cube trays",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/ice-cube-tray/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d59",
+    "name": "cutlery",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/knife/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5a",
+    "name": "storage",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/lunch-box/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5b",
+    "name": "microwaves",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/microwave-oven/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5c",
+    "name": "organization",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/mug-tree-stand/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5d",
+    "name": "pans",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/pan/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5e",
+    "name": "dinnerware",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/plate/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d5f",
+    "name": "plates",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/plate/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d60",
+    "name": "tongs",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/red-tongs/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d61",
+    "name": "pots",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/silver-pot-with-glass-cap/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d62",
+    "name": "turners",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/slotted-turner/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d63",
+    "name": "serveware",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/tray/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d64",
+    "name": "trays",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/tray/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d65",
+    "name": "baking",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/wooden-rolling-pin/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d66",
+    "name": "peelers",
+    "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/yellow-peeler/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d48"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d67",
+    "name": "laptops",
+    "image": "https://cdn.dummyjson.com/product-images/laptops/huawei-matebook-x-pro/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d67"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d68",
+    "name": "apple",
+    "image": "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d67",
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d6e",
+    "name": "mens-shirts",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d6f",
+    "name": "clothing",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-with-black-skirt/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d6e",
+      "6913963978d99d52f6676dc3",
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d70",
+    "name": "men's shirts",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d6e"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d72",
+    "name": "men's t-shirts",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d6e"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d77",
+    "name": "mens-shoes",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d78",
+    "name": "footwear",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d77",
+      "6913963978d99d52f6676de1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d79",
+    "name": "athletic shoes",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d77"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d7b",
+    "name": "sports cleats",
+    "image": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d77"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d7c",
+    "name": "casual shoes",
+    "image": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d77",
+      "6913963978d99d52f6676de1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d7f",
+    "name": "mens-watches",
+    "image": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d80",
+    "name": "watches",
+    "image": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d7f",
+      "6913963978d99d52f6676de9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d81",
+    "name": "leather watches",
+    "image": "https://cdn.dummyjson.com/product-images/mens-watches/brown-leather-belt-watch/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d7f"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d83",
+    "name": "luxury watches",
+    "image": "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d7f",
+      "6913963978d99d52f6676de9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d86",
+    "name": "mobile-accessories",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-stick-monopod/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d87",
+    "name": "electronics",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86",
+      "6913963978d99d52f6676dc2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d88",
+    "name": "smart speakers",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-homepod-mini-cosmic-grey/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8a",
+    "name": "wireless earphones",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8b",
+    "name": "over-ear headphones",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8c",
+    "name": "wireless chargers",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpower-wireless-charger/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8d",
+    "name": "chargers",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8e",
+    "name": "power banks",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-magsafe-battery-pack/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d8f",
+    "name": "smartwatches",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-watch-series-4-gold/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d91",
+    "name": "phone accessories",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/iphone-12-silicone-case-with-magsafe-plum/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d92",
+    "name": "camera accessories",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/monopod/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d94",
+    "name": "selfie accessories",
+    "image": "https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-stick-monopod/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d86"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d98",
+    "name": "motorcycle",
+    "image": "https://cdn.dummyjson.com/product-images/motorcycle/generic-motorcycle/3.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676d99",
+    "name": "motorcycles",
+    "image": "https://cdn.dummyjson.com/product-images/motorcycle/sportbike-motorcycle/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d98"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d9b",
+    "name": "sportbikes",
+    "image": "https://cdn.dummyjson.com/product-images/motorcycle/kawasaki-z800/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d98"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676d9e",
+    "name": "scooters",
+    "image": "https://cdn.dummyjson.com/product-images/motorcycle/scooter-motorcycle/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676d98"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676da1",
+    "name": "skin-care",
+    "image": "https://cdn.dummyjson.com/product-images/skin-care/vaseline-men-body-and-face-lotion/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676da2",
+    "name": "personal care",
+    "image": "https://cdn.dummyjson.com/product-images/skin-care/attitude-super-leaves-hand-soap/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676da3",
+    "name": "hand soap",
+    "image": "https://cdn.dummyjson.com/product-images/skin-care/attitude-super-leaves-hand-soap/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676da5",
+    "name": "body wash",
+    "image": "https://cdn.dummyjson.com/product-images/skin-care/olay-ultra-moisture-shea-butter-body-wash/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676da7",
+    "name": "body lotion",
+    "image": "https://cdn.dummyjson.com/product-images/skin-care/vaseline-men-body-and-face-lotion/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676da9",
+    "name": "smartphones",
+    "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-x/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676daa",
+    "name": "oppo",
+    "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dac",
+    "name": "realme",
+    "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-xt/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dae",
+    "name": "samsung galaxy",
+    "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s7/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db0",
+    "name": "vivo",
+    "image": "https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676da9"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db2",
+    "name": "sports-accessories",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/basketball/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676db3",
+    "name": "sports equipment",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-helmet/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db4",
+    "name": "american football",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/american-football/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db5",
+    "name": "baseball",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/baseball-ball/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db6",
+    "name": "basketball",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/basketball/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db7",
+    "name": "cricket",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-helmet/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db8",
+    "name": "badminton",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/feather-shuttlecock/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676db9",
+    "name": "football",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/football/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dba",
+    "name": "golf",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/iron-golf/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dbb",
+    "name": "tennis",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/tennis-ball/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dbc",
+    "name": "volleyball",
+    "image": "https://cdn.dummyjson.com/product-images/sports-accessories/volleyball/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676db2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dbd",
+    "name": "sunglasses",
+    "image": "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dbd"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dbe",
+    "name": "eyewear",
+    "image": "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dbd"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc0",
+    "name": "party glasses",
+    "image": "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dbd"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc2",
+    "name": "tablets",
+    "image": "https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc2"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc3",
+    "name": "tops",
+    "image": "https://cdn.dummyjson.com/product-images/tops/short-frock/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676dc4",
+    "name": "dresses",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc3",
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc5",
+    "name": "girls' dresses",
+    "image": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc3"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc6",
+    "name": "vehicle",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/300-touring/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676dc7",
+    "name": "sedans",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/charger-sxt-rwd/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dc8",
+    "name": "vehicles",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/300-touring/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dca",
+    "name": "sports cars",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/charger-sxt-rwd/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dcc",
+    "name": "hatchbacks",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-hornet-gt-plus/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dcd",
+    "name": "compact cars",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-hornet-gt-plus/5.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dce",
+    "name": "suvs",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/durango-sxt-rwd/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dcf",
+    "name": "minivans",
+    "image": "https://cdn.dummyjson.com/product-images/vehicle/pacifica-touring/6.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dc6"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dd0",
+    "name": "womens-bags",
+    "image": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/1.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676dd1",
+    "name": "fashion accessories",
+    "image": "https://cdn.dummyjson.com/product-images/womens-jewellery/tropical-earring/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dd0",
+      "6913963978d99d52f6676ddf"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dd2",
+    "name": "handbags",
+    "image": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dd0"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dd4",
+    "name": "leather bags",
+    "image": "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dd0"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dd6",
+    "name": "designer bags",
+    "image": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dd0"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dd8",
+    "name": "backpacks",
+    "image": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dd0"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dda",
+    "name": "womens-dresses",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/4.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676ddb",
+    "name": "gowns",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/4.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676ddc",
+    "name": "corsets",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676ddd",
+    "name": "skirts",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676dde",
+    "name": "suits",
+    "image": "https://cdn.dummyjson.com/product-images/womens-dresses/marni-red-&-black-suit/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676dda"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676ddf",
+    "name": "womens-jewellery",
+    "image": "https://cdn.dummyjson.com/product-images/womens-jewellery/tropical-earring/3.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676de0",
+    "name": "earrings",
+    "image": "https://cdn.dummyjson.com/product-images/womens-jewellery/tropical-earring/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676ddf"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676de1",
+    "name": "womens-shoes",
+    "image": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676de2",
+    "name": "slippers",
+    "image": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/3.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676de1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676de4",
+    "name": "heel shoes",
+    "image": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/2.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676de1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676de5",
+    "name": "women's shoes",
+    "image": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676de1"
+    ]
+  },
+  {
+    "_id": "6913963978d99d52f6676de9",
+    "name": "womens-watches",
+    "image": "https://cdn.dummyjson.com/product-images/womens-watches/rolex-cellini-moonphase/2.webp",
+    "parentCategoryIds": []
+  },
+  {
+    "_id": "6913963978d99d52f6676deb",
+    "name": "women's watches",
+    "image": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/1.webp",
+    "parentCategoryIds": [
+      "6913963978d99d52f6676de9"
+    ]
+  }
+]
