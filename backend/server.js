@@ -11,6 +11,11 @@ app.use(express.json());
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
+// Mount data routes (authenticated)
+const authMiddleware = require('./middleware/authMiddleware');
+const dataRoutes = require('./routes/data');
+app.use('/api', authMiddleware, dataRoutes);
+
 // MongoDB connection
 connectMongo()
   .then(() => {

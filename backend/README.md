@@ -52,3 +52,41 @@ Files added/changed for auth
 - `initDB.js` — updated to default DB name `AzadBazaar` if none provided in URI
 
 If you want, I can add a small `scripts/seedCustomer.js` to insert a test Customer, or implement SMS provider wiring. Let me know which you'd prefer next.
+
+API: data endpoints (authenticated)
+-- All endpoints below require Authorization header: `Bearer <token>` (use `/auth/verify-otp` to obtain a token)
+
+Base path: `/api`
+
+Products
+- POST /api/products  - create product (body = product) 
+- GET  /api/products  - list products
+- GET  /api/products/:id - get product by id
+
+Brands
+- POST /api/brands
+- GET  /api/brands
+- GET  /api/brands/:id
+
+Categories
+- POST /api/categories
+- GET  /api/categories
+- GET  /api/categories/:id
+
+Vouchers
+- POST /api/vouchers
+- GET  /api/vouchers
+- GET  /api/vouchers/:id
+
+Orders
+- POST /api/orders  - create order (body = order snapshot)
+- GET  /api/orders
+- GET  /api/orders/:id
+
+Customers
+- POST /api/customers - create basic customer
+- GET  /api/customers
+- GET  /api/customers/:id
+
+Notes
+- These endpoints are basic create/list/get handlers to quickly upload and retrieve documents for the UI. They perform minimal validation using Mongoose schemas. Production-ready code should add pagination, stricter validation, RBAC, rate-limits and input sanitization.
