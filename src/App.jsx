@@ -11,29 +11,54 @@ import Product from './pages/Product'
 import { ThemeProvider } from './context/ThemeContext'
 import { CartProvider } from './context/CartContext'
 import { DataProvider } from './context/DataContext'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import Login from './pages/Login'
 
 export default function App() {
+  const AuthGate = () => {
+    const { user, loading } = useAuth()
+    // while auth is initializing, avoid flicker
+    if (loading) return <div className="p-4">Loading...</div>
+    if (!user) {
+      return (
+        <Router>
+          <div style={{fontFamily: 'sans-serif', position: 'relative', height: '100%'}}>
+            <Routes>
+              <Route path="/*" element={<Login />} />
+            </Routes>
+          </div>
+        </Router>
+      )
+    }
+
+    return (
+      <Router>
+        <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/view-cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/search-results" element={<SearchResults />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/address" element={<Address />} />
+          </Routes>
+        </div>
+      </Router>
+    )
+  }
+
   return (
     <ThemeProvider>
-      <DataProvider>
-        <CartProvider>
-          <Router>
-            <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
-              <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/view-cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/search-results" element={<SearchResults />} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/address" element={<Address />} />
-              </Routes>
-            </div>
-          </Router>
-        </CartProvider>
-      </DataProvider>
+      <AuthProvider>
+        <DataProvider>
+          <CartProvider>
+            <AuthGate />
+          </CartProvider>
+        </DataProvider>
+      </AuthProvider>
     </ThemeProvider>
   )
 }

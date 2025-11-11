@@ -39,7 +39,7 @@ router.post('/request-otp', async (req, res) => {
 // Verify OTP and login/create user
 router.post('/verify-otp', async (req, res) => {
   try {
-    const { phone, code } = req.body;
+    const { phone, code, name, address, lat, lng } = req.body;
     if (!phone || !code) return res.status(400).json({ message: 'phone and code are required' });
 
     const otpDoc = await Otp.findOne({ phone, code, used: false, expiresAt: { $gt: new Date() } }).sort({ createdAt: -1 }).populate('customerId');
@@ -50,11 +50,31 @@ router.post('/verify-otp', async (req, res) => {
 
     let user = await User.findOne({ phone });
 
+    // If the OTP was issued for a new user, create a Customer document using provided profile data
     if (otpDoc.isNewUser) {
+      // If a customer already exists for this phone (race) use it, otherwise create
+      let customer = await Customer.findOne({ phone });
+      if (!customer) {
+        const payload = { phone };
+        if (name) payload.name = name;
+        if (address) payload.address = address; // if your Customer model accepts address; harmless if ignored
+        if (typeof lat !== 'undefined' || typeof lng !== 'undefined') payload.location = { lat: lat || null, lng: lng || null };
+        try {
+          customer = await Customer.create(payload);
+        } catch (err) {
+          // If creation fails due to duplicate or validation, try to find existing
+          customer = await Customer.findOne({ phone });
+        }
+      }
+
       if (!user) {
-        user = await User.create({ phone });
+        user = await User.create({ phone, customerId: customer ? customer._id : null });
+      } else if (!user.customerId && customer) {
+        user.customerId = customer._id;
+        await user.save();
       }
     } else {
+      // Existing-user flow: try to resolve customerId from OTP or customer collection
       let customerId = otpDoc.customerId ? otpDoc.customerId._id : null;
       if (!customerId) {
         const customer = await Customer.findOne({ phone });

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import BottomNav from '../component/BottomNav'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Settings() {
   const { theme, setTheme } = useTheme()
+  const { logout } = useAuth()
+  const navigate = useNavigate()
   const [colorblindMode, setColorblindMode] = useState('none')
   const [fontSize, setFontSize] = useState(16)
   const [formData, setFormData] = useState({
@@ -63,6 +67,17 @@ export default function Settings() {
     if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       // Handle account deletion
       alert('Account deleted (placeholder)')
+    }
+  }
+
+  const handleLogout = () => {
+    if (window.confirm('Sign out now?')) {
+      try {
+        logout()
+      } catch (err) {
+        console.warn('Logout failed', err)
+      }
+      navigate('/')
     }
   }
 
@@ -240,6 +255,10 @@ export default function Settings() {
           >
             Delete My Account
           </button>
+          
+          <div className="mt-4">
+            <button type="button" className="btn btn-secondary" onClick={handleLogout}>Sign out</button>
+          </div>
         </section>
       </main>
 

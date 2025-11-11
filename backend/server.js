@@ -7,8 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Mount auth routes
+// Mount auth routes (exposed under /api/auth to match frontend client's baseURL)
 const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+// Keep legacy mount as well for compatibility
 app.use('/auth', authRoutes);
 
 // Mount data routes (authenticated)
