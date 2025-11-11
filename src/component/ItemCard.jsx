@@ -16,18 +16,12 @@ export default function ItemCard({ item }) {
 
       <div className="flex-1">
         <h3 className="font-medium mb-1">{item.title}</h3>
-        <div className="flex items-center gap-2 mb-1">
-          <div className="flex items-center text-yellow-500">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.75l-5.6 5.458L19.334 24 12 20.013 4.666 24l1.534-8.792L.6 9.75l7.732-1.732L12 .587z"/></svg>
-            <span className="ml-1 text-sm">{item.rating}</span>
-          </div>
-          <span className="text-[var(--color-text-muted)] text-sm">({item.reviews} reviews)</span>
-        </div>
+        {/* Rating removed: not available from API */}
 
         <div className="flex items-center gap-2">
           <span className="font-semibold">Rs {item.price}</span>
           <span className="text-[var(--color-text-muted)] line-through text-sm">Rs {item.originalPrice}</span>
-          <span className="text-[var(--color-success)] text-sm">{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% OFF</span>
+          <span className="text-[var(--color-success)] text-sm">{item.originalPrice ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100) : 0}% OFF</span>
         </div>
 
         <p className="text-[var(--color-text-muted)] text-sm mt-1">{item.category}</p>
