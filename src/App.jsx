@@ -10,14 +10,16 @@ import Address from './pages/Address'
 import Product from './pages/Product'
 import { ThemeProvider } from './context/ThemeContext'
 import { CartProvider } from './context/CartContext'
+import { DataProvider } from './context/DataContext'
 
 export default function App() {
   return (
     <ThemeProvider>
-      <CartProvider>
-        <Router>
-          <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
-            <Routes>
+      <DataProvider>
+        <CartProvider>
+          <Router>
+            <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
+              <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/view-cart" element={<Cart />} />
@@ -27,10 +29,11 @@ export default function App() {
               <Route path="/search-results" element={<SearchResults />} />
               <Route path="/product" element={<Product />} />
               <Route path="/address" element={<Address />} />
-            </Routes>
-          </div>
-        </Router>
-      </CartProvider>
+              </Routes>
+            </div>
+          </Router>
+        </CartProvider>
+      </DataProvider>
     </ThemeProvider>
   )
 }
