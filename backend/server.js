@@ -14,7 +14,7 @@ app.use('/auth', authRoutes);
 // Mount data routes (authenticated)
 const authMiddleware = require('./middleware/authMiddleware');
 const dataRoutes = require('./routes/data');
-app.use('/api', authMiddleware, dataRoutes);
+app.use('/api', dataRoutes);
 
 // MongoDB connection
 connectMongo()
