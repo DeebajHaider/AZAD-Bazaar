@@ -10,6 +10,8 @@ const ProductSchema = new mongoose.Schema({
   description: { type: String, maxlength: 1000, default: '' },
   images: { type: [String], default: [] },
   categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  // subcategories: optional array of category ObjectIds for products that belong to multiple categories
+  subcategories: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }], default: [] },
   brandId: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand', required: true },
   originalPrice: { type: Number, required: true, min: 0 },
   discountedPrice: { type: Number, required: true, min: 0 },

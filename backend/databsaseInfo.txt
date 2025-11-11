@@ -54,6 +54,7 @@ DB Schema
       "images": ["string"],
       "categoryId": "ObjectId",                // reference
       "brandId": "ObjectId",                   // reference
+  "subcategories": ["ObjectId"],           // optional: additional category references
       "originalPrice": 100.00,
       "discountedPrice": 90.00,
       "stockQuantity": 100,
@@ -85,8 +86,8 @@ DB Schema
       "_id": "ObjectId",
       "name": "string",
       "image": "string",
-      "parentCategoryId": "ObjectId"           // optional
-    }
+    "parentCategoryIds": ["ObjectId"]           // optional: allow multiple parent categories
+      }
   },
 
   "Order": {
@@ -199,7 +200,7 @@ Category
       '_id',
       'image',
       'name',
-      'parentCategoryId'
+      'parentCategoryIds'
     ],
     properties: {
       _id: {
@@ -211,11 +212,11 @@ Category
       name: {
         bsonType: 'string'
       },
-      parentCategoryId: {
-        bsonType: [
-          'null',
-          'objectId'
-        ]
+      parentCategoryIds: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'objectId'
+        }
       }
     }
   }
@@ -600,6 +601,12 @@ product
       },
       categoryId: {
         bsonType: 'objectId'
+      },
+      subcategories: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'objectId'
+        }
       },
       brandId: {
         bsonType: 'objectId'
