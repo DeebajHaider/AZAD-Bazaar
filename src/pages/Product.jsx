@@ -44,9 +44,24 @@ export default function Product() {
   // Reset active index when product changes
   useEffect(() => setActiveIndex(0), [product._id, product.id])
 
+  // Auto-advance image slider when there are multiple images (2s gap)
+  useEffect(() => {
+    if (!Array.isArray(images) || images.length <= 1) return
+    const id = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % images.length)
+    }, 2000)
+    return () => clearInterval(id)
+  }, [images])
+
   const mainImage = images[activeIndex] || images[0]
 
   const productIdForCart = product._id ?? product.id ?? product.sku ?? 'SAMPLE001'
+  // Compute available stock based on backend `Product` model fields
+  const availableStock = (typeof product.stockQuantity === 'number')
+    ? Math.max(0, product.stockQuantity - (product.reservedQuantity || 0))
+    : (product.inStock ? Infinity : 0)
+  const inStock = availableStock > 0
+  const displayPrice = product.discountedPrice ?? product.originalPrice ?? product.price
 
   return (
     <>
@@ -75,21 +90,22 @@ export default function Product() {
 
           <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{product.name ?? product.title}</h1>
           <div className="mt-2 flex items-center gap-3">
-            <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {product.discountedPrice ?? product.price}</div>
-            {!((typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock) && (
+            <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {displayPrice}</div>
+            {!inStock && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
                 Out of Stock
               </span>
             )}
-            {((typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock) && (product.stockCount <= 5) && (
+            {inStock && (isFinite(availableStock) && availableStock <= 5) && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
-                Only {product.stockCount} left
+                Only {availableStock} left
               </span>
             )}
           </div>
 
           <div className="mt-6 text-sm text-gray-600">{product.description}</div>
         </div>
+
 
         {/* Bottom buttons - fixed above bottom nav */}
         <div className="absolute left-0 right-0 bottom-20 flex justify-center z-[1100] pointer-events-none">
@@ -99,7 +115,6 @@ export default function Product() {
               {qty === 0 ? (
                 <button
                   onClick={() => {
-                    const inStock = (typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock
                     if (!inStock) return;
                     setQty(1)
                     // add to cart with quantity 1
@@ -107,16 +122,16 @@ export default function Product() {
                       itemCode: productIdForCart,
                       itemName: product.name ?? product.title,
                       itemPhoto: mainImage,
-                      itemPrice: product.discountedPrice ?? product.price,
-                      itemOldPrice: product.price ?? product.originalPrice ?? (product.discountedPrice ?? product.price),
+                      itemPrice: product.discountedPrice ?? product.originalPrice ?? product.price,
+                      itemOldPrice: product.originalPrice ?? product.price ?? (product.discountedPrice ?? product.price),
                       quantity: 1,
                     })
                   }}
-                  disabled={!((typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock)}
-                  className={`w-full text-white font-medium ${!product.inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={!product.isActive || !inStock}
+                  className={`w-full text-white font-medium ${!inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
                   style={{background:'var(--primary-color)', padding:'12px', borderRadius:12, boxShadow:'var(--shadow-sm)'}}
                 >
-                  {((typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock) ? 'Add to Cart' : 'Out of Stock'}
+                  {inStock ? 'Add to Cart' : 'Out of Stock'}
                 </button>
               ) : (
                 <div className="w-full" style={{display:'flex'}}>
@@ -137,12 +152,11 @@ export default function Product() {
                   <button
                     onClick={() => {
                       const next = qty + 1
-                      const inStock = (typeof product.stockQuantity === 'number') ? (product.stockQuantity - (product.reservedQuantity || 0) > 0) : product.inStock
-                      if (!inStock || (product.stockCount && next > product.stockCount)) return;
+                      if (!inStock || (isFinite(availableStock) && next > availableStock)) return;
                       setQty(next)
                       updateQuantity(productIdForCart, next)
                     }}
-                    disabled={!product.inStock || (product.stockCount && qty >= product.stockCount)}
+                    disabled={!inStock || (isFinite(availableStock) && qty >= availableStock)}
                     style={{
                       width:48, 
                       height:48, 
@@ -152,8 +166,8 @@ export default function Product() {
                       borderRadius:12, 
                       border:'1px solid var(--color-border)', 
                       background:'var(--color-surface)',
-                      opacity: (!product.inStock || (product.stockCount && qty >= product.stockCount)) ? '0.5' : '1',
-                      cursor: (!product.inStock || (product.stockCount && qty >= product.stockCount)) ? 'not-allowed' : 'pointer'
+                      opacity: (!inStock || (isFinite(availableStock) && qty >= availableStock)) ? '0.5' : '1',
+                      cursor: (!inStock || (isFinite(availableStock) && qty >= availableStock)) ? 'not-allowed' : 'pointer'
                     }}
                   >
                     <Plus size={16} />
