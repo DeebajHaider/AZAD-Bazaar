@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import * as cartService from '../api/cartService';
+// add productService (the same underlying service used by useProduct hook)
+import productService from '../api/productService';
 
 const PLACEHOLDER = 'https://via.placeholder.com/80?text=Product';
 
@@ -26,6 +28,56 @@ export default function useCart() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // New effect: ensure we have product docs (with images) for items
+  useEffect(() => {
+    if (!rawItems || rawItems.length === 0) return;
+    // collect unique product ids from rawItems
+    const ids = Array.from(new Set(rawItems.map(it => (it.productId && it.productId.toString) ? it.productId.toString() : String(it.productId))));
+    if (!ids.length) return;
+
+    // build set of existing product ids we already have and check for missing images
+    const existingById = new Map((products || []).map(p => [p._id && p._id.toString ? p._id.toString() : String(p._id), p]));
+    const needFetch = [];
+    for (const id of ids) {
+      const existing = existingById.get(id);
+      // fetch if we don't have the product at all OR if it exists but has no images (so UI can show image)
+      if (!existing || !(Array.isArray(existing.images) && existing.images.length)) {
+        needFetch.push(id);
+      }
+    }
+
+    if (needFetch.length === 0) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        // fetch missing product docs in parallel (limit not implemented; keep simple)
+        const fetched = await Promise.allSettled(needFetch.map(id => productService.getProductById(id)));
+        if (cancelled) return;
+        const successful = fetched
+          .filter(r => r.status === 'fulfilled' && r.value)
+          .map(r => r.status === 'fulfilled' ? r.value : null)
+          .filter(Boolean);
+        if (successful.length) {
+          // merge into products: replace existing entries or append new ones
+          setProducts(prev => {
+            const map = new Map((prev || []).map(p => [p._id && p._id.toString ? p._id.toString() : String(p._id), p]));
+            for (const doc of successful) {
+              const id = doc._id && doc._id.toString ? doc._id.toString() : String(doc._id);
+              map.set(id, doc);
+            }
+            return Array.from(map.values());
+          });
+        }
+      } catch (err) {
+        // non-fatal — keep existing products and surface error state
+        setError(err.message || err);
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [rawItems, products]);
 
   const addToCart = useCallback(async (productId) => {
     setLoading(true);

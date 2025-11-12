@@ -1,0 +1,5422 @@
+{
+  "generatedAt": "2025-11-12T18:16:16.006Z",
+  "models": [
+    {
+      "model": "Brand",
+      "field": "name",
+      "entries": [
+        {
+          "value": "Puma",
+          "docs": [
+            "6913963978d99d52f6676d7d"
+          ],
+          "count": 1,
+          "ur": "پوما"
+        },
+        {
+          "value": "Off White",
+          "docs": [
+            "6913963978d99d52f6676d7e"
+          ],
+          "count": 1,
+          "ur": "آف وائٹ"
+        },
+        {
+          "value": "Fashion Fun",
+          "docs": [
+            "6913963978d99d52f6676dc1"
+          ],
+          "count": 1,
+          "ur": "فیشن تفریح"
+        },
+        {
+          "value": "Casual Comfort",
+          "docs": [
+            "6913963978d99d52f6676d75"
+          ],
+          "count": 1,
+          "ur": "بے تکلف آرام"
+        },
+        {
+          "value": "Longines",
+          "docs": [
+            "6913963978d99d52f6676d84"
+          ],
+          "count": 1,
+          "ur": "لونجینز"
+        },
+        {
+          "value": "Fashion Diva",
+          "docs": [
+            "6913963978d99d52f6676de6"
+          ],
+          "count": 1,
+          "ur": "فیشن دیوا"
+        },
+        {
+          "value": "Oppo",
+          "docs": [
+            "6913963978d99d52f6676dab"
+          ],
+          "count": 1,
+          "ur": "اوپو"
+        },
+        {
+          "value": "Glamour Beauty",
+          "docs": [
+            "6913963978d99d52f6676d17"
+          ],
+          "count": 1,
+          "ur": "دلکش حسن"
+        },
+        {
+          "value": "Chrysler",
+          "docs": [
+            "6913963978d99d52f6676dc9"
+          ],
+          "count": 1,
+          "ur": "کرسلر"
+        },
+        {
+          "value": "Heshe",
+          "docs": [
+            "6913963978d99d52f6676dd5"
+          ],
+          "count": 1,
+          "ur": "ہی شی"
+        },
+        {
+          "value": "Apple",
+          "docs": [
+            "6913963978d99d52f6676d69"
+          ],
+          "count": 1,
+          "ur": "ایپل"
+        },
+        {
+          "value": "Realme",
+          "docs": [
+            "6913963978d99d52f6676dad"
+          ],
+          "count": 1,
+          "ur": "ریئل می"
+        },
+        {
+          "value": "Fashion Co.",
+          "docs": [
+            "6913963978d99d52f6676ded"
+          ],
+          "count": 1,
+          "ur": "فیشن کمپنی"
+        },
+        {
+          "value": "Prada",
+          "docs": [
+            "6913963978d99d52f6676dd7"
+          ],
+          "count": 1,
+          "ur": "پراڈا"
+        },
+        {
+          "value": "Dior",
+          "docs": [
+            "6913963978d99d52f6676d22"
+          ],
+          "count": 1,
+          "ur": "ڈیور"
+        },
+        {
+          "value": "Nail Couture",
+          "docs": [
+            "6913963978d99d52f6676d1d"
+          ],
+          "count": 1,
+          "ur": "نیل کوتور"
+        },
+        {
+          "value": "TechGear",
+          "docs": [
+            "6913963978d99d52f6676d93"
+          ],
+          "count": 1,
+          "ur": "ٹیک گیئر"
+        },
+        {
+          "value": "Urban Chic",
+          "docs": [
+            "6913963978d99d52f6676d76"
+          ],
+          "count": 1,
+          "ur": "جدید شہری انداز"
+        },
+        {
+          "value": "Olay",
+          "docs": [
+            "6913963978d99d52f6676da6"
+          ],
+          "count": 1,
+          "ur": "اولے"
+        },
+        {
+          "value": "IWC",
+          "docs": [
+            "6913963978d99d52f6676dea"
+          ],
+          "count": 1,
+          "ur": "آئی ڈبلیو سی"
+        },
+        {
+          "value": "Fashion Timepieces",
+          "docs": [
+            "6913963978d99d52f6676d82"
+          ],
+          "count": 1,
+          "ur": "فیشن ٹائم پیسز"
+        },
+        {
+          "value": "Fashion Trends",
+          "docs": [
+            "6913963978d99d52f6676d71"
+          ],
+          "count": 1,
+          "ur": "فیشن ٹرینڈز"
+        },
+        {
+          "value": "Furniture Co.",
+          "docs": [
+            "6913963978d99d52f6676d2a"
+          ],
+          "count": 1,
+          "ur": "فرنیچر کمپنی"
+        },
+        {
+          "value": "Dodge",
+          "docs": [
+            "6913963978d99d52f6676dcb"
+          ],
+          "count": 1,
+          "ur": "ڈاج"
+        },
+        {
+          "value": "Essence",
+          "docs": [
+            "6913963978d99d52f6676d15"
+          ],
+          "count": 1,
+          "ur": "ایسنس"
+        },
+        {
+          "value": "Annibale Colombo",
+          "docs": [
+            "6913963978d99d52f6676d27"
+          ],
+          "count": 1,
+          "ur": "اینی بال کولمبو"
+        },
+        {
+          "value": "Dolce & Gabbana",
+          "docs": [
+            "6913963978d99d52f6676d23"
+          ],
+          "count": 1,
+          "ur": "ڈولچے اینڈ گبانا"
+        },
+        {
+          "value": "GadgetMaster",
+          "docs": [
+            "6913963978d99d52f6676d95"
+          ],
+          "count": 1,
+          "ur": "گیجٹ ماسٹر"
+        },
+        {
+          "value": "Fashion Shades",
+          "docs": [
+            "6913963978d99d52f6676dbf"
+          ],
+          "count": 1,
+          "ur": "فیشن شیڈز"
+        },
+        {
+          "value": "Fashionista",
+          "docs": [
+            "6913963978d99d52f6676dd3"
+          ],
+          "count": 1,
+          "ur": "فیشنسٹا"
+        },
+        {
+          "value": "Knoll",
+          "docs": [
+            "6913963978d99d52f6676d2c"
+          ],
+          "count": 1,
+          "ur": "نول"
+        },
+        {
+          "value": "Attitude",
+          "docs": [
+            "6913963978d99d52f6676da4"
+          ],
+          "count": 1,
+          "ur": "ایٹی ٹیوڈ"
+        },
+        {
+          "value": "Vivo",
+          "docs": [
+            "6913963978d99d52f6676db1"
+          ],
+          "count": 1,
+          "ur": "ویوو"
+        },
+        {
+          "value": "Asus",
+          "docs": [
+            "6913963978d99d52f6676d6a"
+          ],
+          "count": 1,
+          "ur": "ایسوس"
+        },
+        {
+          "value": "Huawei",
+          "docs": [
+            "6913963978d99d52f6676d6b"
+          ],
+          "count": 1,
+          "ur": "ہواوے"
+        },
+        {
+          "value": "Classic Wear",
+          "docs": [
+            "6913963978d99d52f6676d74"
+          ],
+          "count": 1,
+          "ur": "کلاسک پہناوا"
+        },
+        {
+          "value": "ProVision",
+          "docs": [
+            "6913963978d99d52f6676d97"
+          ],
+          "count": 1,
+          "ur": "پرو وژن"
+        },
+        {
+          "value": "Amazon",
+          "docs": [
+            "6913963978d99d52f6676d89"
+          ],
+          "count": 1,
+          "ur": "ایمیزون"
+        },
+        {
+          "value": "ScootMaster",
+          "docs": [
+            "6913963978d99d52f6676d9f"
+          ],
+          "count": 1,
+          "ur": "اسکوٹ ماسٹر"
+        },
+        {
+          "value": "Elegance Collection",
+          "docs": [
+            "6913963978d99d52f6676dd9"
+          ],
+          "count": 1,
+          "ur": "نفیس کلیکشن"
+        },
+        {
+          "value": "Bath Trends",
+          "docs": [
+            "6913963978d99d52f6676d2e"
+          ],
+          "count": 1,
+          "ur": "باتھ ٹرینڈز"
+        },
+        {
+          "value": "Nike",
+          "docs": [
+            "6913963978d99d52f6676d7a"
+          ],
+          "count": 1,
+          "ur": "نائیکی"
+        },
+        {
+          "value": "Rolex",
+          "docs": [
+            "6913963978d99d52f6676d85"
+          ],
+          "count": 1,
+          "ur": "رولیکس"
+        },
+        {
+          "value": "Chic Cosmetics",
+          "docs": [
+            "6913963978d99d52f6676d1b"
+          ],
+          "count": 1,
+          "ur": "جدید کاسمیٹکس"
+        },
+        {
+          "value": "Gucci",
+          "docs": [
+            "6913963978d99d52f6676d24"
+          ],
+          "count": 1,
+          "ur": "گوچی"
+        },
+        {
+          "value": "MotoGP",
+          "docs": [
+            "6913963978d99d52f6676d9d"
+          ],
+          "count": 1,
+          "ur": "موٹو جی پی"
+        },
+        {
+          "value": "Dell",
+          "docs": [
+            "6913963978d99d52f6676d6d"
+          ],
+          "count": 1,
+          "ur": "ڈیل"
+        },
+        {
+          "value": "Samsung",
+          "docs": [
+            "6913963978d99d52f6676daf"
+          ],
+          "count": 1,
+          "ur": "سام سنگ"
+        },
+        {
+          "value": "Kawasaki",
+          "docs": [
+            "6913963978d99d52f6676d9c"
+          ],
+          "count": 1,
+          "ur": "کاواساکی"
+        },
+        {
+          "value": "Vaseline",
+          "docs": [
+            "6913963978d99d52f6676da8"
+          ],
+          "count": 1,
+          "ur": "ویسلین"
+        },
+        {
+          "value": "Fashion Gold",
+          "docs": [
+            "6913963978d99d52f6676dec"
+          ],
+          "count": 1,
+          "ur": "فیشن گولڈ"
+        },
+        {
+          "value": "SpeedMaster",
+          "docs": [
+            "6913963978d99d52f6676da0"
+          ],
+          "count": 1,
+          "ur": "اسپیڈ ماسٹر"
+        },
+        {
+          "value": "Fashion Express",
+          "docs": [
+            "6913963978d99d52f6676de8"
+          ],
+          "count": 1,
+          "ur": "فیشن ایکسپریس"
+        },
+        {
+          "value": "Beats",
+          "docs": [
+            "6913963978d99d52f6676d90"
+          ],
+          "count": 1,
+          "ur": "بیٹس"
+        },
+        {
+          "value": "SnapTech",
+          "docs": [
+            "6913963978d99d52f6676d96"
+          ],
+          "count": 1,
+          "ur": "اسنیپ ٹیک"
+        },
+        {
+          "value": "Gigabyte",
+          "docs": [
+            "6913963978d99d52f6676d73"
+          ],
+          "count": 1,
+          "ur": "گیگا بائٹ"
+        },
+        {
+          "value": "Generic Motors",
+          "docs": [
+            "6913963978d99d52f6676d9a"
+          ],
+          "count": 1,
+          "ur": "جینرک موٹرز"
+        },
+        {
+          "value": "Unbranded",
+          "docs": [
+            "6913963978d99d52f6676d31"
+          ],
+          "count": 1,
+          "ur": "غیر برانڈڈ"
+        },
+        {
+          "value": "Lenovo",
+          "docs": [
+            "6913963978d99d52f6676d6c"
+          ],
+          "count": 1,
+          "ur": "لینووو"
+        },
+        {
+          "value": "Pampi",
+          "docs": [
+            "6913963978d99d52f6676de7"
+          ],
+          "count": 1,
+          "ur": "پامپی"
+        },
+        {
+          "value": "Comfort Trends",
+          "docs": [
+            "6913963978d99d52f6676de3"
+          ],
+          "count": 1,
+          "ur": "آرام کے رجحانات"
+        },
+        {
+          "value": "Chanel",
+          "docs": [
+            "6913963978d99d52f6676d21"
+          ],
+          "count": 1,
+          "ur": "شنیل"
+        },
+        {
+          "value": "Calvin Klein",
+          "docs": [
+            "6913963978d99d52f6676d20"
+          ],
+          "count": 1,
+          "ur": "کیلون کلائن"
+        },
+        {
+          "value": "Velvet Touch",
+          "docs": [
+            "6913963978d99d52f6676d19"
+          ],
+          "count": 1,
+          "ur": "مخملی لمس"
+        }
+      ]
+    },
+    {
+      "model": "Brand",
+      "field": "motto",
+      "entries": [
+        {
+          "value": "International ok he cover front.",
+          "docs": [
+            "6913963978d99d52f6676d19"
+          ],
+          "count": 1,
+          "ur": "بین الاقوامی ٹھیک، سامنے کا احاطہ۔"
+        },
+        {
+          "value": "His admit.",
+          "docs": [
+            "6913963978d99d52f6676d84"
+          ],
+          "count": 1,
+          "ur": "اس کا اعتراف۔"
+        },
+        {
+          "value": "Career phone look care less.",
+          "docs": [
+            "6913963978d99d52f6676daf"
+          ],
+          "count": 1,
+          "ur": "کیرئیر فون، بے پرواہ انداز۔"
+        },
+        {
+          "value": "Son upon population see.",
+          "docs": [
+            "6913963978d99d52f6676d9c"
+          ],
+          "count": 1,
+          "ur": "بیٹا آبادی پر دیکھے۔"
+        },
+        {
+          "value": "Kind job once news service.",
+          "docs": [
+            "6913963978d99d52f6676ded"
+          ],
+          "count": 1,
+          "ur": "ایک بار مہربان کام، خبروں کی خدمت۔"
+        },
+        {
+          "value": "Remember all same choose my.",
+          "docs": [
+            "6913963978d99d52f6676dbf"
+          ],
+          "count": 1,
+          "ur": "سب ایک جیسے یاد رکھو، میرا انتخاب کرو۔"
+        },
+        {
+          "value": "Fast across blood air decision.",
+          "docs": [
+            "6913963978d99d52f6676dd7"
+          ],
+          "count": 1,
+          "ur": "خون اور ہوا کے پار تیز فیصلہ۔"
+        },
+        {
+          "value": "Author building interesting interest past.",
+          "docs": [
+            "6913963978d99d52f6676da8"
+          ],
+          "count": 1,
+          "ur": "مصنف کی عمارت، دلچسپ ماضی۔"
+        },
+        {
+          "value": "Something agreement information ground.",
+          "docs": [
+            "6913963978d99d52f6676d97"
+          ],
+          "count": 1,
+          "ur": "کچھ معاہدہ، معلوماتی بنیاد۔"
+        },
+        {
+          "value": "Feeling on.",
+          "docs": [
+            "6913963978d99d52f6676d9a"
+          ],
+          "count": 1,
+          "ur": "احساس جاری ہے۔"
+        },
+        {
+          "value": "Girl former body analysis.",
+          "docs": [
+            "6913963978d99d52f6676d96"
+          ],
+          "count": 1,
+          "ur": "لڑکی، سابقہ جسم، تجزیہ۔"
+        },
+        {
+          "value": "Question much beyond establish.",
+          "docs": [
+            "6913963978d99d52f6676d75"
+          ],
+          "count": 1,
+          "ur": "سوال، حد سے زیادہ قائم کرنا۔"
+        },
+        {
+          "value": "Term born avoid.",
+          "docs": [
+            "6913963978d99d52f6676d6c"
+          ],
+          "count": 1,
+          "ur": "اصطلاح، پیدائشی، گریز۔"
+        },
+        {
+          "value": "Tax certainly candidate.",
+          "docs": [
+            "6913963978d99d52f6676d76"
+          ],
+          "count": 1,
+          "ur": "ٹیکس، یقینی طور پر امیدوار۔"
+        },
+        {
+          "value": "Truth few senior through.",
+          "docs": [
+            "6913963978d99d52f6676dea"
+          ],
+          "count": 1,
+          "ur": "سچ، چند بزرگوں کے ذریعے۔"
+        },
+        {
+          "value": "Focus dark standard statement amount.",
+          "docs": [
+            "6913963978d99d52f6676de6"
+          ],
+          "count": 1,
+          "ur": "توجہ، تاریک معیار، بیان کی رقم۔"
+        },
+        {
+          "value": "Organization feel grow paper piece.",
+          "docs": [
+            "6913963978d99d52f6676d21"
+          ],
+          "count": 1,
+          "ur": "تنظیم، احساس، بڑھوتری، کاغذ کا ٹکڑا۔"
+        },
+        {
+          "value": "Base continue likely actually purpose.",
+          "docs": [
+            "6913963978d99d52f6676d95"
+          ],
+          "count": 1,
+          "ur": "بنیاد، جاری، ممکنہ مقصد۔"
+        },
+        {
+          "value": "Stock central with.",
+          "docs": [
+            "6913963978d99d52f6676d24"
+          ],
+          "count": 1,
+          "ur": "اسٹاک، مرکزی کے ساتھ۔"
+        },
+        {
+          "value": "Argue good rate management.",
+          "docs": [
+            "6913963978d99d52f6676dd9"
+          ],
+          "count": 1,
+          "ur": "بحث، اچھی شرح، انتظام۔"
+        },
+        {
+          "value": "Worry share degree interview.",
+          "docs": [
+            "6913963978d99d52f6676d23"
+          ],
+          "count": 1,
+          "ur": "فکر، حصہ، ڈگری، انٹرویو۔"
+        },
+        {
+          "value": "Themselves discuss down.",
+          "docs": [
+            "6913963978d99d52f6676d7e"
+          ],
+          "count": 1,
+          "ur": "وہ خود بحث کرتے ہیں۔"
+        },
+        {
+          "value": "North store manage management.",
+          "docs": [
+            "6913963978d99d52f6676d89"
+          ],
+          "count": 1,
+          "ur": "شمالی اسٹور، انتظامی انتظام۔"
+        },
+        {
+          "value": "Pay yeah worker worker.",
+          "docs": [
+            "6913963978d99d52f6676d90"
+          ],
+          "count": 1,
+          "ur": "ادائیگی، ہاں کارکن۔"
+        },
+        {
+          "value": "Rather test specific another.",
+          "docs": [
+            "6913963978d99d52f6676de7"
+          ],
+          "count": 1,
+          "ur": "بلکہ آزمائش، ایک اور مخصوص۔"
+        },
+        {
+          "value": "Type west wrong issue.",
+          "docs": [
+            "6913963978d99d52f6676dcb"
+          ],
+          "count": 1,
+          "ur": "قسم، مغرب، غلط مسئلہ۔"
+        },
+        {
+          "value": "Until figure garden wife technology.",
+          "docs": [
+            "6913963978d99d52f6676dc1"
+          ],
+          "count": 1,
+          "ur": "جب تک شکل، باغ، بیوی، ٹیکنالوجی۔"
+        },
+        {
+          "value": "Above set mean.",
+          "docs": [
+            "6913963978d99d52f6676d20"
+          ],
+          "count": 1,
+          "ur": "اوپر، مطلب طے کریں۔"
+        },
+        {
+          "value": "Unit option mission will.",
+          "docs": [
+            "6913963978d99d52f6676da6"
+          ],
+          "count": 1,
+          "ur": "یونٹ، آپشن، مشن ہوگا۔"
+        },
+        {
+          "value": "Goal friend himself next despite.",
+          "docs": [
+            "6913963978d99d52f6676d74"
+          ],
+          "count": 1,
+          "ur": "مقصد، دوست، خود، اگلے کے باوجود۔"
+        },
+        {
+          "value": "Big guess any accept forget.",
+          "docs": [
+            "6913963978d99d52f6676d22"
+          ],
+          "count": 1,
+          "ur": "بڑا اندازہ، کوئی بھی قبول کرے، بھول جاؤ۔"
+        },
+        {
+          "value": "Today social cost administration left.",
+          "docs": [
+            "6913963978d99d52f6676d71"
+          ],
+          "count": 1,
+          "ur": "آج، سماجی لاگت، انتظامیہ باقی۔"
+        },
+        {
+          "value": "Lawyer change interest appear west.",
+          "docs": [
+            "6913963978d99d52f6676d2c"
+          ],
+          "count": 1,
+          "ur": "وکیل، تبدیلی، دلچسپی، مغرب ظاہر۔"
+        },
+        {
+          "value": "Buy dream will.",
+          "docs": [
+            "6913963978d99d52f6676dd3"
+          ],
+          "count": 1,
+          "ur": "خریداری کا خواب ہوگا۔"
+        },
+        {
+          "value": "Rich area environmental could.",
+          "docs": [
+            "6913963978d99d52f6676d73"
+          ],
+          "count": 1,
+          "ur": "امیر علاقہ، ماحولیاتی ہو سکتا ہے۔"
+        },
+        {
+          "value": "Especially education themselves international so.",
+          "docs": [
+            "6913963978d99d52f6676da0"
+          ],
+          "count": 1,
+          "ur": "خاص طور پر تعلیم، وہ خود بین الاقوامی۔"
+        },
+        {
+          "value": "Section reality hot open court.",
+          "docs": [
+            "6913963978d99d52f6676d6b"
+          ],
+          "count": 1,
+          "ur": "سیکشن، حقیقت، گرم، کھلی عدالت۔"
+        },
+        {
+          "value": "Issue such study.",
+          "docs": [
+            "6913963978d99d52f6676d27"
+          ],
+          "count": 1,
+          "ur": "مسئلہ، ایسا مطالعہ۔"
+        },
+        {
+          "value": "Low fall full.",
+          "docs": [
+            "6913963978d99d52f6676d1d"
+          ],
+          "count": 1,
+          "ur": "کم، زوال، مکمل۔"
+        },
+        {
+          "value": "Only leader throughout.",
+          "docs": [
+            "6913963978d99d52f6676d7a"
+          ],
+          "count": 1,
+          "ur": "صرف رہنما بھر میں۔"
+        },
+        {
+          "value": "Today like meeting few walk.",
+          "docs": [
+            "6913963978d99d52f6676da4"
+          ],
+          "count": 1,
+          "ur": "آج، ملاقات کی طرح، چند قدم۔"
+        },
+        {
+          "value": "Exactly money make side.",
+          "docs": [
+            "6913963978d99d52f6676dec"
+          ],
+          "count": 1,
+          "ur": "بالکل، پیسہ، پہلو بنائیں۔"
+        },
+        {
+          "value": "One operation push.",
+          "docs": [
+            "6913963978d99d52f6676d82"
+          ],
+          "count": 1,
+          "ur": "ایک آپریشن، دھکا۔"
+        },
+        {
+          "value": "Perhaps analysis.",
+          "docs": [
+            "6913963978d99d52f6676de8"
+          ],
+          "count": 1,
+          "ur": "شاید تجزیہ۔"
+        },
+        {
+          "value": "Within TV amount.",
+          "docs": [
+            "6913963978d99d52f6676d15"
+          ],
+          "count": 1,
+          "ur": "ٹی وی کی رقم کے اندر۔"
+        },
+        {
+          "value": "Image few.",
+          "docs": [
+            "6913963978d99d52f6676d85"
+          ],
+          "count": 1,
+          "ur": "تصویر، چند۔"
+        },
+        {
+          "value": "Cultural particularly.",
+          "docs": [
+            "6913963978d99d52f6676d9d"
+          ],
+          "count": 1,
+          "ur": "ثقافتی، خاص طور پر۔"
+        },
+        {
+          "value": "Respond ahead modern fight.",
+          "docs": [
+            "6913963978d99d52f6676d69"
+          ],
+          "count": 1,
+          "ur": "آگے جواب دیں، جدید لڑائی۔"
+        },
+        {
+          "value": "Purpose member part big.",
+          "docs": [
+            "6913963978d99d52f6676d6a"
+          ],
+          "count": 1,
+          "ur": "مقصد، رکن، حصہ، بڑا۔"
+        },
+        {
+          "value": "Toward goal type.",
+          "docs": [
+            "6913963978d99d52f6676d2a"
+          ],
+          "count": 1,
+          "ur": "مقصد کی قسم کی طرف۔"
+        },
+        {
+          "value": "Why last.",
+          "docs": [
+            "6913963978d99d52f6676d17"
+          ],
+          "count": 1,
+          "ur": "کیوں آخری۔"
+        },
+        {
+          "value": "Over spend.",
+          "docs": [
+            "6913963978d99d52f6676d2e"
+          ],
+          "count": 1,
+          "ur": "زیادہ خرچ۔"
+        },
+        {
+          "value": "Rich thousand seek forget.",
+          "docs": [
+            "6913963978d99d52f6676d7d"
+          ],
+          "count": 1,
+          "ur": "امیر ہزار، تلاش، بھول جاؤ۔"
+        },
+        {
+          "value": "Truth yet discover fact.",
+          "docs": [
+            "6913963978d99d52f6676d9f"
+          ],
+          "count": 1,
+          "ur": "سچ، پھر بھی حقیقت دریافت کریں۔"
+        },
+        {
+          "value": "Fine message read.",
+          "docs": [
+            "6913963978d99d52f6676d93"
+          ],
+          "count": 1,
+          "ur": "عمدہ پیغام پڑھیں۔"
+        },
+        {
+          "value": "Gun open success TV.",
+          "docs": [
+            "6913963978d99d52f6676d6d"
+          ],
+          "count": 1,
+          "ur": "بندوق، کھلی کامیابی، ٹی وی۔"
+        },
+        {
+          "value": "Under little off.",
+          "docs": [
+            "6913963978d99d52f6676dad"
+          ],
+          "count": 1,
+          "ur": "نیچے، تھوڑا دور۔"
+        },
+        {
+          "value": "Perform choice media white.",
+          "docs": [
+            "6913963978d99d52f6676dab"
+          ],
+          "count": 1,
+          "ur": "انتخاب، میڈیا، سفید کارکردگی۔"
+        },
+        {
+          "value": "Individual career.",
+          "docs": [
+            "6913963978d99d52f6676db1"
+          ],
+          "count": 1,
+          "ur": "انفرادی کیریئر۔"
+        },
+        {
+          "value": "Really watch training.",
+          "docs": [
+            "6913963978d99d52f6676d1b"
+          ],
+          "count": 1,
+          "ur": "واقعی تربیت دیکھیں۔"
+        },
+        {
+          "value": "Cup whether turn.",
+          "docs": [
+            "6913963978d99d52f6676dc9"
+          ],
+          "count": 1,
+          "ur": "کپ، چاہے مڑے۔"
+        },
+        {
+          "value": "Film those range technology them.",
+          "docs": [
+            "6913963978d99d52f6676dd5"
+          ],
+          "count": 1,
+          "ur": "فلم، وہ رینج، ٹیکنالوجی۔"
+        },
+        {
+          "value": "Music sometimes hold prepare.",
+          "docs": [
+            "6913963978d99d52f6676de3"
+          ],
+          "count": 1,
+          "ur": "موسیقی، کبھی کبھی تیاری پکڑو۔"
+        },
+        {
+          "value": "Arm do environmental move.",
+          "docs": [
+            "6913963978d99d52f6676d31"
+          ],
+          "count": 1,
+          "ur": "بازو، ماحولیاتی حرکت۔"
+        }
+      ]
+    },
+    {
+      "model": "Category",
+      "field": "name",
+      "entries": [
+        {
+          "value": "pans",
+          "docs": [
+            "6913963978d99d52f6676d5d"
+          ],
+          "count": 1,
+          "ur": "پین"
+        },
+        {
+          "value": "graters",
+          "docs": [
+            "6913963978d99d52f6676d57"
+          ],
+          "count": 1,
+          "ur": "کدوکش"
+        },
+        {
+          "value": "earrings",
+          "docs": [
+            "6913963978d99d52f6676de0"
+          ],
+          "count": 1,
+          "ur": "بالیاں"
+        },
+        {
+          "value": "watches",
+          "docs": [
+            "6913963978d99d52f6676d80"
+          ],
+          "count": 1,
+          "ur": "گھڑیاں"
+        },
+        {
+          "value": "casual shoes",
+          "docs": [
+            "6913963978d99d52f6676d7c"
+          ],
+          "count": 1,
+          "ur": "عام جوتے"
+        },
+        {
+          "value": "sports cleats",
+          "docs": [
+            "6913963978d99d52f6676d7b"
+          ],
+          "count": 1,
+          "ur": "کھیلوں کے کلیٹس"
+        },
+        {
+          "value": "coffee",
+          "docs": [
+            "6913963978d99d52f6676d3d"
+          ],
+          "count": 1,
+          "ur": "کافی"
+        },
+        {
+          "value": "men's shirts",
+          "docs": [
+            "6913963978d99d52f6676d70"
+          ],
+          "count": 1,
+          "ur": "مردانہ شرٹس"
+        },
+        {
+          "value": "clothing",
+          "docs": [
+            "6913963978d99d52f6676d6f"
+          ],
+          "count": 1,
+          "ur": "کپڑے"
+        },
+        {
+          "value": "women's shoes",
+          "docs": [
+            "6913963978d99d52f6676de5"
+          ],
+          "count": 1,
+          "ur": "زنانہ جوتے"
+        },
+        {
+          "value": "slicers",
+          "docs": [
+            "6913963978d99d52f6676d53"
+          ],
+          "count": 1,
+          "ur": "سلائسر"
+        },
+        {
+          "value": "mens-shirts",
+          "docs": [
+            "6913963978d99d52f6676d6e"
+          ],
+          "count": 1,
+          "ur": "مردانہ-شرٹس"
+        },
+        {
+          "value": "luxury watches",
+          "docs": [
+            "6913963978d99d52f6676d83"
+          ],
+          "count": 1,
+          "ur": "لگژری گھڑیاں"
+        },
+        {
+          "value": "selfie accessories",
+          "docs": [
+            "6913963978d99d52f6676d94"
+          ],
+          "count": 1,
+          "ur": "سیلفی لوازمات"
+        },
+        {
+          "value": "plant accessories",
+          "docs": [
+            "6913963978d99d52f6676d46"
+          ],
+          "count": 1,
+          "ur": "پودوں کے لوازمات"
+        },
+        {
+          "value": "vehicles",
+          "docs": [
+            "6913963978d99d52f6676dc8"
+          ],
+          "count": 1,
+          "ur": "گاڑیاں"
+        },
+        {
+          "value": "party glasses",
+          "docs": [
+            "6913963978d99d52f6676dc0"
+          ],
+          "count": 1,
+          "ur": "پارٹی گلاسز"
+        },
+        {
+          "value": "backpacks",
+          "docs": [
+            "6913963978d99d52f6676dd8"
+          ],
+          "count": 1,
+          "ur": "بیگ پیک"
+        },
+        {
+          "value": "camera accessories",
+          "docs": [
+            "6913963978d99d52f6676d92"
+          ],
+          "count": 1,
+          "ur": "کیمرے کے لوازمات"
+        },
+        {
+          "value": "tongs",
+          "docs": [
+            "6913963978d99d52f6676d60"
+          ],
+          "count": 1,
+          "ur": "چمٹا"
+        },
+        {
+          "value": "dog food",
+          "docs": [
+            "6913963978d99d52f6676d37"
+          ],
+          "count": 1,
+          "ur": "کتے کی خوراک"
+        },
+        {
+          "value": "realme",
+          "docs": [
+            "6913963978d99d52f6676dac"
+          ],
+          "count": 1,
+          "ur": "ریئل می"
+        },
+        {
+          "value": "cooking essentials",
+          "docs": [
+            "6913963978d99d52f6676d35"
+          ],
+          "count": 1,
+          "ur": "کھانا پکانے کی ضروریات"
+        },
+        {
+          "value": "cutlery",
+          "docs": [
+            "6913963978d99d52f6676d59"
+          ],
+          "count": 1,
+          "ur": "کٹلری"
+        },
+        {
+          "value": "baseball",
+          "docs": [
+            "6913963978d99d52f6676db5"
+          ],
+          "count": 1,
+          "ur": "بیس بال"
+        },
+        {
+          "value": "minivans",
+          "docs": [
+            "6913963978d99d52f6676dcf"
+          ],
+          "count": 1,
+          "ur": "منی وینز"
+        },
+        {
+          "value": "fruits",
+          "docs": [
+            "6913963978d99d52f6676d30"
+          ],
+          "count": 1,
+          "ur": "پھل"
+        },
+        {
+          "value": "seafood",
+          "docs": [
+            "6913963978d99d52f6676d39"
+          ],
+          "count": 1,
+          "ur": "سمندری غذا"
+        },
+        {
+          "value": "microwaves",
+          "docs": [
+            "6913963978d99d52f6676d5b"
+          ],
+          "count": 1,
+          "ur": "مائیکروویو"
+        },
+        {
+          "value": "smartphones",
+          "docs": [
+            "6913963978d99d52f6676da9"
+          ],
+          "count": 1,
+          "ur": "اسمارٹ فونز"
+        },
+        {
+          "value": "condiments",
+          "docs": [
+            "6913963978d99d52f6676d3a"
+          ],
+          "count": 1,
+          "ur": "مصالحہ جات"
+        },
+        {
+          "value": "kitchen tools",
+          "docs": [
+            "6913963978d99d52f6676d49"
+          ],
+          "count": 1,
+          "ur": "باورچی خانے کے اوزار"
+        },
+        {
+          "value": "electronics",
+          "docs": [
+            "6913963978d99d52f6676d87"
+          ],
+          "count": 1,
+          "ur": "الیکٹرانکس"
+        },
+        {
+          "value": "fragrances",
+          "docs": [
+            "6913963978d99d52f6676d1e"
+          ],
+          "count": 1,
+          "ur": "خوشبویات"
+        },
+        {
+          "value": "mobile-accessories",
+          "docs": [
+            "6913963978d99d52f6676d86"
+          ],
+          "count": 1,
+          "ur": "موبائل-لوازمات"
+        },
+        {
+          "value": "utensils",
+          "docs": [
+            "6913963978d99d52f6676d4a"
+          ],
+          "count": 1,
+          "ur": "برتن"
+        },
+        {
+          "value": "plates",
+          "docs": [
+            "6913963978d99d52f6676d5f"
+          ],
+          "count": 1,
+          "ur": "پلیٹیں"
+        },
+        {
+          "value": "sports equipment",
+          "docs": [
+            "6913963978d99d52f6676db3"
+          ],
+          "count": 1,
+          "ur": "کھیلوں کا سامان"
+        },
+        {
+          "value": "desserts",
+          "docs": [
+            "6913963978d99d52f6676d3b"
+          ],
+          "count": 1,
+          "ur": "میٹھا"
+        },
+        {
+          "value": "photo frame",
+          "docs": [
+            "6913963978d99d52f6676d44"
+          ],
+          "count": 1,
+          "ur": "تصویر کا فریم"
+        },
+        {
+          "value": "home decor",
+          "docs": [
+            "6913963978d99d52f6676d42"
+          ],
+          "count": 1,
+          "ur": "گھر کی سجاوٹ"
+        },
+        {
+          "value": "sedans",
+          "docs": [
+            "6913963978d99d52f6676dc7"
+          ],
+          "count": 1,
+          "ur": "سیڈان"
+        },
+        {
+          "value": "grains",
+          "docs": [
+            "6913963978d99d52f6676d3f"
+          ],
+          "count": 1,
+          "ur": "اناج"
+        },
+        {
+          "value": "fashion accessories",
+          "docs": [
+            "6913963978d99d52f6676dd1"
+          ],
+          "count": 1,
+          "ur": "فیشن لوازمات"
+        },
+        {
+          "value": "volleyball",
+          "docs": [
+            "6913963978d99d52f6676dbc"
+          ],
+          "count": 1,
+          "ur": "والی بال"
+        },
+        {
+          "value": "womens-dresses",
+          "docs": [
+            "6913963978d99d52f6676dda"
+          ],
+          "count": 1,
+          "ur": "زنانہ-ملبوسات"
+        },
+        {
+          "value": "kitchen-accessories",
+          "docs": [
+            "6913963978d99d52f6676d48"
+          ],
+          "count": 1,
+          "ur": "باورچی-خانے-کے-لوازمات"
+        },
+        {
+          "value": "face powder",
+          "docs": [
+            "6913963978d99d52f6676d18"
+          ],
+          "count": 1,
+          "ur": "فیس پاؤڈر"
+        },
+        {
+          "value": "women's watches",
+          "docs": [
+            "6913963978d99d52f6676deb"
+          ],
+          "count": 1,
+          "ur": "خواتین کی گھڑیاں"
+        },
+        {
+          "value": "mens-shoes",
+          "docs": [
+            "6913963978d99d52f6676d77"
+          ],
+          "count": 1,
+          "ur": "مردانہ-جوتے"
+        },
+        {
+          "value": "office chairs",
+          "docs": [
+            "6913963978d99d52f6676d2b"
+          ],
+          "count": 1,
+          "ur": "دفتر کی کرسیاں"
+        },
+        {
+          "value": "cat food",
+          "docs": [
+            "6913963978d99d52f6676d34"
+          ],
+          "count": 1,
+          "ur": "بلی کی خوراک"
+        },
+        {
+          "value": "heel shoes",
+          "docs": [
+            "6913963978d99d52f6676de4"
+          ],
+          "count": 1,
+          "ur": "ہی والے جوتے"
+        },
+        {
+          "value": "basketball",
+          "docs": [
+            "6913963978d99d52f6676db6"
+          ],
+          "count": 1,
+          "ur": "باسکٹ بال"
+        },
+        {
+          "value": "motorcycle",
+          "docs": [
+            "6913963978d99d52f6676d98"
+          ],
+          "count": 1,
+          "ur": "موٹر سائیکل"
+        },
+        {
+          "value": "dresses",
+          "docs": [
+            "6913963978d99d52f6676dc4"
+          ],
+          "count": 1,
+          "ur": "ملبوسات"
+        },
+        {
+          "value": "compact cars",
+          "docs": [
+            "6913963978d99d52f6676dcd"
+          ],
+          "count": 1,
+          "ur": "چھوٹی کاریں"
+        },
+        {
+          "value": "sportbikes",
+          "docs": [
+            "6913963978d99d52f6676d9b"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس بائیکس"
+        },
+        {
+          "value": "lighting",
+          "docs": [
+            "6913963978d99d52f6676d47"
+          ],
+          "count": 1,
+          "ur": "روشنی"
+        },
+        {
+          "value": "hatchbacks",
+          "docs": [
+            "6913963978d99d52f6676dcc"
+          ],
+          "count": 1,
+          "ur": "ہیچ بیکس"
+        },
+        {
+          "value": "golf",
+          "docs": [
+            "6913963978d99d52f6676dba"
+          ],
+          "count": 1,
+          "ur": "گولف"
+        },
+        {
+          "value": "power banks",
+          "docs": [
+            "6913963978d99d52f6676d8e"
+          ],
+          "count": 1,
+          "ur": "پاور بینکس"
+        },
+        {
+          "value": "cooktops",
+          "docs": [
+            "6913963978d99d52f6676d54"
+          ],
+          "count": 1,
+          "ur": "کک ٹاپس"
+        },
+        {
+          "value": "sports-accessories",
+          "docs": [
+            "6913963978d99d52f6676db2"
+          ],
+          "count": 1,
+          "ur": "کھیلوں-کے-لوازمات"
+        },
+        {
+          "value": "meat",
+          "docs": [
+            "6913963978d99d52f6676d32"
+          ],
+          "count": 1,
+          "ur": "گوشت"
+        },
+        {
+          "value": "ice cube trays",
+          "docs": [
+            "6913963978d99d52f6676d58"
+          ],
+          "count": 1,
+          "ur": "برف کے کیوب ٹرے"
+        },
+        {
+          "value": "groceries",
+          "docs": [
+            "6913963978d99d52f6676d2f"
+          ],
+          "count": 1,
+          "ur": "گروسری"
+        },
+        {
+          "value": "glasses",
+          "docs": [
+            "6913963978d99d52f6676d56"
+          ],
+          "count": 1,
+          "ur": "گلاسز"
+        },
+        {
+          "value": "body wash",
+          "docs": [
+            "6913963978d99d52f6676da5"
+          ],
+          "count": 1,
+          "ur": "باڈی واش"
+        },
+        {
+          "value": "eyewear",
+          "docs": [
+            "6913963978d99d52f6676dbe"
+          ],
+          "count": 1,
+          "ur": "چشمے"
+        },
+        {
+          "value": "sofas",
+          "docs": [
+            "6913963978d99d52f6676d28"
+          ],
+          "count": 1,
+          "ur": "صوفے"
+        },
+        {
+          "value": "peelers",
+          "docs": [
+            "6913963978d99d52f6676d66"
+          ],
+          "count": 1,
+          "ur": "چھیلنے والے"
+        },
+        {
+          "value": "laptops",
+          "docs": [
+            "6913963978d99d52f6676d67"
+          ],
+          "count": 1,
+          "ur": "لیپ ٹاپ"
+        },
+        {
+          "value": "designer bags",
+          "docs": [
+            "6913963978d99d52f6676dd6"
+          ],
+          "count": 1,
+          "ur": "ڈیزائنر بیگ"
+        },
+        {
+          "value": "wireless chargers",
+          "docs": [
+            "6913963978d99d52f6676d8c"
+          ],
+          "count": 1,
+          "ur": "وائرلیس چارجرز"
+        },
+        {
+          "value": "womens-bags",
+          "docs": [
+            "6913963978d99d52f6676dd0"
+          ],
+          "count": 1,
+          "ur": "خواتین کے بیگ"
+        },
+        {
+          "value": "vehicle",
+          "docs": [
+            "6913963978d99d52f6676dc6"
+          ],
+          "count": 1,
+          "ur": "گاڑی"
+        },
+        {
+          "value": "womens-shoes",
+          "docs": [
+            "6913963978d99d52f6676de1"
+          ],
+          "count": 1,
+          "ur": "خواتین کے جوتے"
+        },
+        {
+          "value": "suits",
+          "docs": [
+            "6913963978d99d52f6676dde"
+          ],
+          "count": 1,
+          "ur": "سوٹ"
+        },
+        {
+          "value": "nail polish",
+          "docs": [
+            "6913963978d99d52f6676d1c"
+          ],
+          "count": 1,
+          "ur": "نیل پالش"
+        },
+        {
+          "value": "smart speakers",
+          "docs": [
+            "6913963978d99d52f6676d88"
+          ],
+          "count": 1,
+          "ur": "اسمارٹ اسپیکرز"
+        },
+        {
+          "value": "tops",
+          "docs": [
+            "6913963978d99d52f6676dc3"
+          ],
+          "count": 1,
+          "ur": "ٹاپس"
+        },
+        {
+          "value": "beds",
+          "docs": [
+            "6913963978d99d52f6676d26"
+          ],
+          "count": 1,
+          "ur": "بستر"
+        },
+        {
+          "value": "cups",
+          "docs": [
+            "6913963978d99d52f6676d4c"
+          ],
+          "count": 1,
+          "ur": "کپ"
+        },
+        {
+          "value": "baking",
+          "docs": [
+            "6913963978d99d52f6676d65"
+          ],
+          "count": 1,
+          "ur": "بیکنگ"
+        },
+        {
+          "value": "leather watches",
+          "docs": [
+            "6913963978d99d52f6676d81"
+          ],
+          "count": 1,
+          "ur": "چمڑے کی گھڑیاں"
+        },
+        {
+          "value": "home-decoration",
+          "docs": [
+            "6913963978d99d52f6676d41"
+          ],
+          "count": 1,
+          "ur": "گھر کی سجاوٹ"
+        },
+        {
+          "value": "beverages",
+          "docs": [
+            "6913963978d99d52f6676d3c"
+          ],
+          "count": 1,
+          "ur": "مشروبات"
+        },
+        {
+          "value": "womens-watches",
+          "docs": [
+            "6913963978d99d52f6676de9"
+          ],
+          "count": 1,
+          "ur": "خواتین کی گھڑیاں"
+        },
+        {
+          "value": "serveware",
+          "docs": [
+            "6913963978d99d52f6676d63"
+          ],
+          "count": 1,
+          "ur": "سرو ویئر"
+        },
+        {
+          "value": "tennis",
+          "docs": [
+            "6913963978d99d52f6676dbb"
+          ],
+          "count": 1,
+          "ur": "ٹینس"
+        },
+        {
+          "value": "athletic shoes",
+          "docs": [
+            "6913963978d99d52f6676d79"
+          ],
+          "count": 1,
+          "ur": "ایتھلیٹک جوتے"
+        },
+        {
+          "value": "mascara",
+          "docs": [
+            "6913963978d99d52f6676d14"
+          ],
+          "count": 1,
+          "ur": "مسکارا"
+        },
+        {
+          "value": "gowns",
+          "docs": [
+            "6913963978d99d52f6676ddb"
+          ],
+          "count": 1,
+          "ur": "گاؤن"
+        },
+        {
+          "value": "perfumes",
+          "docs": [
+            "6913963978d99d52f6676d1f"
+          ],
+          "count": 1,
+          "ur": "پرفیوم"
+        },
+        {
+          "value": "girls' dresses",
+          "docs": [
+            "6913963978d99d52f6676dc5"
+          ],
+          "count": 1,
+          "ur": "لڑکیوں کے لباس"
+        },
+        {
+          "value": "swing",
+          "docs": [
+            "6913963978d99d52f6676d43"
+          ],
+          "count": 1,
+          "ur": "جھولا"
+        },
+        {
+          "value": "woks",
+          "docs": [
+            "6913963978d99d52f6676d50"
+          ],
+          "count": 1,
+          "ur": "کڑاہی"
+        },
+        {
+          "value": "apple",
+          "docs": [
+            "6913963978d99d52f6676d68"
+          ],
+          "count": 1,
+          "ur": "ایپل"
+        },
+        {
+          "value": "suvs",
+          "docs": [
+            "6913963978d99d52f6676dce"
+          ],
+          "count": 1,
+          "ur": "ایس یو ویز"
+        },
+        {
+          "value": "handbags",
+          "docs": [
+            "6913963978d99d52f6676dd2"
+          ],
+          "count": 1,
+          "ur": "ہینڈ بیگ"
+        },
+        {
+          "value": "skirts",
+          "docs": [
+            "6913963978d99d52f6676ddd"
+          ],
+          "count": 1,
+          "ur": "اسکرٹس"
+        },
+        {
+          "value": "pots",
+          "docs": [
+            "6913963978d99d52f6676d61"
+          ],
+          "count": 1,
+          "ur": "برتن"
+        },
+        {
+          "value": "turners",
+          "docs": [
+            "6913963978d99d52f6676d62"
+          ],
+          "count": 1,
+          "ur": "ٹرنرز"
+        },
+        {
+          "value": "skin-care",
+          "docs": [
+            "6913963978d99d52f6676da1"
+          ],
+          "count": 1,
+          "ur": "جلد کی دیکھ بھال"
+        },
+        {
+          "value": "cricket",
+          "docs": [
+            "6913963978d99d52f6676db7"
+          ],
+          "count": 1,
+          "ur": "کرکٹ"
+        },
+        {
+          "value": "kitchen appliances",
+          "docs": [
+            "6913963978d99d52f6676d4d"
+          ],
+          "count": 1,
+          "ur": "باورچی خانے کے آلات"
+        },
+        {
+          "value": "footwear",
+          "docs": [
+            "6913963978d99d52f6676d78"
+          ],
+          "count": 1,
+          "ur": "جوتے"
+        },
+        {
+          "value": "cookware",
+          "docs": [
+            "6913963978d99d52f6676d4f"
+          ],
+          "count": 1,
+          "ur": "پکانے کے برتن"
+        },
+        {
+          "value": "samsung galaxy",
+          "docs": [
+            "6913963978d99d52f6676dae"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی"
+        },
+        {
+          "value": "wireless earphones",
+          "docs": [
+            "6913963978d99d52f6676d8a"
+          ],
+          "count": 1,
+          "ur": "وائرلیس ائیر فونز"
+        },
+        {
+          "value": "sports cars",
+          "docs": [
+            "6913963978d99d52f6676dca"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس کاریں"
+        },
+        {
+          "value": "american football",
+          "docs": [
+            "6913963978d99d52f6676db4"
+          ],
+          "count": 1,
+          "ur": "امریکی فٹ بال"
+        },
+        {
+          "value": "pet supplies",
+          "docs": [
+            "6913963978d99d52f6676d33"
+          ],
+          "count": 1,
+          "ur": "پالتو جانوروں کا سامان"
+        },
+        {
+          "value": "strainers",
+          "docs": [
+            "6913963978d99d52f6676d55"
+          ],
+          "count": 1,
+          "ur": "چھلنیاں"
+        },
+        {
+          "value": "body lotion",
+          "docs": [
+            "6913963978d99d52f6676da7"
+          ],
+          "count": 1,
+          "ur": "باڈی لوشن"
+        },
+        {
+          "value": "household essentials",
+          "docs": [
+            "6913963978d99d52f6676d40"
+          ],
+          "count": 1,
+          "ur": "گھریلو ضروریات"
+        },
+        {
+          "value": "health supplements",
+          "docs": [
+            "6913963978d99d52f6676d3e"
+          ],
+          "count": 1,
+          "ur": "صحت کے سپلیمنٹس"
+        },
+        {
+          "value": "beauty",
+          "docs": [
+            "6913963978d99d52f6676d13"
+          ],
+          "count": 1,
+          "ur": "بیوٹی"
+        },
+        {
+          "value": "smartwatches",
+          "docs": [
+            "6913963978d99d52f6676d8f"
+          ],
+          "count": 1,
+          "ur": "اسمارٹ واچز"
+        },
+        {
+          "value": "cutting boards",
+          "docs": [
+            "6913963978d99d52f6676d51"
+          ],
+          "count": 1,
+          "ur": "کٹنگ بورڈز"
+        },
+        {
+          "value": "badminton",
+          "docs": [
+            "6913963978d99d52f6676db8"
+          ],
+          "count": 1,
+          "ur": "بیڈمنٹن"
+        },
+        {
+          "value": "corsets",
+          "docs": [
+            "6913963978d99d52f6676ddc"
+          ],
+          "count": 1,
+          "ur": "کارسیٹ"
+        },
+        {
+          "value": "drinkware",
+          "docs": [
+            "6913963978d99d52f6676d4b"
+          ],
+          "count": 1,
+          "ur": "ڈرنک ویئر"
+        },
+        {
+          "value": "over-ear headphones",
+          "docs": [
+            "6913963978d99d52f6676d8b"
+          ],
+          "count": 1,
+          "ur": "اوور ایئر ہیڈ فونز"
+        },
+        {
+          "value": "eyeshadow",
+          "docs": [
+            "6913963978d99d52f6676d16"
+          ],
+          "count": 1,
+          "ur": "آئی شیڈو"
+        },
+        {
+          "value": "storage",
+          "docs": [
+            "6913963978d99d52f6676d5a"
+          ],
+          "count": 1,
+          "ur": "اسٹوریج"
+        },
+        {
+          "value": "trays",
+          "docs": [
+            "6913963978d99d52f6676d64"
+          ],
+          "count": 1,
+          "ur": "ٹرے"
+        },
+        {
+          "value": "hand soap",
+          "docs": [
+            "6913963978d99d52f6676da3"
+          ],
+          "count": 1,
+          "ur": "ہینڈ صابن"
+        },
+        {
+          "value": "scooters",
+          "docs": [
+            "6913963978d99d52f6676d9e"
+          ],
+          "count": 1,
+          "ur": "اسکوٹرز"
+        },
+        {
+          "value": "mens-watches",
+          "docs": [
+            "6913963978d99d52f6676d7f"
+          ],
+          "count": 1,
+          "ur": "مردوں کی گھڑیاں"
+        },
+        {
+          "value": "lipstick",
+          "docs": [
+            "6913963978d99d52f6676d1a"
+          ],
+          "count": 1,
+          "ur": "لپ اسٹک"
+        },
+        {
+          "value": "vegetables",
+          "docs": [
+            "6913963978d99d52f6676d36"
+          ],
+          "count": 1,
+          "ur": "سبزیاں"
+        },
+        {
+          "value": "men's t-shirts",
+          "docs": [
+            "6913963978d99d52f6676d72"
+          ],
+          "count": 1,
+          "ur": "مردوں کی ٹی شرٹس"
+        },
+        {
+          "value": "personal care",
+          "docs": [
+            "6913963978d99d52f6676da2"
+          ],
+          "count": 1,
+          "ur": "ذاتی دیکھ بھال"
+        },
+        {
+          "value": "oppo",
+          "docs": [
+            "6913963978d99d52f6676daa"
+          ],
+          "count": 1,
+          "ur": "اوپو"
+        },
+        {
+          "value": "motorcycles",
+          "docs": [
+            "6913963978d99d52f6676d99"
+          ],
+          "count": 1,
+          "ur": "موٹر سائیکلیں"
+        },
+        {
+          "value": "bathroom",
+          "docs": [
+            "6913963978d99d52f6676d2d"
+          ],
+          "count": 1,
+          "ur": "باتھ روم"
+        },
+        {
+          "value": "chargers",
+          "docs": [
+            "6913963978d99d52f6676d8d"
+          ],
+          "count": 1,
+          "ur": "چارجرز"
+        },
+        {
+          "value": "phone accessories",
+          "docs": [
+            "6913963978d99d52f6676d91"
+          ],
+          "count": 1,
+          "ur": "فون لوازمات"
+        },
+        {
+          "value": "bedside tables",
+          "docs": [
+            "6913963978d99d52f6676d29"
+          ],
+          "count": 1,
+          "ur": "بیڈ سائیڈ ٹیبلز"
+        },
+        {
+          "value": "dinnerware",
+          "docs": [
+            "6913963978d99d52f6676d5e"
+          ],
+          "count": 1,
+          "ur": "ڈنر ویئر"
+        },
+        {
+          "value": "vivo",
+          "docs": [
+            "6913963978d99d52f6676db0"
+          ],
+          "count": 1,
+          "ur": "ویوو"
+        },
+        {
+          "value": "womens-jewellery",
+          "docs": [
+            "6913963978d99d52f6676ddf"
+          ],
+          "count": 1,
+          "ur": "خواتین کے زیورات"
+        },
+        {
+          "value": "furniture",
+          "docs": [
+            "6913963978d99d52f6676d25"
+          ],
+          "count": 1,
+          "ur": "فرنیچر"
+        },
+        {
+          "value": "artificial plants",
+          "docs": [
+            "6913963978d99d52f6676d45"
+          ],
+          "count": 1,
+          "ur": "مصنوعی پودے"
+        },
+        {
+          "value": "dairy",
+          "docs": [
+            "6913963978d99d52f6676d38"
+          ],
+          "count": 1,
+          "ur": "ڈیری"
+        },
+        {
+          "value": "juicers",
+          "docs": [
+            "6913963978d99d52f6676d52"
+          ],
+          "count": 1,
+          "ur": "جوسرز"
+        },
+        {
+          "value": "organization",
+          "docs": [
+            "6913963978d99d52f6676d5c"
+          ],
+          "count": 1,
+          "ur": "ترتیب"
+        },
+        {
+          "value": "football",
+          "docs": [
+            "6913963978d99d52f6676db9"
+          ],
+          "count": 1,
+          "ur": "فٹ بال"
+        },
+        {
+          "value": "tablets",
+          "docs": [
+            "6913963978d99d52f6676dc2"
+          ],
+          "count": 1,
+          "ur": "ٹیبلٹس"
+        },
+        {
+          "value": "slippers",
+          "docs": [
+            "6913963978d99d52f6676de2"
+          ],
+          "count": 1,
+          "ur": "چپل"
+        },
+        {
+          "value": "sunglasses",
+          "docs": [
+            "6913963978d99d52f6676dbd"
+          ],
+          "count": 1,
+          "ur": "دھوپ کے چشمے"
+        },
+        {
+          "value": "leather bags",
+          "docs": [
+            "6913963978d99d52f6676dd4"
+          ],
+          "count": 1,
+          "ur": "چمڑے کے بیگ"
+        },
+        {
+          "value": "blenders",
+          "docs": [
+            "6913963978d99d52f6676d4e"
+          ],
+          "count": 1,
+          "ur": "بلینڈرز"
+        }
+      ]
+    },
+    {
+      "model": "Product",
+      "field": "name",
+      "entries": [
+        {
+          "value": "Lunch Box",
+          "docs": [
+            "6913963978d99d52f6676e2e"
+          ],
+          "count": 1,
+          "ur": "لنچ باکس"
+        },
+        {
+          "value": "Bedside Table African Cherry",
+          "docs": [
+            "6913963978d99d52f6676dfa"
+          ],
+          "count": 1,
+          "ur": "بیڈ سائیڈ ٹیبل افریقی چیری"
+        },
+        {
+          "value": "Green Bell Pepper",
+          "docs": [
+            "6913963978d99d52f6676e06"
+          ],
+          "count": 1,
+          "ur": "ہری شملہ مرچ"
+        },
+        {
+          "value": "Juice",
+          "docs": [
+            "6913963978d99d52f6676e0a"
+          ],
+          "count": 1,
+          "ur": "جوس"
+        },
+        {
+          "value": "Eggs",
+          "docs": [
+            "6913963978d99d52f6676e04"
+          ],
+          "count": 1,
+          "ur": "انڈے"
+        },
+        {
+          "value": "Cricket Bat",
+          "docs": [
+            "6913963978d99d52f6676e7c"
+          ],
+          "count": 1,
+          "ur": "کرکٹ بیٹ"
+        },
+        {
+          "value": "Metal Baseball Bat",
+          "docs": [
+            "6913963978d99d52f6676e83"
+          ],
+          "count": 1,
+          "ur": "دھاتی بیس بال بیٹ"
+        },
+        {
+          "value": "Carbon Steel Wok",
+          "docs": [
+            "6913963978d99d52f6676e21"
+          ],
+          "count": 1,
+          "ur": "کاربن اسٹیل کڑاہی"
+        },
+        {
+          "value": "Bamboo Spatula",
+          "docs": [
+            "6913963978d99d52f6676e1d"
+          ],
+          "count": 1,
+          "ur": "بانس کا چمچہ"
+        },
+        {
+          "value": "Knoll Saarinen Executive Conference Chair",
+          "docs": [
+            "6913963978d99d52f6676dfb"
+          ],
+          "count": 1,
+          "ur": "نول سارینن ایگزیکٹو کانفرنس چیئر"
+        },
+        {
+          "value": "Nescafe Coffee",
+          "docs": [
+            "6913963978d99d52f6676e0f"
+          ],
+          "count": 1,
+          "ur": "نیسکیفے کافی"
+        },
+        {
+          "value": "Dodge Hornet GT Plus",
+          "docs": [
+            "6913963978d99d52f6676e96"
+          ],
+          "count": 1,
+          "ur": "ڈاج ہارنیٹ جی ٹی پلس"
+        },
+        {
+          "value": "Lemon",
+          "docs": [
+            "6913963978d99d52f6676e0c"
+          ],
+          "count": 1,
+          "ur": "لیموں"
+        },
+        {
+          "value": "Girl Summer Dress",
+          "docs": [
+            "6913963978d99d52f6676e90"
+          ],
+          "count": 1,
+          "ur": "لڑکیوں کا سمر ڈریس"
+        },
+        {
+          "value": "Huawei Matebook X Pro",
+          "docs": [
+            "6913963978d99d52f6676e3d"
+          ],
+          "count": 1,
+          "ur": "ہواوے میٹ بک ایکس پرو"
+        },
+        {
+          "value": "Strawberry",
+          "docs": [
+            "6913963978d99d52f6676e15"
+          ],
+          "count": 1,
+          "ur": "اسٹرابیری"
+        },
+        {
+          "value": "Hand Blender",
+          "docs": [
+            "6913963978d99d52f6676e2a"
+          ],
+          "count": 1,
+          "ur": "ہینڈ بلینڈر"
+        },
+        {
+          "value": "Apple Watch Series 4 Gold",
+          "docs": [
+            "6913963978d99d52f6676e57"
+          ],
+          "count": 1,
+          "ur": "ایپل واچ سیریز 4 گولڈ"
+        },
+        {
+          "value": "Chanel Coco Noir Eau De",
+          "docs": [
+            "6913963978d99d52f6676df4"
+          ],
+          "count": 1,
+          "ur": "شنیل کوکو نوئر او ڈی"
+        },
+        {
+          "value": "Kiwi",
+          "docs": [
+            "6913963978d99d52f6676e0b"
+          ],
+          "count": 1,
+          "ur": "کیوی"
+        },
+        {
+          "value": "Apple AirPods Max Silver",
+          "docs": [
+            "6913963978d99d52f6676e52"
+          ],
+          "count": 1,
+          "ur": "ایپل ایئر پوڈز میکس سلور"
+        },
+        {
+          "value": "Black & Brown Slipper",
+          "docs": [
+            "6913963978d99d52f6676ea6"
+          ],
+          "count": 1,
+          "ur": "کالی اور بھوری چپل"
+        },
+        {
+          "value": "Vivo X21",
+          "docs": [
+            "6913963978d99d52f6676e75"
+          ],
+          "count": 1,
+          "ur": "ویوو ایکس 21"
+        },
+        {
+          "value": "Powder Canister",
+          "docs": [
+            "6913963978d99d52f6676df0"
+          ],
+          "count": 1,
+          "ur": "پاؤڈر کنستر"
+        },
+        {
+          "value": "Golf Ball",
+          "docs": [
+            "6913963978d99d52f6676e81"
+          ],
+          "count": 1,
+          "ur": "گالف بال"
+        },
+        {
+          "value": "Decoration Swing",
+          "docs": [
+            "6913963978d99d52f6676e18"
+          ],
+          "count": 1,
+          "ur": "سجاوٹی جھولا"
+        },
+        {
+          "value": "Potatoes",
+          "docs": [
+            "6913963978d99d52f6676e10"
+          ],
+          "count": 1,
+          "ur": "آلو"
+        },
+        {
+          "value": "Knife",
+          "docs": [
+            "6913963978d99d52f6676e2d"
+          ],
+          "count": 1,
+          "ur": "چاقو"
+        },
+        {
+          "value": "Boxed Blender",
+          "docs": [
+            "6913963978d99d52f6676e20"
+          ],
+          "count": 1,
+          "ur": "ڈبے والا بلینڈر"
+        },
+        {
+          "value": "Generic Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e5e"
+          ],
+          "count": 1,
+          "ur": "عام موٹر سائیکل"
+        },
+        {
+          "value": "Samsung Galaxy Tab S8 Plus Grey",
+          "docs": [
+            "6913963978d99d52f6676e8d"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ٹیب ایس 8 پلس گرے"
+        },
+        {
+          "value": "Cat Food",
+          "docs": [
+            "6913963978d99d52f6676dff"
+          ],
+          "count": 1,
+          "ur": "بلی کی خوراک"
+        },
+        {
+          "value": "Electric Stove",
+          "docs": [
+            "6913963978d99d52f6676e25"
+          ],
+          "count": 1,
+          "ur": "بجلی کا چولہا"
+        },
+        {
+          "value": "Glass",
+          "docs": [
+            "6913963978d99d52f6676e28"
+          ],
+          "count": 1,
+          "ur": "گلاس"
+        },
+        {
+          "value": "Milk",
+          "docs": [
+            "6913963978d99d52f6676e0d"
+          ],
+          "count": 1,
+          "ur": "دودھ"
+        },
+        {
+          "value": "Gigabyte Aorus Men Tshirt",
+          "docs": [
+            "6913963978d99d52f6676e41"
+          ],
+          "count": 1,
+          "ur": "گیگا بائٹ اورس مردانہ ٹی شرٹ"
+        },
+        {
+          "value": "Longines Master Collection",
+          "docs": [
+            "6913963978d99d52f6676e4b"
+          ],
+          "count": 1,
+          "ur": "لونجینز ماسٹر کلیکشن"
+        },
+        {
+          "value": "Oppo A57",
+          "docs": [
+            "6913963978d99d52f6676e6a"
+          ],
+          "count": 1,
+          "ur": "اوپو اے 57"
+        },
+        {
+          "value": "Dior J'adore",
+          "docs": [
+            "6913963978d99d52f6676df5"
+          ],
+          "count": 1,
+          "ur": "ڈیور جاڈور"
+        },
+        {
+          "value": "Apple iPhone Charger",
+          "docs": [
+            "6913963978d99d52f6676e55"
+          ],
+          "count": 1,
+          "ur": "ایپل آئی فون چارجر"
+        },
+        {
+          "value": "Realme X",
+          "docs": [
+            "6913963978d99d52f6676e6e"
+          ],
+          "count": 1,
+          "ur": "ریئل می ایکس"
+        },
+        {
+          "value": "American Football",
+          "docs": [
+            "6913963978d99d52f6676e76"
+          ],
+          "count": 1,
+          "ur": "امریکی فٹ بال"
+        },
+        {
+          "value": "Tennis Racket",
+          "docs": [
+            "6913963978d99d52f6676e85"
+          ],
+          "count": 1,
+          "ur": "ٹینس ریکٹ"
+        },
+        {
+          "value": "Mug Tree Stand",
+          "docs": [
+            "6913963978d99d52f6676e30"
+          ],
+          "count": 1,
+          "ur": "مگ ٹری اسٹینڈ"
+        },
+        {
+          "value": "Black Aluminium Cup",
+          "docs": [
+            "6913963978d99d52f6676e1e"
+          ],
+          "count": 1,
+          "ur": "کالا ایلومینیم کپ"
+        },
+        {
+          "value": "Red Lipstick",
+          "docs": [
+            "6913963978d99d52f6676df1"
+          ],
+          "count": 1,
+          "ur": "سرخ لپ اسٹک"
+        },
+        {
+          "value": "Chopping Board",
+          "docs": [
+            "6913963978d99d52f6676e22"
+          ],
+          "count": 1,
+          "ur": "چاپنگ بورڈ"
+        },
+        {
+          "value": "Annibale Colombo Sofa",
+          "docs": [
+            "6913963978d99d52f6676df9"
+          ],
+          "count": 1,
+          "ur": "اینی بال کولمبو صوفا"
+        },
+        {
+          "value": "Ice Cream",
+          "docs": [
+            "6913963978d99d52f6676e09"
+          ],
+          "count": 1,
+          "ur": "آئس کریم"
+        },
+        {
+          "value": "Nike Baseball Cleats",
+          "docs": [
+            "6913963978d99d52f6676e46"
+          ],
+          "count": 1,
+          "ur": "نائیکی بیس بال کلیٹس"
+        },
+        {
+          "value": "Fine Mesh Strainer",
+          "docs": [
+            "6913963978d99d52f6676e26"
+          ],
+          "count": 1,
+          "ur": "باریک جالی والی چھلنی"
+        },
+        {
+          "value": "Apple",
+          "docs": [
+            "6913963978d99d52f6676dfd"
+          ],
+          "count": 1,
+          "ur": "ایپل"
+        },
+        {
+          "value": "Vivo V9",
+          "docs": [
+            "6913963978d99d52f6676e74"
+          ],
+          "count": 1,
+          "ur": "ویوو وی 9"
+        },
+        {
+          "value": "Baseball Ball",
+          "docs": [
+            "6913963978d99d52f6676e77"
+          ],
+          "count": 1,
+          "ur": "بیس بال کی گیند"
+        },
+        {
+          "value": "Blue Women's Handbag",
+          "docs": [
+            "6913963978d99d52f6676e99"
+          ],
+          "count": 1,
+          "ur": "نیلا زنانہ ہینڈ بیگ"
+        },
+        {
+          "value": "Iron Golf",
+          "docs": [
+            "6913963978d99d52f6676e82"
+          ],
+          "count": 1,
+          "ur": "آئرن گالف"
+        },
+        {
+          "value": "Beef Steak",
+          "docs": [
+            "6913963978d99d52f6676dfe"
+          ],
+          "count": 1,
+          "ur": "بیف اسٹیک"
+        },
+        {
+          "value": "Pan",
+          "docs": [
+            "6913963978d99d52f6676e31"
+          ],
+          "count": 1,
+          "ur": "پین"
+        },
+        {
+          "value": "Red Tongs",
+          "docs": [
+            "6913963978d99d52f6676e33"
+          ],
+          "count": 1,
+          "ur": "سرخ چمٹا"
+        },
+        {
+          "value": "Cricket Ball",
+          "docs": [
+            "6913963978d99d52f6676e7b"
+          ],
+          "count": 1,
+          "ur": "کرکٹ کی گیند"
+        },
+        {
+          "value": "Heshe Women's Leather Bag",
+          "docs": [
+            "6913963978d99d52f6676e9a"
+          ],
+          "count": 1,
+          "ur": "ہی شی زنانہ چمڑے کا بیگ"
+        },
+        {
+          "value": "Prada Women Bag",
+          "docs": [
+            "6913963978d99d52f6676e9b"
+          ],
+          "count": 1,
+          "ur": "پراڈا زنانہ بیگ"
+        },
+        {
+          "value": "Plate",
+          "docs": [
+            "6913963978d99d52f6676e32"
+          ],
+          "count": 1,
+          "ur": "پلیٹ"
+        },
+        {
+          "value": "Rice",
+          "docs": [
+            "6913963978d99d52f6676e13"
+          ],
+          "count": 1,
+          "ur": "چاول"
+        },
+        {
+          "value": "Plant Pot",
+          "docs": [
+            "6913963978d99d52f6676e1b"
+          ],
+          "count": 1,
+          "ur": "پودے کا گملہ"
+        },
+        {
+          "value": "Yellow Peeler",
+          "docs": [
+            "6913963978d99d52f6676e3a"
+          ],
+          "count": 1,
+          "ur": "پیلا چھیلنے والا"
+        },
+        {
+          "value": "Short Frock",
+          "docs": [
+            "6913963978d99d52f6676e92"
+          ],
+          "count": 1,
+          "ur": "چھوٹی فراک"
+        },
+        {
+          "value": "Classic Sun Glasses",
+          "docs": [
+            "6913963978d99d52f6676e88"
+          ],
+          "count": 1,
+          "ur": "کلاسک دھوپ کے چشمے"
+        },
+        {
+          "value": "Lenovo Yoga 920",
+          "docs": [
+            "6913963978d99d52f6676e3e"
+          ],
+          "count": 1,
+          "ur": "لینووو یوگا 920"
+        },
+        {
+          "value": "Gray Dress",
+          "docs": [
+            "6913963978d99d52f6676e91"
+          ],
+          "count": 1,
+          "ur": "سرمئی لباس"
+        },
+        {
+          "value": "Sportbike Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e62"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس بائیک موٹر سائیکل"
+        },
+        {
+          "value": "Oppo K1",
+          "docs": [
+            "6913963978d99d52f6676e6c"
+          ],
+          "count": 1,
+          "ur": "اوپو کے 1"
+        },
+        {
+          "value": "Vaseline Men Body and Face Lotion",
+          "docs": [
+            "6913963978d99d52f6676e65"
+          ],
+          "count": 1,
+          "ur": "ویسلین مردانہ جسم اور چہرے کا لوشن"
+        },
+        {
+          "value": "Pampi Shoes",
+          "docs": [
+            "6913963978d99d52f6676ea9"
+          ],
+          "count": 1,
+          "ur": "پامپی جوتے"
+        },
+        {
+          "value": "Basketball Rim",
+          "docs": [
+            "6913963978d99d52f6676e7a"
+          ],
+          "count": 1,
+          "ur": "باسکٹ بال رم"
+        },
+        {
+          "value": "Red Nail Polish",
+          "docs": [
+            "6913963978d99d52f6676df2"
+          ],
+          "count": 1,
+          "ur": "سرخ نیل پالش"
+        },
+        {
+          "value": "Rolex Datejust",
+          "docs": [
+            "6913963978d99d52f6676e4e"
+          ],
+          "count": 1,
+          "ur": "رولیکس ڈیٹ جسٹ"
+        },
+        {
+          "value": "Wooden Bathroom Sink With Mirror",
+          "docs": [
+            "6913963978d99d52f6676dfc"
+          ],
+          "count": 1,
+          "ur": "آئینے کے ساتھ لکڑی کا باتھ روم سنک"
+        },
+        {
+          "value": "Soft Drinks",
+          "docs": [
+            "6913963978d99d52f6676e14"
+          ],
+          "count": 1,
+          "ur": "سافٹ ڈرنکس"
+        },
+        {
+          "value": "Vivo S1",
+          "docs": [
+            "6913963978d99d52f6676e73"
+          ],
+          "count": 1,
+          "ur": "ویوو ایس 1"
+        },
+        {
+          "value": "Corset Leather With Skirt",
+          "docs": [
+            "6913963978d99d52f6676e9f"
+          ],
+          "count": 1,
+          "ur": "اسکرٹ کے ساتھ چمڑے کا کارسیٹ"
+        },
+        {
+          "value": "Corset With Black Skirt",
+          "docs": [
+            "6913963978d99d52f6676ea0"
+          ],
+          "count": 1,
+          "ur": "کالی اسکرٹ کے ساتھ کارسیٹ"
+        },
+        {
+          "value": "Golden Shoes Woman",
+          "docs": [
+            "6913963978d99d52f6676ea8"
+          ],
+          "count": 1,
+          "ur": "سنہری جوتے خاتون"
+        },
+        {
+          "value": "Spice Rack",
+          "docs": [
+            "6913963978d99d52f6676e36"
+          ],
+          "count": 1,
+          "ur": "مصالحہ ریک"
+        },
+        {
+          "value": "New DELL XPS 13 9300 Laptop",
+          "docs": [
+            "6913963978d99d52f6676e3f"
+          ],
+          "count": 1,
+          "ur": "نیا ڈیل ایکس پی ایس 13 9300 لیپ ٹاپ"
+        },
+        {
+          "value": "Puma Future Rider Trainers",
+          "docs": [
+            "6913963978d99d52f6676e47"
+          ],
+          "count": 1,
+          "ur": "پوما فیوچر رائڈر ٹرینرز"
+        },
+        {
+          "value": "Spoon",
+          "docs": [
+            "6913963978d99d52f6676e37"
+          ],
+          "count": 1,
+          "ur": "چمچ"
+        },
+        {
+          "value": "Tray",
+          "docs": [
+            "6913963978d99d52f6676e38"
+          ],
+          "count": 1,
+          "ur": "ٹرے"
+        },
+        {
+          "value": "Water",
+          "docs": [
+            "6913963978d99d52f6676e17"
+          ],
+          "count": 1,
+          "ur": "پانی"
+        },
+        {
+          "value": "Men Check Shirt",
+          "docs": [
+            "6913963978d99d52f6676e44"
+          ],
+          "count": 1,
+          "ur": "مردانہ چیک شرٹ"
+        },
+        {
+          "value": "IWC Ingenieur Automatic Steel",
+          "docs": [
+            "6913963978d99d52f6676eab"
+          ],
+          "count": 1,
+          "ur": "آئی ڈبلیو سی انجینئر آٹومیٹک اسٹیل"
+        },
+        {
+          "value": "Gucci Bloom Eau de",
+          "docs": [
+            "6913963978d99d52f6676df7"
+          ],
+          "count": 1,
+          "ur": "گوچی بلوم او ڈی"
+        },
+        {
+          "value": "Cucumber",
+          "docs": [
+            "6913963978d99d52f6676e02"
+          ],
+          "count": 1,
+          "ur": "کھیرا"
+        },
+        {
+          "value": "TV Studio Camera Pedestal",
+          "docs": [
+            "6913963978d99d52f6676e5d"
+          ],
+          "count": 1,
+          "ur": "ٹی وی اسٹوڈیو کیمرہ پیڈسٹل"
+        },
+        {
+          "value": "MotoGP CI.H1",
+          "docs": [
+            "6913963978d99d52f6676e60"
+          ],
+          "count": 1,
+          "ur": "موٹو جی پی سی آئی.ایچ 1"
+        },
+        {
+          "value": "Sunglasses",
+          "docs": [
+            "6913963978d99d52f6676e8b"
+          ],
+          "count": 1,
+          "ur": "دھوپ کے چشمے"
+        },
+        {
+          "value": "Egg Slicer",
+          "docs": [
+            "6913963978d99d52f6676e24"
+          ],
+          "count": 1,
+          "ur": "انڈے کا سلائسر"
+        },
+        {
+          "value": "Microwave Oven",
+          "docs": [
+            "6913963978d99d52f6676e2f"
+          ],
+          "count": 1,
+          "ur": "مائیکروویو اوون"
+        },
+        {
+          "value": "Attitude Super Leaves Hand Soap",
+          "docs": [
+            "6913963978d99d52f6676e63"
+          ],
+          "count": 1,
+          "ur": "ایٹی ٹیوڈ سپر لیوز ہینڈ سوپ"
+        },
+        {
+          "value": "Dog Food",
+          "docs": [
+            "6913963978d99d52f6676e03"
+          ],
+          "count": 1,
+          "ur": "کتے کی خوراک"
+        },
+        {
+          "value": "Oppo F19 Pro Plus",
+          "docs": [
+            "6913963978d99d52f6676e6b"
+          ],
+          "count": 1,
+          "ur": "اوپو ایف 19 پرو پلس"
+        },
+        {
+          "value": "Calvin Klein Heel Shoes",
+          "docs": [
+            "6913963978d99d52f6676ea7"
+          ],
+          "count": 1,
+          "ur": "کیلون کلائن ہیل والے جوتے"
+        },
+        {
+          "value": "Essence Mascara Lash Princess",
+          "docs": [
+            "6913963978d99d52f6676dee"
+          ],
+          "count": 1,
+          "ur": "ایسنس مسکارا لیش پرنسس"
+        },
+        {
+          "value": "Man Plaid Shirt",
+          "docs": [
+            "6913963978d99d52f6676e42"
+          ],
+          "count": 1,
+          "ur": "مردانہ پلیڈ شرٹ"
+        },
+        {
+          "value": "Scooter Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e61"
+          ],
+          "count": 1,
+          "ur": "اسکوٹر موٹر سائیکل"
+        },
+        {
+          "value": "Kitchen Sieve",
+          "docs": [
+            "6913963978d99d52f6676e2c"
+          ],
+          "count": 1,
+          "ur": "باورچی خانے کی چھلنی"
+        },
+        {
+          "value": "Tennis Ball",
+          "docs": [
+            "6913963978d99d52f6676e84"
+          ],
+          "count": 1,
+          "ur": "ٹینس کی گیند"
+        },
+        {
+          "value": "Rolex Cellini Date Black Dial",
+          "docs": [
+            "6913963978d99d52f6676e4c"
+          ],
+          "count": 1,
+          "ur": "رولیکس سیلینی ڈیٹ بلیک ڈائل"
+        },
+        {
+          "value": "iPhone X",
+          "docs": [
+            "6913963978d99d52f6676e69"
+          ],
+          "count": 1,
+          "ur": "آئی فون ایکس"
+        },
+        {
+          "value": "Charger SXT RWD",
+          "docs": [
+            "6913963978d99d52f6676e95"
+          ],
+          "count": 1,
+          "ur": "چارجر ایس ایکس ٹی آر ڈبلیو ڈی"
+        },
+        {
+          "value": "Cricket Helmet",
+          "docs": [
+            "6913963978d99d52f6676e7d"
+          ],
+          "count": 1,
+          "ur": "کرکٹ ہیلمٹ"
+        },
+        {
+          "value": "Table Lamp",
+          "docs": [
+            "6913963978d99d52f6676e1c"
+          ],
+          "count": 1,
+          "ur": "ٹیبل لیمپ"
+        },
+        {
+          "value": "Football",
+          "docs": [
+            "6913963978d99d52f6676e80"
+          ],
+          "count": 1,
+          "ur": "فٹ بال"
+        },
+        {
+          "value": "Party Glasses",
+          "docs": [
+            "6913963978d99d52f6676e8a"
+          ],
+          "count": 1,
+          "ur": "پارٹی گلاسز"
+        },
+        {
+          "value": "Eyeshadow Palette with Mirror",
+          "docs": [
+            "6913963978d99d52f6676def"
+          ],
+          "count": 1,
+          "ur": "آئینے کے ساتھ آئی شیڈو پیلیٹ"
+        },
+        {
+          "value": "Tissue Paper Box",
+          "docs": [
+            "6913963978d99d52f6676e16"
+          ],
+          "count": 1,
+          "ur": "ٹشو پیپر باکس"
+        },
+        {
+          "value": "Cooking Oil",
+          "docs": [
+            "6913963978d99d52f6676e01"
+          ],
+          "count": 1,
+          "ur": "پکانے کا تیل"
+        },
+        {
+          "value": "Slotted Turner",
+          "docs": [
+            "6913963978d99d52f6676e35"
+          ],
+          "count": 1,
+          "ur": "سوراخ والا چمچہ"
+        },
+        {
+          "value": "Dress Pea",
+          "docs": [
+            "6913963978d99d52f6676ea1"
+          ],
+          "count": 1,
+          "ur": "مٹر کا لباس"
+        },
+        {
+          "value": "Women Handbag Black",
+          "docs": [
+            "6913963978d99d52f6676e9d"
+          ],
+          "count": 1,
+          "ur": "زنانہ ہینڈ بیگ کالا"
+        },
+        {
+          "value": "Green Crystal Earring",
+          "docs": [
+            "6913963978d99d52f6676ea3"
+          ],
+          "count": 1,
+          "ur": "سبز کرسٹل بالی"
+        },
+        {
+          "value": "Mulberry",
+          "docs": [
+            "6913963978d99d52f6676e0e"
+          ],
+          "count": 1,
+          "ur": "شہتوت"
+        },
+        {
+          "value": "Green and Black Glasses",
+          "docs": [
+            "6913963978d99d52f6676e89"
+          ],
+          "count": 1,
+          "ur": "سبز اور کالے چشمے"
+        },
+        {
+          "value": "Baseball Glove",
+          "docs": [
+            "6913963978d99d52f6676e78"
+          ],
+          "count": 1,
+          "ur": "بیس بال کا دستانہ"
+        },
+        {
+          "value": "Brown Leather Belt Watch",
+          "docs": [
+            "6913963978d99d52f6676e4a"
+          ],
+          "count": 1,
+          "ur": "بھورے چمڑے کی بیلٹ والی گھڑی"
+        },
+        {
+          "value": "Amazon Echo Plus",
+          "docs": [
+            "6913963978d99d52f6676e50"
+          ],
+          "count": 1,
+          "ur": "ایمیزون ایکو پلس"
+        },
+        {
+          "value": "Volleyball",
+          "docs": [
+            "6913963978d99d52f6676e86"
+          ],
+          "count": 1,
+          "ur": "والی بال"
+        },
+        {
+          "value": "Calvin Klein CK One",
+          "docs": [
+            "6913963978d99d52f6676df3"
+          ],
+          "count": 1,
+          "ur": "کیلون کلائن سی کے ون"
+        },
+        {
+          "value": "Ice Cube Tray",
+          "docs": [
+            "6913963978d99d52f6676e2b"
+          ],
+          "count": 1,
+          "ur": "برف کی ٹرے"
+        },
+        {
+          "value": "Cricket Wicket",
+          "docs": [
+            "6913963978d99d52f6676e7e"
+          ],
+          "count": 1,
+          "ur": "کرکٹ وکٹ"
+        },
+        {
+          "value": "Tropical Earring",
+          "docs": [
+            "6913963978d99d52f6676ea5"
+          ],
+          "count": 1,
+          "ur": "ٹراپیکل بالی"
+        },
+        {
+          "value": "Dolce Shine Eau de",
+          "docs": [
+            "6913963978d99d52f6676df6"
+          ],
+          "count": 1,
+          "ur": "ڈولچے شائن او ڈی"
+        },
+        {
+          "value": "Apple Airpods",
+          "docs": [
+            "6913963978d99d52f6676e51"
+          ],
+          "count": 1,
+          "ur": "ایپل ایئر پوڈز"
+        },
+        {
+          "value": "Wooden Rolling Pin",
+          "docs": [
+            "6913963978d99d52f6676e39"
+          ],
+          "count": 1,
+          "ur": "لکڑی کا بیلن"
+        },
+        {
+          "value": "Green Oval Earring",
+          "docs": [
+            "6913963978d99d52f6676ea4"
+          ],
+          "count": 1,
+          "ur": "سبز بیضوی بالی"
+        },
+        {
+          "value": "Blue Frock",
+          "docs": [
+            "6913963978d99d52f6676e8f"
+          ],
+          "count": 1,
+          "ur": "نیلی فراک"
+        },
+        {
+          "value": "iPhone 5s",
+          "docs": [
+            "6913963978d99d52f6676e66"
+          ],
+          "count": 1,
+          "ur": "آئی فون 5 ایس"
+        },
+        {
+          "value": "Pacifica Touring",
+          "docs": [
+            "6913963978d99d52f6676e98"
+          ],
+          "count": 1,
+          "ur": "پیسفیکا ٹورنگ"
+        },
+        {
+          "value": "Samsung Galaxy Tab White",
+          "docs": [
+            "6913963978d99d52f6676e8e"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ٹیب سفید"
+        },
+        {
+          "value": "Annibale Colombo Bed",
+          "docs": [
+            "6913963978d99d52f6676df8"
+          ],
+          "count": 1,
+          "ur": "اینی بال کولمبو بستر"
+        },
+        {
+          "value": "iPhone 12 Silicone Case with MagSafe Plum",
+          "docs": [
+            "6913963978d99d52f6676e59"
+          ],
+          "count": 1,
+          "ur": "آئی فون 12 میگ سیف کے ساتھ سلیکون کیس پلم"
+        },
+        {
+          "value": "Kawasaki Z800",
+          "docs": [
+            "6913963978d99d52f6676e5f"
+          ],
+          "count": 1,
+          "ur": "کاواساکی زی 800"
+        },
+        {
+          "value": "Apple MacBook Pro 14 Inch Space Grey",
+          "docs": [
+            "6913963978d99d52f6676e3b"
+          ],
+          "count": 1,
+          "ur": "ایپل میک بک پرو 14 انچ اسپیس گرے"
+        },
+        {
+          "value": "Protein Powder",
+          "docs": [
+            "6913963978d99d52f6676e11"
+          ],
+          "count": 1,
+          "ur": "پروٹین پاؤڈر"
+        },
+        {
+          "value": "Chicken Meat",
+          "docs": [
+            "6913963978d99d52f6676e00"
+          ],
+          "count": 1,
+          "ur": "چکن کا گوشت"
+        },
+        {
+          "value": "Marni Red & Black Suit",
+          "docs": [
+            "6913963978d99d52f6676ea2"
+          ],
+          "count": 1,
+          "ur": "مارنی سرخ اور کالا سوٹ"
+        },
+        {
+          "value": "Olay Ultra Moisture Shea Butter Body Wash",
+          "docs": [
+            "6913963978d99d52f6676e64"
+          ],
+          "count": 1,
+          "ur": "اولے الٹرا موئسچر شیا بٹر باڈی واش"
+        },
+        {
+          "value": "Red Shoes",
+          "docs": [
+            "6913963978d99d52f6676eaa"
+          ],
+          "count": 1,
+          "ur": "سرخ جوتے"
+        },
+        {
+          "value": "Sports Sneakers Off White & Red",
+          "docs": [
+            "6913963978d99d52f6676e48"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس اسنیکرز آف وائٹ اور سرخ"
+        },
+        {
+          "value": "iPhone 13 Pro",
+          "docs": [
+            "6913963978d99d52f6676e68"
+          ],
+          "count": 1,
+          "ur": "آئی فون 13 پرو"
+        },
+        {
+          "value": "Citrus Squeezer Yellow",
+          "docs": [
+            "6913963978d99d52f6676e23"
+          ],
+          "count": 1,
+          "ur": "پیلا سٹرس اسکوئیزر"
+        },
+        {
+          "value": "Rolex Submariner Watch",
+          "docs": [
+            "6913963978d99d52f6676e4f"
+          ],
+          "count": 1,
+          "ur": "رولیکس سب میرینر واچ"
+        },
+        {
+          "value": "Realme C35",
+          "docs": [
+            "6913963978d99d52f6676e6d"
+          ],
+          "count": 1,
+          "ur": "ریئل می سی 35"
+        },
+        {
+          "value": "Black Sun Glasses",
+          "docs": [
+            "6913963978d99d52f6676e87"
+          ],
+          "count": 1,
+          "ur": "کالے دھوپ کے چشمے"
+        },
+        {
+          "value": "Asus Zenbook Pro Dual Screen Laptop",
+          "docs": [
+            "6913963978d99d52f6676e3c"
+          ],
+          "count": 1,
+          "ur": "ایسوس زین بک پرو ڈوئل اسکرین لیپ ٹاپ"
+        },
+        {
+          "value": "Apple MagSafe Battery Pack",
+          "docs": [
+            "6913963978d99d52f6676e56"
+          ],
+          "count": 1,
+          "ur": "ایپل میگ سیف بیٹری پیک"
+        },
+        {
+          "value": "Monopod",
+          "docs": [
+            "6913963978d99d52f6676e5a"
+          ],
+          "count": 1,
+          "ur": "مونو پاڈ"
+        },
+        {
+          "value": "Basketball",
+          "docs": [
+            "6913963978d99d52f6676e79"
+          ],
+          "count": 1,
+          "ur": "باسکٹ بال"
+        },
+        {
+          "value": "Selfie Stick Monopod",
+          "docs": [
+            "6913963978d99d52f6676e5c"
+          ],
+          "count": 1,
+          "ur": "سیلفی اسٹک مونو پاڈ"
+        },
+        {
+          "value": "Green Chili Pepper",
+          "docs": [
+            "6913963978d99d52f6676e07"
+          ],
+          "count": 1,
+          "ur": "ہری مرچ"
+        },
+        {
+          "value": "Black Whisk",
+          "docs": [
+            "6913963978d99d52f6676e1f"
+          ],
+          "count": 1,
+          "ur": "کالی پھینٹنی"
+        },
+        {
+          "value": "Feather Shuttlecock",
+          "docs": [
+            "6913963978d99d52f6676e7f"
+          ],
+          "count": 1,
+          "ur": "پر والی شٹل کاک"
+        },
+        {
+          "value": "Realme XT",
+          "docs": [
+            "6913963978d99d52f6676e6f"
+          ],
+          "count": 1,
+          "ur": "ریئل می ایکس ٹی"
+        },
+        {
+          "value": "300 Touring",
+          "docs": [
+            "6913963978d99d52f6676e94"
+          ],
+          "count": 1,
+          "ur": "300 ٹورنگ"
+        },
+        {
+          "value": "White Faux Leather Backpack",
+          "docs": [
+            "6913963978d99d52f6676e9c"
+          ],
+          "count": 1,
+          "ur": "سفید مصنوعی چمڑے کا بیگ پیک"
+        },
+        {
+          "value": "Honey Jar",
+          "docs": [
+            "6913963978d99d52f6676e08"
+          ],
+          "count": 1,
+          "ur": "شہد کا جار"
+        },
+        {
+          "value": "Family Tree Photo Frame",
+          "docs": [
+            "6913963978d99d52f6676e19"
+          ],
+          "count": 1,
+          "ur": "فیملی ٹری فوٹو فریم"
+        },
+        {
+          "value": "Grater Black",
+          "docs": [
+            "6913963978d99d52f6676e29"
+          ],
+          "count": 1,
+          "ur": "کالا کدوکش"
+        },
+        {
+          "value": "Sports Sneakers Off White Red",
+          "docs": [
+            "6913963978d99d52f6676e49"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس اسنیکرز آف وائٹ سرخ"
+        },
+        {
+          "value": "Rolex Cellini Moonphase",
+          "docs": [
+            "6913963978d99d52f6676e4d",
+            "6913963978d99d52f6676eac"
+          ],
+          "count": 2,
+          "ur": "رولیکس سیلینی مون فیز"
+        },
+        {
+          "value": "Samsung Galaxy S8",
+          "docs": [
+            "6913963978d99d52f6676e71"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 8"
+        },
+        {
+          "value": "House Showpiece Plant",
+          "docs": [
+            "6913963978d99d52f6676e1a"
+          ],
+          "count": 1,
+          "ur": "گھر کا نمائشی پودا"
+        },
+        {
+          "value": "Samsung Galaxy S7",
+          "docs": [
+            "6913963978d99d52f6676e70"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 7"
+        },
+        {
+          "value": "Nike Air Jordan 1 Red And Black",
+          "docs": [
+            "6913963978d99d52f6676e45"
+          ],
+          "count": 1,
+          "ur": "نائیکی ایئر جارڈن 1 سرخ اور کالا"
+        },
+        {
+          "value": "iPad Mini 2021 Starlight",
+          "docs": [
+            "6913963978d99d52f6676e8c"
+          ],
+          "count": 1,
+          "ur": "آئی پیڈ منی 2021 اسٹار لائٹ"
+        },
+        {
+          "value": "Tartan Dress",
+          "docs": [
+            "6913963978d99d52f6676e93"
+          ],
+          "count": 1,
+          "ur": "ٹارٹن لباس"
+        },
+        {
+          "value": "Durango SXT RWD",
+          "docs": [
+            "6913963978d99d52f6676e97"
+          ],
+          "count": 1,
+          "ur": "ڈورانگو ایس ایکس ٹی آر ڈبلیو ڈی"
+        },
+        {
+          "value": "Beats Flex Wireless Earphones",
+          "docs": [
+            "6913963978d99d52f6676e58"
+          ],
+          "count": 1,
+          "ur": "بیٹس فلیکس وائرلیس ائیر فونز"
+        },
+        {
+          "value": "Rolex Datejust Women",
+          "docs": [
+            "6913963978d99d52f6676ead"
+          ],
+          "count": 1,
+          "ur": "رولیکس ڈیٹ جسٹ خواتین"
+        },
+        {
+          "value": "Fish Steak",
+          "docs": [
+            "6913963978d99d52f6676e05"
+          ],
+          "count": 1,
+          "ur": "مچھلی کا اسٹیک"
+        },
+        {
+          "value": "Man Short Sleeve Shirt",
+          "docs": [
+            "6913963978d99d52f6676e43"
+          ],
+          "count": 1,
+          "ur": "مردانہ چھوٹی آستین والی شرٹ"
+        },
+        {
+          "value": "Samsung Galaxy S10",
+          "docs": [
+            "6913963978d99d52f6676e72"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 10"
+        },
+        {
+          "value": "Selfie Lamp with iPhone",
+          "docs": [
+            "6913963978d99d52f6676e5b"
+          ],
+          "count": 1,
+          "ur": "آئی فون کے ساتھ سیلفی لیمپ"
+        },
+        {
+          "value": "Women's Wrist Watch",
+          "docs": [
+            "6913963978d99d52f6676eaf"
+          ],
+          "count": 1,
+          "ur": "خواتین کی کلائی کی گھڑی"
+        },
+        {
+          "value": "Fork",
+          "docs": [
+            "6913963978d99d52f6676e27"
+          ],
+          "count": 1,
+          "ur": "کانٹا"
+        },
+        {
+          "value": "Apple HomePod Mini Cosmic Grey",
+          "docs": [
+            "6913963978d99d52f6676e54"
+          ],
+          "count": 1,
+          "ur": "ایپل ہوم پوڈ منی کاسمک گرے"
+        },
+        {
+          "value": "Black Women's Gown",
+          "docs": [
+            "6913963978d99d52f6676e9e"
+          ],
+          "count": 1,
+          "ur": "کالا زنانہ گاؤن"
+        },
+        {
+          "value": "Watch Gold for Women",
+          "docs": [
+            "6913963978d99d52f6676eae"
+          ],
+          "count": 1,
+          "ur": "خواتین کے لیے سنہری گھڑی"
+        },
+        {
+          "value": "Silver Pot With Glass Cap",
+          "docs": [
+            "6913963978d99d52f6676e34"
+          ],
+          "count": 1,
+          "ur": "شیشے کے ڈھکن کے ساتھ چاندی کا برتن"
+        },
+        {
+          "value": "Apple Airpower Wireless Charger",
+          "docs": [
+            "6913963978d99d52f6676e53"
+          ],
+          "count": 1,
+          "ur": "ایپل ایئر پاور وائرلیس چارجر"
+        },
+        {
+          "value": "iPhone 6",
+          "docs": [
+            "6913963978d99d52f6676e67"
+          ],
+          "count": 1,
+          "ur": "آئی فون 6"
+        },
+        {
+          "value": "Blue & Black Check Shirt",
+          "docs": [
+            "6913963978d99d52f6676e40"
+          ],
+          "count": 1,
+          "ur": "نیلی اور کالی چیک شرٹ"
+        },
+        {
+          "value": "Red Onions",
+          "docs": [
+            "6913963978d99d52f6676e12"
+          ],
+          "count": 1,
+          "ur": "لال پیاز"
+        }
+      ]
+    },
+    {
+      "model": "Product",
+      "field": "description",
+      "entries": [
+        {
+          "value": "The Man Plaid Shirt is a timeless and versatile men's shirt with a classic plaid pattern. Its comfortable fit and casual style make it a wardrobe essential for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676e42"
+          ],
+          "count": 1,
+          "ur": "مردانہ پلیڈ شرٹ ایک لازوال اور ہمہ گیر مردانہ شرٹ ہے جس میں کلاسک پلیڈ پیٹرن ہے۔ اس کا آرام دہ فٹ اور بے تکلف انداز اسے مختلف مواقع کے لیے الماری کا ایک لازمی حصہ بناتا ہے۔"
+        },
+        {
+          "value": "The Basketball Rim is a sturdy hoop and net assembly mounted on a basketball backboard. It provides a target for shooting and scoring in the game of basketball.",
+          "docs": [
+            "6913963978d99d52f6676e7a"
+          ],
+          "count": 1,
+          "ur": "باسکٹ بال رم ایک مضبوط ہوپ اور نیٹ اسمبلی ہے جو باسکٹ بال کے بیک بورڈ پر نصب ہوتی ہے۔ یہ باسکٹ بال کے کھیل میں شوٹنگ اور اسکورنگ کے لیے ایک ہدف فراہم کرتی ہے۔"
+        },
+        {
+          "value": "The Tropical Earring is a fun and playful accessory inspired by tropical elements. Featuring vibrant colors and a lively design, it's perfect for adding a touch of summer to your look.",
+          "docs": [
+            "6913963978d99d52f6676ea5"
+          ],
+          "count": 1,
+          "ur": "ٹراپیکل بالی ایک تفریحی اور شوخ لوازمات ہے جو ٹراپیکل عناصر سے متاثر ہے۔ متحرک رنگوں اور ایک جاندار ڈیزائن کی خصوصیت کے ساتھ، یہ آپ کے انداز میں موسم گرما کا رنگ شامل کرنے کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Glass is a versatile and elegant drinking vessel suitable for a variety of beverages. Its clear design allows you to enjoy the colors and textures of your drinks.",
+          "docs": [
+            "6913963978d99d52f6676e28"
+          ],
+          "count": 1,
+          "ur": "گلاس ایک ہمہ گیر اور نفیس پینے کا برتن ہے جو مختلف قسم کے مشروبات کے لیے موزوں ہے۔ اس کا شفاف ڈیزائن آپ کو اپنے مشروبات کے رنگوں اور بناوٹ سے لطف اندوز ہونے دیتا ہے۔"
+        },
+        {
+          "value": "The Decoration Swing is a charming addition to your home decor. Crafted with intricate details, it adds a touch of elegance and whimsy to any room.",
+          "docs": [
+            "6913963978d99d52f6676e18"
+          ],
+          "count": 1,
+          "ur": "سجاوٹی جھولا آپ کے گھر کی سجاوٹ میں ایک دلکش اضافہ ہے۔ پیچیدہ تفصیلات کے ساتھ تیار کیا گیا، یہ کسی بھی کمرے میں نفاست اور دلکشی کا احساس شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Cricket Bat is an essential piece of cricket equipment used by batsmen to hit the cricket ball. It is made of wood and comes in various sizes and designs.",
+          "docs": [
+            "6913963978d99d52f6676e7c"
+          ],
+          "count": 1,
+          "ur": "کرکٹ بیٹ کرکٹ کے سامان کا ایک لازمی حصہ ہے جسے بلے باز کرکٹ کی گیند کو مارنے کے لیے استعمال کرتے ہیں۔ یہ لکڑی سے بنا ہوتا ہے اور مختلف سائز اور ڈیزائن میں آتا ہے۔"
+        },
+        {
+          "value": "The Tennis Ball is a standard ball used in the sport of tennis. It is designed for bouncing and hitting with tennis rackets during matches or practice sessions.",
+          "docs": [
+            "6913963978d99d52f6676e84"
+          ],
+          "count": 1,
+          "ur": "ٹینس بال ایک معیاری گیند ہے جو ٹینس کے کھیل میں استعمال ہوتی ہے۔ اسے میچوں یا پریکٹس سیشن کے دوران ٹینس ریکٹ سے اچھالنے اور مارنے کے لیے ڈیزائن کیا گیا ہے۔"
+        },
+        {
+          "value": "The Cricket Helmet is a protective headgear worn by cricket players, especially batsmen and wicketkeepers. It provides protection against fast bowling and bouncers.",
+          "docs": [
+            "6913963978d99d52f6676e7d"
+          ],
+          "count": 1,
+          "ur": "کرکٹ ہیلمٹ ایک حفاظتی ہیڈ گیئر ہے جسے کرکٹ کھلاڑی، خاص طور پر بلے باز اور وکٹ کیپر پہنتے ہیں۔ یہ تیز باؤلنگ اور باؤنسرز کے خلاف تحفظ فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities. It boasts advanced photography features and a powerful performance for a premium user experience.",
+          "docs": [
+            "6913963978d99d52f6676e6b"
+          ],
+          "count": 1,
+          "ur": "اوپو ایف 19 پرو پلس ایک خصوصیات سے بھرپور اسمارٹ فون ہے جس کی توجہ کیمرے کی صلاحیتوں پر ہے۔ یہ ایک بہترین صارف کے تجربے کے لیے جدید فوٹوگرافی کی خصوصیات اور طاقتور کارکردگی کا حامل ہے۔"
+        },
+        {
+          "value": "The Prada Women Bag is an iconic designer bag that exudes elegance and luxury. Crafted with precision and featuring the Prada logo, it's a statement piece for fashion enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e9b"
+          ],
+          "count": 1,
+          "ur": "پراڈا ویمن بیگ ایک مشہور ڈیزائنر بیگ ہے جو نفاست اور عیش و عشرت کو ظاہر کرتا ہے۔ مہارت کے ساتھ تیار کیا گیا اور پراڈا لوگو کی خصوصیت کے ساتھ، یہ فیشن کے شوقین افراد کے لیے ایک اسٹیٹمنٹ پیس ہے۔"
+        },
+        {
+          "value": "The Knife is an essential kitchen tool for chopping, slicing, and dicing. Its sharp blade and ergonomic handle make it a reliable choice for food preparation.",
+          "docs": [
+            "6913963978d99d52f6676e2d"
+          ],
+          "count": 1,
+          "ur": "چاقو باورچی خانے کا ایک لازمی اوزار ہے جو کاٹنے، سلائس کرنے اور ٹکڑے کرنے کے لیے استعمال ہوتا ہے۔ اس کا تیز بلیڈ اور ایرگونومک ہینڈل اسے کھانے کی تیاری کے لیے ایک قابل اعتماد انتخاب بناتا ہے۔"
+        },
+        {
+          "value": "Attitude Super Leaves Hand Soap is a natural and nourishing hand soap enriched with the goodness of super leaves. It cleanses and moisturizes your hands, leaving them feeling fresh and soft.",
+          "docs": [
+            "6913963978d99d52f6676e63"
+          ],
+          "count": 1,
+          "ur": "ایٹی ٹیوڈ سپر لیوز ہینڈ سوپ ایک قدرتی اور غذائیت سے بھرپور ہینڈ صابن ہے جو سپر لیوز کی خوبیوں سے مالا مال ہے۔ یہ آپ کے ہاتھوں کو صاف اور نم کرتا ہے، انہیں تازہ اور نرم محسوس کراتا ہے۔"
+        },
+        {
+          "value": "The Slotted Turner is a kitchen utensil designed for flipping and turning food items. Its slotted design allows excess liquid to drain, making it ideal for frying and sautéing.",
+          "docs": [
+            "6913963978d99d52f6676e35"
+          ],
+          "count": 1,
+          "ur": "سوراخ والا چمچہ باورچی خانے کا ایک برتن ہے جو کھانے کی اشیاء کو پلٹنے اور گھمانے کے لیے ڈیزائن کیا گیا ہے۔ اس کا سوراخ والا ڈیزائن اضافی مائع کو نکلنے دیتا ہے، جو اسے تلنے اور بھوننے کے لیے مثالی بناتا ہے۔"
+        },
+        {
+          "value": "The Citrus Squeezer in Yellow is a handy tool for extracting juice from citrus fruits. Its vibrant color adds a cheerful touch to your kitchen gadgets.",
+          "docs": [
+            "6913963978d99d52f6676e23"
+          ],
+          "count": 1,
+          "ur": "پیلے رنگ کا سٹرس اسکوئیزر کھٹے پھلوں سے رس نکالنے کے لیے ایک کارآمد اوزار ہے۔ اس کا متحرک رنگ آپ کے باورچی خانے کے گیجٹس میں ایک خوشگوار احساس شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Rolex Cellini Date with Black Dial is a classic and prestigious watch. With a black dial and date complication, it exudes sophistication and is a symbol of Rolex's heritage.",
+          "docs": [
+            "6913963978d99d52f6676e4c"
+          ],
+          "count": 1,
+          "ur": "بلیک ڈائل کے ساتھ رولیکس سیلینی ڈیٹ ایک کلاسک اور باوقار گھڑی ہے۔ بلیک ڈائل اور تاریخ کی خصوصیت کے ساتھ، یہ نفاست کو ظاہر کرتی ہے اور رولیکس کی وراثت کی علامت ہے۔"
+        },
+        {
+          "value": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "docs": [
+            "6913963978d99d52f6676e49"
+          ],
+          "count": 1,
+          "ur": "آف وائٹ سرخ رنگ میں اسپورٹس اسنیکرز کا ایک اور ورژن، جو ایک منفرد ڈیزائن کی خصوصیت رکھتا ہے۔ یہ اسنیکرز عام مواقع کے لیے اسٹائل اور آرام فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance. It represents innovation and excellence in smartphone technology.",
+          "docs": [
+            "6913963978d99d52f6676e72"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 10 ایک فلیگ شپ ڈیوائس ہے جس میں ڈائنامک AMOLED ڈسپلے، ہمہ گیر کیمرہ سسٹم، اور طاقتور کارکردگی ہے۔ یہ اسمارٹ فون ٹیکنالوجی میں جدت اور عمدگی کی نمائندگی کرتا ہے۔"
+        },
+        {
+          "value": "The Corset With Black Skirt is a chic and versatile outfit that pairs a fashionable corset with a classic black skirt. It offers a trendy and coordinated look for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676ea0"
+          ],
+          "count": 1,
+          "ur": "کالی اسکرٹ کے ساتھ کارسیٹ ایک جدید اور ہمہ گیر لباس ہے جو ایک فیشن ایبل کارسیٹ کو کلاسک کالی اسکرٹ کے ساتھ جوڑتا ہے۔ یہ مختلف مواقع کے لیے ایک ٹرینڈی اور مربوط انداز پیش کرتا ہے۔"
+        },
+        {
+          "value": "The Samsung Galaxy Tab in White is a sleek and versatile Android tablet. With a vibrant display, long-lasting battery, and a range of features, it offers a great user experience for various tasks.",
+          "docs": [
+            "6913963978d99d52f6676e8e"
+          ],
+          "count": 1,
+          "ur": "سفید رنگ میں سام سنگ گلیکسی ٹیب ایک خوبصورت اور ہمہ گیر اینڈرائیڈ ٹیبلٹ ہے۔ ایک متحرک ڈسپلے، دیرپا بیٹری، اور خصوصیات کی ایک رینج کے ساتھ، یہ مختلف کاموں کے لیے صارف کا بہترین تجربہ پیش کرتا ہے۔"
+        },
+        {
+          "value": "The New DELL XPS 13 9300 Laptop is a compact and powerful device, featuring a virtually borderless InfinityEdge display and high-end performance for various tasks.",
+          "docs": [
+            "6913963978d99d52f6676e3f"
+          ],
+          "count": 1,
+          "ur": "نیا ڈیل ایکس پی ایس 13 9300 لیپ ٹاپ ایک کمپیکٹ اور طاقتور ڈیوائس ہے، جس میں تقریباً بارڈر لیس انفینٹی ایج ڈسپلے اور مختلف کاموں کے لیے اعلیٰ درجے کی کارکردگی ہے۔"
+        },
+        {
+          "value": "The Egg Slicer is a convenient tool for slicing boiled eggs evenly. It's perfect for salads, sandwiches, and other dishes where sliced eggs are desired.",
+          "docs": [
+            "6913963978d99d52f6676e24"
+          ],
+          "count": 1,
+          "ur": "انڈے کا سلائسر ابلے ہوئے انڈوں کو یکساں طور پر کاٹنے کے لیے ایک آسان اوزار ہے۔ یہ سلاد، سینڈوچ، اور دیگر پکوانوں کے لیے بہترین ہے جہاں کٹے ہوئے انڈوں کی ضرورت ہوتی ہے۔"
+        },
+        {
+          "value": "The Pan is a versatile and essential cookware item for frying, sautéing, and cooking various dishes. Its non-stick coating ensures easy food release and cleanup.",
+          "docs": [
+            "6913963978d99d52f6676e31"
+          ],
+          "count": 1,
+          "ur": "پین کھانا پکانے کا ایک ہمہ گیر اور لازمی برتن ہے جو تلنے، بھوننے اور مختلف پکوان تیار کرنے کے لیے استعمال ہوتا ہے۔ اس کی نان اسٹک کوٹنگ کھانے کو آسانی سے نکالنے اور صفائی کو یقینی بناتی ہے۔"
+        },
+        {
+          "value": "Crisp and hydrating cucumbers, ideal for salads, snacks, or as a refreshing side.",
+          "docs": [
+            "6913963978d99d52f6676e02"
+          ],
+          "count": 1,
+          "ur": "کرکرے اور پانی سے بھرپور کھیرے، سلاد، اسنیکس، یا ایک تازگی بخش سائیڈ ڈش کے طور پر مثالی ہیں۔"
+        },
+        {
+          "value": "The Classic Sun Glasses offer a timeless design with a neutral frame and UV-protected lenses. These sunglasses are versatile and suitable for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676e88"
+          ],
+          "count": 1,
+          "ur": "کلاسک دھوپ کے چشمے ایک لازوال ڈیزائن پیش کرتے ہیں جس میں ایک نیوٹرل فریم اور یووی سے محفوظ لینسز ہیں۔ یہ دھوپ کے چشمے ہمہ گیر ہیں اور مختلف مواقع کے لیے موزوں ہیں۔"
+        },
+        {
+          "value": "The Electric Stove provides a portable and efficient cooking solution. Ideal for small kitchens or as an additional cooking surface for various culinary needs.",
+          "docs": [
+            "6913963978d99d52f6676e25"
+          ],
+          "count": 1,
+          "ur": "بجلی کا چولہا ایک پورٹیبل اور موثر پکانے کا حل فراہم کرتا ہے۔ چھوٹے باورچی خانوں کے لیے یا مختلف پکوان کی ضروریات کے لیے اضافی پکانے کی سطح کے طور پر مثالی ہے۔"
+        },
+        {
+          "value": "The Plate is a classic and essential dishware item for serving meals. Its durable and stylish design makes it suitable for everyday use or special occasions.",
+          "docs": [
+            "6913963978d99d52f6676e32"
+          ],
+          "count": 1,
+          "ur": "پلیٹ کھانا پیش کرنے کے لیے ایک کلاسک اور ضروری برتن ہے۔ اس کا پائیدار اور اسٹائلش ڈیزائن اسے روزمرہ کے استعمال یا خاص مواقع کے لیے موزوں بناتا ہے۔"
+        },
+        {
+          "value": "Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",
+          "docs": [
+            "6913963978d99d52f6676e06"
+          ],
+          "count": 1,
+          "ur": "تازہ اور چمکدار ہری شملہ مرچ، آپ کے پکوانوں میں رنگ اور ذائقہ شامل کرنے کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Selfie Stick Monopod is a extendable and foldable device for capturing the perfect selfie or group photo. Compatible with smartphones and cameras.",
+          "docs": [
+            "6913963978d99d52f6676e5c"
+          ],
+          "count": 1,
+          "ur": "سیلفی اسٹک مونو پاڈ ایک بڑھنے اور تہہ ہونے والی ڈیوائس ہے جو کامل سیلفی یا گروپ فوٹو لینے کے لیے ہے۔ اسمارٹ فونز اور کیمروں کے ساتھ ہم آہنگ ہے۔"
+        },
+        {
+          "value": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
+          "docs": [
+            "6913963978d99d52f6676df3"
+          ],
+          "count": 1,
+          "ur": "کیلون کلائن کا سی کے ون ایک کلاسک یونی سیکس خوشبو ہے، جو اپنی تازہ اور صاف مہک کے لیے جانی جاتی ہے۔ یہ ایک ہمہ گیر خوشبو ہے جو روزمرہ پہننے کے لیے موزوں ہے۔"
+        },
+        {
+          "value": "Quality coffee from Nescafe, available in various blends for a rich and satisfying cup.",
+          "docs": [
+            "6913963978d99d52f6676e0f"
+          ],
+          "count": 1,
+          "ur": "نیسکیفے کی معیاری کافی، ایک بھرپور اور اطمینان بخش کپ کے لیے مختلف بلینڈز میں دستیاب ہے۔"
+        },
+        {
+          "value": "The iPhone 5s is a classic smartphone known for its compact design and advanced features during its release. While it's an older model, it still provides a reliable user experience.",
+          "docs": [
+            "6913963978d99d52f6676e66"
+          ],
+          "count": 1,
+          "ur": "آئی فون 5 ایس ایک کلاسک اسمارٹ فون ہے جو اپنے کمپیکٹ ڈیزائن اور ریلیز کے وقت جدید خصوصیات کے لیے جانا جاتا ہے۔ اگرچہ یہ ایک پرانا ماڈل ہے، پھر بھی یہ ایک قابل اعتماد صارف کا تجربہ فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Boxed Blender is a powerful and compact blender perfect for smoothies, shakes, and more. Its convenient design and multiple functions make it a versatile kitchen appliance.",
+          "docs": [
+            "6913963978d99d52f6676e20"
+          ],
+          "count": 1,
+          "ur": "ڈبے والا بلینڈر ایک طاقتور اور کمپیکٹ بلینڈر ہے جو اسموتھیز، شیکس اور بہت کچھ کے لیے بہترین ہے۔ اس کا آسان ڈیزائن اور متعدد فنکشنز اسے باورچی خانے کا ایک ہمہ گیر آلہ بناتے ہیں۔"
+        },
+        {
+          "value": "The Green and Black Glasses feature a bold combination of green and black colors, adding a touch of vibrancy to your eyewear collection. They are both stylish and eye-catching.",
+          "docs": [
+            "6913963978d99d52f6676e89"
+          ],
+          "count": 1,
+          "ur": "سبز اور کالے چشمے سبز اور کالے رنگوں کا ایک جرات مندانہ امتزاج پیش کرتے ہیں، جو آپ کے چشموں کے مجموعے میں ایک متحرک رنگ شامل کرتے ہیں۔ یہ اسٹائلش اور دلکش دونوں ہیں۔"
+        },
+        {
+          "value": "The American Football is a classic ball used in American football games. It is designed for throwing and catching, making it an essential piece of equipment for the sport.",
+          "docs": [
+            "6913963978d99d52f6676e76"
+          ],
+          "count": 1,
+          "ur": "امریکی فٹ بال ایک کلاسک گیند ہے جو امریکی فٹ بال کے کھیلوں میں استعمال ہوتی ہے۔ اسے پھینکنے اور پکڑنے کے لیے ڈیزائن کیا گیا ہے، جو اسے اس کھیل کے لیے سامان کا ایک لازمی حصہ بناتا ہے۔"
+        },
+        {
+          "value": "The Lenovo Yoga 920 is a 2-in-1 convertible laptop with a flexible hinge, allowing you to use it as a laptop or tablet, offering versatility and portability.",
+          "docs": [
+            "6913963978d99d52f6676e3e"
+          ],
+          "count": 1,
+          "ur": "لینووو یوگا 920 ایک 2-ان-1 کنورٹیبل لیپ ٹاپ ہے جس میں ایک لچکدار قبضہ ہے، جو آپ کو اسے لیپ ٹاپ یا ٹیبلٹ کے طور پر استعمال کرنے کی اجازت دیتا ہے، جو ہمہ گیری اور پورٹیبلٹی پیش کرتا ہے۔"
+        },
+        {
+          "value": "The Beats Flex Wireless Earphones offer a comfortable and versatile audio experience. With magnetic earbuds and up to 12 hours of battery life, they are ideal for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e58"
+          ],
+          "count": 1,
+          "ur": "بیٹس فلیکس وائرلیس ائیر فونز ایک آرام دہ اور ہمہ گیر آڈیو تجربہ پیش کرتے ہیں۔ مقناطیسی ایئربڈز اور 12 گھنٹے تک کی بیٹری لائف کے ساتھ، یہ روزمرہ کے استعمال کے لیے مثالی ہیں۔"
+        },
+        {
+          "value": "The Apple iPhone Charger is a high-quality charger designed for fast and efficient charging of your iPhone. Ensure your device stays powered up and ready to go.",
+          "docs": [
+            "6913963978d99d52f6676e55"
+          ],
+          "count": 1,
+          "ur": "ایپل آئی فون چارجر ایک اعلیٰ معیار کا چارجر ہے جو آپ کے آئی فون کی تیز اور موثر چارجنگ کے لیے ڈیزائن کیا گیا ہے۔ یقینی بنائیں کہ آپ کا آلہ پاور اپ اور جانے کے لیے تیار رہے۔"
+        },
+        {
+          "value": "High-quality rice, a staple for various cuisines and a versatile base for many dishes.",
+          "docs": [
+            "6913963978d99d52f6676e13"
+          ],
+          "count": 1,
+          "ur": "اعلیٰ معیار کے چاول، مختلف کھانوں کے لیے ایک اہم جز اور بہت سے پکوانوں کے لیے ایک ہمہ گیر بنیاد۔"
+        },
+        {
+          "value": "Zesty and tangy lemons, versatile for cooking, baking, or making refreshing beverages.",
+          "docs": [
+            "6913963978d99d52f6676e0c"
+          ],
+          "count": 1,
+          "ur": "ذائقے دار اور کھٹے لیموں، کھانا پکانے، بیکنگ، یا تازگی بخش مشروبات بنانے کے لیے ہمہ گیر۔"
+        },
+        {
+          "value": "Flavorful and aromatic red onions, perfect for adding depth to your savory dishes.",
+          "docs": [
+            "6913963978d99d52f6676e12"
+          ],
+          "count": 1,
+          "ur": "ذائقے دار اور خوشبودار لال پیاز، آپ کے نمکین پکوانوں میں گہرائی شامل کرنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
+          "docs": [
+            "6913963978d99d52f6676df0"
+          ],
+          "count": 1,
+          "ur": "پاؤڈر کنستر ایک باریک پسا ہوا سیٹنگ پاؤڈر ہے جو میک اپ کو سیٹ کرنے اور چمک کو کنٹرول کرنے کے لیے ڈیزائن کیا گیا ہے۔ ہلکے اور شفاف فارمولے کے ساتھ، یہ ایک ہموار اور میٹ فنش فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Table Lamp is a functional and decorative lighting solution for your living space. With a modern design, it provides both ambient and task lighting, enhancing the atmosphere.",
+          "docs": [
+            "6913963978d99d52f6676e1c"
+          ],
+          "count": 1,
+          "ur": "ٹیبل لیمپ آپ کی رہنے کی جگہ کے لیے ایک فعال اور آرائشی روشنی کا حل ہے۔ ایک جدید ڈیزائن کے ساتھ، یہ ماحول کو بڑھاتے ہوئے، ارد گرد اور کام کی روشنی دونوں فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Blue & Black Check Shirt is a stylish and comfortable men's shirt featuring a classic check pattern. Made from high-quality fabric, it's suitable for both casual and semi-formal occasions.",
+          "docs": [
+            "6913963978d99d52f6676e40"
+          ],
+          "count": 1,
+          "ur": "نیلی اور کالی چیک شرٹ ایک اسٹائلش اور آرام دہ مردانہ شرٹ ہے جس میں کلاسک چیک پیٹرن ہے۔ اعلیٰ معیار کے کپڑے سے بنی، یہ عام اور نیم رسمی دونوں مواقع کے لیے موزوں ہے۔"
+        },
+        {
+          "value": "The Samsung Galaxy S7 is a flagship smartphone known for its sleek design and advanced features. It features a high-resolution display, powerful camera, and robust performance.",
+          "docs": [
+            "6913963978d99d52f6676e70"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 7 ایک فلیگ شپ اسمارٹ فون ہے جو اپنے خوبصورت ڈیزائن اور جدید خصوصیات کے لیے جانا جاتا ہے۔ اس میں ایک ہائی ریزولوشن ڈسپلے، طاقتور کیمرہ، اور مضبوط کارکردگی ہے۔"
+        },
+        {
+          "value": "The Vivo X21 is a premium smartphone with a focus on cutting-edge technology. It features an in-display fingerprint sensor, a high-resolution display, and advanced camera capabilities.",
+          "docs": [
+            "6913963978d99d52f6676e75"
+          ],
+          "count": 1,
+          "ur": "ویوو ایکس 21 ایک پریمیم اسمارٹ فون ہے جس کی توجہ جدید ٹیکنالوجی پر ہے۔ اس میں ان-ڈسپلے فنگر پرنٹ سینسر، ایک ہائی ریزولوشن ڈسپلے، اور جدید کیمرے کی صلاحیتیں ہیں۔"
+        },
+        {
+          "value": "The Sunglasses offer a classic and simple design with a focus on functionality. These sunglasses provide essential UV protection while maintaining a timeless look.",
+          "docs": [
+            "6913963978d99d52f6676e8b"
+          ],
+          "count": 1,
+          "ur": "دھوپ کے چشمے فعالیت پر توجہ کے ساتھ ایک کلاسک اور سادہ ڈیزائن پیش کرتے ہیں۔ یہ دھوپ کے چشمے ایک لازوال انداز کو برقرار رکھتے ہوئے ضروری یووی تحفظ فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The Apple MagSafe Battery Pack is a portable and convenient way to add extra battery life to your MagSafe-compatible iPhone. Attach it magnetically for a secure connection.",
+          "docs": [
+            "6913963978d99d52f6676e56"
+          ],
+          "count": 1,
+          "ur": "ایپل میگ سیف بیٹری پیک آپ کے میگ سیف سے ہم آہنگ آئی فون میں اضافی بیٹری لائف شامل کرنے کا ایک پورٹیبل اور آسان طریقہ ہے۔ محفوظ کنکشن کے لیے اسے مقناطیسی طور پر منسلک کریں۔"
+        },
+        {
+          "value": "The Apple HomePod Mini in Cosmic Grey is a compact smart speaker that delivers impressive audio and integrates seamlessly with the Apple ecosystem for a smart home experience.",
+          "docs": [
+            "6913963978d99d52f6676e54"
+          ],
+          "count": 1,
+          "ur": "کاسمک گرے میں ایپل ہوم پوڈ منی ایک کمپیکٹ اسمارٹ اسپیکر ہے جو متاثر کن آڈیو فراہم کرتا ہے اور ایک اسمارٹ ہوم کے تجربے کے لیے ایپل ایکو سسٹم کے ساتھ بغیر کسی رکاوٹ کے مربوط ہوتا ہے۔"
+        },
+        {
+          "value": "The Sportbike Motorcycle is designed for speed and agility, with a sleek and aerodynamic profile. It's suitable for riders looking for a dynamic and thrilling riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e62"
+          ],
+          "count": 1,
+          "ur": "اسپورٹس بائیک موٹر سائیکل رفتار اور پھرتی کے لیے ڈیزائن کی گئی ہے، جس میں ایک خوبصورت اور ایروڈینامک پروفائل ہے۔ یہ ان سواروں کے لیے موزوں ہے جو ایک متحرک اور سنسنی خیز سواری کے تجربے کی تلاش میں ہیں۔"
+        },
+        {
+          "value": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
+          "docs": [
+            "6913963978d99d52f6676df7"
+          ],
+          "count": 1,
+          "ur": "گوچی کا گوچی بلوم ایک پھولوں والی اور دلکش خوشبو ہے، جس میں ٹیوبروز، جیسمین، اور رنگون کریپر کے نوٹ ہیں۔ یہ ایک جدید اور رومانٹک مہک ہے۔"
+        },
+        {
+          "value": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+          "docs": [
+            "6913963978d99d52f6676e0a"
+          ],
+          "count": 1,
+          "ur": "تازگی بخش پھلوں کا جوس، وٹامنز سے بھرپور اور ہائیڈریٹ رہنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Men Check Shirt is a classic and versatile shirt featuring a stylish check pattern. Suitable for various occasions, it adds a smart and polished touch to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e44"
+          ],
+          "count": 1,
+          "ur": "مردانہ چیک شرٹ ایک کلاسک اور ہمہ گیر شرٹ ہے جس میں ایک اسٹائلش چیک پیٹرن ہے۔ مختلف مواقع کے لیے موزوں، یہ آپ کی الماری میں ایک اسمارٹ اور نفیس ٹچ شامل کرتی ہے۔"
+        },
+        {
+          "value": "The Rolex Datejust is an iconic and versatile timepiece with a date window. Known for its timeless design and reliability, it's a symbol of Rolex's watchmaking excellence.",
+          "docs": [
+            "6913963978d99d52f6676e4e"
+          ],
+          "count": 1,
+          "ur": "رولیکس ڈیٹ جسٹ ایک مشہور اور ہمہ گیر ٹائم پیس ہے جس میں تاریخ کی کھڑکی ہے۔ اپنے لازوال ڈیزائن اور وشوسنییتا کے لیے جانا جاتا ہے، یہ رولیکس کی گھڑی سازی کی عمدگی کی علامت ہے۔"
+        },
+        {
+          "value": "The Party Glasses are designed to add flair to your party outfit. With unique shapes or colorful frames, they're perfect for adding a playful touch to your look during celebrations.",
+          "docs": [
+            "6913963978d99d52f6676e8a"
+          ],
+          "count": 1,
+          "ur": "پارٹی گلاسز آپ کے پارٹی کے لباس میں شان و شوکت شامل کرنے کے لیے ڈیزائن کیے گئے ہیں۔ منفرد اشکال یا رنگین فریموں کے ساتھ، یہ تقریبات کے دوران آپ کے انداز میں ایک شوخ ٹچ شامل کرنے کے لیے بہترین ہیں۔"
+        },
+        {
+          "value": "The Realme XT is a feature-rich smartphone with a focus on camera technology. It comes equipped with advanced camera sensors, delivering high-quality photos and videos for photography enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e6f"
+          ],
+          "count": 1,
+          "ur": "ریئل می ایکس ٹی ایک خصوصیات سے بھرپور اسمارٹ فون ہے جس کی توجہ کیمرہ ٹیکنالوجی پر ہے۔ یہ جدید کیمرہ سینسرز سے لیس ہے، جو فوٹو گرافی کے شوقین افراد کے لیے اعلیٰ معیار کی تصاویر اور ویڈیوز فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Baseball Glove is a protective glove worn by baseball players. It is designed to catch and field the baseball, providing players with comfort and control during the game.",
+          "docs": [
+            "6913963978d99d52f6676e78"
+          ],
+          "count": 1,
+          "ur": "بیس بال کا دستانہ ایک حفاظتی دستانہ ہے جسے بیس بال کے کھلاڑی پہنتے ہیں۔ اسے بیس بال کو پکڑنے اور فیلڈ کرنے کے لیے ڈیزائن کیا گیا ہے، جو کھلاڑیوں کو کھیل کے دوران آرام اور کنٹرول فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
+          "docs": [
+            "6913963978d99d52f6676df2"
+          ],
+          "count": 1,
+          "ur": "سرخ نیل پالش متحرک اور چمکدار ناخنوں کے لیے ایک بھرپور اور چمکدار سرخ رنگ پیش کرتی ہے۔ فوری خشک ہونے والے فارمولے کے ساتھ، یہ گھر پر سیلون جیسا فنش فراہم کرتی ہے۔"
+        },
+        {
+          "value": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
+          "docs": [
+            "6913963978d99d52f6676df4"
+          ],
+          "count": 1,
+          "ur": "شنیل کا کوکو نوئر ایک خوبصورت اور پراسرار خوشبو ہے، جس میں گریپ فروٹ، گلاب، اور صندل کی لکڑی کے نوٹ شامل ہیں۔ شام کے مواقع کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Short Frock is a playful and trendy dress with a shorter length. Ideal for casual outings or special occasions, it combines style and comfort for a fashionable look.",
+          "docs": [
+            "6913963978d99d52f6676e92"
+          ],
+          "count": 1,
+          "ur": "چھوٹی فراک ایک شوخ اور ٹرینڈی لباس ہے جس کی لمبائی چھوٹی ہے۔ عام تقریبات یا خاص مواقع کے لیے مثالی، یہ ایک فیشن ایبل انداز کے لیے اسٹائل اور آرام کو یکجا کرتی ہے۔"
+        },
+        {
+          "value": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+          "docs": [
+            "6913963978d99d52f6676def"
+          ],
+          "count": 1,
+          "ur": "آئینے کے ساتھ آئی شیڈو پیلیٹ شاندار آئی لُکس بنانے کے لیے آئی شیڈو شیڈز کی ایک ہمہ گیر رینج پیش کرتا ہے۔ ایک بلٹ ان آئینے کے ساتھ، یہ چلتے پھرتے میک اپ لگانے کے لیے آسان ہے۔"
+        },
+        {
+          "value": "The MacBook Pro 14 Inch in Space Grey is a powerful and sleek laptop, featuring Apple's M1 Pro chip for exceptional performance and a stunning Retina display.",
+          "docs": [
+            "6913963978d99d52f6676e3b"
+          ],
+          "count": 1,
+          "ur": "اسپیس گرے میں میک بک پرو 14 انچ ایک طاقتور اور خوبصورت لیپ ٹاپ ہے، جس میں غیر معمولی کارکردگی کے لیے ایپل کی M1 پرو چپ اور ایک شاندار ریٹنا ڈسپلے ہے۔"
+        },
+        {
+          "value": "Calvin Klein Heel Shoes are elegant and sophisticated, designed for formal occasions. With a classic design and high-quality materials, they complement your stylish ensemble.",
+          "docs": [
+            "6913963978d99d52f6676ea7"
+          ],
+          "count": 1,
+          "ur": "کیلون کلائن ہیل والے جوتے خوبصورت اور نفیس ہیں، جو رسمی مواقع کے لیے ڈیزائن کیے گئے ہیں۔ کلاسک ڈیزائن اور اعلیٰ معیار کے مواد کے ساتھ، یہ آپ کے اسٹائلش جوڑ کو مکمل کرتے ہیں۔"
+        },
+        {
+          "value": "The Vivo V9 is a smartphone known for its sleek design and emphasis on capturing high-quality selfies. It features a notch display, dual-camera setup, and a modern design.",
+          "docs": [
+            "6913963978d99d52f6676e74"
+          ],
+          "count": 1,
+          "ur": "ویوو وی 9 ایک اسمارٹ فون ہے جو اپنے خوبصورت ڈیزائن اور اعلیٰ معیار کی سیلفی لینے پر زور دینے کے لیے جانا جاتا ہے۔ اس میں ایک نوچ ڈسپلے، ڈوئل کیمرہ سیٹ اپ، اور ایک جدید ڈیزائن ہے۔"
+        },
+        {
+          "value": "The Golden Shoes for Women are a glamorous choice for special occasions. Featuring a golden hue and stylish design, they add a touch of luxury to your outfit.",
+          "docs": [
+            "6913963978d99d52f6676ea8"
+          ],
+          "count": 1,
+          "ur": "خواتین کے لیے سنہری جوتے خاص مواقع کے لیے ایک دلکش انتخاب ہیں۔ سنہری رنگت اور اسٹائلش ڈیزائن کی خصوصیت کے ساتھ، یہ آپ کے لباس میں عیش و عشرت کا احساس شامل کرتے ہیں۔"
+        },
+        {
+          "value": "The Samsung Galaxy Tab S8 Plus in Grey is a high-performance Android tablet by Samsung. With a large AMOLED display, powerful processor, and S Pen support, it's ideal for productivity and entertainment.",
+          "docs": [
+            "6913963978d99d52f6676e8d"
+          ],
+          "count": 1,
+          "ur": "گرے رنگ میں سام سنگ گلیکسی ٹیب ایس 8 پلس سام سنگ کا ایک اعلیٰ کارکردگی والا اینڈرائیڈ ٹیبلٹ ہے۔ ایک بڑے AMOLED ڈسپلے، طاقتور پروسیسر، اور ایس پین سپورٹ کے ساتھ، یہ پیداواریت اور تفریح کے لیے مثالی ہے۔"
+        },
+        {
+          "value": "Quality fish steak, suitable for grilling, baking, or pan-searing.",
+          "docs": [
+            "6913963978d99d52f6676e05"
+          ],
+          "count": 1,
+          "ur": "معیاری مچھلی کا اسٹیک، گرل کرنے، بیک کرنے، یا پین میں تلنے کے لیے موزوں ہے۔"
+        },
+        {
+          "value": "Versatile cooking oil suitable for frying, sautéing, and various culinary applications.",
+          "docs": [
+            "6913963978d99d52f6676e01"
+          ],
+          "count": 1,
+          "ur": "تلنے، بھوننے، اور مختلف پکوان کی ایپلی کیشنز کے لیے موزوں ہمہ گیر پکانے کا تیل۔"
+        },
+        {
+          "value": "The Baseball Ball is a standard baseball used in baseball games. It features a durable leather cover and is designed for pitching, hitting, and fielding in the game of baseball.",
+          "docs": [
+            "6913963978d99d52f6676e77"
+          ],
+          "count": 1,
+          "ur": "بیس بال کی گیند ایک معیاری بیس بال ہے جو بیس بال کے کھیلوں میں استعمال ہوتی ہے۔ اس میں ایک پائیدار چمڑے کا کور ہے اور اسے بیس بال کے کھیل میں پچنگ، ہٹنگ، اور فیلڈنگ کے لیے ڈیزائن کیا گیا ہے۔"
+        },
+        {
+          "value": "Pampi Shoes offer a blend of comfort and style for everyday use. With a versatile design, they are suitable for various casual occasions, providing a trendy and relaxed look.",
+          "docs": [
+            "6913963978d99d52f6676ea9"
+          ],
+          "count": 1,
+          "ur": "پامپی جوتے روزمرہ کے استعمال کے لیے آرام اور اسٹائل کا امتزاج پیش کرتے ہیں۔ ایک ہمہ گیر ڈیزائن کے ساتھ، یہ مختلف عام مواقع کے لیے موزوں ہیں، جو ایک ٹرینڈی اور آرام دہ انداز فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The 300 Touring is a stylish and comfortable sedan, known for its luxurious features and smooth performance.",
+          "docs": [
+            "6913963978d99d52f6676e94"
+          ],
+          "count": 1,
+          "ur": "300 ٹورنگ ایک اسٹائلش اور آرام دہ سیڈان ہے، جو اپنی پرتعیش خصوصیات اور ہموار کارکردگی کے لیے جانی جاتی ہے۔"
+        },
+        {
+          "value": "The Hand Blender is a versatile kitchen appliance for blending, pureeing, and mixing. Its compact design and powerful motor make it a convenient tool for various recipes.",
+          "docs": [
+            "6913963978d99d52f6676e2a"
+          ],
+          "count": 1,
+          "ur": "ہینڈ بلینڈر باورچی خانے کا ایک ہمہ گیر آلہ ہے جو بلینڈنگ، پیوری بنانے، اور مکس کرنے کے لیے ہے۔ اس کا کمپیکٹ ڈیزائن اور طاقتور موٹر اسے مختلف ترکیبوں کے لیے ایک آسان اوزار بناتے ہیں۔"
+        },
+        {
+          "value": "Assorted soft drinks in various flavors, perfect for refreshing beverages.",
+          "docs": [
+            "6913963978d99d52f6676e14"
+          ],
+          "count": 1,
+          "ur": "مختلف ذائقوں میں مختلف سافٹ ڈرنکس، تازگی بخش مشروبات کے لیے بہترین۔"
+        },
+        {
+          "value": "The Silver Pot with Glass Cap is a stylish and functional cookware item for boiling, simmering, and preparing delicious meals. Its glass cap allows you to monitor cooking progress.",
+          "docs": [
+            "6913963978d99d52f6676e34"
+          ],
+          "count": 1,
+          "ur": "شیشے کے ڈھکن کے ساتھ چاندی کا برتن ابلنے، ابالنے، اور مزیدار کھانے تیار کرنے کے لیے ایک اسٹائلش اور فعال پکانے کا برتن ہے۔ اس کا شیشے کا ڈھکن آپ کو پکنے کے عمل کی نگرانی کرنے کی اجازت دیتا ہے۔"
+        },
+        {
+          "value": "The Sports Sneakers in Off White and Red combine style and functionality, making them a fashionable choice for sports enthusiasts. The red and off-white color combination adds a bold and energetic touch.",
+          "docs": [
+            "6913963978d99d52f6676e48"
+          ],
+          "count": 1,
+          "ur": "آف وائٹ اور سرخ رنگ میں اسپورٹس اسنیکرز اسٹائل اور فعالیت کو یکجا کرتے ہیں، جو انہیں کھیلوں کے شوقین افراد کے لیے ایک فیشن ایبل انتخاب بناتے ہیں۔ سرخ اور آف وائٹ رنگ کا امتزاج ایک جرات مندانہ اور توانائی بخش ٹچ شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses. They provide both UV protection and a fashionable look.",
+          "docs": [
+            "6913963978d99d52f6676e87"
+          ],
+          "count": 1,
+          "ur": "کالے دھوپ کے چشمے ایک کلاسک اور اسٹائلش انتخاب ہیں، جن میں ایک خوبصورت کالا فریم اور ٹنٹڈ لینسز ہیں۔ یہ یووی تحفظ اور ایک فیشن ایبل انداز دونوں فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The iPhone 12 Silicone Case with MagSafe in Plum is a stylish and protective case designed for the iPhone 12. It features MagSafe technology for easy attachment of accessories.",
+          "docs": [
+            "6913963978d99d52f6676e59"
+          ],
+          "count": 1,
+          "ur": "پلم رنگ میں آئی فون 12 میگ سیف کے ساتھ سلیکون کیس آئی فون 12 کے لیے ڈیزائن کیا گیا ایک اسٹائلش اور حفاظتی کیس ہے۔ اس میں لوازمات کو آسانی سے منسلک کرنے کے لیے میگ سیف ٹیکنالوجی ہے۔"
+        },
+        {
+          "value": "Nutritious cat food formulated to meet the dietary needs of your feline friend.",
+          "docs": [
+            "6913963978d99d52f6676dff"
+          ],
+          "count": 1,
+          "ur": "آپ کی بلی دوست کی غذائی ضروریات کو پورا کرنے کے لیے تیار کردہ غذائیت سے بھرپور بلی کی خوراک۔"
+        },
+        {
+          "value": "The Monopod is a versatile camera accessory for stable and adjustable shooting. Perfect for capturing selfies, group photos, and videos with ease.",
+          "docs": [
+            "6913963978d99d52f6676e5a"
+          ],
+          "count": 1,
+          "ur": "مونو پاڈ مستحکم اور ایڈجسٹ ایبل شوٹنگ کے لیے ایک ہمہ گیر کیمرہ لوازمات ہے۔ سیلفی، گروپ فوٹوز، اور ویڈیوز کو آسانی سے کیپچر کرنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Feather Shuttlecock is used in the sport of badminton. It features natural feathers and is designed for high-speed play, providing stability and accuracy during matches.",
+          "docs": [
+            "6913963978d99d52f6676e7f"
+          ],
+          "count": 1,
+          "ur": "پر والی شٹل کاک بیڈمنٹن کے کھیل میں استعمال ہوتی ہے۔ اس میں قدرتی پر ہیں اور اسے تیز رفتار کھیل کے لیے ڈیزائن کیا گیا ہے، جو میچوں کے دوران استحکام اور درستگی فراہم کرتی ہے۔"
+        },
+        {
+          "value": "The Gold Women's Watch is a stunning accessory that combines luxury and style. Featuring a gold-plated case and a chic design, it adds a touch of glamour to any outfit.",
+          "docs": [
+            "6913963978d99d52f6676eae"
+          ],
+          "count": 1,
+          "ur": "سنہری خواتین کی گھڑی ایک شاندار لوازمات ہے جو عیش و عشرت اور اسٹائل کو یکجا کرتی ہے۔ سونے کی پلیٹ والے کیس اور ایک جدید ڈیزائن کی خصوصیت کے ساتھ، یہ کسی بھی لباس میں گلیمر کا احساس شامل کرتی ہے۔"
+        },
+        {
+          "value": "The Yellow Peeler is a handy tool for peeling fruits and vegetables with ease. Its bright yellow color adds a cheerful touch to your kitchen gadgets.",
+          "docs": [
+            "6913963978d99d52f6676e3a"
+          ],
+          "count": 1,
+          "ur": "پیلا چھیلنے والا پھلوں اور سبزیوں کو آسانی سے چھیلنے کے لیے ایک کارآمد اوزار ہے۔ اس کا چمکدار پیلا رنگ آپ کے باورچی خانے کے گیجٹس میں ایک خوشگوار احساس شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Charger SXT RWD is a powerful and sporty rear-wheel-drive sedan, offering a blend of performance and practicality.",
+          "docs": [
+            "6913963978d99d52f6676e95"
+          ],
+          "count": 1,
+          "ur": "چارجر ایس ایکس ٹی آر ڈبلیو ڈی ایک طاقتور اور اسپورٹی ریئر وہیل ڈرائیو سیڈان ہے، جو کارکردگی اور عملیت کا امتزاج پیش کرتی ہے۔"
+        },
+        {
+          "value": "The Apple Watch Series 4 in Gold is a stylish and advanced smartwatch with features like heart rate monitoring, fitness tracking, and a beautiful Retina display.",
+          "docs": [
+            "6913963978d99d52f6676e57"
+          ],
+          "count": 1,
+          "ur": "گولڈ میں ایپل واچ سیریز 4 ایک اسٹائلش اور جدید اسمارٹ واچ ہے جس میں دل کی دھڑکن کی نگرانی، فٹنس ٹریکنگ، اور ایک خوبصورت ریٹنا ڈسپلے جیسی خصوصیات ہیں۔"
+        },
+        {
+          "value": "The Dodge Hornet GT Plus is a compact and agile hatchback, perfect for urban driving with a touch of sportiness.",
+          "docs": [
+            "6913963978d99d52f6676e96"
+          ],
+          "count": 1,
+          "ur": "ڈاج ہارنیٹ جی ٹی پلس ایک کمپیکٹ اور پھرتیلی ہیچ بیک ہے، جو شہری ڈرائیونگ کے لیے تھوڑی اسپورٹینس کے ساتھ بہترین ہے۔"
+        },
+        {
+          "value": "The Red Tongs are versatile kitchen tongs suitable for various cooking and serving tasks. Their vibrant color adds a pop of excitement to your kitchen utensils.",
+          "docs": [
+            "6913963978d99d52f6676e33"
+          ],
+          "count": 1,
+          "ur": "سرخ چمٹا مختلف پکانے اور پیش کرنے کے کاموں کے لیے موزوں ہمہ گیر باورچی خانے کا چمٹا ہے۔ ان کا متحرک رنگ آپ کے باورچی خانے کے برتنوں میں جوش کا ایک پاپ شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Volleyball is a standard ball used in the sport of volleyball. It is designed for passing, setting, and spiking over the net during volleyball matches.",
+          "docs": [
+            "6913963978d99d52f6676e86"
+          ],
+          "count": 1,
+          "ur": "والی بال ایک معیاری گیند ہے جو والی بال کے کھیل میں استعمال ہوتی ہے۔ اسے والی بال میچوں کے دوران نیٹ پر پاس کرنے، سیٹ کرنے، اور اسپائک کرنے کے لیے ڈیزائن کیا گیا ہے۔"
+        },
+        {
+          "value": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+          "docs": [
+            "6913963978d99d52f6676dee"
+          ],
+          "count": 1,
+          "ur": "ایسنس مسکارا لیش پرنسس ایک مقبول مسکارا ہے جو اپنے حجم بڑھانے اور لمبا کرنے والے اثرات کے لیے جانا جاتا ہے۔ اس دیرپا اور ظلم سے پاک فارمولے کے ساتھ ڈرامائی پلکیں حاصل کریں۔"
+        },
+        {
+          "value": "The Dress Pea is a stylish and comfortable dress with a pea pattern. Perfect for casual outings, it adds a playful and fun element to your wardrobe, making it a great choice for day-to-day wear.",
+          "docs": [
+            "6913963978d99d52f6676ea1"
+          ],
+          "count": 1,
+          "ur": "مٹر کا لباس ایک اسٹائلش اور آرام دہ لباس ہے جس میں مٹر کا پیٹرن ہے۔ عام تقریبات کے لیے بہترین، یہ آپ کی الماری میں ایک شوخ اور تفریحی عنصر شامل کرتا ہے، جو اسے روزمرہ کے لباس کے لیے ایک بہترین انتخاب بناتا ہے۔"
+        },
+        {
+          "value": "The Metal Baseball Bat is a durable and lightweight baseball bat made from metal alloys. It is commonly used in baseball games for hitting and batting practice.",
+          "docs": [
+            "6913963978d99d52f6676e83"
+          ],
+          "count": 1,
+          "ur": "دھاتی بیس بال بیٹ ایک پائیدار اور ہلکا پھلکا بیس بال بیٹ ہے جو دھاتی مرکب سے بنا ہے۔ یہ عام طور پر بیس بال کے کھیلوں میں ہٹنگ اور بیٹنگ کی مشق کے لیے استعمال ہوتا ہے۔"
+        },
+        {
+          "value": "Fresh and tender chicken meat, suitable for various culinary preparations.",
+          "docs": [
+            "6913963978d99d52f6676e00"
+          ],
+          "count": 1,
+          "ur": "تازہ اور نرم چکن کا گوشت، مختلف پکوان کی تیاریوں کے لیے موزوں ہے۔"
+        },
+        {
+          "value": "The Plant Pot is a stylish container for your favorite plants. With a sleek design, it complements your indoor or outdoor garden, adding a modern touch to your plant display.",
+          "docs": [
+            "6913963978d99d52f6676e1b"
+          ],
+          "count": 1,
+          "ur": "پودے کا گملہ آپ کے پسندیدہ پودوں کے لیے ایک اسٹائلش کنٹینر ہے۔ ایک خوبصورت ڈیزائن کے ساتھ، یہ آپ کے انڈور یا آؤٹ ڈور باغ کو مکمل کرتا ہے، جو آپ کے پودوں کی نمائش میں ایک جدید ٹچ شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Chopping Board is an essential kitchen accessory for food preparation. Made from durable material, it provides a safe and hygienic surface for cutting and chopping.",
+          "docs": [
+            "6913963978d99d52f6676e22"
+          ],
+          "count": 1,
+          "ur": "چاپنگ بورڈ کھانے کی تیاری کے لیے باورچی خانے کا ایک لازمی لوازمات ہے۔ پائیدار مواد سے بنا، یہ کاٹنے اور چاپنگ کے لیے ایک محفوظ اور حفظان صحت کی سطح فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Kitchen Sieve is a versatile tool for sifting and straining dry and wet ingredients. Its fine mesh design ensures smooth results in your cooking and baking.",
+          "docs": [
+            "6913963978d99d52f6676e2c"
+          ],
+          "count": 1,
+          "ur": "باورچی خانے کی چھلنی خشک اور گیلے اجزاء کو چھاننے اور چھاننے کے لیے ایک ہمہ گیر اوزار ہے۔ اس کا باریک جالی والا ڈیزائن آپ کے پکانے اور بیکنگ میں ہموار نتائج کو یقینی بناتا ہے۔"
+        },
+        {
+          "value": "The IWC Ingenieur Automatic Steel watch is a durable and sophisticated timepiece. With a stainless steel case and automatic movement, it combines precision and style for watch enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676eab"
+          ],
+          "count": 1,
+          "ur": "آئی ڈبلیو سی انجینئر آٹومیٹک اسٹیل گھڑی ایک پائیدار اور نفیس ٹائم پیس ہے۔ اسٹینلیس اسٹیل کیس اور آٹومیٹک موومنٹ کے ساتھ، یہ گھڑی کے شوقین افراد کے لیے درستگی اور اسٹائل کو یکجا کرتی ہے۔"
+        },
+        {
+          "value": "Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",
+          "docs": [
+            "6913963978d99d52f6676e04"
+          ],
+          "count": 1,
+          "ur": "تازہ انڈے، بیکنگ، کھانا پکانے، یا ناشتے کے لیے ایک ہمہ گیر جز۔"
+        },
+        {
+          "value": "The Black & Brown Slipper is a comfortable and stylish choice for casual wear. Featuring a blend of black and brown colors, it adds a touch of sophistication to your relaxation.",
+          "docs": [
+            "6913963978d99d52f6676ea6"
+          ],
+          "count": 1,
+          "ur": "کالا اور بھورا سلیپر عام لباس کے لیے ایک آرام دہ اور اسٹائلش انتخاب ہے۔ کالے اور بھورے رنگوں کے امتزاج کی خصوصیت کے ساتھ، یہ آپ کے آرام میں نفاست کا احساس شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Spoon is a versatile kitchen utensil for stirring, serving, and tasting. Its ergonomic design and durable construction make it an essential tool for every kitchen.",
+          "docs": [
+            "6913963978d99d52f6676e37"
+          ],
+          "count": 1,
+          "ur": "چمچ ہلانے، پیش کرنے اور چکھنے کے لیے باورچی خانے کا ایک ہمہ گیر برتن ہے۔ اس کا ایرگونومک ڈیزائن اور پائیدار تعمیر اسے ہر باورچی خانے کے لیے ایک لازمی اوزار بناتی ہے۔"
+        },
+        {
+          "value": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
+          "docs": [
+            "6913963978d99d52f6676e26"
+          ],
+          "count": 1,
+          "ur": "باریک جالی والی چھلنی مائعات کو چھاننے اور خشک اجزاء کو چھاننے کے لیے ایک ہمہ گیر اوزار ہے۔ اس کی باریک جالی ہموار پکانے اور بیکنگ کے لیے موثر فلٹرنگ کو یقینی بناتی ہے۔"
+        },
+        {
+          "value": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "docs": [
+            "6913963978d99d52f6676e46"
+          ],
+          "count": 1,
+          "ur": "نائیکی بیس بال کلیٹس بیس بال کے میدان میں زیادہ سے زیادہ کرشن اور کارکردگی کے لیے ڈیزائن کیے گئے ہیں۔ یہ کھیلوں اور مشقوں کے دوران کھلاڑیوں کو استحکام اور مدد فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The Selfie Lamp with iPhone is a portable and adjustable LED light designed to enhance your selfies and video calls. Attach it to your iPhone for well-lit photos.",
+          "docs": [
+            "6913963978d99d52f6676e5b"
+          ],
+          "count": 1,
+          "ur": "آئی فون کے ساتھ سیلفی لیمپ ایک پورٹیبل اور ایڈجسٹ ایبل ایل ای ڈی لائٹ ہے جو آپ کی سیلفی اور ویڈیو کالز کو بہتر بنانے کے لیے ڈیزائن کی گئی ہے۔ اچھی روشنی والی تصاویر کے لیے اسے اپنے آئی فون سے منسلک کریں۔"
+        },
+        {
+          "value": "The Realme C35 is a budget-friendly smartphone with a focus on providing essential features for everyday use. It offers a reliable performance and user-friendly experience.",
+          "docs": [
+            "6913963978d99d52f6676e6d"
+          ],
+          "count": 1,
+          "ur": "ریئل می سی 35 ایک بجٹ دوست اسمارٹ فون ہے جس کی توجہ روزمرہ کے استعمال کے لیے ضروری خصوصیات فراہم کرنے پر ہے۔ یہ ایک قابل اعتماد کارکردگی اور صارف دوست تجربہ پیش کرتا ہے۔"
+        },
+        {
+          "value": "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
+          "docs": [
+            "6913963978d99d52f6676dfa"
+          ],
+          "count": 1,
+          "ur": "افریقی چیری میں بیڈ سائیڈ ٹیبل آپ کے بیڈروم میں ایک اسٹائلش اور فعال اضافہ ہے، جو آسان اسٹوریج کی جگہ اور نفاست کا احساس فراہم کرتا ہے۔"
+        },
+        {
+          "value": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+          "docs": [
+            "6913963978d99d52f6676e08"
+          ],
+          "count": 1,
+          "ur": "خالص اور قدرتی شہد ایک آسان جار میں، مشروبات کو میٹھا کرنے یا کھانے پر ڈالنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Tartan Dress features a classic tartan pattern, bringing a timeless and sophisticated touch to your wardrobe. Perfect for fall and winter, it adds a hint of traditional charm.",
+          "docs": [
+            "6913963978d99d52f6676e93"
+          ],
+          "count": 1,
+          "ur": "ٹارٹن لباس ایک کلاسک ٹارٹن پیٹرن کی خصوصیت رکھتا ہے، جو آپ کی الماری میں ایک لازوال اور نفیس ٹچ لاتا ہے۔ موسم خزاں اور موسم سرما کے لیے بہترین، یہ روایتی دلکشی کا ایک اشارہ شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Marni Red & Black Suit is a sophisticated and fashion-forward suit ensemble. With a combination of red and black tones, it showcases a modern design for a bold and confident look.",
+          "docs": [
+            "6913963978d99d52f6676ea2"
+          ],
+          "count": 1,
+          "ur": "مارنی سرخ اور کالا سوٹ ایک نفیس اور فیشن فارورڈ سوٹ کا جوڑا ہے۔ سرخ اور کالے رنگوں کے امتزاج کے ساتھ، یہ ایک جرات مندانہ اور پراعتماد انداز کے لیے ایک جدید ڈیزائن کی نمائش کرتا ہے۔"
+        },
+        {
+          "value": "The Rolex Datejust Women's watch is an iconic timepiece designed for women. With a timeless design and a date complication, it offers both elegance and functionality.",
+          "docs": [
+            "6913963978d99d52f6676ead"
+          ],
+          "count": 1,
+          "ur": "رولیکس ڈیٹ جسٹ خواتین کی گھڑی ایک مشہور ٹائم پیس ہے جو خواتین کے لیے ڈیزائن کیا گیا ہے۔ ایک لازوال ڈیزائن اور تاریخ کی خصوصیت کے ساتھ، یہ نفاست اور فعالیت دونوں پیش کرتی ہے۔"
+        },
+        {
+          "value": "The Rolex Cellini Moonphase is a masterpiece of horology, featuring a moon phase complication and exquisite design. It reflects Rolex's commitment to precision and elegance.",
+          "docs": [
+            "6913963978d99d52f6676e4d"
+          ],
+          "count": 1,
+          "ur": "رولیکس سیلینی مون فیز ہورولوجی کا ایک شاہکار ہے، جس میں چاند کے مرحلے کی پیچیدگی اور شاندار ڈیزائن ہے۔ یہ رولیکس کی درستگی اور نفاست کے عزم کی عکاسی کرتا ہے۔"
+        },
+        {
+          "value": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e47"
+          ],
+          "count": 1,
+          "ur": "پوما فیوچر رائڈر ٹرینرز ریٹرو اسٹائل اور جدید آرام کا امتزاج پیش کرتے ہیں۔ عام لباس کے لیے بہترین، یہ ٹرینرز روزمرہ کے لیے ایک فیشن ایبل اور آرام دہ آپشن فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The Girl Summer Dress is a cute and breezy dress designed for warm weather. With playful patterns and lightweight fabric, it's perfect for keeping cool and stylish during the summer.",
+          "docs": [
+            "6913963978d99d52f6676e90"
+          ],
+          "count": 1,
+          "ur": "لڑکیوں کا سمر ڈریس گرم موسم کے لیے ڈیزائن کیا گیا ایک پیارا اور ہوا دار لباس ہے۔ شوخ پیٹرن اور ہلکے کپڑے کے ساتھ، یہ موسم گرما کے دوران ٹھنڈا اور اسٹائلش رہنے کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "Fresh and nutritious milk, a staple for various recipes and daily consumption.",
+          "docs": [
+            "6913963978d99d52f6676e0d"
+          ],
+          "count": 1,
+          "ur": "تازہ اور غذائیت سے بھرپور دودھ، مختلف ترکیبوں اور روزانہ استعمال کے لیے ایک اہم جز۔"
+        },
+        {
+          "value": "The Lunch Box is a convenient and portable container for packing and carrying your meals. With compartments for different foods, it's perfect for on-the-go dining.",
+          "docs": [
+            "6913963978d99d52f6676e2e"
+          ],
+          "count": 1,
+          "ur": "لنچ باکس آپ کے کھانے کو پیک کرنے اور لے جانے کے لیے ایک آسان اور پورٹیبل کنٹینر ہے۔ مختلف کھانوں کے لیے کمپارٹمنٹس کے ساتھ، یہ چلتے پھرتے کھانے کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "Fresh and crisp apples, perfect for snacking or incorporating into various recipes.",
+          "docs": [
+            "6913963978d99d52f6676dfd"
+          ],
+          "count": 1,
+          "ur": "تازہ اور کرکرے سیب، اسنیکنگ کے لیے یا مختلف ترکیبوں میں شامل کرنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Huawei Matebook X Pro is a slim and stylish laptop with a high-resolution touchscreen display, offering a premium experience for users on the go.",
+          "docs": [
+            "6913963978d99d52f6676e3d"
+          ],
+          "count": 1,
+          "ur": "ہواوے میٹ بک ایکس پرو ایک پتلا اور اسٹائلش لیپ ٹاپ ہے جس میں ہائی ریزولوشن ٹچ اسکرین ڈسپلے ہے، جو چلتے پھرتے صارفین کے لیے ایک پریمیم تجربہ پیش کرتا ہے۔"
+        },
+        {
+          "value": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
+          "docs": [
+            "6913963978d99d52f6676df1"
+          ],
+          "count": 1,
+          "ur": "سرخ لپ اسٹک آپ کے ہونٹوں پر رنگ کا ایک پاپ شامل کرنے کے لیے ایک کلاسک اور جرات مندانہ انتخاب ہے۔ ایک کریمی اور پگمنٹڈ فارمولے کے ساتھ، یہ ایک متحرک اور دیرپا فنش فراہم کرتی ہے۔"
+        },
+        {
+          "value": "The iPhone X is a flagship smartphone featuring a bezel-less OLED display, facial recognition technology (Face ID), and impressive performance. It represents a milestone in iPhone design and innovation.",
+          "docs": [
+            "6913963978d99d52f6676e69"
+          ],
+          "count": 1,
+          "ur": "آئی فون ایکس ایک فلیگ شپ اسمارٹ فون ہے جس میں بیزل لیس OLED ڈسپلے، چہرے کی شناخت کی ٹیکنالوجی (فیس آئی ڈی)، اور متاثر کن کارکردگی ہے۔ یہ آئی فون ڈیزائن اور جدت میں ایک سنگ میل کی نمائندگی کرتا ہے۔"
+        },
+        {
+          "value": "Sweet and juicy mulberries, perfect for snacking or adding to desserts and cereals.",
+          "docs": [
+            "6913963978d99d52f6676e0e"
+          ],
+          "count": 1,
+          "ur": "میٹھے اور رس بھرے شہتوت، اسنیکنگ کے لیے یا میٹھے اور سیریلز میں شامل کرنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Man Short Sleeve Shirt is a breezy and stylish option for warm days. With a comfortable fit and short sleeves, it's perfect for a laid-back yet polished look.",
+          "docs": [
+            "6913963978d99d52f6676e43"
+          ],
+          "count": 1,
+          "ur": "مردانہ چھوٹی آستین والی شرٹ گرم دنوں کے لیے ایک ہوا دار اور اسٹائلش آپشن ہے۔ آرام دہ فٹ اور چھوٹی آستینوں کے ساتھ، یہ ایک آرام دہ لیکن نفیس انداز کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Bamboo Spatula is a versatile kitchen tool made from eco-friendly bamboo. Ideal for flipping, stirring, and serving various dishes.",
+          "docs": [
+            "6913963978d99d52f6676e1d"
+          ],
+          "count": 1,
+          "ur": "بانس کا چمچہ ماحول دوست بانس سے بنا باورچی خانے کا ایک ہمہ گیر اوزار ہے۔ مختلف پکوانوں کو پلٹنے، ہلانے اور پیش کرنے کے لیے مثالی۔"
+        },
+        {
+          "value": "The Green Crystal Earring is a dazzling accessory that features a vibrant green crystal. With a classic design, it adds a touch of elegance to your ensemble, perfect for formal or special occasions.",
+          "docs": [
+            "6913963978d99d52f6676ea3"
+          ],
+          "count": 1,
+          "ur": "سبز کرسٹل بالی ایک شاندار لوازمات ہے جس میں ایک متحرک سبز کرسٹل ہے۔ ایک کلاسک ڈیزائن کے ساتھ، یہ آپ کے جوڑ میں نفاست کا ایک ٹچ شامل کرتی ہے، جو رسمی یا خاص مواقع کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Microwave Oven is a versatile kitchen appliance for quick and efficient cooking, reheating, and defrosting. Its compact size makes it suitable for various kitchen setups.",
+          "docs": [
+            "6913963978d99d52f6676e2f"
+          ],
+          "count": 1,
+          "ur": "مائیکروویو اوون تیز اور موثر پکانے، دوبارہ گرم کرنے، اور ڈیفروسٹ کرنے کے لیے باورچی خانے کا ایک ہمہ گیر آلہ ہے۔ اس کا کمپیکٹ سائز اسے مختلف باورچی خانے کے سیٹ اپ کے لیے موزوں بناتا ہے۔"
+        },
+        {
+          "value": "The Gigabyte Aorus Men Tshirt is a cool and casual shirt for gaming enthusiasts. With the Aorus logo and sleek design, it's perfect for expressing your gaming style.",
+          "docs": [
+            "6913963978d99d52f6676e41"
+          ],
+          "count": 1,
+          "ur": "گیگا بائٹ اورس مردانہ ٹی شرٹ گیمنگ کے شوقین افراد کے لیے ایک ٹھنڈی اور عام شرٹ ہے۔ اورس لوگو اور خوبصورت ڈیزائن کے ساتھ، یہ آپ کے گیمنگ اسٹائل کا اظہار کرنے کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Scooter Motorcycle is a practical and fuel-efficient bike ideal for urban commuting. It features a step-through design and user-friendly controls for easy maneuverability.",
+          "docs": [
+            "6913963978d99d52f6676e61"
+          ],
+          "count": 1,
+          "ur": "اسکوٹر موٹر سائیکل شہری سفر کے لیے ایک عملی اور ایندھن کی بچت والی بائیک ہے۔ اس میں ایک اسٹیپ تھرو ڈیزائن اور آسان چال چلانے کے لیے صارف دوست کنٹرول ہیں۔"
+        },
+        {
+          "value": "The Ice Cube Tray is a practical accessory for making ice cubes in various shapes. Perfect for keeping your drinks cool and adding a fun element to your beverages.",
+          "docs": [
+            "6913963978d99d52f6676e2b"
+          ],
+          "count": 1,
+          "ur": "برف کی ٹرے مختلف اشکال میں برف کے کیوب بنانے کے لیے ایک عملی لوازمات ہے۔ اپنے مشروبات کو ٹھنڈا رکھنے اور اپنے مشروبات میں ایک تفریحی عنصر شامل کرنے کے لیے بہترین"
+        },
+        {
+          "value": "The Rolex Submariner is a legendary dive watch with a rich history. Known for its durability and water resistance, it's a symbol of adventure and exploration.",
+          "docs": [
+            "6913963978d99d52f6676e4f"
+          ],
+          "count": 1,
+          "ur": "رولیکس سب میرینر ایک افسانوی غوطہ خوری کی گھڑی ہے جس کی ایک بھرپور تاریخ ہے۔ اپنی پائیداری اور پانی کی مزاحمت کے لیے جانی جاتی ہے، یہ مہم جوئی اور تلاش کی علامت ہے۔"
+        },
+        {
+          "value": "The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",
+          "docs": [
+            "6913963978d99d52f6676e99"
+          ],
+          "count": 1,
+          "ur": "نیلا زنانہ ہینڈ بیگ روزمرہ کے استعمال کے لیے ایک اسٹائلش اور کشادہ لوازمات ہے۔ ایک متحرک نیلے رنگ اور متعدد کمپارٹمنٹس کے ساتھ، یہ فیشن اور فعالیت کو یکجا کرتا ہے۔"
+        },
+        {
+          "value": "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
+          "docs": [
+            "6913963978d99d52f6676df6"
+          ],
+          "count": 1,
+          "ur": "ڈولچے اینڈ گبانا کا ڈولچے شائن ایک متحرک اور پھل دار خوشبو ہے، جس میں آم، جیسمین، اور سنہری لکڑیوں کے نوٹ شامل ہیں۔ یہ ایک خوشگوار اور جوان مہک ہے۔"
+        },
+        {
+          "value": "The Heshe Women's Leather Bag is a luxurious and high-quality leather bag for the sophisticated woman. With a timeless design and durable craftsmanship, it's a versatile accessory.",
+          "docs": [
+            "6913963978d99d52f6676e9a"
+          ],
+          "count": 1,
+          "ur": "ہی شی زنانہ چمڑے کا بیگ ایک نفیس خاتون کے لیے ایک پرتعیش اور اعلیٰ معیار کا چمڑے کا بیگ ہے۔ ایک لازوال ڈیزائن اور پائیدار کاریگری کے ساتھ، یہ ایک ہمہ گیر لوازمات ہے۔"
+        },
+        {
+          "value": "The Apple Airpods offer a seamless wireless audio experience. With easy pairing, high-quality sound, and Siri integration, they are perfect for on-the-go listening.",
+          "docs": [
+            "6913963978d99d52f6676e51"
+          ],
+          "count": 1,
+          "ur": "ایپل ایئر پوڈز ایک بے جوڑ وائرلیس آڈیو تجربہ پیش کرتے ہیں۔ آسان پیئرنگ، اعلیٰ معیار کی آواز، اور سری انٹیگریشن کے ساتھ، یہ چلتے پھرتے سننے کے لیے بہترین ہیں۔"
+        },
+        {
+          "value": "Spicy green chili pepper, ideal for adding heat to your favorite recipes.",
+          "docs": [
+            "6913963978d99d52f6676e07"
+          ],
+          "count": 1,
+          "ur": "مسالہ دار ہری مرچ، آپ کی پسندیدہ ترکیبوں میں تیزی شامل کرنے کے لیے مثالی ہے۔"
+        },
+        {
+          "value": "Pure and refreshing bottled water, essential for staying hydrated throughout the day.",
+          "docs": [
+            "6913963978d99d52f6676e17"
+          ],
+          "count": 1,
+          "ur": "خالص اور تازگی بخش بوتل کا پانی، دن بھر ہائیڈریٹ رہنے کے لیے ضروری ہے۔"
+        },
+        {
+          "value": "The Samsung Galaxy S8 is a premium smartphone with an Infinity Display, offering a stunning visual experience. It boasts advanced camera capabilities and cutting-edge technology.",
+          "docs": [
+            "6913963978d99d52f6676e71"
+          ],
+          "count": 1,
+          "ur": "سام سنگ گلیکسی ایس 8 ایک پریمیم اسمارٹ فون ہے جس میں انفینٹی ڈسپلے ہے، جو ایک شاندار بصری تجربہ پیش کرتا ہے۔ یہ جدید کیمرے کی صلاحیتوں اور جدید ٹیکنالوجی کا حامل ہے۔"
+        },
+        {
+          "value": "The Vivo S1 is a stylish and mid-range smartphone offering a blend of design and performance. It features a vibrant display, capable camera system, and reliable functionality.",
+          "docs": [
+            "6913963978d99d52f6676e73"
+          ],
+          "count": 1,
+          "ur": "ویوو ایس 1 ایک اسٹائلش اور درمیانی رینج کا اسمارٹ فون ہے جو ڈیزائن اور کارکردگی کا امتزاج پیش کرتا ہے۔ اس میں ایک متحرک ڈسپلے، قابل کیمرہ سسٹم، اور قابل اعتماد فعالیت ہے۔"
+        },
+        {
+          "value": "The MotoGP CI.H1 is a high-performance motorcycle inspired by MotoGP racing technology. It offers cutting-edge features and precision engineering for an exhilarating riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e60"
+          ],
+          "count": 1,
+          "ur": "موٹو جی پی سی آئی.ایچ 1 ایک اعلیٰ کارکردگی والی موٹر سائیکل ہے جو موٹو جی پی ریسنگ ٹیکنالوجی سے متاثر ہے۔ یہ ایک سنسنی خیز سواری کے تجربے کے لیے جدید خصوصیات اور درست انجینئرنگ پیش کرتی ہے۔"
+        },
+        {
+          "value": "The Golf Ball is a small ball used in the sport of golf. It features dimples on its surface, providing aerodynamic lift and distance when struck by a golf club.",
+          "docs": [
+            "6913963978d99d52f6676e81"
+          ],
+          "count": 1,
+          "ur": "گالف بال ایک چھوٹی گیند ہے جو گالف کے کھیل میں استعمال ہوتی ہے۔ اس کی سطح پر ڈمپلز ہوتے ہیں، جو گالف کلب سے مارے جانے پر ایروڈینامک لفٹ اور فاصلہ فراہم کرتے ہیں۔"
+        },
+        {
+          "value": "The Apple AirPower Wireless Charger provides a convenient way to charge your compatible Apple devices wirelessly. Simply place your devices on the charging mat for effortless charging.",
+          "docs": [
+            "6913963978d99d52f6676e53"
+          ],
+          "count": 1,
+          "ur": "ایپل ایئر پاور وائرلیس چارجر آپ کے ہم آہنگ ایپل ڈیوائسز کو وائرلیس طور پر چارج کرنے کا ایک آسان طریقہ فراہم کرتا ہے۔ آسانی سے چارجنگ کے لیے اپنے ڈیوائسز کو چارجنگ میٹ پر رکھیں۔"
+        },
+        {
+          "value": "The Fork is a classic utensil for various dining and serving purposes. Its durable and ergonomic design makes it a reliable choice for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e27"
+          ],
+          "count": 1,
+          "ur": "کانٹا مختلف کھانے اور پیش کرنے کے مقاصد کے لیے ایک کلاسک برتن ہے۔ اس کا پائیدار اور ایرگونومک ڈیزائن اسے روزمرہ کے استعمال کے لیے ایک قابل اعتماد انتخاب بناتا ہے۔"
+        },
+        {
+          "value": "Sweet and succulent strawberries, great for snacking, desserts, or blending into smoothies.",
+          "docs": [
+            "6913963978d99d52f6676e15"
+          ],
+          "count": 1,
+          "ur": "میٹھی اور رسیلی اسٹرابیری، اسنیکنگ، میٹھے، یا اسموتھیز میں ملانے کے لیے بہترین۔"
+        },
+        {
+          "value": "The iPhone 6 is a stylish and capable smartphone with a larger display and improved performance. It introduced new features and design elements, making it a popular choice in its time.",
+          "docs": [
+            "6913963978d99d52f6676e67"
+          ],
+          "count": 1,
+          "ur": "آئی فون 6 ایک اسٹائلش اور قابل اسمارٹ فون ہے جس میں ایک بڑا ڈسپلے اور بہتر کارکردگی ہے۔ اس نے نئی خصوصیات اور ڈیزائن عناصر متعارف کرائے، جو اسے اپنے وقت میں ایک مقبول انتخاب بناتا ہے۔"
+        },
+        {
+          "value": "The Family Tree Photo Frame is a sentimental and stylish way to display your cherished family memories. With multiple photo slots, it tells the story of your loved ones.",
+          "docs": [
+            "6913963978d99d52f6676e19"
+          ],
+          "count": 1,
+          "ur": "فیملی ٹری فوٹو فریم آپ کی عزیز خاندانی یادوں کو ظاہر کرنے کا ایک جذباتی اور اسٹائلش طریقہ ہے۔ متعدد فوٹو سلاٹس کے ساتھ، یہ آپ کے پیاروں کی کہانی بیان کرتا ہے۔"
+        },
+        {
+          "value": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display. It offers advanced features for users who demand top-notch technology.",
+          "docs": [
+            "6913963978d99d52f6676e68"
+          ],
+          "count": 1,
+          "ur": "آئی فون 13 پرو ایک جدید اسمارٹ فون ہے جس میں ایک طاقتور کیمرہ سسٹم، اعلیٰ کارکردگی والی چپ، اور شاندار ڈسپلے ہے۔ یہ ان صارفین کے لیے جدید خصوصیات پیش کرتا ہے جو اعلیٰ درجے کی ٹیکنالوجی کا مطالبہ کرتے ہیں۔"
+        },
+        {
+          "value": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
+          "docs": [
+            "6913963978d99d52f6676e45"
+          ],
+          "count": 1,
+          "ur": "سرخ اور کالے رنگ میں نائیکی ایئر جارڈن 1 ایک مشہور باسکٹ بال اسنیکر ہے جو اپنے اسٹائلش ڈیزائن اور اعلیٰ کارکردگی کی خصوصیات کے لیے جانا جاتا ہے، جو اسے اسنیکر کے شوقین افراد اور کھلاڑیوں میں پسندیدہ بناتا ہے۔"
+        },
+        {
+          "value": "The Oppo K1 series offers a range of smartphones with various features and specifications. Known for their stylish design and reliable performance, the Oppo K1 series caters to diverse user preferences.",
+          "docs": [
+            "6913963978d99d52f6676e6c"
+          ],
+          "count": 1,
+          "ur": "اوپو کے 1 سیریز مختلف خصوصیات اور تفصیلات کے ساتھ اسمارٹ فونز کی ایک رینج پیش کرتی ہے۔ اپنے اسٹائلش ڈیزائن اور قابل اعتماد کارکردگی کے لیے جانا جاتا ہے، اوپو کے 1 سیریز متنوع صارف کی ترجیحات کو پورا کرتی ہے۔"
+        },
+        {
+          "value": "The Realme X is a mid-range smartphone known for its sleek design and impressive display. It offers a good balance of performance and camera capabilities for users seeking a quality device.",
+          "docs": [
+            "6913963978d99d52f6676e6e"
+          ],
+          "count": 1,
+          "ur": "ریئل می ایکس ایک درمیانی رینج کا اسمارٹ فون ہے جو اپنے خوبصورت ڈیزائن اور متاثر کن ڈسپلے کے لیے جانا جاتا ہے۔ یہ ان صارفین کے لیے کارکردگی اور کیمرے کی صلاحیتوں کا اچھا توازن پیش کرتا ہے جو ایک معیاری ڈیوائس کی تلاش میں ہیں۔"
+        },
+        {
+          "value": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
+          "docs": [
+            "6913963978d99d52f6676e0b"
+          ],
+          "count": 1,
+          "ur": "غذائیت سے بھرپور کیوی، اسنیکنگ کے لیے یا آپ کے پکوانوں میں ٹراپیکل ٹوئسٹ شامل کرنے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Iron Golf is a type of golf club designed for various golf shots. It features a solid metal head and is used for approach shots, chipping, and other golfing techniques.",
+          "docs": [
+            "6913963978d99d52f6676e82"
+          ],
+          "count": 1,
+          "ur": "آئرن گالف ایک قسم کا گالف کلب ہے جو مختلف گالف شاٹس کے لیے ڈیزائن کیا گیا ہے۔ اس میں ایک ٹھوس دھاتی سر ہوتا ہے اور اسے اپروچ شاٹس، چپنگ، اور دیگر گالفنگ تکنیکوں کے لیے استعمال کیا جاتا ہے۔"
+        },
+        {
+          "value": "The Longines Master Collection is an elegant and refined watch known for its precision and craftsmanship. With a timeless design, it's a symbol of luxury and sophistication.",
+          "docs": [
+            "6913963978d99d52f6676e4b"
+          ],
+          "count": 1,
+          "ur": "لونجینز ماسٹر کلیکشن ایک خوبصورت اور نفیس گھڑی ہے جو اپنی درستگی اور کاریگری کے لیے جانی جاتی ہے۔ ایک لازوال ڈیزائن کے ساتھ، یہ عیش و عشرت اور نفاست کی علامت ہے۔"
+        },
+        {
+          "value": "The Durango SXT RWD is a spacious and versatile SUV, known for its strong performance and family-friendly features.",
+          "docs": [
+            "6913963978d99d52f6676e97"
+          ],
+          "count": 1,
+          "ur": "ڈورانگو ایس ایکس ٹی آر ڈبلیو ڈی ایک کشادہ اور ہمہ گیر ایس یو وی ہے، جو اپنی مضبوط کارکردگی اور خاندان دوست خصوصیات کے لیے جانی جاتی ہے۔"
+        },
+        {
+          "value": "Vaseline Men Body and Face Lotion is a specially formulated lotion designed to provide long-lasting moisture to men's skin. It absorbs quickly and helps keep the skin hydrated and healthy.",
+          "docs": [
+            "6913963978d99d52f6676e65"
+          ],
+          "count": 1,
+          "ur": "ویسلین مردانہ جسم اور چہرے کا لوشن ایک خاص طور پر تیار کردہ لوشن ہے جو مردوں کی جلد کو دیرپا نمی فراہم کرنے کے لیے ڈیزائن کیا گیا ہے۔ یہ جلدی جذب ہو جاتا ہے اور جلد کو ہائیڈریٹ اور صحت مند رکھنے میں مدد کرتا ہے۔"
+        },
+        {
+          "value": "The White Faux Leather Backpack is a trendy and practical backpack for the modern woman. With a sleek white design and ample storage space, it's perfect for both casual and on-the-go styles.",
+          "docs": [
+            "6913963978d99d52f6676e9c"
+          ],
+          "count": 1,
+          "ur": "سفید مصنوعی چمڑے کا بیگ پیک جدید خاتون کے لیے ایک ٹرینڈی اور عملی بیگ پیک ہے۔ ایک خوبصورت سفید ڈیزائن اور کافی اسٹوریج کی جگہ کے ساتھ، یہ عام اور چلتے پھرتے اسٹائل دونوں کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Black Women's Gown is an elegant and timeless evening gown. With a sleek black design, it's perfect for formal events and special occasions, exuding sophistication and style.",
+          "docs": [
+            "6913963978d99d52f6676e9e"
+          ],
+          "count": 1,
+          "ur": "کالا زنانہ گاؤن ایک خوبصورت اور لازوال شام کا گاؤن ہے۔ ایک خوبصورت کالے ڈیزائن کے ساتھ، یہ رسمی تقریبات اور خاص مواقع کے لیے بہترین ہے، جو نفاست اور اسٹائل کو ظاہر کرتا ہے۔"
+        },
+        {
+          "value": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
+          "docs": [
+            "6913963978d99d52f6676df5"
+          ],
+          "count": 1,
+          "ur": "ڈیور کا جاڈور ایک پرتعیش اور پھولوں والی خوشبو ہے، جو یلانگ-یلانگ، گلاب، اور جیسمین کے امتزاج کے لیے جانی جاتی ہے۔ یہ نسوانیت اور نفاست کا مجسمہ ہے۔"
+        },
+        {
+          "value": "Creamy and delicious ice cream, available in various flavors for a delightful treat.",
+          "docs": [
+            "6913963978d99d52f6676e09"
+          ],
+          "count": 1,
+          "ur": "کیمیائی اور مزیدار آئس کریم، ایک خوشگوار دعوت کے لیے مختلف ذائقوں میں دستیاب ہے۔"
+        },
+        {
+          "value": "Versatile and starchy potatoes, great for roasting, mashing, or as a side dish.",
+          "docs": [
+            "6913963978d99d52f6676e10"
+          ],
+          "count": 1,
+          "ur": "ہمہ گیر اور نشاستے دار آلو، بھوننے، میش کرنے، یا سائیڈ ڈش کے طور پر بہترین۔"
+        },
+        {
+          "value": "The Red Shoes make a bold statement with their vibrant red color. Whether for a party or a casual outing, these shoes add a pop of color and style to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676eaa"
+          ],
+          "count": 1,
+          "ur": "سرخ جوتے اپنے متحرک سرخ رنگ کے ساتھ ایک جرات مندانہ بیان دیتے ہیں۔ چاہے پارٹی کے لیے ہو یا عام باہر جانے کے لیے، یہ جوتے آپ کی الماری میں رنگ اور اسٹائل کا ایک پاپ شامل کرتے ہیں۔"
+        },
+        {
+          "value": "The Mug Tree Stand is a stylish and space-saving solution for organizing your mugs. Keep your favorite mugs easily accessible and neatly displayed in your kitchen.",
+          "docs": [
+            "6913963978d99d52f6676e30"
+          ],
+          "count": 1,
+          "ur": "مگ ٹری اسٹینڈ آپ کے مگ کو منظم کرنے کے لیے ایک اسٹائلش اور جگہ بچانے والا حل ہے۔ اپنے پسندیدہ مگ کو آسانی سے قابل رسائی اور اپنے باورچی خانے میں صاف ستھرے طریقے سے دکھائیں۔"
+        },
+        {
+          "value": "The Apple AirPods Max in Silver are premium over-ear headphones with high-fidelity audio, adaptive EQ, and active noise cancellation. Experience immersive sound in style.",
+          "docs": [
+            "6913963978d99d52f6676e52"
+          ],
+          "count": 1,
+          "ur": "سلور میں ایپل ایئر پوڈز میکس پریمیم اوور ایئر ہیڈ فونز ہیں جن میں ہائی فیڈیلیٹی آڈیو، ایڈاپٹیو ای کیو، اور ایکٹو نوائز کینسلیشن ہے۔ اسٹائل میں عمیق آواز کا تجربہ کریں۔"
+        },
+        {
+          "value": "The Oppo A57 is a mid-range smartphone known for its sleek design and capable features. It offers a balance of performance and affordability, making it a popular choice.",
+          "docs": [
+            "6913963978d99d52f6676e6a"
+          ],
+          "count": 1,
+          "ur": "اوپو اے 57 ایک درمیانی رینج کا اسمارٹ فون ہے جو اپنے خوبصورت ڈیزائن اور قابل خصوصیات کے لیے جانا جاتا ہے۔ یہ کارکردگی اور سستی کا توازن پیش کرتا ہے، جو اسے ایک مقبول انتخاب بناتا ہے۔"
+        },
+        {
+          "value": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple. Featuring a stunning Retina display, powerful A-series chip, and a sleek design, it offers a premium tablet experience.",
+          "docs": [
+            "6913963978d99d52f6676e8c"
+          ],
+          "count": 1,
+          "ur": "اسٹار لائٹ میں آئی پیڈ منی 2021 ایپل کا ایک کمپیکٹ اور طاقتور ٹیبلٹ ہے۔ ایک شاندار ریٹنا ڈسپلے، طاقتور اے-سیریز چپ، اور ایک خوبصورت ڈیزائن کی خصوصیت کے ساتھ، یہ ایک پریمیم ٹیبلٹ کا تجربہ پیش کرتا ہے۔"
+        },
+        {
+          "value": "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
+          "docs": [
+            "6913963978d99d52f6676dfc"
+          ],
+          "count": 1,
+          "ur": "آئینے کے ساتھ لکڑی کا باتھ روم سنک آپ کے باتھ روم میں ایک منفرد اور اسٹائلش اضافہ ہے، جس میں لکڑی کا سنک کاؤنٹر ٹاپ اور ایک مماثل آئینہ ہے۔"
+        },
+        {
+          "value": "The Green Oval Earring is a stylish and versatile accessory with a unique oval shape. Whether for casual or dressy occasions, its green hue and contemporary design make it a standout piece.",
+          "docs": [
+            "6913963978d99d52f6676ea4"
+          ],
+          "count": 1,
+          "ur": "سبز بیضوی بالی ایک منفرد بیضوی شکل کے ساتھ ایک اسٹائلش اور ہمہ گیر لوازمات ہے۔ چاہے عام ہو یا رسمی مواقع کے لیے، اس کا سبز رنگ اور عصری ڈیزائن اسے ایک نمایاں ٹکڑا بناتا ہے۔"
+        },
+        {
+          "value": "The Tennis Racket is an essential piece of equipment used in the sport of tennis. It features a frame with strings and a grip, allowing players to hit the tennis ball.",
+          "docs": [
+            "6913963978d99d52f6676e85"
+          ],
+          "count": 1,
+          "ur": "ٹینس ریکٹ ٹینس کے کھیل میں استعمال ہونے والا سامان کا ایک لازمی حصہ ہے۔ اس میں تاروں اور ایک گرفت کے ساتھ ایک فریم ہے، جو کھلاڑیوں کو ٹینس کی گیند کو مارنے کی اجازت دیتا ہے۔"
+        },
+        {
+          "value": "The Blue Frock is a charming and stylish dress for various occasions. With a vibrant blue color and a comfortable design, it adds a touch of elegance to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e8f"
+          ],
+          "count": 1,
+          "ur": "نیلی فراک مختلف مواقع کے لیے ایک دلکش اور اسٹائلش لباس ہے۔ ایک متحرک نیلے رنگ اور ایک آرام دہ ڈیزائن کے ساتھ، یہ آپ کی الماری میں نفاست کا ایک ٹچ شامل کرتی ہے۔"
+        },
+        {
+          "value": "The Black Aluminium Cup is a stylish and durable cup suitable for both hot and cold beverages. Its sleek black design adds a modern touch to your drinkware collection.",
+          "docs": [
+            "6913963978d99d52f6676e1e"
+          ],
+          "count": 1,
+          "ur": "کالا ایلومینیم کپ ایک اسٹائلش اور پائیدار کپ ہے جو گرم اور ٹھنڈے دونوں مشروبات کے لیے موزوں ہے۔ اس کا خوبصورت کالا ڈیزائن آپ کے ڈرنک ویئر کے مجموعے میں ایک جدید ٹچ شامل کرتا ہے۔"
+        },
+        {
+          "value": "The TV Studio Camera Pedestal is a professional-grade camera support system for smooth and precise camera movements in a studio setting. Ideal for broadcast and production.",
+          "docs": [
+            "6913963978d99d52f6676e5d"
+          ],
+          "count": 1,
+          "ur": "ٹی وی اسٹوڈیو کیمرہ پیڈسٹل ایک اسٹوڈیو سیٹنگ میں ہموار اور درست کیمرے کی نقل و حرکت کے لیے ایک پیشہ ورانہ گریڈ کا کیمرہ سپورٹ سسٹم ہے۔ براڈکاسٹ اور پروڈکشن کے لیے مثالی ہے۔"
+        },
+        {
+          "value": "High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",
+          "docs": [
+            "6913963978d99d52f6676dfe"
+          ],
+          "count": 1,
+          "ur": "اعلیٰ معیار کا بیف اسٹیک، گرل کرنے یا آپ کی ترجیحی سطح پر پکانے کے لیے بہترین۔"
+        },
+        {
+          "value": "The Cricket Wicket is a set of three stumps and two bails, forming a wicket used in the sport of cricket. Batsmen aim to protect the wicket while scoring runs.",
+          "docs": [
+            "6913963978d99d52f6676e7e"
+          ],
+          "count": 1,
+          "ur": "کرکٹ وکٹ تین اسٹمپس اور دو بیلز کا ایک سیٹ ہے، جو کرکٹ کے کھیل میں استعمال ہونے والی ایک وکٹ بناتا ہے۔ بلے باز رنز بناتے ہوئے وکٹ کی حفاظت کا ہدف رکھتے ہیں۔"
+        },
+        {
+          "value": "The Pacifica Touring is a stylish and well-equipped minivan, offering comfort and convenience for family journeys.",
+          "docs": [
+            "6913963978d99d52f6676e98"
+          ],
+          "count": 1,
+          "ur": "پیسفیکا ٹورنگ ایک اسٹائلش اور اچھی طرح سے لیس منی وین ہے، جو خاندانی سفر کے لیے آرام اور سہولت پیش کرتی ہے۔"
+        },
+        {
+          "value": "The Black Whisk is a kitchen essential for whisking and beating ingredients. Its ergonomic handle and sleek design make it a practical and stylish tool.",
+          "docs": [
+            "6913963978d99d52f6676e1f"
+          ],
+          "count": 1,
+          "ur": "کالی پھینٹنی اجزاء کو پھینٹنے اور ملانے کے لیے باورچی خانے کی ایک لازمی چیز ہے۔ اس کا ایرگونومک ہینڈل اور خوبصورت ڈیزائن اسے ایک عملی اور اسٹائلش اوزار بناتا ہے۔"
+        },
+        {
+          "value": "The Tray is a functional and decorative item for serving snacks, appetizers, or drinks. Its stylish design makes it a versatile accessory for entertaining guests.",
+          "docs": [
+            "6913963978d99d52f6676e38"
+          ],
+          "count": 1,
+          "ur": "ٹرے اسنیکس، ایپیٹائزرز، یا مشروبات پیش کرنے کے لیے ایک فعال اور آرائشی آئٹم ہے۔ اس کا اسٹائلش ڈیزائن اسے مہمانوں کی تفریح کے لیے ایک ہمہ گیر لوازمات بناتا ہے۔"
+        },
+        {
+          "value": "Nutrient-packed protein powder, ideal for supplementing your diet with essential proteins.",
+          "docs": [
+            "6913963978d99d52f6676e11"
+          ],
+          "count": 1,
+          "ur": "غذائیت سے بھرپور پروٹین پاؤڈر، آپ کی خوراک کو ضروری پروٹین کے ساتھ پورا کرنے کے لیے مثالی ہے۔"
+        },
+        {
+          "value": "The Grater in Black is a handy kitchen tool for grating cheese, vegetables, and more. Its sleek design and sharp blades make food preparation efficient and easy.",
+          "docs": [
+            "6913963978d99d52f6676e29"
+          ],
+          "count": 1,
+          "ur": "کالے رنگ میں کدوکش پنیر، سبزیوں، اور بہت کچھ کو کدوکش کرنے کے لیے باورچی خانے کا ایک کارآمد اوزار ہے۔ اس کا خوبصورت ڈیزائن اور تیز بلیڈ کھانے کی تیاری کو موثر اور آسان بناتے ہیں۔"
+        },
+        {
+          "value": "The Brown Leather Belt Watch is a stylish timepiece with a classic design. Featuring a genuine leather strap and a sleek dial, it adds a touch of sophistication to your look.",
+          "docs": [
+            "6913963978d99d52f6676e4a"
+          ],
+          "count": 1,
+          "ur": "بھورے چمڑے کی بیلٹ والی گھڑی ایک کلاسک ڈیزائن کے ساتھ ایک اسٹائلش ٹائم پیس ہے۔ ایک حقیقی چمڑے کے پٹے اور ایک خوبصورت ڈائل کی خصوصیت کے ساتھ، یہ آپ کے انداز میں نفاست کا ایک ٹچ شامل کرتی ہے۔"
+        },
+        {
+          "value": "Convenient tissue paper box for everyday use, providing soft and absorbent tissues.",
+          "docs": [
+            "6913963978d99d52f6676e16"
+          ],
+          "count": 1,
+          "ur": "روزمرہ کے استعمال کے لیے آسان ٹشو پیپر باکس، نرم اور جاذب ٹشو فراہم کرتا ہے۔"
+        },
+        {
+          "value": "The Spice Rack is a convenient organizer for your spices and seasonings. Keep your kitchen essentials within reach and neatly arranged with this stylish spice rack.",
+          "docs": [
+            "6913963978d99d52f6676e36"
+          ],
+          "count": 1,
+          "ur": "مصالحہ ریک آپ کے مصالحوں اور سیزننگ کے لیے ایک آسان آرگنائزر ہے۔ اس اسٹائلش مصالحہ ریک کے ساتھ اپنے باورچی خانے کی ضروریات کو پہنچ میں اور صاف ستھرے طریقے سے ترتیب دیں۔"
+        },
+        {
+          "value": "The Football, also known as a soccer ball, is the standard ball used in the sport of football (soccer). It is designed for kicking and passing in the game.",
+          "docs": [
+            "6913963978d99d52f6676e80"
+          ],
+          "count": 1,
+          "ur": "فٹ بال، جسے ساکر بال بھی کہا جاتا ہے، فٹ بال (ساکر) کے کھیل میں استعمال ہونے والی معیاری گیند ہے۔ اسے کھیل میں لات مارنے اور پاس کرنے کے لیے ڈیزائن کیا گیا ہے۔"
+        },
+        {
+          "value": "The Corset Leather With Skirt is a bold and edgy ensemble that combines a stylish corset with a matching skirt. Ideal for fashion-forward individuals, it makes a statement at any event.",
+          "docs": [
+            "6913963978d99d52f6676e9f"
+          ],
+          "count": 1,
+          "ur": "اسکرٹ کے ساتھ چمڑے کا کارسیٹ ایک جرات مندانہ اور جدید جوڑا ہے جو ایک اسٹائلش کارسیٹ کو ایک مماثل اسکرٹ کے ساتھ جوڑتا ہے۔ فیشن فارورڈ افراد کے لیے مثالی، یہ کسی بھی تقریب میں ایک بیان دیتا ہے۔"
+        },
+        {
+          "value": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+          "docs": [
+            "6913963978d99d52f6676df8"
+          ],
+          "count": 1,
+          "ur": "اینی بال کولمبو بستر ایک پرتعیش اور خوبصورت بیڈ فریم ہے، جو ایک آرام دہ اور اسٹائلش بیڈروم کے لیے اعلیٰ معیار کے مواد سے تیار کیا گیا ہے۔"
+        },
+        {
+          "value": "The Rolex Cellini Moonphase watch is a masterpiece of horology. Featuring a moon phase complication, it showcases the craftsmanship and elegance that Rolex is renowned for.",
+          "docs": [
+            "6913963978d99d52f6676eac"
+          ],
+          "count": 1,
+          "ur": "رولیکس سیلینی مون فیز گھڑی ہورولوجی کا ایک شاہکار ہے۔ چاند کے مرحلے کی پیچیدگی کی خصوصیت کے ساتھ، یہ اس کاریگری اور نفاست کی نمائش کرتی ہے جس کے لیے رولیکس مشہور ہے۔"
+        },
+        {
+          "value": "The Women Handbag in Black is a classic and versatile accessory that complements various outfits. With a timeless black color and functional design, it's a must-have in every woman's wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e9d"
+          ],
+          "count": 1,
+          "ur": "کالے رنگ میں زنانہ ہینڈ بیگ ایک کلاسک اور ہمہ گیر لوازمات ہے جو مختلف لباسوں کو مکمل کرتا ہے۔ ایک لازوال کالے رنگ اور فعال ڈیزائن کے ساتھ، یہ ہر عورت کی الماری میں ہونا ضروری ہے۔"
+        },
+        {
+          "value": "Specially formulated dog food designed to provide essential nutrients for your canine companion.",
+          "docs": [
+            "6913963978d99d52f6676e03"
+          ],
+          "count": 1,
+          "ur": "خاص طور پر تیار کردہ کتے کی خوراک جو آپ کے کینائن ساتھی کے لیے ضروری غذائی اجزاء فراہم کرنے کے لیے ڈیزائن کی گئی ہے۔"
+        },
+        {
+          "value": "The Generic Motorcycle is a versatile and reliable bike suitable for various riding preferences. With a balanced design, it provides a comfortable and efficient riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e5e"
+          ],
+          "count": 1,
+          "ur": "عام موٹر سائیکل ایک ہمہ گیر اور قابل اعتماد بائیک ہے جو مختلف سواری کی ترجیحات کے لیے موزوں ہے۔ ایک متوازن ڈیزائن کے ساتھ، یہ ایک آرام دہ اور موثر سواری کا تجربہ فراہم کرتی ہے۔"
+        },
+        {
+          "value": "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
+          "docs": [
+            "6913963978d99d52f6676dfb"
+          ],
+          "count": 1,
+          "ur": "نول سارینن ایگزیکٹو کانفرنس چیئر ایک جدید اور ایرگونومک کرسی ہے، جو اپنے لازوال ڈیزائن کے ساتھ آپ کے دفتر یا کانفرنس روم کے لیے بہترین ہے۔"
+        },
+        {
+          "value": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
+          "docs": [
+            "6913963978d99d52f6676df9"
+          ],
+          "count": 1,
+          "ur": "اینی بال کولمبو صوفا ایک نفیس اور آرام دہ بیٹھنے کا آپشن ہے، جس میں آپ کے رہنے والے کمرے کے لیے شاندار ڈیزائن اور پریمیم اپ ہولسٹری ہے۔"
+        },
+        {
+          "value": "The Asus Zenbook Pro Dual Screen Laptop is a high-performance device with dual screens, providing productivity and versatility for creative professionals.",
+          "docs": [
+            "6913963978d99d52f6676e3c"
+          ],
+          "count": 1,
+          "ur": "ایسوس زین بک پرو ڈوئل اسکرین لیپ ٹاپ ایک اعلیٰ کارکردگی والی ڈیوائس ہے جس میں ڈوئل اسکرین ہیں، جو تخلیقی پیشہ ور افراد کے لیے پیداواریت اور ہمہ گیری فراہم کرتی ہے۔"
+        },
+        {
+          "value": "Olay Ultra Moisture Shea Butter Body Wash is a luxurious body wash that hydrates and nourishes your skin with the moisturizing power of shea butter. Enjoy a rich lather and silky-smooth skin.",
+          "docs": [
+            "6913963978d99d52f6676e64"
+          ],
+          "count": 1,
+          "ur": "اولے الٹرا موئسچر شیا بٹر باڈی واش ایک پرتعیش باڈی واش ہے جو شیا بٹر کی نمی بخش طاقت سے آپ کی جلد کو ہائیڈریٹ اور پرورش دیتا ہے۔ ایک بھرپور جھاگ اور ریشمی ہموار جلد سے لطف اٹھائیں۔"
+        },
+        {
+          "value": "The Carbon Steel Wok is a versatile cooking pan suitable for stir-frying, sautéing, and deep frying. Its sturdy construction ensures even heat distribution for delicious meals.",
+          "docs": [
+            "6913963978d99d52f6676e21"
+          ],
+          "count": 1,
+          "ur": "کاربن اسٹیل کڑاہی ایک ہمہ گیر پکانے کا پین ہے جو ہلچل میں تلنے، بھوننے، اور گہری تلنے کے لیے موزوں ہے۔ اس کی مضبوط تعمیر مزیدار کھانوں کے لیے یکساں گرمی کی تقسیم کو یقینی بناتی ہے۔"
+        },
+        {
+          "value": "The Kawasaki Z800 is a powerful and agile sportbike known for its striking design and performance. It's equipped with advanced features, making it a favorite among motorcycle enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e5f"
+          ],
+          "count": 1,
+          "ur": "کاواساکی زی 800 ایک طاقتور اور پھرتیلی اسپورٹس بائیک ہے جو اپنے شاندار ڈیزائن اور کارکردگی کے لیے جانی جاتی ہے۔ یہ جدید خصوصیات سے لیس ہے، جو اسے موٹر سائیکل کے شوقین افراد میں پسندیدہ بناتی ہے۔"
+        },
+        {
+          "value": "The Basketball is a standard ball used in basketball games. It is designed for dribbling, shooting, and passing in the game of basketball, suitable for both indoor and outdoor play.",
+          "docs": [
+            "6913963978d99d52f6676e79"
+          ],
+          "count": 1,
+          "ur": "باسکٹ بال ایک معیاری گیند ہے جو باسکٹ بال کے کھیلوں میں استعمال ہوتی ہے۔ اسے باسکٹ بال کے کھیل میں ڈرائبلنگ، شوٹنگ، اور پاسنگ کے لیے ڈیزائن کیا گیا ہے، جو انڈور اور آؤٹ ڈور دونوں طرح کے کھیل کے لیے موزوں ہے۔"
+        },
+        {
+          "value": "The Gray Dress is a versatile and chic option for various occasions. With a neutral gray color, it can be dressed up or down, making it a wardrobe staple for any fashion-forward individual.",
+          "docs": [
+            "6913963978d99d52f6676e91"
+          ],
+          "count": 1,
+          "ur": "سرمئی لباس مختلف مواقع کے لیے ایک ہمہ گیر اور جدید آپشن ہے۔ ایک نیوٹرل سرمئی رنگ کے ساتھ، اسے رسمی یا غیر رسمی بنایا جا سکتا ہے، جو اسے کسی بھی فیشن فارورڈ فرد کے لیے الماری کا ایک اہم حصہ بناتا ہے۔"
+        },
+        {
+          "value": "The House Showpiece Plant is an artificial plant that brings a touch of nature to your home without the need for maintenance. It adds greenery and style to any space.",
+          "docs": [
+            "6913963978d99d52f6676e1a"
+          ],
+          "count": 1,
+          "ur": "گھر کا نمائشی پودا ایک مصنوعی پودا ہے جو دیکھ بھال کی ضرورت کے بغیر آپ کے گھر میں فطرت کا ایک ٹچ لاتا ہے۔ یہ کسی بھی جگہ میں ہریالی اور اسٹائل شامل کرتا ہے۔"
+        },
+        {
+          "value": "The Cricket Ball is a hard leather ball used in the sport of cricket. It is bowled and batted in the game, and its hardness and seam contribute to the dynamics of cricket play.",
+          "docs": [
+            "6913963978d99d52f6676e7b"
+          ],
+          "count": 1,
+          "ur": "کرکٹ کی گیند ایک سخت چمڑے کی گیند ہے جو کرکٹ کے کھیل میں استعمال ہوتی ہے۔ اسے کھیل میں گیند بازی اور بلے بازی کی جاتی ہے، اور اس کی سختی اور سیون کرکٹ کے حرکیات میں حصہ ڈالتی ہے۔"
+        },
+        {
+          "value": "The Wooden Rolling Pin is a classic kitchen tool for rolling out dough for baking. Its smooth surface and sturdy handles make it easy to achieve uniform thickness.",
+          "docs": [
+            "6913963978d99d52f6676e39"
+          ],
+          "count": 1,
+          "ur": "لکڑی کا بیلن بیکنگ کے لیے آٹا بیلنے کے لیے باورچی خانے کا ایک کلاسک اوزار ہے۔ اس کی ہموار سطح اور مضبوط ہینڈل یکساں موٹائی حاصل کرنا آسان بناتے ہیں۔"
+        },
+        {
+          "value": "The Amazon Echo Plus is a smart speaker with built-in Alexa voice control. It features premium sound quality and serves as a hub for controlling smart home devices.",
+          "docs": [
+            "6913963978d99d52f6676e50"
+          ],
+          "count": 1,
+          "ur": "ایمیزون ایکو پلس ایک اسمارٹ اسپیکر ہے جس میں بلٹ ان الیکسا وائس کنٹرول ہے۔ اس میں پریمیم ساؤنڈ کوالٹی ہے اور یہ اسمارٹ ہوم ڈیوائسز کو کنٹرول کرنے کے لیے ایک مرکز کے طور پر کام کرتا ہے۔"
+        },
+        {
+          "value": "The Women's Wrist Watch is a versatile and fashionable timepiece for everyday wear. With a comfortable strap and a simple yet elegant design, it complements various styles.",
+          "docs": [
+            "6913963978d99d52f6676eaf"
+          ],
+          "count": 1,
+          "ur": "خواتین کی کلائی کی گھڑی روزمرہ پہننے کے لیے ایک ہمہ گیر اور فیشن ایبل ٹائم پیس ہے۔ ایک آرام دہ پٹے اور ایک سادہ لیکن خوبصورت ڈیزائن کے ساتھ، یہ مختلف اسٹائل کو مکمل کرتی ہے۔"
+        }
+      ]
+    },
+    {
+      "model": "Order",
+      "field": "products.name",
+      "entries": []
+    },
+    {
+      "model": "Order",
+      "field": "products.description",
+      "entries": []
+    },
+    {
+      "model": "Customer",
+      "field": "addresses.label",
+      "entries": [
+        {
+          "value": "Home",
+          "docs": [
+            "6913cae509586269e3650acb",
+            "691429475c0c0cc06e7e9341",
+            "6914c76e60cc94a8cf263717"
+          ],
+          "count": 3,
+          "ur": "ہوم"
+        }
+      ]
+    }
+  ]
+}

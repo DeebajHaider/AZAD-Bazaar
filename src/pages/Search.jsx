@@ -6,12 +6,9 @@ import { useI18n } from '../context/I18nContext'
 export default function Search() {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
-  const { t, setLang } = useI18n()
+  const { t } = useI18n()
 
-  // Ensure the language is set to Urdu for this page
-  React.useEffect(() => {
-    setLang('ur')
-  }, [setLang])
+
 
   const handleSearch = (e) => {
     e.preventDefault()

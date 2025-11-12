@@ -28,7 +28,7 @@ export default function App() {
           <div style={{fontFamily: 'sans-serif', position: 'relative', height: '100%'}}>
             <Routes>
               <Route path="/*" element={<Login />} />
-             <Route path="/accessibility" element={<AccessibilitySettings />} />
+              <Route path="/accessibility" element={<AccessibilitySettings />} />
             </Routes>
           </div>
         </Router>
@@ -37,7 +37,7 @@ export default function App() {
 
     return (
       <Router>
-        <div className="App" style={{fontFamily:'sans-serif', position: 'relative', height: '100%'}}>
+        <div className="App" style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
@@ -56,18 +56,18 @@ export default function App() {
   }
 
   return (
-  <I18nProvider>
-    <ThemeProvider>
-      <AccessibilityProvider>
-        <AuthProvider>
-          <DataProvider>
-            <CartProvider>
-              <AuthGate />
-            </CartProvider>
-          </DataProvider>
-        </AuthProvider>
-      </AccessibilityProvider>
-    </ThemeProvider>
-  </I18nProvider>
+    <I18nProvider>
+      <ThemeProvider>
+        <AccessibilityProvider>
+          <AuthProvider>
+            <DataProvider>
+              <CartProvider>
+                <AuthGate />
+              </CartProvider>
+            </DataProvider>
+          </AuthProvider>
+        </AccessibilityProvider>
+      </ThemeProvider>
+    </I18nProvider>
   )
 }

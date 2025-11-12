@@ -3,6 +3,8 @@ import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./cartItem.css";
 import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
+
 
 const Counter = ({ quantity, onChange, onRemove, itemName }) => {
   const decrement = () => {
@@ -35,6 +37,8 @@ const Counter = ({ quantity, onChange, onRemove, itemName }) => {
 }
 
 const CartItem = ({ item, onQuantityChange, onRemove }) => {
+  const { translateDBVal } = useTranslations()
+
   const { t } = useI18n()
   const [quantity, setQuantity] = useState(item.quantity || 0)
   const navigate = useNavigate()
@@ -63,7 +67,7 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
           className="cart-item-link p-0 bg-transparent border-0"
           aria-label={t('cartItem.viewDetailsAriaLabel') ? t('cartItem.viewDetailsAriaLabel').replace('{{itemName}}', item.itemName) : `Open cart for ${item.itemName}`}
         >
-          <img src={item.itemPhoto} alt={item.itemName} className="cart-item-img" />
+          <img src={item.itemPhoto} alt={translateDBVal("Product", "name", item.itemName, 'ur')} className="cart-item-img" />
         </button>
       </div>
 
@@ -75,7 +79,7 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
           className="cart-item-name cart-item-link text-left"
           aria-label={t('cartItem.viewDetailsAriaLabel') ? t('cartItem.viewDetailsAriaLabel').replace('{{itemName}}', item.itemName) : `Open cart for ${item.itemName}`}
         >
-          {item.itemName}
+          {translateDBVal("Product", "name", item.itemName, 'ur')} 
         </button>
         <div className="cart-item-price">
           <span className="price-current">{t('common.currencySymbol')}. {item.itemPrice}</span>

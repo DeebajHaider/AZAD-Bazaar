@@ -3,7 +3,8 @@ import { useAuth } from '../context/AuthContext'
 import BottomNav from '../component/BottomNav'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
-import { 
+import useTranslations from '../hooks/useTranslations'
+import {
   MapPin, Search,
   Apple, Carrot, Cookie, Milk, Coffee,
   Fish, Egg, Beef, Cake, ChefHat, Wine
@@ -39,9 +40,17 @@ export default function Home() {
   const { customer } = useAuth()
   const [voucherCode, setVoucherCode] = React.useState('')
   const [appliedVoucher, setAppliedVoucher] = React.useState(null)
+  const { loading, translateDBVal } = useTranslations();
 
   const voucherMap = { 'AZAD10': 10, 'AZAD20': 20 }
-  const { t } = useI18n()
+  const { t , setLang} = useI18n()
+
+  // Ensure the language is set to Urdu for this page
+  React.useEffect(() => {
+    setLang('ur')
+  }, [setLang])
+
+
 
   // simple formatter for translations containing {{placeholders}}
   const format = (key, vars = {}) => {
@@ -61,14 +70,14 @@ export default function Home() {
       setAppliedVoucher({ invalid: true })
     }
   }
-  
+
   return (
     <>
       {/* Consolidated Sticky Header for Address and Search */}
       <header className="sticky top-0 z-20 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800">
         <div className="max-w-[430px] mx-auto p-3 space-y-3">
           {/* Address Bar */}
-          <button 
+          <button
             onClick={() => navigate('/settings')} // Navigate to settings to change address
             className="w-full flex items-start gap-2 text-left"
           >
@@ -82,7 +91,7 @@ export default function Home() {
           </button>
 
           {/* Search Bar: Styled to look like an input field */}
-          <button 
+          <button
             onClick={() => navigate('/search-results?q=')}
             className="w-full h-12 flex items-center gap-3 px-4 bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-lg text-left"
           >
@@ -94,7 +103,7 @@ export default function Home() {
 
       {/* Main content area */}
       <main className="flex-1 overflow-y-auto bg-white dark:bg-slate-950 p-4 space-y-6 pb-24">
-        
+        {translateDBVal("", "field", "value", "lang")}
         {/* Categories Section */}
         <section>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.categories.title')}</h2>

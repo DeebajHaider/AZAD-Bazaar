@@ -1,0 +1,5422 @@
+{
+  "generatedAt": "2025-11-12T18:16:16.006Z",
+  "models": [
+    {
+      "model": "Brand",
+      "field": "name",
+      "entries": [
+        {
+          "value": "Puma",
+          "docs": [
+            "6913963978d99d52f6676d7d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Off White",
+          "docs": [
+            "6913963978d99d52f6676d7e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Fun",
+          "docs": [
+            "6913963978d99d52f6676dc1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Casual Comfort",
+          "docs": [
+            "6913963978d99d52f6676d75"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Longines",
+          "docs": [
+            "6913963978d99d52f6676d84"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Diva",
+          "docs": [
+            "6913963978d99d52f6676de6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Oppo",
+          "docs": [
+            "6913963978d99d52f6676dab"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Glamour Beauty",
+          "docs": [
+            "6913963978d99d52f6676d17"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chrysler",
+          "docs": [
+            "6913963978d99d52f6676dc9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Heshe",
+          "docs": [
+            "6913963978d99d52f6676dd5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple",
+          "docs": [
+            "6913963978d99d52f6676d69"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Realme",
+          "docs": [
+            "6913963978d99d52f6676dad"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Co.",
+          "docs": [
+            "6913963978d99d52f6676ded"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Prada",
+          "docs": [
+            "6913963978d99d52f6676dd7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dior",
+          "docs": [
+            "6913963978d99d52f6676d22"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nail Couture",
+          "docs": [
+            "6913963978d99d52f6676d1d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "TechGear",
+          "docs": [
+            "6913963978d99d52f6676d93"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Urban Chic",
+          "docs": [
+            "6913963978d99d52f6676d76"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Olay",
+          "docs": [
+            "6913963978d99d52f6676da6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "IWC",
+          "docs": [
+            "6913963978d99d52f6676dea"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Timepieces",
+          "docs": [
+            "6913963978d99d52f6676d82"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Trends",
+          "docs": [
+            "6913963978d99d52f6676d71"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Furniture Co.",
+          "docs": [
+            "6913963978d99d52f6676d2a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dodge",
+          "docs": [
+            "6913963978d99d52f6676dcb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Essence",
+          "docs": [
+            "6913963978d99d52f6676d15"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Annibale Colombo",
+          "docs": [
+            "6913963978d99d52f6676d27"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dolce & Gabbana",
+          "docs": [
+            "6913963978d99d52f6676d23"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "GadgetMaster",
+          "docs": [
+            "6913963978d99d52f6676d95"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Shades",
+          "docs": [
+            "6913963978d99d52f6676dbf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashionista",
+          "docs": [
+            "6913963978d99d52f6676dd3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Knoll",
+          "docs": [
+            "6913963978d99d52f6676d2c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Attitude",
+          "docs": [
+            "6913963978d99d52f6676da4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vivo",
+          "docs": [
+            "6913963978d99d52f6676db1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Asus",
+          "docs": [
+            "6913963978d99d52f6676d6a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Huawei",
+          "docs": [
+            "6913963978d99d52f6676d6b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Classic Wear",
+          "docs": [
+            "6913963978d99d52f6676d74"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "ProVision",
+          "docs": [
+            "6913963978d99d52f6676d97"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Amazon",
+          "docs": [
+            "6913963978d99d52f6676d89"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "ScootMaster",
+          "docs": [
+            "6913963978d99d52f6676d9f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Elegance Collection",
+          "docs": [
+            "6913963978d99d52f6676dd9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Bath Trends",
+          "docs": [
+            "6913963978d99d52f6676d2e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nike",
+          "docs": [
+            "6913963978d99d52f6676d7a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex",
+          "docs": [
+            "6913963978d99d52f6676d85"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chic Cosmetics",
+          "docs": [
+            "6913963978d99d52f6676d1b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gucci",
+          "docs": [
+            "6913963978d99d52f6676d24"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "MotoGP",
+          "docs": [
+            "6913963978d99d52f6676d9d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dell",
+          "docs": [
+            "6913963978d99d52f6676d6d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Samsung",
+          "docs": [
+            "6913963978d99d52f6676daf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Kawasaki",
+          "docs": [
+            "6913963978d99d52f6676d9c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vaseline",
+          "docs": [
+            "6913963978d99d52f6676da8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Gold",
+          "docs": [
+            "6913963978d99d52f6676dec"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "SpeedMaster",
+          "docs": [
+            "6913963978d99d52f6676da0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fashion Express",
+          "docs": [
+            "6913963978d99d52f6676de8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Beats",
+          "docs": [
+            "6913963978d99d52f6676d90"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "SnapTech",
+          "docs": [
+            "6913963978d99d52f6676d96"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gigabyte",
+          "docs": [
+            "6913963978d99d52f6676d73"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Generic Motors",
+          "docs": [
+            "6913963978d99d52f6676d9a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Unbranded",
+          "docs": [
+            "6913963978d99d52f6676d31"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Lenovo",
+          "docs": [
+            "6913963978d99d52f6676d6c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pampi",
+          "docs": [
+            "6913963978d99d52f6676de7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Comfort Trends",
+          "docs": [
+            "6913963978d99d52f6676de3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chanel",
+          "docs": [
+            "6913963978d99d52f6676d21"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Calvin Klein",
+          "docs": [
+            "6913963978d99d52f6676d20"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Velvet Touch",
+          "docs": [
+            "6913963978d99d52f6676d19"
+          ],
+          "count": 1,
+          "ur": ""
+        }
+      ]
+    },
+    {
+      "model": "Brand",
+      "field": "motto",
+      "entries": [
+        {
+          "value": "International ok he cover front.",
+          "docs": [
+            "6913963978d99d52f6676d19"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "His admit.",
+          "docs": [
+            "6913963978d99d52f6676d84"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Career phone look care less.",
+          "docs": [
+            "6913963978d99d52f6676daf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Son upon population see.",
+          "docs": [
+            "6913963978d99d52f6676d9c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Kind job once news service.",
+          "docs": [
+            "6913963978d99d52f6676ded"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Remember all same choose my.",
+          "docs": [
+            "6913963978d99d52f6676dbf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fast across blood air decision.",
+          "docs": [
+            "6913963978d99d52f6676dd7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Author building interesting interest past.",
+          "docs": [
+            "6913963978d99d52f6676da8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Something agreement information ground.",
+          "docs": [
+            "6913963978d99d52f6676d97"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Feeling on.",
+          "docs": [
+            "6913963978d99d52f6676d9a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Girl former body analysis.",
+          "docs": [
+            "6913963978d99d52f6676d96"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Question much beyond establish.",
+          "docs": [
+            "6913963978d99d52f6676d75"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Term born avoid.",
+          "docs": [
+            "6913963978d99d52f6676d6c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tax certainly candidate.",
+          "docs": [
+            "6913963978d99d52f6676d76"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Truth few senior through.",
+          "docs": [
+            "6913963978d99d52f6676dea"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Focus dark standard statement amount.",
+          "docs": [
+            "6913963978d99d52f6676de6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Organization feel grow paper piece.",
+          "docs": [
+            "6913963978d99d52f6676d21"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Base continue likely actually purpose.",
+          "docs": [
+            "6913963978d99d52f6676d95"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Stock central with.",
+          "docs": [
+            "6913963978d99d52f6676d24"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Argue good rate management.",
+          "docs": [
+            "6913963978d99d52f6676dd9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Worry share degree interview.",
+          "docs": [
+            "6913963978d99d52f6676d23"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Themselves discuss down.",
+          "docs": [
+            "6913963978d99d52f6676d7e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "North store manage management.",
+          "docs": [
+            "6913963978d99d52f6676d89"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pay yeah worker worker.",
+          "docs": [
+            "6913963978d99d52f6676d90"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rather test specific another.",
+          "docs": [
+            "6913963978d99d52f6676de7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Type west wrong issue.",
+          "docs": [
+            "6913963978d99d52f6676dcb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Until figure garden wife technology.",
+          "docs": [
+            "6913963978d99d52f6676dc1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Above set mean.",
+          "docs": [
+            "6913963978d99d52f6676d20"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Unit option mission will.",
+          "docs": [
+            "6913963978d99d52f6676da6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Goal friend himself next despite.",
+          "docs": [
+            "6913963978d99d52f6676d74"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Big guess any accept forget.",
+          "docs": [
+            "6913963978d99d52f6676d22"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Today social cost administration left.",
+          "docs": [
+            "6913963978d99d52f6676d71"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Lawyer change interest appear west.",
+          "docs": [
+            "6913963978d99d52f6676d2c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Buy dream will.",
+          "docs": [
+            "6913963978d99d52f6676dd3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rich area environmental could.",
+          "docs": [
+            "6913963978d99d52f6676d73"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Especially education themselves international so.",
+          "docs": [
+            "6913963978d99d52f6676da0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Section reality hot open court.",
+          "docs": [
+            "6913963978d99d52f6676d6b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Issue such study.",
+          "docs": [
+            "6913963978d99d52f6676d27"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Low fall full.",
+          "docs": [
+            "6913963978d99d52f6676d1d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Only leader throughout.",
+          "docs": [
+            "6913963978d99d52f6676d7a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Today like meeting few walk.",
+          "docs": [
+            "6913963978d99d52f6676da4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Exactly money make side.",
+          "docs": [
+            "6913963978d99d52f6676dec"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "One operation push.",
+          "docs": [
+            "6913963978d99d52f6676d82"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Perhaps analysis.",
+          "docs": [
+            "6913963978d99d52f6676de8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Within TV amount.",
+          "docs": [
+            "6913963978d99d52f6676d15"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Image few.",
+          "docs": [
+            "6913963978d99d52f6676d85"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cultural particularly.",
+          "docs": [
+            "6913963978d99d52f6676d9d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Respond ahead modern fight.",
+          "docs": [
+            "6913963978d99d52f6676d69"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Purpose member part big.",
+          "docs": [
+            "6913963978d99d52f6676d6a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Toward goal type.",
+          "docs": [
+            "6913963978d99d52f6676d2a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Why last.",
+          "docs": [
+            "6913963978d99d52f6676d17"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Over spend.",
+          "docs": [
+            "6913963978d99d52f6676d2e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rich thousand seek forget.",
+          "docs": [
+            "6913963978d99d52f6676d7d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Truth yet discover fact.",
+          "docs": [
+            "6913963978d99d52f6676d9f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fine message read.",
+          "docs": [
+            "6913963978d99d52f6676d93"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gun open success TV.",
+          "docs": [
+            "6913963978d99d52f6676d6d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Under little off.",
+          "docs": [
+            "6913963978d99d52f6676dad"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Perform choice media white.",
+          "docs": [
+            "6913963978d99d52f6676dab"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Individual career.",
+          "docs": [
+            "6913963978d99d52f6676db1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Really watch training.",
+          "docs": [
+            "6913963978d99d52f6676d1b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cup whether turn.",
+          "docs": [
+            "6913963978d99d52f6676dc9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Film those range technology them.",
+          "docs": [
+            "6913963978d99d52f6676dd5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Music sometimes hold prepare.",
+          "docs": [
+            "6913963978d99d52f6676de3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Arm do environmental move.",
+          "docs": [
+            "6913963978d99d52f6676d31"
+          ],
+          "count": 1,
+          "ur": ""
+        }
+      ]
+    },
+    {
+      "model": "Category",
+      "field": "name",
+      "entries": [
+        {
+          "value": "pans",
+          "docs": [
+            "6913963978d99d52f6676d5d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "graters",
+          "docs": [
+            "6913963978d99d52f6676d57"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "earrings",
+          "docs": [
+            "6913963978d99d52f6676de0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "watches",
+          "docs": [
+            "6913963978d99d52f6676d80"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "casual shoes",
+          "docs": [
+            "6913963978d99d52f6676d7c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sports cleats",
+          "docs": [
+            "6913963978d99d52f6676d7b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "coffee",
+          "docs": [
+            "6913963978d99d52f6676d3d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "men's shirts",
+          "docs": [
+            "6913963978d99d52f6676d70"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "clothing",
+          "docs": [
+            "6913963978d99d52f6676d6f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "women's shoes",
+          "docs": [
+            "6913963978d99d52f6676de5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "slicers",
+          "docs": [
+            "6913963978d99d52f6676d53"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "mens-shirts",
+          "docs": [
+            "6913963978d99d52f6676d6e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "luxury watches",
+          "docs": [
+            "6913963978d99d52f6676d83"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "selfie accessories",
+          "docs": [
+            "6913963978d99d52f6676d94"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "plant accessories",
+          "docs": [
+            "6913963978d99d52f6676d46"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "vehicles",
+          "docs": [
+            "6913963978d99d52f6676dc8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "party glasses",
+          "docs": [
+            "6913963978d99d52f6676dc0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "backpacks",
+          "docs": [
+            "6913963978d99d52f6676dd8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "camera accessories",
+          "docs": [
+            "6913963978d99d52f6676d92"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "tongs",
+          "docs": [
+            "6913963978d99d52f6676d60"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "dog food",
+          "docs": [
+            "6913963978d99d52f6676d37"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "realme",
+          "docs": [
+            "6913963978d99d52f6676dac"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cooking essentials",
+          "docs": [
+            "6913963978d99d52f6676d35"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cutlery",
+          "docs": [
+            "6913963978d99d52f6676d59"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "baseball",
+          "docs": [
+            "6913963978d99d52f6676db5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "minivans",
+          "docs": [
+            "6913963978d99d52f6676dcf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "fruits",
+          "docs": [
+            "6913963978d99d52f6676d30"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "seafood",
+          "docs": [
+            "6913963978d99d52f6676d39"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "microwaves",
+          "docs": [
+            "6913963978d99d52f6676d5b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "smartphones",
+          "docs": [
+            "6913963978d99d52f6676da9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "condiments",
+          "docs": [
+            "6913963978d99d52f6676d3a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "kitchen tools",
+          "docs": [
+            "6913963978d99d52f6676d49"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "electronics",
+          "docs": [
+            "6913963978d99d52f6676d87"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "fragrances",
+          "docs": [
+            "6913963978d99d52f6676d1e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "mobile-accessories",
+          "docs": [
+            "6913963978d99d52f6676d86"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "utensils",
+          "docs": [
+            "6913963978d99d52f6676d4a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "plates",
+          "docs": [
+            "6913963978d99d52f6676d5f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sports equipment",
+          "docs": [
+            "6913963978d99d52f6676db3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "desserts",
+          "docs": [
+            "6913963978d99d52f6676d3b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "photo frame",
+          "docs": [
+            "6913963978d99d52f6676d44"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "home decor",
+          "docs": [
+            "6913963978d99d52f6676d42"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sedans",
+          "docs": [
+            "6913963978d99d52f6676dc7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "grains",
+          "docs": [
+            "6913963978d99d52f6676d3f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "fashion accessories",
+          "docs": [
+            "6913963978d99d52f6676dd1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "volleyball",
+          "docs": [
+            "6913963978d99d52f6676dbc"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "womens-dresses",
+          "docs": [
+            "6913963978d99d52f6676dda"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "kitchen-accessories",
+          "docs": [
+            "6913963978d99d52f6676d48"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "face powder",
+          "docs": [
+            "6913963978d99d52f6676d18"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "women's watches",
+          "docs": [
+            "6913963978d99d52f6676deb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "mens-shoes",
+          "docs": [
+            "6913963978d99d52f6676d77"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "office chairs",
+          "docs": [
+            "6913963978d99d52f6676d2b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cat food",
+          "docs": [
+            "6913963978d99d52f6676d34"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "heel shoes",
+          "docs": [
+            "6913963978d99d52f6676de4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "basketball",
+          "docs": [
+            "6913963978d99d52f6676db6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "motorcycle",
+          "docs": [
+            "6913963978d99d52f6676d98"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "dresses",
+          "docs": [
+            "6913963978d99d52f6676dc4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "compact cars",
+          "docs": [
+            "6913963978d99d52f6676dcd"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sportbikes",
+          "docs": [
+            "6913963978d99d52f6676d9b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "lighting",
+          "docs": [
+            "6913963978d99d52f6676d47"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "hatchbacks",
+          "docs": [
+            "6913963978d99d52f6676dcc"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "golf",
+          "docs": [
+            "6913963978d99d52f6676dba"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "power banks",
+          "docs": [
+            "6913963978d99d52f6676d8e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cooktops",
+          "docs": [
+            "6913963978d99d52f6676d54"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sports-accessories",
+          "docs": [
+            "6913963978d99d52f6676db2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "meat",
+          "docs": [
+            "6913963978d99d52f6676d32"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "ice cube trays",
+          "docs": [
+            "6913963978d99d52f6676d58"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "groceries",
+          "docs": [
+            "6913963978d99d52f6676d2f"
+          ],
+          "count": 1,
+          "ur": "wefr"
+        },
+        {
+          "value": "glasses",
+          "docs": [
+            "6913963978d99d52f6676d56"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "body wash",
+          "docs": [
+            "6913963978d99d52f6676da5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "eyewear",
+          "docs": [
+            "6913963978d99d52f6676dbe"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sofas",
+          "docs": [
+            "6913963978d99d52f6676d28"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "peelers",
+          "docs": [
+            "6913963978d99d52f6676d66"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "laptops",
+          "docs": [
+            "6913963978d99d52f6676d67"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "designer bags",
+          "docs": [
+            "6913963978d99d52f6676dd6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "wireless chargers",
+          "docs": [
+            "6913963978d99d52f6676d8c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "womens-bags",
+          "docs": [
+            "6913963978d99d52f6676dd0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "vehicle",
+          "docs": [
+            "6913963978d99d52f6676dc6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "womens-shoes",
+          "docs": [
+            "6913963978d99d52f6676de1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "suits",
+          "docs": [
+            "6913963978d99d52f6676dde"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "nail polish",
+          "docs": [
+            "6913963978d99d52f6676d1c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "smart speakers",
+          "docs": [
+            "6913963978d99d52f6676d88"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "tops",
+          "docs": [
+            "6913963978d99d52f6676dc3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "beds",
+          "docs": [
+            "6913963978d99d52f6676d26"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cups",
+          "docs": [
+            "6913963978d99d52f6676d4c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "baking",
+          "docs": [
+            "6913963978d99d52f6676d65"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "leather watches",
+          "docs": [
+            "6913963978d99d52f6676d81"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "home-decoration",
+          "docs": [
+            "6913963978d99d52f6676d41"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "beverages",
+          "docs": [
+            "6913963978d99d52f6676d3c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "womens-watches",
+          "docs": [
+            "6913963978d99d52f6676de9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "serveware",
+          "docs": [
+            "6913963978d99d52f6676d63"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "tennis",
+          "docs": [
+            "6913963978d99d52f6676dbb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "athletic shoes",
+          "docs": [
+            "6913963978d99d52f6676d79"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "mascara",
+          "docs": [
+            "6913963978d99d52f6676d14"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "gowns",
+          "docs": [
+            "6913963978d99d52f6676ddb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "perfumes",
+          "docs": [
+            "6913963978d99d52f6676d1f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "girls' dresses",
+          "docs": [
+            "6913963978d99d52f6676dc5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "swing",
+          "docs": [
+            "6913963978d99d52f6676d43"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "woks",
+          "docs": [
+            "6913963978d99d52f6676d50"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "apple",
+          "docs": [
+            "6913963978d99d52f6676d68"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "suvs",
+          "docs": [
+            "6913963978d99d52f6676dce"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "handbags",
+          "docs": [
+            "6913963978d99d52f6676dd2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "skirts",
+          "docs": [
+            "6913963978d99d52f6676ddd"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "pots",
+          "docs": [
+            "6913963978d99d52f6676d61"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "turners",
+          "docs": [
+            "6913963978d99d52f6676d62"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "skin-care",
+          "docs": [
+            "6913963978d99d52f6676da1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cricket",
+          "docs": [
+            "6913963978d99d52f6676db7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "kitchen appliances",
+          "docs": [
+            "6913963978d99d52f6676d4d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "footwear",
+          "docs": [
+            "6913963978d99d52f6676d78"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cookware",
+          "docs": [
+            "6913963978d99d52f6676d4f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "samsung galaxy",
+          "docs": [
+            "6913963978d99d52f6676dae"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "wireless earphones",
+          "docs": [
+            "6913963978d99d52f6676d8a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sports cars",
+          "docs": [
+            "6913963978d99d52f6676dca"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "american football",
+          "docs": [
+            "6913963978d99d52f6676db4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "pet supplies",
+          "docs": [
+            "6913963978d99d52f6676d33"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "strainers",
+          "docs": [
+            "6913963978d99d52f6676d55"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "body lotion",
+          "docs": [
+            "6913963978d99d52f6676da7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "household essentials",
+          "docs": [
+            "6913963978d99d52f6676d40"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "health supplements",
+          "docs": [
+            "6913963978d99d52f6676d3e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "beauty",
+          "docs": [
+            "6913963978d99d52f6676d13"
+          ],
+          "count": 1,
+          "ur": "qwertyuiop"
+        },
+        {
+          "value": "smartwatches",
+          "docs": [
+            "6913963978d99d52f6676d8f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "cutting boards",
+          "docs": [
+            "6913963978d99d52f6676d51"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "badminton",
+          "docs": [
+            "6913963978d99d52f6676db8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "corsets",
+          "docs": [
+            "6913963978d99d52f6676ddc"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "drinkware",
+          "docs": [
+            "6913963978d99d52f6676d4b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "over-ear headphones",
+          "docs": [
+            "6913963978d99d52f6676d8b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "eyeshadow",
+          "docs": [
+            "6913963978d99d52f6676d16"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "storage",
+          "docs": [
+            "6913963978d99d52f6676d5a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "trays",
+          "docs": [
+            "6913963978d99d52f6676d64"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "hand soap",
+          "docs": [
+            "6913963978d99d52f6676da3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "scooters",
+          "docs": [
+            "6913963978d99d52f6676d9e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "mens-watches",
+          "docs": [
+            "6913963978d99d52f6676d7f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "lipstick",
+          "docs": [
+            "6913963978d99d52f6676d1a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "vegetables",
+          "docs": [
+            "6913963978d99d52f6676d36"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "men's t-shirts",
+          "docs": [
+            "6913963978d99d52f6676d72"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "personal care",
+          "docs": [
+            "6913963978d99d52f6676da2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "oppo",
+          "docs": [
+            "6913963978d99d52f6676daa"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "motorcycles",
+          "docs": [
+            "6913963978d99d52f6676d99"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "bathroom",
+          "docs": [
+            "6913963978d99d52f6676d2d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "chargers",
+          "docs": [
+            "6913963978d99d52f6676d8d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "phone accessories",
+          "docs": [
+            "6913963978d99d52f6676d91"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "bedside tables",
+          "docs": [
+            "6913963978d99d52f6676d29"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "dinnerware",
+          "docs": [
+            "6913963978d99d52f6676d5e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "vivo",
+          "docs": [
+            "6913963978d99d52f6676db0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "womens-jewellery",
+          "docs": [
+            "6913963978d99d52f6676ddf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "furniture",
+          "docs": [
+            "6913963978d99d52f6676d25"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "artificial plants",
+          "docs": [
+            "6913963978d99d52f6676d45"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "dairy",
+          "docs": [
+            "6913963978d99d52f6676d38"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "juicers",
+          "docs": [
+            "6913963978d99d52f6676d52"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "organization",
+          "docs": [
+            "6913963978d99d52f6676d5c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "football",
+          "docs": [
+            "6913963978d99d52f6676db9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "tablets",
+          "docs": [
+            "6913963978d99d52f6676dc2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "slippers",
+          "docs": [
+            "6913963978d99d52f6676de2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "sunglasses",
+          "docs": [
+            "6913963978d99d52f6676dbd"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "leather bags",
+          "docs": [
+            "6913963978d99d52f6676dd4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "blenders",
+          "docs": [
+            "6913963978d99d52f6676d4e"
+          ],
+          "count": 1,
+          "ur": ""
+        }
+      ]
+    },
+    {
+      "model": "Product",
+      "field": "name",
+      "entries": [
+        {
+          "value": "Lunch Box",
+          "docs": [
+            "6913963978d99d52f6676e2e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Bedside Table African Cherry",
+          "docs": [
+            "6913963978d99d52f6676dfa"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Green Bell Pepper",
+          "docs": [
+            "6913963978d99d52f6676e06"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Juice",
+          "docs": [
+            "6913963978d99d52f6676e0a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Eggs",
+          "docs": [
+            "6913963978d99d52f6676e04"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cricket Bat",
+          "docs": [
+            "6913963978d99d52f6676e7c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Metal Baseball Bat",
+          "docs": [
+            "6913963978d99d52f6676e83"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Carbon Steel Wok",
+          "docs": [
+            "6913963978d99d52f6676e21"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Bamboo Spatula",
+          "docs": [
+            "6913963978d99d52f6676e1d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Knoll Saarinen Executive Conference Chair",
+          "docs": [
+            "6913963978d99d52f6676dfb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nescafe Coffee",
+          "docs": [
+            "6913963978d99d52f6676e0f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dodge Hornet GT Plus",
+          "docs": [
+            "6913963978d99d52f6676e96"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Lemon",
+          "docs": [
+            "6913963978d99d52f6676e0c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Girl Summer Dress",
+          "docs": [
+            "6913963978d99d52f6676e90"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Huawei Matebook X Pro",
+          "docs": [
+            "6913963978d99d52f6676e3d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Strawberry",
+          "docs": [
+            "6913963978d99d52f6676e15"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Hand Blender",
+          "docs": [
+            "6913963978d99d52f6676e2a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple Watch Series 4 Gold",
+          "docs": [
+            "6913963978d99d52f6676e57"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chanel Coco Noir Eau De",
+          "docs": [
+            "6913963978d99d52f6676df4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Kiwi",
+          "docs": [
+            "6913963978d99d52f6676e0b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple AirPods Max Silver",
+          "docs": [
+            "6913963978d99d52f6676e52"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Black & Brown Slipper",
+          "docs": [
+            "6913963978d99d52f6676ea6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vivo X21",
+          "docs": [
+            "6913963978d99d52f6676e75"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Powder Canister",
+          "docs": [
+            "6913963978d99d52f6676df0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Golf Ball",
+          "docs": [
+            "6913963978d99d52f6676e81"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Decoration Swing",
+          "docs": [
+            "6913963978d99d52f6676e18"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Potatoes",
+          "docs": [
+            "6913963978d99d52f6676e10"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Knife",
+          "docs": [
+            "6913963978d99d52f6676e2d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Boxed Blender",
+          "docs": [
+            "6913963978d99d52f6676e20"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Generic Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e5e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Samsung Galaxy Tab S8 Plus Grey",
+          "docs": [
+            "6913963978d99d52f6676e8d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cat Food",
+          "docs": [
+            "6913963978d99d52f6676dff"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Electric Stove",
+          "docs": [
+            "6913963978d99d52f6676e25"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Glass",
+          "docs": [
+            "6913963978d99d52f6676e28"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Milk",
+          "docs": [
+            "6913963978d99d52f6676e0d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gigabyte Aorus Men Tshirt",
+          "docs": [
+            "6913963978d99d52f6676e41"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Longines Master Collection",
+          "docs": [
+            "6913963978d99d52f6676e4b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Oppo A57",
+          "docs": [
+            "6913963978d99d52f6676e6a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dior J'adore",
+          "docs": [
+            "6913963978d99d52f6676df5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple iPhone Charger",
+          "docs": [
+            "6913963978d99d52f6676e55"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Realme X",
+          "docs": [
+            "6913963978d99d52f6676e6e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "American Football",
+          "docs": [
+            "6913963978d99d52f6676e76"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tennis Racket",
+          "docs": [
+            "6913963978d99d52f6676e85"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Mug Tree Stand",
+          "docs": [
+            "6913963978d99d52f6676e30"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Black Aluminium Cup",
+          "docs": [
+            "6913963978d99d52f6676e1e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Red Lipstick",
+          "docs": [
+            "6913963978d99d52f6676df1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chopping Board",
+          "docs": [
+            "6913963978d99d52f6676e22"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Annibale Colombo Sofa",
+          "docs": [
+            "6913963978d99d52f6676df9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Ice Cream",
+          "docs": [
+            "6913963978d99d52f6676e09"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nike Baseball Cleats",
+          "docs": [
+            "6913963978d99d52f6676e46"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fine Mesh Strainer",
+          "docs": [
+            "6913963978d99d52f6676e26"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple",
+          "docs": [
+            "6913963978d99d52f6676dfd"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vivo V9",
+          "docs": [
+            "6913963978d99d52f6676e74"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Baseball Ball",
+          "docs": [
+            "6913963978d99d52f6676e77"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Blue Women's Handbag",
+          "docs": [
+            "6913963978d99d52f6676e99"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Iron Golf",
+          "docs": [
+            "6913963978d99d52f6676e82"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Beef Steak",
+          "docs": [
+            "6913963978d99d52f6676dfe"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pan",
+          "docs": [
+            "6913963978d99d52f6676e31"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Red Tongs",
+          "docs": [
+            "6913963978d99d52f6676e33"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cricket Ball",
+          "docs": [
+            "6913963978d99d52f6676e7b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Heshe Women's Leather Bag",
+          "docs": [
+            "6913963978d99d52f6676e9a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Prada Women Bag",
+          "docs": [
+            "6913963978d99d52f6676e9b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Plate",
+          "docs": [
+            "6913963978d99d52f6676e32"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rice",
+          "docs": [
+            "6913963978d99d52f6676e13"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Plant Pot",
+          "docs": [
+            "6913963978d99d52f6676e1b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Yellow Peeler",
+          "docs": [
+            "6913963978d99d52f6676e3a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Short Frock",
+          "docs": [
+            "6913963978d99d52f6676e92"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Classic Sun Glasses",
+          "docs": [
+            "6913963978d99d52f6676e88"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Lenovo Yoga 920",
+          "docs": [
+            "6913963978d99d52f6676e3e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gray Dress",
+          "docs": [
+            "6913963978d99d52f6676e91"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sportbike Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e62"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Oppo K1",
+          "docs": [
+            "6913963978d99d52f6676e6c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vaseline Men Body and Face Lotion",
+          "docs": [
+            "6913963978d99d52f6676e65"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pampi Shoes",
+          "docs": [
+            "6913963978d99d52f6676ea9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Basketball Rim",
+          "docs": [
+            "6913963978d99d52f6676e7a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Red Nail Polish",
+          "docs": [
+            "6913963978d99d52f6676df2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex Datejust",
+          "docs": [
+            "6913963978d99d52f6676e4e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Wooden Bathroom Sink With Mirror",
+          "docs": [
+            "6913963978d99d52f6676dfc"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Soft Drinks",
+          "docs": [
+            "6913963978d99d52f6676e14"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vivo S1",
+          "docs": [
+            "6913963978d99d52f6676e73"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Corset Leather With Skirt",
+          "docs": [
+            "6913963978d99d52f6676e9f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Corset With Black Skirt",
+          "docs": [
+            "6913963978d99d52f6676ea0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Golden Shoes Woman",
+          "docs": [
+            "6913963978d99d52f6676ea8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Spice Rack",
+          "docs": [
+            "6913963978d99d52f6676e36"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "New DELL XPS 13 9300 Laptop",
+          "docs": [
+            "6913963978d99d52f6676e3f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Puma Future Rider Trainers",
+          "docs": [
+            "6913963978d99d52f6676e47"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Spoon",
+          "docs": [
+            "6913963978d99d52f6676e37"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tray",
+          "docs": [
+            "6913963978d99d52f6676e38"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Water",
+          "docs": [
+            "6913963978d99d52f6676e17"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Men Check Shirt",
+          "docs": [
+            "6913963978d99d52f6676e44"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "IWC Ingenieur Automatic Steel",
+          "docs": [
+            "6913963978d99d52f6676eab"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gucci Bloom Eau de",
+          "docs": [
+            "6913963978d99d52f6676df7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cucumber",
+          "docs": [
+            "6913963978d99d52f6676e02"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "TV Studio Camera Pedestal",
+          "docs": [
+            "6913963978d99d52f6676e5d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "MotoGP CI.H1",
+          "docs": [
+            "6913963978d99d52f6676e60"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sunglasses",
+          "docs": [
+            "6913963978d99d52f6676e8b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Egg Slicer",
+          "docs": [
+            "6913963978d99d52f6676e24"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Microwave Oven",
+          "docs": [
+            "6913963978d99d52f6676e2f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Attitude Super Leaves Hand Soap",
+          "docs": [
+            "6913963978d99d52f6676e63"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dog Food",
+          "docs": [
+            "6913963978d99d52f6676e03"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Oppo F19 Pro Plus",
+          "docs": [
+            "6913963978d99d52f6676e6b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Calvin Klein Heel Shoes",
+          "docs": [
+            "6913963978d99d52f6676ea7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Essence Mascara Lash Princess",
+          "docs": [
+            "6913963978d99d52f6676dee"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Man Plaid Shirt",
+          "docs": [
+            "6913963978d99d52f6676e42"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Scooter Motorcycle",
+          "docs": [
+            "6913963978d99d52f6676e61"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Kitchen Sieve",
+          "docs": [
+            "6913963978d99d52f6676e2c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tennis Ball",
+          "docs": [
+            "6913963978d99d52f6676e84"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex Cellini Date Black Dial",
+          "docs": [
+            "6913963978d99d52f6676e4c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPhone X",
+          "docs": [
+            "6913963978d99d52f6676e69"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Charger SXT RWD",
+          "docs": [
+            "6913963978d99d52f6676e95"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cricket Helmet",
+          "docs": [
+            "6913963978d99d52f6676e7d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Table Lamp",
+          "docs": [
+            "6913963978d99d52f6676e1c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Football",
+          "docs": [
+            "6913963978d99d52f6676e80"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Party Glasses",
+          "docs": [
+            "6913963978d99d52f6676e8a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Eyeshadow Palette with Mirror",
+          "docs": [
+            "6913963978d99d52f6676def"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tissue Paper Box",
+          "docs": [
+            "6913963978d99d52f6676e16"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cooking Oil",
+          "docs": [
+            "6913963978d99d52f6676e01"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Slotted Turner",
+          "docs": [
+            "6913963978d99d52f6676e35"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dress Pea",
+          "docs": [
+            "6913963978d99d52f6676ea1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Women Handbag Black",
+          "docs": [
+            "6913963978d99d52f6676e9d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Green Crystal Earring",
+          "docs": [
+            "6913963978d99d52f6676ea3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Mulberry",
+          "docs": [
+            "6913963978d99d52f6676e0e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Green and Black Glasses",
+          "docs": [
+            "6913963978d99d52f6676e89"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Baseball Glove",
+          "docs": [
+            "6913963978d99d52f6676e78"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Brown Leather Belt Watch",
+          "docs": [
+            "6913963978d99d52f6676e4a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Amazon Echo Plus",
+          "docs": [
+            "6913963978d99d52f6676e50"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Volleyball",
+          "docs": [
+            "6913963978d99d52f6676e86"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Calvin Klein CK One",
+          "docs": [
+            "6913963978d99d52f6676df3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Ice Cube Tray",
+          "docs": [
+            "6913963978d99d52f6676e2b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Cricket Wicket",
+          "docs": [
+            "6913963978d99d52f6676e7e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tropical Earring",
+          "docs": [
+            "6913963978d99d52f6676ea5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dolce Shine Eau de",
+          "docs": [
+            "6913963978d99d52f6676df6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple Airpods",
+          "docs": [
+            "6913963978d99d52f6676e51"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Wooden Rolling Pin",
+          "docs": [
+            "6913963978d99d52f6676e39"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Green Oval Earring",
+          "docs": [
+            "6913963978d99d52f6676ea4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Blue Frock",
+          "docs": [
+            "6913963978d99d52f6676e8f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPhone 5s",
+          "docs": [
+            "6913963978d99d52f6676e66"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pacifica Touring",
+          "docs": [
+            "6913963978d99d52f6676e98"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Samsung Galaxy Tab White",
+          "docs": [
+            "6913963978d99d52f6676e8e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Annibale Colombo Bed",
+          "docs": [
+            "6913963978d99d52f6676df8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPhone 12 Silicone Case with MagSafe Plum",
+          "docs": [
+            "6913963978d99d52f6676e59"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Kawasaki Z800",
+          "docs": [
+            "6913963978d99d52f6676e5f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple MacBook Pro 14 Inch Space Grey",
+          "docs": [
+            "6913963978d99d52f6676e3b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Protein Powder",
+          "docs": [
+            "6913963978d99d52f6676e11"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Chicken Meat",
+          "docs": [
+            "6913963978d99d52f6676e00"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Marni Red & Black Suit",
+          "docs": [
+            "6913963978d99d52f6676ea2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Olay Ultra Moisture Shea Butter Body Wash",
+          "docs": [
+            "6913963978d99d52f6676e64"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Red Shoes",
+          "docs": [
+            "6913963978d99d52f6676eaa"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sports Sneakers Off White & Red",
+          "docs": [
+            "6913963978d99d52f6676e48"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPhone 13 Pro",
+          "docs": [
+            "6913963978d99d52f6676e68"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Citrus Squeezer Yellow",
+          "docs": [
+            "6913963978d99d52f6676e23"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex Submariner Watch",
+          "docs": [
+            "6913963978d99d52f6676e4f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Realme C35",
+          "docs": [
+            "6913963978d99d52f6676e6d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Black Sun Glasses",
+          "docs": [
+            "6913963978d99d52f6676e87"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Asus Zenbook Pro Dual Screen Laptop",
+          "docs": [
+            "6913963978d99d52f6676e3c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple MagSafe Battery Pack",
+          "docs": [
+            "6913963978d99d52f6676e56"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Monopod",
+          "docs": [
+            "6913963978d99d52f6676e5a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Basketball",
+          "docs": [
+            "6913963978d99d52f6676e79"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Selfie Stick Monopod",
+          "docs": [
+            "6913963978d99d52f6676e5c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Green Chili Pepper",
+          "docs": [
+            "6913963978d99d52f6676e07"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Black Whisk",
+          "docs": [
+            "6913963978d99d52f6676e1f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Feather Shuttlecock",
+          "docs": [
+            "6913963978d99d52f6676e7f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Realme XT",
+          "docs": [
+            "6913963978d99d52f6676e6f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "300 Touring",
+          "docs": [
+            "6913963978d99d52f6676e94"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "White Faux Leather Backpack",
+          "docs": [
+            "6913963978d99d52f6676e9c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Honey Jar",
+          "docs": [
+            "6913963978d99d52f6676e08"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Family Tree Photo Frame",
+          "docs": [
+            "6913963978d99d52f6676e19"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Grater Black",
+          "docs": [
+            "6913963978d99d52f6676e29"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sports Sneakers Off White Red",
+          "docs": [
+            "6913963978d99d52f6676e49"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex Cellini Moonphase",
+          "docs": [
+            "6913963978d99d52f6676e4d",
+            "6913963978d99d52f6676eac"
+          ],
+          "count": 2,
+          "ur": ""
+        },
+        {
+          "value": "Samsung Galaxy S8",
+          "docs": [
+            "6913963978d99d52f6676e71"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "House Showpiece Plant",
+          "docs": [
+            "6913963978d99d52f6676e1a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Samsung Galaxy S7",
+          "docs": [
+            "6913963978d99d52f6676e70"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nike Air Jordan 1 Red And Black",
+          "docs": [
+            "6913963978d99d52f6676e45"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPad Mini 2021 Starlight",
+          "docs": [
+            "6913963978d99d52f6676e8c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Tartan Dress",
+          "docs": [
+            "6913963978d99d52f6676e93"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Durango SXT RWD",
+          "docs": [
+            "6913963978d99d52f6676e97"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Beats Flex Wireless Earphones",
+          "docs": [
+            "6913963978d99d52f6676e58"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Rolex Datejust Women",
+          "docs": [
+            "6913963978d99d52f6676ead"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fish Steak",
+          "docs": [
+            "6913963978d99d52f6676e05"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Man Short Sleeve Shirt",
+          "docs": [
+            "6913963978d99d52f6676e43"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Samsung Galaxy S10",
+          "docs": [
+            "6913963978d99d52f6676e72"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Selfie Lamp with iPhone",
+          "docs": [
+            "6913963978d99d52f6676e5b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Women's Wrist Watch",
+          "docs": [
+            "6913963978d99d52f6676eaf"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fork",
+          "docs": [
+            "6913963978d99d52f6676e27"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple HomePod Mini Cosmic Grey",
+          "docs": [
+            "6913963978d99d52f6676e54"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Black Women's Gown",
+          "docs": [
+            "6913963978d99d52f6676e9e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Watch Gold for Women",
+          "docs": [
+            "6913963978d99d52f6676eae"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Silver Pot With Glass Cap",
+          "docs": [
+            "6913963978d99d52f6676e34"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Apple Airpower Wireless Charger",
+          "docs": [
+            "6913963978d99d52f6676e53"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "iPhone 6",
+          "docs": [
+            "6913963978d99d52f6676e67"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Blue & Black Check Shirt",
+          "docs": [
+            "6913963978d99d52f6676e40"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Red Onions",
+          "docs": [
+            "6913963978d99d52f6676e12"
+          ],
+          "count": 1,
+          "ur": ""
+        }
+      ]
+    },
+    {
+      "model": "Product",
+      "field": "description",
+      "entries": [
+        {
+          "value": "The Man Plaid Shirt is a timeless and versatile men's shirt with a classic plaid pattern. Its comfortable fit and casual style make it a wardrobe essential for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676e42"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Basketball Rim is a sturdy hoop and net assembly mounted on a basketball backboard. It provides a target for shooting and scoring in the game of basketball.",
+          "docs": [
+            "6913963978d99d52f6676e7a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Tropical Earring is a fun and playful accessory inspired by tropical elements. Featuring vibrant colors and a lively design, it's perfect for adding a touch of summer to your look.",
+          "docs": [
+            "6913963978d99d52f6676ea5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Glass is a versatile and elegant drinking vessel suitable for a variety of beverages. Its clear design allows you to enjoy the colors and textures of your drinks.",
+          "docs": [
+            "6913963978d99d52f6676e28"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Decoration Swing is a charming addition to your home decor. Crafted with intricate details, it adds a touch of elegance and whimsy to any room.",
+          "docs": [
+            "6913963978d99d52f6676e18"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Cricket Bat is an essential piece of cricket equipment used by batsmen to hit the cricket ball. It is made of wood and comes in various sizes and designs.",
+          "docs": [
+            "6913963978d99d52f6676e7c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Tennis Ball is a standard ball used in the sport of tennis. It is designed for bouncing and hitting with tennis rackets during matches or practice sessions.",
+          "docs": [
+            "6913963978d99d52f6676e84"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Cricket Helmet is a protective headgear worn by cricket players, especially batsmen and wicketkeepers. It provides protection against fast bowling and bouncers.",
+          "docs": [
+            "6913963978d99d52f6676e7d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities. It boasts advanced photography features and a powerful performance for a premium user experience.",
+          "docs": [
+            "6913963978d99d52f6676e6b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Prada Women Bag is an iconic designer bag that exudes elegance and luxury. Crafted with precision and featuring the Prada logo, it's a statement piece for fashion enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e9b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Knife is an essential kitchen tool for chopping, slicing, and dicing. Its sharp blade and ergonomic handle make it a reliable choice for food preparation.",
+          "docs": [
+            "6913963978d99d52f6676e2d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Attitude Super Leaves Hand Soap is a natural and nourishing hand soap enriched with the goodness of super leaves. It cleanses and moisturizes your hands, leaving them feeling fresh and soft.",
+          "docs": [
+            "6913963978d99d52f6676e63"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Slotted Turner is a kitchen utensil designed for flipping and turning food items. Its slotted design allows excess liquid to drain, making it ideal for frying and sautéing.",
+          "docs": [
+            "6913963978d99d52f6676e35"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Citrus Squeezer in Yellow is a handy tool for extracting juice from citrus fruits. Its vibrant color adds a cheerful touch to your kitchen gadgets.",
+          "docs": [
+            "6913963978d99d52f6676e23"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Cellini Date with Black Dial is a classic and prestigious watch. With a black dial and date complication, it exudes sophistication and is a symbol of Rolex's heritage.",
+          "docs": [
+            "6913963978d99d52f6676e4c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "docs": [
+            "6913963978d99d52f6676e49"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance. It represents innovation and excellence in smartphone technology.",
+          "docs": [
+            "6913963978d99d52f6676e72"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Corset With Black Skirt is a chic and versatile outfit that pairs a fashionable corset with a classic black skirt. It offers a trendy and coordinated look for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676ea0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Samsung Galaxy Tab in White is a sleek and versatile Android tablet. With a vibrant display, long-lasting battery, and a range of features, it offers a great user experience for various tasks.",
+          "docs": [
+            "6913963978d99d52f6676e8e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The New DELL XPS 13 9300 Laptop is a compact and powerful device, featuring a virtually borderless InfinityEdge display and high-end performance for various tasks.",
+          "docs": [
+            "6913963978d99d52f6676e3f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Egg Slicer is a convenient tool for slicing boiled eggs evenly. It's perfect for salads, sandwiches, and other dishes where sliced eggs are desired.",
+          "docs": [
+            "6913963978d99d52f6676e24"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Pan is a versatile and essential cookware item for frying, sautéing, and cooking various dishes. Its non-stick coating ensures easy food release and cleanup.",
+          "docs": [
+            "6913963978d99d52f6676e31"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Crisp and hydrating cucumbers, ideal for salads, snacks, or as a refreshing side.",
+          "docs": [
+            "6913963978d99d52f6676e02"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Classic Sun Glasses offer a timeless design with a neutral frame and UV-protected lenses. These sunglasses are versatile and suitable for various occasions.",
+          "docs": [
+            "6913963978d99d52f6676e88"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Electric Stove provides a portable and efficient cooking solution. Ideal for small kitchens or as an additional cooking surface for various culinary needs.",
+          "docs": [
+            "6913963978d99d52f6676e25"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Plate is a classic and essential dishware item for serving meals. Its durable and stylish design makes it suitable for everyday use or special occasions.",
+          "docs": [
+            "6913963978d99d52f6676e32"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",
+          "docs": [
+            "6913963978d99d52f6676e06"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Selfie Stick Monopod is a extendable and foldable device for capturing the perfect selfie or group photo. Compatible with smartphones and cameras.",
+          "docs": [
+            "6913963978d99d52f6676e5c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
+          "docs": [
+            "6913963978d99d52f6676df3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Quality coffee from Nescafe, available in various blends for a rich and satisfying cup.",
+          "docs": [
+            "6913963978d99d52f6676e0f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPhone 5s is a classic smartphone known for its compact design and advanced features during its release. While it's an older model, it still provides a reliable user experience.",
+          "docs": [
+            "6913963978d99d52f6676e66"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Boxed Blender is a powerful and compact blender perfect for smoothies, shakes, and more. Its convenient design and multiple functions make it a versatile kitchen appliance.",
+          "docs": [
+            "6913963978d99d52f6676e20"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Green and Black Glasses feature a bold combination of green and black colors, adding a touch of vibrancy to your eyewear collection. They are both stylish and eye-catching.",
+          "docs": [
+            "6913963978d99d52f6676e89"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The American Football is a classic ball used in American football games. It is designed for throwing and catching, making it an essential piece of equipment for the sport.",
+          "docs": [
+            "6913963978d99d52f6676e76"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Lenovo Yoga 920 is a 2-in-1 convertible laptop with a flexible hinge, allowing you to use it as a laptop or tablet, offering versatility and portability.",
+          "docs": [
+            "6913963978d99d52f6676e3e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Beats Flex Wireless Earphones offer a comfortable and versatile audio experience. With magnetic earbuds and up to 12 hours of battery life, they are ideal for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e58"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple iPhone Charger is a high-quality charger designed for fast and efficient charging of your iPhone. Ensure your device stays powered up and ready to go.",
+          "docs": [
+            "6913963978d99d52f6676e55"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "High-quality rice, a staple for various cuisines and a versatile base for many dishes.",
+          "docs": [
+            "6913963978d99d52f6676e13"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Zesty and tangy lemons, versatile for cooking, baking, or making refreshing beverages.",
+          "docs": [
+            "6913963978d99d52f6676e0c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Flavorful and aromatic red onions, perfect for adding depth to your savory dishes.",
+          "docs": [
+            "6913963978d99d52f6676e12"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
+          "docs": [
+            "6913963978d99d52f6676df0"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Table Lamp is a functional and decorative lighting solution for your living space. With a modern design, it provides both ambient and task lighting, enhancing the atmosphere.",
+          "docs": [
+            "6913963978d99d52f6676e1c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Blue & Black Check Shirt is a stylish and comfortable men's shirt featuring a classic check pattern. Made from high-quality fabric, it's suitable for both casual and semi-formal occasions.",
+          "docs": [
+            "6913963978d99d52f6676e40"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Samsung Galaxy S7 is a flagship smartphone known for its sleek design and advanced features. It features a high-resolution display, powerful camera, and robust performance.",
+          "docs": [
+            "6913963978d99d52f6676e70"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Vivo X21 is a premium smartphone with a focus on cutting-edge technology. It features an in-display fingerprint sensor, a high-resolution display, and advanced camera capabilities.",
+          "docs": [
+            "6913963978d99d52f6676e75"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Sunglasses offer a classic and simple design with a focus on functionality. These sunglasses provide essential UV protection while maintaining a timeless look.",
+          "docs": [
+            "6913963978d99d52f6676e8b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple MagSafe Battery Pack is a portable and convenient way to add extra battery life to your MagSafe-compatible iPhone. Attach it magnetically for a secure connection.",
+          "docs": [
+            "6913963978d99d52f6676e56"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple HomePod Mini in Cosmic Grey is a compact smart speaker that delivers impressive audio and integrates seamlessly with the Apple ecosystem for a smart home experience.",
+          "docs": [
+            "6913963978d99d52f6676e54"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Sportbike Motorcycle is designed for speed and agility, with a sleek and aerodynamic profile. It's suitable for riders looking for a dynamic and thrilling riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e62"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
+          "docs": [
+            "6913963978d99d52f6676df7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+          "docs": [
+            "6913963978d99d52f6676e0a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Men Check Shirt is a classic and versatile shirt featuring a stylish check pattern. Suitable for various occasions, it adds a smart and polished touch to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e44"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Datejust is an iconic and versatile timepiece with a date window. Known for its timeless design and reliability, it's a symbol of Rolex's watchmaking excellence.",
+          "docs": [
+            "6913963978d99d52f6676e4e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Party Glasses are designed to add flair to your party outfit. With unique shapes or colorful frames, they're perfect for adding a playful touch to your look during celebrations.",
+          "docs": [
+            "6913963978d99d52f6676e8a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Realme XT is a feature-rich smartphone with a focus on camera technology. It comes equipped with advanced camera sensors, delivering high-quality photos and videos for photography enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e6f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Baseball Glove is a protective glove worn by baseball players. It is designed to catch and field the baseball, providing players with comfort and control during the game.",
+          "docs": [
+            "6913963978d99d52f6676e78"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
+          "docs": [
+            "6913963978d99d52f6676df2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
+          "docs": [
+            "6913963978d99d52f6676df4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Short Frock is a playful and trendy dress with a shorter length. Ideal for casual outings or special occasions, it combines style and comfort for a fashionable look.",
+          "docs": [
+            "6913963978d99d52f6676e92"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+          "docs": [
+            "6913963978d99d52f6676def"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The MacBook Pro 14 Inch in Space Grey is a powerful and sleek laptop, featuring Apple's M1 Pro chip for exceptional performance and a stunning Retina display.",
+          "docs": [
+            "6913963978d99d52f6676e3b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Calvin Klein Heel Shoes are elegant and sophisticated, designed for formal occasions. With a classic design and high-quality materials, they complement your stylish ensemble.",
+          "docs": [
+            "6913963978d99d52f6676ea7"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Vivo V9 is a smartphone known for its sleek design and emphasis on capturing high-quality selfies. It features a notch display, dual-camera setup, and a modern design.",
+          "docs": [
+            "6913963978d99d52f6676e74"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Golden Shoes for Women are a glamorous choice for special occasions. Featuring a golden hue and stylish design, they add a touch of luxury to your outfit.",
+          "docs": [
+            "6913963978d99d52f6676ea8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Samsung Galaxy Tab S8 Plus in Grey is a high-performance Android tablet by Samsung. With a large AMOLED display, powerful processor, and S Pen support, it's ideal for productivity and entertainment.",
+          "docs": [
+            "6913963978d99d52f6676e8d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Quality fish steak, suitable for grilling, baking, or pan-searing.",
+          "docs": [
+            "6913963978d99d52f6676e05"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Versatile cooking oil suitable for frying, sautéing, and various culinary applications.",
+          "docs": [
+            "6913963978d99d52f6676e01"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Baseball Ball is a standard baseball used in baseball games. It features a durable leather cover and is designed for pitching, hitting, and fielding in the game of baseball.",
+          "docs": [
+            "6913963978d99d52f6676e77"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pampi Shoes offer a blend of comfort and style for everyday use. With a versatile design, they are suitable for various casual occasions, providing a trendy and relaxed look.",
+          "docs": [
+            "6913963978d99d52f6676ea9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The 300 Touring is a stylish and comfortable sedan, known for its luxurious features and smooth performance.",
+          "docs": [
+            "6913963978d99d52f6676e94"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Hand Blender is a versatile kitchen appliance for blending, pureeing, and mixing. Its compact design and powerful motor make it a convenient tool for various recipes.",
+          "docs": [
+            "6913963978d99d52f6676e2a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Assorted soft drinks in various flavors, perfect for refreshing beverages.",
+          "docs": [
+            "6913963978d99d52f6676e14"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Silver Pot with Glass Cap is a stylish and functional cookware item for boiling, simmering, and preparing delicious meals. Its glass cap allows you to monitor cooking progress.",
+          "docs": [
+            "6913963978d99d52f6676e34"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Sports Sneakers in Off White and Red combine style and functionality, making them a fashionable choice for sports enthusiasts. The red and off-white color combination adds a bold and energetic touch.",
+          "docs": [
+            "6913963978d99d52f6676e48"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses. They provide both UV protection and a fashionable look.",
+          "docs": [
+            "6913963978d99d52f6676e87"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPhone 12 Silicone Case with MagSafe in Plum is a stylish and protective case designed for the iPhone 12. It features MagSafe technology for easy attachment of accessories.",
+          "docs": [
+            "6913963978d99d52f6676e59"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nutritious cat food formulated to meet the dietary needs of your feline friend.",
+          "docs": [
+            "6913963978d99d52f6676dff"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Monopod is a versatile camera accessory for stable and adjustable shooting. Perfect for capturing selfies, group photos, and videos with ease.",
+          "docs": [
+            "6913963978d99d52f6676e5a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Feather Shuttlecock is used in the sport of badminton. It features natural feathers and is designed for high-speed play, providing stability and accuracy during matches.",
+          "docs": [
+            "6913963978d99d52f6676e7f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Gold Women's Watch is a stunning accessory that combines luxury and style. Featuring a gold-plated case and a chic design, it adds a touch of glamour to any outfit.",
+          "docs": [
+            "6913963978d99d52f6676eae"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Yellow Peeler is a handy tool for peeling fruits and vegetables with ease. Its bright yellow color adds a cheerful touch to your kitchen gadgets.",
+          "docs": [
+            "6913963978d99d52f6676e3a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Charger SXT RWD is a powerful and sporty rear-wheel-drive sedan, offering a blend of performance and practicality.",
+          "docs": [
+            "6913963978d99d52f6676e95"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple Watch Series 4 in Gold is a stylish and advanced smartwatch with features like heart rate monitoring, fitness tracking, and a beautiful Retina display.",
+          "docs": [
+            "6913963978d99d52f6676e57"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Dodge Hornet GT Plus is a compact and agile hatchback, perfect for urban driving with a touch of sportiness.",
+          "docs": [
+            "6913963978d99d52f6676e96"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Red Tongs are versatile kitchen tongs suitable for various cooking and serving tasks. Their vibrant color adds a pop of excitement to your kitchen utensils.",
+          "docs": [
+            "6913963978d99d52f6676e33"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Volleyball is a standard ball used in the sport of volleyball. It is designed for passing, setting, and spiking over the net during volleyball matches.",
+          "docs": [
+            "6913963978d99d52f6676e86"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+          "docs": [
+            "6913963978d99d52f6676dee"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Dress Pea is a stylish and comfortable dress with a pea pattern. Perfect for casual outings, it adds a playful and fun element to your wardrobe, making it a great choice for day-to-day wear.",
+          "docs": [
+            "6913963978d99d52f6676ea1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Metal Baseball Bat is a durable and lightweight baseball bat made from metal alloys. It is commonly used in baseball games for hitting and batting practice.",
+          "docs": [
+            "6913963978d99d52f6676e83"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fresh and tender chicken meat, suitable for various culinary preparations.",
+          "docs": [
+            "6913963978d99d52f6676e00"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Plant Pot is a stylish container for your favorite plants. With a sleek design, it complements your indoor or outdoor garden, adding a modern touch to your plant display.",
+          "docs": [
+            "6913963978d99d52f6676e1b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Chopping Board is an essential kitchen accessory for food preparation. Made from durable material, it provides a safe and hygienic surface for cutting and chopping.",
+          "docs": [
+            "6913963978d99d52f6676e22"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Kitchen Sieve is a versatile tool for sifting and straining dry and wet ingredients. Its fine mesh design ensures smooth results in your cooking and baking.",
+          "docs": [
+            "6913963978d99d52f6676e2c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The IWC Ingenieur Automatic Steel watch is a durable and sophisticated timepiece. With a stainless steel case and automatic movement, it combines precision and style for watch enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676eab"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",
+          "docs": [
+            "6913963978d99d52f6676e04"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Black & Brown Slipper is a comfortable and stylish choice for casual wear. Featuring a blend of black and brown colors, it adds a touch of sophistication to your relaxation.",
+          "docs": [
+            "6913963978d99d52f6676ea6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Spoon is a versatile kitchen utensil for stirring, serving, and tasting. Its ergonomic design and durable construction make it an essential tool for every kitchen.",
+          "docs": [
+            "6913963978d99d52f6676e37"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
+          "docs": [
+            "6913963978d99d52f6676e26"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "docs": [
+            "6913963978d99d52f6676e46"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Selfie Lamp with iPhone is a portable and adjustable LED light designed to enhance your selfies and video calls. Attach it to your iPhone for well-lit photos.",
+          "docs": [
+            "6913963978d99d52f6676e5b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Realme C35 is a budget-friendly smartphone with a focus on providing essential features for everyday use. It offers a reliable performance and user-friendly experience.",
+          "docs": [
+            "6913963978d99d52f6676e6d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
+          "docs": [
+            "6913963978d99d52f6676dfa"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+          "docs": [
+            "6913963978d99d52f6676e08"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Tartan Dress features a classic tartan pattern, bringing a timeless and sophisticated touch to your wardrobe. Perfect for fall and winter, it adds a hint of traditional charm.",
+          "docs": [
+            "6913963978d99d52f6676e93"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Marni Red & Black Suit is a sophisticated and fashion-forward suit ensemble. With a combination of red and black tones, it showcases a modern design for a bold and confident look.",
+          "docs": [
+            "6913963978d99d52f6676ea2"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Datejust Women's watch is an iconic timepiece designed for women. With a timeless design and a date complication, it offers both elegance and functionality.",
+          "docs": [
+            "6913963978d99d52f6676ead"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Cellini Moonphase is a masterpiece of horology, featuring a moon phase complication and exquisite design. It reflects Rolex's commitment to precision and elegance.",
+          "docs": [
+            "6913963978d99d52f6676e4d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e47"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Girl Summer Dress is a cute and breezy dress designed for warm weather. With playful patterns and lightweight fabric, it's perfect for keeping cool and stylish during the summer.",
+          "docs": [
+            "6913963978d99d52f6676e90"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fresh and nutritious milk, a staple for various recipes and daily consumption.",
+          "docs": [
+            "6913963978d99d52f6676e0d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Lunch Box is a convenient and portable container for packing and carrying your meals. With compartments for different foods, it's perfect for on-the-go dining.",
+          "docs": [
+            "6913963978d99d52f6676e2e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Fresh and crisp apples, perfect for snacking or incorporating into various recipes.",
+          "docs": [
+            "6913963978d99d52f6676dfd"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Huawei Matebook X Pro is a slim and stylish laptop with a high-resolution touchscreen display, offering a premium experience for users on the go.",
+          "docs": [
+            "6913963978d99d52f6676e3d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
+          "docs": [
+            "6913963978d99d52f6676df1"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPhone X is a flagship smartphone featuring a bezel-less OLED display, facial recognition technology (Face ID), and impressive performance. It represents a milestone in iPhone design and innovation.",
+          "docs": [
+            "6913963978d99d52f6676e69"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sweet and juicy mulberries, perfect for snacking or adding to desserts and cereals.",
+          "docs": [
+            "6913963978d99d52f6676e0e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Man Short Sleeve Shirt is a breezy and stylish option for warm days. With a comfortable fit and short sleeves, it's perfect for a laid-back yet polished look.",
+          "docs": [
+            "6913963978d99d52f6676e43"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Bamboo Spatula is a versatile kitchen tool made from eco-friendly bamboo. Ideal for flipping, stirring, and serving various dishes.",
+          "docs": [
+            "6913963978d99d52f6676e1d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Green Crystal Earring is a dazzling accessory that features a vibrant green crystal. With a classic design, it adds a touch of elegance to your ensemble, perfect for formal or special occasions.",
+          "docs": [
+            "6913963978d99d52f6676ea3"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Microwave Oven is a versatile kitchen appliance for quick and efficient cooking, reheating, and defrosting. Its compact size makes it suitable for various kitchen setups.",
+          "docs": [
+            "6913963978d99d52f6676e2f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Gigabyte Aorus Men Tshirt is a cool and casual shirt for gaming enthusiasts. With the Aorus logo and sleek design, it's perfect for expressing your gaming style.",
+          "docs": [
+            "6913963978d99d52f6676e41"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Scooter Motorcycle is a practical and fuel-efficient bike ideal for urban commuting. It features a step-through design and user-friendly controls for easy maneuverability.",
+          "docs": [
+            "6913963978d99d52f6676e61"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Ice Cube Tray is a practical accessory for making ice cubes in various shapes. Perfect for keeping your drinks cool and adding a fun element to your beverages.",
+          "docs": [
+            "6913963978d99d52f6676e2b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Submariner is a legendary dive watch with a rich history. Known for its durability and water resistance, it's a symbol of adventure and exploration.",
+          "docs": [
+            "6913963978d99d52f6676e4f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",
+          "docs": [
+            "6913963978d99d52f6676e99"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
+          "docs": [
+            "6913963978d99d52f6676df6"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Heshe Women's Leather Bag is a luxurious and high-quality leather bag for the sophisticated woman. With a timeless design and durable craftsmanship, it's a versatile accessory.",
+          "docs": [
+            "6913963978d99d52f6676e9a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple Airpods offer a seamless wireless audio experience. With easy pairing, high-quality sound, and Siri integration, they are perfect for on-the-go listening.",
+          "docs": [
+            "6913963978d99d52f6676e51"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Spicy green chili pepper, ideal for adding heat to your favorite recipes.",
+          "docs": [
+            "6913963978d99d52f6676e07"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Pure and refreshing bottled water, essential for staying hydrated throughout the day.",
+          "docs": [
+            "6913963978d99d52f6676e17"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Samsung Galaxy S8 is a premium smartphone with an Infinity Display, offering a stunning visual experience. It boasts advanced camera capabilities and cutting-edge technology.",
+          "docs": [
+            "6913963978d99d52f6676e71"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Vivo S1 is a stylish and mid-range smartphone offering a blend of design and performance. It features a vibrant display, capable camera system, and reliable functionality.",
+          "docs": [
+            "6913963978d99d52f6676e73"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The MotoGP CI.H1 is a high-performance motorcycle inspired by MotoGP racing technology. It offers cutting-edge features and precision engineering for an exhilarating riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e60"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Golf Ball is a small ball used in the sport of golf. It features dimples on its surface, providing aerodynamic lift and distance when struck by a golf club.",
+          "docs": [
+            "6913963978d99d52f6676e81"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple AirPower Wireless Charger provides a convenient way to charge your compatible Apple devices wirelessly. Simply place your devices on the charging mat for effortless charging.",
+          "docs": [
+            "6913963978d99d52f6676e53"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Fork is a classic utensil for various dining and serving purposes. Its durable and ergonomic design makes it a reliable choice for everyday use.",
+          "docs": [
+            "6913963978d99d52f6676e27"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Sweet and succulent strawberries, great for snacking, desserts, or blending into smoothies.",
+          "docs": [
+            "6913963978d99d52f6676e15"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPhone 6 is a stylish and capable smartphone with a larger display and improved performance. It introduced new features and design elements, making it a popular choice in its time.",
+          "docs": [
+            "6913963978d99d52f6676e67"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Family Tree Photo Frame is a sentimental and stylish way to display your cherished family memories. With multiple photo slots, it tells the story of your loved ones.",
+          "docs": [
+            "6913963978d99d52f6676e19"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display. It offers advanced features for users who demand top-notch technology.",
+          "docs": [
+            "6913963978d99d52f6676e68"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
+          "docs": [
+            "6913963978d99d52f6676e45"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Oppo K1 series offers a range of smartphones with various features and specifications. Known for their stylish design and reliable performance, the Oppo K1 series caters to diverse user preferences.",
+          "docs": [
+            "6913963978d99d52f6676e6c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Realme X is a mid-range smartphone known for its sleek design and impressive display. It offers a good balance of performance and camera capabilities for users seeking a quality device.",
+          "docs": [
+            "6913963978d99d52f6676e6e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
+          "docs": [
+            "6913963978d99d52f6676e0b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Iron Golf is a type of golf club designed for various golf shots. It features a solid metal head and is used for approach shots, chipping, and other golfing techniques.",
+          "docs": [
+            "6913963978d99d52f6676e82"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Longines Master Collection is an elegant and refined watch known for its precision and craftsmanship. With a timeless design, it's a symbol of luxury and sophistication.",
+          "docs": [
+            "6913963978d99d52f6676e4b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Durango SXT RWD is a spacious and versatile SUV, known for its strong performance and family-friendly features.",
+          "docs": [
+            "6913963978d99d52f6676e97"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Vaseline Men Body and Face Lotion is a specially formulated lotion designed to provide long-lasting moisture to men's skin. It absorbs quickly and helps keep the skin hydrated and healthy.",
+          "docs": [
+            "6913963978d99d52f6676e65"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The White Faux Leather Backpack is a trendy and practical backpack for the modern woman. With a sleek white design and ample storage space, it's perfect for both casual and on-the-go styles.",
+          "docs": [
+            "6913963978d99d52f6676e9c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Black Women's Gown is an elegant and timeless evening gown. With a sleek black design, it's perfect for formal events and special occasions, exuding sophistication and style.",
+          "docs": [
+            "6913963978d99d52f6676e9e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
+          "docs": [
+            "6913963978d99d52f6676df5"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Creamy and delicious ice cream, available in various flavors for a delightful treat.",
+          "docs": [
+            "6913963978d99d52f6676e09"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Versatile and starchy potatoes, great for roasting, mashing, or as a side dish.",
+          "docs": [
+            "6913963978d99d52f6676e10"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Red Shoes make a bold statement with their vibrant red color. Whether for a party or a casual outing, these shoes add a pop of color and style to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676eaa"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Mug Tree Stand is a stylish and space-saving solution for organizing your mugs. Keep your favorite mugs easily accessible and neatly displayed in your kitchen.",
+          "docs": [
+            "6913963978d99d52f6676e30"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Apple AirPods Max in Silver are premium over-ear headphones with high-fidelity audio, adaptive EQ, and active noise cancellation. Experience immersive sound in style.",
+          "docs": [
+            "6913963978d99d52f6676e52"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Oppo A57 is a mid-range smartphone known for its sleek design and capable features. It offers a balance of performance and affordability, making it a popular choice.",
+          "docs": [
+            "6913963978d99d52f6676e6a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple. Featuring a stunning Retina display, powerful A-series chip, and a sleek design, it offers a premium tablet experience.",
+          "docs": [
+            "6913963978d99d52f6676e8c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
+          "docs": [
+            "6913963978d99d52f6676dfc"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Green Oval Earring is a stylish and versatile accessory with a unique oval shape. Whether for casual or dressy occasions, its green hue and contemporary design make it a standout piece.",
+          "docs": [
+            "6913963978d99d52f6676ea4"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Tennis Racket is an essential piece of equipment used in the sport of tennis. It features a frame with strings and a grip, allowing players to hit the tennis ball.",
+          "docs": [
+            "6913963978d99d52f6676e85"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Blue Frock is a charming and stylish dress for various occasions. With a vibrant blue color and a comfortable design, it adds a touch of elegance to your wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e8f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Black Aluminium Cup is a stylish and durable cup suitable for both hot and cold beverages. Its sleek black design adds a modern touch to your drinkware collection.",
+          "docs": [
+            "6913963978d99d52f6676e1e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The TV Studio Camera Pedestal is a professional-grade camera support system for smooth and precise camera movements in a studio setting. Ideal for broadcast and production.",
+          "docs": [
+            "6913963978d99d52f6676e5d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",
+          "docs": [
+            "6913963978d99d52f6676dfe"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Cricket Wicket is a set of three stumps and two bails, forming a wicket used in the sport of cricket. Batsmen aim to protect the wicket while scoring runs.",
+          "docs": [
+            "6913963978d99d52f6676e7e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Pacifica Touring is a stylish and well-equipped minivan, offering comfort and convenience for family journeys.",
+          "docs": [
+            "6913963978d99d52f6676e98"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Black Whisk is a kitchen essential for whisking and beating ingredients. Its ergonomic handle and sleek design make it a practical and stylish tool.",
+          "docs": [
+            "6913963978d99d52f6676e1f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Tray is a functional and decorative item for serving snacks, appetizers, or drinks. Its stylish design makes it a versatile accessory for entertaining guests.",
+          "docs": [
+            "6913963978d99d52f6676e38"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Nutrient-packed protein powder, ideal for supplementing your diet with essential proteins.",
+          "docs": [
+            "6913963978d99d52f6676e11"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Grater in Black is a handy kitchen tool for grating cheese, vegetables, and more. Its sleek design and sharp blades make food preparation efficient and easy.",
+          "docs": [
+            "6913963978d99d52f6676e29"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Brown Leather Belt Watch is a stylish timepiece with a classic design. Featuring a genuine leather strap and a sleek dial, it adds a touch of sophistication to your look.",
+          "docs": [
+            "6913963978d99d52f6676e4a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Convenient tissue paper box for everyday use, providing soft and absorbent tissues.",
+          "docs": [
+            "6913963978d99d52f6676e16"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Spice Rack is a convenient organizer for your spices and seasonings. Keep your kitchen essentials within reach and neatly arranged with this stylish spice rack.",
+          "docs": [
+            "6913963978d99d52f6676e36"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Football, also known as a soccer ball, is the standard ball used in the sport of football (soccer). It is designed for kicking and passing in the game.",
+          "docs": [
+            "6913963978d99d52f6676e80"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Corset Leather With Skirt is a bold and edgy ensemble that combines a stylish corset with a matching skirt. Ideal for fashion-forward individuals, it makes a statement at any event.",
+          "docs": [
+            "6913963978d99d52f6676e9f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+          "docs": [
+            "6913963978d99d52f6676df8"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Rolex Cellini Moonphase watch is a masterpiece of horology. Featuring a moon phase complication, it showcases the craftsmanship and elegance that Rolex is renowned for.",
+          "docs": [
+            "6913963978d99d52f6676eac"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Women Handbag in Black is a classic and versatile accessory that complements various outfits. With a timeless black color and functional design, it's a must-have in every woman's wardrobe.",
+          "docs": [
+            "6913963978d99d52f6676e9d"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Specially formulated dog food designed to provide essential nutrients for your canine companion.",
+          "docs": [
+            "6913963978d99d52f6676e03"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Generic Motorcycle is a versatile and reliable bike suitable for various riding preferences. With a balanced design, it provides a comfortable and efficient riding experience.",
+          "docs": [
+            "6913963978d99d52f6676e5e"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
+          "docs": [
+            "6913963978d99d52f6676dfb"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
+          "docs": [
+            "6913963978d99d52f6676df9"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Asus Zenbook Pro Dual Screen Laptop is a high-performance device with dual screens, providing productivity and versatility for creative professionals.",
+          "docs": [
+            "6913963978d99d52f6676e3c"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "Olay Ultra Moisture Shea Butter Body Wash is a luxurious body wash that hydrates and nourishes your skin with the moisturizing power of shea butter. Enjoy a rich lather and silky-smooth skin.",
+          "docs": [
+            "6913963978d99d52f6676e64"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Carbon Steel Wok is a versatile cooking pan suitable for stir-frying, sautéing, and deep frying. Its sturdy construction ensures even heat distribution for delicious meals.",
+          "docs": [
+            "6913963978d99d52f6676e21"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Kawasaki Z800 is a powerful and agile sportbike known for its striking design and performance. It's equipped with advanced features, making it a favorite among motorcycle enthusiasts.",
+          "docs": [
+            "6913963978d99d52f6676e5f"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Basketball is a standard ball used in basketball games. It is designed for dribbling, shooting, and passing in the game of basketball, suitable for both indoor and outdoor play.",
+          "docs": [
+            "6913963978d99d52f6676e79"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Gray Dress is a versatile and chic option for various occasions. With a neutral gray color, it can be dressed up or down, making it a wardrobe staple for any fashion-forward individual.",
+          "docs": [
+            "6913963978d99d52f6676e91"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The House Showpiece Plant is an artificial plant that brings a touch of nature to your home without the need for maintenance. It adds greenery and style to any space.",
+          "docs": [
+            "6913963978d99d52f6676e1a"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Cricket Ball is a hard leather ball used in the sport of cricket. It is bowled and batted in the game, and its hardness and seam contribute to the dynamics of cricket play.",
+          "docs": [
+            "6913963978d99d52f6676e7b"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Wooden Rolling Pin is a classic kitchen tool for rolling out dough for baking. Its smooth surface and sturdy handles make it easy to achieve uniform thickness.",
+          "docs": [
+            "6913963978d99d52f6676e39"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Amazon Echo Plus is a smart speaker with built-in Alexa voice control. It features premium sound quality and serves as a hub for controlling smart home devices.",
+          "docs": [
+            "6913963978d99d52f6676e50"
+          ],
+          "count": 1,
+          "ur": ""
+        },
+        {
+          "value": "The Women's Wrist Watch is a versatile and fashionable timepiece for everyday wear. With a comfortable strap and a simple yet elegant design, it complements various styles.",
+          "docs": [
+            "6913963978d99d52f6676eaf"
+          ],
+          "count": 1,
+          "ur": ""
+        }
+      ]
+    },
+    {
+      "model": "Order",
+      "field": "products.name",
+      "entries": []
+    },
+    {
+      "model": "Order",
+      "field": "products.description",
+      "entries": []
+    },
+    {
+      "model": "Customer",
+      "field": "addresses.label",
+      "entries": [
+        {
+          "value": "Home",
+          "docs": [
+            "6913cae509586269e3650acb",
+            "691429475c0c0cc06e7e9341",
+            "6914c76e60cc94a8cf263717"
+          ],
+          "count": 3,
+          "ur": ""
+        }
+      ]
+    }
+  ]
+}

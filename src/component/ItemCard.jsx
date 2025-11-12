@@ -1,7 +1,9 @@
 import React from 'react'
 import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
 
 export default function ItemCard({ item }) {
+  const { loading, translateDBVal } = useTranslations();
   const { t } = useI18n()
   const format = (key, vars = {}) => {
     let str = t(key)
@@ -15,12 +17,11 @@ export default function ItemCard({ item }) {
 
   return (
     // Card container: Updated with new color system, borders, and hover effects.
-    <div 
-      className={`flex gap-4 p-4 bg-gray-50 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-800 transition-all duration-200 ${
-        isOut 
-          ? 'opacity-60 grayscale cursor-not-allowed' 
+    <div
+      className={`flex gap-4 p-4 bg-gray-50 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-800 transition-all duration-200 ${isOut
+          ? 'opacity-60 grayscale cursor-not-allowed'
           : 'hover:border-blue-500 hover:shadow-sm cursor-pointer'
-      }`}
+        }`}
     >
       {/* Image container: Uses a slightly different background for contrast (Suggestion #3) */}
       <div className="w-24 h-24 bg-gray-100 dark:bg-slate-800 rounded-md relative flex-shrink-0 flex items-center justify-center overflow-hidden">
@@ -39,9 +40,9 @@ export default function ItemCard({ item }) {
       <div className="flex-1 flex flex-col justify-center">
         {/* Title: Updated to font-semibold (Suggestion #1) and uses primary text colors */}
         <h3 className="font-semibold text-base text-gray-900 dark:text-slate-50 mb-1">
-          {item.title}
+          {translateDBVal("Product", "name", item.title, 'ur')}
         </h3>
-        
+
         {/* Price section */}
         <div className="flex items-baseline gap-2 flex-wrap">
           {/* Current price: Uses primary text colors */}
@@ -60,7 +61,7 @@ export default function ItemCard({ item }) {
         <div className="flex items-center gap-3 mt-1.5">
           {/* Category: Uses secondary text colors */}
           <p className="text-gray-600 dark:text-slate-400 text-sm">
-            {item.category}
+            {translateDBVal("Category", "name", item.category, 'ur')}
           </p>
           {/* Discount: Uses success colors and font-medium (Suggestion #2) */}
           {item.originalPrice && (

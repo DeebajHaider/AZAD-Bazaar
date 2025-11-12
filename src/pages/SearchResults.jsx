@@ -5,6 +5,7 @@ import ItemCard from '../component/ItemCard'
 import { useProducts } from '../api'
 import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
 
 // Reusable component for Sort Buttons for cleaner code
 const SortButton = ({ sortKey, label, currentSort, currentOrder, onClick }) => {
@@ -48,6 +49,7 @@ export default function SearchResults() {
     inStock: false,
     sortOrder: 'asc'
   })
+  const { translateDBVal } = useTranslations()
 
   // --- Logic remains the same, only JSX and styling are updated below ---
 
@@ -199,7 +201,7 @@ export default function SearchResults() {
                 >
                   <option value="">{t('searchResults.filterPanel.allCategories')}</option>
                   {(sortedCategories || []).map(c => (
-                    <option key={c._id ?? c.id} value={c._id ?? c.id}>{c.name}</option>
+                    <option key={c._id ?? c.id} value={c._id ?? c.id}>{translateDBVal("Category", "name", c.name, 'ur')}</option>
                   ))}
                 </select>
               </div>
@@ -247,7 +249,7 @@ export default function SearchResults() {
               <span className="text-sm font-medium text-gray-600 dark:text-slate-400">{t('searchResults.activeFilters.label')}</span>
               {filters.category && (
                 <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">
-                  {categories.find(c => c._id === filters.category)?.name || t('searchResults.activeFilters.categoryFallback')}
+                 {translateDBVal("Category", "name", categories.find(c => c._id === filters.category)?.name, 'ur') || t('searchResults.activeFilters.categoryFallback')}
                 </span>
               )}
               {filters.inStock && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">{t('searchResults.activeFilters.inStock')}</span>}

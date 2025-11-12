@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
 import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
 
 export default function Product() {
   const { t } = useI18n()
@@ -17,6 +18,7 @@ export default function Product() {
     })
     return str
   }
+  const { translateDBVal } = useTranslations();
   const navigate = useNavigate()
   const [qty, setQty] = useState(0)
   const [liked, setLiked] = useState(false)
@@ -105,9 +107,9 @@ export default function Product() {
             <ArrowLeft size={18} />
           </button>
 
-          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{product.name ?? product.title}</h1>
+          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{translateDBVal("Product", "name", product.name ?? product.title, 'ur')}</h1>
           <div className="mt-2 flex items-center gap-3">
-            <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {displayPrice}</div>
+            <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>{t('common.currencySymbol')} {displayPrice}</div>
             {!inStock && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
                 {t('common.outOfStock')}
@@ -120,7 +122,7 @@ export default function Product() {
             )}
           </div>
 
-          <div className="mt-6 text-sm text-gray-600">{product.description}</div>
+          <div className="mt-6 text-sm text-gray-600">{translateDBVal("Product", "description", product.description, 'ur')}</div>
         </div>
 
 
