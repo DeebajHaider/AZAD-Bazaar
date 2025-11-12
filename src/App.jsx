@@ -15,6 +15,7 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import Login from './pages/Login'
 import { AccessibilityProvider } from './context/AccessibilityContext'
 import AccessibilitySettings from './pages/AccessibilitySettings'
+import { I18nProvider } from './context/I18nContext'
 
 export default function App() {
   const AuthGate = () => {
@@ -55,16 +56,18 @@ export default function App() {
   }
 
   return (
-  <ThemeProvider>
-    <AccessibilityProvider>
-      <AuthProvider>
-        <DataProvider>
-          <CartProvider>
-            <AuthGate />
-          </CartProvider>
-        </DataProvider>
-      </AuthProvider>
-    </AccessibilityProvider>
-  </ThemeProvider>
+  <I18nProvider>
+    <ThemeProvider>
+      <AccessibilityProvider>
+        <AuthProvider>
+          <DataProvider>
+            <CartProvider>
+              <AuthGate />
+            </CartProvider>
+          </DataProvider>
+        </AuthProvider>
+      </AccessibilityProvider>
+    </ThemeProvider>
+  </I18nProvider>
   )
 }

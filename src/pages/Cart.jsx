@@ -3,9 +3,11 @@ import BottomNav from '../component/BottomNav'
 import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, Menu } from 'lucide-react'
 import { useCart } from '../context/CartContext'
+import { useI18n } from '../context/I18nContext'
 
 export default function Cart() {
   const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings, loading } = useCart()
+  const { t } = useI18n()
 
   const navigate = useNavigate()
 
@@ -13,12 +15,12 @@ export default function Cart() {
     <>
       <main style={{ padding: 0, background: 'var(--color-bg)', display: 'flex', flexDirection: 'column', height: 'calc(100vh - 80px)' }}>
         <div style={{position:'sticky', top:0, background:'var(--color-surface)', zIndex:10, padding:'var(--space-3) var(--space-4)', display:'flex', justifyContent:'space-between', alignItems:'center', borderBottom:'1px solid var(--color-border)'}}>
-          <h2 style={{fontSize:'var(--font-size-xl)', fontWeight:600, margin:0, color:'var(--color-text-primary)'}}>Cart</h2>
+          <h2 style={{fontSize:'var(--font-size-xl)', fontWeight:600, margin:0, color:'var(--color-text-primary)'}}>{t('cart.title')}</h2>
           <button
             onClick={clearCart}
             style={{fontSize:'var(--font-size-sm)', color:'var(--color-danger)', fontWeight:500, background:'none', border:'none', cursor:'pointer'}}
           >
-            Clear Cart
+            {t('cart.actions.clear')}
           </button>
         </div>
 
@@ -50,7 +52,7 @@ export default function Cart() {
             onMouseEnter={(e) => e.target.style.background = 'var(--color-primary-600)'}
             onMouseLeave={(e) => e.target.style.background = 'var(--color-primary-500)'}
           >
-            Checkout
+            {t('cart.actions.checkout')}
           </button>
         </div>
       </main>

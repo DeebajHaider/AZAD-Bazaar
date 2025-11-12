@@ -1,0 +1,339 @@
+{
+  "hello": "Hello World",
+  "settings": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "accessibility": {
+        "title": "Accessibility Settings",
+        "description": "Customize theme and display options"
+      }
+    },
+    "account": {
+      "title": "Account Information",
+      "form": {
+        "fullName": {
+          "label": "Full Name",
+          "placeholder": "Enter your full name"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "Phone (read-only)"
+        },
+        "address": {
+          "label": "Address",
+          "placeholder": "Enter your primary address"
+        },
+        "saveButton": {
+          "default": "Save Changes",
+          "saving": "Saving..."
+        }
+      }
+    },
+    "signOut": {
+      "button": "Sign Out",
+      "confirmDialog": "Are you sure you want to sign out?"
+    },
+    "notifications": {
+      "updateSuccess": "Your changes have been saved.",
+      "updateFailed": "Failed to save changes.",
+      "noCustomerError": "No customer available for update."
+    }
+  },
+  "login": {
+    "accessibility": {
+      "button": "Accessibility",
+      "ariaLabel": "Accessibility Settings"
+    },
+    "modes": {
+      "login": "Login",
+      "signup": "Sign Up"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your full name"
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter your address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "+923001234567"
+      },
+      "otp": {
+        "label": "Enter OTP",
+        "placeholder": "Enter 6-digit code"
+      },
+      "location": {
+        "latitude": "Latitude",
+        "longitude": "Longitude"
+      }
+    },
+    "buttons": {
+      "sendOtp": "Send OTP",
+      "createAccountAndSendOtp": "Create Account & Send OTP",
+      "sending": "Sending...",
+      "verifyAndSignIn": "Verify & Sign In",
+      "verifying": "Verifying...",
+      "back": "Back"
+    },
+    "notifications": {
+      "errors": {
+        "phoneRequired": "Please enter phone number",
+        "otpSendFailed": "Failed to send OTP",
+        "otpRequired": "Please enter OTP",
+        "verificationFailed": "Verification failed",
+        "otpVerificationFailed": "OTP verification failed"
+      },
+      "info": {
+        "otpSent": "OTP sent — check server console for code (MVP)",
+        "verified": "Verified — signing you in"
+      }
+    },
+    "footer": {
+      "mvpNote": "OTP is logged on server console for MVP testing"
+    }
+  },
+  "accessibility": {
+    "header": {
+      "title": "Accessibility Settings"
+    },
+    "fontSize": {
+      "title": "Font Size",
+      "description": "Adjust text size for better readability",
+      "options": {
+        "small": "Small",
+        "normal": "Normal",
+        "large": "Large",
+        "xlarge": "Extra Large"
+      }
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Choose light or dark theme",
+      "options": {
+        "light": "Light",
+        "dark": "Dark"
+      }
+    },
+    "colorMode": {
+      "title": "Color Mode",
+      "description": "Choose a color scheme that works best for you",
+      "options": {
+        "default": {
+          "label": "Default",
+          "description": "Standard colors"
+        },
+        "highContrast": {
+          "label": "High Contrast",
+          "description": "Maximum contrast for better visibility"
+        },
+        "deuteranopia": {
+          "label": "Red-Green (Deuteranopia)",
+          "description": "Optimized for red-green colorblindness"
+        },
+        "protanopia": {
+          "label": "Red-Green (Protanopia)",
+          "description": "Alternative red-green adjustment"
+        },
+        "tritanopia": {
+          "label": "Blue-Yellow",
+          "description": "Optimized for blue-yellow colorblindness"
+        }
+      }
+    },
+    "preview": {
+      "title": "Preview",
+      "mainText": "This is how text will appear with your current settings.",
+      "secondaryText": "Secondary text looks like this.",
+      "primaryButton": "Primary Button",
+      "successButton": "Success"
+    },
+    "actions": {
+      "reset": "Reset to Defaults"
+    },
+    "footer": {
+      "autoSaveNote": "Settings are saved automatically",
+      "globalApplyNote": "Changes apply across the entire app"
+    }
+  },
+  "search": {
+    "placeholder": "Search for items...",
+    "prompt": "Start typing to search...",
+    "backButtonAriaLabel": "Go back",
+    "submitButtonAriaLabel": "Search"
+  },
+  "searchResults": {
+    "header": {
+      "backButtonAriaLabel": "Go back",
+      "placeholder": "Search for items...",
+      "searchButtonAriaLabel": "Search"
+    },
+    "summary": {
+      "showingResultsFor": "Showing results for \"{{query}}\"",
+      "resultsFound_one": "{{count}} result found",
+      "resultsFound_other": "{{count}} results found",
+      "filtersButton": "Filters"
+    },
+    "filterPanel": {
+      "categoryLabel": "Category",
+      "allCategories": "All Categories",
+      "inStockLabel": "In Stock Only",
+      "onDiscountLabel": "On Discount",
+      "applyButton": "Apply",
+      "closeButton": "Close"
+    },
+    "activeFilters": {
+      "label": "Active:",
+      "inStock": "In Stock",
+      "discount": "Discount",
+      "categoryFallback": "Category",
+      "clearAllButton": "Clear"
+    },
+    "sorting": {
+      "label": "Sort by",
+      "price": "Price",
+      "discount": "Discount",
+      "name": "Name"
+    },
+    "results": {
+      "loading": "Loading...",
+      "error": "Error loading products.",
+      "noResults": "No results found. Try adjusting your search or filters."
+    },
+    "pagination": {
+      "pageInfo": "Page {{currentPage}} of {{totalPages}}",
+      "previousButtonAriaLabel": "Previous Page",
+      "nextButtonAriaLabel": "Next Page"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "actions": {
+      "clear": "Clear Cart",
+      "checkout": "Checkout"
+    }
+  },
+  "checkout": {
+    "title": "Checkout",
+    "address": {
+      "title": "Delivery Address",
+      "editButton": "Edit",
+      "saveButton": "Save",
+      "instructionsLabel": "Delivery instructions (optional)",
+      "instructionsPlaceholder": "Ex: Call this number, leave at door, gate code..."
+    },
+    "payment": {
+      "title": "Payment",
+      "cashOnDelivery": "Cash on Delivery",
+      "card": "Card",
+      "cardDetails": {
+        "title": "Card Details",
+        "nameLabel": "Cardholder Name",
+        "namePlaceholder": "John Doe",
+        "numberLabel": "Card Number",
+        "numberPlaceholder": "1234 5678 9012 3456",
+        "expiryLabel": "Expiry Date",
+        "expiryPlaceholder": "MM/YY",
+        "cvvLabel": "CVV",
+        "cvvPlaceholder": "123"
+      }
+    },
+    "billing": {
+      "title": "Billing",
+      "subtotal": "Subtotal",
+      "serviceFee": "Service fee",
+      "deliveryFee": "Delivery fee",
+      "tax": "Tax",
+      "total": "Total"
+    },
+    "actions": {
+      "placeOrder": "Place Order — ${{total}}",
+      "orderPlacedAlert": "Order placed. Total: ${{total}}"
+    }
+  },
+  "addressPage": {
+    "title": "Delivery Address",
+    "placeholder": "Address editing interface will be implemented here...",
+    "backButtonAriaLabel": "Go back"
+  },
+  "bottomNav": {
+    "ariaLabel": "Bottom navigation",
+    "home": "Home",
+    "cart": "Cart",
+    "settings": "Settings"
+  },
+  "home": {
+    "header": {
+      "deliveryTo": "Delivery to:",
+      "setAddressPrompt": "Set delivery address in Settings",
+      "searchPlaceholder": "Search for items..."
+    },
+    "categories": {
+      "title": "Categories",
+      "items": {
+        "fruits": "Fruits",
+        "vegetables": "Vegetables",
+        "snacks": "Snacks",
+        "dairy": "Dairy",
+        "beverages": "Beverages",
+        "seafood": "Seafood",
+        "eggs": "Eggs",
+        "meat": "Meat",
+        "desserts": "Desserts",
+        "ready-meals": "Ready Meals",
+        "drinks": "Drinks"
+      }
+    },
+    "voucher": {
+      "title": "Apply Voucher",
+      "placeholder": "Enter voucher code",
+      "applyButton": "Apply",
+      "invalidMessage": "Invalid voucher code",
+      "successMessage": "Voucher applied! You get {{pct}}% off."
+    },
+    "recentOrders": {
+      "title": "Recent Orders",
+      "orderTitle": "Order #{{orderNumber}}",
+      "status": "Delivered recently"
+    },
+    "popularBrands": {
+      "title": "Popular Brands",
+      "brandName": "Brand {{brandNumber}}"
+    }
+  },
+  "common": {
+    "currencySymbol": "Rs",
+    "outOfStock": "Out of Stock"
+  },
+  "itemCard": {
+    "discountOff": "{{percent}}% OFF",
+    "productImageAlt": "Image of {{title}}"
+  },
+  "cartItem": {
+    "removeAriaLabel": "Remove {{itemName}} from cart",
+    "viewDetailsAriaLabel": "View details for {{itemName}}"
+  },
+  "productPage": {
+    "backButtonAriaLabel": "Go back",
+    "stockStatus": {
+      "lowStock_one": "Only {{count}} left",
+      "lowStock_other": "Only {{count}} left"
+    },
+    "actions": {
+      "addToCart": "Add to Cart",
+      "favoriteAriaLabel": "Add to favorites",
+      "unfavoriteAriaLabel": "Remove from favorites"
+    },
+    "gallery": {
+      "mainImageAlt": "Main image of {{productName}}",
+      "thumbnailAlt": "Thumbnail {{index}} for {{productName}}"
+    },
+    "fallback": {
+      "title": "Sample Product Title",
+      "description": "This is a sample product description. Replace with real product details when available."
+    }
+  }
+}

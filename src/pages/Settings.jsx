@@ -3,10 +3,12 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { ChevronRight, LogOut, Save } from 'lucide-react'
 import BottomNav from '../component/BottomNav'
+import { useI18n } from '../context/I18nContext'
 
 export default function Settings() {
   const { logout, customer, updateCustomer } = useAuth()
   const navigate = useNavigate()
+  const { t } = useI18n()
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState(null)
@@ -34,16 +36,16 @@ export default function Settings() {
     setError(null)
     setSuccess(null)
     try {
-      if (!customer?._id) throw new Error('No customer available for update.')
+      if (!customer?._id) throw new Error(t('settings.notifications.noCustomerError'))
       const payload = {
         name: formData.name,
         address: formData.address // Backend will handle normalization
       }
       await updateCustomer(customer._id, payload)
-      setSuccess('Your changes have been saved.')
+      setSuccess(t('settings.notifications.updateSuccess'))
     } catch (err) {
       console.error('Update customer failed', err)
-      setError(err.message || 'Failed to save changes.')
+      setError(err.message || t('settings.notifications.updateFailed'))
     } finally {
       setIsSaving(false)
     }
@@ -51,7 +53,7 @@ export default function Settings() {
 
   const handleLogout = () => {
     // Using a more modern confirm dialog would be better in a real app
-    if (window.confirm('Are you sure you want to sign out?')) {
+    if (window.confirm(t('settings.signOut.confirmDialog'))) {
       logout()
       navigate('/')
     }
@@ -75,7 +77,7 @@ export default function Settings() {
               </svg>
             </button>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-slate-50">
-              Settings
+              {t('settings.title')}
             </h1>
           </div>
         </div>
@@ -90,15 +92,15 @@ export default function Settings() {
           {/* Card: Appearance & Accessibility */}
           <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
             <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
-              Appearance
+              {t('settings.appearance.title')}
             </h2>
             <button
               onClick={() => navigate('/accessibility')}
               className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200"
             >
               <div>
-                <p className="font-medium text-gray-900 dark:text-slate-50">Accessibility Settings</p>
-                <p className="text-sm text-gray-600 dark:text-slate-400">Customize theme and display options</p>
+                <p className="font-medium text-gray-900 dark:text-slate-50">{t('settings.appearance.accessibility.title')}</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400">{t('settings.appearance.accessibility.description')}</p>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400 dark:text-slate-500" />
             </button>
@@ -107,20 +109,20 @@ export default function Settings() {
           {/* Card: Account Information Form */}
           <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
             <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
-              Account Information
+              {t('settings.account.title')}
             </h2>
             <div className="p-4 space-y-4">
               {/* Name Field */}
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  Full Name
+                  {t('settings.account.form.fullName.label')}
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Enter your full name"
+                  placeholder={t('settings.account.form.fullName.placeholder')}
                   className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 />
               </div>
@@ -128,7 +130,7 @@ export default function Settings() {
               {/* Phone Field (Read-only) */}
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  Phone Number
+                  {t('settings.account.form.phone.label')}
                 </label>
                 <input
                   type="tel"
@@ -136,21 +138,21 @@ export default function Settings() {
                   value={formData.phone}
                   readOnly
                   className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 cursor-not-allowed"
-                  placeholder="Phone (read-only)"
+                  placeholder={t('settings.account.form.phone.placeholder')}
                 />
               </div>
 
               {/* Address Field */}
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  Address
+                  {t('settings.account.form.address.label')}
                 </label>
                 <textarea
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
                   rows={3}
-                  placeholder="Enter your primary address"
+                  placeholder={t('settings.account.form.address.placeholder')}
                   className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 />
               </div>
@@ -162,7 +164,7 @@ export default function Settings() {
                 className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={18} />
-                {isSaving ? 'Saving...' : 'Save Changes'}
+                {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
               </button>
             </div>
           </form>
@@ -174,7 +176,7 @@ export default function Settings() {
               className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-transparent border border-red-500/50 dark:border-red-500/40 text-red-600 dark:text-red-500 font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-950/50 transition-all duration-200"
             >
               <LogOut size={18} />
-              Sign Out
+              {t('settings.signOut.button')}
             </button>
           </div>
 

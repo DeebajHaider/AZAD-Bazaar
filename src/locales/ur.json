@@ -1,0 +1,339 @@
+{
+  "hello": "ہیلو دنیا",
+  "settings": {
+    "title": "ترتیبات",
+    "appearance": {
+      "title": "ظاہری شکل",
+      "accessibility": {
+        "title": "رسائی کی ترتیبات",
+        "description": "تھیم اور ڈسپلے کے اختیارات کو حسب ضرورت بنائیں"
+      }
+    },
+    "account": {
+      "title": "اکاؤنٹ کی معلومات",
+      "form": {
+        "fullName": {
+          "label": "پورا نام",
+          "placeholder": "اپنا پورا نام درج کریں"
+        },
+        "phone": {
+          "label": "فون نمبر",
+          "placeholder": "فون (صرف پڑھنے کے لیے)"
+        },
+        "address": {
+          "label": "پتہ",
+          "placeholder": "اپنا بنیادی پتہ درج کریں"
+        },
+        "saveButton": {
+          "default": "تبدیلیاں محفوظ کریں",
+          "saving": "محفوظ کیا جا رہا ہے..."
+        }
+      }
+    },
+    "signOut": {
+      "button": "سائن آؤٹ",
+      "confirmDialog": "کیا آپ واقعی سائن آؤٹ کرنا چاہتے ہیں؟"
+    },
+    "notifications": {
+      "updateSuccess": "آپ کی تبدیلیاں محفوظ کر دی گئی ہیں۔",
+      "updateFailed": "تبدیلیاں محفوظ کرنے میں ناکام۔",
+      "noCustomerError": "اپ ڈیٹ کے لیے کوئی صارف دستیاب نہیں ہے۔"
+    }
+  },
+  "login": {
+    "accessibility": {
+      "button": "رسائی",
+      "ariaLabel": "رسائی کی ترتیبات"
+    },
+    "modes": {
+      "login": "لاگ ان",
+      "signup": "اکاؤنٹ بنائیں"
+    },
+    "form": {
+      "name": {
+        "label": "نام",
+        "placeholder": "اپنا پورا نام درج کریں"
+      },
+      "address": {
+        "label": "پتہ",
+        "placeholder": "اپنا پتہ درج کریں"
+      },
+      "phone": {
+        "label": "فون نمبر",
+        "placeholder": "+923001234567"
+      },
+      "otp": {
+        "label": "OTP درج کریں",
+        "placeholder": "6 ہندسوں کا کوڈ درج کریں"
+      },
+      "location": {
+        "latitude": "عرض بلد",
+        "longitude": "طول بلد"
+      }
+    },
+    "buttons": {
+      "sendOtp": "OTP بھیجیں",
+      "createAccountAndSendOtp": "اکاؤنٹ بنائیں اور OTP بھیجیں",
+      "sending": "بھیجا جا رہا ہے...",
+      "verifyAndSignIn": "تصدیق کریں اور سائن ان کریں",
+      "verifying": "تصدیق کی جا رہی ہے...",
+      "back": "واپس"
+    },
+    "notifications": {
+      "errors": {
+        "phoneRequired": "براہ کرم فون نمبر درج کریں",
+        "otpSendFailed": "OTP بھیجنے میں ناکامی",
+        "otpRequired": "براہ کرم OTP درج کریں",
+        "verificationFailed": "تصدیق ناکام ہوگئی",
+        "otpVerificationFailed": "OTP کی تصدیق ناکام ہوگئی"
+      },
+      "info": {
+        "otpSent": "OTP بھیج دیا گیا — کوڈ کے لیے سرور کنسول چیک کریں (MVP)",
+        "verified": "تصدیق ہوگئی — آپ کو سائن ان کیا جا رہا ہے"
+      }
+    },
+    "footer": {
+      "mvpNote": "MVP ٹیسٹنگ کے لیے OTP سرور کنسول پر لاگ کیا جاتا ہے"
+    }
+  },
+  "accessibility": {
+    "header": {
+      "title": "رسائی کی ترتیبات"
+    },
+    "fontSize": {
+      "title": "فونٹ کا سائز",
+      "description": "پڑھنے میں آسانی کے لیے ٹیکسٹ کا سائز تبدیل کریں",
+      "options": {
+        "small": "چھوٹا",
+        "normal": "معمول",
+        "large": "بڑا",
+        "xlarge": "بہت بڑا"
+      }
+    },
+    "theme": {
+      "title": "تھیم",
+      "description": "لائٹ یا ڈارک تھیم منتخب کریں",
+      "options": {
+        "light": "لائٹ",
+        "dark": "ڈارک"
+      }
+    },
+    "colorMode": {
+      "title": "رنگ کا موڈ",
+      "description": "ایسی رنگ سکیم منتخب کریں جو آپ کے لیے بہترین ہو",
+      "options": {
+        "default": {
+          "label": "ڈیفالٹ",
+          "description": "معیاری رنگ"
+        },
+        "highContrast": {
+          "label": "ہائی کنٹراسٹ",
+          "description": "بہتر دیکھنے کے لیے زیادہ سے زیادہ کنٹراسٹ"
+        },
+        "deuteranopia": {
+          "label": "سرخ-سبز (Deuteranopia)",
+          "description": "سرخ-سبز رنگ کے اندھے پن کے لیے موزوں"
+        },
+        "protanopia": {
+          "label": "سرخ-سبز (Protanopia)",
+          "description": "متبادل سرخ-سبز ایڈجسٹمنٹ"
+        },
+        "tritanopia": {
+          "label": "نیلا-پیلا",
+          "description": "نیلے-پیلے رنگ کے اندھے پن کے لیے موزوں"
+        }
+      }
+    },
+    "preview": {
+      "title": "پیش منظر",
+      "mainText": "آپ کی موجودہ ترتیبات کے ساتھ متن اس طرح نظر آئے گا۔",
+      "secondaryText": "ثانوی متن اس طرح لگتا ہے۔",
+      "primaryButton": "بنیادی بٹن",
+      "successButton": "کامیابی"
+    },
+    "actions": {
+      "reset": "ڈیفالٹس پر ری سیٹ کریں"
+    },
+    "footer": {
+      "autoSaveNote": "ترتیبات خود بخود محفوظ ہو جاتی ہیں",
+      "globalApplyNote": "تبدیلیاں پوری ایپ پر لاگو ہوتی ہیں"
+    }
+  },
+  "search": {
+    "placeholder": "چیزیں تلاش کریں...",
+    "prompt": "تلاش کرنے کے لیے ٹائپ کرنا شروع کریں...",
+    "backButtonAriaLabel": "واپس جائیں",
+    "submitButtonAriaLabel": "تلاش کریں"
+  },
+  "searchResults": {
+    "header": {
+      "backButtonAriaLabel": "واپس جائیں",
+      "placeholder": "چیزیں تلاش کریں...",
+      "searchButtonAriaLabel": "تلاش کریں"
+    },
+    "summary": {
+      "showingResultsFor": "\"{{query}}\" کے لیے نتائج دکھائے جا رہے ہیں",
+      "resultsFound_one": "{{count}} نتیجہ ملا",
+      "resultsFound_other": "{{count}} نتائج ملے",
+      "filtersButton": "فلٹرز"
+    },
+    "filterPanel": {
+      "categoryLabel": "زمرہ",
+      "allCategories": "تمام زمرے",
+      "inStockLabel": "صرف اسٹاک میں",
+      "onDiscountLabel": "رعایت پر",
+      "applyButton": "لاگو کریں",
+      "closeButton": "بند کریں"
+    },
+    "activeFilters": {
+      "label": "فعال:",
+      "inStock": "اسٹاک میں",
+      "discount": "رعایت",
+      "categoryFallback": "زمرہ",
+      "clearAllButton": "صاف کریں"
+    },
+    "sorting": {
+      "label": "اس لحاظ سے ترتیب دیں",
+      "price": "قیمت",
+      "discount": "رعایت",
+      "name": "نام"
+    },
+    "results": {
+      "loading": "لوڈ ہو رہا ہے...",
+      "error": "مصنوعات لوڈ کرنے میں خرابی۔",
+      "noResults": "کوئی نتائج نہیں ملے۔ اپنی تلاش یا فلٹرز کو تبدیل کرنے کی کوشش کریں۔"
+    },
+    "pagination": {
+      "pageInfo": "صفحہ {{currentPage}} از {{totalPages}}",
+      "previousButtonAriaLabel": "پچھلا صفحہ",
+      "nextButtonAriaLabel": "اگلا صفحہ"
+    }
+  },
+  "cart": {
+    "title": "کارٹ",
+    "actions": {
+      "clear": "کارٹ صاف کریں",
+      "checkout": "چیک آؤٹ"
+    }
+  },
+  "checkout": {
+    "title": "چیک آؤٹ",
+    "address": {
+      "title": "ڈیلیوری کا پتہ",
+      "editButton": "ترمیم کریں",
+      "saveButton": "محفوظ کریں",
+      "instructionsLabel": "ڈیلیوری ہدایات (اختیاری)",
+      "instructionsPlaceholder": "مثال: اس نمبر پر کال کریں، دروازے پر چھوڑ دیں، گیٹ کوڈ..."
+    },
+    "payment": {
+      "title": "ادائیگی",
+      "cashOnDelivery": "کیش آن ڈیلیوری",
+      "card": "کارڈ",
+      "cardDetails": {
+        "title": "کارڈ کی تفصیلات",
+        "nameLabel": "کارڈ ہولڈر کا نام",
+        "namePlaceholder": "جان ڈو",
+        "numberLabel": "کارڈ نمبر",
+        "numberPlaceholder": "1234 5678 9012 3456",
+        "expiryLabel": "میعاد ختم ہونے کی تاریخ",
+        "expiryPlaceholder": "MM/YY",
+        "cvvLabel": "CVV",
+        "cvvPlaceholder": "123"
+      }
+    },
+    "billing": {
+      "title": "بلنگ",
+      "subtotal": "ذیلی کل",
+      "serviceFee": "سروس فیس",
+      "deliveryFee": "ڈیلیوری فیس",
+      "tax": "ٹیکس",
+      "total": "کل"
+    },
+    "actions": {
+      "placeOrder": "آرڈر کریں — ${{total}}",
+      "orderPlacedAlert": "آرڈر دے دیا گیا ہے۔ کل: ${{total}}"
+    }
+  },
+  "addressPage": {
+    "title": "ڈیلیوری کا پتہ",
+    "placeholder": "ایڈریس میں ترمیم کرنے کا انٹرفیس یہاں نافذ کیا جائے گا...",
+    "backButtonAriaLabel": "واپس جائیں"
+  },
+  "bottomNav": {
+    "ariaLabel": "نیچے نیویگیشن",
+    "home": "ہوم",
+    "cart": "کارٹ",
+    "settings": "ترتیبات"
+  },
+  "home": {
+    "header": {
+      "deliveryTo": "ترسیل بمقام:",
+      "setAddressPrompt": "ترتیبات میں ڈیلیوری کا پتہ سیٹ کریں",
+      "searchPlaceholder": "چیزیں تلاش کریں..."
+    },
+    "categories": {
+      "title": "زمرے",
+      "items": {
+        "fruits": "پھل",
+        "vegetables": "سبزیاں",
+        "snacks": "اسنیکس",
+        "dairy": "ڈیری",
+        "beverages": "مشروبات",
+        "seafood": "سمندری غذا",
+        "eggs": "انڈے",
+        "meat": "گوشت",
+        "desserts": "میٹھا",
+        "ready-meals": "تیار کھانے",
+        "drinks": "ڈرنکس"
+      }
+    },
+    "voucher": {
+      "title": "واؤچر استعمال کریں",
+      "placeholder": "واؤچر کوڈ درج کریں",
+      "applyButton": "لاگو کریں",
+      "invalidMessage": "غلط واؤچر کوڈ",
+      "successMessage": "واؤچر لاگو ہو گیا! آپ کو {{pct}}% کی چھوٹ ملی۔"
+    },
+    "recentOrders": {
+      "title": "حالیہ آرڈرز",
+      "orderTitle": "آرڈر #{{orderNumber}}",
+      "status": "حال ہی میں ڈیلیور ہوا"
+    },
+    "popularBrands": {
+      "title": "مشہور برانڈز",
+      "brandName": "برانڈ {{brandNumber}}"
+    }
+  },
+  "common": {
+    "currencySymbol": "روپے",
+    "outOfStock": "اسٹاک میں نہیں"
+  },
+  "itemCard": {
+    "discountOff": "{{percent}}% کی چھوٹ",
+    "productImageAlt": "{{title}} کی تصویر"
+  },
+  "cartItem": {
+    "removeAriaLabel": "کارٹ سے {{itemName}} کو ہٹائیں",
+    "viewDetailsAriaLabel": "{{itemName}} کی تفصیلات دیکھیں"
+  },
+  "productPage": {
+    "backButtonAriaLabel": "واپس جائیں",
+    "stockStatus": {
+      "lowStock_one": "صرف {{count}} باقی ہے",
+      "lowStock_other": "صرف {{count}} باقی ہیں"
+    },
+    "actions": {
+      "addToCart": "کارٹ میں شامل کریں",
+      "favoriteAriaLabel": "پسندیدہ میں شامل کریں",
+      "unfavoriteAriaLabel": "پسندیدہ سے ہٹائیں"
+    },
+    "gallery": {
+      "mainImageAlt": "{{productName}} کی مرکزی تصویر",
+      "thumbnailAlt": "{{productName}} کے لیے تھمب نیل {{index}}"
+    },
+    "fallback": {
+      "title": "نمونہ پروڈکٹ کا عنوان",
+      "description": "یہ ایک نمونہ پروڈکٹ کی تفصیل ہے۔ دستیاب ہونے پر حقیقی پروڈکٹ کی تفصیلات سے تبدیل کریں۔"
+    }
+  }
+}

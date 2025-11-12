@@ -5,8 +5,18 @@ import { Heart, Plus, Minus, ArrowLeft } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
+import { useI18n } from '../context/I18nContext'
 
 export default function Product() {
+  const { t } = useI18n()
+  const format = (key, vars = {}) => {
+    let str = t(key)
+    Object.keys(vars).forEach(k => {
+      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
+      str = String(str).replace(re, vars[k])
+    })
+    return str
+  }
   const navigate = useNavigate()
   const [qty, setQty] = useState(0)
   const [liked, setLiked] = useState(false)
@@ -76,13 +86,13 @@ export default function Product() {
         {/* Top image gallery - approx 1/3 of screen */}
         <div style={{height: '33vh', backgroundColor:'#fff'}}>
           <div style={{height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
-            <img src={mainImage} alt="Product" style={{maxHeight:'100%', maxWidth:'100%', objectFit:'contain'}} />
+            <img src={mainImage} alt={format('productPage.gallery.mainImageAlt', { productName: product.name ?? product.title })} style={{maxHeight:'100%', maxWidth:'100%', objectFit:'contain'}} />
             {/* Thumbnails */}
             {images.length > 1 && (
               <div style={{marginTop:8, display:'flex', gap:8, overflowX:'auto', padding:'0 12px'}}>
                 {images.map((src, idx) => (
-                  <button key={idx} onClick={() => setActiveIndex(idx)} style={{border: activeIndex === idx ? '2px solid var(--primary-color)' : '1px solid var(--color-border)', padding:2, borderRadius:8, background:'transparent'}}>
-                    <img src={src} alt={`thumb-${idx}`} style={{width:64, height:64, objectFit:'cover', display:'block', borderRadius:6}} />
+                  <button key={idx} onClick={() => setActiveIndex(idx)} style={{border: activeIndex === idx ? '2px solid var(--primary-color)' : '1px solid var(--color-border)', padding:2, borderRadius:8, background:'transparent'}} aria-label={format('productPage.gallery.thumbnailAlt', { index: idx+1, productName: product.name ?? product.title })}>
+                    <img src={src} alt={format('productPage.gallery.thumbnailAlt', { index: idx+1, productName: product.name ?? product.title })} style={{width:64, height:64, objectFit:'cover', display:'block', borderRadius:6}} />
                   </button>
                 ))}
               </div>
@@ -91,7 +101,7 @@ export default function Product() {
         </div>
 
         <div className="px-4 py-4" style={{background:'var(--color-bg)'}}>
-          <button onClick={() => navigate(-1)} className="text-sm text-gray-600 mb-2"> 
+          <button onClick={() => navigate(-1)} className="text-sm text-gray-600 mb-2" aria-label={t('productPage.backButtonAriaLabel') || 'Go back'}> 
             <ArrowLeft size={18} />
           </button>
 
@@ -100,12 +110,12 @@ export default function Product() {
             <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>Rs. {displayPrice}</div>
             {!inStock && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
-                Out of Stock
+                {t('common.outOfStock')}
               </span>
             )}
             {inStock && (isFinite(availableStock) && availableStock <= 5) && (
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
-                Only {availableStock} left
+                {format('productPage.stockStatus.lowStock_other', { count: availableStock })}
               </span>
             )}
           </div>
@@ -131,7 +141,7 @@ export default function Product() {
                   className={`w-full text-white font-medium ${!inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
                   style={{background:'var(--primary-color)', padding:'12px', borderRadius:12, boxShadow:'var(--shadow-sm)'}}
                 >
-                  {inStock ? 'Add to Cart' : 'Out of Stock'}
+                  {inStock ? (t('productPage.actions.addToCart') || 'Add to Cart') : (t('common.outOfStock') || 'Out of Stock')}
                 </button>
               ) : (
                 <div className="w-full" style={{display:'flex'}}>
@@ -182,6 +192,7 @@ export default function Product() {
               onClick={() => setLiked(v => !v)}
               className="rounded-lg flex items-center justify-center"
               style={{width:48, height:48, borderRadius:12, background: liked ? 'rgba(59,130,246,0.15)' : 'var(--color-surface)', border: liked ? '1px solid var(--primary-color)' : '1px solid var(--color-border)', boxShadow:'var(--shadow-sm)'}}
+              aria-label={liked ? (t('productPage.actions.unfavoriteAriaLabel') || 'Remove from favorites') : (t('productPage.actions.favoriteAriaLabel') || 'Add to favorites')}
             >
               <Heart size={18} style={{color: liked ? 'var(--primary-color)' : 'var(--color-text-secondary)'}} />
             </button>

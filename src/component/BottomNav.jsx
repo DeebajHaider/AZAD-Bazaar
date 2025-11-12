@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, ShoppingCart, Settings } from 'lucide-react';
+import { useI18n } from '../context/I18nContext';
 
 // Sub-component for each navigation item
 const NavItem = ({ to, icon: Icon, label }) => {
@@ -30,18 +31,19 @@ const NavItem = ({ to, icon: Icon, label }) => {
 
 // Main BottomNav component
 export default function BottomNav() {
+  const { t } = useI18n();
+
   return (
     // Outer container handles the fixed positioning and background color.
     // A subtle top border provides separation from the page content.
     <header className="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
-      
       <nav 
         className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4"
-        aria-label="Bottom navigation"
+        aria-label={t('bottomNav.ariaLabel')}
       >
-        <NavItem to="/" icon={Home} label="Home" />
-        <NavItem to="/cart" icon={ShoppingCart} label="Cart" />
-        <NavItem to="/settings" icon={Settings} label="Settings" />
+        <NavItem to="/" icon={Home} label={t('bottomNav.home')} />
+        <NavItem to="/cart" icon={ShoppingCart} label={t('bottomNav.cart')} />
+        <NavItem to="/settings" icon={Settings} label={t('bottomNav.settings')} />
       </nav>
     </header>
   );

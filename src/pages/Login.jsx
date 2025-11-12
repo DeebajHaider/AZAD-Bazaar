@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { useI18n } from '../context/I18nContext'
 
 export default function Login() {
   const { requestOtp, verifyOtp } = useAuth()
   const navigate = useNavigate()
+  const { t } = useI18n()
 
   const [mode, setMode] = useState('login')
   const [phone, setPhone] = useState('')
@@ -35,15 +37,15 @@ export default function Login() {
     e && e.preventDefault()
     setErr(null)
     setInfo(null)
-    if (!phone) return setErr('Please enter phone number')
+    if (!phone) return setErr(t('login.notifications.errors.phoneRequired'))
     setLoading(true)
     try {
       await requestOtp(phone, mode === 'signup')
       setStep('waiting-otp')
-      setInfo('OTP sent — check server console for code (MVP)')
+      setInfo(t('login.notifications.info.otpSent'))
     } catch (error) {
       console.error('requestOtp err', error)
-      setErr(error && error.message ? error.message : 'Failed to send OTP')
+      setErr(error && error.message ? error.message : t('login.notifications.errors.otpSendFailed'))
     } finally {
       setLoading(false)
     }
@@ -53,19 +55,19 @@ export default function Login() {
     e && e.preventDefault()
     setErr(null)
     setInfo(null)
-    if (!otp) return setErr('Please enter OTP')
+    if (!otp) return setErr(t('login.notifications.errors.otpRequired'))
     setLoading(true)
     try {
       const profile = mode === 'signup' ? { name, address, lat, lng } : null
       const resp = await verifyOtp(phone, otp, profile)
       if (resp && resp.success) {
-        setInfo('Verified — signing you in')
+        setInfo(t('login.notifications.info.verified'))
       } else {
-        setErr('Verification failed')
+        setErr(t('login.notifications.errors.verificationFailed'))
       }
     } catch (error) {
       console.error('verify err', error)
-      setErr(error && error.message ? error.message : 'OTP verification failed')
+      setErr(error && error.message ? error.message : t('login.notifications.errors.otpVerificationFailed'))
     } finally {
       setLoading(false)
     }
@@ -95,12 +97,12 @@ export default function Login() {
           <button
             onClick={() => navigate('/accessibility')}
             className="min-h-11 px-4 py-2 flex items-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-gray-900 dark:text-slate-50 font-medium rounded-lg border border-gray-200 dark:border-slate-800 transition-all duration-200"
-            aria-label="Accessibility Settings"
+            aria-label={t('login.accessibility.ariaLabel')}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
-            <span className="text-sm">Accessibility</span>
+            <span className="text-sm">{t('login.accessibility.button')}</span>
           </button>
         </div>
 
@@ -132,7 +134,7 @@ export default function Login() {
                     : 'bg-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200'
                 }`}
               >
-                Login
+                {t('login.modes.login')}
               </button>
               <button
                 onClick={() => switchMode('signup')}
@@ -142,7 +144,7 @@ export default function Login() {
                     : 'bg-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200'
                 }`}
               >
-                Sign Up
+                {t('login.modes.signup')}
               </button>
             </div>
           </div>
@@ -156,26 +158,26 @@ export default function Login() {
                 <>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                      Name
+                      {t('login.form.name.label')}
                     </label>
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your full name"
+                      placeholder={t('login.form.name.placeholder')}
                       className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                      Address
+                      {t('login.form.address.label')}
                     </label>
                     <input
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      placeholder="Enter your address"
+                      placeholder={t('login.form.address.placeholder')}
                       className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     />
                   </div>
@@ -183,13 +185,13 @@ export default function Login() {
                   {(lat || lng) && (
                     <div className="flex gap-3 p-3 bg-gray-100 dark:bg-slate-950 rounded-lg border border-gray-200 dark:border-slate-800">
                       <div className="flex-1">
-                        <div className="text-xs text-gray-600 dark:text-slate-400 mb-1">Latitude</div>
+                        <div className="text-xs text-gray-600 dark:text-slate-400 mb-1">{t('login.form.location.latitude')}</div>
                         <div className="text-sm font-medium text-gray-900 dark:text-slate-50">
                           {lat?.toFixed(6) ?? '—'}
                         </div>
                       </div>
                       <div className="flex-1">
-                        <div className="text-xs text-gray-600 dark:text-slate-400 mb-1">Longitude</div>
+                        <div className="text-xs text-gray-600 dark:text-slate-400 mb-1">{t('login.form.location.longitude')}</div>
                         <div className="text-sm font-medium text-gray-900 dark:text-slate-50">
                           {lng?.toFixed(6) ?? '—'}
                         </div>
@@ -202,13 +204,13 @@ export default function Login() {
               {step === 'enter-phone' && (
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                    Phone Number
+                    {t('login.form.phone.label')}
                   </label>
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+923001234567"
+                    placeholder={t('login.form.phone.placeholder')}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   />
                 </div>
@@ -217,13 +219,13 @@ export default function Login() {
               {step === 'waiting-otp' && (
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                    Enter OTP
+                    {t('login.form.otp.label')}
                   </label>
                   <input
                     type="text"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    placeholder="Enter 6-digit code"
+                    placeholder={t('login.form.otp.placeholder')}
                     maxLength={6}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-center text-2xl font-semibold tracking-widest"
                   />
@@ -237,7 +239,7 @@ export default function Login() {
                     disabled={loading}
                     className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? 'Sending...' : (mode === 'login' ? 'Send OTP' : 'Create Account & Send OTP')}
+                    {loading ? t('login.buttons.sending') : (mode === 'login' ? t('login.buttons.sendOtp') : t('login.buttons.createAccountAndSendOtp'))}
                   </button>
                 ) : (
                   <>
@@ -246,14 +248,14 @@ export default function Login() {
                       disabled={loading}
                       className="w-full min-h-12 px-6 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {loading ? 'Verifying...' : 'Verify & Sign In'}
+                      {loading ? t('login.buttons.verifying') : t('login.buttons.verifyAndSignIn')}
                     </button>
                     <button
                       onClick={resetToPhone}
                       disabled={loading}
                       className="w-full min-h-12 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Back
+                      {t('login.buttons.back')}
                     </button>
                   </>
                 )}
@@ -263,7 +265,7 @@ export default function Login() {
         </div>
 
         <div className="mt-4 text-center text-xs text-gray-500 dark:text-slate-400">
-          OTP is logged on server console for MVP testing
+          {t('login.footer.mvpNote')}
         </div>
       </div>
     </div>

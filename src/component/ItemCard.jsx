@@ -1,6 +1,16 @@
 import React from 'react'
+import { useI18n } from '../context/I18nContext'
 
 export default function ItemCard({ item }) {
+  const { t } = useI18n()
+  const format = (key, vars = {}) => {
+    let str = t(key)
+    Object.keys(vars).forEach(k => {
+      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
+      str = String(str).replace(re, vars[k])
+    })
+    return str
+  }
   const isOut = !item.inStock
 
   return (
@@ -14,12 +24,12 @@ export default function ItemCard({ item }) {
     >
       {/* Image container: Uses a slightly different background for contrast (Suggestion #3) */}
       <div className="w-24 h-24 bg-gray-100 dark:bg-slate-800 rounded-md relative flex-shrink-0 flex items-center justify-center overflow-hidden">
-        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+        <img src={item.image} alt={t('itemCard.productImageAlt') ? format('itemCard.productImageAlt', { title: item.title }) : item.title} className="w-full h-full object-cover" />
         {isOut && (
           // Out of Stock overlay
           <div className="absolute inset-0 bg-gray-900/60 dark:bg-slate-950/60 flex items-center justify-center">
             <span className="bg-red-500 dark:bg-red-600 text-white px-2 py-1 rounded-md text-xs font-semibold uppercase tracking-wider">
-              Out of Stock
+              {t('common.outOfStock')}
             </span>
           </div>
         )}
@@ -36,12 +46,12 @@ export default function ItemCard({ item }) {
         <div className="flex items-baseline gap-2 flex-wrap">
           {/* Current price: Uses primary text colors */}
           <span className="font-semibold text-lg text-gray-900 dark:text-slate-50">
-            Rs {item.price}
+            {t('common.currencySymbol')} {item.price}
           </span>
           {/* Original price: Uses secondary text colors */}
           {item.originalPrice && (
             <span className="text-gray-600 dark:text-slate-400 line-through text-sm">
-              Rs {item.originalPrice}
+              {t('common.currencySymbol')} {item.originalPrice}
             </span>
           )}
         </div>
@@ -55,7 +65,7 @@ export default function ItemCard({ item }) {
           {/* Discount: Uses success colors and font-medium (Suggestion #2) */}
           {item.originalPrice && (
             <span className="text-green-600 dark:text-green-500 text-sm font-medium">
-              {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% OFF
+              {format('itemCard.discountOff', { percent: Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100) })}
             </span>
           )}
         </div>

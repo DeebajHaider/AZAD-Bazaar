@@ -2,25 +2,28 @@ import React from 'react'
 import { useAccessibility } from '../context/AccessibilityContext'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext' // added import
+import { useI18n } from '../context/I18nContext'
 
 export default function AccessibilitySettings() {
   const { fontSize, setFontSize, colorMode, setColorMode, resetToDefaults } = useAccessibility()
   const { theme, setTheme } = useTheme() // use ThemeContext
+  const { t } = useI18n()
   const navigate = useNavigate()
 
   const fontSizes = [
-    { id: 'small', label: 'Small', size: 'text-sm' },
-    { id: 'normal', label: 'Normal', size: 'text-base' },
-    { id: 'large', label: 'Large', size: 'text-lg' },
-    { id: 'xlarge', label: 'Extra Large', size: 'text-xl' }
+    { id: 'small', label: t('accessibility.fontSize.options.small'), size: 'text-sm' },
+    { id: 'normal', label: t('accessibility.fontSize.options.normal'), size: 'text-base' },
+    { id: 'large', label: t('accessibility.fontSize.options.large'), size: 'text-lg' },
+    { id: 'xlarge', label: t('accessibility.fontSize.options.xlarge'), size: 'text-xl' }
   ]
 
+  // use the locale keys for option labels/descriptions
   const colorModes = [
-    { id: 'default', label: 'Default', desc: 'Standard colors' },
-    { id: 'high-contrast', label: 'High Contrast', desc: 'Maximum contrast for better visibility' },
-    { id: 'deuteranopia', label: 'Red-Green (Deuteranopia)', desc: 'Optimized for red-green colorblindness' },
-    { id: 'protanopia', label: 'Red-Green (Protanopia)', desc: 'Alternative red-green adjustment' },
-    { id: 'tritanopia', label: 'Blue-Yellow', desc: 'Optimized for blue-yellow colorblindness' }
+    { id: 'default', label: t('accessibility.colorMode.options.default.label'), desc: t('accessibility.colorMode.options.default.description') },
+    { id: 'highContrast', label: t('accessibility.colorMode.options.highContrast.label'), desc: t('accessibility.colorMode.options.highContrast.description') },
+    { id: 'deuteranopia', label: t('accessibility.colorMode.options.deuteranopia.label'), desc: t('accessibility.colorMode.options.deuteranopia.description') },
+    { id: 'protanopia', label: t('accessibility.colorMode.options.protanopia.label'), desc: t('accessibility.colorMode.options.protanopia.description') },
+    { id: 'tritanopia', label: t('accessibility.colorMode.options.tritanopia.label'), desc: t('accessibility.colorMode.options.tritanopia.description') }
   ]
 
   return (
@@ -37,7 +40,7 @@ export default function AccessibilitySettings() {
             </svg>
           </button>
           <h1 className="text-xl font-semibold text-gray-900 dark:text-slate-50">
-            Accessibility Settings
+            {t('accessibility.header.title')}
           </h1>
         </div>
       </div>
@@ -48,10 +51,10 @@ export default function AccessibilitySettings() {
         {/* Font Size Section */}
         <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
-            Font Size
+            {t('accessibility.fontSize.title')}
           </h2>
           <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
-            Adjust text size for better readability
+            {t('accessibility.fontSize.description')}
           </p>
           
           <div className="grid grid-cols-2 gap-2">
@@ -74,10 +77,10 @@ export default function AccessibilitySettings() {
         {/* Theme Section: inserted directly after Font Size */}
         <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
-            Theme
+            {t('accessibility.theme.title')}
           </h2>
           <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
-            Choose light or dark theme
+            {t('accessibility.theme.description')}
           </p>
 
           <div className="grid grid-cols-2 gap-2">
@@ -89,7 +92,7 @@ export default function AccessibilitySettings() {
                   : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
               }`}
             >
-              Light
+              {t('accessibility.theme.options.light')}
             </button>
 
             <button
@@ -100,7 +103,7 @@ export default function AccessibilitySettings() {
                   : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
               }`}
             >
-              Dark
+              {t('accessibility.theme.options.dark')}
             </button>
           </div>
         </div>
@@ -108,10 +111,10 @@ export default function AccessibilitySettings() {
         {/* Color Mode Section */}
         <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
-            Color Mode
+            {t('accessibility.colorMode.title')}
           </h2>
           <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
-            Choose a color scheme that works best for you
+            {t('accessibility.colorMode.description')}
           </p>
           
           <div className="space-y-2">
@@ -134,52 +137,52 @@ export default function AccessibilitySettings() {
                 <div className="text-xs text-gray-600 dark:text-slate-400">
                   {mode.desc}
                 </div>
-              </button>
-            ))}
-          </div>
-        </div>
+               </button>
+             ))}
+           </div>
+         </div>
 
-        {/* Preview Section */}
-        <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
+         {/* Preview Section */}
+         <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
-            Preview
+            {t('accessibility.preview.title')}
           </h2>
           
-          <div className="space-y-3">
-            <div className="p-4 bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-lg">
+           <div className="space-y-3">
+             <div className="p-4 bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-lg">
               <p className="text-gray-900 dark:text-slate-50 mb-2">
-                This is how text will appear with your current settings.
+                {t('accessibility.preview.mainText')}
               </p>
               <p className="text-sm text-gray-600 dark:text-slate-400">
-                Secondary text looks like this.
+                {t('accessibility.preview.secondaryText')}
               </p>
-            </div>
-            
-            <div className="flex gap-2">
-              <button className="flex-1 min-h-12 px-4 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200">
-                Primary Button
-              </button>
-              <button className="flex-1 min-h-12 px-4 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200">
-                Success
-              </button>
-            </div>
-          </div>
-        </div>
+             </div>
+             
+             <div className="flex gap-2">
+               <button className="flex-1 min-h-12 px-4 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200">
+                {t('accessibility.preview.primaryButton')}
+               </button>
+               <button className="flex-1 min-h-12 px-4 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200">
+                {t('accessibility.preview.successButton')}
+               </button>
+             </div>
+           </div>
+         </div>
 
-        {/* Reset Button */}
-        <button
+         {/* Reset Button */}
+         <button
           onClick={resetToDefaults}
           className="w-full min-h-12 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-lg transition-all duration-200"
-        >
-          Reset to Defaults
-        </button>
+         >
+          {t('accessibility.actions.reset')}
+         </button>
 
-        {/* Info Note */}
-        <div className="text-center text-xs text-gray-500 dark:text-slate-400 space-y-1">
-          <p>Settings are saved automatically</p>
-          <p>Changes apply across the entire app</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+         {/* Info Note */}
+         <div className="text-center text-xs text-gray-500 dark:text-slate-400 space-y-1">
+          <p>{t('accessibility.footer.autoSaveNote')}</p>
+          <p>{t('accessibility.footer.globalApplyNote')}</p>
+         </div>
+       </div>
+     </div>
+   )
+ }

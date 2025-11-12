@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth } from '../context/AuthContext'
 import BottomNav from '../component/BottomNav'
 import { useNavigate } from 'react-router-dom'
+import { useI18n } from '../context/I18nContext'
 import { 
   MapPin, Search,
   Apple, Carrot, Cookie, Milk, Coffee,
@@ -40,6 +41,17 @@ export default function Home() {
   const [appliedVoucher, setAppliedVoucher] = React.useState(null)
 
   const voucherMap = { 'AZAD10': 10, 'AZAD20': 20 }
+  const { t } = useI18n()
+
+  // simple formatter for translations containing {{placeholders}}
+  const format = (key, vars = {}) => {
+    let str = t(key)
+    Object.keys(vars).forEach(k => {
+      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
+      str = String(str).replace(re, vars[k])
+    })
+    return str
+  }
 
   const handleApplyVoucher = () => {
     const pct = voucherMap[voucherCode.trim()]
@@ -62,9 +74,9 @@ export default function Home() {
           >
             <MapPin size={20} className="text-blue-500 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-xs text-gray-600 dark:text-slate-400">Delivery to:</p>
+              <p className="text-xs text-gray-600 dark:text-slate-400">{t('home.header.deliveryTo')}</p>
               <p className="text-sm font-medium text-gray-900 dark:text-slate-50 truncate">
-                {(customer?.addresses?.[0]?.addressText) || 'Set delivery address in Settings'}
+                {(customer?.addresses?.[0]?.addressText) || t('home.header.setAddressPrompt')}
               </p>
             </div>
           </button>
@@ -75,7 +87,7 @@ export default function Home() {
             className="w-full h-12 flex items-center gap-3 px-4 bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-lg text-left"
           >
             <Search size={18} className="text-gray-400 dark:text-slate-500" />
-            <span className="text-gray-500 dark:text-slate-400">Search for items...</span>
+            <span className="text-gray-500 dark:text-slate-400">{t('home.header.searchPlaceholder')}</span>
           </button>
         </div>
       </header>
@@ -85,15 +97,17 @@ export default function Home() {
         
         {/* Categories Section */}
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">Categories</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.categories.title')}</h2>
           <div className="grid grid-cols-4 gap-3">
             {categories.map((category) => (
               <InfoCard
-                key={category.name}
+                key={category.query}
                 onClick={() => navigate(`/search-results?q=&category=${category.query}`)}
               >
                 <category.icon size={24} className="text-blue-500" />
-                <span className="text-xs font-medium text-gray-900 dark:text-slate-50">{category.name}</span>
+                <span className="text-xs font-medium text-gray-900 dark:text-slate-50">
+                  {t('home.categories.items.' + category.query)}
+                </span>
               </InfoCard>
             ))}
           </div>
@@ -101,37 +115,39 @@ export default function Home() {
 
         {/* Voucher Section */}
         <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">Apply Voucher</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.voucher.title')}</h3>
           <div className="flex gap-2">
             <input
               value={voucherCode}
               onChange={(e) => setVoucherCode(e.target.value.toUpperCase())}
-              placeholder="Enter voucher code"
+              placeholder={t('home.voucher.placeholder')}
               className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <button
               onClick={handleApplyVoucher}
               className="min-h-12 px-5 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg"
             >
-              Apply
+              {t('home.voucher.applyButton')}
             </button>
           </div>
           <div className="mt-2 min-h-[20px] text-sm">
-            {appliedVoucher?.invalid && <p className="text-red-600 dark:text-red-500">Invalid voucher code</p>}
-            {appliedVoucher?.pct && <p className="text-green-600 dark:text-green-500">Voucher applied! You get {appliedVoucher.pct}% off.</p>}
+            {appliedVoucher?.invalid && <p className="text-red-600 dark:text-red-500">{t('home.voucher.invalidMessage')}</p>}
+            {appliedVoucher?.pct && <p className="text-green-600 dark:text-green-500">{format('home.voucher.successMessage', { pct: appliedVoucher.pct })}</p>}
           </div>
         </section>
 
         {/* Recent Orders Section */}
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">Recent Orders</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.recentOrders.title')}</h2>
           <div className="grid grid-cols-2 gap-3">
             {[1, 2, 3].map((i) => (
               <InfoCard key={i} onClick={() => navigate('/cart')}>
                 <Cake size={20} className="text-blue-500" />
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-slate-50">Order #{100 + i}</p>
-                  <p className="text-xs text-gray-600 dark:text-slate-400">Delivered recently</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-slate-50">
+                    {format('home.recentOrders.orderTitle', { orderNumber: 100 + i })}
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-slate-400">{t('home.recentOrders.status')}</p>
                 </div>
               </InfoCard>
             ))}
@@ -140,11 +156,13 @@ export default function Home() {
 
         {/* Popular Brands Section */}
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">Popular Brands</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.popularBrands.title')}</h2>
           <div className="grid grid-cols-4 gap-3">
             {Array.from({ length: 8 }).map((_, idx) => (
               <InfoCard key={idx}>
-                <span className="font-semibold text-gray-900 dark:text-slate-50">Brand {idx + 1}</span>
+                <span className="font-semibold text-gray-900 dark:text-slate-50">
+                  {format('home.popularBrands.brandName', { brandNumber: idx + 1 })}
+                </span>
               </InfoCard>
             ))}
           </div>

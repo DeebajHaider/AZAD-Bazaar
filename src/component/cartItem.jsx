@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./cartItem.css";
+import { useI18n } from '../context/I18nContext'
 
-const Counter = ({ quantity, onChange, onRemove }) => {
+const Counter = ({ quantity, onChange, onRemove, itemName }) => {
   const decrement = () => {
     if (quantity > 1) onChange(quantity - 1)
     else onRemove()
@@ -11,14 +12,17 @@ const Counter = ({ quantity, onChange, onRemove }) => {
 
   const increment = () => onChange(quantity + 1)
 
+  const { t } = useI18n()
+  const removeLabel = t('cartItem.removeAriaLabel') ? t('cartItem.removeAriaLabel').replace('{{itemName}}', itemName) : `Remove ${itemName}`
+
   return (
     <div className="counter">
       {quantity === 1 ? (
-        <button onClick={decrement} className="counter-btn counter-btn-delete">
+        <button onClick={decrement} className="counter-btn counter-btn-delete" aria-label={removeLabel}>
           <Trash2 size={18} />
         </button>
       ) : (
-        <button onClick={decrement} className="counter-btn">
+        <button onClick={decrement} className="counter-btn" aria-label={removeLabel}>
           −
         </button>
       )}
@@ -31,6 +35,7 @@ const Counter = ({ quantity, onChange, onRemove }) => {
 }
 
 const CartItem = ({ item, onQuantityChange, onRemove }) => {
+  const { t } = useI18n()
   const [quantity, setQuantity] = useState(item.quantity || 0)
   const navigate = useNavigate()
 
@@ -56,7 +61,7 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
           type="button"
           onClick={() => navigate('/cart')}
           className="cart-item-link p-0 bg-transparent border-0"
-          aria-label={`Open cart for ${item.itemName}`}
+          aria-label={t('cartItem.viewDetailsAriaLabel') ? t('cartItem.viewDetailsAriaLabel').replace('{{itemName}}', item.itemName) : `Open cart for ${item.itemName}`}
         >
           <img src={item.itemPhoto} alt={item.itemName} className="cart-item-img" />
         </button>
@@ -68,19 +73,19 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
           type="button"
           onClick={() => navigate('/cart')}
           className="cart-item-name cart-item-link text-left"
-          aria-label={`Open cart for ${item.itemName}`}
+          aria-label={t('cartItem.viewDetailsAriaLabel') ? t('cartItem.viewDetailsAriaLabel').replace('{{itemName}}', item.itemName) : `Open cart for ${item.itemName}`}
         >
           {item.itemName}
         </button>
         <div className="cart-item-price">
-          <span className="price-current">Rs. {item.itemPrice}</span>
-          <span className="price-old">Rs. {item.itemOldPrice}</span>
+          <span className="price-current">{t('common.currencySymbol')}. {item.itemPrice}</span>
+          <span className="price-old">{t('common.currencySymbol')}. {item.itemOldPrice}</span>
         </div>
       </div>
 
       {/* Counter Section - 25% */}
       <div className="cart-item-counter">
-        <Counter quantity={quantity} onChange={handleChange} onRemove={handleRemove} />
+        <Counter quantity={quantity} onChange={handleChange} onRemove={handleRemove} itemName={item.itemName} />
       </div>
     </div>
   )

@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Search as SearchIcon, SlidersHorizontal, X } from 'lucide-react'
+import { ArrowLeft, Search as SearchIcon, SlidersHorizontal } from 'lucide-react'
 import ItemCard from '../component/ItemCard'
 import { useProducts } from '../api'
 import { useData } from '../context/DataContext'
+import { useI18n } from '../context/I18nContext'
 
 // Reusable component for Sort Buttons for cleaner code
-const SortButton = ({ label, currentSort, currentOrder, onClick }) => {
-  const isActive = currentSort === label.toLowerCase()
+const SortButton = ({ sortKey, label, currentSort, currentOrder, onClick }) => {
+  const isActive = currentSort === sortKey
   return (
     <button
       type="button"
@@ -27,6 +28,14 @@ const SortButton = ({ label, currentSort, currentOrder, onClick }) => {
 }
 
 export default function SearchResults() {
+  const { t } = useI18n()
+
+  // Simple template formatter for "{{var}}" tokens in locale strings
+  const fmt = (template, vars = {}) => {
+    if (!template || typeof template !== 'string') return template ?? ''
+    return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k) => (vars[k] !== undefined ? String(vars[k]) : ''))
+  }
+
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [showFilters, setShowFilters] = useState(false)
@@ -130,7 +139,7 @@ export default function SearchResults() {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            aria-label="Go back"
+            aria-label={t('searchResults.header.backButtonAriaLabel')}
             className="min-h-11 min-w-11 flex-shrink-0 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200"
           >
             <ArrowLeft size={20} />
@@ -142,12 +151,12 @@ export default function SearchResults() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search for items..."
+              placeholder={t('searchResults.header.placeholder')}
               className="w-full pl-4 pr-12 h-12 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
             <button
               type="submit"
-              aria-label="Search"
+              aria-label={t('searchResults.header.searchButtonAriaLabel')}
               className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors"
             >
               <SearchIcon size={20} />
@@ -160,11 +169,11 @@ export default function SearchResults() {
         {/* Search Info & Filter Toggle */}
         <section className="p-4 border-b border-gray-200 dark:border-slate-800">
           <p className="text-sm text-gray-600 dark:text-slate-400 mb-2">
-            Showing results for "{searchParams.get('q')}"
+            {fmt(t('searchResults.summary.showingResultsFor'), { query: searchParams.get('q') ?? '' })}
           </p>
           <div className="flex justify-between items-center gap-3">
             <p className="font-medium text-gray-900 dark:text-slate-50">
-              {totalResults} results found
+              {fmt(t(totalResults === 1 ? 'searchResults.summary.resultsFound_one' : 'searchResults.summary.resultsFound_other'), { count: totalResults })}
             </p>
             {/* Filter Toggle: Styled as a secondary button. */}
             <button
@@ -172,7 +181,7 @@ export default function SearchResults() {
               className="min-h-11 px-4 py-2 flex items-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-lg transition-all duration-200"
             >
               <SlidersHorizontal size={18} />
-              <span>Filters</span>
+              <span>{t('searchResults.summary.filtersButton')}</span>
             </button>
           </div>
         </section>
@@ -182,13 +191,13 @@ export default function SearchResults() {
           <section className="bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 p-4">
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">Category</label>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">{t('searchResults.filterPanel.categoryLabel')}</label>
                 <select
                   value={filters.category}
                   onChange={(e) => setFilters({ ...filters, category: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="">All Categories</option>
+                  <option value="">{t('searchResults.filterPanel.allCategories')}</option>
                   {(sortedCategories || []).map(c => (
                     <option key={c._id ?? c.id} value={c._id ?? c.id}>{c.name}</option>
                   ))}
@@ -203,7 +212,7 @@ export default function SearchResults() {
                     onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
                     className="w-5 h-5 rounded border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-800 text-blue-500 focus:ring-blue-500"
                   />
-                  <span className="text-sm font-medium text-gray-900 dark:text-slate-50">In Stock Only</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-slate-50">{t('searchResults.filterPanel.inStockLabel')}</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
@@ -212,7 +221,7 @@ export default function SearchResults() {
                     onChange={(e) => setFilters({ ...filters, discount: e.target.checked })}
                     className="w-5 h-5 rounded border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-800 text-blue-500 focus:ring-blue-500"
                   />
-                  <span className="text-sm font-medium text-gray-900 dark:text-slate-50">On Discount</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-slate-50">{t('searchResults.filterPanel.onDiscountLabel')}</span>
                 </label>
               </div>
 
@@ -220,11 +229,11 @@ export default function SearchResults() {
                 <button
                   onClick={() => setShowFilters(false)}
                   className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200"
-                >Apply</button>
+                >{t('searchResults.filterPanel.applyButton')}</button>
                 <button
                   onClick={() => setShowFilters(false)}
                   className="w-full min-h-12 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-lg transition-all duration-200"
-                >Close</button>
+                >{t('searchResults.filterPanel.closeButton')}</button>
               </div>
             </div>
           </section>
@@ -235,30 +244,30 @@ export default function SearchResults() {
           {/* Active Filter Pills: Using rounded-full for a modern look. */}
           {hasActiveFilters && (
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-sm font-medium text-gray-600 dark:text-slate-400">Active:</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-slate-400">{t('searchResults.activeFilters.label')}</span>
               {filters.category && (
                 <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">
-                  {categories.find(c => c._id === filters.category)?.name || 'Category'}
+                  {categories.find(c => c._id === filters.category)?.name || t('searchResults.activeFilters.categoryFallback')}
                 </span>
               )}
-              {filters.inStock && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">In Stock</span>}
-              {filters.discount && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">Discount</span>}
+              {filters.inStock && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">{t('searchResults.activeFilters.inStock')}</span>}
+              {filters.discount && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">{t('searchResults.activeFilters.discount')}</span>}
               <button
                 onClick={() => setFilters({ category: '', sortBy: 'relevance', discount: false, inStock: false, sortOrder: 'asc' })}
                 className="text-sm text-red-600 dark:text-red-500 hover:underline ml-auto"
               >
-                Clear
+                {t('searchResults.activeFilters.clearAllButton')}
               </button>
             </div>
           )}
 
           {/* Sort Toggles */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">Sort by</label>
+            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">{t('searchResults.sorting.label')}</label>
             <div className="flex gap-2 flex-wrap">
-              <SortButton label="Price" currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('price')} />
-              <SortButton label="Discount" currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('discount')} />
-              <SortButton label="Name" currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('name')} />
+              <SortButton sortKey="price" label={t('searchResults.sorting.price')} currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('price')} />
+              <SortButton sortKey="discount" label={t('searchResults.sorting.discount')} currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('discount')} />
+              <SortButton sortKey="name" label={t('searchResults.sorting.name')} currentSort={filters.sortBy} currentOrder={filters.sortOrder} onClick={() => handleSortClick('name')} />
             </div>
           </div>
         </section>
@@ -266,10 +275,10 @@ export default function SearchResults() {
         {/* Results List */}
         <section className="p-4">
           <div className="space-y-4">
-            {loadingProducts && <p className="text-center text-gray-600 dark:text-slate-400 p-8">Loading...</p>}
-            {productsError && <p className="text-center text-red-600 dark:text-red-500 p-8">Error loading products.</p>}
+            {loadingProducts && <p className="text-center text-gray-600 dark:text-slate-400 p-8">{t('searchResults.results.loading')}</p>}
+            {productsError && <p className="text-center text-red-600 dark:text-red-500 p-8">{t('searchResults.results.error')}</p>}
             {!loadingProducts && currentResults.length === 0 && (
-              <p className="text-center text-gray-600 dark:text-slate-400 p-8">No results found. Try adjusting your search or filters.</p>
+              <p className="text-center text-gray-600 dark:text-slate-400 p-8">{t('searchResults.results.noResults')}</p>
             )}
             {!loadingProducts && currentResults.map((item) => (
               <div key={item._id ?? item.id} onClick={() => navigate('/product', { state: { product: item } })}>
@@ -285,16 +294,18 @@ export default function SearchResults() {
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
+              aria-label={t('searchResults.pagination.previousButtonAriaLabel')}
               className="min-h-11 min-w-11 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >←</button>
             
             <span className="text-sm font-medium text-gray-600 dark:text-slate-400">
-              Page {currentPage} of {totalPages}
+              {fmt(t('searchResults.pagination.pageInfo'), { currentPage, totalPages })}
             </span>
 
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
+              aria-label={t('searchResults.pagination.nextButtonAriaLabel')}
               className="min-h-11 min-w-11 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >→</button>
           </nav>
