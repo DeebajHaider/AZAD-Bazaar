@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./cartItem.css";
 
 const Counter = ({ quantity, onChange, onRemove }) => {
@@ -31,6 +32,7 @@ const Counter = ({ quantity, onChange, onRemove }) => {
 
 const CartItem = ({ item, onQuantityChange, onRemove }) => {
   const [quantity, setQuantity] = useState(item.quantity || 0)
+  const navigate = useNavigate()
 
   // sync when parent updates
   React.useEffect(() => {
@@ -50,12 +52,26 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
     <div className="cart-item">
       {/* Image Section - 15% */}
       <div className="cart-item-image">
-        <img src={item.itemPhoto} alt={item.itemName} className="cart-item-img" />
+        <button
+          type="button"
+          onClick={() => navigate('/cart')}
+          className="cart-item-link p-0 bg-transparent border-0"
+          aria-label={`Open cart for ${item.itemName}`}
+        >
+          <img src={item.itemPhoto} alt={item.itemName} className="cart-item-img" />
+        </button>
       </div>
 
       {/* Middle Section - 60% */}
       <div className="cart-item-details">
-        <p className="cart-item-name">{item.itemName}</p>
+        <button
+          type="button"
+          onClick={() => navigate('/cart')}
+          className="cart-item-name cart-item-link text-left"
+          aria-label={`Open cart for ${item.itemName}`}
+        >
+          {item.itemName}
+        </button>
         <div className="cart-item-price">
           <span className="price-current">Rs. {item.itemPrice}</span>
           <span className="price-old">Rs. {item.itemOldPrice}</span>
