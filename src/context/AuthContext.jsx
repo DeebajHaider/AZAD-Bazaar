@@ -31,6 +31,8 @@ export function AuthProvider({ children }) {
         setLoading(false)
         return
       }
+      // ensure axios client has token on init to attach to requests
+      try { import('../api/client').then((m) => m.setAuthToken(token)).catch(() => {}) } catch (e) {}
       try {
         const resp = await authService.me()
         if (!mounted) return
@@ -80,6 +82,10 @@ export function AuthProvider({ children }) {
       }
       setToken(resp.token)
       setUser(resp.user || null)
+      // ensure axios client has the token immediately (avoid timing issues)
+      try {
+        import('../api/client').then((m) => m.setAuthToken(resp.token)).catch(() => {})
+      } catch (e) {}
       // fetch customer if present
       if (resp.user && resp.user.customerId) {
         try {
@@ -133,6 +139,7 @@ export function AuthProvider({ children }) {
     } catch (e) {}
     setToken(null)
     setUser(null)
+    try { import('../api/client').then((m) => m.setAuthToken(null)).catch(() => {}) } catch (e) {}
   }
 
   const value = { user, token, loading, customer, requestOtp, verifyOtp, createCustomer, getCustomer, updateCustomer, logout }

@@ -10,7 +10,7 @@ export default function Product() {
   const navigate = useNavigate()
   const [qty, setQty] = useState(0)
   const [liked, setLiked] = useState(false)
-  const { addItem, updateQuantity } = useCart()
+  const { addToCart, decrementProduct, items: cartItems, loading: cartLoading } = useCart()
 
   const location = useLocation()
   const incoming = location.state && location.state.product ? location.state.product : null
@@ -62,6 +62,13 @@ export default function Product() {
     : (product.inStock ? Infinity : 0)
   const inStock = availableStock > 0
   const displayPrice = product.discountedPrice ?? product.originalPrice ?? product.price
+
+  // Sync local qty with cart when product or cart changes
+  React.useEffect(() => {
+    const pid = productIdForCart
+    const found = cartItems.find((it) => it.itemCode === pid)
+    setQty(found ? found.quantity : 0)
+  }, [productIdForCart, cartItems])
 
   return (
     <>
@@ -117,15 +124,8 @@ export default function Product() {
                   onClick={() => {
                     if (!inStock) return;
                     setQty(1)
-                    // add to cart with quantity 1
-                    addItem({
-                      itemCode: productIdForCart,
-                      itemName: product.name ?? product.title,
-                      itemPhoto: mainImage,
-                      itemPrice: product.discountedPrice ?? product.originalPrice ?? product.price,
-                      itemOldPrice: product.originalPrice ?? product.price ?? (product.discountedPrice ?? product.price),
-                      quantity: 1,
-                    })
+                    // add to cart via API
+                    addToCart(productIdForCart)
                   }}
                   disabled={!product.isActive || !inStock}
                   className={`w-full text-white font-medium ${!inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -137,11 +137,11 @@ export default function Product() {
                 <div className="w-full" style={{display:'flex'}}>
                   <button
                     onClick={() => {
-                      const next = Math.max(0, qty - 1)
-                      setQty(next)
-                      if (next === 0) updateQuantity(productIdForCart, 0)
-                      else updateQuantity(productIdForCart, next)
-                    }}
+                        const next = Math.max(0, qty - 1)
+                        setQty(next)
+                        // call decrement API once (will remove if quantity becomes 0)
+                        decrementProduct(productIdForCart)
+                      }}
                     style={{width:48, height:48, display:'flex', alignItems:'center', justifyContent:'center', borderRadius:12, border:'1px solid var(--color-border)', background:'var(--color-surface)'}}
                   >
                     <Minus size={16} />
@@ -154,7 +154,8 @@ export default function Product() {
                       const next = qty + 1
                       if (!inStock || (isFinite(availableStock) && next > availableStock)) return;
                       setQty(next)
-                      updateQuantity(productIdForCart, next)
+                      // increment via API
+                      addToCart(productIdForCart)
                     }}
                     disabled={!inStock || (isFinite(availableStock) && qty >= availableStock)}
                     style={{

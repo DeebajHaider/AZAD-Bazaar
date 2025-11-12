@@ -18,8 +18,13 @@ client.interceptors.request.use(
   (config) => {
     // Example: attach token from localStorage if available
     try {
-      const token = localStorage.getItem('token');
-      if (token) config.headers.Authorization = `Bearer ${token}`;
+      const token = localStorage.getItem('token') || (window && window.__AZAD_TOKEN__);
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      } else {
+        // no token found; leave Authorization as-is (caller may have set it)
+        // console.debug('No auth token present for request', config.url);
+      }
     } catch (e) {
       // ignore (SSR or privacy)
     }
@@ -41,3 +46,14 @@ client.interceptors.response.use(
 );
 
 export default client;
+
+// Helper for explicitly setting token at runtime (e.g., after login)
+export function setAuthToken(token) {
+  try {
+    if (typeof window !== 'undefined') window.__AZAD_TOKEN__ = token;
+    if (token) client.defaults.headers.Authorization = `Bearer ${token}`;
+    else delete client.defaults.headers.Authorization;
+  } catch (e) {
+    // ignore
+  }
+}

@@ -4,6 +4,10 @@ const User = require('../models/User');
 const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || req.headers.Authorization;
+    // DEBUG: log incoming authorization header for troubleshooting
+    if (process.env.DEBUG_AUTH === 'true') {
+      console.debug('AuthMiddleware incoming authorization header:', authHeader);
+    }
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ message: 'Unauthorized: missing token' });
     }

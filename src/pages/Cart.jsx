@@ -5,7 +5,7 @@ import { ShoppingCart, Menu } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 
 export default function Cart() {
-  const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings } = useCart()
+  const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings, loading } = useCart()
 
   const navigate = useNavigate()
 
@@ -29,7 +29,17 @@ export default function Cart() {
               display: none;
             }
           `}</style>
-          <CartItemList items={cartItems} onQuantityChange={updateQuantity} onRemove={removeItem} />
+          <CartItemList
+            items={cartItems}
+            onQuantityChange={(itemCode, next) => {
+              // delegate to context updateQuantity which will call API and refresh
+              updateQuantity(itemCode, next)
+            }}
+            onRemove={(itemCode) => {
+              // remove fully
+              removeItem(itemCode)
+            }}
+          />
         </div>
 
         {/* Checkout button at the bottom */}

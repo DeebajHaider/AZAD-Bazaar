@@ -7,6 +7,7 @@ const categoryCtrl = require('../controllers/categoryController');
 const voucherCtrl = require('../controllers/voucherController');
 const orderCtrl = require('../controllers/orderController');
 const customerCtrl = require('../controllers/customerController');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Products
 router.post('/products', productCtrl.createProduct);
@@ -38,5 +39,11 @@ router.post('/customers', customerCtrl.createCustomer);
 router.get('/customers', customerCtrl.listCustomers);
 router.get('/customers/:id', customerCtrl.getCustomer);
 router.put('/customers/:id', customerCtrl.updateCustomer);
+
+// Cart endpoints (authenticated)
+router.get('/cart', authMiddleware, customerCtrl.getCart);
+router.post('/cart/add', authMiddleware, customerCtrl.addProductToCart);
+router.post('/cart/decrement', authMiddleware, customerCtrl.decrementProductInCart);
+router.post('/cart/clear', authMiddleware, customerCtrl.clearCart);
 
 module.exports = router;

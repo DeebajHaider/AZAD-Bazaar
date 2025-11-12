@@ -1,5 +1,6 @@
 const Customer = require('../models/Customer');
 const mongoose = require('mongoose');
+const Product = require('../models/Product');
 
 // Helper to normalize an incoming single address into addresses array
 function buildAddressesFromPayload(body) {
@@ -73,5 +74,157 @@ exports.updateCustomer = async (req, res) => {
   } catch (err) {
     console.error('updateCustomer error', err);
     return res.status(400).json({ message: err.message });
+  }
+};
+
+// --- Cart APIs ---
+// Get cart for current authenticated user (requires req.user from authMiddleware)
+exports.getCart = async (req, res) => {
+  try {
+    console.log('getCart called', { user: req.user ? { id: req.user._id, phone: req.user.phone, customerId: req.user.customerId } : null });
+    const user = req.user;
+    if (!user || !user.customerId) return res.json({ items: [], products: [] });
+
+    const customer = await Customer.findById(user.customerId).lean();
+    if (!customer || !customer.currentCart || !customer.currentCart.items.length) {
+      return res.json({ items: [], products: [] });
+    }
+
+    const items = customer.currentCart.items.map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+
+    // Fetch product minimal details
+    const ids = items.map((i) => i.productId).filter(Boolean);
+    const products = await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1 }).lean();
+
+    console.log('getCart returning', { itemsCount: items.length, productsCount: products.length });
+
+    return res.json({ items, products });
+  } catch (err) {
+    console.error('getCart error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Add product to cart: body:{ productId }
+exports.addProductToCart = async (req, res) => {
+  try {
+    console.log('addProductToCart called', { body: req.body, user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    const { productId } = req.body;
+    if (!user || !user.customerId) return res.status(400).json({ message: 'Customer not linked to user' });
+    if (!productId || !mongoose.Types.ObjectId.isValid(productId)) return res.status(400).json({ message: 'Invalid productId' });
+
+    const product = await Product.findById(productId).lean();
+    console.log('addProductToCart product loaded', { productId, exists: !!product, stockQuantity: product ? product.stockQuantity : null });
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    if (!product.stockQuantity || product.stockQuantity <= 0) return res.status(400).json({ message: 'Product out of stock' });
+
+    const cid = user.customerId;
+
+    // Try to increment quantity if item already exists
+    const incrementResult = await Customer.findOneAndUpdate(
+      { _id: cid, 'currentCart.items.productId': productId },
+      {
+        $inc: { 'currentCart.items.$.quantity': 1 },
+        $set: { 'currentCart.items.$.addedAt': new Date(), 'currentCart.lastUpdated': new Date() }
+      },
+      { new: true }
+    ).lean();
+
+    if (incrementResult) {
+      console.log('addProductToCart incrementResult', { customerId: cid, items: incrementResult.currentCart ? incrementResult.currentCart.items.length : 0 });
+      // return same shape as getCart: { items, products }
+      const items = (incrementResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+      const ids = items.map((i) => i.productId).filter(Boolean);
+      const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+      return res.json({ items, products });
+    }
+
+    // Otherwise push new item
+    const newItem = { productId: new mongoose.Types.ObjectId(productId), quantity: 1, addedAt: new Date() };
+    const pushResult = await Customer.findOneAndUpdate(
+      { _id: cid },
+      { $push: { 'currentCart.items': newItem }, $set: { 'currentCart.lastUpdated': new Date() } },
+      { new: true }
+    ).lean();
+
+    if (!pushResult) return res.status(404).json({ message: 'Customer not found' });
+  console.log('addProductToCart pushResult', { customerId: cid, items: pushResult.currentCart ? pushResult.currentCart.items.length : 0 });
+  const items = (pushResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+  const ids = items.map((i) => i.productId).filter(Boolean);
+  const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+  return res.json({ items, products });
+  } catch (err) {
+    console.error('addProductToCart error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Decrement product quantity in cart (remove if 0). body:{ productId }
+exports.decrementProductInCart = async (req, res) => {
+  try {
+    console.log('decrementProductInCart called', { body: req.body, user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    const { productId } = req.body;
+    if (!user || !user.customerId) return res.status(400).json({ message: 'Customer not linked to user' });
+    if (!productId || !mongoose.Types.ObjectId.isValid(productId)) return res.status(400).json({ message: 'Invalid productId' });
+
+    const cid = user.customerId;
+
+    // Try decrement where quantity > 1
+    const decResult = await Customer.findOneAndUpdate(
+      { _id: cid, 'currentCart.items.productId': productId, 'currentCart.items.quantity': { $gt: 1 } },
+      { $inc: { 'currentCart.items.$.quantity': -1 }, $set: { 'currentCart.items.$.addedAt': new Date(), 'currentCart.lastUpdated': new Date() } },
+      { new: true }
+    ).lean();
+
+    if (decResult) {
+      console.log('decrementProductInCart decResult', { customerId: cid, items: decResult.currentCart ? decResult.currentCart.items.length : 0 });
+      const items = (decResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+      const ids = items.map((i) => i.productId).filter(Boolean);
+      const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+      return res.json({ items, products });
+    }
+
+    // Otherwise remove the item completely
+    const pullResult = await Customer.findOneAndUpdate(
+      { _id: cid },
+      { $pull: { 'currentCart.items': { productId: new mongoose.Types.ObjectId(productId) } }, $set: { 'currentCart.lastUpdated': new Date() } },
+      { new: true }
+    ).lean();
+
+  if (!pullResult) return res.status(404).json({ message: 'Customer not found' });
+  console.log('decrementProductInCart pullResult', { customerId: cid, items: pullResult.currentCart ? pullResult.currentCart.items.length : 0 });
+  const items = (pullResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+  const ids = items.map((i) => i.productId).filter(Boolean);
+  const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+  return res.json({ items, products });
+  } catch (err) {
+    console.error('decrementProductInCart error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Clear cart (server-side): empties currentCart.items
+exports.clearCart = async (req, res) => {
+  try {
+    console.log('clearCart called', { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    if (!user || !user.customerId) return res.status(400).json({ message: 'Customer not linked to user' });
+
+    const cid = user.customerId;
+    const result = await Customer.findOneAndUpdate(
+      { _id: cid },
+      { $set: { 'currentCart.items': [], 'currentCart.lastUpdated': new Date() } },
+      { new: true }
+    ).lean();
+
+    if (!result) return res.status(404).json({ message: 'Customer not found' });
+    console.log('clearCart success', { customerId: cid });
+    // return empty cart shape
+    return res.json({ items: [], products: [] });
+  } catch (err) {
+    console.error('clearCart error', err);
+    return res.status(500).json({ message: 'Server error' });
   }
 };

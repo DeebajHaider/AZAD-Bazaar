@@ -25,7 +25,6 @@ DB Schema
             "productId": "ObjectId",
             "quantity": 2,
             "addedAt": "timestamp",
-            "variant": "string"               // optional
           }
         ],
         "vouchers": ["ObjectId"]              // applied vouchers
