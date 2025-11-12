@@ -67,6 +67,14 @@ export default function Home() {
       {/* Consolidated Sticky Header for Address and Search */}
       <header className="sticky top-0 z-20 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800">
         <div className="max-w-[430px] mx-auto p-3 space-y-3">
+          {/* Site Logo - replace the src with your production logo URL */}
+          <div className="flex items-center justify-center">
+            <img
+              src="src\Azad-Bazaar-transparent.png"
+              alt="Azad Bazaar logo"
+              style={{ height: 40, objectFit: 'contain' }}
+            />
+          </div>
           {/* Address Bar */}
           <button 
             onClick={() => navigate('/settings')} // Navigate to settings to change address
