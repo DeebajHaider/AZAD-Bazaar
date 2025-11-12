@@ -8,9 +8,11 @@ try {
   const savedTheme = localStorage.getItem('azad_theme')
   const savedFont = localStorage.getItem('azad_fontSize')
   if (savedTheme === 'dark') {
+    console.log('Applying dark theme before React mounts')
     document.documentElement.classList.add('dark')
     document.documentElement.classList.add('dark-theme')
   } else {
+    console.log('Applying light theme before React mounts')
     document.documentElement.classList.remove('dark')
     document.documentElement.classList.remove('dark-theme')
   }

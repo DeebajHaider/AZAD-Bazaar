@@ -13,6 +13,8 @@ import { CartProvider } from './context/CartContext'
 import { DataProvider } from './context/DataContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import Login from './pages/Login'
+import { AccessibilityProvider } from './context/AccessibilityContext'
+import AccessibilitySettings from './pages/AccessibilitySettings'
 
 export default function App() {
   const AuthGate = () => {
@@ -25,6 +27,7 @@ export default function App() {
           <div style={{fontFamily: 'sans-serif', position: 'relative', height: '100%'}}>
             <Routes>
               <Route path="/*" element={<Login />} />
+             <Route path="/accessibility" element={<AccessibilitySettings />} />
             </Routes>
           </div>
         </Router>
@@ -44,6 +47,7 @@ export default function App() {
             <Route path="/search-results" element={<SearchResults />} />
             <Route path="/product" element={<Product />} />
             <Route path="/address" element={<Address />} />
+            <Route path="/accessibility" element={<AccessibilitySettings />} />
           </Routes>
         </div>
       </Router>
@@ -51,7 +55,8 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider>
+  <ThemeProvider>
+    <AccessibilityProvider>
       <AuthProvider>
         <DataProvider>
           <CartProvider>
@@ -59,6 +64,7 @@ export default function App() {
           </CartProvider>
         </DataProvider>
       </AuthProvider>
-    </ThemeProvider>
+    </AccessibilityProvider>
+  </ThemeProvider>
   )
 }

@@ -11,6 +11,15 @@ export function ThemeProvider({ children }) {
     localStorage.setItem('theme', theme)
   }, [theme])
 
+  useEffect(() => {
+    const root = document.documentElement
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  }, [theme])
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
@@ -18,6 +27,8 @@ export function ThemeProvider({ children }) {
   )
 }
 
-export function useTheme() {
-  return useContext(ThemeContext)
-}
+// export hook as a top-level const for stable HMR compatibility
+export const useTheme = () => useContext(ThemeContext)
+
+// also provide a default export for the context object to keep export shape stable
+export default ThemeContext
