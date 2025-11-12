@@ -46,3 +46,4 @@ debug.log
 .vite/
 
 venv
+**.env
