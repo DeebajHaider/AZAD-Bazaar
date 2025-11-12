@@ -142,14 +142,22 @@
    BASE STYLES
    ============================================================================ */
 
-html,
-body {
+html {
   height: 100%;
   margin: 0;
   padding: 0;
   background: var(--color-bg);
   color: var(--color-text-primary);
 }
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-text-tertiary);
+  color: var(--color-text-primary);
+}
+
 
 body {
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
