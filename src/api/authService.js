@@ -27,7 +27,7 @@ const authService = {
   },
 
   createCustomer: async (payload) => {
-    const resp = await client.post('/data/customers', payload)
+    const resp = await client.post('/customers', payload)
     return resp.data
   }
 }

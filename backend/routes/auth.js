@@ -8,6 +8,7 @@ const { generateOtp } = require('../utils/otp');
 const { sendOtp } = require('../utils/sendOtp');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middleware/authMiddleware');
+const mongoose = require('mongoose');
 
 // Request OTP
 router.post('/request-otp', async (req, res) => {
@@ -57,8 +58,17 @@ router.post('/verify-otp', async (req, res) => {
       if (!customer) {
         const payload = { phone };
         if (name) payload.name = name;
-        if (address) payload.address = address; // if your Customer model accepts address; harmless if ignored
-        if (typeof lat !== 'undefined' || typeof lng !== 'undefined') payload.location = { lat: lat || null, lng: lng || null };
+        // Convert incoming single address + lat/lng into addresses array (single object)
+        if (address) {
+          payload.addresses = [{
+            addressId: new mongoose.Types.ObjectId().toString(),
+            label: 'Home',
+            addressText: address,
+            lat: typeof lat !== 'undefined' ? lat : null,
+            lng: typeof lng !== 'undefined' ? lng : null,
+            isDefault: true
+          }];
+        }
         try {
           customer = await Customer.create(payload);
         } catch (err) {

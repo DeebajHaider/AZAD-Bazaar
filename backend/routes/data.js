@@ -37,5 +37,6 @@ router.get('/orders/:id', orderCtrl.getOrder);
 router.post('/customers', customerCtrl.createCustomer);
 router.get('/customers', customerCtrl.listCustomers);
 router.get('/customers/:id', customerCtrl.getCustomer);
+router.put('/customers/:id', customerCtrl.updateCustomer);
 
 module.exports = router;

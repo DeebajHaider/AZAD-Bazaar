@@ -14,6 +14,14 @@ export function AuthProvider({ children }) {
   })
   const [token, setToken] = useState(() => localStorage.getItem('token') || null)
   const [loading, setLoading] = useState(true)
+  const [customer, setCustomer] = useState(() => {
+    try {
+      const raw = localStorage.getItem('azad_customer')
+      return raw ? JSON.parse(raw) : null
+    } catch (e) {
+      return null
+    }
+  })
 
   useEffect(() => {
     // simple init: verify token by calling /me if present
@@ -27,6 +35,21 @@ export function AuthProvider({ children }) {
         const resp = await authService.me()
         if (!mounted) return
         setUser(resp.user || null)
+        // if user has customerId, try fetching customer into global state
+        if (resp.user && resp.user.customerId) {
+          try {
+            // dynamic import to avoid circular issues
+            const customerService = (await import('../api/customerService')).default
+            const cust = await customerService.getCustomer(resp.user.customerId)
+            if (mounted) {
+              setCustomer(cust)
+              try { localStorage.setItem('azad_customer', JSON.stringify(cust)) } catch (e) {}
+            }
+          } catch (err) {
+            // ignore
+            console.warn('could not fetch customer on init', err)
+          }
+        }
       } catch (err) {
         console.warn('auth me failed', err)
         // invalid token -> clear
@@ -34,6 +57,7 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('azad_user')
         setToken(null)
         setUser(null)
+        setCustomer(null)
       } finally {
         if (mounted) setLoading(false)
       }
@@ -45,8 +69,8 @@ export function AuthProvider({ children }) {
     return authService.requestOtp(phone, isNewUser)
   }
 
-  async function verifyOtp(phone, code) {
-    const resp = await authService.verifyOtp(phone, code)
+  async function verifyOtp(phone, code, profile = null) {
+    const resp = await authService.verifyOtp(phone, code, profile)
     if (resp && resp.token) {
       try {
         localStorage.setItem('token', resp.token)
@@ -56,6 +80,17 @@ export function AuthProvider({ children }) {
       }
       setToken(resp.token)
       setUser(resp.user || null)
+      // fetch customer if present
+      if (resp.user && resp.user.customerId) {
+        try {
+          const customerService = (await import('../api/customerService')).default
+          const cust = await customerService.getCustomer(resp.user.customerId)
+          setCustomer(cust)
+          try { localStorage.setItem('azad_customer', JSON.stringify(cust)) } catch (e) {}
+        } catch (err) {
+          console.warn('fetch customer after login failed', err)
+        }
+      }
     }
     return resp
   }
@@ -63,6 +98,32 @@ export function AuthProvider({ children }) {
   async function createCustomer(payload) {
     const resp = await authService.createCustomer(payload)
     return resp
+  }
+
+  // get customer by id and sync to global state
+  async function getCustomer(id) {
+    try {
+      const customerService = (await import('../api/customerService')).default
+      const cust = await customerService.getCustomer(id)
+      setCustomer(cust)
+      try { localStorage.setItem('azad_customer', JSON.stringify(cust)) } catch (e) {}
+      return cust
+    } catch (err) {
+      throw err
+    }
+  }
+
+  // update customer and sync to global state
+  async function updateCustomer(id, payload) {
+    try {
+      const customerService = (await import('../api/customerService')).default
+      const updated = await customerService.updateCustomer(id, payload)
+      setCustomer(updated)
+      try { localStorage.setItem('azad_customer', JSON.stringify(updated)) } catch (e) {}
+      return updated
+    } catch (err) {
+      throw err
+    }
   }
 
   function logout() {
@@ -74,7 +135,7 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
-  const value = { user, token, loading, requestOtp, verifyOtp, createCustomer, logout }
+  const value = { user, token, loading, customer, requestOtp, verifyOtp, createCustomer, getCustomer, updateCustomer, logout }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

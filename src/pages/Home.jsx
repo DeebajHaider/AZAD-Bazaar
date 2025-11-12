@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAuth } from '../context/AuthContext'
 import BottomNav from '../component/BottomNav'
 import { useNavigate } from 'react-router-dom'
 import { 
@@ -23,6 +24,7 @@ const categories = [
 
 export default function Home() {
   const navigate = useNavigate()
+  const { customer } = useAuth()
    const [voucherCode, setVoucherCode] = React.useState('')
    const [appliedVoucher, setAppliedVoucher] = React.useState(null)
 
@@ -91,7 +93,9 @@ export default function Home() {
           <div style={{textAlign:'left'}}>
             <div style={{fontSize:'var(--font-size-xs)', color:'var(--color-text-secondary)'}}>Delivery to:</div>
             <div style={{fontSize:'var(--font-size-sm)', fontWeight:500, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', color:'var(--color-text-primary)'}}>
-              Etawah Society, Street 5, House Number 49
+              {(
+                customer && Array.isArray(customer.addresses) && customer.addresses[0] && customer.addresses[0].addressText
+              ) || 'Set delivery address'}
             </div>
           </div>
         </button>

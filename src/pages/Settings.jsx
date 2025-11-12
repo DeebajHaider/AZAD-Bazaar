@@ -6,17 +6,14 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Settings() {
   const { theme, setTheme } = useTheme()
-  const { logout } = useAuth()
+  const { logout, customer, updateCustomer } = useAuth()
   const navigate = useNavigate()
   const [colorblindMode, setColorblindMode] = useState('none')
   const [fontSize, setFontSize] = useState(16)
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    address: '',
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
+    address: ''
   })
 
   const handleInputChange = (e) => {
@@ -36,6 +33,17 @@ export default function Settings() {
       // ignore
     }
   }, [])
+
+  // populate form from global customer when available
+  useEffect(() => {
+    if (customer) {
+      setFormData({
+        name: customer.name || '',
+        phone: customer.phone || '',
+        address: (Array.isArray(customer.addresses) && customer.addresses[0] && customer.addresses[0].addressText) || ''
+      })
+    }
+  }, [customer])
 
   // Apply theme and font size to document and persist fontSize to localStorage
   useEffect(() => {
@@ -59,16 +67,23 @@ export default function Settings() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
-    alert('Saved (placeholder)')
+    // Update name and address via API
+    ;(async () => {
+      try {
+        if (!customer || !customer._id) return alert('No customer available')
+        const payload = { name: formData.name }
+        // send address as single string; backend will normalize into addresses array
+        payload.address = formData.address
+        const updated = await updateCustomer(customer._id, payload)
+        alert('Saved')
+        // optional: you could update local form from updated response
+      } catch (err) {
+        console.error('update customer failed', err)
+        alert(err && err.message ? err.message : 'Update failed')
+      }
+    })()
   }
 
-  const handleDeleteAccount = () => {
-    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      // Handle account deletion
-      alert('Account deleted (placeholder)')
-    }
-  }
 
   const handleLogout = () => {
     if (window.confirm('Sign out now?')) {
@@ -179,11 +194,9 @@ export default function Settings() {
               type="tel"
               name="phone"
               value={formData.phone}
-              onChange={handleInputChange}
-              className="form-input"
-              placeholder="Enter your phone number"
-              pattern="[0-9]*"
-              inputMode="numeric"
+              readOnly
+              className="form-input bg-gray-100"
+              placeholder="Phone (read-only)"
             />
           </div>
 
@@ -199,63 +212,12 @@ export default function Settings() {
           </div>
 
           <div className="form-group">
-            <h4 className="section-title">Change Password</h4>
-            
-            <div className="form-group">
-              <label className="form-label">Current Password</label>
-              <input
-                type="password"
-                name="currentPassword"
-                value={formData.currentPassword}
-                onChange={handleInputChange}
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={formData.newPassword}
-                onChange={handleInputChange}
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Confirm New Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                className="form-input"
-              />
-            </div>
-
             <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
           </div>
         </form>
-
-        {/* Delete Account Section */}
         <section className="settings-section">
-          <h3 className="section-title danger-text">Delete Account</h3>
-          
-          <p className="helper-text">
-            Once you delete your account, there is no going back. Please be certain.
-          </p>
-
-          <button 
-            type="button" 
-            className="btn btn-danger"
-            onClick={handleDeleteAccount}
-          >
-            Delete My Account
-          </button>
-          
           <div className="mt-4">
             <button type="button" className="btn btn-secondary" onClick={handleLogout}>Sign out</button>
           </div>
