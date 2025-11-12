@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -28,7 +28,8 @@ export default function App() {
         <Router>
           <div style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
             <Routes>
-              <Route path="/*" element={<Login />} />
+              <Route path="/*" element={<LanguageSelection />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/accessibility" element={<AccessibilitySettings />} />
               <Route path="/language" element={<LanguageSelection />} />
             </Routes>
@@ -52,7 +53,7 @@ export default function App() {
             <Route path="/address" element={<Address />} />
             <Route path="/accessibility" element={<AccessibilitySettings />} />
             <Route path="/language" element={<LanguageSelection />} />
-
+            <Route path="/login" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </Router>

@@ -89,7 +89,7 @@ export default function LanguageSelection() {
 
           {/* Proceed Button */}
           <button
-            onClick={() => navigate('/home')} // Navigates to the home page on click
+            onClick={() => navigate('/login')} // Navigates to the home page on click
             className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200"
           >
             {lang === 'ur' ? languageStrings.proceedButton.ur : languageStrings.proceedButton.en}
