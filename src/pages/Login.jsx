@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
+// Import logo - replace path if your PNG is located elsewhere (e.g. '../assets/logo.png')
+import logo from '../Azad-Bazaar.svg'
 
 export default function Login() {
   const { requestOtp, verifyOtp } = useAuth()
@@ -92,6 +94,11 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-950 px-4">
       <div className="w-full max-w-[430px]">
         
+        {/* Logo (large) - takes up the space above the login card. Replace the imported image as needed. */}
+        <div className="flex items-center justify-center mb-4">
+          <img src={logo} alt="Azad Bazaar" style={{ width: '100%', maxWidth: 340, height: 314, objectFit: 'contain' }} />
+        </div>
+
         {/* Accessibility Button - Top Right */}
         <div className="flex justify-end mb-4">
           <button

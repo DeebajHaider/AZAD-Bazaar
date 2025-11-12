@@ -76,19 +76,22 @@ export default function Home() {
       {/* Consolidated Sticky Header for Address and Search */}
       <header className="sticky top-0 z-20 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800">
         <div className="max-w-[430px] mx-auto p-3 space-y-3">
-          {/* Address Bar */}
-          <button
-            onClick={() => navigate('/settings')} // Navigate to settings to change address
-            className="w-full flex items-start gap-2 text-left"
-          >
-            <MapPin size={20} className="text-blue-500 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-xs text-gray-600 dark:text-slate-400">{t('home.header.deliveryTo')}</p>
-              <p className="text-sm font-medium text-gray-900 dark:text-slate-50 truncate">
-                {(customer?.addresses?.[0]?.addressText) || t('home.header.setAddressPrompt')}
-              </p>
-            </div>
-          </button>
+          {/* Header row: Delivery address (left) and logo (right) */}
+          <div className="flex items-center justify-between gap-3">
+            <button
+              onClick={() => navigate('/settings')}
+              className="flex-1 flex items-start gap-2 text-left"
+            >
+              <MapPin size={20} className="text-blue-500 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs text-gray-600 dark:text-slate-400">{t('home.header.deliveryTo')}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-slate-50 truncate">
+                  {(customer?.addresses?.[0]?.addressText) || t('home.header.setAddressPrompt')}
+                </p>
+              </div>
+            </button>
+
+          </div>
 
           {/* Search Bar: Styled to look like an input field */}
           <button
@@ -98,6 +101,14 @@ export default function Home() {
             <Search size={18} className="text-gray-400 dark:text-slate-500" />
             <span className="text-gray-500 dark:text-slate-400">{t('home.header.searchPlaceholder')}</span>
           </button>
+            {/* Centered large logo below the search bar (keep size = 256) */}
+            <div className="flex items-center justify-center mt-3">
+              <img
+                src="src\Azad-Bazaar.svg"
+                alt="Azad Bazaar logo"
+                style={{ width: 321, height: 'auto', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
         </div>
       </header>
 
