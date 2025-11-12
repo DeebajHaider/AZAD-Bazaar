@@ -29,7 +29,7 @@ const SortButton = ({ sortKey, label, currentSort, currentOrder, onClick }) => {
 }
 
 export default function SearchResults() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
 
   // Simple template formatter for "{{var}}" tokens in locale strings
   const fmt = (template, vars = {}) => {
@@ -201,7 +201,7 @@ export default function SearchResults() {
                 >
                   <option value="">{t('searchResults.filterPanel.allCategories')}</option>
                   {(sortedCategories || []).map(c => (
-                    <option key={c._id ?? c.id} value={c._id ?? c.id}>{translateDBVal("Category", "name", c.name, 'ur')}</option>
+                    <option key={c._id ?? c.id} value={c._id ?? c.id}>{translateDBVal("Category", "name", c.name, lang)}</option>
                   ))}
                 </select>
               </div>
@@ -249,7 +249,7 @@ export default function SearchResults() {
               <span className="text-sm font-medium text-gray-600 dark:text-slate-400">{t('searchResults.activeFilters.label')}</span>
               {filters.category && (
                 <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">
-                 {translateDBVal("Category", "name", categories.find(c => c._id === filters.category)?.name, 'ur') || t('searchResults.activeFilters.categoryFallback')}
+                 {translateDBVal("Category", "name", categories.find(c => c._id === filters.category)?.name, lang) || t('searchResults.activeFilters.categoryFallback')}
                 </span>
               )}
               {filters.inStock && <span className="text-xs font-medium bg-blue-100 dark:bg-slate-800 text-blue-700 dark:text-slate-200 px-3 py-1.5 rounded-full">{t('searchResults.activeFilters.inStock')}</span>}

@@ -4,7 +4,7 @@ import useTranslations from '../hooks/useTranslations'
 
 export default function ItemCard({ item }) {
   const { loading, translateDBVal } = useTranslations();
-  const { t } = useI18n()
+  const { t , lang} = useI18n()
   const format = (key, vars = {}) => {
     let str = t(key)
     Object.keys(vars).forEach(k => {
@@ -40,7 +40,7 @@ export default function ItemCard({ item }) {
       <div className="flex-1 flex flex-col justify-center">
         {/* Title: Updated to font-semibold (Suggestion #1) and uses primary text colors */}
         <h3 className="font-semibold text-base text-gray-900 dark:text-slate-50 mb-1">
-          {translateDBVal("Product", "name", item.title, 'ur')}
+          {translateDBVal("Product", "name", item.title, lang)}
         </h3>
 
         {/* Price section */}
@@ -61,7 +61,7 @@ export default function ItemCard({ item }) {
         <div className="flex items-center gap-3 mt-1.5">
           {/* Category: Uses secondary text colors */}
           <p className="text-gray-600 dark:text-slate-400 text-sm">
-            {translateDBVal("Category", "name", item.category, 'ur')}
+            {translateDBVal("Category", "name", item.category, lang)}
           </p>
           {/* Discount: Uses success colors and font-medium (Suggestion #2) */}
           {item.originalPrice && (

@@ -7,6 +7,14 @@
       "accessibility": {
         "title": "Accessibility Settings",
         "description": "Customize theme and display options"
+      },
+      "language": {
+        "title": "Language",
+        "description": "Change app language",
+        "options": {
+          "en": "English",
+          "ur": "اردو"
+        }
       }
     },
     "account": {

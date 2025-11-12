@@ -7,6 +7,14 @@
       "accessibility": {
         "title": "رسائی کی ترتیبات",
         "description": "تھیم اور ڈسپلے کے اختیارات کو حسب ضرورت بنائیں"
+      },
+      "language": {
+        "title": "زبان",
+        "description": "ایپ کی زبان تبدیل کریں",
+        "options": {
+          "en": "انگریزی",
+          "ur": "اردو"
+        }
       }
     },
     "account": {

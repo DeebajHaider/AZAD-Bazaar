@@ -43,12 +43,7 @@ export default function Home() {
   const { loading, translateDBVal } = useTranslations();
 
   const voucherMap = { 'AZAD10': 10, 'AZAD20': 20 }
-  const { t , setLang} = useI18n()
-
-  // Ensure the language is set to Urdu for this page
-  React.useEffect(() => {
-    setLang('ur')
-  }, [setLang])
+  const { t } = useI18n()
 
 
 
@@ -114,7 +109,6 @@ export default function Home() {
 
       {/* Main content area */}
       <main className="flex-1 overflow-y-auto bg-white dark:bg-slate-950 p-4 space-y-6 pb-24">
-        {translateDBVal("", "field", "value", "lang")}
         {/* Categories Section */}
         <section>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">{t('home.categories.title')}</h2>

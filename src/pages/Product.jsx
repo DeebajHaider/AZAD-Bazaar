@@ -9,7 +9,7 @@ import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
 
 export default function Product() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const format = (key, vars = {}) => {
     let str = t(key)
     Object.keys(vars).forEach(k => {
@@ -107,7 +107,7 @@ export default function Product() {
             <ArrowLeft size={18} />
           </button>
 
-          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{translateDBVal("Product", "name", product.name ?? product.title, 'ur')}</h1>
+          <h1 style={{fontSize:'var(--font-size-lg)', fontWeight:700, color:'var(--color-text-primary)'}}>{translateDBVal("Product", "name", product.name ?? product.title, lang)}</h1>
           <div className="mt-2 flex items-center gap-3">
             <div className="text-gray-700" style={{fontSize:18, fontWeight:600}}>{t('common.currencySymbol')} {displayPrice}</div>
             {!inStock && (
@@ -122,7 +122,7 @@ export default function Product() {
             )}
           </div>
 
-          <div className="mt-6 text-sm text-gray-600">{translateDBVal("Product", "description", product.description, 'ur')}</div>
+          <div className="mt-6 text-sm text-gray-600">{translateDBVal("Product", "description", product.description, lang)}</div>
         </div>
 
 

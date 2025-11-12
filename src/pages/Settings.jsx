@@ -8,7 +8,7 @@ import { useI18n } from '../context/I18nContext'
 export default function Settings() {
   const { logout, customer, updateCustomer } = useAuth()
   const navigate = useNavigate()
-  const { t } = useI18n()
+  const { t, lang, setLang } = useI18n()
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState(null)
@@ -104,6 +104,33 @@ export default function Settings() {
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400 dark:text-slate-500" />
             </button>
+
+            {/* Language Selection (visual hierarchy updated to match Accessibility) */}
+            <div className="p-4 border-t border-gray-100 dark:border-slate-800">
+              <p className="font-medium text-gray-900 dark:text-slate-50">    {t('settings.appearance.language.title')}</p>
+              <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">   {t('settings.appearance.language.description')}         </p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setLang('en')}
+                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
+                    }`}
+                >
+                  {t('settings.appearance.language.options.en')}
+                </button>
+
+                <button
+                  onClick={() => setLang('ur')}
+                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
+                      : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                    }`}
+                >
+                  {t('settings.appearance.language.options.ur')}
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Card: Account Information Form */}

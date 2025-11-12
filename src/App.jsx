@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import { AccessibilityProvider } from './context/AccessibilityContext'
 import AccessibilitySettings from './pages/AccessibilitySettings'
 import { I18nProvider } from './context/I18nContext'
+import LanguageSelection from './pages/LanguageSelection'
 
 export default function App() {
   const AuthGate = () => {
@@ -25,10 +26,11 @@ export default function App() {
     if (!user) {
       return (
         <Router>
-          <div style={{fontFamily: 'sans-serif', position: 'relative', height: '100%'}}>
+          <div style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
             <Routes>
               <Route path="/*" element={<Login />} />
               <Route path="/accessibility" element={<AccessibilitySettings />} />
+              <Route path="/language" element={<LanguageSelection />} />
             </Routes>
           </div>
         </Router>
@@ -49,6 +51,8 @@ export default function App() {
             <Route path="/product" element={<Product />} />
             <Route path="/address" element={<Address />} />
             <Route path="/accessibility" element={<AccessibilitySettings />} />
+            <Route path="/language" element={<LanguageSelection />} />
+
           </Routes>
         </div>
       </Router>
