@@ -90,7 +90,7 @@ export default function Cart() {
                 onClick={() => navigate('/checkout')}
                 className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200"
               >
-                {t('cart.actions.checkout')}refer
+                {t('cart.actions.checkout')}
               </button>
             </div>}
           <BottomNav /></>}

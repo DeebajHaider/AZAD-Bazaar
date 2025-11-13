@@ -358,5 +358,8 @@
     "description": {
       "title": "Description"
     }
+  }, 
+  "splash": {
+    "loadingMessage": "Getting things ready..."
   }
 }

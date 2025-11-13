@@ -358,5 +358,8 @@
      "description": {
       "title": "تفصیل"
     }
+  }, 
+  "splash": {
+    "loadingMessage": "تیار ہو رہا ہے..."
   }
 }

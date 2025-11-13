@@ -17,12 +17,15 @@ import { AccessibilityProvider } from './context/AccessibilityContext'
 import AccessibilitySettings from './pages/AccessibilitySettings'
 import { I18nProvider } from './context/I18nContext'
 import LanguageSelection from './pages/LanguageSelection'
+import SplashScreen from './pages/SplashScreen'
 
 export default function App() {
   const AuthGate = () => {
     const { user, loading } = useAuth()
-    // while auth is initializing, avoid flicker
-    if (loading) return <div className="p-4">Loading...</div>
+    // MODIFIED: Show SplashScreen while the auth context is loading
+    if (loading) {
+      return <SplashScreen onComplete={() => { /* The component will transition automatically when 'loading' becomes false */ }} />
+    }
     if (!user) {
       return (
         <Router>
