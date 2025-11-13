@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { ChevronRight, LogOut, Save } from 'lucide-react'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
+import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
+import HeaderWithName from '../component/HeaderWithName'
 
 export default function Settings() {
   const { logout, customer, updateCustomer } = useAuth()
@@ -11,8 +13,6 @@ export default function Settings() {
   const { t, lang, setLang } = useI18n()
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
   const [isSaving, setIsSaving] = useState(false)
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(null)
 
   // Populate form from global customer when available
   useEffect(() => {
@@ -60,33 +60,10 @@ export default function Settings() {
   }
 
   return (
-    <>
+    <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
       {/* Main container for the settings page */}
       {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
       <main className="min-h-screen flex-1 overflow-y-auto bg-white dark:bg-slate-950">
-
-        {/* Page Header */}
-        <div className="bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 p-4">
-          <div className="max-w-[430px] mx-auto flex items-center gap-3">
-            <button
-              onClick={() => navigate('/')}
-              className="min-h-11 min-w-11 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-slate-50">
-              {t('settings.title')}
-            </h1>
-          </div>
-        </div>
-        {/* 
-          Container for all settings sections.
-          - `p-4` for screen padding.
-          - `pb-24` to ensure content doesn't hide behind the BottomNav.
-          - `space-y-6` provides consistent spacing between cards.
-        */}
         <div className="p-4 pb-24 space-y-6">
 
           {/* Card: Appearance & Accessibility */}
@@ -113,8 +90,8 @@ export default function Settings() {
                 <button
                   onClick={() => setLang('en')}
                   className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
-                      ? 'border-blue-500 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
+                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
                     }`}
                 >
                   {t('settings.appearance.language.options.en')}
@@ -123,8 +100,8 @@ export default function Settings() {
                 <button
                   onClick={() => setLang('ur')}
                   className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                      : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
+                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
                     }`}
                 >
                   {t('settings.appearance.language.options.ur')}
@@ -209,8 +186,6 @@ export default function Settings() {
 
         </div>
       </main>
-
-      <BottomNav />
-    </>
+    </Layout>
   )
 }
