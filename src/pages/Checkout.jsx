@@ -1,31 +1,54 @@
 import React, { useState } from 'react'
-import BottomNav from '../component/BottomNav'
+import { ArrowLeft, Edit3, Save, Wallet, CreditCard } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
+import { Layout } from '../Layout'
+import HeaderWithName from '../component/HeaderWithName'
+import BottomNav from '../component/BottomNav'
+
+// --- Sub-components for better organization ---
+
+// A reusable styled input component
+const FormInput = ({ label, ...props }) => (
+  <div>
+    <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+      {label}
+    </label>
+    <input
+      {...props}
+      className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+    />
+  </div>
+)
+
+// A visually distinct payment option selector
+const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`w-full flex flex-col items-center justify-center gap-2 p-4 border-2 rounded-lg transition-all duration-200 ${isActive
+        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/40'
+        : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:border-gray-300 dark:hover:border-slate-700'
+      }`}
+  >
+    <Icon size={24} className={isActive ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-slate-400'} />
+    <span className={`font-medium ${isActive ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-slate-50'}`}>
+      {label}
+    </span>
+  </button>
+)
+
+// --- Main Checkout Component ---
 
 export default function Checkout() {
   const { t } = useI18n()
-  const [address, setAddress] = useState('123 Example St, Apt 4B, City')
+
+  // State Management
+  const [address, setAddress] = useState('123 Example St, Apt 4B, City, Country, 12345')
   const [editingAddress, setEditingAddress] = useState(false)
   const [instructions, setInstructions] = useState('')
-  const [payment, setPayment] = useState('cash')
-  const [cardDetails, setCardDetails] = useState({
-    cardholderName: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: ''
-  })
+  const [paymentMethod, setPaymentMethod] = useState('cash')
+  const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
 
-  // simple formatter for translations containing {{placeholders}}
-  const format = (key, vars = {}) => {
-    let str = t(key)
-    Object.keys(vars).forEach(k => {
-      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
-      str = String(str).replace(re, vars[k])
-    })
-    return str
-  }
-
-  // Example fees — replace with real values from your backend/cart
+  // Example fees from your original code
   const subtotal = 49.99
   const serviceFee = 2.5
   const deliveryFee = 5.0
@@ -34,173 +57,118 @@ export default function Checkout() {
   const total = +(subtotal + serviceFee + deliveryFee + tax).toFixed(2)
 
   const handlePlaceOrder = () => {
-    // Placeholder action — connect to backend or navigation as needed
-    alert(format('checkout.actions.orderPlacedAlert', { total: total.toFixed(2) }))
+    alert(`Order placed! Total: ${t('common.currencySymbol')}${total.toFixed(2)}`)
   }
 
+  // Header "Edit/Save" button
+  const EditAddressAction = () => (
+    <button
+      onClick={() => setEditingAddress(prev => !prev)}
+      className="flex items-center gap-1.5 text-sm font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+    >
+      {editingAddress ? <Save size={16} /> : <Edit3 size={16} />}
+      {editingAddress ? t('checkout.address.saveButton') : t('checkout.address.editButton')}
+    </button>
+  )
+
   return (
-    <>
-      <main style={{padding:'var(--space-4)', maxWidth:1000, margin:'0 auto', color:'var(--color-text-primary)', paddingBottom:'var(--space-20)', width:'100%', boxSizing:'border-box'}}>
-        <h2 style={{fontSize:'var(--font-size-2xl)', fontWeight:600, marginBottom:'var(--space-4)'}}>{t('checkout.title')}</h2>
-
-        {/* Address */}
-        <section style={{marginBottom:'var(--space-5)', paddingBottom:'var(--space-5)', borderBottom:`1px solid var(--color-border)`}}>
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'var(--space-2)'}}>
-            <h3 style={{margin:0, fontSize:'var(--font-size-lg)', fontWeight:600}}>{t('checkout.address.title')}</h3>
-            <button
-              onClick={() => setEditingAddress(prev => !prev)}
-              style={{border:'none', background:'transparent', color:'var(--color-primary-500)', cursor:'pointer'}}
-              aria-pressed={editingAddress}
-            >
-              {editingAddress ? t('checkout.address.saveButton') : t('checkout.address.editButton')}
-            </button>
-          </div>
-
-          {editingAddress ? (
-            <textarea
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              rows={3}
-              style={{width:'100%', padding:'var(--space-3)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-surface)', color:'var(--color-text-primary)', fontFamily:'inherit'}}
-            />
-          ) : (
-            <p style={{margin:0, color:'var(--color-text-secondary)'}}>{address}</p>
-          )}
-
-          <label style={{display:'block', marginTop:'var(--space-3)', marginBottom:'var(--space-2)', color:'var(--color-text-secondary)', fontSize:'var(--font-size-sm)'}}>{t('checkout.address.instructionsLabel')}</label>
-          <input
-            type="text"
-            placeholder={t('checkout.address.instructionsPlaceholder')}
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-            style={{width:'100%', padding:'var(--space-3)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-surface)', color:'var(--color-text-primary)', fontFamily:'inherit'}}
-          />
-        </section>
-
-        {/* Payment Options */}
-        <section style={{marginBottom:'var(--space-5)', paddingBottom:'var(--space-5)', borderBottom:`1px solid var(--color-border)`}}>
-          <h3 style={{fontSize:'var(--font-size-lg)', fontWeight:600, marginBottom:'var(--space-3)'}}>{t('checkout.payment.title')}</h3>
-
-          <div style={{display:'flex', gap:'var(--space-2)', color:'var(--color-text-primary)'}}>
-            <label style={{flex:1}}>
-              <input
-                type="radio"
-                name="payment"
-                value="cash"
-                checked={payment === 'cash'}
-                onChange={() => setPayment('cash')}
-                style={{marginRight:'var(--space-2)'}}
-              />
-              {t('checkout.payment.cashOnDelivery')}
-            </label>
-
-            <label style={{flex:1}}>
-              <input
-                type="radio"
-                name="payment"
-                value="card"
-                checked={payment === 'card'}
-                onChange={() => setPayment('card')}
-                style={{marginRight:'var(--space-2)'}}
-              />
-              {t('checkout.payment.card')}
-            </label>
-          </div>
-
-          {payment === 'card' && (
-            <div style={{marginTop:'var(--space-4)', padding:'var(--space-4)', backgroundColor:'var(--color-surface)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`}}>
-              <h4 style={{fontSize:'var(--font-size-md)', fontWeight:600, marginBottom:'var(--space-3)', margin:0}}>{t('checkout.payment.cardDetails.title')}</h4>
-              
-              <div style={{marginBottom:'var(--space-3)'}}>
-                <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>{t('checkout.payment.cardDetails.nameLabel')}</label>
-                <input
-                  type="text"
-                  placeholder={t('checkout.payment.cardDetails.namePlaceholder')}
-                  value={cardDetails.cardholderName}
-                  onChange={(e) => setCardDetails({...cardDetails, cardholderName: e.target.value})}
-                  style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
-                />
-              </div>
-
-              <div style={{marginBottom:'var(--space-3)'}}>
-                <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>{t('checkout.payment.cardDetails.numberLabel')}</label>
-                <input
-                  type="text"
-                  placeholder={t('checkout.payment.cardDetails.numberPlaceholder')}
-                  value={cardDetails.cardNumber}
-                  onChange={(e) => setCardDetails({...cardDetails, cardNumber: e.target.value})}
-                  style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
-                />
-              </div>
-
-              <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'var(--space-3)', marginBottom:'var(--space-3)'}}>
-                <div>
-                  <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>{t('checkout.payment.cardDetails.expiryLabel')}</label>
-                  <input
-                    type="text"
-                    placeholder={t('checkout.payment.cardDetails.expiryPlaceholder')}
-                    value={cardDetails.expiryDate}
-                    onChange={(e) => setCardDetails({...cardDetails, expiryDate: e.target.value})}
-                    style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
-                  />
-                </div>
-                <div>
-                  <label style={{display:'block', marginBottom:'var(--space-1)', fontSize:'var(--font-size-sm)', fontWeight:500, color:'var(--color-text-primary)'}}>{t('checkout.payment.cardDetails.cvvLabel')}</label>
-                  <input
-                    type="text"
-                    placeholder={t('checkout.payment.cardDetails.cvvPlaceholder')}
-                    value={cardDetails.cvv}
-                    onChange={(e) => setCardDetails({...cardDetails, cvv: e.target.value})}
-                    style={{width:'100%', padding:'var(--space-2)', borderRadius:'var(--radius-md)', border:`1px solid var(--color-border)`, backgroundColor:'var(--color-bg)', color:'var(--color-text-primary)', fontFamily:'inherit', boxSizing:'border-box'}}
-                  />
-                </div>
-              </div>
+    <Layout
+      header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
+      footer={<BottomNav />}
+    >
+      <main className="flex-1 overflow-y-auto bg-white dark:bg-slate-950">
+        <div className="p-4 space-y-6 pb-32">
+          {/* Address Section */}
+          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-slate-800">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50">{t('checkout.address.title')}</h2>
+              <EditAddressAction />
             </div>
-          )}
-        </section>
+            <div className="p-4 space-y-4">
+              {editingAddress ? (
+                <textarea
+                  value={address}
+                  onChange={e => setAddress(e.target.value)}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              ) : (
+                <p className="text-base text-gray-600 dark:text-slate-400">{address}</p>
+              )}
+              <FormInput
+                label={t('checkout.address.instructionsLabel')}
+                placeholder={t('checkout.address.instructionsPlaceholder')}
+                value={instructions}
+                onChange={e => setInstructions(e.target.value)}
+              />
+            </div>
+          </section>
 
-        {/* Billing Details */}
-        <section style={{marginBottom:'var(--space-5)'}}>
-          <h3 style={{fontSize:'var(--font-size-lg)', fontWeight:600, marginBottom:'var(--space-3)'}}>{t('checkout.billing.title')}</h3>
+          {/* Payment Section */}
+          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4 space-y-4">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50">{t('checkout.payment.title')}</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <PaymentOption
+                label={t('checkout.payment.cashOnDelivery')}
+                icon={Wallet}
+                isActive={paymentMethod === 'cash'}
+                onClick={() => setPaymentMethod('cash')}
+              />
+              <PaymentOption
+                label={t('checkout.payment.card')}
+                icon={CreditCard}
+                isActive={paymentMethod === 'card'}
+                onClick={() => setPaymentMethod('card')}
+              />
+            </div>
+            {paymentMethod === 'card' && (
+              <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-slate-800">
+                <FormInput label={t('checkout.payment.cardDetails.nameLabel')} placeholder="JOHN DOE" value={cardDetails.name} onChange={e => setCardDetails({ ...cardDetails, name: e.target.value })} />
+                <FormInput label={t('checkout.payment.cardDetails.numberLabel')} placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={e => setCardDetails({ ...cardDetails, number: e.target.value })} />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormInput label={t('checkout.payment.cardDetails.expiryLabel')} placeholder="MM/YY" value={cardDetails.expiry} onChange={e => setCardDetails({ ...cardDetails, expiry: e.target.value })} />
+                  <FormInput label={t('checkout.payment.cardDetails.cvvLabel')} placeholder="123" value={cardDetails.cvv} onChange={e => setCardDetails({ ...cardDetails, cvv: e.target.value })} />
+                </div>
+              </div>
+            )}
+          </section>
 
-          <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
-            <span style={{color:'var(--color-text-muted)'}}>{t('checkout.billing.subtotal')}</span>
-            <strong>${subtotal.toFixed(2)}</strong>
-          </div>
-
-          <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
-            <span style={{color:'var(--color-text-muted)'}}>{t('checkout.billing.serviceFee')}</span>
-            <span>${serviceFee.toFixed(2)}</span>
-          </div>
-
-          <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-2)', color:'var(--color-text-primary)'}}>
-            <span style={{color:'var(--color-text-muted)'}}>{t('checkout.billing.deliveryFee')}</span>
-            <span>${deliveryFee.toFixed(2)}</span>
-          </div>
-
-          <div style={{display:'flex', justifyContent:'space-between', marginBottom:'var(--space-3)', color:'var(--color-text-primary)'}}>
-            <span style={{color:'var(--color-text-muted)'}}>{t('checkout.billing.tax')}</span>
-            <span>${tax.toFixed(2)}</span>
-          </div>
-
-          <div style={{display:'flex', justifyContent:'space-between', paddingTop:'var(--space-3)', borderTop:`1px solid var(--color-border)`, color:'var(--color-text-primary)'}}>
-            <strong>{t('checkout.billing.total')}</strong>
-            <strong>${total.toFixed(2)}</strong>
-          </div>
-        </section>
-
-        <div>
-          <button
-            onClick={handlePlaceOrder}
-            className="btn btn-primary"
-            style={{width:'100%'}}
-          >
-            {format('checkout.actions.placeOrder', { total: total.toFixed(2) })}
-          </button>
+          {/* Billing Section */}
+          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4 space-y-3">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">{t('checkout.billing.title')}</h2>
+            <div className="flex justify-between text-base">
+              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.subtotal')}</span>
+              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-base">
+              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.serviceFee')}</span>
+              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{serviceFee.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-base">
+              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.deliveryFee')}</span>
+              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{deliveryFee.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-base">
+              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.tax')}</span>
+              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{tax.toFixed(2)}</span>
+            </div>
+            <div className="pt-3 mt-1 border-t border-gray-200 dark:border-slate-800 flex justify-between text-lg font-semibold">
+              <span className="text-gray-900 dark:text-slate-50">{t('checkout.billing.total')}</span>
+              <span className="text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{total.toFixed(2)}</span>
+            </div>
+          </section>
         </div>
       </main>
 
-      <BottomNav />
-    </>
+      {/* Fixed Footer for Action Button */}
+      <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm border-t border-gray-200 dark:border-slate-800 p-4">
+        <button
+          onClick={handlePlaceOrder}
+          className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200"
+        >
+          {t('checkout.actions.placeOrder', { total: total.toFixed(2) })}
+        </button>
+      </footer>
+    </Layout>
   )
 }
