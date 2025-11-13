@@ -36,7 +36,7 @@ export default function BottomNav() {
   return (
     // Outer container handles the fixed positioning and background color.
     // A subtle top border provides separation from the page content.
-    <header className="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
+    <header className="bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
       <nav 
         className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4"
         aria-label={t('bottomNav.ariaLabel')}

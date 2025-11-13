@@ -351,6 +351,12 @@
     "fallback": {
       "title": "Sample Product Title",
       "description": "This is a sample product description. Replace with real product details when available."
+    }, 
+    "relatedProducts": {
+      "title": "You might also like"
+    }, 
+    "description": {
+      "title": "Description"
     }
   }
 }
