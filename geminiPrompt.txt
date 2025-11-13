@@ -1,0 +1,926 @@
+You are an expert UI redeisnger your goal is to make ui consister and match the given guideliens . You can also slight improve the design but you need to ask before hand, you can do suggestions and then when user confirms yuou will implement it.  Also if you introduce any new string, you will provide key value fr its lanagueg defintions for english and urdu
+
+Current app index.css @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --mobile-width: 430px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  max-width: var(--mobile-width);
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+
+
+# Mobile App Style Guidelines
+
+## 🎨 Color System
+
+### Light Mode
+- **Background:** `bg-white`
+- **Surface/Cards:** `bg-gray-50`
+- **Text Primary:** `text-gray-900`
+- **Text Secondary:** `text-gray-600`
+- **Borders:** `border-gray-200`
+
+### Dark Mode
+- **Background:** `dark:bg-slate-950`
+- **Surface/Cards:** `dark:bg-slate-900`
+- **Text Primary:** `dark:text-slate-50`
+- **Text Secondary:** `dark:text-slate-400`
+- **Borders:** `dark:border-slate-800`
+
+### Accent Colors
+- **Primary:** `bg-blue-500` / `dark:bg-blue-600`
+- **Success:** `bg-green-500` / `dark:bg-green-600`
+- **Danger:** `bg-red-500` / `dark:bg-red-600`
+- **Warning:** `bg-amber-500` / `dark:bg-amber-600`
+
+## 📏 Layout & Spacing
+
+### Container
+- **Max Width:** `max-w-[430px]`
+- **Full Height:** `h-screen` or `min-h-screen`
+- **Centering:** `mx-auto`
+
+### Padding
+- **Page/Screen:** `p-4` (16px)
+- **Cards/Sections:** `p-4` or `p-5` (16px or 20px)
+- **Buttons:** `px-6 py-3` (24px horizontal, 12px vertical)
+- **Small Elements:** `p-2` or `p-3` (8px or 12px)
+
+### Gaps & Margins
+- **Between sections:** `space-y-4` or `gap-4`
+- **Between elements:** `space-y-2` or `gap-2`
+- **Large spacing:** `space-y-6` or `gap-6`
+
+## 🔘 Interactive Elements
+
+### Buttons
+- **Minimum Height:** `min-h-12` (48px for touch targets)
+- **Padding:** `px-6 py-3`
+- **Border Radius:** `rounded-lg`
+- **Font:** `font-medium`
+- **Hover:** `hover:bg-opacity-90` or specific hover colors
+- **Transition:** `transition-all duration-200`
+
+### Touch Targets
+- All interactive elements should be **minimum 44-48px** in height/width
+- Use `min-h-12` or `min-h-11` for buttons and clickable areas
+
+## 🎯 Borders & Radius
+
+### Border Radius
+- **Small:** `rounded` (4px)
+- **Medium:** `rounded-lg` (8px)
+- **Large:** `rounded-xl` (12px)
+- **Full:** `rounded-full` (pills/circles)
+
+### Borders
+- **Standard:** `border border-gray-200 dark:border-slate-800`
+- **Dividers:** `border-b border-gray-200 dark:border-slate-800`
+- **Subtle:** `border border-gray-100 dark:border-slate-900`
+
+## 📝 Typography
+
+### Font Sizes
+- **Headings (h1):** `text-2xl` or `text-3xl`
+- **Subheadings (h2):** `text-xl`
+- **Body:** `text-base` (default)
+- **Small text:** `text-sm`
+- **Tiny text:** `text-xs`
+
+### Font Weights
+- **Headings:** `font-semibold` or `font-bold`
+- **Buttons:** `font-medium`
+- **Body:** `font-normal` (default)
+
+## 🎭 Common Patterns
+
+### Card Component
+```
+bg-gray-50 dark:bg-slate-900 
+border border-gray-200 dark:border-slate-800 
+rounded-lg p-4
+```
+
+### Input Fields
+```
+w-full px-4 py-3 
+border border-gray-200 dark:border-slate-800 
+rounded-lg 
+bg-white dark:bg-slate-950
+text-gray-900 dark:text-slate-50
+focus:ring-2 focus:ring-blue-500 focus:border-transparent
+```
+
+### Primary Button
+```
+min-h-12 px-6 py-3 
+bg-blue-500 hover:bg-blue-600 
+dark:bg-blue-600 dark:hover:bg-blue-700
+text-white font-medium rounded-lg 
+transition-all duration-200
+```
+
+### Secondary Button
+```
+min-h-12 px-6 py-3 
+bg-gray-100 hover:bg-gray-200 
+dark:bg-slate-800 dark:hover:bg-slate-700
+text-gray-900 dark:text-slate-50 
+font-medium rounded-lg 
+transition-all duration-200
+```
+
+## ⚡ Performance
+
+- Use `transition-all duration-200` for smooth interactions
+- Apply `will-change-transform` sparingly for heavy animations
+- Prefer `transform` and `opacity` for animations
+
+## 🌙 Dark Mode Implementation
+
+Always pair light and dark mode classes:
+```jsx
+className="bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50"
+```
+
+Use Tailwind's `dark:` prefix for all color-related utilities.
+
+## 📱 Mobile-Specific
+
+- **Viewport:** Set `max-w-[430px] mx-auto` on root container
+- **Safe Areas:** Consider using `pb-safe` if using iOS safe area insets
+- **Scrolling:** Use `overflow-y-auto` for scrollable content
+- **Fixed Elements:** Bottom nav should use `fixed bottom-0 w-full max-w-[430px]`
+
+## ✨ Shadows & Elevation
+
+- **Subtle:** `shadow-sm`
+- **Medium:** `shadow-md`
+- **Large:** `shadow-lg`
+- **Dark mode:** Shadows are less visible, consider using borders instead
+
+
+
+Here is some info
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Home from './pages/Home'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Settings from './pages/Settings'
+import Search from './pages/Search'
+import SearchResults from './pages/SearchResults'
+import Address from './pages/Address'
+import Product from './pages/Product'
+import { ThemeProvider } from './context/ThemeContext'
+import { CartProvider } from './context/CartContext'
+import { DataProvider } from './context/DataContext'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import Login from './pages/Login'
+import { AccessibilityProvider } from './context/AccessibilityContext'
+import AccessibilitySettings from './pages/AccessibilitySettings'
+import { I18nProvider } from './context/I18nContext'
+import LanguageSelection from './pages/LanguageSelection'
+
+export default function App() {
+  const AuthGate = () => {
+    const { user, loading } = useAuth()
+    // while auth is initializing, avoid flicker
+    if (loading) return <div className="p-4">Loading...</div>
+    if (!user) {
+      return (
+        <Router>
+          <div style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
+            <Routes>
+              <Route path="/*" element={<LanguageSelection />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/accessibility" element={<AccessibilitySettings />} />
+              <Route path="/language" element={<LanguageSelection />} />
+            </Routes>
+          </div>
+        </Router>
+      )
+    }
+
+    return (
+      <Router>
+        <div className="App" style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/view-cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/search-results" element={<SearchResults />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/address" element={<Address />} />
+            <Route path="/accessibility" element={<AccessibilitySettings />} />
+            <Route path="/language" element={<LanguageSelection />} />
+            <Route path="/login" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    )
+  }
+
+  return (
+    <I18nProvider>
+      <ThemeProvider>
+        <AccessibilityProvider>
+          <AuthProvider>
+            <DataProvider>
+              <CartProvider>
+                <AuthGate />
+              </CartProvider>
+            </DataProvider>
+          </AuthProvider>
+        </AccessibilityProvider>
+      </ThemeProvider>
+    </I18nProvider>
+  )
+}
+
+
+import React, { useState, useEffect } from 'react'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import { ChevronRight, LogOut, Save } from 'lucide-react'
+import BottomNav from '../component/BottomNav'
+import { useI18n } from '../context/I18nContext'
+import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
+import HeaderWithName from '../component/HeaderWithName'
+
+export default function Settings() {
+  const { logout, customer, updateCustomer } = useAuth()
+  const navigate = useNavigate()
+  const { t, lang, setLang } = useI18n()
+  const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
+  const [isSaving, setIsSaving] = useState(false)
+
+  // Populate form from global customer when available
+  useEffect(() => {
+    if (customer) {
+      setFormData({
+        name: customer.name || '',
+        phone: customer.phone || '',
+        address: (Array.isArray(customer.addresses) && customer.addresses[0]?.addressText) || ''
+      })
+    }
+  }, [customer])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSaving(true)
+    setError(null)
+    setSuccess(null)
+    try {
+      if (!customer?._id) throw new Error(t('settings.notifications.noCustomerError'))
+      const payload = {
+        name: formData.name,
+        address: formData.address // Backend will handle normalization
+      }
+      await updateCustomer(customer._id, payload)
+      setSuccess(t('settings.notifications.updateSuccess'))
+    } catch (err) {
+      console.error('Update customer failed', err)
+      setError(err.message || t('settings.notifications.updateFailed'))
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleLogout = () => {
+    // Using a more modern confirm dialog would be better in a real app
+    if (window.confirm(t('settings.signOut.confirmDialog'))) {
+      logout()
+      navigate('/')
+    }
+  }
+
+  return (
+    <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
+      {/* Main container for the settings page */}
+      {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
+      <main className="min-h-screen flex-1 overflow-y-auto bg-white dark:bg-slate-950">
+        <div className="p-4 pb-24 space-y-6">
+
+          {/* Card: Appearance & Accessibility */}
+          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
+            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
+              {t('settings.appearance.title')}
+            </h2>
+            <button
+              onClick={() => navigate('/accessibility')}
+              className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200"
+            >
+              <div>
+                <p className="font-medium text-gray-900 dark:text-slate-50">{t('settings.appearance.accessibility.title')}</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400">{t('settings.appearance.accessibility.description')}</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400 dark:text-slate-500" />
+            </button>
+
+            {/* Language Selection (visual hierarchy updated to match Accessibility) */}
+            <div className="p-4 border-t border-gray-100 dark:border-slate-800">
+              <p className="font-medium text-gray-900 dark:text-slate-50">    {t('settings.appearance.language.title')}</p>
+              <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">   {t('settings.appearance.language.description')}         </p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => {setLang('en'); document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");}}
+                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
+                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
+                    }`}
+                >
+                  {t('settings.appearance.language.options.en')}
+                </button>
+
+                <button
+                  onClick={() => {setLang('ur'); document.getElementsByTagName('html')[0].setAttribute("dir", "rtl"); }}
+                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
+                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                    }`}
+                >
+                  {t('settings.appearance.language.options.ur')}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card: Account Information Form */}
+          <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
+            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
+              {t('settings.account.title')}
+            </h2>
+            <div className="p-4 space-y-4">
+              {/* Name Field */}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                  {t('settings.account.form.fullName.label')}
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder={t('settings.account.form.fullName.placeholder')}
+                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                />
+              </div>
+
+              {/* Phone Field (Read-only) */}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                  {t('settings.account.form.phone.label')}
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  readOnly
+                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 cursor-not-allowed"
+                  placeholder={t('settings.account.form.phone.placeholder')}
+                />
+              </div>
+
+              {/* Address Field */}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                  {t('settings.account.form.address.label')}
+                </label>
+                <textarea
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  rows={3}
+                  placeholder={t('settings.account.form.address.placeholder')}
+                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                />
+              </div>
+
+              {/* Save Button */}
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Save size={18} />
+                {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
+              </button>
+            </div>
+          </form>
+
+          {/* Card: Danger Zone / Sign Out */}
+          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-transparent border border-red-500/50 dark:border-red-500/40 text-red-600 dark:text-red-500 font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-950/50 transition-all duration-200"
+            >
+              <LogOut size={18} />
+              {t('settings.signOut.button')}
+            </button>
+          </div>
+
+        </div>
+      </main>
+    </Layout>
+  )
+}
+
+import React, { useState, useEffect } from 'react'
+import { Heart, Plus, Minus } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom' // Import Link for navigation
+import { useCart } from '../context/CartContext'
+import { useProduct } from '../api'
+import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
+import { Layout } from '../Layout'
+import HeaderWithName from '../component/HeaderWithName'
+import BottomNav from '../component/BottomNav'
+import { getCategoryById } from '../api/categoryService'
+
+// --- Sub-components for better organization ---
+
+// Component for the image gallery at the top
+const ProductGallery = ({ images, productName, format }) => {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => setActiveIndex(0), [images])
+
+  useEffect(() => {
+    if (images.length <= 1) return
+    const id = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % images.length)
+    }, 3000)
+    return () => clearInterval(id)
+  }, [images.length])
+
+  const mainImage = images[activeIndex] || images[0]
+
+  return (
+    // MODIFIED: Reduced height for a smaller image (fixed height)
+    <div className="relative w-full h-56 max-h-64 bg-gray-100 dark:bg-slate-900">
+      {mainImage ? (
+        <img
+          src={mainImage}
+          alt={format('productPage.gallery.mainImageAlt', { productName })}
+              className="w-full h-full object-contain"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-slate-600">
+        </div>
+      )}
+      {images.length > 1 && (
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-2">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              aria-label={format('productPage.gallery.thumbnailAlt', { index: idx + 1, productName })}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-4 bg-blue-500' : 'bg-gray-300 dark:bg-slate-700'
+                }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Component for the fixed action bar at the bottom
+const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
+  const { t } = useI18n()
+  const productIdForCart = product._id ?? product.id
+
+  if (!product) return null
+
+  return (
+    <div className="bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 p-1">
+      <div className="mx-auto p-4">
+        {qty === 0 ? (
+          <button
+            onClick={() => {
+              if (!inStock) return
+              addToCart(productIdForCart)
+            }}
+            disabled={!inStock}
+            className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {inStock ? t('productPage.actions.addToCart') : t('common.outOfStock')}
+          </button>
+        ) : (
+          <div className="w-full flex items-center justify-between gap-2">
+            <div className="flex items-center gap-4 rounded-lg bg-gray-100 dark:bg-slate-800 p-1">
+              <button
+                onClick={() => decrementProduct(productIdForCart)}
+                className="min-w-10 min-h-10 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-md transition-all duration-200"
+                aria-label={t('productPage.actions.decreaseQuantity')}
+              >
+                <Minus size={18} />
+              </button>
+              <div className="text-xl font-semibold text-gray-900 dark:text-slate-50 min-w-[2ch] text-center">{qty}</div>
+              <button
+                onClick={() => addToCart(productIdForCart)}
+                disabled={!inStock || (isFinite(availableStock) && qty >= availableStock)}
+                className="min-w-10 min-h-10 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label={t('productPage.actions.increaseQuantity')}
+              >
+                <Plus size={18} />
+              </button>
+            </div>
+            {/* The primary button can still be shown, or replaced with a total price. For now, this is cleaner. */}
+            <div className="text-2xl font-bold text-gray-900 dark:text-slate-50">
+              {t('common.currencySymbol')} {(product.price * qty).toFixed(2)}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// NEW: Component for a single card in the related products list
+const RelatedProductCard = ({ product }) => {
+  const { t, lang } = useI18n()
+  const { translateDBVal } = useTranslations()
+  return (
+    <Link to={`/product/${product.id}`} state={{ product }} className="block w-36 flex-shrink-0">
+      <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg overflow-hidden transition-all duration-200 hover:border-blue-500 hover:shadow-sm">
+        <div className="aspect-square bg-gray-100 dark:bg-slate-800">
+          <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+        </div>
+        <div className="p-2">
+          <h3 className="text-sm font-medium text-gray-900 dark:text-slate-50 truncate">{ translateDBVal("Product", "name", product.title, lang)}</h3>
+          <div className="flex items-baseline gap-1 mt-1">
+            <span className="text-base font-semibold text-gray-900 dark:text-slate-50">
+              {t('common.currencySymbol')} {product.price}
+            </span>
+            {product.originalPrice && (
+              <span className="text-xs text-gray-500 dark:text-slate-400 line-through">
+                {t('common.currencySymbol')} {product.originalPrice}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+// NEW: Component for the entire related products section
+const RelatedProducts = () => {
+  const { t } = useI18n()
+
+  // Hardcoded data as requested
+  const sampleRelatedProducts = [
+    { id: 'REL001', title: 'Fresh Organic Apples', price: 4.99, originalPrice: 6.99, image: 'https://via.placeholder.com/200x200?text=Apple' },
+    { id: 'REL002', title: 'Whole Wheat Bread', price: 3.49, image: 'https://via.placeholder.com/200x200?text=Bread' },
+    { id: 'REL003', title: 'Almond Milk (Unsweetened)', price: 2.99, originalPrice: 3.50, image: 'https://via.placeholder.com/200x200?text=Milk' },
+    { id: 'REL004', title: 'Cage-Free Brown Eggs', price: 5.99, image: 'https://via.placeholder.com/200x200?text=Eggs' },
+    { id: 'REL005', title: 'Greek Yogurt', price: 1.50, image: 'https://via.placeholder.com/200x200?text=Yogurt' }
+  ]
+
+  return (
+    <div className="py-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3 px-4">
+        {t('productPage.relatedProducts.title')}
+      </h2>
+      <div className="flex gap-3 overflow-x-auto pb-2 px-4 scrollbar-hide">
+        {sampleRelatedProducts.map(p => <RelatedProductCard key={p.id} product={p} />)}
+      </div>
+    </div>
+  )
+}
+
+
+// --- Main Product Page Component ---
+export default function Product() {
+  const { t, lang } = useI18n()
+  const { translateDBVal } = useTranslations()
+  const { addToCart, decrementProduct, items: cartItems } = useCart()
+  const location = useLocation()
+  const [qty, setQty] = useState(0)
+  const [liked, setLiked] = useState(false)
+  const [subcategoryNames, setSubcategoryNames] = useState([]);
+
+
+  const incoming = location.state?.product || null
+  const incomingId = incoming?._id || incoming?.id
+  const { data: fetchedProduct } = useProduct(incomingId, { immediate: !!incomingId && !incoming?.name })
+
+  // MODIFIED: Added category and subcategories to fallback data
+  const fallback = {
+    _id: 'SAMPLE001',
+    title: 'Sample Product Title',
+    price: 299,
+    description: 'This is a sample product description. It provides details about the item, its features, and benefits. It is here to demonstrate how longer text wraps and flows within the designated component area.',
+    image: 'https://via.placeholder.com/400x400?text=Product',
+    inStock: true,
+    category: 'Pantry',
+    subcategories: ['Snacks', 'Organic']
+  }
+
+  const product = incoming || fetchedProduct || fallback
+  const productName = translateDBVal("Product", "name", product.name ?? product.title, lang)
+  const images = (product.images?.length) ? product.images : [product.image]
+  const availableStock = product.stockQuantity ?? (product.inStock ? Infinity : 0)
+  const inStock = availableStock > 0
+  const displayPrice = product.discountedPrice ?? product.price
+  const originalPrice = product.originalPrice
+
+  useEffect(() => {
+    const found = cartItems.find((it) => it.itemCode === product._id)
+    setQty(found ? found.quantity : 0)
+  }, [product._id, cartItems])
+
+  const format = (key, vars = {}) => {
+    let str = t(key)
+    Object.keys(vars).forEach(k => str = str.replace(`{{${k}}}`, vars[k]))
+    return str
+  }
+
+  const FavoriteButton = () => (
+    <button
+      onClick={() => setLiked(v => !v)}
+      aria-label={liked ? t('productPage.actions.unfavoriteAriaLabel') : t('productPage.actions.favoriteAriaLabel')}
+      className="min-h-11 min-w-11 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200"
+    >
+      <Heart
+        size={20}
+        className={`transition-all ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-slate-400'}`}
+      />
+    </button>
+  )
+
+  useEffect(() => {
+    if (!product.subcategories) return;
+
+    setSubcategoryNames([]); // reset before fetching new ones
+
+    Promise.all(product.subcategories.map(async subcategoryId => {
+      const res = await getCategoryById(subcategoryId);
+      return res.name;
+    })).then(names => {
+      setSubcategoryNames(names);
+    });
+
+  }, [product.subcategories]);
+  return (
+    <Layout
+      header={<HeaderWithName title={productName} rightAction={<FavoriteButton />} />}
+      footer={
+        <>
+          <ProductActionBar
+            qty={qty}
+            product={product}
+            addToCart={addToCart}
+            decrementProduct={decrementProduct}
+            inStock={inStock}
+            availableStock={availableStock}
+          />
+          <BottomNav /> 
+          </>}
+    >
+      <main className="flex flex-1 flex-col bg-white dark:bg-slate-950 min-h-full">
+        <div className="flex-1  overflow-y-auto ">
+          <ProductGallery images={images} productName={productName} format={format} />
+
+          <div className="p-4 space-y-4">
+            {/* NEW: Category Badges */}
+            <div className="flex flex-wrap gap-2">
+              {product.category && (
+                <span className="px-2.5 py-1 text-xs font-medium text-blue-800 bg-blue-100 dark:text-blue-300 dark:bg-blue-900/50 rounded-full">
+                  {translateDBVal(
+                    "Category",
+                    "name",
+                    typeof product.category === 'string' ? product.category : (product.category.name ?? product.category._id ?? ''),
+                    lang
+                  )}
+                </span>
+              )}
+              {subcategoryNames.map(sub => {
+                // we need to get categry name with this id
+                return (
+                  <span key={sub} className="px-2.5 py-1 text-xs font-medium text-gray-800 bg-gray-100 dark:text-slate-300 dark:bg-slate-800 rounded-full">
+                    {translateDBVal("Category", "name", sub, lang)}
+                  </span>
+                )
+              })}
+            </div>
+
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold text-gray-900 dark:text-slate-50">
+                    {t('common.currencySymbol')} {displayPrice}
+                  </span>
+                  {originalPrice && (
+                    <span className="text-base text-gray-500 dark:text-slate-400 line-through">
+                      {t('common.currencySymbol')} {originalPrice}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                {!inStock ? (
+                  <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300">
+                    {t('common.outOfStock')}
+                  </span>
+                ) : (isFinite(availableStock) && availableStock <= 5) && (
+                  <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
+                    {format('productPage.stockStatus.lowStock_other', { count: availableStock })}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
+                {t('productPage.description.title')}
+              </h2>
+              <p className="text-base text-gray-600 dark:text-slate-400">
+                {translateDBVal("Product", "description", product.description, lang)}
+              </p>
+              {/* Spacer with physical height ~2cm to add visual separation */}
+              <div style={{ height: '1cm' }} />
+            </div>
+          </div>
+
+          {/* NEW: Related Products Section */}
+          <div className="border-t border-gray-200 dark:border-slate-800 mt-2">
+            <RelatedProducts />
+          </div>
+        </div>
+      </main>
+
+
+    </Layout>
+  )
+}
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
+import categoryService from '../api/categoryService'
+import brandService from '../api/brandService'
+
+const DataContext = createContext(null)
+
+const FIVE_MIN = 5 * 60 * 1000
+
+export function DataProvider({ children }) {
+  const [categories, setCategories] = useState(null)
+  const [brands, setBrands] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const tsRef = useRef(0)
+
+  const isExpired = useCallback(() => {
+    return Date.now() - tsRef.current > FIVE_MIN
+  }, [])
+
+  const fetchCategories = useCallback(async (force = false) => {
+    if (!force && categories && !isExpired()) return categories
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await categoryService.getCategories()
+      setCategories(data)
+      tsRef.current = Date.now()
+      return data
+    } catch (err) {
+      setError(err)
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }, [categories, isExpired])
+
+  const fetchBrands = useCallback(async (force = false) => {
+    if (!force && brands && !isExpired()) return brands
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await brandService.getBrands()
+      setBrands(data)
+      tsRef.current = Date.now()
+      return data
+    } catch (err) {
+      setError(err)
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }, [brands, isExpired])
+
+  // Prefetch on mount
+  useEffect(() => {
+    let mounted = true
+    ;(async () => {
+      try {
+        setLoading(true)
+        const [cats, brs] = await Promise.all([categoryService.getCategories(), brandService.getBrands()])
+        if (!mounted) return
+        setCategories(cats)
+        setBrands(brs)
+        tsRef.current = Date.now()
+      } catch (err) {
+        if (!mounted) return
+        setError(err)
+      } finally {
+        if (mounted) setLoading(false)
+      }
+    })()
+    return () => { mounted = false }
+  }, [])
+
+  const value = {
+    categories,
+    brands,
+    loading,
+    error,
+    fetchCategories,
+    fetchBrands,
+  }
+
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>
+}
+
+export function useData() {
+  const ctx = useContext(DataContext)
+  if (!ctx) throw new Error('useData must be used within DataProvider')
+  return ctx
+}
+
+export default DataContext
+
+
+
+import { useState, useEffect, useCallback, useRef } from 'react';
+import productService from '../productService';
+
+/**
+ * useProducts hook
+ * params: object passed as query params to backend (name, categories, brands, instock, sort)
+ * options: { immediate: boolean } - whether to fetch immediately
+ */
+export default function useProducts(initialParams = {}, options = { immediate: true }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const paramsRef = useRef(initialParams);
+
+  const fetch = useCallback(async (overrideParams) => {
+    setLoading(true);
+    setError(null);
+    const params = overrideParams ?? paramsRef.current ?? {};
+    try {
+      const res = await productService.getProducts(params);
+      setData(res);
+      return res;
+    } catch (err) {
+      setError(err);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    paramsRef.current = initialParams;
+    if (options && options.immediate) {
+      fetch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(initialParams)]);
+
+  const refetch = useCallback((overrideParams) => fetch(overrideParams), [fetch]);
+
+  return { data, loading, error, refetch };
+}
