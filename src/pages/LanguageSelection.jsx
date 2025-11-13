@@ -59,7 +59,7 @@ export default function LanguageSelection() {
               return (
                 <button
                   key={language.code}
-                  onClick={() => setLang(language.code)}
+                  onClick={() => {setLang(language.code); document.getElementsByTagName('html')[0].setAttribute("dir", language.code === 'ur' ? "rtl" : "ltr"); }}
                   className={`w-full min-h-16 p-4 rounded-lg border-2 transition-all duration-200 flex items-center justify-between text-left ${
                     isSelected
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/50'

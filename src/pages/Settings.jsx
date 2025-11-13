@@ -88,7 +88,7 @@ export default function Settings() {
               <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">   {t('settings.appearance.language.description')}         </p>
               <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => setLang('en')}
+                  onClick={() => {setLang('en'); document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");}}
                   className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
                     ? 'border-blue-500 bg-blue-50 text-blue-700'
                     : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
@@ -98,7 +98,7 @@ export default function Settings() {
                 </button>
 
                 <button
-                  onClick={() => setLang('ur')}
+                  onClick={() => {setLang('ur'); document.getElementsByTagName('html')[0].setAttribute("dir", "rtl"); }}
                   className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
                     ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
                     : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
