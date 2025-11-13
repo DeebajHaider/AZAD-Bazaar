@@ -222,6 +222,15 @@
     "actions": {
       "clear": "Clear Cart",
       "checkout": "Checkout"
+    }, 
+    "empty":{
+      "title":"Your Cart is Empty", 
+      "description":"You haven't added anything to your cart yet.", 
+      "cta":"Start Shopping"
+    }, 
+    "summary":{
+      "savings":"Total Savings", 
+      "subtotal":"Subtotal"
     }
   },
   "checkout": {
