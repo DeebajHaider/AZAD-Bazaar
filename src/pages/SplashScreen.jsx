@@ -32,7 +32,7 @@ export default function SplashScreen({ onComplete, duration = 2500 }) {
   }, [onComplete, duration])
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-slate-950">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center primBg">
       <div className="flex flex-col items-center gap-4">
         {/* Logo with the 2-second fade-in and scale animation */}
         <img
@@ -42,7 +42,7 @@ export default function SplashScreen({ onComplete, duration = 2500 }) {
         />
 
         {/* Feedback text that fades in after a short delay */}
-        <p className={`text-base text-gray-600 dark:text-slate-400 transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
+        <p className={`text-base secText transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
           {t('splash.loadingMessage')}
         </p>
       </div>

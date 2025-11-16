@@ -57,6 +57,7 @@ export default function App() {
             <Route path="/accessibility" element={<AccessibilitySettings />} />
             <Route path="/language" element={<LanguageSelection />} />
             <Route path="/login" element={<Navigate to="/" replace />} />
+            <Route path="/splash" element={<SplashScreen />} />
           </Routes>
         </div>
       </Router>

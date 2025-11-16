@@ -1,10 +1,10 @@
 import React from 'react'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
-
 export default function ItemCard({ item }) {
   const { loading, translateDBVal } = useTranslations();
-  const { t , lang} = useI18n()
+  const { t, lang } = useI18n()
+  
   const format = (key, vars = {}) => {
     let str = t(key)
     Object.keys(vars).forEach(k => {
@@ -13,64 +13,69 @@ export default function ItemCard({ item }) {
     })
     return str
   }
+  
   const isOut = !item.inStock
-
+  const discountPercent = item.originalPrice 
+    ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
+    : 0
+  
   return (
-    // Card container: Updated with new color system, borders, and hover effects.
     <div
-      className={`flex gap-4 p-4 bg-gray-50 dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-800 transition-all duration-200 ${isOut
+      className={`flex gap-4 p-4 secBg rounded-lg primBorder transition-all duration-200 ${
+        isOut
           ? 'opacity-60 grayscale cursor-not-allowed'
-          : 'hover:border-blue-500 hover:shadow-sm cursor-pointer'
-        }`}
+          : 'hover:shadow-sm cursor-pointer'
+      }`}
     >
-      {/* Image container: Uses a slightly different background for contrast (Suggestion #3) */}
-      <div className="w-24 h-24 bg-gray-100 dark:bg-slate-800 rounded-md relative flex-shrink-0 flex items-center justify-center overflow-hidden">
-        <img src={item.image} alt={t('itemCard.productImageAlt') ? format('itemCard.productImageAlt', { title: item.title }) : item.title} className="w-full h-full object-cover" />
+      {/* Image container */}
+      <div className="w-24 h-24 primBg primBorder rounded-md relative flex-shrink-0 flex items-center justify-center overflow-hidden">
+        <img 
+          src={item.image} 
+          alt={format('itemCard.productImageAlt', { title: item.title })} 
+          className="w-full h-full object-cover" 
+        />
         {isOut && (
-          // Out of Stock overlay
           <div className="absolute inset-0 bg-gray-900/60 dark:bg-slate-950/60 flex items-center justify-center">
-            <span className="bg-red-500 dark:bg-red-600 text-white px-2 py-1 rounded-md text-xs font-semibold uppercase tracking-wider">
+            <span className="badgeDanger uppercase tracking-wider text-xs">
               {t('common.outOfStock')}
             </span>
           </div>
         )}
       </div>
-
+      
       {/* Item details */}
       <div className="flex-1 flex flex-col justify-center">
-        {/* Title: Updated to font-semibold (Suggestion #1) and uses primary text colors */}
-        <h3 className="font-semibold text-base text-gray-900 dark:text-slate-50 mb-1">
+        {/* Title */}
+        <h3 className="font-semibold text-base primText mb-1 line-clamp-2">
           {translateDBVal("Product", "name", item.title, lang)}
         </h3>
-
+        
         {/* Price section */}
         <div className="flex items-baseline gap-2 flex-wrap">
-          {/* Current price: Uses primary text colors */}
-          <span className="font-semibold text-lg text-gray-900 dark:text-slate-50">
-            {t('common.currencySymbol')} {item.price}
+          <span className="font-semibold text-lg primText">
+            {t('common.currencySymbol')} {Number(item.price).toLocaleString()}
           </span>
-          {/* Original price: Uses secondary text colors */}
           {item.originalPrice && (
-            <span className="text-gray-600 dark:text-slate-400 line-through text-sm">
-              {t('common.currencySymbol')} {item.originalPrice}
+            <span className="secText line-through text-sm">
+              {t('common.currencySymbol')} {Number(item.originalPrice).toLocaleString()}
             </span>
           )}
         </div>
-
-        {/* Category and Discount */}
-        <div className="flex items-center gap-3 mt-1.5">
-          {/* Category: Uses secondary text colors */}
-          <p className="text-gray-600 dark:text-slate-400 text-sm">
+        
+        {/* Category and Discount - IMPROVED */}
+        <div className="flex items-center gap-2 mt-2">
+          {/* Category badge - improved sizing and padding */}
+          <span className="badgePrimary max-w-[120px] inline-block text-ellipsis overflow-hidden text-xs px-2 py-0.5 whitespace-nowrap">
             {translateDBVal("Category", "name", item.category, lang)}
-          </p>
-          {/* Discount: Uses success colors and font-medium (Suggestion #2) */}
-          {item.originalPrice && (
-            <span className="text-green-600 dark:text-green-500 text-sm font-medium">
-              {format('itemCard.discountOff', { percent: Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100) })}
+          </span>
+          
+          {/* Discount badge - now styled as a proper badge instead of just text */}
+          {item.originalPrice && discountPercent > 0 && (
+            <span className="badgeSuccess text-xs px-2 py-0.5 whitespace-nowrap">
+              {format('itemCard.discountOff', { percent: discountPercent })}
             </span>
           )}
         </div>
-
       </div>
     </div>
   )

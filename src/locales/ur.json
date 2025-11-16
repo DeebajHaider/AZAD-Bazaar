@@ -181,17 +181,22 @@
     },
     "summary": {
       "showingResultsFor": "\"{{query}}\" کے لیے نتائج دکھائے جا رہے ہیں",
+      "resultFound": "{{count}} نتیجہ ملا",
+      "resultsFound": "{{count}} نتائج ملے",
       "resultsFound_one": "{{count}} نتیجہ ملا",
       "resultsFound_other": "{{count}} نتائج ملے",
-      "filtersButton": "فلٹرز"
+      "filtersButton": "فلٹرز",
+      "for": "کے لیے"
     },
     "filterPanel": {
+      "title": "فلٹرز",
       "categoryLabel": "زمرہ",
       "allCategories": "تمام زمرے",
       "inStockLabel": "صرف اسٹاک میں",
       "onDiscountLabel": "رعایت پر",
       "applyButton": "لاگو کریں",
-      "closeButton": "بند کریں"
+      "closeButton": "بند کریں",
+      "quickFilters": "فوری فلٹرز"
     },
     "activeFilters": {
       "label": "فعال:",
@@ -323,7 +328,9 @@
   },
   "common": {
     "currencySymbol": "روپے",
-    "outOfStock": "اسٹاک میں نہیں"
+    "outOfStock": "اسٹاک میں نہیں",
+    "close": "بند کریں",
+    "clear": "صاف کریں"
   },
   "itemCard": {
     "discountOff": "{{percent}}% کی چھوٹ",

@@ -181,17 +181,22 @@
     },
     "summary": {
       "showingResultsFor": "Showing results for \"{{query}}\"",
+      "resultFound": "{{count}} result found",
+      "resultsFound": "{{count}} results found",
       "resultsFound_one": "{{count}} result found",
       "resultsFound_other": "{{count}} results found",
-      "filtersButton": "Filters"
+      "filtersButton": "Filters",
+      "for": "for"
     },
     "filterPanel": {
+      "title": "Filters",
       "categoryLabel": "Category",
       "allCategories": "All Categories",
       "inStockLabel": "In Stock Only",
       "onDiscountLabel": "On Discount",
       "applyButton": "Apply",
-      "closeButton": "Close"
+      "closeButton": "Close",
+      "quickFilters": "Quick Filters"
     },
     "activeFilters": {
       "label": "Active:",
@@ -323,7 +328,9 @@
   },
   "common": {
     "currencySymbol": "Rs",
-    "outOfStock": "Out of Stock"
+    "outOfStock": "Out of Stock",
+    "close": "Close",
+    "clear": "Clear"
   },
   "itemCard": {
     "discountOff": "{{percent}}% OFF",
