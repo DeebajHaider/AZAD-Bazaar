@@ -6,6 +6,8 @@ import { useProducts } from '../api'
 import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
+import { Layout } from '../Layout'
+import BottomNav from '../component/BottomNav'
 
 // --- Category Filter Modal Component ---
 const CategoryModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, t, lang, translateDBVal }) => {
@@ -190,101 +192,113 @@ export default function SearchResults() {
 
   useEffect(() => { setCurrentPage(1) }, [filters])
 
-  return (
-    <div className="min-h-screen primBg">
-      <header className="sticky top-0 z-20 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm dividerBorder">
-        <form onSubmit={handleSearch} className="max-w-[430px] mx-auto p-1.5 sm:p-2 flex items-center gap-2">
-          <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="btnSecondary h-10 w-10 flex-shrink-0 flex items-center justify-center rounded-lg">
-            <ArrowLeft size={18} />
+  // Header component with search form
+  const SearchHeader = () => (
+    <header className="secBg dividerBorder p-4">
+      <div className="max-w-[430px] mx-auto">
+        <form onSubmit={handleSearch} className="flex items-center gap-3">
+          <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
+            <ArrowLeft size={20} />
           </button>
           <div className="relative flex-1">
-            <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t('searchResults.header.placeholder')} className="inputField h-10 pr-10 text-sm" />
-            <button type="submit" aria-label={t('searchResults.header.searchButtonAriaLabel')} className="absolute right-0 top-0 h-10 w-10 flex items-center justify-center secText hover:accentPrimText transition-colors">
-              <SearchIcon size={18} />
+            <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t('searchResults.header.placeholder')} className="inputField h-11 pr-11 text-sm w-full" />
+            <button type="submit" aria-label={t('searchResults.header.searchButtonAriaLabel')} className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors">
+              <SearchIcon size={20} />
             </button>
           </div>
         </form>
-      </header>
+      </div>
+    </header>
+  )
 
-      <main className="pb-24">
-        {/* New Filter & Sort Section */}
-        <section className="p-4 space-y-4 dividerBorder">
-            <div className="flex items-center gap-2">
-                <button onClick={() => setCategoryModalOpen(true)} className="btnSecondary px-4 py-2 rounded-lg">
-                    {t('searchResults.summary.filtersButton')}
-                </button>
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 py-0.5">
-                    {selectedCategoryObjects.map(cat => (
-                        <span key={cat._id} className="badgePrimary flex-shrink-0 text-xs py-1 px-2.5">
-                            {cat._id === 'inStock' || cat._id === 'onDiscount' ? cat.name : translateDBVal("Category", "name", cat.name, lang)}
-                        </span>
-                    ))}
-                    {selectedCategoryObjects.length > 0 && (
-                      <button onClick={clearCategoryFilters} className="badgePrimary flex-shrink-0 !bg-red-500 !text-white hover:!bg-red-600 transition-colors text-xs py-1 px-2.5">
-                          {t('common.clear')}
-                      </button>
-                    )}
-                </div>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-                <span className="primText font-medium text-sm">{t('searchResults.sorting.label')}</span>
-                <div className="flex gap-2">
-                    {['name', 'price', 'discount'].map(key => (
-                       <button key={key} onClick={() => handleSortClick(key)} className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 ${filters.sortBy === key ? 'accentPrimBg text-white' : 'secBg primText primBorder secHoverBg'}`}>
-                           {t(`searchResults.sorting.${key}`)}
-                           {filters.sortBy === key && (
-                             filters.sortOrder === 'asc' ? 
-                               <ChevronUp size={16} className="flex-shrink-0" /> : 
-                               <ChevronDown size={16} className="flex-shrink-0" />
-                           )}
-                       </button> 
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        {/* Results Info */}
-        <section className="px-4 pt-4 pb-2">
-            <p className="primText font-medium truncate">
-                {t(totalResults === 1 ? 'searchResults.summary.resultFound' : 'searchResults.summary.resultsFound').replace('{{count}}', totalResults)}
-                {searchQuery && (
-                    <span className="secText font-normal">
-                        {' '}{t('searchResults.summary.for')}{' '}
-                        <span className="font-semibold italic">"{searchQuery}"</span>
-                    </span>
-                )}
-            </p>
-        </section>
-
-        {/* Results List */}
-        <section className="p-4">
-          <div className="space-y-4">
-            {loadingProducts && <p className="text-center secText p-8">{t('searchResults.results.loading')}</p>}
-            {productsError && <p className="text-center accentDangerText p-8">{t('searchResults.results.error')}</p>}
-            {!loadingProducts && currentResults.length === 0 && (
-              <p className="text-center secText p-8">{t('searchResults.results.noResults')}</p>
+  // Main content component
+  const SearchContent = () => (
+    <main className="flex-1 overflow-y-auto primBg min-h-full">
+      {/* New Filter & Sort Section */}
+      <section className="p-4 space-y-4 dividerBorder">
+        <div className="flex items-center gap-2">
+          <button onClick={() => setCategoryModalOpen(true)} className="btnSecondary px-4 py-2 rounded-lg">
+            {t('searchResults.summary.filtersButton')}
+          </button>
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 py-0.5">
+            {selectedCategoryObjects.map(cat => (
+              <span key={cat._id} className="badgePrimary flex-shrink-0 text-xs py-1 px-2.5">
+                {cat._id === 'inStock' || cat._id === 'onDiscount' ? cat.name : translateDBVal("Category", "name", cat.name, lang)}
+              </span>
+            ))}
+            {selectedCategoryObjects.length > 0 && (
+              <button onClick={clearCategoryFilters} className="badgePrimary flex-shrink-0 !bg-red-500 !text-white hover:!bg-red-600 transition-colors text-xs py-1 px-2.5">
+                {t('common.clear')}
+              </button>
             )}
-            {!loadingProducts && currentResults.map((item) => (
-              <div key={item._id} onClick={() => navigate('/product', { state: { product: item } })}>
-                <ItemCard item={mapApiItemToCard(item)} />
-              </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="primText font-medium text-sm">{t('searchResults.sorting.label')}</span>
+          <div className="flex gap-2">
+            {['name', 'price', 'discount'].map(key => (
+              <button key={key} onClick={() => handleSortClick(key)} className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 ${filters.sortBy === key ? 'accentPrimBg text-white' : 'secBg primText primBorder secHoverBg'}`}>
+                {t(`searchResults.sorting.${key}`)}
+                {filters.sortBy === key && (
+                  filters.sortOrder === 'asc' ? 
+                    <ChevronUp size={16} className="flex-shrink-0" /> : 
+                    <ChevronDown size={16} className="flex-shrink-0" />
+                )}
+              </button> 
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Pagination */}
-        {totalResults > pageSize && (
-          <nav className="flex justify-center items-center gap-2 p-4 mt-4 dividerBorder">
-            <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} aria-label={t('searchResults.pagination.previousButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">←</button>
-            <span className="text-sm font-medium secText">
-              {t('searchResults.pagination.pageInfo').replace('{{currentPage}}', currentPage).replace('{{totalPages}}', totalPages)}
+      {/* Results Info */}
+      <section className="px-4 pt-4 pb-2">
+        <p className="primText font-medium truncate">
+          {t(totalResults === 1 ? 'searchResults.summary.resultFound' : 'searchResults.summary.resultsFound').replace('{{count}}', totalResults)}
+          {searchQuery && (
+            <span className="secText font-normal">
+              {' '}{t('searchResults.summary.for')}{' '}
+              <span className="font-semibold italic">"{searchQuery}"</span>
             </span>
-            <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} aria-label={t('searchResults.pagination.nextButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">→</button>
-          </nav>
-        )}
-      </main>
+          )}
+        </p>
+      </section>
 
+      {/* Results List */}
+      <section className="p-4">
+        <div className="space-y-4">
+          {loadingProducts && <p className="text-center secText p-8">{t('searchResults.results.loading')}</p>}
+          {productsError && <p className="text-center accentDangerText p-8">{t('searchResults.results.error')}</p>}
+          {!loadingProducts && currentResults.length === 0 && (
+            <p className="text-center secText p-8">{t('searchResults.results.noResults')}</p>
+          )}
+          {!loadingProducts && currentResults.map((item) => (
+            <div key={item._id} onClick={() => navigate('/product', { state: { product: item } })}>
+              <ItemCard item={mapApiItemToCard(item)} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pagination */}
+      {totalResults > pageSize && (
+        <nav className="flex justify-center items-center gap-2 p-4 mt-4 dividerBorder">
+          <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} aria-label={t('searchResults.pagination.previousButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">←</button>
+          <span className="text-sm font-medium secText">
+            {t('searchResults.pagination.pageInfo').replace('{{currentPage}}', currentPage).replace('{{totalPages}}', totalPages)}
+          </span>
+          <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} aria-label={t('searchResults.pagination.nextButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">→</button>
+        </nav>
+      )}
+    </main>
+  )
+
+  return (
+    <Layout
+      header={<SearchHeader />}
+      footer={<BottomNav />}
+    >
+      <SearchContent />
       <CategoryModal isOpen={isCategoryModalOpen} onClose={() => setCategoryModalOpen(false)} initialFilters={filters} applyFilters={setFilters} categories={sortedCategories} t={t} lang={lang} translateDBVal={translateDBVal} />
-    </div>
+    </Layout>
   )
 }

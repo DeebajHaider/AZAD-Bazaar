@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, ShoppingCart, Settings } from 'lucide-react';
+import { Home, ShoppingCart, Settings, Search } from 'lucide-react';
 import { useI18n } from '../context/I18nContext';
 
 // Sub-component for each navigation item
@@ -44,6 +44,7 @@ export default function BottomNav() {
         aria-label={t('bottomNav.ariaLabel')}
       >
         <NavItem to="/" icon={Home} label={t('bottomNav.home')} />
+        <NavItem to="/search-results" icon={Search} label={t('bottomNav.search')} />
         <NavItem to="/cart" icon={ShoppingCart} label={t('bottomNav.cart')} />
         <NavItem to="/settings" icon={Settings} label={t('bottomNav.settings')} />
       </nav>

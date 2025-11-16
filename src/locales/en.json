@@ -284,6 +284,7 @@
   "bottomNav": {
     "ariaLabel": "Bottom navigation",
     "home": "Home",
+    "search": "Search",
     "cart": "Cart",
     "settings": "Settings"
   },
