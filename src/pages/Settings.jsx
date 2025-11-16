@@ -63,35 +63,35 @@ export default function Settings() {
     <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
       {/* Main container for the settings page */}
       {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
-      <main className="min-h-screen flex-1 overflow-y-auto bg-white dark:bg-slate-950">
+      <main className="min-h-screen flex-1 overflow-y-auto primBg">
         <div className="p-4 pb-24 space-y-6">
 
           {/* Card: Appearance & Accessibility */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
-            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
+          <div className="secBg primBorder rounded-lg">
+            <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
               {t('settings.appearance.title')}
             </h2>
             <button
               onClick={() => navigate('/accessibility')}
-              className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200"
+              className="flex items-center justify-between w-full p-4 text-left"
             >
               <div>
-                <p className="font-medium text-gray-900 dark:text-slate-50">{t('settings.appearance.accessibility.title')}</p>
-                <p className="text-sm text-gray-600 dark:text-slate-400">{t('settings.appearance.accessibility.description')}</p>
+                <p className="font-medium primText ">{t('settings.appearance.accessibility.title')}</p>
+                <p className="text-sm secText">{t('settings.appearance.accessibility.description')}</p>
               </div>
-              <ChevronRight className="w-5 h-5 text-gray-400 dark:text-slate-500" />
+              <ChevronRight className="w-5 h-5 secText" />
             </button>
 
             {/* Language Selection (visual hierarchy updated to match Accessibility) */}
-            <div className="p-4 border-t border-gray-100 dark:border-slate-800">
-              <p className="font-medium text-gray-900 dark:text-slate-50">    {t('settings.appearance.language.title')}</p>
-              <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">   {t('settings.appearance.language.description')}         </p>
+            <div className="p-4 dividerBorder">
+              <p className="font-medium primText ">    {t('settings.appearance.language.title')}</p>
+              <p className="text-sm secText mb-3">   {t('settings.appearance.language.description')}         </p>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => { setLang('en') }}
-                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
-                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                    : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
+                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${lang === 'en'
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
                     }`}
                 >
                   {t('settings.appearance.language.options.en')}
@@ -99,9 +99,9 @@ export default function Settings() {
 
                 <button
                   onClick={() => { setLang('ur') }}
-                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${lang === 'ur'
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
                     }`}
                 >
                   {t('settings.appearance.language.options.ur')}
@@ -111,14 +111,14 @@ export default function Settings() {
           </div>
 
           {/* Card: Account Information Form */}
-          <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
-            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
+          <form onSubmit={handleSubmit} className="secBg primBorder rounded-lg">
+            <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
               {t('settings.account.title')}
             </h2>
             <div className="p-4 space-y-4">
               {/* Name Field */}
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                <label className="block text-sm font-medium mb-2 primText ">
                   {t('settings.account.form.fullName.label')}
                 </label>
                 <input
@@ -127,13 +127,13 @@ export default function Settings() {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder={t('settings.account.form.fullName.placeholder')}
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="inputField transition-all duration-200"
                 />
               </div>
 
               {/* Phone Field (Read-only) */}
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                <label className="block text-sm font-medium mb-2 primText ">
                   {t('settings.account.form.phone.label')}
                 </label>
                 <input
@@ -141,14 +141,14 @@ export default function Settings() {
                   name="phone"
                   value={formData.phone}
                   readOnly
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 cursor-not-allowed"
+                  className="w-full px-4 py-3 primBorder rounded-lg secBg secText cursor-not-allowed"
                   placeholder={t('settings.account.form.phone.placeholder')}
                 />
               </div>
 
               {/* Address Field */}
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+                <label className="block text-sm font-medium mb-2 primText ">
                   {t('settings.account.form.address.label')}
                 </label>
                 <textarea
@@ -157,7 +157,7 @@ export default function Settings() {
                   onChange={handleInputChange}
                   rows={3}
                   placeholder={t('settings.account.form.address.placeholder')}
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="inputField transition-all duration-200"
                 />
               </div>
 
@@ -165,7 +165,7 @@ export default function Settings() {
               <button
                 type="submit"
                 disabled={isSaving}
-                className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={18} />
                 {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
@@ -174,10 +174,10 @@ export default function Settings() {
           </form>
 
           {/* Card: Danger Zone / Sign Out */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4">
+          <div className="secBg primBorder rounded-lg p-4">
             <button
               onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-transparent border border-red-500/50 dark:border-red-500/40 text-red-600 dark:text-red-500 font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-950/50 transition-all duration-200"
+              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnDanger rounded-lg transition-all duration-200"
             >
               <LogOut size={18} />
               {t('settings.signOut.button')}

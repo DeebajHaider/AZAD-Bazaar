@@ -10,12 +10,12 @@ import BottomNav from '../component/BottomNav'
 // A reusable styled input component
 const FormInput = ({ label, ...props }) => (
   <div>
-    <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
+    <label className="block text-sm font-medium mb-2 primText ">
       {label}
     </label>
     <input
       {...props}
-      className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200"
     />
   </div>
 )
@@ -24,13 +24,13 @@ const FormInput = ({ label, ...props }) => (
 const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`w-full flex flex-col items-center justify-center gap-2 p-4 border-2 rounded-lg transition-all duration-200 ${isActive
-        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/40'
-        : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:border-gray-300 dark:hover:border-slate-700'
+    className={`w-full flex flex-col items-center justify-center gap-2 p-4 rounded-lg transition-all duration-200 ${isActive
+        ? 'modeChooseButton-selected'
+        : 'modeChooseButton-unselected'
       }`}
   >
-    <Icon size={24} className={isActive ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-slate-400'} />
-    <span className={`font-medium ${isActive ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-slate-50'}`}>
+    <Icon size={24} className={isActive ? '' : 'secText'} />
+    <span className="font-medium">
       {label}
     </span>
   </button>
@@ -64,7 +64,7 @@ export default function Checkout() {
   const EditAddressAction = () => (
     <button
       onClick={() => setEditingAddress(prev => !prev)}
-      className="flex items-center gap-1.5 text-sm font-medium text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+      className="flex items-center gap-1.5 text-sm font-medium accentPrimText hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
     >
       {editingAddress ? <Save size={16} /> : <Edit3 size={16} />}
       {editingAddress ? t('checkout.address.saveButton') : t('checkout.address.editButton')}
@@ -76,12 +76,12 @@ export default function Checkout() {
       header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
       footer={<BottomNav />}
     >
-      <main className="flex-1 overflow-y-auto bg-white dark:bg-slate-950">
+      <main className="flex-1 overflow-y-auto primBg">
         <div className="p-4 space-y-6 pb-32">
           {/* Address Section */}
-          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-slate-800">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50">{t('checkout.address.title')}</h2>
+          <section className="secBg primBorder rounded-lg">
+            <div className="flex justify-between items-center p-4 dividerBorder">
+              <h2 className="text-lg font-semibold primText ">{t('checkout.address.title')}</h2>
               <EditAddressAction />
             </div>
             <div className="p-4 space-y-4">
@@ -90,10 +90,10 @@ export default function Checkout() {
                   value={address}
                   onChange={e => setAddress(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="inputField"
                 />
               ) : (
-                <p className="text-base text-gray-600 dark:text-slate-400">{address}</p>
+                <p className="text-base secText">{address}</p>
               )}
               <FormInput
                 label={t('checkout.address.instructionsLabel')}
@@ -105,8 +105,8 @@ export default function Checkout() {
           </section>
 
           {/* Payment Section */}
-          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4 space-y-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50">{t('checkout.payment.title')}</h2>
+          <section className="secBg primBorder rounded-lg p-4 space-y-4">
+            <h2 className="text-lg font-semibold primText ">{t('checkout.payment.title')}</h2>
             <div className="grid grid-cols-2 gap-4">
               <PaymentOption
                 label={t('checkout.payment.cashOnDelivery')}
@@ -122,7 +122,7 @@ export default function Checkout() {
               />
             </div>
             {paymentMethod === 'card' && (
-              <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-slate-800">
+              <div className="space-y-4 pt-4 dividerBorder border-t">
                 <FormInput label={t('checkout.payment.cardDetails.nameLabel')} placeholder="JOHN DOE" value={cardDetails.name} onChange={e => setCardDetails({ ...cardDetails, name: e.target.value })} />
                 <FormInput label={t('checkout.payment.cardDetails.numberLabel')} placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={e => setCardDetails({ ...cardDetails, number: e.target.value })} />
                 <div className="grid grid-cols-2 gap-4">
@@ -134,37 +134,37 @@ export default function Checkout() {
           </section>
 
           {/* Billing Section */}
-          <section className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4 space-y-3">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">{t('checkout.billing.title')}</h2>
+          <section className="secBg primBorder rounded-lg p-4 space-y-3">
+            <h2 className="text-lg font-semibold primText  mb-2">{t('checkout.billing.title')}</h2>
             <div className="flex justify-between text-base">
-              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.subtotal')}</span>
-              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{subtotal.toFixed(2)}</span>
+              <span className="secText">{t('checkout.billing.subtotal')}</span>
+              <span className="font-medium primText ">{t('common.currencySymbol')}{subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-base">
-              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.serviceFee')}</span>
-              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{serviceFee.toFixed(2)}</span>
+              <span className="secText">{t('checkout.billing.serviceFee')}</span>
+              <span className="font-medium primText ">{t('common.currencySymbol')}{serviceFee.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-base">
-              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.deliveryFee')}</span>
-              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{deliveryFee.toFixed(2)}</span>
+              <span className="secText">{t('checkout.billing.deliveryFee')}</span>
+              <span className="font-medium primText ">{t('common.currencySymbol')}{deliveryFee.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-base">
-              <span className="text-gray-600 dark:text-slate-400">{t('checkout.billing.tax')}</span>
-              <span className="font-medium text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{tax.toFixed(2)}</span>
+              <span className="secText">{t('checkout.billing.tax')}</span>
+              <span className="font-medium primText ">{t('common.currencySymbol')}{tax.toFixed(2)}</span>
             </div>
-            <div className="pt-3 mt-1 border-t border-gray-200 dark:border-slate-800 flex justify-between text-lg font-semibold">
-              <span className="text-gray-900 dark:text-slate-50">{t('checkout.billing.total')}</span>
-              <span className="text-gray-900 dark:text-slate-50">{t('common.currencySymbol')}{total.toFixed(2)}</span>
+            <div className="pt-3 mt-1 dividerBorder border-t flex justify-between text-lg font-semibold">
+              <span className="primText ">{t('checkout.billing.total')}</span>
+              <span className="primText ">{t('common.currencySymbol')}{total.toFixed(2)}</span>
             </div>
           </section>
         </div>
       </main>
 
       {/* Fixed Footer for Action Button */}
-      <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm border-t border-gray-200 dark:border-slate-800 p-4">
+      <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm dividerBorder border-t p-4">
         <button
           onClick={handlePlaceOrder}
-          className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200"
+          className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
         >
           {t('checkout.actions.placeOrder', { total: total.toFixed(2) })}
         </button>

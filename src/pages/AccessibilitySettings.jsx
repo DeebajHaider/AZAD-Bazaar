@@ -30,16 +30,16 @@ export default function AccessibilitySettings() {
 
   return (
     <Layout header={<HeaderWithName title={t('accessibility.header.title')} to="/settings" />}>
-      <div className="min-h-screen bg-white dark:bg-slate-950">
+      <div className="min-h-screen primBg">
         {/* Content */}
         <div className="max-w-[430px] mx-auto p-4 space-y-6">
 
           {/* Font Size Section */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
               {t('accessibility.fontSize.title')}
             </h2>
-            <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
+            <p className="text-sm secText mb-4">
               {t('accessibility.fontSize.description')}
             </p>
 
@@ -48,9 +48,9 @@ export default function AccessibilitySettings() {
                 <button
                   key={size.id}
                   onClick={() => setFontSize(size.id)}
-                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${fontSize === size.id
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${fontSize === size.id
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
                     }`}
                 >
                   <div className={size.size}>{size.label}</div>
@@ -60,20 +60,20 @@ export default function AccessibilitySettings() {
           </div>
 
           {/* Theme Section: inserted directly after Font Size */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
               {t('accessibility.theme.title')}
             </h2>
-            <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
+            <p className="text-sm secText mb-4">
               {t('accessibility.theme.description')}
             </p>
 
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setTheme('light')}
-                className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${theme === 'light'
-                  ? 'border-blue-500 bg-blue-50 text-blue-700'
-                  : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
+                className={`min-h-16 px-4 py-3 rounded-lg  font-medium transition-all duration-200 ${theme === 'light'
+                  ? 'modeChooseButton-selected'
+                  : 'modeChooseButton-unselected'
                   }`}
               >
                 {t('accessibility.theme.options.light')}
@@ -81,9 +81,9 @@ export default function AccessibilitySettings() {
 
               <button
                 onClick={() => setTheme('dark')}
-                className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${theme === 'dark'
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                  : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
+                className={`min-h-16 px-4 py-3 rounded-lg  font-medium transition-all duration-200 ${theme === 'dark'
+                  ? 'modeChooseButton-selected'
+                  : 'modeChooseButton-unselected'
                   }`}
               >
                 {t('accessibility.theme.options.dark')}
@@ -92,11 +92,11 @@ export default function AccessibilitySettings() {
           </div>
 
           {/* Color Mode Section */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
               {t('accessibility.colorMode.title')}
             </h2>
-            <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
+            <p className="text-sm secText mb-4">
               {t('accessibility.colorMode.description')}
             </p>
 
@@ -105,18 +105,18 @@ export default function AccessibilitySettings() {
                 <button
                   key={mode.id}
                   onClick={() => setColorMode(mode.id)}
-                  className={`w-full min-h-16 px-4 py-3 rounded-lg border-2 text-left transition-all duration-200 ${colorMode === mode.id
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950'
-                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:border-gray-300 dark:hover:border-slate-700'
+                  className={`w-full min-h-16 px-4 py-3 rounded-lg  text-left transition-all duration-200 ${colorMode === mode.id
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
                     }`}
                 >
-                  <div className="font-medium text-gray-900 dark:text-slate-50 mb-1">
+                  <div className="font-medium primText  mb-1">
                     {mode.label}
                     {colorMode === mode.id && (
-                      <span className="ml-2 text-blue-600 dark:text-blue-400">✓</span>
+                      <span className="ml-2 accentPrimText">✓</span>
                     )}
                   </div>
-                  <div className="text-xs text-gray-600 dark:text-slate-400">
+                  <div className="text-xs secText">
                     {mode.desc}
                   </div>
                 </button>
@@ -125,26 +125,26 @@ export default function AccessibilitySettings() {
           </div>
 
           {/* Preview Section */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-5">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-4">
               {t('accessibility.preview.title')}
             </h2>
 
             <div className="space-y-3">
-              <div className="p-4 bg-white dark:bg-slate-950 border border-gray-200 dark:border-slate-800 rounded-lg">
-                <p className="text-gray-900 dark:text-slate-50 mb-2">
+              <div className="p-4 primBg primBorder rounded-lg">
+                <p className="primText  mb-2">
                   {t('accessibility.preview.mainText')}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-slate-400">
+                <p className="text-sm secText">
                   {t('accessibility.preview.secondaryText')}
                 </p>
               </div>
 
               <div className="flex gap-2">
-                <button className="flex-1 min-h-12 px-4 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200">
+                <button className="flex-1 min-h-12 px-4 py-3 btnPrimary rounded-lg transition-all duration-200">
                   {t('accessibility.preview.primaryButton')}
                 </button>
-                <button className="flex-1 min-h-12 px-4 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200">
+                <button className="flex-1 min-h-12 px-4 py-3 btnSuccess rounded-lg transition-all duration-200">
                   {t('accessibility.preview.successButton')}
                 </button>
               </div>
@@ -154,13 +154,13 @@ export default function AccessibilitySettings() {
           {/* Reset Button */}
           <button
             onClick={resetToDefaults}
-            className="w-full min-h-12 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-lg transition-all duration-200"
+            className="w-full min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
           >
             {t('accessibility.actions.reset')}
           </button>
 
           {/* Info Note */}
-          <div className="text-center text-xs text-gray-500 dark:text-slate-400 space-y-1">
+          <div className="text-center text-xs secText space-y-1">
             <p>{t('accessibility.footer.autoSaveNote')}</p>
             <p>{t('accessibility.footer.globalApplyNote')}</p>
           </div>

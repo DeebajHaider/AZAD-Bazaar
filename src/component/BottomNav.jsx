@@ -11,11 +11,13 @@ const NavItem = ({ to, icon: Icon, label }) => {
   // Base classes for all items
   const baseClasses = "flex flex-col items-center justify-center gap-1 w-full min-h-12 py-2 rounded-lg transition-all duration-200";
   
-  // Classes for the active item (with the "pill" background)
-  const activeClasses = "bg-blue-50 dark:bg-slate-800 text-blue-500 dark:text-blue-500 font-medium";
+  // Classes for the active item, using the system's "selected" class
+  // Note: modeChooseButton-selected does not have its own border, it relies on the unselected state to provide it.
+  // To prevent layout shift, we add a transparent border to the inactive state.
+  const activeClasses = "modeChooseButton-selected font-medium";
   
   // Classes for inactive items
-  const inactiveClasses = "text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200";
+  const inactiveClasses = "secText hover:primText border-2 border-transparent";
 
   return (
     <Link 
@@ -35,10 +37,10 @@ export default function BottomNav() {
 
   return (
     // Outer container handles the fixed positioning and background color.
-    // A subtle top border provides separation from the page content.
-    <header className="bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
+    // Use design tokens from index.css for background and border.
+    <header className="bottom-0 left-0 right-0 primBg primBorder">
       <nav 
-        className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4"
+        className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4 gap-2" // Added gap-2 for spacing
         aria-label={t('bottomNav.ariaLabel')}
       >
         <NavItem to="/" icon={Home} label={t('bottomNav.home')} />
