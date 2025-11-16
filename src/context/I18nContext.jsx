@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useState, useMemo } from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
 import en from '../locales/en.json'
 import ur from '../locales/ur.json'
+import usePersistedLang from '../hooks/usePersistedLang'
 
 const I18nContext = createContext()
 
 export function I18nProvider({ children, defaultLang = 'en' }) {
-  const [lang, setLang] = useState(defaultLang)
+  const [lang, setLang] = usePersistedLang('lang', defaultLang)
 
   // use the external JSON locale files so you can edit them separately
   const translations = useMemo(() => ({ en, ur }), [])

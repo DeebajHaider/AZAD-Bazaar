@@ -36,13 +36,11 @@ export default function useTranslations(options = {}) {
       setLoading(true);
       setError(null);
       try {
-         console.log('useTranslations: loading translations from', url);
         if (!cachedMap || cachedRaw?.sourceUrl !== url) {
           const json = await fetchJson(url);
           const built = buildLookup(json, { normalize });
           cachedMap = built;
           cachedRaw = { sourceUrl: url, json };
-           console.log('useTranslations: translations loaded', { sourceUrl: url, models: Array.isArray(json.models) ? json.models.length : 0 });
         }
         if (mounted) setMap(cachedMap);
       } catch (err) {
@@ -58,42 +56,33 @@ export default function useTranslations(options = {}) {
 
   // translateDBVal: translation helper (renamed from `get`)
   const translateDBVal = (model, field, value, lang = 'ur') => {
-    console.log('translateDBVal called', { model, field, value, lang });
     if (!value) return value;
     if (lang === 'en') return value; // english is the source
     const key = normalize && typeof value === 'string' ? value.trim().toLowerCase() : value;
     if (!map) {
-       console.log('translateDBVal: no map available', { model, field, value, key });
       return value;
     }
     const modelMap = map[model];
     if (!modelMap) {
-       console.log('translateDBVal: missing model', { model, field, value, key });
       return value;
     }
     const fieldMap = modelMap[field];
     if (!fieldMap) {
-       console.log('translateDBVal: missing field', { model, field, value, key });
       return value;
     }
     const entry = fieldMap[key];
     if (!entry) {
-       console.log('translateDBVal: missing entry', { model, field, value, key });
       return value;
     }
-    console.log('translateDBVal: found entry', { entry });
     if (lang === 'ur' && entry.ur) {
-       console.log('translateDBVal: hit', { model, field, value, key, result: entry.ur });
       return entry.ur;
     }
-     console.log('translateDBVal: fallback to original', { model, field, value, key });
     return value;
   };
 
   // Allow caller to override the cached translations at runtime
   const setTranslations = (json) => {
     try {
-       console.log('useTranslations: setTranslations called (runtime override)', { entries: Array.isArray(json.models) ? json.models.length : 0 });
       cachedRaw = { sourceUrl: 'runtime', json };
       cachedMap = buildLookup(json, { normalize });
       setMap(cachedMap);

@@ -11,17 +11,21 @@ export function useAccessibility() {
 }
 
 export function AccessibilityProvider({ children }) {
-  const [fontSize, setFontSize] = useState('normal')
-  const [colorMode, setColorMode] = useState('default')
+  const [fontSize, setFontSize] = useState(() => {
+    try {
+      return localStorage.getItem('accessibility-fontSize') || 'normal'
+    } catch (e) {
+      return 'normal'
+    }
+  })
 
-  // Load saved preferences on mount
-  useEffect(() => {
-    const savedFontSize = localStorage.getItem('accessibility-fontSize')
-    const savedColorMode = localStorage.getItem('accessibility-colorMode')
-    
-    if (savedFontSize) setFontSize(savedFontSize)
-    if (savedColorMode) setColorMode(savedColorMode)
-  }, [])
+  const [colorMode, setColorMode] = useState(() => {
+    try {
+      return localStorage.getItem('accessibility-colorMode') || 'default'
+    } catch (e) {
+      return 'default'
+    }
+  })
 
   // Apply font size to root element
   useEffect(() => {
@@ -41,7 +45,7 @@ export function AccessibilityProvider({ children }) {
     const root = document.documentElement
     
     // Remove all color mode classes
-    root.classList.remove('high-contrast', 'deuteranopia', 'protanopia', 'tritanopia')
+    root.classList.remove('highContrast', 'deuteranopia', 'protanopia', 'tritanopia')
     
     // Add the selected mode
     if (colorMode !== 'default') {
