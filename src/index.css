@@ -609,3 +609,33 @@ body {
   }
   
 }
+
+/* Hide scrollbars globally but keep scrolling functional */
+/* WebKit browsers */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+main::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html, body, #root, main {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+/* Keep touch scrolling smooth on iOS */
+main {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Also hide scrollbars for all elements (covers horizontal scrollbars on inner containers) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
