@@ -23,6 +23,7 @@
     "@capacitor/android": "^7.4.4",
     "@capacitor/cli": "^7.4.4",
     "@capacitor/core": "^7.4.4",
+    "@capacitor/status-bar": "^7.0.3",
     "axios": "^1.13.2",
     "clsx": "^2.1.1",
     "i18next": "^25.6.2",
