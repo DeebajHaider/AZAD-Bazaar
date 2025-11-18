@@ -1,9 +1,16 @@
 import axios from 'axios';
 
-// Base URL can be configured via Vite env var VITE_API_BASE_URL
-const baseURL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL)
-  ? import.meta.env.VITE_API_BASE_URL
-  : 'http://localhost:5000/api';
+// Resolve API base URL with precedence:
+// 1. VITE_API_BASE_URL (recommended Vite-exposed variable)
+// 2. APICLIENT (non-prefixed, from .env if manually loaded)
+// 3. process.env.APICLIENT (Node context / SSR fallback)
+// 4. default localhost
+const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {};
+let baseURL = env.VITE_API_BASE_URL
+  || (typeof process !== 'undefined' && process.env && process.env.APICLIENT)
+  || 'http://localhost:5000/api';
+
+console.debug('API client baseURL set to', baseURL);
 
 const client = axios.create({
   baseURL,

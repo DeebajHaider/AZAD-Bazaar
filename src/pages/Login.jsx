@@ -42,9 +42,10 @@ export default function Login() {
     if (!phone) return setErr(t('login.notifications.errors.phoneRequired'))
     setLoading(true)
     try {
-      await requestOtp(phone, mode === 'signup')
+      const res = await requestOtp(phone, mode === 'signup')
+      console.log('requestOtp res', res)
       setStep('waiting-otp')
-      setInfo(t('login.notifications.info.otpSent'))
+      setInfo(t('login.notifications.info.otpSent') + res.otp)
     } catch (error) {
       console.error('requestOtp err', error)
       setErr(error && error.message ? error.message : t('login.notifications.errors.otpSendFailed'))
