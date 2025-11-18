@@ -181,7 +181,15 @@ export default function SearchResults() {
   }
 
   const mapApiItemToCard = (it) => ({
-    id: it._id, title: it.name, price: it.discountedPrice ?? it.price, originalPrice: it.price, category: it.category?.name, inStock: (it.stockQuantity - (it.reservedQuantity || 0) > 0), image: it.images?.[0]
+    id: it._id,
+    title: it.name,
+    // displayed price: prefer discountedPrice, fall back to price
+    price: it.discountedPrice ?? it.price,
+    // originalPrice may be provided as `originalPrice`; fall back to `price` when absent
+    originalPrice: it.originalPrice ?? it.price,
+    category: it.category?.name,
+    inStock: (it.stockQuantity - (it.reservedQuantity || 0) > 0),
+    image: it.images?.[0]
   })
 
   const pageSize = 10
