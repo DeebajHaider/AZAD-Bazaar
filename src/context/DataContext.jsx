@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import categoryService from '../api/categoryService'
 import brandService from '../api/brandService'
+import productService from '../api/productService'
 
 const DataContext = createContext(null)
 
@@ -9,6 +10,7 @@ const FIVE_MIN = 5 * 60 * 1000
 export function DataProvider({ children }) {
   const [categories, setCategories] = useState(null)
   const [brands, setBrands] = useState(null)
+  const [relatedProductsCache, setRelatedProductsCache] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const tsRef = useRef(0)
@@ -63,6 +65,19 @@ export function DataProvider({ children }) {
     }
   }, [brands, isExpired])
 
+  const fetchRelatedProducts = useCallback(async (productId) => {
+    if (relatedProductsCache[productId]) return relatedProductsCache[productId]
+    
+    try {
+      const data = await productService.getRelatedProducts(productId)
+      setRelatedProductsCache(prev => ({ ...prev, [productId]: data }))
+      return data
+    } catch (err) {
+      console.error("Failed to fetch related products", err)
+      return []
+    }
+  }, [relatedProductsCache])
+
   const mainCategories = useMemo(() => {
     if (!categories) return []
     return categories.filter(c => !c.parentCategoryIds || c.parentCategoryIds.length === 0)
@@ -106,6 +121,7 @@ export function DataProvider({ children }) {
     getSubCategories,
     fetchCategories: getAllCategories,
     fetchBrands,
+    fetchRelatedProducts,
   }
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>

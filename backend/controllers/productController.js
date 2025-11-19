@@ -152,3 +152,44 @@ exports.getProduct = async (req, res) => {
     return res.status(400).json({ message: 'Invalid id' });
   }
 };
+
+exports.getRelatedProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const limit = parseInt(req.query.limit) || 5;
+
+    const product = await Product.findById(id);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+
+    const pipeline = [
+      { 
+        $match: { 
+          _id: { $ne: product._id },
+          categoryId: product.categoryId,
+          isActive: true // Assuming we only want active products
+        } 
+      },
+      {
+        $addFields: {
+          matchesSub: {
+            $size: { 
+              $setIntersection: [ 
+                { $ifNull: ["$subcategories", []] }, 
+                { $ifNull: [product.subcategories, []] } 
+              ] 
+            }
+          }
+        }
+      },
+      { $sort: { matchesSub: -1 } },
+      { $limit: 20 }, // Pool of top candidates
+      { $sample: { size: limit } }
+    ];
+
+    const related = await Product.aggregate(pipeline);
+    return res.json(related);
+  } catch (err) {
+    console.error('getRelatedProducts error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};

@@ -3,6 +3,7 @@ import { Heart, Plus, Minus } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
+import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
 import { Layout } from '../Layout'
@@ -106,23 +107,27 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
 const RelatedProductCard = ({ product }) => {
   const { t, lang } = useI18n()
   const { translateDBVal } = useTranslations()
+  const productId = product._id || product.id
+  const displayPrice = product.discountedPrice ?? product.price
+  const image = (product.images && product.images.length) ? product.images[0] : product.image
+
   return (
-    <Link to={`/product/${product.id}`} state={{ product }} className="block w-36 flex-shrink-0 focusRing rounded-lg">
+    <Link to={`/product/${productId}`} state={{ product }} className="block w-36 flex-shrink-0 focusRing rounded-lg">
       <div className="card transition-shadow duration-200 hover:shadow-md flex flex-col h-64">
         <div className="aspect-square secBg rounded-md overflow-hidden flex-shrink-0 primBorder">
-          <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+          <img src={image} alt={product.title} className="w-full h-full object-cover" />
         </div>
         <div className="pt-2 flex-1 flex flex-col">
           <h3 className="text-sm font-medium primText line-clamp-2 min-h-10">{translateDBVal("Product", "name", product.name?? product.title, lang)}</h3>
-          <div className="flex items-baseline gap-1 mt-auto">
-            <span className="text-base font-semibold primText">
-              {t('common.currencySymbol')} {product.price.toLocaleString()}
-            </span>
+          <div className="flex flex-col mt-auto">
             {product.originalPrice && (
               <span className="text-xs secText line-through">
                 {t('common.currencySymbol')} {product.originalPrice.toLocaleString()}
               </span>
             )}
+            <span className="text-base font-semibold primText">
+              {t('common.currencySymbol')} {displayPrice.toLocaleString()}
+            </span>
           </div>
         </div>
       </div>
@@ -130,13 +135,20 @@ const RelatedProductCard = ({ product }) => {
   )
 }
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ productId }) => {
   const { t } = useI18n()
-  const sampleRelatedProducts = [
-    { id: 'REL001', title: 'Fresh Organic Apples', price: 4.99, originalPrice: 6.99, image: 'https://via.placeholder.com/200x200?text=Apple' },
-    { id: 'REL002', title: 'Whole Wheat Bread', price: 3.49, image: 'https://via.placeholder.com/200x200?text=Bread' },
-    { id: 'REL003', title: 'Almond Milk (Unsweetened)', price: 2.99, originalPrice: 3.50, image: 'https://via.placeholder.com/200x200?text=Milk' },
-  ]
+  const { fetchRelatedProducts } = useData()
+  const [related, setRelated] = useState([])
+
+  useEffect(() => {
+    if (productId) {
+      fetchRelatedProducts(productId).then(res => {
+        if (Array.isArray(res)) setRelated(res)
+      })
+    }
+  }, [productId, fetchRelatedProducts])
+
+  if (!related || related.length === 0) return null
 
   return (
     <div className="py-6">
@@ -144,7 +156,7 @@ const RelatedProducts = () => {
         {t('productPage.relatedProducts.title')}
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-2 px-4 scrollbar-hide">
-        {sampleRelatedProducts.map(p => <RelatedProductCard key={p.id} product={p} />)}
+        {related.map(p => <RelatedProductCard key={p._id || p.id} product={p} />)}
       </div>
     </div>
   )
@@ -233,7 +245,7 @@ export default function Product() {
         </div>
 
         <div className="dividerBorder border-t mt-2">
-          <RelatedProducts />
+          <RelatedProducts productId={product._id || product.id} />
         </div>
       </main>
     </Layout>

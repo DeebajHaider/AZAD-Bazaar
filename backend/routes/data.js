@@ -13,6 +13,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/products', productCtrl.createProduct);
 router.get('/products', productCtrl.listProducts);
 router.get('/products/:id', productCtrl.getProduct);
+router.get('/products/:id/related', productCtrl.getRelatedProducts);
 
 // Brands
 router.post('/brands', brandCtrl.createBrand);

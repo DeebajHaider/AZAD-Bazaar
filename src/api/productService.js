@@ -41,7 +41,20 @@ export const getProductById = async (id) => {
   return response.data;
 };
 
+export const getRelatedProducts = async (id) => {
+  if (!id) throw new Error('Product id is required');
+  
+  const cacheKey = `related_products_${id}`;
+  const cached = getFromCache(cacheKey);
+  if (cached) return cached;
+
+  const response = await client.get(`/products/${id}/related`);
+  setInCache(cacheKey, response.data);
+  return response.data;
+};
+
 export default {
   getProducts,
   getProductById,
+  getRelatedProducts,
 };
