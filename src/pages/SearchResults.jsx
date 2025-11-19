@@ -151,11 +151,11 @@ export default function SearchResults() {
     return arr
   }, [filteredResults, filters.sortBy, filters.sortOrder])
 
-  const { categories } = useData()
+  const { mainCategories } = useData()
   const sortedCategories = useMemo(() => {
-    if (!Array.isArray(categories)) return []
-    return categories.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
-  }, [categories])
+    if (!Array.isArray(mainCategories)) return []
+    return mainCategories.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+  }, [mainCategories])
   
   const selectedCategoryObjects = useMemo(() => {
     const specialMap = {
