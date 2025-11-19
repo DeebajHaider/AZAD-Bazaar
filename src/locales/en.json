@@ -191,6 +191,7 @@
     "filterPanel": {
       "title": "Filters",
       "categoryLabel": "Category",
+      "brandLabel": "Brand",
       "allCategories": "All Categories",
       "inStockLabel": "In Stock Only",
       "onDiscountLabel": "On Discount",

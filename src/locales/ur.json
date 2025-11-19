@@ -191,6 +191,7 @@
     "filterPanel": {
       "title": "فلٹرز",
       "categoryLabel": "زمرہ",
+      "brandLabel": "برانڈ",
       "allCategories": "تمام زمرے",
       "inStockLabel": "صرف اسٹاک میں",
       "onDiscountLabel": "رعایت پر",

@@ -2,18 +2,39 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ArrowLeft, Search as SearchIcon, X, ChevronUp, ChevronDown } from 'lucide-react'
 import ItemCard from '../component/ItemCard'
-import { useProducts } from '../api'
+import { useProducts, useBrands } from '../api'
 import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
 import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
+import useDebounce from '../hooks/useDebounce'
+
+// Header component with search form
+const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate }) => (
+  <header className="secBg dividerBorder p-4">
+    <div className="max-w-[430px] mx-auto">
+      <form onSubmit={handleSearch} className="flex items-center gap-3">
+        <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
+          <ArrowLeft size={20} />
+        </button>
+        <div className="relative flex-1">
+          <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t('searchResults.header.placeholder')} className="inputField h-11 pr-11 text-sm w-full" />
+          <button type="submit" aria-label={t('searchResults.header.searchButtonAriaLabel')} className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors">
+            <SearchIcon size={20} />
+          </button>
+        </div>
+      </form>
+    </div>
+  </header>
+)
 
 // --- Category Filter Modal Component ---
-const CategoryModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, t, lang, translateDBVal }) => {
+const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, brands, t, lang, translateDBVal }) => {
   if (!isOpen) return null
 
   const [tempCategories, setTempCategories] = useState(initialFilters.categories)
+  const [tempBrands, setTempBrands] = useState(initialFilters.brands)
 
   const specialFilters = [
     { _id: 'inStock', name: t('searchResults.filterPanel.inStockLabel') },
@@ -26,13 +47,20 @@ const CategoryModal = ({ isOpen, onClose, initialFilters, applyFilters, categori
     )
   }
 
+  const handleToggleBrand = (brandId) => {
+    setTempBrands(prev =>
+      prev.includes(brandId) ? prev.filter(id => id !== brandId) : [...prev, brandId]
+    )
+  }
+
   const handleApply = () => {
-    applyFilters({ ...initialFilters, categories: tempCategories })
+    applyFilters({ ...initialFilters, categories: tempCategories, brands: tempBrands })
     onClose()
   }
   
   const handleClear = () => {
     setTempCategories([])
+    setTempBrands([])
   }
 
   return (
@@ -75,6 +103,21 @@ const CategoryModal = ({ isOpen, onClose, initialFilters, applyFilters, categori
                     })}
                 </div>
             </div>
+
+            {/* Product Brands */}
+            <div>
+                <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.brandLabel')}</h3>
+                <div className="flex flex-wrap gap-2">
+                    {brands.map(brand => {
+                         const isSelected = tempBrands.includes(brand._id)
+                         return (
+                           <button key={brand._id} onClick={() => handleToggleBrand(brand._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
+                             {translateDBVal("Brand", "name", brand.name, lang)}
+                           </button>
+                         )
+                    })}
+                </div>
+            </div>
         </main>
 
         <footer className="flex gap-3 pt-3 border-t dividerBorder flex-shrink-0">
@@ -94,33 +137,75 @@ export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { translateDBVal } = useTranslations()
 
-  const [isCategoryModalOpen, setCategoryModalOpen] = useState(false)
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [currentPage, setCurrentPage] = useState(1)
   
   // Refactored filter state for new UI
-  const [filters, setFilters] = useState({
-    categories: [], // Can include 'inStock', 'onDiscount', and category IDs
-    sortBy: 'name',
-    sortOrder: 'asc'
+  const [filters, setFilters] = useState(() => {
+    const initialCategories = searchParams.get('category') ? [searchParams.get('category')] : []
+    const initialBrands = searchParams.get('brand') ? [searchParams.get('brand')] : []
+    return {
+      categories: initialCategories,
+      brands: initialBrands,
+      sortBy: 'name',
+      sortOrder: 'asc'
+    }
   })
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (debouncedSearchTerm.trim()) {
+      newSearchParams.set('q', debouncedSearchTerm.trim());
+    } else {
+      newSearchParams.delete('q');
+    }
+    setSearchParams(newSearchParams, { replace: true });
+    setCurrentPage(1);
+  }, [debouncedSearchTerm, setSearchParams]);
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams)
+    let wasModified = false
+    if (newSearchParams.has('category')) {
+      newSearchParams.delete('category')
+      wasModified = true
+    }
+    if (newSearchParams.has('brand')) {
+      newSearchParams.delete('brand')
+      wasModified = true
+    }
+    if (wasModified) {
+      setSearchParams(newSearchParams, { replace: true })
+    }
+  }, [])
 
   // --- Core Logic (largely unchanged, adapted to new filter state) ---
 
   const handleSearch = (e) => {
     e.preventDefault()
-    setSearchParams(searchTerm.trim() ? { q: searchTerm.trim() } : {})
+    // Force immediate search, bypassing debounce
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (searchTerm.trim()) {
+      newSearchParams.set('q', searchTerm.trim());
+    } else {
+      newSearchParams.delete('q');
+    }
+    setSearchParams(newSearchParams, { replace: true });
     setCurrentPage(1)
   }
 
   const apiParams = useMemo(() => {
     const p = {}
-    if (searchTerm && searchTerm.trim()) p.name = searchTerm.trim()
+    const query = searchParams.get('q')
+    if (query) p.name = query
     const realCategories = filters.categories.filter(c => c !== 'inStock' && c !== 'onDiscount')
     if (realCategories.length > 0) p.categories = realCategories.join(',')
+    if (filters.brands.length > 0) p.brands = filters.brands.join(',')
     if (filters.categories.includes('inStock')) p.instock = true
     return p
-  }, [searchTerm, filters.categories])
+  }, [searchParams, filters.categories, filters.brands])
 
   const { data: apiData, loading: loadingProducts, error: productsError } = useProducts(apiParams, { immediate: true })
 
@@ -152,10 +237,17 @@ export default function SearchResults() {
   }, [filteredResults, filters.sortBy, filters.sortOrder])
 
   const { mainCategories } = useData()
+  const { data: allBrands } = useBrands()
+
   const sortedCategories = useMemo(() => {
     if (!Array.isArray(mainCategories)) return []
     return mainCategories.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
   }, [mainCategories])
+
+  const sortedBrands = useMemo(() => {
+    if (!Array.isArray(allBrands)) return []
+    return allBrands.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+  }, [allBrands])
   
   const selectedCategoryObjects = useMemo(() => {
     const specialMap = {
@@ -168,6 +260,12 @@ export default function SearchResults() {
     }).filter(Boolean)
   }, [filters.categories, sortedCategories, t, lang])
 
+  const selectedBrandObjects = useMemo(() => {
+    return filters.brands.map(id => {
+        return sortedBrands.find(c => c._id === id)
+    }).filter(Boolean)
+  }, [filters.brands, sortedBrands])
+
   const handleSortClick = (sortBy) => {
     if (filters.sortBy === sortBy) {
       setFilters({ ...filters, sortOrder: filters.sortOrder === 'asc' ? 'desc' : 'asc' })
@@ -178,6 +276,10 @@ export default function SearchResults() {
 
   const clearCategoryFilters = () => {
     setFilters(prev => ({ ...prev, categories: [] }))
+  }
+
+  const clearBrandFilters = () => {
+    setFilters(prev => ({ ...prev, brands: [] }))
   }
 
   const mapApiItemToCard = (it) => ({
@@ -200,32 +302,13 @@ export default function SearchResults() {
 
   useEffect(() => { setCurrentPage(1) }, [filters])
 
-  // Header component with search form
-  const SearchHeader = () => (
-    <header className="secBg dividerBorder p-4">
-      <div className="max-w-[430px] mx-auto">
-        <form onSubmit={handleSearch} className="flex items-center gap-3">
-          <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
-            <ArrowLeft size={20} />
-          </button>
-          <div className="relative flex-1">
-            <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t('searchResults.header.placeholder')} className="inputField h-11 pr-11 text-sm w-full" />
-            <button type="submit" aria-label={t('searchResults.header.searchButtonAriaLabel')} className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors">
-              <SearchIcon size={20} />
-            </button>
-          </div>
-        </form>
-      </div>
-    </header>
-  )
-
   // Main content component
   const SearchContent = () => (
     <main className="flex-1 overflow-y-auto primBg min-h-full">
       {/* New Filter & Sort Section */}
       <section className="p-4 space-y-4 dividerBorder">
         <div className="flex items-center gap-2">
-          <button onClick={() => setCategoryModalOpen(true)} className="btnSecondary px-4 py-2 rounded-lg">
+          <button onClick={() => setFilterModalOpen(true)} className="btnSecondary px-4 py-2 rounded-lg">
             {t('searchResults.summary.filtersButton')}
           </button>
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 py-0.5">
@@ -234,8 +317,13 @@ export default function SearchResults() {
                 {cat._id === 'inStock' || cat._id === 'onDiscount' ? cat.name : translateDBVal("Category", "name", cat.name, lang)}
               </span>
             ))}
-            {selectedCategoryObjects.length > 0 && (
-              <button onClick={clearCategoryFilters} className="badgePrimary flex-shrink-0 !bg-red-500 !text-white hover:!bg-red-600 transition-colors text-xs py-1 px-2.5">
+            {selectedBrandObjects.map(brand => (
+              <span key={brand._id} className="badgePrimary flex-shrink-0 text-xs py-1 px-2.5">
+                {translateDBVal("Brand", "name", brand.name, lang)}
+              </span>
+            ))}
+            {(selectedCategoryObjects.length > 0 || selectedBrandObjects.length > 0) && (
+              <button onClick={() => { clearCategoryFilters(); clearBrandFilters(); }} className="badgePrimary flex-shrink-0 !bg-red-500 !text-white hover:!bg-red-600 transition-colors text-xs py-1 px-2.5">
                 {t('common.clear')}
               </button>
             )}
@@ -302,11 +390,11 @@ export default function SearchResults() {
 
   return (
     <Layout
-      header={<SearchHeader />}
+      header={<SearchHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch} t={t} navigate={navigate} />}
       footer={<BottomNav />}
     >
       <SearchContent />
-      <CategoryModal isOpen={isCategoryModalOpen} onClose={() => setCategoryModalOpen(false)} initialFilters={filters} applyFilters={setFilters} categories={sortedCategories} t={t} lang={lang} translateDBVal={translateDBVal} />
+      <FilterModal isOpen={isFilterModalOpen} onClose={() => setFilterModalOpen(false)} initialFilters={filters} applyFilters={setFilters} categories={sortedCategories} brands={sortedBrands} t={t} lang={lang} translateDBVal={translateDBVal} />
     </Layout>
   )
 }
