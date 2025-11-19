@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
 // Import logo - replace path if your PNG is located elsewhere (e.g. '../assets/logo.png')
-import logo from '../Azad-Bazaar.svg'
+import logo from '/Azad-Bazaar.svg'
 
 export default function Login() {
   const { requestOtp, verifyOtp } = useAuth()

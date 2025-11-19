@@ -101,7 +101,7 @@ export default function Home() {
               </div>
             </button>
             <div className="flex-shrink-0">
-              <img src="src/Azad-Bazaar.svg" alt="Azad Bazaar logo" className="h-8 w-auto" />
+              <img src="/Azad-Bazaar.svg" alt="Azad Bazaar logo" className="h-8 w-auto" />
             </div>
           </div>
           <button onClick={() => navigate('/search-results?q=')} className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing">
@@ -132,7 +132,7 @@ export default function Home() {
         {/* Promotional Card */}
         <section className="secBg primBorder rounded-xl p-4 flex items-center justify-center min-h-[120px]">
           <img
-            src="src/Azad-Bazaar.svg"
+            src="/Azad-Bazaar.svg"
             alt="Azad Bazaar Offer"
             className="h-28 w-auto"
           />

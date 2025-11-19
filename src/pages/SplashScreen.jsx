@@ -36,7 +36,7 @@ export default function SplashScreen({ onComplete, duration = 2500 }) {
       <div className="flex flex-col items-center gap-4">
         {/* Logo with the 2-second fade-in and scale animation */}
         <img
-          src="src/Azad-Bazaar.svg"
+          src="/Azad-Bazaar.svg"
           alt="Azad Bazaar Logo"
           className="h-40 w-auto animate-fade-in-scale"
         />
