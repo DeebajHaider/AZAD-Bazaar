@@ -70,10 +70,10 @@ const InfoCard = ({ children, onClick }) => (
 export default function Home() {
   const navigate = useNavigate()
   const { customer } = useAuth()
-  const { categories, brands } = useData()
+  const { mainCategories, brands } = useData()
   const { t } = useI18n()
 
-  const displayCategories = categories?.slice(0, 30) || []
+  const displayCategories = mainCategories?.slice(0, 30) || []
   const displayBrands = brands?.slice(0, 30) || []
 
   const format = (key, vars = {}) => {

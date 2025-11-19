@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import categoryService from '../api/categoryService'
 import brandService from '../api/brandService'
 
@@ -17,7 +17,7 @@ export function DataProvider({ children }) {
     return Date.now() - tsRef.current > FIVE_MIN
   }, [])
 
-  const fetchCategories = useCallback(async (force = false) => {
+  const getAllCategories = useCallback(async (force = false) => {
     if (!force && categories && !isExpired()) return categories
     setLoading(true)
     setError(null)
@@ -33,6 +33,18 @@ export function DataProvider({ children }) {
       setLoading(false)
     }
   }, [categories, isExpired])
+
+  const getMainCategories = useCallback(async () => {
+    const all = await getAllCategories()
+    if (!all) return []
+    return all.filter(c => !c.parentCategoryIds || c.parentCategoryIds.length === 0)
+  }, [getAllCategories])
+
+  const getSubCategories = useCallback(async () => {
+    const all = await getAllCategories()
+    if (!all) return []
+    return all.filter(c => c.parentCategoryIds && c.parentCategoryIds.length > 0)
+  }, [getAllCategories])
 
   const fetchBrands = useCallback(async (force = false) => {
     if (!force && brands && !isExpired()) return brands
@@ -50,6 +62,16 @@ export function DataProvider({ children }) {
       setLoading(false)
     }
   }, [brands, isExpired])
+
+  const mainCategories = useMemo(() => {
+    if (!categories) return []
+    return categories.filter(c => !c.parentCategoryIds || c.parentCategoryIds.length === 0)
+  }, [categories])
+
+  const subCategories = useMemo(() => {
+    if (!categories) return []
+    return categories.filter(c => c.parentCategoryIds && c.parentCategoryIds.length > 0)
+  }, [categories])
 
   // Prefetch on mount
   useEffect(() => {
@@ -74,10 +96,15 @@ export function DataProvider({ children }) {
 
   const value = {
     categories,
+    mainCategories,
+    subCategories,
     brands,
     loading,
     error,
-    fetchCategories,
+    getAllCategories,
+    getMainCategories,
+    getSubCategories,
+    fetchCategories: getAllCategories,
     fetchBrands,
   }
 

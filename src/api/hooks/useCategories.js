@@ -27,5 +27,8 @@ export default function useCategories(options = { immediate: true }) {
 
   const refetch = useCallback(() => fetch(), [fetch]);
 
-  return { data, loading, error, refetch };
+  const mainCategories = data ? data.filter(c => !c.parentCategoryIds || c.parentCategoryIds.length === 0) : [];
+  const subCategories = data ? data.filter(c => c.parentCategoryIds && c.parentCategoryIds.length > 0) : [];
+
+  return { data, mainCategories, subCategories, loading, error, refetch };
 }
