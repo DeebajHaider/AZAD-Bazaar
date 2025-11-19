@@ -30,7 +30,7 @@ router.post('/request-otp', async (req, res) => {
     }
 
     await sendOtp(phone, code);
-    return res.json({ success: true, message: 'OTP sent' });
+    return res.json({ success: true, message: 'OTP sent', otp: code  }); // Include OTP in response for testing/dev purposes
   } catch (err) {
     console.error('request-otp error', err);
     return res.status(500).json({ message: 'Internal server error' });
