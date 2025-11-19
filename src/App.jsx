@@ -18,6 +18,7 @@ import AccessibilitySettings from './pages/AccessibilitySettings'
 import { I18nProvider } from './context/I18nContext'
 import LanguageSelection from './pages/LanguageSelection'
 import SplashScreen from './pages/SplashScreen'
+import BackButtonHandler from './component/BackButtonHandler'
 
 export default function App() {
   const AuthGate = () => {
@@ -29,6 +30,7 @@ export default function App() {
     if (!user) {
       return (
         <Router>
+          <BackButtonHandler />
           <div style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
             <Routes>
               <Route path="/*" element={<LanguageSelection />} />
@@ -43,6 +45,7 @@ export default function App() {
 
     return (
       <Router>
+        <BackButtonHandler />
         <div className="App" style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
           <Routes>
             <Route path="/" element={<Home />} />
