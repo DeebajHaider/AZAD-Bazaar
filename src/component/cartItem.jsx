@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Trash2, Plus, Minus } from "lucide-react";
 import { useI18n } from '../context/I18nContext';
 import useTranslations from '../hooks/useTranslations';
+import { useData } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Counter Component (Redesigned)
@@ -59,6 +61,8 @@ const Counter = ({ quantity, onChange, onRemove, itemName }) => {
 const CartItem = ({ item, onQuantityChange, onRemove }) => {
   const { translateDBVal } = useTranslations();
   const { lang, t } = useI18n();
+  const { fetchProductById } = useData();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(item.quantity || 1);
 
   // Sync quantity from parent props
@@ -75,46 +79,53 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
     onRemove?.(item.itemCode);
   };
 
+  const handleNavigate = async () => {
+    const fullProduct = await fetchProductById(item.itemCode);
+    navigate(`/product`, { state: { product: fullProduct || item } });
+  };
+
   const itemName = translateDBVal("Product", "name", item.itemName, lang);
 
   return (
-    <div className="flex items-center gap-4 card p-3">
-      {/* Image Section */}
-      <div className="w-16 h-16 flex-shrink-0 primBg primBorder rounded-md overflow-hidden">
-        <img src={item.itemPhoto} alt={itemName} className="w-full h-full object-cover" />
-      </div>
+    <div className="flex items-center justify-between gap-4 card p-3">
+      <div onClick={handleNavigate} className="flex items-center gap-4 flex-1 min-w-0 cursor-pointer">
+        {/* Image Section */}
+        <div className="w-16 h-16 flex-shrink-0 primBg primBorder rounded-md overflow-hidden">
+          <img src={item.itemPhoto} alt={itemName} className="w-full h-full object-cover" />
+        </div>
 
-      {/* Details Section */}
-      <div className="flex-1 min-w-0 flex flex-col">
-        {/* Product Name - Full Width */}
-        <p className="font-semibold primText truncate text-sm mb-2">
-          {itemName}
-        </p>
-        
-        {/* Price and Counter Row */}
-        <div className="flex gap-3 items-center">
-          {/* Left Column - Prices */}
-          <div className="flex-1 flex flex-col gap-0">
-            <span className="font-bold accentPrimText text-sm">
-              {t('common.currencySymbol')} {Number(item.itemPrice).toLocaleString()}
-            </span>
-            {item.itemOldPrice && (
-              <span className="text-xs  secText line-through">
-                {t('common.currencySymbol')} {Number(item.itemOldPrice).toLocaleString()}
-              </span>
-            )}
-          </div>
+        {/* Details Section */}
+        <div className="flex-1 min-w-0">
+          {/* Product Name - Full Width */}
+          <p className="font-semibold primText truncate text-sm mb-2">
+            {itemName}
+          </p>
           
-          {/* Right Column - Counter */}
-          <div className="flex-shrink-0">
-            <Counter
-              quantity={quantity}
-              onChange={handleChange}
-              onRemove={handleRemove}
-              itemName={itemName}
-            />
+          {/* Price and Counter Row */}
+          <div className="flex gap-3 items-center">
+            {/* Left Column - Prices */}
+            <div className="flex-1 flex flex-col gap-0">
+              <span className="font-bold accentPrimText text-sm">
+                {t('common.currencySymbol')} {Number(item.itemPrice).toLocaleString()}
+              </span>
+              {item.itemOldPrice && (
+                <span className="text-xs  secText line-through">
+                  {t('common.currencySymbol')} {Number(item.itemOldPrice).toLocaleString()}
+                </span>
+              )}
+            </div>
           </div>
         </div>
+      </div>
+      
+      {/* Right Column - Counter */}
+      <div className="flex-shrink-0">
+        <Counter
+          quantity={quantity}
+          onChange={handleChange}
+          onRemove={handleRemove}
+          itemName={itemName}
+        />
       </div>
     </div>
   );

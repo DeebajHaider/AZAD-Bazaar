@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Heart, Plus, Minus } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
@@ -57,9 +57,9 @@ const ProductGallery = ({ images, productName, format }) => {
 const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
   const { t, lang } = useI18n()
   const productIdForCart = product._id ?? product.id
-  
+
   const formatCurrency = (amount) => new Intl.NumberFormat(lang, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount)
-   const displayPrice = product.discountedPrice ?? product.price
+  const displayPrice = product.discountedPrice ?? product.price
 
   if (!product) return null
 
@@ -107,18 +107,17 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
 const RelatedProductCard = ({ product }) => {
   const { t, lang } = useI18n()
   const { translateDBVal } = useTranslations()
-  const productId = product._id || product.id
   const displayPrice = product.discountedPrice ?? product.price
   const image = (product.images && product.images.length) ? product.images[0] : product.image
 
   return (
-    <Link to={`/product/${productId}`} state={{ product }} className="block w-36 flex-shrink-0 focusRing rounded-lg">
+    <Link to={`/product`} state={{ product }} className="block w-36 flex-shrink-0 focusRing rounded-lg">
       <div className="card transition-shadow duration-200 hover:shadow-md flex flex-col h-64">
         <div className="aspect-square secBg rounded-md overflow-hidden flex-shrink-0 primBorder">
           <img src={image} alt={product.title} className="w-full h-full object-cover" />
         </div>
         <div className="pt-2 flex-1 flex flex-col">
-          <h3 className="text-sm font-medium primText line-clamp-2 min-h-10">{translateDBVal("Product", "name", product.name?? product.title, lang)}</h3>
+          <h3 className="text-sm font-medium primText line-clamp-2 min-h-10">{translateDBVal("Product", "name", product.name ?? product.title, lang)}</h3>
           <div className="flex flex-col mt-auto">
             {product.originalPrice && (
               <span className="text-xs secText line-through">
@@ -171,6 +170,7 @@ export default function Product() {
   const [qty, setQty] = useState(0)
   const [liked, setLiked] = useState(false)
   const [subcategoryNames, setSubcategoryNames] = useState([]);
+  const mainContentRef = useRef(null);
 
   const incoming = location.state?.product || null
   const incomingId = incoming?._id || incoming?.id
@@ -186,6 +186,13 @@ export default function Product() {
   const originalPrice = product.originalPrice
 
   useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo(0, 0);
+    }
+  }, [product]);
+
+
+  useEffect(() => {
     const found = cartItems.find((it) => it.itemCode === product._id)
     setQty(found ? found.quantity : 0)
   }, [product._id, cartItems])
@@ -196,7 +203,7 @@ export default function Product() {
     Promise.all(product.subcategories.map(async subId => getCategoryById(subId).then(res => res.name)))
       .then(names => setSubcategoryNames(names));
   }, [product.subcategories]);
-  
+
   const format = (key, vars = {}) => t(key, vars)
 
   const FavoriteButton = () => (
@@ -211,10 +218,11 @@ export default function Product() {
 
   return (
     <Layout
+      ref={mainContentRef}
       header={<HeaderWithName title={productName} rightAction={<FavoriteButton />} />}
       footer={<><ProductActionBar qty={qty} product={product} addToCart={addToCart} decrementProduct={decrementProduct} inStock={inStock} availableStock={availableStock} /><BottomNav /></>}
     >
-      <main className="flex-1 primBg overflow-y-auto">
+      <main ref={mainContentRef} className="flex-1 primBg overflow-y-auto">
         <ProductGallery images={images} productName={productName} format={format} />
 
         <div className="p-4 space-y-4">

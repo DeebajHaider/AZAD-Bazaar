@@ -10,6 +10,7 @@ const FIVE_MIN = 5 * 60 * 1000
 export function DataProvider({ children }) {
   const [categories, setCategories] = useState(null)
   const [brands, setBrands] = useState(null)
+  const [productCache, setProductCache] = useState({})
   const [relatedProductsCache, setRelatedProductsCache] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -64,6 +65,18 @@ export function DataProvider({ children }) {
       setLoading(false)
     }
   }, [brands, isExpired])
+
+  const fetchProductById = useCallback(async (productId) => {
+    if (productCache[productId]) return productCache[productId];
+    try {
+      const data = await productService.getProductById(productId);
+      setProductCache(prev => ({ ...prev, [productId]: data }));
+      return data;
+    } catch (err) {
+      console.error("Failed to fetch product", err);
+      return null;
+    }
+  }, [productCache]);
 
   const fetchRelatedProducts = useCallback(async (productId) => {
     if (relatedProductsCache[productId]) return relatedProductsCache[productId]
@@ -122,6 +135,7 @@ export function DataProvider({ children }) {
     fetchCategories: getAllCategories,
     fetchBrands,
     fetchRelatedProducts,
+    fetchProductById,
   }
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
