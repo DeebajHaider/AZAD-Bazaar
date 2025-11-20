@@ -21,7 +21,9 @@ export default function HeaderWithName({ title, to = -1, rightAction = null, ove
         ) : (
           // A placeholder to maintain layout if the button isn't rendered
           // Added min-w-11 to perfectly match the button's footprint
-          <div className="min-h-11 min-w-11" />
+          <div className="min-h-11 min-w-11" >
+            {overwriteNavButton}
+          </div>
         )}
 
         {/* Title */}

@@ -20,6 +20,13 @@ export default function Cart() {
     }).format(amount);
   };
 
+  // Cart icon to display in header
+  const CartIcon = () => (
+    <div className="min-h-11 min-w-11 flex items-center justify-center rounded-lg secBg primBorder">
+      <ShoppingCart className="  accentPrimText" />
+    </div>
+  )
+
   // Header button for clearing the cart
   const ClearCartButton = () => (
     <button
@@ -109,7 +116,7 @@ export default function Cart() {
         <HeaderWithName
           title={t('cart.title')}
           to="/"
-          overwriteNavButton={<></>}
+          overwriteNavButton={<CartIcon />}
           rightAction={cartItems.length > 0 ? <ClearCartButton /> : null}
         />
       }
