@@ -19,6 +19,9 @@ import { I18nProvider } from './context/I18nContext'
 import LanguageSelection from './pages/LanguageSelection'
 import SplashScreen from './pages/SplashScreen'
 import BackButtonHandler from './component/BackButtonHandler'
+import { OrderProvider } from './context/OrderContext'
+import Orders from './pages/Orders'
+import Order from './pages/Order'
 
 export default function App() {
   const AuthGate = () => {
@@ -61,6 +64,8 @@ export default function App() {
             <Route path="/language" element={<LanguageSelection />} />
             <Route path="/login" element={<Navigate to="/" replace />} />
             <Route path="/splash" element={<SplashScreen />} />
+            <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:orderId" element={<Order />} />
           </Routes>
         </div>
       </Router>
@@ -74,7 +79,9 @@ export default function App() {
           <AuthProvider>
             <DataProvider>
               <CartProvider>
-                <AuthGate />
+                <OrderProvider>
+                  <AuthGate />
+                </OrderProvider>
               </CartProvider>
             </DataProvider>
           </AuthProvider>

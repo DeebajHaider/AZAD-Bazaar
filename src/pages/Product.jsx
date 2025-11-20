@@ -115,11 +115,11 @@ const ProductGallery = ({ images, productName, format }) => {
 const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
   const { t, lang } = useI18n()
   const [actionLoading, setActionLoading] = useState(false)
-  const productIdForCart = product._id ?? product.id
-
-  const displayPrice = product.discountedPrice ?? product.price
-
+  
   if (!product) return null
+  
+  const productIdForCart = product._id ?? product.id
+  const displayPrice = product.discountedPrice ?? product.price
 
   const runWithLoading = (fn) => {
     if (!fn) return
@@ -282,17 +282,19 @@ export default function Product() {
   const mainContentRef = useRef(null);
 
   const incoming = location.state?.product || null
-  const incomingId = incoming?._id || incoming?.id
+  const incomingId = incoming?._id || incoming?.id || location?.state?.productIdtoFetch
+  if (incomingId){
+    console.log("Fetching product with ID:", incomingId);
+  }
   const { data: fetchedProduct, loading: productLoading } = useProduct(incomingId, { immediate: !!incomingId && !incoming?.name })
 
-  const fallback = { _id: 'SAMPLE001', title: 'Sample Product Title', price: 299, description: 'This is a sample product description...', image: '', inStock: true, category: 'Pantry', subcategories: ['Snacks', 'Organic'] }
-  const product = incoming || fetchedProduct || fallback
-  const productName = translateDBVal("Product", "name", product.name ?? product.title, lang)
-  const images = (product.images?.length) ? product.images : [product.image]
-  const availableStock = product.stockQuantity ?? (product.inStock ? Infinity : 0)
+  const product = incoming || fetchedProduct
+  const productName = product ? translateDBVal("Product", "name", product.name ?? product.title, lang) : ''
+  const images = product?.images?.length ? product.images : (product?.image ? [product.image] : [])
+  const availableStock = product?.stockQuantity ?? (product?.inStock ? Infinity : 0)
   const inStock = availableStock > 0
-  const displayPrice = product.discountedPrice ?? product.price
-  const originalPrice = product.originalPrice
+  const displayPrice = product?.discountedPrice ?? product?.price
+  const originalPrice = product?.originalPrice
 
   useEffect(() => {
     if (mainContentRef.current) {
@@ -302,16 +304,17 @@ export default function Product() {
 
 
   useEffect(() => {
+    if (!product) return;
     const found = cartItems.find((it) => it.itemCode === product._id)
     setQty(found ? found.quantity : 0)
-  }, [product._id, cartItems])
+  }, [product?._id, cartItems, product])
 
   useEffect(() => {
-    if (!product.subcategories) return;
+    if (!product?.subcategories) return;
     setSubcategoryNames([]);
     Promise.all(product.subcategories.map(async subId => getCategoryById(subId).then(res => res.name)))
       .then(names => setSubcategoryNames(names));
-  }, [product.subcategories]);
+  }, [product?.subcategories]);
 
   const format = (key, vars = {}) => t(key, vars)
 
@@ -331,10 +334,10 @@ export default function Product() {
       header={<HeaderWithName title={productLoading ? '...' : productName} rightAction={<FavoriteButton />} />}
       footer={<><ProductActionBar qty={qty} product={product} addToCart={addToCart} decrementProduct={decrementProduct} inStock={inStock} availableStock={availableStock} /><BottomNav /></>}
     >
-      {productLoading ? (
+      {(productLoading || !product) ? (
         <ProductPageSkeleton />
       ) : (
-        <main ref={mainContentRef} className="flex-1 primBg overflow-y-auto">
+        <main ref={mainContentRef} className="flex-1 primBg overflow-y-auto min-h-full">
           <ProductGallery images={images} productName={productName} format={format} />
 
           <div className="p-4 space-y-4">

@@ -287,7 +287,8 @@
     "home": "Home",
     "search": "Search",
     "cart": "Cart",
-    "settings": "Settings"
+    "settings": "Settings", 
+    "orders": "Orders"
   },
   "home": {
     "header": {
@@ -332,7 +333,12 @@
     "currencySymbol": "Rs",
     "outOfStock": "Out of Stock",
     "close": "Close",
-    "clear": "Clear"
+    "clear": "Clear", 
+    "error": {
+      "title": "An Error Occurred",
+      "description": "Something went wrong. Please try again later.",
+      "notFound": "The requested item could not be found."
+    }
   },
   "itemCard": {
     "discountOff": "{{percent}}% OFF",
@@ -376,5 +382,45 @@
   }, 
   "splash": {
     "loadingMessage": "Getting things ready..."
+  },
+  "orders": {
+    "title": "My Orders",
+    "card": {
+      "orderId": "Order #{id}"
+    },
+    "empty": {
+      "title": "No Orders Yet",
+      "description": "Your past orders will appear here."
+    },
+    "status": {
+      "pending": "Pending",
+      "placed": "Placed",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "failed": "Failed"
+    },
+    "step": {
+      "placed": "Placed",
+      "confirmed": "Confirmed",
+      "shipped": "Shipped",
+      "delivered": "Delivered"
+    }
+  },
+  "order": {
+    "title": "Order Details",
+    "titleWithId": "Order #{id}",
+    "items": {
+      "title": "Items",
+      "quantity": "Qty: {count}"
+    },
+    "shipping": {
+      "title": "Shipping Address"
+    },
+    "payment": {
+      "title": "Payment Method"
+    }
   }
 }

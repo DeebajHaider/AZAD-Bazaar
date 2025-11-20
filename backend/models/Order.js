@@ -32,7 +32,7 @@ const OrderSchema = new mongoose.Schema({
   paymentMethod: {
     name: { type: String, required: true },
     type: { type: String, required: true },
-    last4Digits: { type: String, required: true }
+    last4Digits: { type: String }
   },
   products: { type: [ProductSnapshotSchema], required: true, validate: v => Array.isArray(v) && v.length > 0 },
   deliveryInstructions: { type: String, default: '' },

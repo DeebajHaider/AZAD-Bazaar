@@ -287,7 +287,8 @@
     "home": "ہوم",
     "search": "تلاش",
     "cart": "کارٹ",
-    "settings": "ترتیبات"
+    "settings": "ترتیبات",
+    "orders": "آرڈرز"
   },
   "home": {
     "header": {
@@ -332,7 +333,12 @@
     "currencySymbol": "روپے",
     "outOfStock": "اسٹاک میں نہیں",
     "close": "بند کریں",
-    "clear": "صاف کریں"
+    "clear": "صاف کریں",
+    "error": {
+      "title": "ایک خرابی پیش آگئی",
+      "description": "کچھ غلط ہو گیا. براہ کرم بعد میں دوبارہ کوشش کریں.",
+      "notFound": "مطلوبہ آئٹم نہیں مل سکا۔"
+    }
   },
   "itemCard": {
     "discountOff": "{{percent}}% کی چھوٹ",
@@ -376,5 +382,45 @@
   }, 
   "splash": {
     "loadingMessage": "تیار ہو رہا ہے..."
+  },
+  "orders": {
+    "title": "میرے آرڈرز",
+    "card": {
+      "orderId": "آرڈر #{id}"
+    },
+    "empty": {
+      "title": "ابھی تک کوئی آرڈر نہیں",
+      "description": "آپ کے پچھلے آرڈرز یہاں ظاہر ہوں گے۔"
+    },
+    "status": {
+      "pending": "زیر التواء",
+      "placed": "موصول",
+      "confirmed": "تصدیق شدہ",
+      "processing": "پروسیسنگ",
+      "shipped": "روانہ",
+      "delivered": "پہنچا دیا",
+      "cancelled": "منسوخ",
+      "failed": "ناکام"
+    },
+    "step": {
+      "placed": "موصول",
+      "confirmed": "تصدیق شدہ",
+      "shipped": "روانہ",
+      "delivered": "پہنچا دیا"
+    }
+  },
+  "order": {
+    "title": "آرڈر کی تفصیلات",
+    "titleWithId": "آرڈر #{id}",
+    "items": {
+      "title": "اشیاء",
+      "quantity": "تعداد: {count}"
+    },
+    "shipping": {
+      "title": "شپنگ کا پتہ"
+    },
+    "payment": {
+      "title": "ادائیگی کا طریقہ"
+    }
   }
 }

@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-import { ArrowLeft, Edit3, Save, Wallet, CreditCard } from 'lucide-react'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ArrowLeft, Edit3, Save, Wallet, CreditCard, Loader2 } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
+import AuthContext from '../context/AuthContext'
+import { useOrdersContext } from '../context/OrderContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
@@ -91,13 +94,27 @@ const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
 
 export default function Checkout() {
   const { t } = useI18n()
-  const { total: cartTotal, loading: cartLoading } = useCart()
+  const { items: cartItems, total: cartTotal, clearCart, loading: cartLoading } = useCart()
+  const { user } = useContext(AuthContext)
+  const { createOrder } = useOrdersContext()
+  const navigate = useNavigate()
 
   // State Management
-  const [address, setAddress] = useState('123 Example St, Apt 4B, City, Country, 12345')
+  const [orderLoading, setOrderLoading] = useState(false)
+  const [orderError, setOrderError] = useState(null)
+  const [address, setAddress] = useState({
+    label: 'Home',
+    addressText: '123 Example St, Apt 4B, City, Country, 12345',
+    lat: 33.6844,
+    lng: 73.0479
+  })
   const [editingAddress, setEditingAddress] = useState(false)
   const [instructions, setInstructions] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState('cash')
+  const [paymentMethod, setPaymentMethod] = useState({
+    name: 'Cash on Delivery',
+    type: 'cash',
+    last4Digits: ''
+  })
   const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
 
   // Example fees from your original code
@@ -108,8 +125,41 @@ export default function Checkout() {
   const tax = +(subtotal * taxRate).toFixed(2)
   const total = +(subtotal + serviceFee + deliveryFee + tax).toFixed(2)
 
-  const handlePlaceOrder = () => {
-    alert(`Order placed! Total: ${t('common.currencySymbol')}${total.toFixed(2)}`)
+  const handlePlaceOrder = async () => {
+    if (!user || !user.customerId) {
+      alert('You must be logged in to place an order.')
+      return
+    }
+
+    const orderData = {
+      customerId: user.customerId,
+      customName: user.name,
+      address: address,
+      paymentMethod: paymentMethod,
+      products: cartItems.map(item => ({
+        productId: item.itemCode,
+        quantity: item.quantity
+      })),
+      deliveryInstructions: instructions,
+      vouchersUsed: [] // Add voucher logic later
+    }
+
+    setOrderLoading(true)
+    setOrderError(null)
+    
+    try {
+      const newOrder = await createOrder(orderData)
+      if (newOrder) {
+        clearCart()
+        navigate('/orders')
+      }
+    } catch (err) {
+      console.error('Failed to create order:', err)
+      setOrderError(err)
+      alert(`Error: ${err.message}`)
+    } finally {
+      setOrderLoading(false)
+    }
   }
 
   // Header "Edit/Save" button
@@ -152,13 +202,13 @@ export default function Checkout() {
             <div className="p-4 space-y-4">
               {editingAddress ? (
                 <textarea
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
+                  value={address.addressText}
+                  onChange={e => setAddress({ ...address, addressText: e.target.value })}
                   rows={3}
                   className="inputField"
                 />
               ) : (
-                <p className="text-base secText">{address}</p>
+                <p className="text-base secText">{address.addressText}</p>
               )}
               <FormInput
                 label={t('checkout.address.instructionsLabel')}
@@ -176,20 +226,23 @@ export default function Checkout() {
               <PaymentOption
                 label={t('checkout.payment.cashOnDelivery')}
                 icon={Wallet}
-                isActive={paymentMethod === 'cash'}
-                onClick={() => setPaymentMethod('cash')}
+                isActive={paymentMethod.type === 'cash'}
+                onClick={() => setPaymentMethod({ name: 'Cash on Delivery', type: 'cash', last4Digits: '' })}
               />
               <PaymentOption
                 label={t('checkout.payment.card')}
                 icon={CreditCard}
-                isActive={paymentMethod === 'card'}
-                onClick={() => setPaymentMethod('card')}
+                isActive={paymentMethod.type === 'card'}
+                onClick={() => setPaymentMethod({ name: 'Card', type: 'card', last4Digits: cardDetails.number.slice(-4) })}
               />
             </div>
-            {paymentMethod === 'card' && (
+            {paymentMethod.type === 'card' && (
               <div className="space-y-4 pt-4 dividerBorder border-t">
                 <FormInput label={t('checkout.payment.cardDetails.nameLabel')} placeholder="JOHN DOE" value={cardDetails.name} onChange={e => setCardDetails({ ...cardDetails, name: e.target.value })} />
-                <FormInput label={t('checkout.payment.cardDetails.numberLabel')} placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={e => setCardDetails({ ...cardDetails, number: e.target.value })} />
+                <FormInput label={t('checkout.payment.cardDetails.numberLabel')} placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={e => {
+                  setCardDetails({ ...cardDetails, number: e.target.value })
+                  setPaymentMethod({ ...paymentMethod, last4Digits: e.target.value.slice(-4) })
+                }} />
                 <div className="grid grid-cols-2 gap-4">
                   <FormInput label={t('checkout.payment.cardDetails.expiryLabel')} placeholder="MM/YY" value={cardDetails.expiry} onChange={e => setCardDetails({ ...cardDetails, expiry: e.target.value })} />
                   <FormInput label={t('checkout.payment.cardDetails.cvvLabel')} placeholder="123" value={cardDetails.cvv} onChange={e => setCardDetails({ ...cardDetails, cvv: e.target.value })} />
@@ -229,10 +282,16 @@ export default function Checkout() {
       <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm dividerBorder border-t p-4">
         <button
           onClick={handlePlaceOrder}
-          className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
+          disabled={orderLoading}
+          className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 flex items-center justify-center"
         >
-          {t('checkout.actions.placeOrder', { total: total.toFixed(2) })}
+          {orderLoading ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            t('checkout.actions.placeOrder', { total: total.toFixed(2) })
+          )}
         </button>
+        {orderError && <p className="text-red-500 text-sm mt-2 text-center">{orderError.message}</p>}
       </footer>
     </Layout>
   )
