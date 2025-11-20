@@ -30,3 +30,39 @@ exports.getVoucher = async (req, res) => {
     return res.status(400).json({ message: 'Invalid id' });
   }
 };
+
+exports.validateVoucher = async (req, res) => {
+  try {
+    const { voucherId, customerId } = req.body;
+    if (!voucherId) {
+      return res.status(400).json({ message: 'Voucher ID required' });
+    }
+
+    const voucher = await Voucher.findById(voucherId);
+    if (!voucher) {
+      return res.status(404).json({ message: 'Invalid voucher' });
+    }
+
+    if (!voucher.isActive) {
+      return res.status(400).json({ message: 'Voucher is not active' });
+    }
+
+    const now = new Date();
+    if (now < voucher.startDate || now > voucher.endDate) {
+      return res.status(400).json({ message: 'Voucher expired' });
+    }
+
+    if (voucher.usedCount >= voucher.usageLimit) {
+      return res.status(400).json({ message: 'Voucher usage limit reached' });
+    }
+
+    if (voucher.mustBeUsedBy && voucher.mustBeUsedBy.toString() !== customerId) {
+      return res.status(400).json({ message: 'Voucher not valid for this customer' });
+    }
+
+    return res.json({ valid: true, voucher });
+  } catch (err) {
+    console.error('validateVoucher error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};

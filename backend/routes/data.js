@@ -29,11 +29,12 @@ router.get('/categories/:id', categoryCtrl.getCategory);
 router.post('/vouchers', voucherCtrl.createVoucher);
 router.get('/vouchers', voucherCtrl.listVouchers);
 router.get('/vouchers/:id', voucherCtrl.getVoucher);
+router.post('/vouchers/validate', voucherCtrl.validateVoucher);
 
-// Orders
-router.post('/orders', orderCtrl.createOrder);
-router.get('/orders', orderCtrl.listOrders);
-router.get('/orders/:id', orderCtrl.getOrder);
+// Orders (authenticated)
+router.post('/orders', authMiddleware, orderCtrl.createOrder);
+router.get('/orders', authMiddleware, orderCtrl.listOrders);
+router.get('/orders/:id', authMiddleware, orderCtrl.getOrder);
 
 // Customers (basic)
 router.post('/customers', customerCtrl.createCustomer);
