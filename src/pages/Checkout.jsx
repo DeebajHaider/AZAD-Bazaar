@@ -1,9 +1,60 @@
 import React, { useState } from 'react'
 import { ArrowLeft, Edit3, Save, Wallet, CreditCard } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
+import { useCart } from '../context/CartContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
+
+const CheckoutSkeleton = () => (
+  <div className="p-4 space-y-6 pb-32 animate-pulse">
+    {/* Address Section Skeleton */}
+    <div className="secBg primBorder rounded-lg">
+      <div className="flex justify-between items-center p-4 dividerBorder">
+        <div className="h-6 w-32 skeleton" />
+        <div className="h-6 w-20 skeleton" />
+      </div>
+      <div className="p-4 space-y-4">
+        <div className="h-10 w-full skeleton" />
+        <div className="h-10 w-full skeleton" />
+      </div>
+    </div>
+
+    {/* Payment Section Skeleton */}
+    <div className="secBg primBorder rounded-lg p-4 space-y-4">
+      <div className="h-6 w-32 skeleton" />
+      <div className="grid grid-cols-2 gap-4">
+        <div className="h-24 skeleton rounded-lg" />
+        <div className="h-24 skeleton rounded-lg" />
+      </div>
+    </div>
+
+    {/* Billing Section Skeleton */}
+    <div className="secBg primBorder rounded-lg p-4 space-y-3">
+      <div className="h-6 w-24 skeleton mb-2" />
+      <div className="flex justify-between">
+        <div className="h-5 w-20 skeleton" />
+        <div className="h-5 w-16 skeleton" />
+      </div>
+      <div className="flex justify-between">
+        <div className="h-5 w-24 skeleton" />
+        <div className="h-5 w-12 skeleton" />
+      </div>
+      <div className="flex justify-between">
+        <div className="h-5 w-28 skeleton" />
+        <div className="h-5 w-14 skeleton" />
+      </div>
+      <div className="flex justify-between">
+        <div className="h-5 w-16 skeleton" />
+        <div className="h-5 w-12 skeleton" />
+      </div>
+      <div className="pt-3 mt-1 dividerBorder border-t flex justify-between">
+        <div className="h-6 w-20 skeleton" />
+        <div className="h-6 w-24 skeleton" />
+      </div>
+    </div>
+  </div>
+)
 
 // --- Sub-components for better organization ---
 
@@ -40,6 +91,7 @@ const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
 
 export default function Checkout() {
   const { t } = useI18n()
+  const { total: cartTotal, loading: cartLoading } = useCart()
 
   // State Management
   const [address, setAddress] = useState('123 Example St, Apt 4B, City, Country, 12345')
@@ -49,7 +101,7 @@ export default function Checkout() {
   const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
 
   // Example fees from your original code
-  const subtotal = 49.99
+  const subtotal = cartTotal
   const serviceFee = 2.5
   const deliveryFee = 5.0
   const taxRate = 0.13
@@ -70,6 +122,19 @@ export default function Checkout() {
       {editingAddress ? t('checkout.address.saveButton') : t('checkout.address.editButton')}
     </button>
   )
+
+  if (cartLoading) {
+    return (
+      <Layout
+        header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
+        footer={<BottomNav />}
+      >
+        <main className="flex-1 overflow-y-auto primBg">
+          <CheckoutSkeleton />
+        </main>
+      </Layout>
+    )
+  }
 
   return (
     <Layout

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useI18n } from '../context/I18nContext'
+import ImageWithLoader from '../component/ImageWithLoader'
 
 /**
  * A splash screen component that shows a logo animation and a feedback message.
@@ -35,10 +36,10 @@ export default function SplashScreen({ onComplete, duration = 2500 }) {
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center primBg">
       <div className="flex flex-col items-center gap-4">
         {/* Logo with the 2-second fade-in and scale animation */}
-        <img
+        <ImageWithLoader
           src="/Azad-Bazaar.svg"
           alt="Azad Bazaar Logo"
-          className="h-40 w-auto animate-fade-in-scale"
+          imageClassName="h-40 w-auto animate-fade-in-scale"
         />
 
         {/* Feedback text that fades in after a short delay */}

@@ -10,6 +10,17 @@ import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
 import useDebounce from '../hooks/useDebounce'
 
+const ItemCardSkeleton = () => (
+  <div className="flex items-start gap-4 p-3 rounded-lg secBg primBorder">
+    <div className="w-24 h-24 skeleton rounded-md flex-shrink-0"></div>
+    <div className="flex-1 space-y-2">
+      <div className="h-5 w-3/4 skeleton"></div>
+      <div className="h-4 w-1/4 skeleton"></div>
+      <div className="h-6 w-1/2 skeleton"></div>
+    </div>
+  </div>
+)
+
 // Header component with search form
 const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate }) => (
   <header className="secBg dividerBorder p-4">
@@ -362,16 +373,19 @@ export default function SearchResults() {
       {/* Results List */}
       <section className="p-4">
         <div className="space-y-4">
-          {loadingProducts && <p className="text-center secText p-8">{t('searchResults.results.loading')}</p>}
-          {productsError && <p className="text-center accentDangerText p-8">{t('searchResults.results.error')}</p>}
-          {!loadingProducts && currentResults.length === 0 && (
+          {loadingProducts ? (
+            Array.from({ length: 5 }).map((_, i) => <ItemCardSkeleton key={i} />)
+          ) : productsError ? (
+            <p className="text-center accentDangerText p-8">{t('searchResults.results.error')}</p>
+          ) : currentResults.length === 0 ? (
             <p className="text-center secText p-8">{t('searchResults.results.noResults')}</p>
+          ) : (
+            currentResults.map((item) => (
+              <div key={item._id} onClick={() => navigate('/product', { state: { product: item } })}>
+                <ItemCard item={mapApiItemToCard(item)} />
+              </div>
+            ))
           )}
-          {!loadingProducts && currentResults.map((item) => (
-            <div key={item._id} onClick={() => navigate('/product', { state: { product: item } })}>
-              <ItemCard item={mapApiItemToCard(item)} />
-            </div>
-          ))}
         </div>
       </section>
 

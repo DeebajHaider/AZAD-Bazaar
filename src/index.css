@@ -607,7 +607,59 @@ body {
   .highContrast .secHoverBg {
     @apply hover:bg-gray-200 dark:hover:bg-gray-700;
   }
-  
+/* ==================== SKELETON LOADER (IMPROVED & ACCESSIBLE) ==================== */
+
+/* --- Base Skeleton Style --- */
+/* A subtle, low-contrast look for the default experience. */
+.skeleton {
+  @apply bg-gray-200 dark:bg-slate-800 animate-pulse rounded-md;
+}
+
+/* --- Nested Skeleton Style --- */
+/* Provides slightly more contrast for nested elements by default. */
+.skeleton .skeleton {
+  @apply bg-gray-300 dark:bg-slate-700;
+}
+
+
+/* --- High Contrast & Colorblindness Support --- */
+/*
+  This single block improves the experience for BOTH high-contrast users
+  and users with color vision deficiency. We don't need separate rules for
+  protanopia, deuteranopia, etc., because the issue is luminance contrast,
+  not color. A strong border solves this for everyone.
+*/
+.highContrast .skeleton,
+.deuteranopia .skeleton,
+.protanopia .skeleton,
+.tritanopia .skeleton {
+  /* Use a transparent background and a strong border. This creates a
+     very clear, unmistakable shape that relies on outlines, not fill color. */
+  @apply bg-transparent border-2 border-gray-400 dark:border-gray-600;
+}
+
+/* For nested skeletons in these modes, we make the border slightly
+   different to maintain the hierarchy. */
+.highContrast .skeleton .skeleton,
+.deuteranopia .skeleton .skeleton,
+.protanopia .skeleton .skeleton,
+.tritanopia .skeleton .skeleton {
+  @apply border-gray-500 dark:border-gray-500;
+}
+
+/* --- Image Skeleton Style --- */
+/* A borderless skeleton for use inside image containers that already have borders. */
+.image-skeleton {
+  @apply bg-gray-200 dark:bg-slate-800 animate-pulse;
+}
+
+/* In high contrast modes, we still want a fill, but no border. */
+.highContrast .image-skeleton,
+.deuteranopia .image-skeleton,
+.protanopia .image-skeleton,
+.tritanopia .image-skeleton {
+  @apply bg-gray-300 dark:bg-gray-700 border-none;
+}
 }
 
 /* Hide scrollbars globally but keep scrolling functional */

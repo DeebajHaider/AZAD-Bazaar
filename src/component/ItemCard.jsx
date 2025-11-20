@@ -1,6 +1,19 @@
 import React from 'react'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
+import ImageWithLoader from './ImageWithLoader'
+
+export const ItemCardSkeleton = () => (
+  <div className="flex items-start gap-4 p-3 rounded-lg secBg primBorder animate-pulse">
+    <div className="w-24 h-24 skeleton rounded-md flex-shrink-0"></div>
+    <div className="flex-1 space-y-2">
+      <div className="h-5 w-3/4 skeleton"></div>
+      <div className="h-4 w-1/4 skeleton"></div>
+      <div className="h-6 w-1/2 skeleton"></div>
+    </div>
+  </div>
+);
+
 export default function ItemCard({ item }) {
   const { loading, translateDBVal } = useTranslations();
   const { t, lang } = useI18n()
@@ -29,10 +42,10 @@ export default function ItemCard({ item }) {
     >
       {/* Image container */}
       <div className="w-24 h-24 primBg primBorder rounded-md relative flex-shrink-0 flex items-center justify-center overflow-hidden">
-        <img 
-          src={item.image} 
-          alt={format('itemCard.productImageAlt', { title: item.title })} 
-          className="w-full h-full object-cover" 
+        <ImageWithLoader
+          src={item.image}
+          alt={format('itemCard.productImageAlt', { title: item.title })}
+          imageClassName="w-full h-full object-cover"
         />
         {isOut && (
           <div className="absolute inset-0 bg-gray-900/60 dark:bg-slate-950/60 flex items-center justify-center">

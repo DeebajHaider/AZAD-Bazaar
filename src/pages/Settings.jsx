@@ -7,12 +7,44 @@ import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
 import HeaderWithName from '../component/HeaderWithName'
 
+const AccountInfoSkeleton = () => (
+  <form className="secBg primBorder rounded-lg animate-pulse">
+    <h2 className="p-4 text-xl font-semibold primText dividerBorder">
+      <div className="h-7 w-40 skeleton" />
+    </h2>
+    <div className="p-4 space-y-4">
+      {/* Name Field */}
+      <div className="space-y-2">
+        <div className="h-4 w-24 skeleton" />
+        <div className="h-11 w-full skeleton rounded-lg" />
+      </div>
+
+      {/* Phone Field (Read-only) */}
+      <div className="space-y-2">
+        <div className="h-4 w-20 skeleton" />
+        <div className="h-11 w-full skeleton rounded-lg" />
+      </div>
+
+      {/* Address Field */}
+      <div className="space-y-2">
+        <div className="h-4 w-28 skeleton" />
+        <div className="h-16 w-full skeleton rounded-lg" />
+      </div>
+
+      {/* Save Button */}
+      <div className="h-12 w-full skeleton rounded-lg" />
+    </div>
+  </form>
+);
+
 export default function Settings() {
-  const { logout, customer, updateCustomer } = useAuth()
+  const { logout, customer, updateCustomer, loading: authLoading } = useAuth()
   const navigate = useNavigate()
   const { t, lang, setLang } = useI18n()
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
   const [isSaving, setIsSaving] = useState(false)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
   // Populate form from global customer when available
   useEffect(() => {
@@ -110,68 +142,69 @@ export default function Settings() {
             </div>
           </div>
 
-          {/* Card: Account Information Form */}
-          <form onSubmit={handleSubmit} className="secBg primBorder rounded-lg">
-            <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
-              {t('settings.account.title')}
-            </h2>
-            <div className="p-4 space-y-4">
-              {/* Name Field */}
-              <div>
-                <label className="block text-sm font-medium mb-2 primText ">
-                  {t('settings.account.form.fullName.label')}
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder={t('settings.account.form.fullName.placeholder')}
-                  className="inputField transition-all duration-200"
-                />
-              </div>
+          {authLoading ? <AccountInfoSkeleton /> : (
+            <form onSubmit={handleSubmit} className="secBg primBorder rounded-lg">
+              <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
+                {t('settings.account.title')}
+              </h2>
+              <div className="p-4 space-y-4">
+                {/* Name Field */}
+                <div>
+                  <label className="block text-sm font-medium mb-2 primText ">
+                    {t('settings.account.form.fullName.label')}
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder={t('settings.account.form.fullName.placeholder')}
+                    className="inputField transition-all duration-200"
+                  />
+                </div>
 
-              {/* Phone Field (Read-only) */}
-              <div>
-                <label className="block text-sm font-medium mb-2 primText ">
-                  {t('settings.account.form.phone.label')}
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  readOnly
-                  className="w-full px-4 py-3 primBorder rounded-lg secBg secText cursor-not-allowed"
-                  placeholder={t('settings.account.form.phone.placeholder')}
-                />
-              </div>
+                {/* Phone Field (Read-only) */}
+                <div>
+                  <label className="block text-sm font-medium mb-2 primText ">
+                    {t('settings.account.form.phone.label')}
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    readOnly
+                    className="w-full px-4 py-3 primBorder rounded-lg secBg secText cursor-not-allowed"
+                    placeholder={t('settings.account.form.phone.placeholder')}
+                  />
+                </div>
 
-              {/* Address Field */}
-              <div>
-                <label className="block text-sm font-medium mb-2 primText ">
-                  {t('settings.account.form.address.label')}
-                </label>
-                <textarea
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  rows={3}
-                  placeholder={t('settings.account.form.address.placeholder')}
-                  className="inputField transition-all duration-200"
-                />
-              </div>
+                {/* Address Field */}
+                <div>
+                  <label className="block text-sm font-medium mb-2 primText ">
+                    {t('settings.account.form.address.label')}
+                  </label>
+                  <textarea
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    rows={3}
+                    placeholder={t('settings.account.form.address.placeholder')}
+                    className="inputField transition-all duration-200"
+                  />
+                </div>
 
-              {/* Save Button */}
-              <button
-                type="submit"
-                disabled={isSaving}
-                className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Save size={18} />
-                {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
-              </button>
-            </div>
-          </form>
+                {/* Save Button */}
+                <button
+                  type="submit"
+                  disabled={isSaving}
+                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Save size={18} />
+                  {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
+                </button>
+              </div>
+            </form>
+          )}
 
           {/* Card: Danger Zone / Sign Out */}
           <div className="secBg primBorder rounded-lg p-4">

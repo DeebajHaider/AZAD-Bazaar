@@ -4,11 +4,11 @@ import { useCart } from '../context/CartContext'
 import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
-import CartItemList from '../component/CartItem'
+import CartItemList, { CartItemSkeleton } from '../component/cartItem'
 import BottomNav from '../component/BottomNav'
 
 export default function Cart() {
-  const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings } = useCart()
+  const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings, loading } = useCart()
   const { t, lang } = useI18n()
   const navigate = useNavigate()
 
@@ -53,11 +53,17 @@ export default function Cart() {
   const CartContents = () => (
     // Add padding to the bottom to ensure the last item is not hidden by the sticky footer
     <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-48">
-      <CartItemList
-        items={cartItems}
-        onQuantityChange={(itemCode, next) => updateQuantity(itemCode, next)}
-        onRemove={(itemCode) => removeItem(itemCode)}
-      />
+      {loading ? (
+        <div className="space-y-3">
+          {Array.from({ length: 3 }).map((_, i) => <CartItemSkeleton key={i} />)}
+        </div>
+      ) : (
+        <CartItemList
+          items={cartItems}
+          onQuantityChange={(itemCode, next) => updateQuantity(itemCode, next)}
+          onRemove={(itemCode) => removeItem(itemCode)}
+        />
+      )}
     </div>
   )
 

@@ -4,6 +4,7 @@ import { useI18n } from '../context/I18nContext';
 import useTranslations from '../hooks/useTranslations';
 import { useData } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import ImageWithLoader from "./ImageWithLoader";
 
 /**
  * Counter Component (Redesigned)
@@ -50,6 +51,19 @@ const Counter = ({ quantity, onChange, onRemove, itemName }) => {
   );
 };
 
+export const CartItemSkeleton = () => (
+  <div className="flex items-center justify-between gap-4 card p-3">
+    <div className="flex items-center gap-4 flex-1 min-w-0">
+      <div className="w-16 h-16 flex-shrink-0 skeleton rounded-md"></div>
+      <div className="flex-1 min-w-0 space-y-3">
+        <div className="h-4 w-3/4 skeleton"></div>
+        <div className="h-4 w-1/4 skeleton"></div>
+      </div>
+    </div>
+    <div className="w-24 h-9 skeleton rounded-lg"></div>
+  </div>
+);
+
 
 /**
  * CartItem Component (Redesigned)
@@ -90,9 +104,12 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
     <div className="flex items-center justify-between gap-4 card p-3">
       <div onClick={handleNavigate} className="flex items-center gap-4 flex-1 min-w-0 cursor-pointer">
         {/* Image Section */}
-        <div className="w-16 h-16 flex-shrink-0 primBg primBorder rounded-md overflow-hidden">
-          <img src={item.itemPhoto} alt={itemName} className="w-full h-full object-cover" />
-        </div>
+        <ImageWithLoader
+          src={item.itemPhoto}
+          alt={itemName}
+          containerClassName="w-16 h-16 flex-shrink-0 primBg primBorder rounded-md overflow-hidden"
+          imageClassName="w-full h-full object-cover"
+        />
 
         {/* Details Section */}
         <div className="flex-1 min-w-0">
