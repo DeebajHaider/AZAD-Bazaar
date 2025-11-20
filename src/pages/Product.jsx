@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Heart, Plus, Minus } from 'lucide-react'
+import { Heart, Plus, Minus, Loader2 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
@@ -114,48 +114,86 @@ const ProductGallery = ({ images, productName, format }) => {
 
 const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
   const { t, lang } = useI18n()
+  const [actionLoading, setActionLoading] = useState(false)
   const productIdForCart = product._id ?? product.id
 
-  const formatCurrency = (amount) => new Intl.NumberFormat(lang, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount)
   const displayPrice = product.discountedPrice ?? product.price
 
   if (!product) return null
 
+  const runWithLoading = (fn) => {
+    if (!fn) return
+    let finished = false
+    setActionLoading(true)
+    try {
+      const result = fn()
+      if (result && typeof result.then === 'function') {
+        result.finally(() => setActionLoading(false))
+        finished = true
+      }
+    } catch (e) {
+      // swallow for now
+    } finally {
+      if (!finished) {
+        // ensure a perceptible loading state even for sync updates
+        setTimeout(() => setActionLoading(false), 300)
+      }
+    }
+  }
+
+  const totalAmount = (parseFloat(displayPrice) * qty)
+  const addDisabled = !inStock || (isFinite(availableStock) && qty >= availableStock) || actionLoading
+  const decDisabled = actionLoading
+
   return (
     <div className="secBg dividerBorder border-t p-1">
-      <div className="mx-auto p-4">
+      <div className="mx-auto p-4 space-y-1">
         {qty === 0 ? (
           <button
-            onClick={() => { if (inStock) addToCart(productIdForCart) }}
-            disabled={!inStock}
-            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={() => { if (inStock) runWithLoading(() => addToCart(productIdForCart)) }}
+            disabled={!inStock || actionLoading}
+            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
+            {actionLoading ? <Loader2 size={18} className="animate-spin" /> : null}
             {inStock ? t('productPage.actions.addToCart') : t('common.outOfStock')}
           </button>
         ) : (
-          <div className="w-full flex items-center justify-between gap-2">
-            <div className="flex items-center gap-4 rounded-lg secBg p-1 primBorder">
+          <>
+            <div className="flex items-center justify-between w-full">
+              <span className="text-sm secText">{t('productPage.labels.totalAmount')}</span>
+              <span className="text-lg font-bold primText">{t('common.currencySymbol')} {totalAmount.toLocaleString()}</span>
+            </div>
+            <div className="grid grid-cols-10 gap-3 items-center">
+              <div className="col-span-3 flex items-center gap-2 rounded-lg secBg p-1 primBorder justify-center">
+                <button
+                  onClick={() => runWithLoading(() => decrementProduct(productIdForCart))}
+                  disabled={decDisabled}
+                  className="flex-1 min-h-11 flex items-center justify-center secHoverBg primText secBorder font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label={t('productPage.actions.decreaseQuantity')}
+                >
+                  {actionLoading ? <Loader2 size={18} className="animate-spin" /> : <Minus size={18} />}
+                </button>
+                <div className="text-lg font-semibold primText min-w-[2ch] text-center">{qty}</div>
+                <button
+                  onClick={() => runWithLoading(() => addToCart(productIdForCart))}
+                  disabled={addDisabled}
+                  className="flex-1 min-h-11 flex items-center justify-center secHoverBg primText font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label={t('productPage.actions.increaseQuantity')}
+                >
+                  {actionLoading ? <Loader2 size={18} className="animate-spin" /> : <Plus size={18} />}
+                </button>
+              </div>
               <button
-                onClick={() => decrementProduct(productIdForCart)}
-                className="min-w-10 min-h-10 flex items-center justify-center secHoverBg primText font-medium rounded-md transition-all duration-200"
-                aria-label={t('productPage.actions.decreaseQuantity')}
-              >
-                <Minus size={18} />
-              </button>
-              <div className="text-xl font-semibold primText min-w-[2ch] text-center">{qty}</div>
-              <button
-                onClick={() => addToCart(productIdForCart)}
-                disabled={!inStock || (isFinite(availableStock) && qty >= availableStock)}
-                className="min-w-10 min-h-10 flex items-center justify-center secHoverBg primText font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => runWithLoading(() => addToCart(productIdForCart))}
+                disabled={addDisabled}
+                className="col-span-7 min-h-12 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label={t('productPage.actions.increaseQuantity')}
               >
-                <Plus size={18} />
+                {actionLoading ? <Loader2 size={18} className="animate-spin" /> : <Plus size={18} />}
+                {t('productPage.actions.addMoreToCart')}
               </button>
             </div>
-            <div className="text-2xl font-bold primText">
-              {t('common.currencySymbol')} {(parseFloat(displayPrice) * qty).toLocaleString()}
-            </div>
-          </div>
+          </>
         )}
       </div>
     </div>

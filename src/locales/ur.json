@@ -352,6 +352,9 @@
       "addToCart": "کارٹ میں شامل کریں",
       "favoriteAriaLabel": "پسندیدہ میں شامل کریں",
       "unfavoriteAriaLabel": "پسندیدہ سے ہٹائیں"
+      ,"increaseQuantity": "مقدار بڑھائیں"
+      ,"decreaseQuantity": "مقدار کم کریں"
+      ,"addMoreToCart": "مزید شامل کریں"
     },
     "gallery": {
       "mainImageAlt": "{{productName}} کی مرکزی تصویر",
@@ -366,6 +369,9 @@
     }, 
      "description": {
       "title": "تفصیل"
+    },
+    "labels": {
+      "totalAmount": "کل رقم"
     }
   }, 
   "splash": {

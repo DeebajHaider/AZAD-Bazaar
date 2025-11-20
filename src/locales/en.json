@@ -352,6 +352,9 @@
       "addToCart": "Add to Cart",
       "favoriteAriaLabel": "Add to favorites",
       "unfavoriteAriaLabel": "Remove from favorites"
+      ,"increaseQuantity": "Increase quantity"
+      ,"decreaseQuantity": "Decrease quantity"
+      ,"addMoreToCart": "Add more to cart"
     },
     "gallery": {
       "mainImageAlt": "Main image of {{productName}}",
@@ -366,6 +369,9 @@
     }, 
     "description": {
       "title": "Description"
+    },
+    "labels": {
+      "totalAmount": "Total Amount"
     }
   }, 
   "splash": {
