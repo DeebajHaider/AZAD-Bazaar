@@ -46,6 +46,9 @@
       "updateSuccess": "Your changes have been saved.",
       "updateFailed": "Failed to save changes.",
       "noCustomerError": "No customer available for update."
+    },
+    "about": {
+      "button": "About"
     }
   },
   "login": {
@@ -272,6 +275,9 @@
       "tax": "Tax",
       "total": "Total"
     },
+    "summary": {
+      "discount": "Discount"
+    },
     "actions": {
       "placeOrder": "Place Order — ${{total}}",
       "orderPlacedAlert": "Order placed. Total: ${{total}}"
@@ -322,7 +328,13 @@
     "recentOrders": {
       "title": "Recent Orders",
       "orderTitle": "Order #{{orderNumber}}",
-      "status": "Delivered recently"
+      "status": "Delivered recently",
+      "arrivingInDays": "Arriving in {{count}} days",
+      "arrivingSoon": "Arriving soon",
+      "viewAll": "View All",
+      "emptyTitle": "No orders yet",
+      "emptyDesc": "Start shopping to see your orders here.",
+      "startShopping": "Start Shopping"
     },
     "popularBrands": {
       "title": "Popular Brands",
@@ -334,6 +346,9 @@
     "outOfStock": "Out of Stock",
     "close": "Close",
     "clear": "Clear", 
+    "item": "item",
+    "items": "items",
+    "total": "Total",
     "error": {
       "title": "An Error Occurred",
       "description": "Something went wrong. Please try again later.",
@@ -386,7 +401,8 @@
   "orders": {
     "title": "My Orders",
     "card": {
-      "orderId": "Order #{id}"
+      "orderId": "Order #{id}",
+      "viewDetails": "View Details"
     },
     "empty": {
       "title": "No Orders Yet",
@@ -400,8 +416,12 @@
       "shipped": "Shipped",
       "delivered": "Delivered",
       "cancelled": "Cancelled",
-      "failed": "Failed"
+      "failed": "Failed",
+      "inProgress": "In Progress",
+      "failedMessage": "Order cancelled."
     },
+    "deliveredOn": "Delivered on",
+    "cancelled": "Cancelled",
     "step": {
       "placed": "Placed",
       "confirmed": "Confirmed",
@@ -412,6 +432,9 @@
   "order": {
     "title": "Order Details",
     "titleWithId": "Order #{id}",
+    "tracking": {
+      "title": "Tracking"
+    },
     "items": {
       "title": "Items",
       "quantity": "Qty: {count}"
@@ -422,5 +445,13 @@
     "payment": {
       "title": "Payment Method"
     }
+  },
+  "about": {
+    "title": "About & Contributors",
+    "heading": "Built for HCI Project",
+    "description": "Crafted to provide the best shopping experience with a focus on accessibility and speed.",
+    "engineering": "Engineering",
+    "qa": "Quality Assurance",
+    "thanks": "Special thanks to our testers for testing things and giving advice so we could fix them."
   }
 }

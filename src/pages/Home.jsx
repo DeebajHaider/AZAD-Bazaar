@@ -137,9 +137,13 @@ const RecentOrderCard = ({ order, onClick, t, lang }) => {
           ) : currentStatus === 'cancelled' ? (
              <span>{t('orders.cancelled')}</span>
           ) : daysLeft > 0 ? (
-             <span className="flex items-center gap-1">
-               {t('home.recentOrders.arrivingInDays', { count: daysLeft })}
-             </span>
+             (() => {
+               const raw = t('home.recentOrders.arrivingInDays') || 'Arriving in {{count}} days'
+               const text = raw.replace('{{count}}', daysLeft)
+               return (
+                 <span className="flex items-center gap-1">{text}</span>
+               )
+             })()
           ) : (
              <span>{t('home.recentOrders.arrivingSoon')}</span>
           )}

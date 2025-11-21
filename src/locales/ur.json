@@ -46,6 +46,9 @@
       "updateSuccess": "آپ کی تبدیلیاں محفوظ کر دی گئی ہیں۔",
       "updateFailed": "تبدیلیاں محفوظ کرنے میں ناکام۔",
       "noCustomerError": "اپ ڈیٹ کے لیے کوئی صارف دستیاب نہیں ہے۔"
+    },
+    "about": {
+      "button": "ہمارے بارے میں"
     }
   },
   "login": {
@@ -272,6 +275,9 @@
       "tax": "ٹیکس",
       "total": "کل"
     },
+    "summary": {
+      "discount": "رعایت"
+    },
     "actions": {
       "placeOrder": "آرڈر کریں — ${{total}}",
       "orderPlacedAlert": "آرڈر دے دیا گیا ہے۔ کل: ${{total}}"
@@ -322,7 +328,13 @@
     "recentOrders": {
       "title": "حالیہ آرڈرز",
       "orderTitle": "آرڈر #{{orderNumber}}",
-      "status": "حال ہی میں ڈیلیور ہوا"
+      "status": "حال ہی میں ڈیلیور ہوا",
+      "arrivingInDays": "{{count}} دن میں پہنچے گا",
+      "arrivingSoon": "جلد پہنچنے والا ہے",
+      "viewAll": "سب دیکھیں",
+      "emptyTitle": "ابھی تک کوئی آرڈر نہیں",
+      "emptyDesc": "آرڈرز دیکھنے کے لیے خریداری شروع کریں۔",
+      "startShopping": "خریداری شروع کریں"
     },
     "popularBrands": {
       "title": "مشہور برانڈز",
@@ -334,6 +346,9 @@
     "outOfStock": "اسٹاک میں نہیں",
     "close": "بند کریں",
     "clear": "صاف کریں",
+    "item": "آئٹم",
+    "items": "آئٹمز",
+    "total": "کل",
     "error": {
       "title": "ایک خرابی پیش آگئی",
       "description": "کچھ غلط ہو گیا. براہ کرم بعد میں دوبارہ کوشش کریں.",
@@ -377,7 +392,8 @@
       "title": "تفصیل"
     },
     "labels": {
-      "totalAmount": "کل رقم"
+          "orderId": "آرڈر #{id}",
+          "viewDetails": "تفصیلات دیکھیں"
     }
   }, 
   "splash": {
@@ -386,7 +402,8 @@
   "orders": {
     "title": "میرے آرڈرز",
     "card": {
-      "orderId": "آرڈر #{id}"
+      "orderId": "آرڈر #{id}",
+      "viewDetails": "تفصیلات"
     },
     "empty": {
       "title": "ابھی تک کوئی آرڈر نہیں",
@@ -400,8 +417,12 @@
       "shipped": "روانہ",
       "delivered": "پہنچا دیا",
       "cancelled": "منسوخ",
-      "failed": "ناکام"
+      "failed": "ناکام",
+      "inProgress": "جاری ہے",
+      "failedMessage": "آرڈر منسوخ ہو گیا۔"
     },
+    "deliveredOn": "پہنچا دیا گیا",
+    "cancelled": "منسوخ",
     "step": {
       "placed": "موصول",
       "confirmed": "تصدیق شدہ",
@@ -412,6 +433,9 @@
   "order": {
     "title": "آرڈر کی تفصیلات",
     "titleWithId": "آرڈر #{id}",
+    "tracking": {
+      "title": "ٹریکنگ"
+    },
     "items": {
       "title": "اشیاء",
       "quantity": "تعداد: {count}"
@@ -422,5 +446,13 @@
     "payment": {
       "title": "ادائیگی کا طریقہ"
     }
+  },
+  "about": {
+    "title": "ہماری ٹیم",
+    "heading": "جذبے سے تیار کردہ",
+    "description": "بہترین رسائی اور رفتار کے ساتھ خریداری کا تجربہ فراہم کرنے کے لیے بنایا گیا۔",
+    "engineering": "انجینئرنگ",
+    "qa": "کوالٹی اشورنس",
+    "thanks": "ہمارے ٹیسٹرز کا خصوصی شکریہ جنہوں نے مسائل تلاش کیے تاکہ ہم انہیں درست کر سکیں۔"
   }
 }
