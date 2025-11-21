@@ -48,7 +48,7 @@ const RelatedProductsSkeleton = () => {
 };
 
 const ProductPageSkeleton = () => (
-  <div className="flex-1 primBg overflow-y-auto">
+  <div className="flex-1 primBg overflow-y-auto min-h-full">
     <div className="relative w-full h-72 skeleton" />
     <div className="p-4 space-y-6">
       {/* Price & Stock */}
