@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import authService from '../api/authService'
+import { invalidateCache } from '../api/cacheUtils'
+import { CART, ORDERS_LIST, ORDER_BY_ID } from '../api/cacheKeys'
 
 const AuthContext = createContext(null)
 
@@ -86,6 +88,12 @@ export function AuthProvider({ children }) {
       try {
         import('../api/client').then((m) => m.setAuthToken(resp.token)).catch(() => {})
       } catch (e) {}
+      
+      // Clear cart and order caches on login
+      invalidateCache(CART)
+      invalidateCache(ORDERS_LIST)
+      invalidateCache('order_') // Clear all individual order caches
+      
       // fetch customer if present
       if (resp.user && resp.user.customerId) {
         try {
@@ -136,9 +144,17 @@ export function AuthProvider({ children }) {
     try {
       localStorage.removeItem('token')
       localStorage.removeItem('azad_user')
+      localStorage.removeItem('azad_customer')
     } catch (e) {}
+    
+    // Clear cart and order caches on logout
+    invalidateCache(CART)
+    invalidateCache(ORDERS_LIST)
+    invalidateCache('order_') // Clear all individual order caches
+    
     setToken(null)
     setUser(null)
+    setCustomer(null)
     try { import('../api/client').then((m) => m.setAuthToken(null)).catch(() => {}) } catch (e) {}
   }
 
