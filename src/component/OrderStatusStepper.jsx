@@ -1,80 +1,104 @@
 import React from 'react'
-import {
-  Check,
-  Package,
-  Truck,
-  Home
-} from 'lucide-react'
-import {
-  useI18n
-} from '../context/I18nContext'
+import { Check, Circle, X } from 'lucide-react'
+import { useI18n } from '../context/I18nContext'
+import dayjs from 'dayjs'
 
-const OrderStatusStepper = ({
-  currentStatus
-}) => {
-  const {
-    t
-  } = useI18n()
-  const steps = [{
-    name: 'Placed',
-    icon: Package
-  }, {
-    name: 'Confirmed',
-    icon: Check
-  }, {
-    name: 'Shipped',
-    icon: Truck
-  }, {
-    name: 'Delivered',
-    icon: Home
-  }, ]
+const OrderStatusStepper = ({ currentStatus, history = [] }) => {
+  const { t } = useI18n()
 
-  const getStatusIndex = (status) => {
-    const normalizedStatus = status?.toLowerCase()
-    if (normalizedStatus === 'delivered') return 3
-    if (normalizedStatus === 'shipped') return 2
-    if (normalizedStatus === 'confirmed' || normalizedStatus === 'processing') return 1
-    if (normalizedStatus === 'placed' || normalizedStatus === 'pending') return 0
-    return -1 // Default for cancelled/failed
-  }
+  const steps = [
+    { key: 'pending', label: 'placed' },
+    { key: 'confirmed', label: 'confirmed' },
+    { key: 'shipped', label: 'shipped' },
+    { key: 'delivered', label: 'delivered' }
+  ]
 
-  const currentStepIndex = getStatusIndex(currentStatus)
+  const normalizedCurrent = currentStatus?.toLowerCase() || 'pending'
+  const isFailed = ['cancelled', 'failed', 'canceled'].includes(normalizedCurrent)
 
-  if (currentStepIndex < 0) {
+  let currentStepIndex = steps.findIndex(s => s.key === normalizedCurrent)
+  if (normalizedCurrent === 'processing') currentStepIndex = 1
+  if (currentStepIndex === -1 && !isFailed) currentStepIndex = 0
+
+  // Compact Failed State
+  if (isFailed) {
     return (
-      <div className="p-4 text-center accentDangerBg text-white font-medium rounded-lg">
-        {t(`orders.status.${currentStatus.toLowerCase()}`, currentStatus)}
+      <div className="flex items-center gap-3 py-2">
+        <div className="w-8 h-8 rounded-full accentDangerBg flex items-center justify-center text-white shadow-sm flex-shrink-0">
+          <X size={16} />
+        </div>
+        <div>
+          <p className="font-bold primText text-sm">
+            {t(`orders.status.${normalizedCurrent}`, normalizedCurrent)}
+          </p>
+          <p className="text-xs secText">
+            {t('orders.status.failedMessage', 'Order cancelled.')}
+          </p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="relative pl-1">
       {steps.map((step, index) => {
-        const isCompleted = index < currentStepIndex
-        const isActive = index === currentStepIndex
-        const isFuture = index > currentStepIndex
+        const isCompleted = index <= currentStepIndex
+        const isCurrent = index === currentStepIndex
+        const isLast = index === steps.length - 1
 
-        const iconColor = isCompleted || isActive ? 'accentPrimText' : 'secText'
-        const textColor = isCompleted || isActive ? 'primText' : 'secText'
-        const lineColor = isCompleted ? 'accentPrimBg' : 'primBorder'
+        const historyEntry = history.find(h => h.status === step.key)
+        const timeString = historyEntry ? dayjs(historyEntry.timestamp).format('MMM D, HH:mm') : null
 
         return (
-          <React.Fragment key={step.name}>
-            <div className="flex flex-col items-center text-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  isActive ? 'accentPrimBg text-white' : isCompleted ? 'accentPrimBg text-white' : 'secBg primBorder'
-                }`}>
-                <step.icon size={20} className={isActive || isCompleted ? 'text-white' : 'secText'} />
-              </div>
-              <p className={`mt-2 text-xs font-medium ${textColor}`}>
-                {t(`orders.step.${step.name.toLowerCase()}`)}
-              </p>
-            </div>
-            {index < steps.length - 1 && (
-              <div className={`flex-1 h-1 mx-2 rounded-full ${lineColor}`} />
+          // Reduced vertical spacing: pb-4 instead of mb-6
+          <div key={step.key} className={`flex gap-3 relative ${!isLast ? 'pb-5' : ''}`}>
+            
+            {/* Vertical Line */}
+            {!isLast && (
+              // Adjusted for w-6 icons: Left 11px centers it (24px/2 - 1px)
+              <div 
+                className={`absolute left-[11px] top-6 bottom-0 w-[2px] ${
+                  index < currentStepIndex ? 'accentPrimBg' : 'bg-gray-200 dark:bg-slate-700'
+                }`} 
+              />
             )}
-          </React.Fragment>
+
+            {/* Compact Icon (w-6 h-6) */}
+            <div className="relative z-10 flex-shrink-0">
+              <div 
+                className={`w-6 h-6 rounded-full flex items-center justify-center border-[1.5px] transition-colors duration-300 ${
+                  isCompleted 
+                    ? 'accentPrimBg border-transparent text-white' 
+                    : 'bg-white dark:bg-slate-950 primBorder secText'
+                } ${isCurrent ? 'ring-2 ring-blue-100 dark:ring-blue-900' : ''}`}
+              >
+                {isCompleted ? <Check size={12} /> : <Circle size={8} />}
+              </div>
+            </div>
+
+            {/* Compact Text Content */}
+            <div className={`pt-0.5 flex-1 ${isCompleted ? 'opacity-100' : 'opacity-60'}`}>
+              <div className="flex justify-between items-baseline">
+                <p className={`leading-none ${isCurrent ? 'font-bold primText text-sm' : 'font-medium primText text-sm'}`}>
+                  {t(`orders.step.${step.label}`, step.label)}
+                </p>
+                
+                {/* Timestamp is now inline on the right to save vertical space */}
+                {timeString && (
+                  <span className="text-[10px] secText tabular-nums">
+                    {timeString}
+                  </span>
+                )}
+              </div>
+              
+              {/* Current Status Indicator */}
+              {isCurrent && (
+                 <p className="text-[11px] secText mt-1 animate-pulse leading-tight">
+                   {t('orders.status.inProgress', 'Processing...')}
+                 </p>
+              )}
+            </div>
+          </div>
         )
       })}
     </div>
