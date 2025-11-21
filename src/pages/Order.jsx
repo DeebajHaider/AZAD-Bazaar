@@ -14,6 +14,7 @@ import {
 import useOrder from '../api/hooks/useOrder'
 import OrderStatusStepper from '../component/OrderStatusStepper'
 import ImageWithLoader from '../component/ImageWithLoader'
+import { useAuth } from '../context/AuthContext'; // Import Auth
 
 // Skeleton for the detail page
 const OrderDetailSkeleton = () => (
@@ -42,6 +43,8 @@ const OrderDetailSkeleton = () => (
 );
 
 export default function Order() {
+  const { token } = useAuth();
+
   const {
     orderId
   } = useParams()
@@ -49,11 +52,12 @@ export default function Order() {
     order,
     loading,
     error
-  } = useOrder(orderId)
+  } = useOrder(orderId, token)
   const {
     t,
     lang
   } = useI18n()
+
 
   const formatCurrency = (amount) => {
     if (typeof amount !== 'number') return '0.00'

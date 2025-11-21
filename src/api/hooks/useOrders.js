@@ -3,11 +3,10 @@ import orderService from '../orderService';
 
 /**
  * useOrders hook
- * Fetches all orders for the current authenticated user.
- * options: { immediate: boolean } - whether to fetch immediately
+ * trigger: A value (like auth token) that forces a reload when changed
  */
-export default function useOrders(options = { immediate: true }) {
-  const [orders, setOrders] = useState(null);
+export default function useOrders(options = { immediate: true }, trigger) {
+  const [orders, setOrders] = useState(null); // Default to null (not loaded)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -26,12 +25,13 @@ export default function useOrders(options = { immediate: true }) {
     }
   }, []);
 
+  const immediate = options?.immediate;
   useEffect(() => {
-    if (options && options.immediate) {
+    if (immediate) {
       fetchOrders();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Reload whenever the trigger (token) changes
+  }, [trigger, fetchOrders, immediate]);
 
   const refetch = useCallback(() => fetchOrders(), [fetchOrders]);
 

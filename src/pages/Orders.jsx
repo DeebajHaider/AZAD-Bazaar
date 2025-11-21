@@ -59,7 +59,6 @@ export default function Orders() {
 
         {!loading && !error && orders && orders.length > 0 && (
           orders.map(order => (
-            console.log('Rendering order:', order._id),
             <Link key={order._id} to={`/orders/${order._id}`} state={{ order }} className="block mb-4">
               <OrderItemCard order={order} />
             </Link>

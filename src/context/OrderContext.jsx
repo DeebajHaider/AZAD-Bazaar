@@ -1,11 +1,13 @@
 import React, { createContext, useContext } from 'react';
 import useOrders from '../api/hooks/useOrders';
 import orderService from '../api/orderService';
+import { useAuth } from './AuthContext'; // Import Auth
 
 const OrderContext = createContext(null);
 
 export function OrderProvider({ children }) {
-  const { orders, loading, error, refetch } = useOrders();
+  const { token } = useAuth();
+  const { orders, loading, error, refetch } = useOrders({ immediate: true }, token);
 
   async function createOrder(orderData) {
     try {

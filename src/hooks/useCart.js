@@ -5,7 +5,7 @@ import productService from '../api/productService';
 
 const PLACEHOLDER = 'https://via.placeholder.com/80?text=Product';
 
-export default function useCart() {
+export default function useCart(authTrigger) {
   const [rawItems, setRawItems] = useState([]); // { productId, quantity, addedAt }
   const [products, setProducts] = useState([]); // product docs
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function useCart() {
 
   useEffect(() => {
     load();
-  }, [load]);
+  }, [load, authTrigger]);
 
   // New effect: ensure we have product docs (with images) for items
   useEffect(() => {

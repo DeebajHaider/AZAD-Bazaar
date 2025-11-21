@@ -1,11 +1,13 @@
 import React, { createContext, useContext } from 'react'
 import useCartApi from '../hooks/useCart'
+import { useAuth } from './AuthContext'
 
 const CartContext = createContext(null)
 
 export function CartProvider({ children }) {
   // use the API-backed hook internally
-  const api = useCartApi()
+  const { token } = useAuth()
+  const api = useCartApi(token)
 
   // expose a compatible API similar to the previous CartContext
   // addItem expects an object with itemCode === productId string

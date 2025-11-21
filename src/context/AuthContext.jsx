@@ -90,7 +90,7 @@ export function AuthProvider({ children }) {
       } catch (e) {}
       
       // Clear cart and order caches on login
-      invalidateCache(CART)
+      invalidateCache('cart_') // Clear all cart caches
       invalidateCache(ORDERS_LIST)
       invalidateCache('order_') // Clear all individual order caches
       
@@ -148,7 +148,7 @@ export function AuthProvider({ children }) {
     } catch (e) {}
     
     // Clear cart and order caches on logout
-    invalidateCache(CART)
+    invalidateCache('cart_') // Clear all cart caches
     invalidateCache(ORDERS_LIST)
     invalidateCache('order_') // Clear all individual order caches
     

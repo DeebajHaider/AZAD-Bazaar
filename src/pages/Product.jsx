@@ -121,23 +121,19 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
   const productIdForCart = product._id ?? product.id
   const displayPrice = product.discountedPrice ?? product.price
 
-  const runWithLoading = (fn) => {
+  const runWithLoading = async (fn) => {
     if (!fn) return
-    let finished = false
     setActionLoading(true)
     try {
       const result = fn()
       if (result && typeof result.then === 'function') {
-        result.finally(() => setActionLoading(false))
-        finished = true
+        await result
       }
     } catch (e) {
-      // swallow for now
+      console.error('Product action error:', e)
     } finally {
-      if (!finished) {
-        // ensure a perceptible loading state even for sync updates
-        setTimeout(() => setActionLoading(false), 300)
-      }
+      // ensure a perceptible loading state even for sync updates
+      setTimeout(() => setActionLoading(false), 300)
     }
   }
 

@@ -1,8 +1,7 @@
-import { useState, useEffect }
-from 'react'
+import { useState, useEffect } from 'react'
 import orderService from '../orderService'
 
-export default function useOrder(orderId) {
+export default function useOrder(orderId, trigger) {
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -28,7 +27,7 @@ export default function useOrder(orderId) {
     }
 
     fetchOrder()
-  }, [orderId])
+  }, [orderId, trigger]) // Add trigger to dependencies
 
   return {
     order,
