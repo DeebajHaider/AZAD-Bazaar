@@ -22,6 +22,7 @@ import BackButtonHandler from './component/BackButtonHandler'
 import { OrderProvider } from './context/OrderContext'
 import Orders from './pages/Orders'
 import Order from './pages/Order'
+import About from './pages/About'
 
 export default function App() {
   const AuthGate = () => {
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/accessibility" element={<AccessibilitySettings />} />
               <Route path="/language" element={<LanguageSelection />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </div>
         </Router>
@@ -66,6 +68,7 @@ export default function App() {
             <Route path="/splash" element={<SplashScreen />} />
             <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:orderId" element={<Order />} />
+          <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </Router>

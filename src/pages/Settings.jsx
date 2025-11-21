@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save } from 'lucide-react'
+import { ChevronRight, LogOut, Save, Info } from 'lucide-react'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
@@ -96,7 +96,7 @@ export default function Settings() {
       {/* Main container for the settings page */}
       {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
       <main className="min-h-screen flex-1 overflow-y-auto primBg">
-        <div className="p-4 pb-24 space-y-6">
+        <div className="p-4 space-y-6">
 
           {/* Card: Appearance & Accessibility */}
           <div className="secBg primBorder rounded-lg">
@@ -216,6 +216,18 @@ export default function Settings() {
               {t('settings.signOut.button')}
             </button>
           </div>
+
+          {/* Card: About App */}
+          <div className="secBg primBorder rounded-lg p-4">
+            <button
+              onClick={() => navigate('/about')}
+              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+            >
+              <Info size={18} />
+              {t('settings.about.button')}
+            </button>
+          </div>
+
 
         </div>
       </main>
