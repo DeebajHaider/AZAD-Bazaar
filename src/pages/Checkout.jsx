@@ -97,7 +97,7 @@ const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
 // --- Main Checkout Component ---
 
 export default function Checkout() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const { items: cartItems, total: cartTotal, clearCart, loading: cartLoading } = useCart()
   const { user } = useContext(AuthContext)
   const { createOrder } = useOrdersContext()
@@ -128,6 +128,14 @@ export default function Checkout() {
   const taxRate = 0.13
   const tax = +(subtotal * taxRate).toFixed(2)
   const total = +(subtotal + serviceFee + deliveryFee + tax).toFixed(2)
+
+  const formatCurrency = (amount) => {
+    if (typeof amount !== 'number') return '0.00'
+    return new Intl.NumberFormat(lang, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount)
+  }
 
   const handlePlaceOrder = async () => {
     if (!user || !user.customerId) {
@@ -201,7 +209,9 @@ export default function Checkout() {
         {orderLoading ? (
           <Loader2 className="animate-spin" />
         ) : (
-          t('checkout.actions.placeOrder', { total: total.toFixed(2) })
+          // Use replace on translation string to inject formatted total
+          t('checkout.actions.placeOrder')
+            .replace('${{total}}', `${t('common.currencySymbol') }${formatCurrency(total)}`)
         )}
       </button>
       {orderError && <p className="text-red-500 text-sm mt-2 text-center">{orderError.message}</p>}

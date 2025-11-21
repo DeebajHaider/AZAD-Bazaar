@@ -50,3 +50,4 @@ venv
 android/app/release/baselineProfiles/1/app-release.dm
 android/app/release/baselineProfiles/0/app-release.dm
 android/app/release/baselineProfiles/1/*.dm
+android/app/release/baselineProfiles/**/app-release.dm
