@@ -16,8 +16,8 @@ export const PRODUCTS_LIST = 'products_list';
 export const PRODUCT_BY_ID = (id) => `product_${id}`;
 export const RELATED_PRODUCTS = (id) => `related_products_${id}`;
 
-// Cart cache keys
-export const CART = 'cart';
+// Cart cache keys (user-specific)
+export const CART = (token = '') => `cart_${token ? token.substring(0, 10) : 'guest'}`;
 
 // Order cache keys
 export const ORDERS_LIST = 'orders_list';

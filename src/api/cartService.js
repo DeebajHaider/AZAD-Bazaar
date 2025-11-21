@@ -2,35 +2,47 @@ import client from './client';
 import { getFromCache, setInCache, invalidateCache } from './cacheUtils';
 import { CART } from './cacheKeys';
 
+const getToken = () => {
+  try {
+    return localStorage.getItem('token') || '';
+  } catch (e) {
+    return '';
+  }
+};
+
 export async function getCart() {
-  const cacheKey = CART;
-  const cached = getFromCache(cacheKey);
+  const token = getToken();
+  const cacheKey = CART(token);
+  const cached = await getFromCache(cacheKey);
   if (cached) return cached;
 
   const resp = await client.get('/cart');
-  setInCache(cacheKey, resp.data);
+  await setInCache(cacheKey, resp.data);
   return resp.data;
 }
 
 export async function addProduct(productId) {
-  invalidateCache(CART);
+  const token = getToken();
+  await invalidateCache(CART(token));
   const resp = await client.post('/cart/add', { productId });
-  setInCache(CART, resp.data);
+  await setInCache(CART(token), resp.data);
   return resp.data;
 }
 
 export async function decrementProduct(productId) {
-  invalidateCache(CART);
+  const token = getToken();
+  await invalidateCache(CART(token));
   const resp = await client.post('/cart/decrement', { productId });
-  setInCache(CART, resp.data);
+  await setInCache(CART(token), resp.data);
   return resp.data;
 }
 
 export default { getCart, addProduct, decrementProduct };
 
 export async function clearCart() {
-  invalidateCache(CART);
+  const token = getToken();
+  await invalidateCache(CART(token));
   const resp = await client.post('/cart/clear');
-  setInCache(CART, resp.data);
+  await setInCache(CART(token), resp.data);
   return resp.data;
 }

@@ -9,11 +9,11 @@ import { PRODUCTS_LIST, PRODUCT_BY_ID, RELATED_PRODUCTS } from './cacheKeys';
  */
 export const getProducts = async (params = {}) => {
   const cacheKey = generateCacheKey(PRODUCTS_LIST, params);
-  const cached = getFromCache(cacheKey);
+  const cached = await getFromCache(cacheKey);
   if (cached) return cached;
 
   const response = await client.get('/products', { params });
-  setInCache(cacheKey, response.data);
+  await setInCache(cacheKey, response.data);
   return response.data;
 };
 
@@ -24,21 +24,21 @@ export const getProductById = async (id) => {
 
   // 1. Check if product exists in the default full list cache
   const listCacheKey = generateCacheKey(PRODUCTS_LIST, {});
-  const listCache = getFromCache(listCacheKey);
+  const listCache = await getFromCache(listCacheKey);
   if (listCache && Array.isArray(listCache)) {
     const found = listCache.find(p => p._id === id);
     if (found) {
       console.debug(`[Cache] HIT (from list): product_${id}`);
-      setInCache(cacheKey, found);
+      await setInCache(cacheKey, found);
       return found;
     }
   }
 
-  const cached = getFromCache(cacheKey);
+  const cached = await getFromCache(cacheKey);
   if (cached) return cached;
 
   const response = await client.get(`/products/${id}`);
-  setInCache(cacheKey, response.data);
+  await setInCache(cacheKey, response.data);
   return response.data;
 };
 
@@ -46,11 +46,11 @@ export const getRelatedProducts = async (id) => {
   if (!id) throw new Error('Product id is required');
   
   const cacheKey = RELATED_PRODUCTS(id);
-  const cached = getFromCache(cacheKey);
+  const cached = await getFromCache(cacheKey);
   if (cached) return cached;
 
   const response = await client.get(`/products/${id}/related`);
-  setInCache(cacheKey, response.data);
+  await setInCache(cacheKey, response.data);
   return response.data;
 };
 
