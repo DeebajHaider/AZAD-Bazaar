@@ -374,3 +374,31 @@ Related Products section.
 4.  **Scroll Physics:** Added `snap-x` to the container and `snap-start` to the cards. On mobile, this makes scrolling feel much more precise, stopping exactly on a product rather than cutting one off halfway.
 
 
+## UI & HCI Report
+
+#### 1. Heuristic Evaluation (Nielsen)
+*   **Aesthetic and Minimalist Design:** The page does not overwhelm the user with walls of text. By using "Cards" for developers and a "List Group" for testers, the information is chunked effectively.
+*   **Consistency and Standards:** The page uses the existing `card`, `badgePrimary`, `primText`, and `secBg` classes. This ensures the page feels like a native part of the application, not an afterthought.
+*   **Recognition rather than Recall:** Using icons (`Code` for devs, `Shield/Bug` for testers) helps users instantly recognize the roles without needing to read the fine print immediately.
+
+#### 2. Accessibility & Inclusion (a11y)
+*   **Color Blindness:**
+    *   Roles are distinguished by text labels ("Lead", "QA Team") and Icons, not just color.
+    *   The "Lead" developer card has a thicker border (`border-l-4`) to denote hierarchy, which works in Monochrome/Achromatopsia modes.
+    *   We utilize the `.deuteranopia`, `.protanopia` overrides implicitly by using the `accentPrimText`/`badgeSuccess` classes defined in your CSS.
+*   **Screen Readers:**
+    *   The page uses semantic `<section>`, `<h1>`, and `<h2>` tags.
+    *   The Avatar logic is purely decorative (visuals), so the important information (Name/Role) is in plain text blocks next to it.
+*   **Contrast:**
+    *   The text classes `primText` (usually gray-900/white) ensure high contrast against `primBg` and `secBg`.
+
+#### 3. Mobile Design Nuances
+*   **Touch Targets:** Even though this is an informational page, the layout provides ample spacing (`gap-3`, `p-3`). If you decide to make these profiles clickable (e.g., linking to GitHub) in the future, the hit areas are already large enough (approx 60px height per card).
+*   **Visual Flow:** The eye is guided from the "Heart" icon (Emotional connection) -> Lead Dev (Authority) -> Testers (Gratitude).
+*   **Gradients/Accents:** Instead of boring gray cards, I used the `accentPrimBg` (Blue/Pink depending on mode) for the Lead avatar and border. This adds that "creative accent" you requested without breaking the design system.
+
+#### 4. i18n Support
+*   I included fallback strings `|| "String"` so the page works immediately, but wrapped them in `t()` so you can add the keys to your translation files later (e.g., `'about.engineering': 'انجينيرنگ'`).
+
+
+
