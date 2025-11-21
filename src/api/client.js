@@ -24,6 +24,7 @@ const client = axios.create({
 client.interceptors.request.use(
   (config) => {
     // Example: attach token from localStorage if available
+    console.debug('API request to', config.url);
     try {
       const token = localStorage.getItem('token') || (window && window.__AZAD_TOKEN__);
       if (token) {

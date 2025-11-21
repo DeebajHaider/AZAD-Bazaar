@@ -283,9 +283,6 @@ export default function Product() {
 
   const incoming = location.state?.product || null
   const incomingId = incoming?._id || incoming?.id || location?.state?.productIdtoFetch
-  if (incomingId){
-    console.log("Fetching product with ID:", incomingId);
-  }
   const { data: fetchedProduct, loading: productLoading } = useProduct(incomingId, { immediate: !!incomingId && !incoming?.name })
 
   const product = incoming || fetchedProduct
