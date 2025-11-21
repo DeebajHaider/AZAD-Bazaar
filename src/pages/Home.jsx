@@ -1,13 +1,15 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MapPin, Search, Cake } from 'lucide-react'
+import { MapPin, Search, ShoppingBag, ChevronRight, Clock, Truck, CheckCircle, XCircle, Package } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useData } from '../context/DataContext'
+import { useOrdersContext } from '../context/OrderContext' // Added
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
 import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
 import ImageWithLoader from '../component/ImageWithLoader'
+import dayjs from 'dayjs' // Assuming dayjs is installed as per other files
 
 // --- Reusable Sub-components for the Home Screen ---
 
@@ -27,17 +29,140 @@ const BrandCardSkeleton = () => (
   </div>
 )
 
-const InfoCardSkeleton = () => (
-  <div className="min-h-[90px] rounded-xl secBg primBorder p-3 flex flex-col items-center justify-center gap-2">
-    <div className="w-8 h-8 skeleton rounded-full" />
-    <div className="space-y-2 w-full flex flex-col items-center">
-      <div className="h-4 w-3/4 skeleton" />
-      <div className="h-3 w-1/2 skeleton" />
+const RecentOrderSkeleton = () => (
+  <div className="w-full h-[100px] secBg primBorder rounded-xl p-3 flex gap-3 items-center">
+    <div className="w-[72px] h-[72px] skeleton rounded-lg flex-shrink-0" />
+    <div className="flex-1 space-y-2">
+      <div className="flex justify-between">
+        <div className="h-4 w-20 skeleton" />
+        <div className="h-4 w-16 skeleton" />
+      </div>
+      <div className="h-3 w-24 skeleton" />
+      <div className="h-5 w-12 skeleton" />
     </div>
   </div>
 )
 
-// Category Card: Improved hover/focus state for better feedback.
+// --- Component: Order Image Grid ---
+// Handles the visual representation of 1-4 items in a compact grid
+const OrderImageGrid = ({ products }) => {
+  const displayProducts = products.slice(0, 4);
+  const count = displayProducts.length;
+
+  const getGridClass = () => {
+    if (count === 1) return 'grid-cols-1 grid-rows-1';
+    if (count === 2) return 'grid-cols-2 grid-rows-1';
+    if (count === 3) return 'grid-cols-2 grid-rows-2'; // Logic handled in render
+    return 'grid-cols-2 grid-rows-2';
+  };
+
+  return (
+    <div className={`w-[72px] h-[72px] rounded-lg overflow-hidden primBorder flex-shrink-0 bg-white dark:bg-slate-800 grid gap-[1px] ${getGridClass()}`}>
+      {displayProducts.map((prod, idx) => {
+        // Special layout for 3 items: First item takes full height on left
+        const isThreeItemsLayout = count === 3;
+        const itemClass = isThreeItemsLayout && idx === 0 
+          ? "row-span-2 h-full" 
+          : "h-full w-full";
+
+        return (
+          <div key={idx} className={`relative overflow-hidden ${itemClass}`}>
+             {prod.photo ? (
+               <img src={prod.photo} alt="" className="w-full h-full object-cover" />
+             ) : (
+               <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                 <Package size={12} className="secText opacity-50" />
+               </div>
+             )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+const RecentOrderCard = ({ order, onClick, t, lang }) => {
+  const currency = t('common.currencySymbol') || '$';
+  
+  // Calculate dates
+  const createdAt = dayjs(order.createdAt);
+  const deliveryTarget = createdAt.add(5, 'day');
+  const now = dayjs();
+  const daysLeft = deliveryTarget.diff(now, 'day');
+  
+  // Status Logic
+  const currentStatus = order.statusHistory?.[order.statusHistory.length - 1]?.status || order.status || 'pending';
+  
+  const getStatusConfig = (status) => {
+    const s = status.toLowerCase();
+    if (s === 'delivered') return { color: 'text-green-700 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30', icon: CheckCircle, label: t('orders.status.delivered') };
+    if (['cancelled', 'failed'].includes(s)) return { color: 'text-red-700 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30', icon: XCircle, label: t('orders.status.cancelled') };
+    if (s === 'shipped') return { color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30', icon: Truck, label: t('orders.status.shipped') };
+    return { color: 'text-amber-700 dark:text-amber-400', bg: 'bg-amber-100 dark:bg-amber-900/30', icon: Clock, label: t('orders.status.processing') };
+  };
+
+  const config = getStatusConfig(currentStatus);
+  const StatusIcon = config.icon;
+
+  // Formatting Cost
+  const formattedTotal = new Intl.NumberFormat(lang, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(order.totalPaid);
+
+  return (
+    <button 
+      onClick={onClick}
+      className="w-full secBg primBorder secHoverBg rounded-xl p-3 flex gap-3 items-start text-left transition-all duration-200 active:scale-[0.99] group focusRing"
+      aria-label={`${config.label}, ${currency}${formattedTotal}, ${t('home.recentOrders.orderTitle', { orderNumber: order._id.slice(-4) })}`}
+    >
+      {/* Image Grid (Visual Anchor) */}
+      <OrderImageGrid products={order.products} />
+
+      {/* Info Section */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between h-[72px]">
+        
+        {/* Top: Status Badge (Primary Focus) */}
+        <div className="flex justify-between items-start">
+           <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${config.bg} ${config.color}`}>
+             <StatusIcon size={12} />
+             <span>{config.label}</span>
+           </div>
+        </div>
+
+        {/* Middle: Delivery Context (Natural Reading Flow) */}
+        <div className="text-xs secText truncate mt-1">
+          {currentStatus === 'delivered' ? (
+             <span>{t('orders.deliveredOn')} {dayjs(order.updatedAt).format('MMM D')}</span>
+          ) : currentStatus === 'cancelled' ? (
+             <span>{t('orders.cancelled')}</span>
+          ) : daysLeft > 0 ? (
+             <span className="flex items-center gap-1">
+               {t('home.recentOrders.arrivingInDays', { count: daysLeft })}
+             </span>
+          ) : (
+             <span>{t('home.recentOrders.arrivingSoon')}</span>
+          )}
+        </div>
+
+        {/* Bottom: Price & Subtle ID */}
+        <div className="flex justify-between items-end mt-auto">
+          <span className="font-bold primText text-sm">
+            {currency} {formattedTotal}
+          </span>
+          
+          {/* Demoted Order ID (Tertiary Info) */}
+          <span className="text-[11px] secText opacity-60 font-mono tracking-wide">
+            #{order._id.slice(-6).toUpperCase()}
+          </span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+
+// Category Card
 const CategoryCard = ({ category, onClick }) => {
   const { lang } = useI18n()
   const { translateDBVal } = useTranslations()
@@ -60,7 +185,7 @@ const CategoryCard = ({ category, onClick }) => {
   )
 }
 
-// Brand Card: Switched to an opacity hover effect, which is better for image cards.
+// Brand Card
 const BrandCard = ({ brand, onClick }) => {
   const imageUrl = brand.images?.[0]
   const { lang } = useI18n()
@@ -90,35 +215,22 @@ const BrandCard = ({ brand, onClick }) => {
   )
 }
 
-// Info Card: Corrected the hover state implementation.
-const InfoCard = ({ children, onClick }) => (
-  <button
-    onClick={onClick}
-    className="secBg primBorder secHoverBg rounded-xl p-3 flex flex-col items-center justify-center gap-2 text-center transition-all duration-200 shadow-sm min-h-[90px] focusRing"
-  >
-    {children}
-  </button>
-)
-
 // --- Main Home Screen Component ---
 
 export default function Home() {
   const navigate = useNavigate()
   const { customer } = useAuth()
-  const { mainCategories, brands, loading } = useData()
-  const { t } = useI18n()
+  const { mainCategories, brands, loading: dataLoading } = useData()
+  const { orders, loading: ordersLoading, error: ordersError } = useOrdersContext() // Fetching real orders
+  const { t, lang } = useI18n()
 
   const displayCategories = mainCategories?.slice(0, 30) || []
   const displayBrands = brands?.slice(0, 30) || []
-
-  const format = (key, vars = {}) => {
-    let str = t(key)
-    Object.keys(vars).forEach(k => {
-      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
-      str = String(str).replace(re, vars[k])
-    })
-    return str
-  }
+  
+  // Process Orders: Sort by Date Descending and take top 3
+  const recentOrders = orders 
+    ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3) 
+    : [];
 
   return (
     <Layout footer={<BottomNav />}>
@@ -147,12 +259,12 @@ export default function Home() {
       </header>
 
       {/* Main content area */}
-      <main className="flex-1 overflow-y-auto primBg p-4 space-y-8 pb-24">
+      <main className="flex-1 overflow-y-auto primBg p-4 space-y-8 min-h-full">
         {/* Categories Section */}
         <section>
           <h2 className="text-xl font-semibold primText mb-4">{t('home.categories.title')}</h2>
           <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-            {loading ? (
+            {dataLoading ? (
               Array.from({ length: 8 }).map((_, i) => <CategoryCardSkeleton key={i} />)
             ) : (
               displayCategories.map(category => (
@@ -175,11 +287,61 @@ export default function Home() {
           />
         </section>
 
+        {/* Recent Orders Section (Redesigned) */}
+        <section>
+          <div className="flex justify-between items-end mb-3">
+            <h2 className="text-xl font-semibold primText">{t('home.recentOrders.title')}</h2>
+            {recentOrders.length > 0 && (
+              <button 
+                onClick={() => navigate('/orders')} 
+                className="text-xs font-medium accentPrimText hover:underline pb-1"
+              >
+                {t('home.recentOrders.viewAll') || 'View All'}
+              </button>
+            )}
+          </div>
+
+          {ordersLoading ? (
+            <div className="space-y-3">
+              {Array.from({ length: 2 }).map((_, i) => <RecentOrderSkeleton key={i} />)}
+            </div>
+          ) : recentOrders.length > 0 ? (
+            <div className="space-y-3">
+              {recentOrders.map(order => (
+                <RecentOrderCard 
+                  key={order._id} 
+                  order={order} 
+                  t={t}
+                  lang={lang}
+                  onClick={() => navigate(`/orders/${order._id}`)}
+                />
+              ))}
+            </div>
+          ) : (
+            /* Empty State CTA */
+            <div className="secBg primBorder rounded-xl p-6 flex flex-col items-center text-center space-y-3">
+              <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                <ShoppingBag className="accentPrimText w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold primText">{t('home.recentOrders.emptyTitle') || "No orders yet"}</p>
+                <p className="text-xs secText mt-1">{t('home.recentOrders.emptyDesc') || "Start shopping to see your orders here."}</p>
+              </div>
+              <button 
+                onClick={() => navigate('/search-results')}
+                className="mt-2 btnPrimary text-sm px-6 py-2.5 rounded-lg w-full max-w-[200px]"
+              >
+                {t('home.recentOrders.startShopping') || "Start Shopping"}
+              </button>
+            </div>
+          )}
+        </section>
+
         {/* Popular Brands Section */}
         <section>
           <h2 className="text-xl font-semibold primText mb-4">{t('home.popularBrands.title')}</h2>
           <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-            {loading ? (
+            {dataLoading ? (
               Array.from({ length: 8 }).map((_, i) => <BrandCardSkeleton key={i} />)
             ) : (
               displayBrands.map(brand => (
@@ -189,27 +351,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Recent Orders Section */}
-        <section>
-          <h2 className="text-xl font-semibold primText mb-3">{t('home.recentOrders.title')}</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {loading ? (
-              Array.from({ length: 4 }).map((_, i) => <InfoCardSkeleton key={i} />)
-            ) : (
-              [1, 2, 3].map(i => (
-                <InfoCard key={i} onClick={() => navigate('/cart')}>
-                  <Cake size={20} className="accentPrimText" />
-                  <div className="text-left">
-                    <p className="text-sm font-semibold primText">
-                      {format('home.recentOrders.orderTitle', { orderNumber: 100 + i })}
-                    </p>
-                    <p className="text-xs secText">{t('home.recentOrders.status')}</p>
-                  </div>
-                </InfoCard>
-              ))
-            )}
-          </div>
-        </section>
       </main>
     </Layout>
   )
