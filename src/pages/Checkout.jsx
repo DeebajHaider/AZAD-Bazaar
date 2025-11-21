@@ -186,13 +186,31 @@ export default function Checkout() {
     )
   }
 
+  // Footer action bar component (moved into Layout footer similar to Product/Cart pages)
+  const PlaceOrderFooter = () => (
+    <div className="secBg dividerBorder border-t p-4">
+      <button
+        onClick={handlePlaceOrder}
+        disabled={orderLoading}
+        className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 flex items-center justify-center"
+      >
+        {orderLoading ? (
+          <Loader2 className="animate-spin" />
+        ) : (
+          t('checkout.actions.placeOrder', { total: total.toFixed(2) })
+        )}
+      </button>
+      {orderError && <p className="text-red-500 text-sm mt-2 text-center">{orderError.message}</p>}
+    </div>
+  )
+
   return (
     <Layout
       header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
-      footer={<BottomNav />}
+      footer={<><PlaceOrderFooter /><BottomNav /></>}
     >
-      <main className="flex-1 overflow-y-auto primBg">
-        <div className="p-4 space-y-6 pb-32">
+      <main className="flex-1 overflow-y-auto primBg min-h-full">
+        <div className="p-4 space-y-6">
           {/* Address Section */}
           <section className="secBg primBorder rounded-lg">
             <div className="flex justify-between items-center p-4 dividerBorder">
@@ -277,22 +295,6 @@ export default function Checkout() {
           </section>
         </div>
       </main>
-
-      {/* Fixed Footer for Action Button */}
-      <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm dividerBorder border-t p-4">
-        <button
-          onClick={handlePlaceOrder}
-          disabled={orderLoading}
-          className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 flex items-center justify-center"
-        >
-          {orderLoading ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            t('checkout.actions.placeOrder', { total: total.toFixed(2) })
-          )}
-        </button>
-        {orderError && <p className="text-red-500 text-sm mt-2 text-center">{orderError.message}</p>}
-      </footer>
     </Layout>
   )
 }
