@@ -10,7 +10,7 @@ import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
 
 const CheckoutSkeleton = () => (
-  <div className="p-4 space-y-6 pb-32 animate-pulse">
+  <div className="p-4 space-y-6 min-h-full animate-pulse">
     {/* Address Section Skeleton */}
     <div className="secBg primBorder rounded-lg">
       <div className="flex justify-between items-center p-4 dividerBorder">
@@ -33,7 +33,13 @@ const CheckoutSkeleton = () => (
     </div>
 
     {/* Billing Section Skeleton */}
-    <div className="secBg primBorder rounded-lg p-4 space-y-3">
+    
+  </div>
+)
+
+const CheckoutBillingSkeleton = () => (
+  <div className="primBg">
+<div className="secBg primBorder rounded-lg p-4 space-y-3">
       <div className="h-6 w-24 skeleton mb-2" />
       <div className="flex justify-between">
         <div className="h-5 w-20 skeleton" />
@@ -55,9 +61,7 @@ const CheckoutSkeleton = () => (
         <div className="h-6 w-20 skeleton" />
         <div className="h-6 w-24 skeleton" />
       </div>
-    </div>
-  </div>
-)
+    </div></div>);
 
 // --- Sub-components for better organization ---
 
@@ -177,9 +181,9 @@ export default function Checkout() {
     return (
       <Layout
         header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
-        footer={<BottomNav />}
+        footer={<><CheckoutBillingSkeleton /><BottomNav /></>}
       >
-        <main className="flex-1 overflow-y-auto primBg">
+        <main className="flex-1 overflow-y-auto primBg min-h-full">
           <CheckoutSkeleton />
         </main>
       </Layout>
