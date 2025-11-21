@@ -59,7 +59,7 @@ export default function Cart() {
   // View for displaying cart items
   const CartContents = () => (
     // Add padding to the bottom to ensure the last item is not hidden by the sticky footer
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-48">
+    <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-full">
       {loading ? (
         <div className="space-y-3">
           {Array.from({ length: 3 }).map((_, i) => <CartItemSkeleton key={i} />)}
@@ -76,10 +76,9 @@ export default function Cart() {
 
   // Sticky footer for checkout summary
   const CartSummaryFooter = () => (
-    <footer className="fixed bottom-16 left-0 right-0 z-10 w-full max-w-[430px] mx-auto secBg dividerBorder border-t p-4">
+    <div className="secBg dividerBorder border-t p-4">
       <div className="space-y-4">
         <div className="space-y-2">
-          {/* Savings Row - only shown if there are savings */}
           {savings > 0 && (
             <div className="flex justify-between items-center text-sm">
               <span className="secText">{t('cart.summary.savings')}</span>
@@ -88,8 +87,6 @@ export default function Cart() {
               </span>
             </div>
           )}
-
-          {/* Subtotal Row */}
           <div className="flex justify-between items-baseline">
             <span className="font-semibold primText">{t('cart.summary.subtotal')}</span>
             <span className="text-xl font-bold primText">
@@ -97,8 +94,6 @@ export default function Cart() {
             </span>
           </div>
         </div>
-
-        {/* Checkout Button */}
         <button
           onClick={() => navigate('/checkout')}
           className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
@@ -106,12 +101,12 @@ export default function Cart() {
           {t('cart.actions.checkout')}
         </button>
       </div>
-    </footer>
+    </div>
   )
 
   return (
     <Layout
-      footer={<BottomNav />}
+      footer={<>{cartItems.length > 0 && <CartSummaryFooter />}<BottomNav /></>}
       header={
         <HeaderWithName
           title={t('cart.title')}
@@ -124,7 +119,6 @@ export default function Cart() {
       <main className="flex flex-1 flex-col primBg min-h-full">
         {cartItems.length > 0 ? <CartContents /> : <EmptyCartView />}
       </main>
-      {cartItems.length > 0 && <CartSummaryFooter />}
     </Layout>
   )
 }
