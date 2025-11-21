@@ -1,7 +1,6 @@
 import client from './client';
 import { getFromCache, setInCache, invalidateCache } from './cacheUtils';
-
-const ORDERS_LIST_KEY = 'orders_list';
+import { ORDERS_LIST, ORDER_BY_ID, CART } from './cacheKeys';
 
 /**
  * Create a new order.
@@ -10,8 +9,8 @@ const ORDERS_LIST_KEY = 'orders_list';
  */
 export async function createOrder(orderData) {
   // Invalidate caches that will be affected by a new order
-  invalidateCache(ORDERS_LIST_KEY);
-  invalidateCache('cart'); // Creating an order usually clears the cart
+  invalidateCache(ORDERS_LIST);
+  invalidateCache(CART); // Creating an order usually clears the cart
 
   const resp = await client.post('/orders', orderData);
   // Don't cache the response of a POST request directly,
@@ -23,7 +22,7 @@ export async function createOrder(orderData) {
  * Fetch all orders for the current user.
  */
 export async function getOrders() {
-  const cacheKey = ORDERS_LIST_KEY;
+  const cacheKey = ORDERS_LIST;
   // const cached = getFromCache(cacheKey);
   // if (cached) return cached;
 
@@ -39,12 +38,12 @@ export async function getOrders() {
 export async function getOrderById(id) {
   if (!id) throw new Error('Order ID is required');
 
-  const cacheKey = `order_${id}`;
+  const cacheKey = ORDER_BY_ID(id);
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 
   // As an optimization, check the list cache first
-  const listCache = getFromCache(ORDERS_LIST_KEY);
+  const listCache = getFromCache(ORDERS_LIST);
   if (listCache && Array.isArray(listCache)) {
     const found = listCache.find(o => o._id === id);
     if (found) {

@@ -1,8 +1,9 @@
 import client from './client';
 import { getFromCache, setInCache } from './cacheUtils';
+import { BRANDS_LIST, BRAND_BY_ID } from './cacheKeys';
 
 export const getBrands = async () => {
-  const cacheKey = 'brands_list';
+  const cacheKey = BRANDS_LIST;
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 
@@ -14,10 +15,10 @@ export const getBrands = async () => {
 export const getBrandById = async (id) => {
   if (!id) throw new Error('Brand id is required');
   
-  const cacheKey = `brand_${id}`;
+  const cacheKey = BRAND_BY_ID(id);
 
   // 1. Check if brand exists in the full list cache
-  const listCache = getFromCache('brands_list');
+  const listCache = getFromCache(BRANDS_LIST);
   if (listCache && Array.isArray(listCache)) {
     const found = listCache.find(b => b._id === id);
     if (found) {

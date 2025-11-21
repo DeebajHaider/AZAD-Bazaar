@@ -1,8 +1,9 @@
 import client from './client';
 import { getFromCache, setInCache, invalidateCache } from './cacheUtils';
+import { CART } from './cacheKeys';
 
 export async function getCart() {
-  const cacheKey = 'cart';
+  const cacheKey = CART;
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 
@@ -12,24 +13,24 @@ export async function getCart() {
 }
 
 export async function addProduct(productId) {
-  invalidateCache('cart');
+  invalidateCache(CART);
   const resp = await client.post('/cart/add', { productId });
-  setInCache('cart', resp.data);
+  setInCache(CART, resp.data);
   return resp.data;
 }
 
 export async function decrementProduct(productId) {
-  invalidateCache('cart');
+  invalidateCache(CART);
   const resp = await client.post('/cart/decrement', { productId });
-  setInCache('cart', resp.data);
+  setInCache(CART, resp.data);
   return resp.data;
 }
 
 export default { getCart, addProduct, decrementProduct };
 
 export async function clearCart() {
-  invalidateCache('cart');
+  invalidateCache(CART);
   const resp = await client.post('/cart/clear');
-  setInCache('cart', resp.data);
+  setInCache(CART, resp.data);
   return resp.data;
 }

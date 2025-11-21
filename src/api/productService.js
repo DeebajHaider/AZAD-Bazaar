@@ -1,5 +1,6 @@
 import client from './client';
 import { getFromCache, setInCache, generateCacheKey } from './cacheUtils';
+import { PRODUCTS_LIST, PRODUCT_BY_ID, RELATED_PRODUCTS } from './cacheKeys';
 
 /**
  * Fetch products list with optional query params.
@@ -7,7 +8,7 @@ import { getFromCache, setInCache, generateCacheKey } from './cacheUtils';
  * Example: { name: 'apple', categories: 'fruits', brands: ['b1','b2'], instock: true, sort: 'name' }
  */
 export const getProducts = async (params = {}) => {
-  const cacheKey = generateCacheKey('products_list', params);
+  const cacheKey = generateCacheKey(PRODUCTS_LIST, params);
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 
@@ -19,10 +20,10 @@ export const getProducts = async (params = {}) => {
 export const getProductById = async (id) => {
   if (!id) throw new Error('Product id is required');
 
-  const cacheKey = `product_${id}`;
+  const cacheKey = PRODUCT_BY_ID(id);
 
   // 1. Check if product exists in the default full list cache
-  const listCacheKey = generateCacheKey('products_list', {});
+  const listCacheKey = generateCacheKey(PRODUCTS_LIST, {});
   const listCache = getFromCache(listCacheKey);
   if (listCache && Array.isArray(listCache)) {
     const found = listCache.find(p => p._id === id);
@@ -44,7 +45,7 @@ export const getProductById = async (id) => {
 export const getRelatedProducts = async (id) => {
   if (!id) throw new Error('Product id is required');
   
-  const cacheKey = `related_products_${id}`;
+  const cacheKey = RELATED_PRODUCTS(id);
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 

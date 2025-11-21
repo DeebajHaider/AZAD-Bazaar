@@ -1,8 +1,9 @@
 import client from './client';
 import { getFromCache, setInCache } from './cacheUtils';
+import { CATEGORIES_LIST, CATEGORY_BY_ID } from './cacheKeys';
 
 export const getCategories = async () => {
-  const cacheKey = 'categories_list';
+  const cacheKey = CATEGORIES_LIST;
   const cached = getFromCache(cacheKey);
   if (cached) return cached;
 
@@ -14,10 +15,10 @@ export const getCategories = async () => {
 export const getCategoryById = async (id) => {
   if (!id) throw new Error('Category id is required');
 
-  const cacheKey = `category_${id}`;
+  const cacheKey = CATEGORY_BY_ID(id);
 
   // 1. Check if category exists in the full list cache
-  const listCache = getFromCache('categories_list');
+  const listCache = getFromCache(CATEGORIES_LIST);
   if (listCache && Array.isArray(listCache)) {
     const found = listCache.find(c => c._id === id);
     if (found) {
