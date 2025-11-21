@@ -358,7 +358,7 @@ export default function Product() {
         <main ref={mainContentRef} className="flex-1 primBg overflow-y-auto min-h-full">
           <ProductGallery images={images} productName={productName} format={format} />
 
-          <div className="p-5 pb-20">
+          <div className="p-5 pb-16">
             {/* Price & Stock Section */}
             <div className="flex justify-between items-start mb-6">
               <div>

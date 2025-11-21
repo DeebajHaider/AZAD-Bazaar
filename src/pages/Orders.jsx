@@ -53,7 +53,7 @@ export default function Orders() {
     >
       <main className="flex-1 min-h-full overflow-y-auto primBg">
         {/* Add a subtle background variation for list area if needed, currently keeping generic primBg */}
-        <div className="max-w-[430px] mx-auto w-full p-4 pb-24 space-y-4">
+        <div className="max-w-[430px] mx-auto w-full p-4 space-y-4">
           
           {/* Loading State */}
           {loading && (

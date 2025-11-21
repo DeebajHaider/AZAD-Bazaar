@@ -12,7 +12,7 @@ import { useAuth } from '../context/AuthContext'
 
 // Skeleton Layout - Adjusted to be more compact (w-12 images, p-3 paddings)
 const OrderDetailSkeleton = () => (
-  <div className="p-3 space-y-3 pb-24 animate-pulse max-w-[430px] mx-auto">
+  <div className="p-3 space-y-3 min-h-full animate-pulse max-w-[430px] mx-auto">
     {/* Status Skeleton */}
     <div className="secBg primBorder rounded-lg p-4">
       <div className="space-y-4">
