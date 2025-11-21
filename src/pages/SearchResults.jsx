@@ -359,15 +359,26 @@ export default function SearchResults() {
 
       {/* Results Info */}
       <section className="px-4 pt-4 pb-2">
-        <p className="primText font-medium truncate">
-          {t(totalResults === 1 ? 'searchResults.summary.resultFound' : 'searchResults.summary.resultsFound').replace('{{count}}', totalResults)}
-          {searchQuery && (
-            <span className="secText font-normal">
-              {' '}{t('searchResults.summary.for')}{' '}
-              <span className="font-semibold italic">"{searchQuery}"</span>
+        {loadingProducts ? (
+          <p className="primText font-medium flex items-center gap-2">
+            <span>{t('common.loading') || 'Loading'}</span>
+            <span className="inline-flex gap-0.5">
+              <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
+              <span className="animate-bounce" style={{ animationDelay: '200ms', animationDuration: '1.4s' }}>.</span>
+              <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
             </span>
-          )}
-        </p>
+          </p>
+        ) : (
+          <p className="primText font-medium truncate">
+            {t(totalResults === 1 ? 'searchResults.summary.resultFound' : 'searchResults.summary.resultsFound').replace('{{count}}', totalResults)}
+            {searchQuery && (
+              <span className="secText font-normal">
+                {' '}{t('searchResults.summary.for')}{' '}
+                <span className="font-semibold italic">"{searchQuery}"</span>
+              </span>
+            )}
+          </p>
+        )}
       </section>
 
       {/* Results List */}
