@@ -348,3 +348,29 @@ Here is the redesigned `RecentOrderCard`.
 3.  **Contextual Delivery Text:** Placed immediately below the status to provide context (e.g., Status says "Shipped", Text says "Arriving in 2 days").
 4.  **Cleaner Layout:** The card feels less "busy" because we aren't forcing a header row with two opposing elements (ID vs Badge).
 
+product page
+### Design Improvements & HCI Principles
+
+1.  **Action Bar (The "Add to Cart" Fix):**
+    *   **Mapping:** I removed the confusing "Counter + Add More Button" split. Now, it transitions from a single "Add to Cart" button to a standard **Quantity Stepper** (Minus - Quantity - Plus). This is the industry standard (Mental Model) for food/grocery apps.
+    *   **Fitts's Law:** The hit targets for Plus/Minus are significantly larger, filling the available space.
+    *   **Feedback:** The total cost updates dynamically next to the stepper, giving immediate feedback on the cart value.
+
+2.  **Information Architecture (Header/Description):**
+    *   **Visual Hierarchy:** Instead of a literal word "Description" (which is redundant), I moved the **Categories** to this position.
+    *   **Differentiation:**
+        *   **Main Category:** Styled as a primary, bold link. It acts as the "Section Header".
+        *   **Sub-categories:** Styled as pills/tags next to it. This separates the hierarchy visually.
+
+3.  **Aesthetics:**
+    *   Cleaned up the price section to be more compact.
+    *   Added a smooth transition to the Action Bar states.
+Related Products section.
+
+### HCI Improvements & Design Rationale:
+1.  **Fitts's Law (Target Size):** I increased the card width slightly (`w-40` vs `w-36`) to make the tap target larger and allow more room for the product title to breathe without aggressive truncation.
+2.  **Gestalt Principle (Common Region):** I used the `card` class to create a distinct boundary. I also added a subtle discount badge inside the image area to group "value" information visually.
+3.  **Feedback & Affordance:** Added `group` and `hover` states. When the user hovers (or taps), the border color changes to the primary accent color, providing immediate visual feedback that the item is interactive.
+4.  **Scroll Physics:** Added `snap-x` to the container and `snap-start` to the cards. On mobile, this makes scrolling feel much more precise, stopping exactly on a product rather than cutting one off halfway.
+
+

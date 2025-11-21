@@ -15,14 +15,17 @@ import ImageWithLoader from '../component/ImageWithLoader'
 // --- Sub-components ---
 
 const RelatedProductCardSkeleton = () => (
-  <div className="w-36 flex-shrink-0">
-    <div className="card transition-shadow duration-200 hover:shadow-md flex flex-col h-64">
-      <div className="aspect-square skeleton rounded-md" />
-      <div className="pt-2 flex-1 flex flex-col space-y-2">
-        <div className="h-4 w-full skeleton" />
-        <div className="h-4 w-2/3 skeleton" />
+  <div className="w-40 flex-shrink-0 snap-start">
+    <div className="card p-3 flex flex-col h-[260px] space-y-3">
+      <div className="aspect-square w-full skeleton rounded-md" />
+      <div className="flex-1 flex flex-col space-y-2">
+        <div className="h-3.5 w-full skeleton rounded" />
+        <div className="h-3.5 w-2/3 skeleton rounded" />
         <div className="flex-grow" />
-        <div className="h-6 w-1/2 skeleton" />
+        <div className="flex items-center justify-between">
+          <div className="h-5 w-16 skeleton rounded" />
+          <div className="h-4 w-8 skeleton rounded" />
+        </div>
       </div>
     </div>
   </div>
@@ -198,31 +201,58 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
 const RelatedProductCard = ({ product }) => {
   const { t, lang } = useI18n()
   const { translateDBVal } = useTranslations()
+  
   const displayPrice = product.discountedPrice ?? product.price
+  const originalPrice = product.originalPrice
+  // Calculate percentage off if applicable
+  const percentOff = originalPrice && originalPrice > displayPrice 
+    ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100) 
+    : 0
+
+  // Fallback logic for image
   const image = (product.images && product.images.length) ? product.images[0] : product.image
 
   return (
-    <Link to={`/product`} state={{ product }} className="block w-36 flex-shrink-0 focusRing rounded-lg">
-      <div className="card p-0 overflow-hidden transition-all duration-200 active:scale-[0.98] h-64 flex flex-col">
-        <ImageWithLoader
-          src={image}
-          alt={product.title}
-          containerClassName="aspect-square bg-white dark:bg-slate-800 flex-shrink-0"
-          imageClassName="w-full h-full object-contain p-2"
-        />
-        <div className="p-3 flex-1 flex flex-col border-t dividerBorder">
-          <h3 className="text-xs font-medium primText line-clamp-2 mb-2 leading-relaxed">
+    <Link 
+      to={`/product`} 
+      state={{ product }} 
+      className="group block w-40 flex-shrink-0 snap-start focusRing rounded-lg"
+    >
+      <div className="card p-3 h-[260px] flex flex-col transition-all duration-200 group-hover:border-blue-500 dark:group-hover:border-blue-400 relative group-active:scale-[0.98]">
+        
+        {/* Image Container */}
+        <div className="relative aspect-square w-full mb-3 bg-white dark:bg-white/5 rounded-md overflow-hidden">
+          <ImageWithLoader
+            src={image}
+            alt={product.title}
+            containerClassName="w-full h-full"
+            imageClassName="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+          />
+          {/* Discount Badge Overlay - High Visibility */}
+          {percentOff > 0 && (
+            <div className="absolute top-1 left-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+              -{percentOff}%
+            </div>
+          )}
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 flex flex-col">
+          <h3 className="text-sm font-medium primText line-clamp-2 mb-1 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {translateDBVal("Product", "name", product.name ?? product.title, lang)}
           </h3>
-          <div className="mt-auto">
-            {product.originalPrice && (
-              <span className="text-[10px] secText line-through block">
-                {t('common.currencySymbol')} {product.originalPrice.toLocaleString()}
+          
+          <div className="mt-auto pt-2">
+            {originalPrice > displayPrice && (
+              <span className="text-xs secText line-through block">
+                {t('common.currencySymbol')}{originalPrice.toLocaleString()}
               </span>
             )}
-            <span className="text-sm font-bold primText">
-              {t('common.currencySymbol')} {displayPrice.toLocaleString()}
-            </span>
+            <div className="flex items-center justify-between">
+              <span className="text-base font-bold primText">
+                {t('common.currencySymbol')}<span className="text-lg">{displayPrice.toLocaleString()}</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
