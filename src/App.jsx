@@ -60,7 +60,7 @@ export default function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/search" element={<Search />} />
             <Route path="/search-results" element={<SearchResults />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/product/:productId" element={<Product />} />
             <Route path="/address" element={<Address />} />
             <Route path="/accessibility" element={<AccessibilitySettings />} />
             <Route path="/language" element={<LanguageSelection />} />

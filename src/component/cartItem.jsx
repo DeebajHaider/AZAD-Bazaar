@@ -93,9 +93,8 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
     onRemove?.(item.itemCode);
   };
 
-  const handleNavigate = async () => {
-    const fullProduct = await fetchProductById(item.itemCode);
-    navigate(`/product`, { state: { product: fullProduct || item } });
+  const handleNavigate = () => {
+    navigate(`/product/${item.itemCode}`);
   };
 
   const itemName = translateDBVal("Product", "name", item.itemName, lang);

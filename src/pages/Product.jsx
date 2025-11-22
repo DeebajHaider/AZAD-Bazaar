@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Heart, Plus, Minus, Loader2, Share2, ShoppingCart } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
 import { useData } from '../context/DataContext'
@@ -214,8 +214,7 @@ const RelatedProductCard = ({ product }) => {
 
   return (
     <Link 
-      to={`/product`} 
-      state={{ product }} 
+      to={`/product/${product._id || product.id}`}
       className="group block w-40 flex-shrink-0 snap-start focusRing rounded-lg"
     >
       <div className="card p-3 h-[260px] flex flex-col transition-all duration-200 group-hover:border-blue-500 dark:group-hover:border-blue-400 relative group-active:scale-[0.98]">
@@ -298,17 +297,15 @@ export default function Product() {
   const { t, lang } = useI18n()
   const { translateDBVal } = useTranslations()
   const { addToCart, decrementProduct, items: cartItems } = useCart()
-  const location = useLocation()
+  const { productId } = useParams()
   const [qty, setQty] = useState(0)
   const [liked, setLiked] = useState(false)
   const [subcategoryNames, setSubcategoryNames] = useState([]);
   const mainContentRef = useRef(null);
 
-  const incoming = location.state?.product || null
-  const incomingId = incoming?._id || incoming?.id || location?.state?.productIdtoFetch
-  const { data: fetchedProduct, loading: productLoading } = useProduct(incomingId, { immediate: !!incomingId && !incoming?.name })
+  const { data: fetchedProduct, loading: productLoading } = useProduct(productId, { immediate: !!productId })
 
-  const product = incoming || fetchedProduct
+  const product = fetchedProduct
   const productName = product ? translateDBVal("Product", "name", product.name ?? product.title, lang) : ''
   const images = product?.images?.length ? product.images : (product?.image ? [product.image] : [])
   const availableStock = product?.stockQuantity ?? (product?.inStock ? Infinity : 0)

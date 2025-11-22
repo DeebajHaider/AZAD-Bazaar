@@ -151,8 +151,7 @@ export default function Order() {
             <div className="dividerBorder">
               {order.products.map((item) => (
                 <Link 
-                  to={`/product`} 
-                  state={{ productIdtoFetch: item.productId }} 
+                  to={`/product/${item.productId}`}
                   key={item.productId} 
                   // Reduced padding: p-3 instead of p-4
                   className="flex dividerBorder gap-3 p-3 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors group active:scale-[0.99]"

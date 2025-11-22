@@ -392,7 +392,7 @@ export default function SearchResults() {
             <p className="text-center secText p-8">{t('searchResults.results.noResults')}</p>
           ) : (
             currentResults.map((item) => (
-              <div key={item._id} onClick={() => navigate('/product', { state: { product: item } })}>
+              <div key={item._id}>
                 <ItemCard item={mapApiItemToCard(item)} />
               </div>
             ))

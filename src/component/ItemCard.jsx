@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
 import ImageWithLoader from './ImageWithLoader'
@@ -33,10 +34,11 @@ export default function ItemCard({ item }) {
     : 0
   
   return (
-    <div
-      className={`flex gap-4 p-4 secBg rounded-lg primBorder transition-all duration-200 ${
+    <Link
+      to={`/product/${item.id}`}
+      className={`flex gap-4 p-4 secBg rounded-lg primBorder transition-all duration-200 block ${
         isOut
-          ? 'opacity-60 grayscale cursor-not-allowed'
+          ? 'opacity-60 grayscale cursor-not-allowed pointer-events-none'
           : 'hover:shadow-sm cursor-pointer'
       }`}
     >
@@ -90,6 +92,6 @@ export default function ItemCard({ item }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
