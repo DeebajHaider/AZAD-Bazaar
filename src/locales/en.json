@@ -349,6 +349,7 @@
     "item": "item",
     "items": "items",
     "total": "Total",
+    "loading": "Loading...",
     "error": {
       "title": "An Error Occurred",
       "description": "Something went wrong. Please try again later.",
