@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Edit3, Save, Wallet, CreditCard, Loader2 } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
@@ -99,20 +99,34 @@ const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
 export default function Checkout() {
   const { t, lang } = useI18n()
   const { items: cartItems, total: cartTotal, clearCart, loading: cartLoading } = useCart()
-  const { user } = useContext(AuthContext)
+  const { user, customer, loading: authLoading } = useContext(AuthContext)
   const { createOrder } = useOrdersContext()
   const navigate = useNavigate()
 
   // State Management
   const [orderLoading, setOrderLoading] = useState(false)
   const [orderError, setOrderError] = useState(null)
+  const [editingAddress, setEditingAddress] = useState(false)
   const [address, setAddress] = useState({
     label: 'Home',
-    addressText: '123 Example St, Apt 4B, City, Country, 12345',
-    lat: 33.6844,
-    lng: 73.0479
+    addressText: '',
+    lat: null,
+    lng: null
   })
-  const [editingAddress, setEditingAddress] = useState(false)
+    // Sync address from customer context when available
+    useEffect(() => {
+      if (customer && Array.isArray(customer.addresses) && customer.addresses.length) {
+        const defaultAddr = customer.addresses.find(a => a.isDefault) || customer.addresses[0]
+        // Only update if not editing to avoid wiping in-progress edits
+        if (!editingAddress) setAddress({
+          label: defaultAddr.label || 'Home',
+          addressText: defaultAddr.addressText || '',
+          lat: defaultAddr.lat ?? null,
+          lng: defaultAddr.lng ?? null,
+          addressId: defaultAddr.addressId
+        })
+      }
+    }, [customer, editingAddress])
   const [instructions, setInstructions] = useState('')
   const [paymentMethod, setPaymentMethod] = useState({
     name: 'Cash on Delivery',
@@ -185,7 +199,8 @@ export default function Checkout() {
     </button>
   )
 
-  if (cartLoading) {
+  // Show skeleton while cart is loading OR auth/customer still resolving
+  if (cartLoading || authLoading || (user && user.customerId && !customer)) {
     return (
       <Layout
         header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
