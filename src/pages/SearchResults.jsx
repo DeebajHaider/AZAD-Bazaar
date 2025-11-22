@@ -9,6 +9,7 @@ import useTranslations from '../hooks/useTranslations'
 import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
 import useDebounce from '../hooks/useDebounce'
+import MobilePagination from '../component/MobilePagination' // <-- STEP 1: IMPORT THE NEW COMPONENT
 
 const ItemCardSkeleton = () => (
   <div className="flex items-start gap-4 p-3 rounded-lg secBg primBorder">
@@ -401,14 +402,12 @@ export default function SearchResults() {
       </section>
 
       {/* Pagination */}
-      {totalResults > pageSize && (
-        <nav className="flex justify-center items-center gap-2 p-4 mt-4 dividerBorder">
-          <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} aria-label={t('searchResults.pagination.previousButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">←</button>
-          <span className="text-sm font-medium secText">
-            {t('searchResults.pagination.pageInfo').replace('{{currentPage}}', currentPage).replace('{{totalPages}}', totalPages)}
-          </span>
-          <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} aria-label={t('searchResults.pagination.nextButtonAriaLabel')} className="btnSecondary min-h-11 min-w-11 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">→</button>
-        </nav>
+    {totalResults > pageSize && (
+        <MobilePagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       )}
     </main>
   )

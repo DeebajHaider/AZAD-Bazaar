@@ -223,7 +223,15 @@
     "pagination": {
       "pageInfo": "صفحہ {{currentPage}} از {{totalPages}}",
       "previousButtonAriaLabel": "پچھلا صفحہ",
-      "nextButtonAriaLabel": "اگلا صفحہ"
+      "nextButtonAriaLabel": "اگلا صفحہ",
+      "jumpToPageTitle": "صفحے پر جائیں",
+      "jumpToPagePrompt": "صفحہ درج کریں (1 - {{totalPages}}):",
+      "currentPagePlaceholder": "موجودہ: {{currentPage}}",
+      "pageInputAriaLabel": "صفحہ نمبر ان پٹ",
+      "goButton": "جائیں",
+      "navAriaLabel": "تلاش کے نتائج کی صفحہ بندی",
+      "jumpToPageAriaLabel": "کسی مخصوص صفحے پر جانے کے لیے ٹیپ کریں۔",
+      "jumpToLink": "صفحے پر جائیں..."
     }
   },
   "cart": {

@@ -223,7 +223,15 @@
     "pagination": {
       "pageInfo": "Page {{currentPage}} of {{totalPages}}",
       "previousButtonAriaLabel": "Previous Page",
-      "nextButtonAriaLabel": "Next Page"
+      "nextButtonAriaLabel": "Next Page",
+      "jumpToPageTitle": "Jump to Page",
+      "jumpToPagePrompt": "Enter page (1 - {{totalPages}}):",
+      "currentPagePlaceholder": "Current: {{currentPage}}",
+      "pageInputAriaLabel": "Page number input",
+      "goButton": "Go",
+      "navAriaLabel": "Search results pagination",
+      "jumpToPageAriaLabel": "Tap to jump to a specific page.",
+      "jumpToLink": "Jump to..."
     }
   },
   "cart": {
