@@ -3,7 +3,6 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech'
 import { useI18n } from './I18nContext'
 import ur from '../locales/ur.json'
 import en from '../locales/en.json'
-import romanUr from '../locales/roman-ur.json'
 
 // Map app language -> preferred BCP-47 tag
 const LANGUAGE_TAG_MAP = {
@@ -63,14 +62,12 @@ export function TTSProvider({ children, defaultRate = 1.0, defaultPitch = 1.0, d
     return anyEn || 'en-US'
   }, [lang, isUrduSupported, supportedLangTags])
 
-  // Retrieve text for a key considering roman Urdu fallback
+  // Retrieve text for a key: only native Urdu or English fallback
   const getTextForKey = useCallback((key) => {
     if (!key) return ''
     if (lang === 'ur') {
       const directUr = getNested(ur, key)
       if (directUr !== undefined) return directUr
-      const roman = getNested(romanUr, key)
-      if (roman !== undefined) return roman
       // fall back to English translation via direct lookup (not t to avoid re-fallback chain confusion)
       const english = getNested(en, key)
       if (english !== undefined) return english
