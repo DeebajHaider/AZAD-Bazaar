@@ -27,6 +27,16 @@ export function AccessibilityProvider({ children }) {
     }
   })
 
+
+  // ascMode state
+  const [ascMode, setAscMode] = useState(() => {
+    try {
+      return localStorage.getItem('accessibility-ascMode') || ''
+    } catch (e) {
+      return ''
+    }
+  })
+
   // Apply font size to root element
   useEffect(() => {
     const fontSizes = {
@@ -35,34 +45,40 @@ export function AccessibilityProvider({ children }) {
       large: '18px',
       xlarge: '22px'
     }
-    
     document.documentElement.style.fontSize = fontSizes[fontSize]
     localStorage.setItem('accessibility-fontSize', fontSize)
   }, [fontSize])
 
+
   // Apply color mode to root element
   useEffect(() => {
     const root = document.documentElement
-    
     // Remove all color mode classes
     root.classList.remove('highContrast', 'deuteranopia', 'protanopia', 'tritanopia')
-    
     // Add the selected mode
     if (colorMode !== 'default') {
       root.classList.add(colorMode)
     }
-    
     localStorage.setItem('accessibility-colorMode', colorMode)
   }, [colorMode])
+
+  // Store ascMode in localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('accessibility-ascMode', ascMode)
+  }, [ascMode])
+
 
   const value = {
     fontSize,
     setFontSize,
     colorMode,
     setColorMode,
+    ascMode,
+    setAscMode,
     resetToDefaults: () => {
       setFontSize('normal')
       setColorMode('default')
+      setAscMode('')
     }
   }
 
