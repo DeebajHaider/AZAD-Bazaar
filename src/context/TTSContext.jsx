@@ -79,7 +79,8 @@ export function TTSProvider({ children, defaultRate = 1.0, defaultPitch = 1.0, d
 
   const speakText = useCallback(async (text, options = {}) => {
     if (!text) return
-    const speechLang = resolveSpeechLangTag()
+    // Use options.lang if provided, else resolve from app state
+    const speechLang = options.lang || resolveSpeechLangTag()
     try {
       await TextToSpeech.speak({
         text,
