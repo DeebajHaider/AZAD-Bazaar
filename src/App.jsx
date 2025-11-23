@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import { AccessibilityProvider } from './context/AccessibilityContext'
 import AccessibilitySettings from './pages/AccessibilitySettings'
 import { I18nProvider } from './context/I18nContext'
+import { TTSProvider } from './context/TTSContext'
 import LanguageSelection from './pages/LanguageSelection'
 import SplashScreen from './pages/SplashScreen'
 import BackButtonHandler from './component/BackButtonHandler'
@@ -77,19 +78,21 @@ export default function App() {
 
   return (
     <I18nProvider>
-      <ThemeProvider>
-        <AccessibilityProvider>
-          <AuthProvider>
-            <DataProvider>
-              <CartProvider>
-                <OrderProvider>
-                  <AuthGate />
-                </OrderProvider>
-              </CartProvider>
-            </DataProvider>
-          </AuthProvider>
-        </AccessibilityProvider>
-      </ThemeProvider>
+      <TTSProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <AuthProvider>
+              <DataProvider>
+                <CartProvider>
+                  <OrderProvider>
+                      <AuthGate />
+                  </OrderProvider>
+                </CartProvider>
+              </DataProvider>
+            </AuthProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
+      </TTSProvider>
     </I18nProvider>
   )
 }

@@ -1,0 +1,14 @@
+{
+  "hello": "Hello Duniya",
+  "settings": {
+    "title": "Tarteebaat"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": {
+      "title": "Aap ki cart khaali hai",
+      "description": "Abhi tak kuch add nahi hua",
+      "cta": "Shopping shuru karein"
+    }
+  }
+}
