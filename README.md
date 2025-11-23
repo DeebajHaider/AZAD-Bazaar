@@ -29,3 +29,46 @@ Bazaar is a popular marketplace, but many users and evaluators have reported rep
 
 AZAD stands for Abdul Wasay (A), Zuhair (Z), and Deebaj (D). It also evokes the word "azad" (which means "free" in several South Asian languages), reflecting our aim to free users from frustrating UI patterns.
 
+## Text‑to‑Speech (TTS) Context
+
+The app includes a `TTSProvider` (Capacitor plugin `@capacitor-community/text-to-speech`) that lets any component speak a translation key.
+
+### Features
+- Auto language selection based on current i18n `lang`.
+- Uses Urdu (`ur-PK` / variants) if supported, otherwise falls back to English.
+- If a Urdu translation key is missing, falls back to roman Urdu (from `roman-ur.json`), then English.
+- Simple hook API via `useTTS()`.
+
+### Basic Usage
+```jsx
+import TTSDemoButton from './component/TTSDemoButton'
+// Somewhere inside providers tree
+<TTSDemoButton translationKey="hello" />
+```
+
+### Programmatic Usage
+```jsx
+import { useTTS } from '../context/TTSContext'
+
+function SpeakCartEmpty() {
+	const { speakKey } = useTTS()
+	return <button onClick={() => speakKey('cart.empty.title')}>Speak Empty Cart</button>
+}
+```
+
+### Adding Roman Urdu Fallbacks
+Add keys to `src/locales/roman-ur.json`. TTS will prefer:
+1. Urdu translation
+2. Roman Urdu translation
+3. English translation
+4. Raw key (last resort)
+
+### Notes
+- If TTS plugin fails or is not ready, buttons are disabled.
+- Customize rate/pitch/volume by passing options to `speakKey(key, { rate, pitch, volume })`.
+- Provider inserted in `App.jsx` wrapping the rest of providers.
+
+### Native Sync
+After installing the dependency: `npm install @capacitor-community/text-to-speech` run `npx cap sync` (done already).
+
+
