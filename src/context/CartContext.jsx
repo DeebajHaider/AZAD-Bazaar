@@ -32,13 +32,7 @@ export function CartProvider({ children }) {
 
   // removeItem: remove fully using direct API if available
   async function removeItem(itemCode) {
-    if (api.removeProduct) {
-      await api.removeProduct(itemCode)
-    } else {
-      // fallback: decrement until gone
-      const current = (api.items.find((it) => it.itemCode === itemCode) || {}).quantity || 0
-      for (let i = 0; i < current; i++) await api.decrementProduct(itemCode)
-    }
+      return await api.removeItem(itemCode);   
   }
 
   async function clearCart() {

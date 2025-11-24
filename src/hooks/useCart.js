@@ -178,7 +178,8 @@ export default function useCart(authTrigger) {
   const removeItem = useCallback(async (productId) => {
     setLoading(true);
     try {
-      const resp = await cartService.decrementProduct(productId);
+      // Use dedicated removeProduct API to fully remove the item
+      const resp = await cartService.removeProduct(productId);
       if (resp && (resp.items || resp.cart || resp.products)) {
         const items = resp.items || (resp.cart && resp.cart.items) || [];
         const products = resp.products || [];
