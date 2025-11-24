@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Edit3, Save, Wallet, CreditCard, Loader2 } from 'lucide-react'
+import { ArrowLeft, Edit3, Save, Wallet, CreditCard, Loader2, Mic } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
 import AuthContext from '../context/AuthContext'
@@ -8,6 +8,8 @@ import { useOrdersContext } from '../context/OrderContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
+import VoiceInputModal from '../component/VoiceInputModal'
+import { useAccessibility } from '../context/AccessibilityContext'
 
 const CheckoutSkeleton = () => (
   <div className="p-4 space-y-6 min-h-full animate-pulse">
@@ -135,6 +137,29 @@ export default function Checkout() {
   })
   const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
 
+  // Accessibility voice input mode
+  const { ascMode } = useAccessibility && useAccessibility() || {}
+  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+
+  // Voice modal state
+  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+  const [voiceTarget, setVoiceTarget] = useState(null) // 'instructions' or 'address'
+  
+  // Language direction (for button placement)
+  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
+
+  // Handle voice confirm for narrator mode
+  const handleVoiceConfirm = useCallback((transcript) => {
+    if (!voiceTarget) return;
+    if (voiceTarget === 'instructions') {
+      setInstructions(transcript)
+    } else if (voiceTarget === 'address') {
+      setAddress(prev => ({ ...prev, addressText: transcript }))
+    }
+    setVoiceModalOpen(false);
+    setVoiceTarget(null);
+  }, [voiceTarget])
+
   // Example fees from your original code
   const subtotal = cartTotal
   const serviceFee = 2.5
@@ -160,7 +185,11 @@ export default function Checkout() {
     const orderData = {
       customerId: user.customerId,
       customName: user.name,
-      address: address,
+      address: {
+        ...address,
+        lat: address.lat ?? 0,
+        lng: address.lng ?? 0
+      },
       paymentMethod: paymentMethod,
       products: cartItems.map(item => ({
         productId: item.itemCode,
@@ -248,23 +277,67 @@ export default function Checkout() {
             </div>
             <div className="p-4 space-y-4">
               {editingAddress ? (
-                <textarea
-                  value={address.addressText}
-                  onChange={e => setAddress({ ...address, addressText: e.target.value })}
-                  rows={3}
-                  className="inputField"
-                />
+                <div className="relative">
+                  <textarea
+                    value={address.addressText}
+                    onChange={e => setAddress({ ...address, addressText: e.target.value })}
+                    rows={3}
+                    className="inputField pr-12 rtl:pl-12"
+                  />
+                  {isVoiceInput && (
+                    <button
+                      type="button"
+                      aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
+                      onClick={() => { setVoiceTarget('address'); setVoiceModalOpen(true); }}
+                      className={`absolute top-2 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                    >
+                      <Mic size={20} className="primText" />
+                    </button>
+                  )}
+                </div>
               ) : (
                 <p className="text-base secText">{address.addressText}</p>
               )}
-              <FormInput
-                label={t('checkout.address.instructionsLabel')}
-                placeholder={t('checkout.address.instructionsPlaceholder')}
-                value={instructions}
-                onChange={e => setInstructions(e.target.value)}
-              />
+              <div className="relative">
+                <label className="block text-sm font-medium mb-2 primText ">
+                  {t('checkout.address.instructionsLabel')}
+                </label>
+                <input
+                  type="text"
+                  placeholder={t('checkout.address.instructionsPlaceholder')}
+                  value={instructions}
+                  onChange={e => setInstructions(e.target.value)}
+                  className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 pr-12 rtl:pl-12"
+                />
+                {isVoiceInput && (
+                  <button
+                    type="button"
+                    aria-label={t('voiceModal.actions.openForInstructions') || 'Voice input for delivery instructions'}
+                    onClick={() => { setVoiceTarget('instructions'); setVoiceModalOpen(true); }}
+                    className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                    style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                  >
+                    <Mic size={20} className="primText" />
+                  </button>
+                )}
+              </div>
             </div>
           </section>
+
+          {/* Voice Input Modal for narrator mode */}
+          {isVoiceInput && voiceModalOpen && (
+            <VoiceInputModal
+              isOpen={voiceModalOpen}
+              onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+              onConfirm={handleVoiceConfirm}
+              confirmLabel={
+                voiceTarget === 'instructions' ? t('voiceModal.actions.confirmInstructions') :
+                voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
+                t('voiceModal.actions.confirm')
+              }
+            />
+          )}
 
           {/* Payment Section */}
           <section className="secBg primBorder rounded-lg p-4 space-y-4">

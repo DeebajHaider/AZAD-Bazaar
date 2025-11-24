@@ -518,7 +518,9 @@
       "confirmPhone": "Confirm Phone",
       "confirmName": "Confirm Name",
       "confirmAddress": "Confirm Address",
-      "confirmOtp": "Confirm OTP"
+      "confirmOtp": "Confirm OTP",
+      "confirmInstructions": "Confirm Instructions",
+      "openForInstructions": "Voice input for delivery instructions"
     },
     "error": {
       "title": "An Error Occurred",

@@ -519,7 +519,9 @@
       "confirmPhone": "فون کی تصدیق کریں",
       "confirmName": "نام کی تصدیق کریں",
       "confirmAddress": "پتہ کی تصدیق کریں",
-      "confirmOtp": "OTP کی تصدیق کریں"
+      "confirmOtp": "OTP کی تصدیق کریں",
+      "confirmInstructions": "ہدایات کی تصدیق کریں",
+      "openForInstructions": "ڈیلیوری ہدایات کے لیے آواز ان پٹ"
     },
     "error": {
       "title": "ایک خرابی پیش آگئی",
