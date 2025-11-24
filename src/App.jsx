@@ -24,6 +24,8 @@ import { OrderProvider } from './context/OrderContext'
 import Orders from './pages/Orders'
 import Order from './pages/Order'
 import About from './pages/About'
+import ThemeSelection from './pages/ThemeSelection'
+
 
 // --- NEW IMPORTS (Ensure you create these files) ---
 import ModeSelection from './pages/ModeSelection'
@@ -57,6 +59,9 @@ export default function App() {
 
             {/* Step 3: Mode Selection (Literate vs Illiterate) */}
             <Route path="/mode-selection" element={<ModeSelection />} />
+
+            {/* Step 4: Theme Selection */}
+            <Route path="/theme-selection" element={<ThemeSelection />} />
 
             {/* Step 4: Accessibility Setup */}
             <Route path="/accessibility" element={<AccessibilitySettings />} />

@@ -125,7 +125,7 @@ export default function ModeSelection() {
   };
 
   const handleConfirm = () => {
-    navigate('/login'); // Navigate to next screen
+    navigate('/theme-selection'); // Navigate to ThemeSelection page
   };
 
   // --- Footer Component ---
