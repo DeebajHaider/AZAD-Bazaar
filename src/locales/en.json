@@ -239,15 +239,15 @@
     "actions": {
       "clear": "Clear Cart",
       "checkout": "Checkout"
-    }, 
-    "empty":{
-      "title":"Your Cart is Empty", 
-      "description":"You haven't added anything to your cart yet.", 
-      "cta":"Start Shopping"
-    }, 
-    "summary":{
-      "savings":"Total Savings", 
-      "subtotal":"Subtotal"
+    },
+    "empty": {
+      "title": "Your Cart is Empty",
+      "description": "You haven't added anything to your cart yet.",
+      "cta": "Start Shopping"
+    },
+    "summary": {
+      "savings": "Total Savings",
+      "subtotal": "Subtotal"
     }
   },
   "checkout": {
@@ -301,7 +301,7 @@
     "home": "Home",
     "search": "Search",
     "cart": "Cart",
-    "settings": "Settings", 
+    "settings": "Settings",
     "orders": "Orders"
   },
   "home": {
@@ -353,7 +353,7 @@
     "currencySymbol": "Rs",
     "outOfStock": "Out of Stock",
     "close": "Close",
-    "clear": "Clear", 
+    "clear": "Clear",
     "item": "item",
     "items": "items",
     "total": "Total",
@@ -381,10 +381,10 @@
     "actions": {
       "addToCart": "Add to Cart",
       "favoriteAriaLabel": "Add to favorites",
-      "unfavoriteAriaLabel": "Remove from favorites"
-      ,"increaseQuantity": "Increase quantity"
-      ,"decreaseQuantity": "Decrease quantity"
-      ,"addMoreToCart": "Add more to cart"
+      "unfavoriteAriaLabel": "Remove from favorites",
+      "increaseQuantity": "Increase quantity",
+      "decreaseQuantity": "Decrease quantity",
+      "addMoreToCart": "Add more to cart"
     },
     "gallery": {
       "mainImageAlt": "Main image of {{productName}}",
@@ -393,17 +393,17 @@
     "fallback": {
       "title": "Sample Product Title",
       "description": "This is a sample product description. Replace with real product details when available."
-    }, 
+    },
     "relatedProducts": {
       "title": "You might also like"
-    }, 
+    },
     "description": {
       "title": "Description"
     },
     "labels": {
       "totalAmount": "Total Amount"
     }
-  }, 
+  },
   "splash": {
     "loadingMessage": "Getting things ready..."
   },
@@ -462,8 +462,8 @@
     "engineering": "Engineering",
     "qa": "Quality Assurance",
     "thanks": "Special thanks to our testers for testing things and giving advice so we could fix them."
-  }, 
-    "modeSelection": {
+  },
+  "modeSelection": {
     "title": "Choose Your Experience",
     "description": "Select the mode that best fits your needs.",
     "normal": {
@@ -478,13 +478,37 @@
       "title": "I am completely illiterate",
       "description": "Voice-guided navigation with audio feedback."
     }
-  }, 
-    "tts": {
+  },
+  "tts": {
     "modeSelection": {
       "intro": "Please select the mode that best fits your needs. You will hear three options.",
       "option1": "Option one: If you have no special needs.",
       "option2": "Option two: If you need voice assistance.",
       "option3": "Option three: If you are completely illiterate."
+    }
+  },
+  "voiceModal": {
+    "liveTranscript": {
+      "title": "Recorded Text",
+      "placeholder": "Your text will appear here as you speak..."
+    },
+    "title": "Voice Input",
+    "instructions": {
+      "idle": "Tap the microphone to start speaking.",
+      "listening": "Listening...",
+      "result": "Here is what we heard:"
+    },
+    "actions": {
+      "confirm": "Confirm & Use Text",
+      "retry": "Try Again",
+      "close": "Close",
+      "confirmSearch": "Confirm Search"
+    },
+    "error": {
+      "title": "An Error Occurred",
+      "noSpeech": "We didn't catch that. Please ensure your microphone is enabled and try again.",
+      "notSupported": "Voice recognition is not supported on this browser. Please use a browser like Chrome.",
+      "generic": "Something went wrong. Please try again."
     }
   }
 }
