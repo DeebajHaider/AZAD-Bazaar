@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Search as SearchIcon, X, ChevronUp, ChevronDown } from 'lucide-react'
+import { ArrowLeft, Search as SearchIcon, X, ChevronUp, ChevronDown, Mic } from 'lucide-react'
 import ItemCard from '../component/ItemCard'
 import { useProducts, useBrands } from '../api'
+import fuzzysort from 'fuzzysort';
 import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
@@ -22,24 +23,54 @@ const ItemCardSkeleton = () => (
   </div>
 )
 
-// Header component with search form
-const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate }) => (
-  <header className="secBg dividerBorder p-4">
-    <div className="max-w-[430px] mx-auto">
-      <form onSubmit={handleSearch} className="flex items-center gap-3">
-        <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
-          <ArrowLeft size={20} />
-        </button>
-        <div className="relative flex-1">
-          <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t('searchResults.header.placeholder')} className="inputField h-11 pr-11 text-sm w-full" />
-          <button type="submit" aria-label={t('searchResults.header.searchButtonAriaLabel')} className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors">
-            <SearchIcon size={20} />
+import VoiceInputModal from '../component/VoiceInputModal';
+// Header component with search form and voice input
+const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate, onVoiceClick, isVoiceOpen, lang }) => {
+  // Determine if RTL
+  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
+  // Padding for input: left for RTL, right for LTR
+  const inputPadding = isRTL ? 'pl-20' : 'pr-20';
+  // Icon positions
+  const micBtnClass = isRTL ? 'absolute left-0 top-0' : 'absolute right-0 top-0';
+  const searchBtnClass = isRTL ? 'absolute left-11 top-0' : 'absolute right-11 top-0';
+  return (
+    <header className="secBg dividerBorder p-4">
+      <div className="max-w-[430px] mx-auto">
+        <form onSubmit={handleSearch} className="flex items-center gap-3">
+          <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
+            <ArrowLeft size={20} />
           </button>
-        </div>
-      </form>
-    </div>
-  </header>
-)
+          <div className="relative flex-1">
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder={t('searchResults.header.placeholder')}
+              className={`inputField h-11 ${inputPadding} text-sm w-full`}
+              dir={isRTL ? 'rtl' : 'ltr'}
+            />
+
+            <button
+              type="submit"
+              aria-label={t('searchResults.header.searchButtonAriaLabel')}
+              className={`${searchBtnClass} h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors`}
+            >
+              <SearchIcon size={20} />
+            </button>
+            <button
+              type="button"
+              aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
+              onClick={onVoiceClick}
+              className={`${micBtnClass} h-11 w-11 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors`}
+            >
+              <Mic size={20} className="primText" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </header>
+  );
+}
 
 // --- Category Filter Modal Component ---
 const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, brands, t, lang, translateDBVal }) => {
@@ -69,7 +100,7 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
     applyFilters({ ...initialFilters, categories: tempCategories, brands: tempBrands })
     onClose()
   }
-  
+
   const handleClear = () => {
     setTempCategories([])
     setTempBrands([])
@@ -79,62 +110,62 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/60 p-4" role="dialog" aria-modal="true">
       <div className="secBg rounded-2xl p-4 space-y-4 max-h-[85vh] flex flex-col max-w-[430px] w-full" onClick={e => e.stopPropagation()}>
         <header className="flex justify-between items-center pb-3 dividerBorder flex-shrink-0">
-           <h2 className="text-xl font-bold primText">{t('searchResults.filterPanel.title')}</h2>
-           <button onClick={onClose} aria-label={t('common.close')} className="btnSecondary rounded-full !p-0 h-10 w-10 flex items-center justify-center">
-             <X size={20} />
-           </button>
+          <h2 className="text-xl font-bold primText">{t('searchResults.filterPanel.title')}</h2>
+          <button onClick={onClose} aria-label={t('common.close')} className="btnSecondary rounded-full !p-0 h-10 w-10 flex items-center justify-center">
+            <X size={20} />
+          </button>
         </header>
-        
+
         <main className="overflow-y-auto space-y-4 flex-grow">
-            {/* Appended Special Filters as per request */}
-            <div>
-                <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.quickFilters')}</h3>
-                <div className="flex flex-wrap gap-2">
-                    {specialFilters.map(filter => {
-                        const isSelected = tempCategories.includes(filter._id)
-                        return (
-                          <button key={filter._id} onClick={() => handleToggleCategory(filter._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
-                            {filter.name}
-                          </button>
-                        )
-                    })}
-                </div>
+          {/* Appended Special Filters as per request */}
+          <div>
+            <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.quickFilters')}</h3>
+            <div className="flex flex-wrap gap-2">
+              {specialFilters.map(filter => {
+                const isSelected = tempCategories.includes(filter._id)
+                return (
+                  <button key={filter._id} onClick={() => handleToggleCategory(filter._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
+                    {filter.name}
+                  </button>
+                )
+              })}
             </div>
+          </div>
 
-            {/* Product Categories */}
-            <div>
-                <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.categoryLabel')}</h3>
-                <div className="flex flex-wrap gap-2">
-                    {categories.map(cat => {
-                         const isSelected = tempCategories.includes(cat._id)
-                         return (
-                           <button key={cat._id} onClick={() => handleToggleCategory(cat._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
-                             {translateDBVal("Category", "name", cat.name, lang)}
-                           </button>
-                         )
-                    })}
-                </div>
+          {/* Product Categories */}
+          <div>
+            <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.categoryLabel')}</h3>
+            <div className="flex flex-wrap gap-2">
+              {categories.map(cat => {
+                const isSelected = tempCategories.includes(cat._id)
+                return (
+                  <button key={cat._id} onClick={() => handleToggleCategory(cat._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
+                    {translateDBVal("Category", "name", cat.name, lang)}
+                  </button>
+                )
+              })}
             </div>
+          </div>
 
-            {/* Product Brands */}
-            <div>
-                <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.brandLabel')}</h3>
-                <div className="flex flex-wrap gap-2">
-                    {brands.map(brand => {
-                         const isSelected = tempBrands.includes(brand._id)
-                         return (
-                           <button key={brand._id} onClick={() => handleToggleBrand(brand._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
-                             {translateDBVal("Brand", "name", brand.name, lang)}
-                           </button>
-                         )
-                    })}
-                </div>
+          {/* Product Brands */}
+          <div>
+            <h3 className="font-semibold primText mb-2">{t('searchResults.filterPanel.brandLabel')}</h3>
+            <div className="flex flex-wrap gap-2">
+              {brands.map(brand => {
+                const isSelected = tempBrands.includes(brand._id)
+                return (
+                  <button key={brand._id} onClick={() => handleToggleBrand(brand._id)} className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}>
+                    {translateDBVal("Brand", "name", brand.name, lang)}
+                  </button>
+                )
+              })}
             </div>
+          </div>
         </main>
 
         <footer className="flex gap-3 pt-3 border-t dividerBorder flex-shrink-0">
-           <button onClick={handleClear} className="w-full min-h-12 btnSecondary rounded-lg">{t('searchResults.activeFilters.clearAllButton')}</button>
-           <button onClick={handleApply} className="w-full min-h-12 btnPrimary rounded-lg">{t('searchResults.filterPanel.applyButton')}</button>
+          <button onClick={handleClear} className="w-full min-h-12 btnSecondary rounded-lg">{t('searchResults.activeFilters.clearAllButton')}</button>
+          <button onClick={handleApply} className="w-full min-h-12 btnPrimary rounded-lg">{t('searchResults.filterPanel.applyButton')}</button>
         </footer>
       </div>
     </div>
@@ -143,6 +174,7 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
 
 
 // --- Main Search Results Component ---
+
 export default function SearchResults() {
   const { t, lang } = useI18n()
   const navigate = useNavigate()
@@ -153,7 +185,8 @@ export default function SearchResults() {
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [currentPage, setCurrentPage] = useState(1)
-  
+  const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+
   // Refactored filter state for new UI
   const [filters, setFilters] = useState(() => {
     const initialCategories = searchParams.get('category') ? [searchParams.get('category')] : []
@@ -198,36 +231,85 @@ export default function SearchResults() {
   const handleSearch = (e) => {
     e.preventDefault()
     // Force immediate search, bypassing debounce
+    const trimmed = searchTerm.trim();
     const newSearchParams = new URLSearchParams(searchParams);
-    if (searchTerm.trim()) {
-      newSearchParams.set('q', searchTerm.trim());
+    if (trimmed) {
+      newSearchParams.set('q', trimmed);
     } else {
       newSearchParams.delete('q');
     }
     setSearchParams(newSearchParams, { replace: true });
     setCurrentPage(1)
+    setSearchTerm(trimmed); // keep input trimmed
   }
 
+  // Handle voice input confirm
+  const handleVoiceConfirm = (transcript) => {
+    const trimmed = transcript.trim();
+    if (trimmed) {
+      setSearchTerm(trimmed);
+      // Immediately search
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set('q', trimmed);
+      setSearchParams(newSearchParams, { replace: true });
+      setCurrentPage(1);
+    }
+  }
+
+  // TEMP: Always fetch all products (no search string)
   const apiParams = useMemo(() => {
     const p = {}
-    const query = searchParams.get('q')
-    if (query) p.name = query
+    // const query = searchParams.get('q')
+    // if (query) p.name = query
     const realCategories = filters.categories.filter(c => c !== 'inStock' && c !== 'onDiscount')
     if (realCategories.length > 0) p.categories = realCategories.join(',')
     if (filters.brands.length > 0) p.brands = filters.brands.join(',')
     if (filters.categories.includes('inStock')) p.instock = true
     return p
-  }, [searchParams, filters.categories, filters.brands])
+  }, [filters.categories, filters.brands])
 
   const { data: apiData, loading: loadingProducts, error: productsError } = useProducts(apiParams, { immediate: true })
 
+  // Manual search using fuzzywuzzy and string match on translated name (supports Urdu and other languages)
   const filteredResults = useMemo(() => {
     let results = Array.isArray(apiData) ? apiData.slice() : []
     if (filters.categories.includes('onDiscount')) {
       results = results.filter(it => (it.discountedPrice ?? it.price) < (it.price ?? it.originalPrice))
     }
-    return results
-  }, [apiData, filters.categories])
+    // Manual search
+    const search = searchParams.get('q')?.trim();
+    if (search) {
+      // Use translated name for matching
+      // Normalize both search and translated for Unicode (for Urdu, Arabic, etc.)
+      const langCode = lang;
+      const normalizedSearch = search.normalize('NFC').toLowerCase();
+      // Prepare list with translated names
+      const withTranslated = results.map(item => {
+        const translated = (translateDBVal('Product', 'name', item.name, langCode) || item.name || '').normalize('NFC');
+        return {
+          item,
+          translated,
+          translatedLower: translated.toLowerCase(),
+        };
+      });
+      // Fuzzywuzzy (fuzzysort) results
+      const fuzzy = fuzzysort.go(normalizedSearch, withTranslated, {
+        key: 'translated',
+        threshold: -90 // tighter: only stronger matches
+      });
+      // Collect unique ids from fuzzy
+      const fuzzyIds = new Set(fuzzy.map(f => f.obj.item._id));
+      // Substring match (case-insensitive, Unicode safe)
+      const substringMatches = withTranslated.filter(({ translatedLower }) =>
+        translatedLower.includes(normalizedSearch)
+      ).map(({ item }) => item._id);
+      // Merge ids
+      const allIds = new Set([...fuzzyIds, ...substringMatches]);
+      // Filter results by id, preserve original order
+      results = results.filter(it => allIds.has(it._id));
+    }
+    return results;
+  }, [apiData, filters.categories, searchParams, lang, translateDBVal])
 
   const sortedResults = useMemo(() => {
     const arr = filteredResults.slice()
@@ -260,21 +342,21 @@ export default function SearchResults() {
     if (!Array.isArray(allBrands)) return []
     return allBrands.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
   }, [allBrands])
-  
+
   const selectedCategoryObjects = useMemo(() => {
     const specialMap = {
       inStock: { _id: 'inStock', name: t('searchResults.filterPanel.inStockLabel') },
       onDiscount: { _id: 'onDiscount', name: t('searchResults.filterPanel.onDiscountLabel') },
     }
     return filters.categories.map(id => {
-        if (specialMap[id]) return specialMap[id]
-        return sortedCategories.find(c => c._id === id)
+      if (specialMap[id]) return specialMap[id]
+      return sortedCategories.find(c => c._id === id)
     }).filter(Boolean)
   }, [filters.categories, sortedCategories, t, lang])
 
   const selectedBrandObjects = useMemo(() => {
     return filters.brands.map(id => {
-        return sortedBrands.find(c => c._id === id)
+      return sortedBrands.find(c => c._id === id)
     }).filter(Boolean)
   }, [filters.brands, sortedBrands])
 
@@ -348,11 +430,11 @@ export default function SearchResults() {
               <button key={key} onClick={() => handleSortClick(key)} className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 ${filters.sortBy === key ? 'accentPrimBg text-white' : 'secBg primText primBorder secHoverBg'}`}>
                 {t(`searchResults.sorting.${key}`)}
                 {filters.sortBy === key && (
-                  filters.sortOrder === 'asc' ? 
-                    <ChevronUp size={16} className="flex-shrink-0" /> : 
+                  filters.sortOrder === 'asc' ?
+                    <ChevronUp size={16} className="flex-shrink-0" /> :
                     <ChevronDown size={16} className="flex-shrink-0" />
                 )}
-              </button> 
+              </button>
             ))}
           </div>
         </div>
@@ -402,7 +484,7 @@ export default function SearchResults() {
       </section>
 
       {/* Pagination */}
-    {totalResults > pageSize && (
+      {totalResults > pageSize && (
         <MobilePagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -414,7 +496,25 @@ export default function SearchResults() {
 
   return (
     <Layout
-      header={<SearchHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch} t={t} navigate={navigate} />}
+      header={
+        <>
+          <SearchHeader
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleSearch={handleSearch}
+            t={t}
+            navigate={navigate}
+            onVoiceClick={() => setVoiceModalOpen(true)}
+            isVoiceOpen={isVoiceModalOpen}
+            lang={lang}
+          />
+          <VoiceInputModal
+            isOpen={isVoiceModalOpen}
+            onClose={() => setVoiceModalOpen(false)}
+            onConfirm={handleVoiceConfirm}
+          />
+        </>
+      }
       footer={<BottomNav />}
     >
       <SearchContent />
