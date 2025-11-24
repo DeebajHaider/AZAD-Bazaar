@@ -27,7 +27,6 @@ import About from './pages/About'
 
 // --- NEW IMPORTS (Ensure you create these files) ---
 import ModeSelection from './pages/ModeSelection'
-import AccessibilityOnboarding from './pages/AccessibilityOnboarding'
 
 export default function App() {
   const AuthGate = () => {
@@ -60,7 +59,7 @@ export default function App() {
             <Route path="/mode-selection" element={<ModeSelection />} />
 
             {/* Step 4: Accessibility Setup */}
-            <Route path="/accessibility-onboarding" element={<AccessibilityOnboarding />} />
+            <Route path="/accessibility" element={<AccessibilitySettings />} />
 
             {/* Step 5: Login */}
             <Route path="/login" element={<Login />} />

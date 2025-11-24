@@ -48,7 +48,7 @@ const ModeOption = ({ id, isSelected, title, description, icon: Icon, accentClas
 );
 
 export default function ModeSelection() {
-  const { ascMode, setAscMode } = useAccessibility();
+  const { ascMode, setAscMode, setColorMode, setFontSize, colorMode, fontSize } = useAccessibility();
   const { t } = useI18n();
   const { speakText, stop } = useTTS();
   const navigate = useNavigate();
@@ -61,6 +61,14 @@ export default function ModeSelection() {
     if (ascMode.includes('illiterate')) return 'illiterate';
     return 'standard';
   });
+
+  // Ensure colorMode and fontSize are set correctly on mount for highContrast
+  React.useEffect(() => {
+    if (selectedMode === 'highContrast') {
+      if (colorMode !== 'highContrast') setColorMode('highContrast');
+      if (fontSize !== 'large') setFontSize('large');
+    }
+  }, [selectedMode, setColorMode, setFontSize, colorMode, fontSize]);
 
   const [isSpeaking, setIsSpeaking] = useState(false);
   const speakingRef = useRef(false);
@@ -93,6 +101,20 @@ export default function ModeSelection() {
   // --- Handlers ---
   const handleModeChange = (id) => {
     setSelectedMode(id);
+    // Always update context state, even if re-selecting same mode
+    if (id === 'illiterate') {
+      setAscMode('illiterate voiceInput');
+      setFontSize('normal');
+      setColorMode('default');
+    } else if (id === 'highContrast') {
+      setAscMode('highContrast');
+      setColorMode('highContrast');
+      setFontSize('large');
+    } else {
+      setColorMode('default');
+      setAscMode('standard');
+      setFontSize('normal');
+    }
     // Speak the translated TTS label for the selected mode
     let ttsKey = '';
     if (id === 'standard') ttsKey = 'tts.modeSelection.option1';
@@ -103,16 +125,6 @@ export default function ModeSelection() {
   };
 
   const handleConfirm = () => {
-    let modeString = selectedMode;
-
-    // Apply specific logic based on selection
-    if (selectedMode === 'illiterate') {
-      // Illiterate mode automatically enables voice input
-      modeString = 'illiterate voiceInput';
-    } 
-    // You can add logic here if High Contrast should also enable something specific
-
-    setAscMode(modeString);
     navigate('/login'); // Navigate to next screen
   };
 

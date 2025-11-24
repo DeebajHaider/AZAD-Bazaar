@@ -42,7 +42,7 @@ export default function AccessibilitySettings() {
   ]
 
   return (
-    <Layout header={<HeaderWithName title={t('accessibility.header.title')} to="/settings" />}>
+    <Layout header={<HeaderWithName title={t('accessibility.header.title')} to={-1} />}>
       <div className="min-h-screen primBg">
         {/* Content */}
         <div className="max-w-[430px] mx-auto p-4 space-y-6">
