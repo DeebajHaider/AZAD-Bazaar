@@ -41,6 +41,20 @@ export default function ThemeSelection() {
   const { lang } = useI18n()
   const navigate = useNavigate()
 
+  // Ensure initial selected state matches persisted/local applied theme.
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('theme')
+      const rootIsDark = document.documentElement.classList.contains('dark')
+      const effective = stored || (rootIsDark ? 'dark' : 'light')
+      if (effective && effective !== theme) {
+        setTheme(effective)
+      }
+    } catch (_) {
+      // ignore
+    }
+  }, [setTheme])
+
   // Helper function for translations
   const t = (key) => translations[key][lang] || translations[key]['en'];
 

@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AZAD-Bazaar</title>
+    <script>
+      // Early theme initialization to prevent flash of incorrect theme.
+      (function() {
+        try {
+          var hasOnboarded = localStorage.getItem('hasOnboarded');
+          var storedTheme = localStorage.getItem('theme');
+          if (hasOnboarded !== 'true') {
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            storedTheme = prefersDark ? 'dark' : 'light';
+            localStorage.setItem('theme', storedTheme);
+          }
+          if (storedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          // Fail silently; theme can be re-applied later by app logic.
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

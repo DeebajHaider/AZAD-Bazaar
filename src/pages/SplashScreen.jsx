@@ -24,22 +24,7 @@ export default function SplashScreen({ duration = 2000 }) {
 
     const navigationTimer = setTimeout(() => {
       const hasOnboarded = localStorage.getItem('hasOnboarded');
-
-      // If user hasn't onboarded, set theme to device default
-      if (hasOnboarded !== 'true') {
-        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-        localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
-
-        // Optionally, also update document class immediately
-        const root = document.documentElement;
-        if (prefersDark) {
-          root.classList.add('dark');
-        } else {
-          root.classList.remove('dark');
-        }
-      }
-
-      // Navigate to appropriate page
+      // Navigate based on onboarding status (theme now handled in index.html)
       if (hasOnboarded === 'true') {
         navigate('/login', { replace: true });
       } else {
