@@ -393,7 +393,9 @@
       "unfavoriteAriaLabel": "پسندیدہ سے ہٹائیں",
       "increaseQuantity": "مقدار بڑھائیں",
       "decreaseQuantity": "مقدار کم کریں",
-      "addMoreToCart": "مزید شامل کریں"
+      "addMoreToCart": "مزید شامل کریں",
+      "removedFromFavorites": "پسندیدہ سے ہٹا دیا گیا",
+      "addedToFavorites": "پسندیدہ میں شامل کر دیا گیا"
     },
     "gallery": {
       "mainImageAlt": "{{productName}} کی مرکزی تصویر",

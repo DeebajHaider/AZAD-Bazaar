@@ -25,6 +25,7 @@ import Orders from './pages/Orders'
 import Order from './pages/Order'
 import About from './pages/About'
 import ThemeSelection from './pages/ThemeSelection'
+import { Toaster } from 'react-hot-toast';
 
 
 // --- NEW IMPORTS (Ensure you create these files) ---
@@ -119,6 +120,7 @@ return (
 
                     {/* MOVED Router OUTSIDE AuthGate so useNavigate works inside Splash */}
                     <Router>
+                      <Toaster position="bottom-center" />
                       <AuthGate />
                     </Router>
                   </FavoritesProvider>

@@ -393,7 +393,9 @@
       "unfavoriteAriaLabel": "Remove from favorites",
       "increaseQuantity": "Increase quantity",
       "decreaseQuantity": "Decrease quantity",
-      "addMoreToCart": "Add more to cart"
+      "addMoreToCart": "Add more to cart",
+      "removedFromFavorites": "Removed from favorites",
+      "addedToFavorites": "Added to favorites"
     },
     "gallery": {
       "mainImageAlt": "Main image of {{productName}}",

@@ -12,6 +12,7 @@ import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
 import { getCategoryById } from '../api/categoryService'
 import ImageWithLoader from '../component/ImageWithLoader'
+import { showToast } from '../utils/toast'
 
 // --- Sub-components ---
 
@@ -341,8 +342,12 @@ export default function Product() {
     const toggleFav = async () => {
       if (!pid || favLoading) return
       try {
-        if (liked) await remove(pid)
-        else await add(pid)
+        if (liked) {await remove(pid);
+          showToast(t('productPage.actions.removedFromFavorites'))
+        }
+        else {await add(pid);
+          showToast(t('productPage.actions.addedToFavorites'))
+        }
       } catch (e) {
         // silent fail; could add toast later
         console.error('Favorite toggle failed', e)
