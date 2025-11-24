@@ -272,3 +272,84 @@ exports.clearCart = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+exports.getFavorites = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user || !user.customerId)
+      return res.json({ favorites: [] });
+
+    const customer = await Customer.findById(user.customerId, { favorites: 1 }).lean();
+    return res.json({ favorites: customer?.favorites ?? [] });
+  } catch (err) {
+    console.error("getFavorites error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.addFavorite = async (req, res) => {
+  try {
+    const user = req.user;
+    const { productId } = req.body;
+
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    if (!productId)
+      return res.status(400).json({ message: "productId required" });
+
+    if (!mongoose.Types.ObjectId.isValid(productId))
+      return res.status(400).json({ message: "Invalid productId" });
+
+    const product = await Product.findById(productId).lean();
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $addToSet: { favorites: new mongoose.Types.ObjectId(productId) } },
+      { new: true, select: "favorites" }
+    ).lean();
+
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    return res.json({ favorites: customer.favorites });
+  } catch (err) {
+    console.error("addFavorite error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.removeFavorite = async (req, res) => {
+  try {
+    const user = req.user;
+    const { productId } = req.body;
+
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    if (!productId)
+      return res.status(400).json({ message: "productId required" });
+
+    if (!mongoose.Types.ObjectId.isValid(productId))
+      return res.status(400).json({ message: "Invalid productId" });
+
+    const product = await Product.findById(productId).lean();
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $pull: { favorites: new mongoose.Types.ObjectId(productId) } },
+      { new: true, select: "favorites" }
+    ).lean();
+
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    return res.json({ favorites: customer.favorites });
+  } catch (err) {
+    console.error("removeFavorite error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+

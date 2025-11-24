@@ -49,4 +49,9 @@ router.post('/cart/decrement', authMiddleware, customerCtrl.decrementProductInCa
 router.post('/cart/clear', authMiddleware, customerCtrl.clearCart);
 router.post('/cart/remove', authMiddleware, customerCtrl.removeProductFromCart);
 
+// Favorites (authenticated)
+router.get('/favorites', authMiddleware, customerCtrl.getFavorites);
+router.post('/favorites/add', authMiddleware, customerCtrl.addFavorite);
+router.post('/favorites/remove', authMiddleware, customerCtrl.removeFavorite);
+
 module.exports = router;

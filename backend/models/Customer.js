@@ -30,7 +30,8 @@ const CustomerSchema = new mongoose.Schema({
   profilePhoto: { type: String, default: '' },
   addresses: { type: [AddressSchema], default: [] },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
+  favorites: { type: [mongoose.Schema.Types.ObjectId], ref: 'Product', default: [] }
 });
 
 // Keep updatedAt current
