@@ -48,9 +48,9 @@ export default function Settings() {
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
 
-  // Accessibility narrator mode
+  // Accessibility voice input mode
   const { ascMode } = useAccessibility()
-  const isNarrator = typeof ascMode === 'string' && ascMode.includes('narrator')
+  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
 
   // Voice modal state
   const [voiceModalOpen, setVoiceModalOpen] = useState(false)
@@ -182,7 +182,7 @@ export default function Settings() {
                     placeholder={t('settings.account.form.fullName.placeholder')}
                     className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
                   />
-                  {isNarrator && (
+                  {isVoiceInput && (
                     <button
                       type="button"
                       aria-label={t('voiceModal.actions.openForName') || 'Voice input for name'}
@@ -223,7 +223,7 @@ export default function Settings() {
                     placeholder={t('settings.account.form.address.placeholder')}
                     className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
                   />
-                  {isNarrator && (
+                  {isVoiceInput && (
                     <button
                       type="button"
                       aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
@@ -250,11 +250,16 @@ export default function Settings() {
           )}
 
         {/* Voice Input Modal for narrator mode */}
-        {isNarrator && voiceModalOpen && (
+        {isVoiceInput && voiceModalOpen && (
           <VoiceInputModal
             isOpen={voiceModalOpen}
             onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
             onConfirm={handleVoiceConfirm}
+            confirmLabel={
+              voiceTarget === 'name' ? t('voiceModal.actions.confirmName') :
+              voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
+              t('voiceModal.actions.confirm')
+            }
           />
         )}
 

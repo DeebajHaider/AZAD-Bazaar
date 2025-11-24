@@ -12,7 +12,7 @@ import { useI18n } from '../context/I18nContext';
  * @param {() => void} props.onClose - Function to call when the modal should be closed.
  * @param {(transcript: string) => void} props.onConfirm - Function called with the final transcript when confirmed.
  */
-export default function VoiceInputModal({ isOpen, onClose, onConfirm }) {
+export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLabel }) {
   const { t } = useI18n();
   const { status, transcript, startListening, error, isSupported } = useSpeechRecognition();
 
@@ -126,7 +126,7 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm }) {
             className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Search size={20} />
-            {t('voiceModal.actions.confirmSearch')}
+            {confirmLabel || t('voiceModal.actions.confirm')}
           </button>
         </div>
       </motion.div>

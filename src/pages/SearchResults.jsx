@@ -512,6 +512,7 @@ export default function SearchResults() {
             isOpen={isVoiceModalOpen}
             onClose={() => setVoiceModalOpen(false)}
             onConfirm={handleVoiceConfirm}
+            confirmLabel={t('voiceModal.actions.confirmSearch')}
           />
         </>
       }

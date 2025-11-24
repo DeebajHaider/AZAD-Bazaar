@@ -1,51 +1,70 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Accessibility, Mic, Ear } from 'lucide-react';
+import { User, Accessibility, Mic, Ear, Volume2 } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { useI18n } from '../context/I18nContext';
 import { useTTS } from '../context/TTSContext';
 import { Layout } from '../Layout';
 import HeaderWithName from '../component/HeaderWithName';
 
-// A reusable, styled button component for this specific page
-const ModeButton = ({ title, description, icon, accentClass, onClick, ariaLabel }) => (
+// Reusable Mode Option Card
+const ModeButton = ({ title, description, icon, accentTextClass, onClick, ariaLabel }) => (
   <button
     onClick={onClick}
     aria-label={ariaLabel}
-    className="flex-1 w-full secBg primBorder rounded-2xl p-6 flex flex-col items-center justify-center text-center transition-all duration-200 secHoverBg focusRing active:scale-[0.98] shadow-sm"
+    className="group flex-1 w-full card flex flex-col items-center justify-center text-center transition-all duration-200 secHoverBg focusRing relative overflow-hidden"
   >
-    {/* Large, accented icon container */}
-    <div className={`w-24 h-24 mb-5 flex items-center justify-center ${accentClass}`}>
-      {icon}
+    {/* Decorative background circle for icon (subtle) */}
+    <div className="mb-4 p-4 rounded-full primBg primBorder group-hover:scale-110 transition-transform duration-300">
+      <div className={`${accentTextClass}`}>
+        {icon}
+      </div>
     </div>
-    {/* Big, bold title */}
-    <h2 className="text-3xl font-bold primText mb-2">
+    
+    <h2 className="text-xl font-bold primText mb-2">
       {title}
     </h2>
-    {/* Clear, concise description */}
-    <p className="text-base secText max-w-xs">
+    
+    <p className="text-sm secText max-w-[85%] leading-relaxed">
       {description}
     </p>
+
+    {/* Chevron/Arrow visual cue could go here, but kept clean for high contrast/focus */}
   </button>
 );
 
 export default function ModeSelection() {
-  const { setAscMode } = useAccessibility();
+  const { ascMode, setAscMode } = useAccessibility();
   const { t } = useI18n();
   const { speakText, stop } = useTTS();
   const navigate = useNavigate();
   const [isSpeaking, setIsSpeaking] = useState(false);
   const speakingRef = useRef(false);
 
-  // Prepare translations and ARIA labels
-  const normalTitle = t('modeSelection.normal.title', 'I am completely normal');
-  const normalDesc = t('modeSelection.normal.description', 'Standard app experience with default settings.');
-  const assistedTitle = t('modeSelection.assistance.title', 'I need assistance');
-  const assistedDesc = t('modeSelection.assistance.description', 'Larger text, higher contrast, and simplified controls.');
-  const illiterateTitle = t('modeSelection.illiterate.title', 'I am completely illiterate');
-  const illiterateDesc = t('modeSelection.illiterate.description', 'Voice-guided navigation with audio feedback.');
+  // Logic for Voice Input Toggle
+  const voiceInputEnabled = typeof ascMode === 'string' && ascMode.includes('voiceInput');
+  const handleVoiceInputToggle = () => {
+    console.log('Toggling Voice Input From ModeSelection.  Currently enabled:', voiceInputEnabled);
+    if (voiceInputEnabled) {
+      setAscMode((ascMode || '').replace('voiceInput', '').replace(/\s+/g, ' ').trim());
+      console.log('Voice Input Disabled');
+    } else {
+      setAscMode(((ascMode ? ascMode + ' ' : '') + 'voiceInput').replace(/\s+/g, ' ').trim());
+      console.log('Voice Input Enabled');
+    }
+  };
 
-  // TTS: Use i18n keys for intro and concise option descriptions
+  // Translations
+  const normalTitle = t('modeSelection.normal.title', 'Normal Mode');
+  const normalDesc = t('modeSelection.normal.description', 'Standard text size and layout.');
+  
+  const assistedTitle = t('modeSelection.assistance.title', 'Assisted Mode');
+  const assistedDesc = t('modeSelection.assistance.description', 'High contrast, larger text & buttons.');
+  
+  const illiterateTitle = t('modeSelection.illiterate.title', 'Audio Guided');
+  const illiterateDesc = t('modeSelection.illiterate.description', 'Full voice navigation support.');
+
+  // TTS Setup
   const ttsIntro = t('tts.modeSelection.intro');
   const ttsStrings = [
     t('tts.modeSelection.option1'),
@@ -53,12 +72,11 @@ export default function ModeSelection() {
     t('tts.modeSelection.option3')
   ];
 
-  // Helper to handle speaking with indicator, sequential and cancel previous
   const speakWithIndicator = async (text, options = {}) => {
     setIsSpeaking(true);
     speakingRef.current = true;
     try {
-      await stop(); // Cancel any current speech before starting new
+      await stop(); 
       await speakText(text, options);
     } finally {
       setIsSpeaking(false);
@@ -66,7 +84,6 @@ export default function ModeSelection() {
     }
   };
 
-  // On mount: announce intro, then all 3 options sequentially
   useEffect(() => {
     let cancelled = false;
     const playAll = async () => {
@@ -85,11 +102,15 @@ export default function ModeSelection() {
       speakingRef.current = false;
     };
     // eslint-disable-next-line
-  }, [ttsIntro, ttsStrings[0], ttsStrings[1], ttsStrings[2]]);
+  }, [ttsIntro]);
 
-  // Handler for mode selection: no TTS on click
   const handleModeSelect = (mode) => {
-    setAscMode(mode);
+    // Preserve 'voiceInput' if present in ascMode
+    let newAscMode = mode;
+    if (typeof ascMode === 'string' && ascMode.includes('voiceInput')) {
+      newAscMode = `${mode} voiceInput`.replace(/\s+/g, ' ').trim();
+    }
+    setAscMode(newAscMode);
     navigate('/login');
   };
 
@@ -97,49 +118,88 @@ export default function ModeSelection() {
     <Layout
       header={
         <HeaderWithName
-          title={t('modeSelection.title', 'Choose Your Experience')}
+          title={t('modeSelection.title', 'Select Mode')}
           to={-1}
         />
       }
     >
-      {/* Speaking indicator */}
+      {/* Speaking Indicator - using semantic colors */}
       {isSpeaking && (
-        <div className="absolute top-4 right-4 z-50">
-          <span className="inline-block w-4 h-4 rounded-full bg-blue-500 animate-pulse border-2 border-white shadow"></span>
+        <div className="absolute top-4 right-4 z-50 pointer-events-none">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full card shadow-md animate-pulse">
+            <Volume2 size={16} className="accentPrimText" />
+            <span className="text-xs font-medium accentPrimText">Speaking...</span>
+          </div>
         </div>
       )}
-      {/* Main container for the mode selection page */}
-      <main className="flex-1 flex overflow-y-auto primBg min-h-full">
-        <div className="p-4 space-y-6 flex flex-col flex-1">
-          {/* Main Selection Area: 3 Full-width buttons */}
-          <div className="flex flex-col gap-4 flex-1">
+
+      <main className="flex-1 flex flex-col h-full overflow-hidden primBg">
+        <div className="flex-1 flex flex-col max-w-[430px] mx-auto w-full p-4 gap-4">
+          
+          {/* Voice Input Section - Styled as a settings pill */}
+          <div className="card flex flex-row items-center justify-between gap-4 p-4 shadow-sm shrink-0">
+            <div className="flex-1">
+              <h2 className="text-base font-semibold primText">
+                {t('accessibility.voiceInput.title') || 'Voice Input'}
+              </h2>
+              <p className="text-xs secText">
+                {t('accessibility.voiceInput.description') || 'Enable microphone support'}
+              </p>
+            </div>
+            <button
+              onClick={handleVoiceInputToggle}
+              className={`h-12 px-6 rounded-lg font-bold text-sm transition-all duration-200 border-2 ${
+                voiceInputEnabled 
+                  ? 'modeChooseButton-selected' 
+                  : 'modeChooseButton-unselected'
+              }`}
+              aria-pressed={voiceInputEnabled}
+            >
+              {voiceInputEnabled 
+                ? (t('common.on') || 'ON') 
+                : (t('common.off') || 'OFF')
+              }
+            </button>
+          </div>
+
+          {/* Divider with label */}
+          <div className="text-center relative py-2 shrink-0">
+            <span className="secText text-sm bg-transparent px-2 font-medium">
+              {t('modeSelection.chooseLabel', 'Choose your view')}
+            </span>
+          </div>
+
+          {/* Main Options - Flex-1 to fill remaining vertical space equally */}
+          <div className="flex-1 flex flex-col gap-3 pb-4 min-h-0">
             <ModeButton
               title={normalTitle}
               description={normalDesc}
               ariaLabel={`${normalTitle}. ${normalDesc}`}
-              icon={<User size={64} strokeWidth={1.5} />}
-              accentClass="accentPrimText"
+              icon={<User size={48} strokeWidth={1.5} />}
+              accentTextClass="accentPrimText"
               onClick={() => handleModeSelect('standard')}
             />
+            
             <ModeButton
               title={assistedTitle}
               description={assistedDesc}
               ariaLabel={`${assistedTitle}. ${assistedDesc}`}
-              icon={<Accessibility size={64} strokeWidth={1.5} />}
-              accentClass="accentSuccessText"
+              icon={<Accessibility size={48} strokeWidth={1.5} />}
+              accentTextClass="accentSuccessText"
               onClick={() => handleModeSelect('assisted')}
             />
+            
             <ModeButton
               title={illiterateTitle}
               description={illiterateDesc}
               ariaLabel={`${illiterateTitle}. ${illiterateDesc}`}
               icon={
-                <div className="flex items-center gap-2">
-                  <Ear size={56} strokeWidth={1.5} />
-                  <Mic size={56} strokeWidth={1.5} />
+                <div className="flex items-center gap-1">
+                  <Ear size={40} strokeWidth={1.5} />
+                  <Mic size={32} strokeWidth={1.5} className="opacity-80" />
                 </div>
               }
-              accentClass="accentWarningText"
+              accentTextClass="accentWarningText"
               onClick={() => handleModeSelect('illiterate')}
             />
           </div>

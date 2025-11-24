@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
 // Import logo - replace path if your PNG is located elsewhere (e.g. '../assets/logo.png')
 import logo from '/Azad-Bazaar.svg'
 import ImageWithLoader from '../component/ImageWithLoader'
+import VoiceInputModal from '../component/VoiceInputModal'
+import { Mic } from 'lucide-react'
+import { useAccessibility } from '../context/AccessibilityContext'
 
 export default function Login() {
   const { requestOtp, verifyOtp, user } = useAuth()
@@ -22,6 +25,35 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState(null)
   const [info, setInfo] = useState(null)
+
+  // Accessibility voice input mode
+  const { ascMode } = useAccessibility && useAccessibility() || {}
+  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+
+  // Voice modal state
+  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+  const [voiceTarget, setVoiceTarget] = useState(null) // 'name', 'address', 'phone'
+  // Language direction (for button placement)
+  const lang = (typeof window !== 'undefined' && (window.__lang || (window.localStorage && window.localStorage.getItem && window.localStorage.getItem('lang')))) || 'en';
+  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
+  // Handle voice confirm for narrator mode
+  const handleVoiceConfirm = useCallback((transcript) => {
+    if (!voiceTarget) return;
+    if (voiceTarget === 'name') setName(transcript)
+    else if (voiceTarget === 'address') setAddress(transcript)
+    else if (voiceTarget === 'phone') {
+      // Only allow digits for phone number
+      const digits = transcript.replace(/\D/g, '');
+      setPhone(digits);
+    }
+    else if (voiceTarget === 'otp') {
+      // Only allow digits for OTP
+      const digits = transcript.replace(/\D/g, '');
+      setOtp(digits);
+    }
+    setVoiceModalOpen(false);
+    setVoiceTarget(null);
+  }, [voiceTarget, t])
 
   // Redirect to home if already signed in
   useEffect(() => {
@@ -168,7 +200,8 @@ export default function Login() {
               {/* Signup Fields */}
               {mode === 'signup' && step === 'enter-phone' && (
                 <>
-                  <div>
+                  {/* Name Field with Voice Input */}
+                  <div className="relative">
                     <label className="block text-sm font-medium mb-2 primText ">
                       {t('login.form.name.label')}
                     </label>
@@ -177,11 +210,23 @@ export default function Login() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t('login.form.name.placeholder')}
-                      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200"
+                      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 pr-12 rtl:pl-12"
                     />
+                    {isVoiceInput && (
+                      <button
+                        type="button"
+                        aria-label={t('voiceModal.actions.openForName') || 'Voice input for name'}
+                        onClick={() => { setVoiceTarget('name'); setVoiceModalOpen(true); }}
+                        className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                        style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                      >
+                        <Mic size={20} className="primText" />
+                      </button>
+                    )}
                   </div>
-                  
-                  <div>
+
+                  {/* Address Field with Voice Input */}
+                  <div className="relative">
                     <label className="block text-sm font-medium mb-2 primText ">
                       {t('login.form.address.label')}
                     </label>
@@ -190,10 +235,21 @@ export default function Login() {
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       placeholder={t('login.form.address.placeholder')}
-                      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200"
+                      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 pr-12 rtl:pl-12"
                     />
+                    {isVoiceInput && (
+                      <button
+                        type="button"
+                        aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
+                        onClick={() => { setVoiceTarget('address'); setVoiceModalOpen(true); }}
+                        className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                        style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                      >
+                        <Mic size={20} className="primText" />
+                      </button>
+                    )}
                   </div>
-                  
+
                   {(lat || lng) && (
                     <div className="flex gap-3 p-3 secBg rounded-lg primBorder">
                       <div className="flex-1">
@@ -214,33 +270,70 @@ export default function Login() {
               )}
 
               {step === 'enter-phone' && (
-                <div>
+                <div className="relative">
                   <label className="block text-sm font-medium mb-2 primText ">
                     {t('login.form.phone.label')}
                   </label>
                   <input
                     type="tel"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                     placeholder={t('login.form.phone.placeholder')}
-                    className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200"
+                    className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 pr-12 rtl:pl-12"
                   />
+                  {isVoiceInput && (
+                    <button
+                      type="button"
+                      aria-label={t('voiceModal.actions.openForPhone') || 'Voice input for phone'}
+                      onClick={() => { setVoiceTarget('phone'); setVoiceModalOpen(true); }}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                    >
+                      <Mic size={20} className="primText" />
+                    </button>
+                  )}
                 </div>
               )}
+        {/* Voice Input Modal for narrator mode */}
+        {isVoiceInput && voiceModalOpen && (
+          <VoiceInputModal
+            isOpen={voiceModalOpen}
+            onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+            onConfirm={handleVoiceConfirm}
+            confirmLabel={
+              voiceTarget === 'phone' ? t('voiceModal.actions.confirmPhone') :
+              voiceTarget === 'name' ? t('voiceModal.actions.confirmName') :
+              voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
+              voiceTarget === 'otp' ? t('voiceModal.actions.confirmOtp') :
+              t('voiceModal.actions.confirm')
+            }
+          />
+        )}
 
               {step === 'waiting-otp' && (
-                <div>
+                <div className="relative">
                   <label className="block text-sm font-medium mb-2 primText ">
                     {t('login.form.otp.label')}
                   </label>
                   <input
                     type="text"
                     value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                     placeholder={t('login.form.otp.placeholder')}
                     maxLength={6}
-                    className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 text-center text-2xl font-semibold tracking-widest"
+                    className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 text-center text-2xl font-semibold tracking-widest pr-12 rtl:pl-12"
                   />
+                  {isVoiceInput && (
+                    <button
+                      type="button"
+                      aria-label={t('voiceModal.actions.openForOtp') || 'Voice input for OTP'}
+                      onClick={() => { setVoiceTarget('otp'); setVoiceModalOpen(true); }}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                    >
+                      <Mic size={20} className="primText" />
+                    </button>
+                  )}
                 </div>
               )}
 

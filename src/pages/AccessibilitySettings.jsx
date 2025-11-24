@@ -7,7 +7,20 @@ import { Layout } from '../Layout' // import Layout for consistent page structur
 import HeaderWithName from '../component/HeaderWithName'
 
 export default function AccessibilitySettings() {
-  const { fontSize, setFontSize, colorMode, setColorMode, resetToDefaults } = useAccessibility()
+  const { fontSize, setFontSize, colorMode, setColorMode, ascMode, setAscMode, resetToDefaults } = useAccessibility()
+    // Voice Input toggle logic
+    const voiceInputEnabled = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+    const handleVoiceInputToggle = () => {
+      console.log('Toggling Voice Input From AccessibilitySettings. Currently enabled:', voiceInputEnabled)
+      if (voiceInputEnabled) {
+        // Remove 'voiceInput' from ascMode string
+        setAscMode((ascMode || '').replace('voiceInput', '').replace(/\s+/g, ' ').trim())
+        console.log('Voice Input Disabled')
+      } else {
+        setAscMode(((ascMode ? ascMode + ' ' : '') + 'voiceInput').replace(/\s+/g, ' ').trim())
+        console.log('Voice Input Enabled')
+      }
+    }
   const { theme, setTheme } = useTheme() // use ThemeContext
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -33,6 +46,23 @@ export default function AccessibilitySettings() {
       <div className="min-h-screen primBg">
         {/* Content */}
         <div className="max-w-[430px] mx-auto p-4 space-y-6">
+
+          {/* Voice Input Mode Toggle */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText mb-2">
+              {t('accessibility.voiceInput.title') || 'Voice Input'}
+            </h2>
+            <p className="text-sm secText mb-4">
+              {t('accessibility.voiceInput.description') || 'Enable voice input features for text fields.'}
+            </p>
+            <button
+              onClick={handleVoiceInputToggle}
+              className={`w-full min-h-12 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${voiceInputEnabled ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}
+              aria-pressed={voiceInputEnabled}
+            >
+              {voiceInputEnabled ? (t('accessibility.voiceInput.enabled') || 'Voice Input Enabled') : (t('accessibility.voiceInput.disabled') || 'Voice Input Disabled')}
+            </button>
+          </div>
 
           {/* Font Size Section */}
           <div className="secBg primBorder rounded-xl p-5">

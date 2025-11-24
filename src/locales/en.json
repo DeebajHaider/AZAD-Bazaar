@@ -108,6 +108,12 @@
     }
   },
   "accessibility": {
+        "voiceInput": {
+          "title": "Voice Input",
+          "description": "Enable voice input features for text fields.",
+          "enabled": "Voice Input Enabled",
+          "disabled": "Voice Input Disabled"
+        },
     "header": {
       "title": "Accessibility Settings"
     },
@@ -362,7 +368,9 @@
       "title": "An Error Occurred",
       "description": "Something went wrong. Please try again later.",
       "notFound": "The requested item could not be found."
-    }
+    },
+    "on": "On",
+    "off": "Off"
   },
   "itemCard": {
     "discountOff": "{{percent}}% OFF",
@@ -477,7 +485,8 @@
     "illiterate": {
       "title": "I am completely illiterate",
       "description": "Voice-guided navigation with audio feedback."
-    }
+    },
+    "chooseLabel": "Choose Your Mode"
   },
   "tts": {
     "modeSelection": {
@@ -502,7 +511,11 @@
       "confirm": "Confirm & Use Text",
       "retry": "Try Again",
       "close": "Close",
-      "confirmSearch": "Confirm Search"
+      "confirmSearch": "Confirm Search",
+      "confirmPhone": "Confirm Phone",
+      "confirmName": "Confirm Name",
+      "confirmAddress": "Confirm Address",
+      "confirmOtp": "Confirm OTP"
     },
     "error": {
       "title": "An Error Occurred",
