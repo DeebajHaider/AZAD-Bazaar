@@ -1,3 +1,30 @@
+// Remove product from cart directly (by productId)
+exports.removeProductFromCart = async (req, res) => {
+  try {
+    console.log('removeProductFromCart called', { body: req.body, user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    const { productId } = req.body;
+    if (!user || !user.customerId) return res.status(400).json({ message: 'Customer not linked to user' });
+    if (!productId || !mongoose.Types.ObjectId.isValid(productId)) return res.status(400).json({ message: 'Invalid productId' });
+
+    const cid = user.customerId;
+    const pullResult = await Customer.findOneAndUpdate(
+      { _id: cid },
+      { $pull: { 'currentCart.items': { productId: new mongoose.Types.ObjectId(productId) } }, $set: { 'currentCart.lastUpdated': new Date() } },
+      { new: true }
+    ).lean();
+
+    if (!pullResult) return res.status(404).json({ message: 'Customer not found' });
+    console.log('removeProductFromCart pullResult', { customerId: cid, items: pullResult.currentCart ? pullResult.currentCart.items.length : 0 });
+    const items = (pullResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+    const ids = items.map((i) => i.productId).filter(Boolean);
+    const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+    return res.json({ items, products });
+  } catch (err) {
+    console.error('removeProductFromCart error', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
 const Customer = require('../models/Customer');
 const mongoose = require('mongoose');
 const Product = require('../models/Product');

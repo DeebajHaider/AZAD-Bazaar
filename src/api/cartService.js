@@ -37,7 +37,16 @@ export async function decrementProduct(productId) {
   return resp.data;
 }
 
-export default { getCart, addProduct, decrementProduct };
+// Remove a product from cart directly
+export async function removeProduct(productId) {
+  const token = getToken();
+  await invalidateCache(CART(token));
+  const resp = await client.post('/cart/remove', { productId });
+  await setInCache(CART(token), resp.data);
+  return resp.data;
+}
+
+export default { getCart, addProduct, decrementProduct, removeProduct };
 
 export async function clearCart() {
   const token = getToken();

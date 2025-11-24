@@ -30,10 +30,15 @@ export function CartProvider({ children }) {
     // api.load() is called inside addToCart/decrementProduct, so state will refresh
   }
 
-  // removeItem: remove fully by decrementing until gone
+  // removeItem: remove fully using direct API if available
   async function removeItem(itemCode) {
-    const current = (api.items.find((it) => it.itemCode === itemCode) || {}).quantity || 0
-    for (let i = 0; i < current; i++) await api.decrementProduct(itemCode)
+    if (api.removeProduct) {
+      await api.removeProduct(itemCode)
+    } else {
+      // fallback: decrement until gone
+      const current = (api.items.find((it) => it.itemCode === itemCode) || {}).quantity || 0
+      for (let i = 0; i < current; i++) await api.decrementProduct(itemCode)
+    }
   }
 
   async function clearCart() {

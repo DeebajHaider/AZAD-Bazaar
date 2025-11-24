@@ -47,5 +47,6 @@ router.get('/cart', authMiddleware, customerCtrl.getCart);
 router.post('/cart/add', authMiddleware, customerCtrl.addProductToCart);
 router.post('/cart/decrement', authMiddleware, customerCtrl.decrementProductInCart);
 router.post('/cart/clear', authMiddleware, customerCtrl.clearCart);
+router.post('/cart/remove', authMiddleware, customerCtrl.removeProductFromCart);
 
 module.exports = router;
