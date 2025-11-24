@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save, Info } from 'lucide-react'
+import { ChevronRight, LogOut, Save, Info, Mic } from 'lucide-react'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
 import HeaderWithName from '../component/HeaderWithName'
+import { useAccessibility } from '../context/AccessibilityContext'
+import VoiceInputModal from '../component/VoiceInputModal'
 
 const AccountInfoSkeleton = () => (
   <form className="secBg primBorder rounded-lg animate-pulse">
@@ -46,6 +48,17 @@ export default function Settings() {
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
 
+  // Accessibility narrator mode
+  const { ascMode } = useAccessibility()
+  const isNarrator = typeof ascMode === 'string' && ascMode.includes('narrator')
+
+  // Voice modal state
+  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+  const [voiceTarget, setVoiceTarget] = useState(null) // 'name' or 'address'
+
+  // Language direction
+  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur'
+
   // Populate form from global customer when available
   useEffect(() => {
     if (customer) {
@@ -61,6 +74,14 @@ export default function Settings() {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
+
+  // Handle voice confirm for narrator mode
+  const handleVoiceConfirm = useCallback((transcript) => {
+    if (!voiceTarget) return;
+    setFormData(prev => ({ ...prev, [voiceTarget]: transcript }))
+    setVoiceModalOpen(false)
+    setVoiceTarget(null)
+  }, [voiceTarget])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -149,7 +170,7 @@ export default function Settings() {
               </h2>
               <div className="p-4 space-y-4">
                 {/* Name Field */}
-                <div>
+                <div className="relative">
                   <label className="block text-sm font-medium mb-2 primText ">
                     {t('settings.account.form.fullName.label')}
                   </label>
@@ -159,8 +180,19 @@ export default function Settings() {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder={t('settings.account.form.fullName.placeholder')}
-                    className="inputField transition-all duration-200"
+                    className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
                   />
+                  {isNarrator && (
+                    <button
+                      type="button"
+                      aria-label={t('voiceModal.actions.openForName') || 'Voice input for name'}
+                      onClick={() => { setVoiceTarget('name'); setVoiceModalOpen(true); }}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                    >
+                      <Mic size={20} className="primText" />
+                    </button>
+                  )}
                 </div>
 
                 {/* Phone Field (Read-only) */}
@@ -179,7 +211,7 @@ export default function Settings() {
                 </div>
 
                 {/* Address Field */}
-                <div>
+                <div className="relative">
                   <label className="block text-sm font-medium mb-2 primText ">
                     {t('settings.account.form.address.label')}
                   </label>
@@ -189,8 +221,19 @@ export default function Settings() {
                     onChange={handleInputChange}
                     rows={3}
                     placeholder={t('settings.account.form.address.placeholder')}
-                    className="inputField transition-all duration-200"
+                    className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
                   />
+                  {isNarrator && (
+                    <button
+                      type="button"
+                      aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
+                      onClick={() => { setVoiceTarget('address'); setVoiceModalOpen(true); }}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                    >
+                      <Mic size={20} className="primText" />
+                    </button>
+                  )}
                 </div>
 
                 {/* Save Button */}
@@ -205,6 +248,15 @@ export default function Settings() {
               </div>
             </form>
           )}
+
+        {/* Voice Input Modal for narrator mode */}
+        {isNarrator && voiceModalOpen && (
+          <VoiceInputModal
+            isOpen={voiceModalOpen}
+            onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+            onConfirm={handleVoiceConfirm}
+          />
+        )}
 
           {/* Card: Danger Zone / Sign Out */}
           <div className="secBg primBorder rounded-lg p-4">
