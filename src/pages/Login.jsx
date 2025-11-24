@@ -7,7 +7,7 @@ import logo from '/Azad-Bazaar.svg'
 import ImageWithLoader from '../component/ImageWithLoader'
 
 export default function Login() {
-  const { requestOtp, verifyOtp } = useAuth()
+  const { requestOtp, verifyOtp, user } = useAuth()
   const navigate = useNavigate()
   const { t } = useI18n()
 
@@ -22,6 +22,13 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState(null)
   const [info, setInfo] = useState(null)
+
+  // Redirect to home if already signed in
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     if (mode === 'signup' && navigator && navigator.geolocation) {
