@@ -462,5 +462,29 @@
     "engineering": "Engineering",
     "qa": "Quality Assurance",
     "thanks": "Special thanks to our testers for testing things and giving advice so we could fix them."
+  }, 
+    "modeSelection": {
+    "title": "Choose Your Experience",
+    "description": "Select the mode that best fits your needs.",
+    "normal": {
+      "title": "I'm completely normal",
+      "description": "Standard app experience with default settings."
+    },
+    "assistance": {
+      "title": "I need assistance",
+      "description": "Larger text, higher contrast, and easier controls."
+    },
+    "illiterate": {
+      "title": "I am completely illiterate",
+      "description": "Voice-guided navigation with audio feedback."
+    }
+  }, 
+    "tts": {
+    "modeSelection": {
+      "intro": "Please select the mode that best fits your needs. You will hear three options.",
+      "option1": "Option one: If you have no special needs.",
+      "option2": "Option two: If you need voice assistance.",
+      "option3": "Option three: If you are completely illiterate."
+    }
   }
 }
