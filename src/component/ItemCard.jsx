@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Plus, Minus, ShoppingCart, Trash2 } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
@@ -33,6 +33,7 @@ export default function ItemCard({ item }) {
   const { t, lang } = useI18n()
   
   const { items, addToCart, decrementProduct, loading: cartLoading } = useCart()
+  const navigate = useNavigate()
 
   const cartItem = items.find((it) => it.itemCode === item.id)
   const qty = cartItem ? cartItem.quantity : 0
@@ -78,12 +79,30 @@ export default function ItemCard({ item }) {
   // Touch target for the vertical buttons
   const touchTarget = "w-full h-[36px] flex items-center justify-center transition-colors duration-200"
 
+  const handleNavigate = () => {
+    if (!isOut) navigate(`/product/${item.id}`)
+  }
+
+  const handleKey = (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !isOut) {
+      e.preventDefault()
+      handleNavigate()
+    }
+  }
+
   return (
-    <div className={`card p-3 flex gap-3 transition-all duration-200 ${isOut ? 'opacity-70' : 'hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900'}`}>
+    <div
+      className={`card p-3 flex gap-3 transition-all duration-200 cursor-pointer ${isOut ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900'}`}
+      onClick={handleNavigate}
+      onKeyDown={handleKey}
+      role="link"
+      tabIndex={0}
+      aria-disabled={isOut}
+      aria-label={format('itemCard.navigateToProduct', { title: item.title })}
+    >
       
       {/* COLUMN 1: Image (Fixed Width) */}
-      <Link 
-        to={isOut ? '#' : `/product/${item.id}`} 
+      <div 
         className="block flex-shrink-0 relative w-24 sm:w-28 group self-start"
         tabIndex={-1}
       >
@@ -104,14 +123,11 @@ export default function ItemCard({ item }) {
             </span>
           )}
         </div>
-      </Link>
+      </div>
 
       {/* COLUMN 2: Info (Flexible width) */}
       <div className="flex-1 flex flex-col min-w-0">
-        <Link 
-          to={isOut ? '#' : `/product/${item.id}`} 
-          className="block group flex-grow"
-        >
+        <div className="block group flex-grow">
           <div className="space-y-1.5">
             <h3 className={`font-semibold primText leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ${lang === 'ur' ? 'text-lg' : 'text-base'}`}>
               {translateDBVal("Product", "name", item.title, lang)}
@@ -121,7 +137,7 @@ export default function ItemCard({ item }) {
                {translateDBVal("Category", "name", item.category, lang)}
             </span>
           </div>
-        </Link>
+        </div>
 
         {/* Price sits at the bottom of Col 2 */}
         <div className="mt-auto pt-2 leading-none">
