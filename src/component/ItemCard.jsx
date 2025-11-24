@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus, Minus, ShoppingCart, Trash2 } from 'lucide-react'
+import { Plus, Minus, ShoppingCart, Trash2, Loader2 } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
 import useTranslations from '../hooks/useTranslations'
@@ -32,11 +32,14 @@ export default function ItemCard({ item }) {
   const { translateDBVal } = useTranslations()
   const { t, lang } = useI18n()
   
-  const { items, addToCart, decrementProduct, loading: cartLoading } = useCart()
+  const { items, addToCart, decrementProduct, isProductLoading } = useCart()
   const navigate = useNavigate()
 
   const cartItem = items.find((it) => it.itemCode === item.id)
   const qty = cartItem ? cartItem.quantity : 0
+  
+  // Check if this specific product is loading
+  const isLoading = isProductLoading(item.id)
 
   const format = (key, vars = {}) => {
     let str = t(key)
@@ -67,13 +70,17 @@ export default function ItemCard({ item }) {
   const handleAdd = (e) => {
     e.preventDefault() 
     e.stopPropagation()
-    addToCart(item.id)
+    if (!isLoading) {
+      addToCart(item.id)
+    }
   }
 
   const handleRemove = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    decrementProduct(item.id)
+    if (!isLoading) {
+      decrementProduct(item.id)
+    }
   }
 
   // Touch target for the vertical buttons
@@ -164,20 +171,36 @@ export default function ItemCard({ item }) {
           /* State A: Round Add Button */
           <button
             onClick={handleAdd}
-            disabled={cartLoading}
+            disabled={isLoading}
             aria-label={t('common.addToCart')}
-            className="min-w-[40px] min-h-[40px] btnCartAction rounded-full shadow-sm flex items-center justify-center"
+            className={`min-w-[40px] min-h-[40px] btnCartAction rounded-full shadow-sm flex items-center justify-center relative ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
-             <ShoppingCart size={20} strokeWidth={2.5} />
+            {isLoading ? (
+              <Loader2 size={20} className="animate-spin" strokeWidth={2.5} />
+            ) : (
+              <ShoppingCart size={20} strokeWidth={2.5} />
+            )}
           </button>
         ) : (
           /* State B: Vertical Pill Stepper */
           /* HCI Note: Vertical stacking maps perfectly to Up/Down logic */
-          <div className="flex flex-col items-center w-[40px] rounded-2xl primBorder secBg shadow-sm overflow-hidden">
+          <div className="flex flex-col items-center w-[40px] rounded-2xl primBorder secBg shadow-sm overflow-hidden relative">
+            {/* Loading Overlay */}
+            {isLoading && (
+              <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/60 rounded-2xl flex items-center justify-center z-20">
+                <Loader2 className="w-5 h-5 accentPrimText animate-spin" />
+              </div>
+            )}
+            
             {/* Increase (Top) */}
             <button
               onClick={handleAdd}
-              className={`${touchTarget} hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 secText border-b dividerBorder`}
+              disabled={isLoading}
+              className={`${touchTarget} hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 secText border-b dividerBorder ${
+                isLoading ? 'cursor-not-allowed' : ''
+              }`}
               aria-label="Increase quantity"
             >
               <Plus size={16} strokeWidth={3} />
@@ -191,7 +214,10 @@ export default function ItemCard({ item }) {
             {/* Decrease (Bottom) */}
             <button
               onClick={handleRemove}
-              className={`${touchTarget} hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 secText border-t dividerBorder`}
+              disabled={isLoading}
+              className={`${touchTarget} hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 secText border-t dividerBorder ${
+                isLoading ? 'cursor-not-allowed' : ''
+              }`}
               aria-label="Decrease quantity"
             >
               {qty === 1 ? <Trash2 size={16} /> : <Minus size={16} strokeWidth={3} />}
