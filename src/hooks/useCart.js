@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import * as cartService from '../api/cartService';
-// add productService (the same underlying service used by useProduct hook)
 import productService from '../api/productService';
 
 const PLACEHOLDER = 'https://via.placeholder.com/80?text=Product';
@@ -10,6 +9,9 @@ export default function useCart(authTrigger) {
   const [products, setProducts] = useState([]); // product docs
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
+  // Track pending operations to prevent race conditions
+  const pendingOps = useRef(new Set());
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -32,16 +34,13 @@ export default function useCart(authTrigger) {
   // New effect: ensure we have product docs (with images) for items
   useEffect(() => {
     if (!rawItems || rawItems.length === 0) return;
-    // collect unique product ids from rawItems
     const ids = Array.from(new Set(rawItems.map(it => (it.productId && it.productId.toString) ? it.productId.toString() : String(it.productId))));
     if (!ids.length) return;
 
-    // build set of existing product ids we already have and check for missing images
     const existingById = new Map((products || []).map(p => [p._id && p._id.toString ? p._id.toString() : String(p._id), p]));
     const needFetch = [];
     for (const id of ids) {
       const existing = existingById.get(id);
-      // fetch if we don't have the product at all OR if it exists but has no images (so UI can show image)
       if (!existing || !(Array.isArray(existing.images) && existing.images.length)) {
         needFetch.push(id);
       }
@@ -52,7 +51,6 @@ export default function useCart(authTrigger) {
     let cancelled = false;
     (async () => {
       try {
-        // fetch missing product docs in parallel (limit not implemented; keep simple)
         const fetched = await Promise.allSettled(needFetch.map(id => productService.getProductById(id)));
         if (cancelled) return;
         const successful = fetched
@@ -60,7 +58,6 @@ export default function useCart(authTrigger) {
           .map(r => r.status === 'fulfilled' ? r.value : null)
           .filter(Boolean);
         if (successful.length) {
-          // merge into products: replace existing entries or append new ones
           setProducts(prev => {
             const map = new Map((prev || []).map(p => [p._id && p._id.toString ? p._id.toString() : String(p._id), p]));
             for (const doc of successful) {
@@ -71,7 +68,6 @@ export default function useCart(authTrigger) {
           });
         }
       } catch (err) {
-        // non-fatal — keep existing products and surface error state
         setError(err.message || err);
       }
     })();
@@ -80,34 +76,57 @@ export default function useCart(authTrigger) {
   }, [rawItems, products]);
 
   const addToCart = useCallback(async (productId) => {
+    // Prevent concurrent operations on the same item
+    const opKey = `add-${productId}`;
+    if (pendingOps.current.has(opKey)) {
+      console.warn('⚠️ Skipping duplicate add operation for', productId);
+      return;
+    }
+    
+    pendingOps.current.add(opKey);
     setLoading(true);
+    
     try {
+      console.log('➕ Adding to cart:', productId);
       const resp = await cartService.addProduct(productId);
-      // If the server returned the cart and products, update local state directly to avoid a second GET
+      console.log('✅ Add response:', resp.items);
+      
       if (resp && (resp.items || resp.cart || resp.products)) {
-        // there are two possible shapes: { items, products } (new) or { cart, products }
         const items = resp.items || (resp.cart && resp.cart.items) || [];
         const products = resp.products || [];
         setRawItems(items || []);
         if (products && products.length) setProducts(products);
         else {
-          // if products missing, fallback to full reload
           await load();
         }
       } else {
         await load();
       }
     } catch (err) {
+      console.error('❌ Add failed:', err);
       setError(err.message || 'Failed to add product');
     } finally {
+      pendingOps.current.delete(opKey);
       setLoading(false);
     }
   }, [load]);
 
   const decrementProduct = useCallback(async (productId) => {
+    // Prevent concurrent operations on the same item
+    const opKey = `dec-${productId}`;
+    if (pendingOps.current.has(opKey)) {
+      console.warn('⚠️ Skipping duplicate decrement operation for', productId);
+      return;
+    }
+    
+    pendingOps.current.add(opKey);
     setLoading(true);
+    
     try {
+      console.log('➖ Decrementing:', productId);
       const resp = await cartService.decrementProduct(productId);
+      console.log('✅ Decrement response:', resp.items);
+      
       if (resp && (resp.items || resp.cart || resp.products)) {
         const items = resp.items || (resp.cart && resp.cart.items) || [];
         const products = resp.products || [];
@@ -120,21 +139,23 @@ export default function useCart(authTrigger) {
         await load();
       }
     } catch (err) {
+      console.error('❌ Decrement failed:', err);
       setError(err.message || 'Failed to update product');
     } finally {
+      pendingOps.current.delete(opKey);
       setLoading(false);
     }
   }, [load]);
 
-  const productMap = useMemo(() => {
-    const m = new Map();
-    (products || []).forEach((p) => m.set(p._id.toString(), p));
-    return m;
-  }, [products]);
-
   const items = useMemo(() => {
-    return rawItems.map((it) => {
-      const pid = it.productId.toString ? it.productId.toString() : String(it.productId);
+    const productMap = new Map();
+    (products || []).forEach((p) => {
+      const id = p._id && p._id.toString ? p._id.toString() : String(p._id);
+      productMap.set(id, p);
+    });
+
+    const result = rawItems.map((it) => {
+      const pid = it.productId && it.productId.toString ? it.productId.toString() : String(it.productId);
       const p = productMap.get(pid) || {};
       return {
         itemCode: pid,
@@ -146,17 +167,17 @@ export default function useCart(authTrigger) {
         addedAt: it.addedAt || null,
       };
     });
-  }, [rawItems, productMap]);
+    
+    console.log('🔄 Items recalculated:', result.map(i => `${i.itemCode.slice(-4)}:${i.quantity}`).join(', '));
+    return result;
+  }, [rawItems, products]);
 
   const total = useMemo(() => items.reduce((s, it) => s + (Number(it.itemPrice) || 0) * (Number(it.quantity) || 0), 0), [items]);
   const savings = useMemo(() => items.reduce((s, it) => s + ((Number(it.itemOldPrice) || 0) - (Number(it.itemPrice) || 0)) * (Number(it.quantity) || 0), 0), [items]);
 
   const removeItem = useCallback(async (productId) => {
-    // decrement until removed - backend supports decrement which removes at 0
-    // We'll call decrement in a loop until item disappears locally (simple approach)
     setLoading(true);
     try {
-      // try a single decrement then reload
       const resp = await cartService.decrementProduct(productId);
       if (resp && (resp.items || resp.cart || resp.products)) {
         const items = resp.items || (resp.cart && resp.cart.items) || [];
@@ -178,7 +199,6 @@ export default function useCart(authTrigger) {
     setLoading(true);
     try {
       const resp = await cartService.clearCart();
-      // server returns empty cart shape
       if (resp && (resp.items || resp.products || resp.cart)) {
         const items = resp.items || (resp.cart && resp.cart.items) || [];
         const products = resp.products || [];

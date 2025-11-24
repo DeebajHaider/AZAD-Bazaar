@@ -8,7 +8,7 @@ import CartItemList, { CartItemSkeleton } from '../component/cartItem'
 import BottomNav from '../component/BottomNav'
 
 export default function Cart() {
-  const { items: cartItems, clearCart, updateQuantity, removeItem, total, savings, loading } = useCart()
+  const { items: cartItems, clearCart, addToCart, decrementProduct, removeItem, total, savings, loading } = useCart()
   const { t, lang } = useI18n()
   const navigate = useNavigate()
 
@@ -18,6 +18,22 @@ export default function Cart() {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(amount);
+  };
+
+  // Direct handlers for cart operations
+  const handleIncrement = (itemCode) => {
+    console.log('Increment:', itemCode);
+    addToCart(itemCode);
+  };
+
+  const handleDecrement = (itemCode) => {
+    console.log('Decrement:', itemCode);
+    decrementProduct(itemCode);
+  };
+
+  const handleRemove = (itemCode) => {
+    console.log('Remove:', itemCode);
+    removeItem(itemCode);
   };
 
   // Cart icon to display in header
@@ -58,7 +74,6 @@ export default function Cart() {
 
   // View for displaying cart items
   const CartContents = () => (
-    // Add padding to the bottom to ensure the last item is not hidden by the sticky footer
     <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-full">
       {loading ? (
         <div className="space-y-3">
@@ -67,8 +82,9 @@ export default function Cart() {
       ) : (
         <CartItemList
           items={cartItems}
-          onQuantityChange={(itemCode, next) => updateQuantity(itemCode, next)}
-          onRemove={(itemCode) => removeItem(itemCode)}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+          onRemove={handleRemove}
         />
       )}
     </div>

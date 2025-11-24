@@ -1,35 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Trash2, Plus, Minus } from "lucide-react";
 import { useI18n } from '../context/I18nContext';
 import useTranslations from '../hooks/useTranslations';
-import { useData } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import ImageWithLoader from "./ImageWithLoader";
 
 /**
- * Counter Component (Redesigned)
- * - Larger, touch-friendly buttons (min-w-10, min-h-10) meeting the 44px guideline.
- * - Visually grouped with a border and rounded corners.
- * - Uses Minus icon for decrementing for better visual consistency.
+ * Counter Component
+ * Now receives direct increment/decrement/remove handlers
  */
-const Counter = ({ quantity, onChange, onRemove, itemName }) => {
+const Counter = ({ quantity, onIncrement, onDecrement, onRemove, itemName, disabled }) => {
   const { t } = useI18n();
-  const decrement = () => {
-    if (quantity > 1) onChange(quantity - 1);
-    else onRemove();
+  
+  const handleDecrement = () => {
+    if (disabled) return;
+    if (quantity > 1) {
+      onDecrement();
+    } else {
+      onRemove();
+    }
   };
-  const increment = () => onChange(quantity + 1);
 
   const removeLabel = t('cartItem.removeAriaLabel') ? t('cartItem.removeAriaLabel').replace('{{itemName}}', itemName) : `Remove ${itemName}`;
-  const decrementLabel = `Decrement quantity for ${itemName}`; // You can add keys for these if needed
-  const incrementLabel = `Increment quantity for ${itemName}`; // You can add keys for these if needed
+  const decrementLabel = `Decrement quantity for ${itemName}`;
+  const incrementLabel = `Increment quantity for ${itemName}`;
 
   return (
-    <div className="flex items-center primBorder rounded-lg ">
+    <div className="flex items-center primBorder rounded-lg">
       <button
-        onClick={decrement}
+        onClick={handleDecrement}
+        disabled={disabled}
         aria-label={quantity === 1 ? removeLabel : decrementLabel}
         className={`min-h-9 min-w-9 flex items-center justify-center rounded-l-md transition-colors ${
+          disabled ? 'opacity-50 cursor-not-allowed' : ''
+        } ${
           quantity === 1 ? 'accentDangerText' : 'secText secHoverBg'
         }`}
       >
@@ -41,9 +45,12 @@ const Counter = ({ quantity, onChange, onRemove, itemName }) => {
       </span>
 
       <button
-        onClick={increment}
+        onClick={onIncrement}
+        disabled={disabled}
         aria-label={incrementLabel}
-        className="min-h-9 min-w-9  flex items-center justify-center secText secHoverBg rounded-r-md transition-colors"
+        className={`min-h-9 min-w-9 flex items-center justify-center secText secHoverBg rounded-r-md transition-colors ${
+          disabled ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         <Plus size={18} />
       </button>
@@ -64,34 +71,15 @@ export const CartItemSkeleton = () => (
   </div>
 );
 
-
 /**
- * CartItem Component (Redesigned)
- * - Follows the "Card Component" pattern from your guidelines.
- * - Uses a robust flexbox layout instead of fixed percentages.
- * - Typography and colors match the design system.
- * - Removed confusing navigation back to the cart page.
+ * CartItem Component
+ * Receives increment/decrement/remove handlers directly
+ * No quantity management logic here
  */
-const CartItem = ({ item, onQuantityChange, onRemove }) => {
+const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
   const { translateDBVal } = useTranslations();
   const { lang, t } = useI18n();
-  const { fetchProductById } = useData();
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(item.quantity || 1);
-
-  // Sync quantity from parent props
-  useEffect(() => {
-    setQuantity(item.quantity || 1);
-  }, [item.quantity]);
-
-  const handleChange = (nextQuantity) => {
-    setQuantity(nextQuantity);
-    onQuantityChange?.(item.itemCode, nextQuantity);
-  };
-
-  const handleRemove = () => {
-    onRemove?.(item.itemCode);
-  };
 
   const handleNavigate = () => {
     navigate(`/product/${item.itemCode}`);
@@ -125,7 +113,7 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
                 {t('common.currencySymbol')} {Number(item.itemPrice).toLocaleString()}
               </span>
               {item.itemOldPrice && (
-                <span className="text-xs  secText line-through">
+                <span className="text-xs secText line-through">
                   {t('common.currencySymbol')} {Number(item.itemOldPrice).toLocaleString()}
                 </span>
               )}
@@ -137,10 +125,12 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
       {/* Right Column - Counter */}
       <div className="flex-shrink-0">
         <Counter
-          quantity={quantity}
-          onChange={handleChange}
-          onRemove={handleRemove}
+          quantity={item.quantity || 1}
+          onIncrement={() => onIncrement(item.itemCode)}
+          onDecrement={() => onDecrement(item.itemCode)}
+          onRemove={() => onRemove(item.itemCode)}
           itemName={itemName}
+          disabled={isUpdating}
         />
       </div>
     </div>
@@ -148,18 +138,24 @@ const CartItem = ({ item, onQuantityChange, onRemove }) => {
 };
 
 /**
- * CartItemList Component (Simplified)
- * - Now a simple wrapper that adds vertical spacing between items.
+ * CartItemList Component
+ * Passes through increment/decrement/remove handlers
  */
-const CartItemList = ({ items, onQuantityChange, onRemove }) => {
+const CartItemList = ({ items, onIncrement, onDecrement, onRemove, updatingItems = [] }) => {
   return (
     <div className="space-y-3">
       {items.map((item) => (
-        <CartItem key={item.itemCode} item={item} onQuantityChange={onQuantityChange} onRemove={onRemove} />
+        <CartItem 
+          key={item.itemCode} 
+          item={item} 
+          onIncrement={onIncrement}
+          onDecrement={onDecrement}
+          onRemove={onRemove}
+          isUpdating={updatingItems.includes(item.itemCode)}
+        />
       ))}
     </div>
   );
 };
-
 
 export default CartItemList;
