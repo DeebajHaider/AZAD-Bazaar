@@ -186,6 +186,16 @@ export default function SearchResults() {
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [currentPage, setCurrentPage] = useState(1)
   const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+  // Open voice modal if ?voice=1 is present in URL
+  useEffect(() => {
+    if (searchParams.get('voice') === '1') {
+      setVoiceModalOpen(true);
+      // Remove the voice param from the URL (replace, don't push history)
+      const newParams = new URLSearchParams(searchParams);
+      newParams.delete('voice');
+      setTimeout(() => setSearchParams(newParams, { replace: true }), 0);
+    }
+  }, [searchParams, setSearchParams]);
 
   // Refactored filter state for new UI
   const [filters, setFilters] = useState(() => {

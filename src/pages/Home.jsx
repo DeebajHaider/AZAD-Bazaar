@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MapPin, Search, ShoppingBag, ChevronRight, Clock, Truck, CheckCircle, XCircle, Package } from 'lucide-react'
+import { MapPin, Search, ShoppingBag, ChevronRight, Clock, Truck, CheckCircle, XCircle, Package, Mic } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useData } from '../context/DataContext'
 import { useOrdersContext } from '../context/OrderContext' // Added
@@ -10,6 +10,8 @@ import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
 import ImageWithLoader from '../component/ImageWithLoader'
 import dayjs from 'dayjs' // Assuming dayjs is installed as per other files
+import VoiceInputModal from '../component/VoiceInputModal'
+import { useState } from 'react'
 
 // --- Reusable Sub-components for the Home Screen ---
 
@@ -228,6 +230,14 @@ export default function Home() {
   const { orders, loading: ordersLoading, error: ordersError } = useOrdersContext() // Fetching real orders
   const { t, lang } = useI18n()
 
+  // Voice modal state
+  const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+
+  // Handler for voice search button
+  const handleVoiceSearch = () => {
+    navigate('/search-results?q=&voice=1')
+  }
+
   const displayCategories = mainCategories?.slice(0, 30) || []
   const displayBrands = brands?.slice(0, 30) || []
   
@@ -235,6 +245,15 @@ export default function Home() {
   const recentOrders = orders 
     ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3) 
     : [];
+
+  // Handle voice confirm (navigates and sets query)
+  const handleVoiceConfirm = (transcript) => {
+    const trimmed = transcript.trim()
+    if (trimmed) {
+      navigate(`/search-results?q=${encodeURIComponent(trimmed)}`)
+      setVoiceModalOpen(false)
+    }
+  }
 
   return (
     <Layout footer={<BottomNav />}>
@@ -255,10 +274,27 @@ export default function Home() {
               <ImageWithLoader src="/Azad-Bazaar.svg" alt="Azad Bazaar logo" imageClassName="h-8 w-auto" />
             </div>
           </div>
-          <button onClick={() => navigate('/search-results?q=')} className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing">
-            <Search size={18} className="secText" />
-            <span className="secText">{t('home.header.searchPlaceholder')}</span>
-          </button>
+          <div className="relative w-full">
+            <button
+              onClick={() => navigate('/search-results?q=')}
+              className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing"
+              style={{ paddingRight: 48 }}
+            >
+              <Search size={18} className="secText" />
+              <span className="secText">{t('home.header.searchPlaceholder')}</span>
+            </button>
+            {/* Voice Search Button (absolute positioned) */}
+            <button
+              type="button"
+              aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
+              onClick={handleVoiceSearch}
+              className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors"
+              style={{ zIndex: 2 }}
+            >
+              <Mic size={20} className="primText" />
+            </button>
+          </div>
+          {/* VoiceInputModal is now handled in SearchResults page if voice=1 param is present */}
         </div>
       </header>
 
