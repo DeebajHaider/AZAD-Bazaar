@@ -660,6 +660,53 @@ body {
 .tritanopia .image-skeleton {
   @apply bg-gray-300 dark:bg-gray-700 border-none;
 }
+
+ /* ==================== ITEM CARD SPECIFIC ==================== */
+
+  /* Category Badge - Subtle pill shape */
+  .badgeCategory {
+    @apply inline-block bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide;
+    @apply dark:bg-slate-800 dark:text-slate-400;
+  }
+  .highContrast .badgeCategory {
+    @apply bg-transparent border border-black text-black font-bold;
+    @apply dark:border-white dark:text-white;
+  }
+
+  /* Cart Action Button - Tinted Style */
+  .btnCartAction {
+    /* Default: Light Blue Tint */
+    @apply bg-blue-50 text-blue-600 border border-blue-100;
+    @apply hover:bg-blue-500 hover:text-white hover:border-blue-500 hover:shadow-md;
+    @apply dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800 dark:hover:bg-blue-600 dark:hover:text-white;
+    
+    /* Animation */
+    @apply transition-all duration-200 active:scale-95;
+  }
+
+  /* High Contrast Mode */
+  .highContrast .btnCartAction {
+    @apply bg-white border-2 border-blue-800 text-blue-900;
+    @apply hover:bg-blue-900 hover:text-white hover:border-blue-900;
+    @apply dark:bg-black dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
+  }
+
+  /* Tritanopia (Blue-Yellow Color Blindness) - Use Pink/Red */
+  .tritanopia .btnCartAction {
+    @apply bg-pink-50 text-pink-600 border-pink-100;
+    @apply hover:bg-pink-600 hover:border-pink-600;
+    @apply dark:bg-pink-900/30 dark:text-pink-400 dark:border-pink-800;
+  }
+
+  /* Deuteranopia/Protanopia (Red-Green) - Use Sky Blue (Safe) */
+  .deuteranopia .btnCartAction,
+  .protanopia .btnCartAction {
+    @apply bg-sky-50 text-sky-600 border-sky-100;
+    @apply hover:bg-sky-600 hover:border-sky-600;
+    @apply dark:bg-sky-900/30 dark:text-sky-400 dark:border-sky-800;
+  }
+
+  
 }
 
 /* Hide scrollbars globally but keep scrolling functional */
