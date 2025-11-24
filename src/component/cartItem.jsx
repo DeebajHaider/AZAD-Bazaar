@@ -1,5 +1,5 @@
 import React from "react";
-import { Trash2, Plus, Minus, X } from "lucide-react";
+import { Trash2, Plus, Minus, X, Loader2 } from "lucide-react";
 import { useI18n } from '../context/I18nContext';
 import useTranslations from '../hooks/useTranslations';
 import { useNavigate } from "react-router-dom";
@@ -101,9 +101,18 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
 
   return (
     <div
-      onClick={handleNavigate}
-      className="group relative flex items-start gap-3 card p-3 transition-all duration-200 hover:shadow-md cursor-pointer"
+      onClick={!isUpdating ? handleNavigate : undefined}
+      className={`group relative flex items-start gap-3 card p-3 transition-all duration-200 ${
+        isUpdating ? 'cursor-not-allowed' : 'hover:shadow-md cursor-pointer'
+      }`}
     >
+
+      {/* Loading Overlay */}
+      {isUpdating && (
+        <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/60 rounded-lg flex items-center justify-center z-20">
+          <Loader2 className="w-6 h-6 accentPrimText animate-spin" />
+        </div>
+      )}
 
       {/* 
         --- DEDICATED REMOVE BUTTON --- 
@@ -114,7 +123,9 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
         onClick={handleRemoveClick}
         disabled={isUpdating}
         aria-label={t('cart.actions.remove', { defaultValue: 'Remove item' })}
-        className="absolute top-2 right-2 rtl:right-auto rtl:left-2 p-2 rounded-full accentDangerText transition-colors focusRing z-10"
+        className={`absolute top-2 right-2 rtl:right-auto rtl:left-2 p-2 rounded-full accentDangerText transition-colors focusRing z-10 ${
+          isUpdating ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         <Trash2 size={18} />
       </button>

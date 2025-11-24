@@ -8,9 +8,12 @@ import CartItemList, { CartItemSkeleton } from '../component/cartItem'
 import BottomNav from '../component/BottomNav'
 
 export default function Cart() {
-  const { items: cartItems, clearCart, addToCart, decrementProduct, removeItem, total, savings, loading } = useCart()
+  const { items: cartItems, clearCart, addToCart, decrementProduct, removeItem, total, savings, loading, productLoadingStates } = useCart()
   const { t, lang } = useI18n()
   const navigate = useNavigate()
+  
+  // Show skeleton only on initial load (when loading and no items yet)
+  const showSkeleton = loading && cartItems.length === 0
 
   // Helper function to format currency with commas
   const formatCurrency = (amount) => {
@@ -75,7 +78,7 @@ export default function Cart() {
   // View for displaying cart items
   const CartContents = () => (
     <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-full">
-      {loading ? (
+      {showSkeleton ? (
         <div className="space-y-3">
           {Array.from({ length: 3 }).map((_, i) => <CartItemSkeleton key={i} />)}
         </div>
@@ -85,6 +88,7 @@ export default function Cart() {
           onIncrement={handleIncrement}
           onDecrement={handleDecrement}
           onRemove={handleRemove}
+          updatingItems={Object.keys(productLoadingStates).filter(key => productLoadingStates[key])}
         />
       )}
     </div>

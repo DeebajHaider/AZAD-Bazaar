@@ -1,42 +1,101 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import useCartApi from '../hooks/useCart'
 import { useAuth } from './AuthContext'
 
 const CartContext = createContext(null)
 
 export function CartProvider({ children }) {
-  // use the API-backed hook internally
   const { token } = useAuth()
   const api = useCartApi(token)
+  
+  // Track loading state per product
+  const [productLoadingStates, setProductLoadingStates] = useState({})
 
-  // expose a compatible API similar to the previous CartContext
-  // addItem expects an object with itemCode === productId string
+  // Helper to set loading state for a product
+  const setProductLoading = (itemCode, isLoading) => {
+    setProductLoadingStates(prev => ({
+      ...prev,
+      [itemCode]: isLoading
+    }))
+  }
+
+  // Check if a product is loading
+  const isProductLoading = (itemCode) => {
+    return productLoadingStates[itemCode] || false
+  }
+
   async function addItem(newItem) {
     if (!newItem) return
     const productId = newItem.itemCode
     if (!productId) return
-    return api.addToCart(productId)
+    
+    setProductLoading(productId, true)
+    try {
+      return await api.addToCart(productId)
+    } finally {
+      setProductLoading(productId, false)
+    }
   }
 
-  // updateQuantity will increment or decrement until the desired quantity is reached
   async function updateQuantity(itemCode, quantity) {
     const current = (api.items.find((it) => it.itemCode === itemCode) || {}).quantity || 0
     if (quantity === current) return
-    if (quantity > current) {
-      for (let i = 0; i < quantity - current; i++) await api.addToCart(itemCode)
-    } else {
-      for (let i = 0; i < current - quantity; i++) await api.decrementProduct(itemCode)
+    
+    setProductLoading(itemCode, true)
+    try {
+      if (quantity > current) {
+        for (let i = 0; i < quantity - current; i++) {
+          await api.addToCart(itemCode)
+        }
+      } else {
+        for (let i = 0; i < current - quantity; i++) {
+          await api.decrementProduct(itemCode)
+        }
+      }
+    } finally {
+      setProductLoading(itemCode, false)
     }
-    // api.load() is called inside addToCart/decrementProduct, so state will refresh
   }
 
-  // removeItem: remove fully using direct API if available
   async function removeItem(itemCode) {
-      return await api.removeItem(itemCode);   
+    setProductLoading(itemCode, true)
+    try {
+      return await api.removeItem(itemCode)
+    } finally {
+      setProductLoading(itemCode, false)
+    }
   }
 
   async function clearCart() {
-    return api.clearCart()
+    // Set all items as loading
+    api.items.forEach(item => {
+      setProductLoading(item.itemCode, true)
+    })
+    try {
+      return await api.clearCart()
+    } finally {
+      setProductLoadingStates({})
+    }
+  }
+
+  // Convenience method to add to cart directly
+  async function addToCart(itemCode) {
+    setProductLoading(itemCode, true)
+    try {
+      return await api.addToCart(itemCode)
+    } finally {
+      setProductLoading(itemCode, false)
+    }
+  }
+
+  // Convenience method to decrement
+  async function decrementProduct(itemCode) {
+    setProductLoading(itemCode, true)
+    try {
+      return await api.decrementProduct(itemCode)
+    } finally {
+      setProductLoading(itemCode, false)
+    }
   }
 
   const value = {
@@ -44,14 +103,17 @@ export function CartProvider({ children }) {
     loading: api.loading,
     error: api.error,
     addItem,
-    addToCart: api.addToCart,
+    addToCart,
     updateQuantity,
-    decrementProduct: api.decrementProduct,
+    decrementProduct,
     removeItem,
     clearCart,
     total: api.total,
     savings: api.savings,
-    reload: api.load
+    reload: api.load,
+    // New methods for per-product loading
+    isProductLoading,
+    productLoadingStates
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
