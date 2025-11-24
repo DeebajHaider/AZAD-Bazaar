@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save, Info, Mic } from 'lucide-react'
+import { ChevronRight, LogOut, Save, Info, Mic, Heart } from 'lucide-react'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
@@ -271,6 +271,17 @@ export default function Settings() {
             >
               <LogOut size={18} />
               {t('settings.signOut.button')}
+            </button>
+          </div>
+
+          {/* Card: Favorites */}
+          <div className="secBg primBorder rounded-lg p-4">
+            <button
+              onClick={() => navigate('/favorites')}
+              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+            >
+              <Heart size={18} />
+              Favorites
             </button>
           </div>
 

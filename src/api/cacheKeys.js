@@ -19,6 +19,9 @@ export const RELATED_PRODUCTS = (id) => `related_products_${id}`;
 // Cart cache keys (user-specific)
 export const CART = (token = '') => `cart_${token ? token.substring(0, 10) : 'guest'}`;
 
+// Favorites cache keys (user-specific)
+export const FAVORITES = (token = '') => `favorites_${token ? token.substring(0, 10) : 'guest'}`;
+
 // Order cache keys
 export const ORDERS_LIST = 'orders_list';
 export const ORDER_BY_ID = (id) => `order_${id}`;

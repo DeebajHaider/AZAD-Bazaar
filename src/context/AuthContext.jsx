@@ -151,6 +151,8 @@ export function AuthProvider({ children }) {
     invalidateCache('cart_') // Clear all cart caches
     invalidateCache(ORDERS_LIST)
     invalidateCache('order_') // Clear all individual order caches
+    // Clear favorites caches on logout
+    invalidateCache('favorites_')
     
     setToken(null)
     setUser(null)

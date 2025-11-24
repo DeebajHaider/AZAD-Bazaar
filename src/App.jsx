@@ -29,6 +29,8 @@ import ThemeSelection from './pages/ThemeSelection'
 
 // --- NEW IMPORTS (Ensure you create these files) ---
 import ModeSelection from './pages/ModeSelection'
+import Favorites from './pages/Favorites'
+import { FavoritesProvider } from './context/FavoritesContext'
 
 export default function App() {
   const AuthGate = () => {
@@ -86,6 +88,7 @@ export default function App() {
           <Route path="/view-cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/search" element={<Search />} />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/product/:productId" element={<Product />} />
@@ -101,28 +104,31 @@ export default function App() {
         </Routes>
       </div>
     )
-  }
+}
 
-  return (
-    <I18nProvider>
-      <TTSProvider>
-        <ThemeProvider>
-          <AccessibilityProvider>
-            <AuthProvider>
-              <DataProvider>
-                <CartProvider>
-                  <OrderProvider>
+return (
+  <I18nProvider>
+    <TTSProvider>
+      <ThemeProvider>
+        <AccessibilityProvider>
+          <AuthProvider>
+            <DataProvider>
+              <CartProvider>
+                <OrderProvider>
+                  <FavoritesProvider>
+
                     {/* MOVED Router OUTSIDE AuthGate so useNavigate works inside Splash */}
                     <Router>
                       <AuthGate />
                     </Router>
-                  </OrderProvider>
-                </CartProvider>
-              </DataProvider>
-            </AuthProvider>
-          </AccessibilityProvider>
-        </ThemeProvider>
-      </TTSProvider>
-    </I18nProvider>
-  )
+                  </FavoritesProvider>
+                </OrderProvider>
+              </CartProvider>
+            </DataProvider>
+          </AuthProvider>
+        </AccessibilityProvider>
+      </ThemeProvider>
+    </TTSProvider>
+  </I18nProvider>
+)
 }

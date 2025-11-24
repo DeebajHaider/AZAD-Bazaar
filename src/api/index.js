@@ -3,12 +3,14 @@ import productService from './productService';
 import categoryService from './categoryService';
 import brandService from './brandService';
 import orderService from './orderService';
+import favService from './favService';
 
 import useProducts from './hooks/useProducts';
 import useProduct from './hooks/useProduct';
 import useCategories from './hooks/useCategories';
 import useBrands from './hooks/useBrands';
 import useOrders from './hooks/useOrders';
+import useFavorites, { useAddFavorite, useRemoveFavorite } from './hooks/useFavorites';
 
 export {
   client,
@@ -16,11 +18,15 @@ export {
   categoryService,
   brandService,
   orderService,
+  favService,
   useProducts,
   useProduct,
   useCategories,
   useBrands,
   useOrders,
+  useFavorites,
+  useAddFavorite,
+  useRemoveFavorite,
 };
 
 export default {
@@ -29,4 +35,5 @@ export default {
   categoryService,
   brandService,
   orderService,
+  favService,
 };

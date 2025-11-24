@@ -3,6 +3,7 @@ import { Heart, Plus, Minus, Loader2, Share2, ShoppingCart } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useProduct } from '../api'
+import { useFavoritesContext } from "../context/FavoritesContext";
 import { useData } from '../context/DataContext'
 import { useI18n } from '../context/I18nContext'
 import useTranslations from '../hooks/useTranslations'
@@ -299,7 +300,7 @@ export default function Product() {
   const { addToCart, decrementProduct, items: cartItems } = useCart()
   const { productId } = useParams()
   const [qty, setQty] = useState(0)
-  const [liked, setLiked] = useState(false)
+  const { add, remove, isFavorite, loading: favLoading } = useFavoritesContext()
   const [subcategoryNames, setSubcategoryNames] = useState([]);
   const mainContentRef = useRef(null);
 
@@ -334,13 +335,33 @@ export default function Product() {
 
   const format = (key, vars = {}) => t(key, vars)
 
-  const HeaderActions = () => (
-    <div className="flex items-center gap-1">
-      <button onClick={() => setLiked(v => !v)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
-        <Heart size={22} className={`transition-all ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-gray-300'}`} />
-      </button>
-    </div>
-  )
+  const HeaderActions = () => {
+    const pid = product?._id ?? product?.id
+    const liked = pid ? isFavorite(pid) : false
+    const toggleFav = async () => {
+      if (!pid || favLoading) return
+      try {
+        if (liked) await remove(pid)
+        else await add(pid)
+      } catch (e) {
+        // silent fail; could add toast later
+        console.error('Favorite toggle failed', e)
+      }
+    }
+    return (
+      <div className="flex items-center gap-1">
+        <button
+          onClick={toggleFav}
+          disabled={!pid || favLoading}
+          aria-pressed={liked}
+          aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-60"
+        >
+          <Heart size={22} className={`transition-all ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-gray-300'}`} />
+        </button>
+      </div>
+    )
+  }
   
 
   return (
