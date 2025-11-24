@@ -20,32 +20,38 @@ export default function SplashScreen({ duration = 2000 }) {
   const [showText, setShowText] = useState(false)
 
   useEffect(() => {
-    // Timer to fade in the text shortly after the logo animation starts
-    const textTimer = setTimeout(() => {
-      setShowText(true)
-    }, 500) // 0.5s delay
+    const textTimer = setTimeout(() => setShowText(true), 500);
 
-    // Timer to handle the navigation logic
     const navigationTimer = setTimeout(() => {
-      // Check if the user has completed onboarding previously
-      const hasOnboarded = localStorage.getItem('hasOnboarded')
+      const hasOnboarded = localStorage.getItem('hasOnboarded');
 
-      if (hasOnboarded === 'true') {
-        // User has seen onboarding -> Go to Login
-        // replace: true prevents back button from returning to splash
-        navigate('/login', { replace: true })
-      } else {
-        // New user -> Go to Language Selection
-        navigate('/language-selection', { replace: true })
+      // If user hasn't onboarded, set theme to device default
+      if (hasOnboarded !== 'true') {
+        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+        localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
+
+        // Optionally, also update document class immediately
+        const root = document.documentElement;
+        if (prefersDark) {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
       }
-    }, duration)
 
-    // Cleanup timers on component unmount
+      // Navigate to appropriate page
+      if (hasOnboarded === 'true') {
+        navigate('/login', { replace: true });
+      } else {
+        navigate('/language-selection', { replace: true });
+      }
+    }, duration);
+
     return () => {
-      clearTimeout(textTimer)
-      clearTimeout(navigationTimer)
-    }
-  }, [navigate, duration])
+      clearTimeout(textTimer);
+      clearTimeout(navigationTimer);
+    };
+  }, [navigate, duration]);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center primBg">
