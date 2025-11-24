@@ -528,5 +528,16 @@
       "notSupported": "Voice recognition is not supported on this browser. Please use a browser like Chrome.",
       "generic": "Something went wrong. Please try again."
     }
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "itemUnavailable": "Item unavailable",
+    "removeAria": "Remove from favorites",
+    "empty": {
+      "title": "No Favorites Yet",
+      "description": "Save items you love here to check them out later.",
+      "cta": "Start Shopping"
+    },
+    "footerNote": "Prices and availability are subject to change."
   }
 }
