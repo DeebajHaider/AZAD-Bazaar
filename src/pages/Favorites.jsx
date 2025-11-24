@@ -87,7 +87,7 @@ const FavoriteItemCard = ({ id, onRemove }) => {
   };
 
   const handleNavigate = () => {
-    navigate('/product', { state: { product } });
+    navigate('/product' + `/${product._id || product.id}`);
   };
 
   return (
