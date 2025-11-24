@@ -148,9 +148,15 @@ exports.addProductToCart = async (req, res) => {
 
     const cid = user.customerId;
 
-    // Try to increment quantity if item already exists
     const incrementResult = await Customer.findOneAndUpdate(
-      { _id: cid, 'currentCart.items.productId': productId },
+      {
+        _id: cid,
+        'currentCart.items': {
+          $elemMatch: {
+            productId: new mongoose.Types.ObjectId(productId)
+          }
+        }
+      },
       {
         $inc: { 'currentCart.items.$.quantity': 1 },
         $set: { 'currentCart.items.$.addedAt': new Date(), 'currentCart.lastUpdated': new Date() }
@@ -176,11 +182,11 @@ exports.addProductToCart = async (req, res) => {
     ).lean();
 
     if (!pushResult) return res.status(404).json({ message: 'Customer not found' });
-  console.log('addProductToCart pushResult', { customerId: cid, items: pushResult.currentCart ? pushResult.currentCart.items.length : 0 });
-  const items = (pushResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
-  const ids = items.map((i) => i.productId).filter(Boolean);
-  const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
-  return res.json({ items, products });
+    console.log('addProductToCart pushResult', { customerId: cid, items: pushResult.currentCart ? pushResult.currentCart.items.length : 0 });
+    const items = (pushResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+    const ids = items.map((i) => i.productId).filter(Boolean);
+    const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+    return res.json({ items, products });
   } catch (err) {
     console.error('addProductToCart error', err);
     return res.status(500).json({ message: 'Server error' });
@@ -198,10 +204,21 @@ exports.decrementProductInCart = async (req, res) => {
 
     const cid = user.customerId;
 
-    // Try decrement where quantity > 1
+    // FIX: Use $elemMatch to ensure BOTH conditions match the SAME array element
     const decResult = await Customer.findOneAndUpdate(
-      { _id: cid, 'currentCart.items.productId': productId, 'currentCart.items.quantity': { $gt: 1 } },
-      { $inc: { 'currentCart.items.$.quantity': -1 }, $set: { 'currentCart.items.$.addedAt': new Date(), 'currentCart.lastUpdated': new Date() } },
+      {
+        _id: cid,
+        'currentCart.items': {
+          $elemMatch: {
+            productId: new mongoose.Types.ObjectId(productId),
+            quantity: { $gt: 1 }
+          }
+        }
+      },
+      {
+        $inc: { 'currentCart.items.$.quantity': -1 },
+        $set: { 'currentCart.items.$.addedAt': new Date(), 'currentCart.lastUpdated': new Date() }
+      },
       { new: true }
     ).lean();
 
@@ -220,12 +237,12 @@ exports.decrementProductInCart = async (req, res) => {
       { new: true }
     ).lean();
 
-  if (!pullResult) return res.status(404).json({ message: 'Customer not found' });
-  console.log('decrementProductInCart pullResult', { customerId: cid, items: pullResult.currentCart ? pullResult.currentCart.items.length : 0 });
-  const items = (pullResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
-  const ids = items.map((i) => i.productId).filter(Boolean);
-  const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
-  return res.json({ items, products });
+    if (!pullResult) return res.status(404).json({ message: 'Customer not found' });
+    console.log('decrementProductInCart pullResult', { customerId: cid, items: pullResult.currentCart ? pullResult.currentCart.items.length : 0 });
+    const items = (pullResult.currentCart.items || []).map((it) => ({ productId: it.productId, quantity: it.quantity, addedAt: it.addedAt }));
+    const ids = items.map((i) => i.productId).filter(Boolean);
+    const products = ids.length ? await Product.find({ _id: { $in: ids } }, { name: 1, discountedPrice: 1, originalPrice: 1, bulkDiscounts: 1, images: 1 }).lean() : [];
+    return res.json({ items, products });
   } catch (err) {
     console.error('decrementProductInCart error', err);
     return res.status(500).json({ message: 'Server error' });
