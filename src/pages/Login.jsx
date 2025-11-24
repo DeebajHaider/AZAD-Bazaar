@@ -276,6 +276,7 @@ export default function Login() {
                   </label>
                   <input
                     type="tel"
+                    inputMode="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                     placeholder={t('login.form.phone.placeholder')}
@@ -316,7 +317,8 @@ export default function Login() {
                     {t('login.form.otp.label')}
                   </label>
                   <input
-                    type="text"
+                    type="tel"
+                    inputMode="tel"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                     placeholder={t('login.form.otp.placeholder')}
