@@ -136,8 +136,7 @@ export default function LanguageSelection() {
           </div>
           {/* Proceed Button */}
           <button
-            onClick={async () => {
-              await speakWithIndicator(languageStrings.tts.proceed, { lang: 'ur-PK' })
+            onClick={() => {
               navigate('/mode-selection')
             }}
             className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
