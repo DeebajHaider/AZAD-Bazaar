@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
-import { X, Search, Filter } from 'lucide-react'
+import { X, Search, Filter, Mic } from 'lucide-react'
+import VoiceInputModal from './VoiceInputModal'
 
 const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, brands, t, lang, translateDBVal }) => {
   if (!isOpen) return null
@@ -7,6 +8,7 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
   const [tempCategories, setTempCategories] = useState(initialFilters.categories)
   const [tempBrands, setTempBrands] = useState(initialFilters.brands)
   const [searchQuery, setSearchQuery] = useState('')
+  const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
 
   // --- Helpers ---
   const getName = (item, type) => translateDBVal(type, "name", item.name, lang) || ''
@@ -63,6 +65,12 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
     setSearchQuery('')
   }
 
+  const handleVoiceConfirm = (transcript) => {
+    const trimmed = transcript.trim()
+    if (trimmed) setSearchQuery(trimmed)
+    setVoiceModalOpen(false)
+  }
+
   return (
     // Outer backdrop: Added safe-area padding and darkened background
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/60  transition-opacity" role="dialog" aria-modal="true" aria-labelledby="filter-title">
@@ -95,24 +103,32 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
           {/* Search Input */}
           <div className="relative group">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 secText pointer-events-none group-focus-within:accentPrimText transition-colors" size={18} />
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder={t('searchResults.header.placeholder') || "Search filters..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              // FIXED: Added !pl-11 (approx 44px) to override the default inputField padding, ensuring text doesn't overlap icon
-              className="inputField !pl-11 pr-9 py-2.5 h-11 text-sm bg-gray-100 dark:bg-slate-800 border-transparent focus:bg-white dark:focus:bg-slate-950 transition-all shadow-sm"
+              className="inputField !pl-11 pr-20 py-2.5 h-11 text-sm bg-gray-100 dark:bg-slate-800 border-transparent focus:bg-white dark:focus:bg-slate-950 transition-all shadow-sm"
               aria-label="Search categories and brands"
             />
+            {/* Clear Button (shifted left to make room for mic) */}
             {searchQuery && (
-              <button 
+              <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 secText hover:primText transition-colors"
-                aria-label="Clear search"
+                className="absolute right-12 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 secText hover:primText transition-colors"
+                aria-label={t('common.clear') || 'Clear search'}
               >
                 <X size={14} />
               </button>
             )}
+            {/* Voice Search Button */}
+            <button
+              onClick={() => setVoiceModalOpen(true)}
+              aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
+              className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full accentPrimBg flex items-center justify-center hover:opacity-90 transition-colors"
+            >
+              <Mic size={16} className="primText" />
+            </button>
           </div>
           
           <div className="border-b dividerBorder pt-1"></div>
@@ -241,6 +257,13 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
            </button>
         </footer>
       </div>
+      {/* Voice Input Modal */}
+      <VoiceInputModal
+        isOpen={isVoiceModalOpen}
+        onClose={() => setVoiceModalOpen(false)}
+        onConfirm={handleVoiceConfirm}
+        confirmLabel={t('voiceModal.actions.confirmSearch')}
+      />
     </div>
   )
 }
