@@ -108,12 +108,12 @@
     }
   },
   "accessibility": {
-        "voiceInput": {
-          "title": "Voice Input",
-          "description": "Enable voice input features for text fields.",
-          "enabled": "Voice Input Enabled",
-          "disabled": "Voice Input Disabled"
-        },
+    "voiceInput": {
+      "title": "Voice Input",
+      "description": "Enable voice input features for text fields.",
+      "enabled": "Voice Input Enabled",
+      "disabled": "Voice Input Disabled"
+    },
     "header": {
       "title": "Accessibility Settings"
     },
@@ -370,7 +370,8 @@
       "notFound": "The requested item could not be found."
     },
     "on": "On",
-    "off": "Off"
+    "off": "Off",
+    "confirm": "Confirm"
   },
   "itemCard": {
     "discountOff": "{{percent}}% OFF",
@@ -473,27 +474,29 @@
   },
   "modeSelection": {
     "title": "Choose Your Experience",
+    "heading": "Select a Mode",
+    "subHeading": "Choose the option that best fits your needs.",
     "description": "Select the mode that best fits your needs.",
     "normal": {
-      "title": "I'm completely normal",
+      "title": "I don't need any assistance",
       "description": "Standard app experience with default settings."
     },
     "assistance": {
-      "title": "I need assistance",
+      "title": "Visual Assistance",
       "description": "Larger text, higher contrast, and easier controls."
     },
     "illiterate": {
-      "title": "I am completely illiterate",
-      "description": "Voice-guided navigation with audio feedback."
+      "title": "I cannot type",
+      "description": "Voice-enabled input with visual confirmation."
     },
     "chooseLabel": "Choose Your Mode"
   },
   "tts": {
     "modeSelection": {
-      "intro": "Please select the mode that best fits your needs. You will hear three options.",
-      "option1": "Option one: If you have no special needs.",
-      "option2": "Option two: If you need voice assistance.",
-      "option3": "Option three: If you are completely illiterate."
+      "intro": "Please select the mode that best fits your needs.",
+      "option1": "I have no special needs.",
+      "option2": "I need visual assistance.",
+      "option3": "I need voice input as I cannot type"
     }
   },
   "voiceModal": {
