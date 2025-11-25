@@ -6,10 +6,6 @@ Back button in orders takes you back to home, but back button in search takes yo
 
 Put English/Urdu toggle at the top of the Settings page.
 
-Changing address should be difficult or require confirmation.
-
-Option to save multiple addresses with multiple name, which can be selected for order in the checkout page (or we can select from home page and in checkout that will be default until user decides to change) , (and visible on the Orders page)
-
 Clicking “Deliver To” on the home page currently opens Settings. Should instead open a new modal to choose addresses from. And button to add which should lead to an address adding page or we can just make a new account page with name/number/address/card option. ofc each address will have a name like home, work, etc.
 
 Remove back button from Search page because bottom navigation is enough. Or maybe redirect it to the home page. Search mobile HCI elements for this also is a good observation and we can reasarch it on further pages
@@ -23,4 +19,4 @@ Search result state is not preserved: Steps: search → apply category/type/sort
 add a map to show address
 
 optimziaiton 
-accouns age with linkn to settings, cards,m addresses 
+accouns page with linkn to settings, cards, 

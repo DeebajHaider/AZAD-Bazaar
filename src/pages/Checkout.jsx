@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Edit3, Save, Wallet, CreditCard, Loader2, Mic } from 'lucide-react'
+import { Edit3, Save, Wallet, CreditCard, Loader2, Mic, MapPin, Plus, Check, Circle } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
 import AuthContext from '../context/AuthContext'
@@ -11,21 +11,18 @@ import BottomNav from '../component/BottomNav'
 import VoiceInputModal from '../component/VoiceInputModal'
 import { useAccessibility } from '../context/AccessibilityContext'
 
+// --- Skeleton Components ---
 const CheckoutSkeleton = () => (
   <div className="p-4 space-y-6 min-h-full animate-pulse">
-    {/* Address Section Skeleton */}
     <div className="secBg primBorder rounded-lg">
       <div className="flex justify-between items-center p-4 dividerBorder">
         <div className="h-6 w-32 skeleton" />
         <div className="h-6 w-20 skeleton" />
       </div>
       <div className="p-4 space-y-4">
-        <div className="h-10 w-full skeleton" />
-        <div className="h-10 w-full skeleton" />
+        <div className="h-24 w-full skeleton rounded-lg" />
       </div>
     </div>
-
-    {/* Payment Section Skeleton */}
     <div className="secBg primBorder rounded-lg p-4 space-y-4">
       <div className="h-6 w-32 skeleton" />
       <div className="grid grid-cols-2 gap-4">
@@ -33,41 +30,27 @@ const CheckoutSkeleton = () => (
         <div className="h-24 skeleton rounded-lg" />
       </div>
     </div>
-
-    {/* Billing Section Skeleton */}
-    
   </div>
 )
 
 const CheckoutBillingSkeleton = () => (
   <div className="primBg">
-<div className="secBg primBorder rounded-lg p-4 space-y-3">
+    <div className="secBg primBorder rounded-lg p-4 space-y-3">
       <div className="h-6 w-24 skeleton mb-2" />
       <div className="flex justify-between">
         <div className="h-5 w-20 skeleton" />
         <div className="h-5 w-16 skeleton" />
       </div>
-      <div className="flex justify-between">
-        <div className="h-5 w-24 skeleton" />
-        <div className="h-5 w-12 skeleton" />
-      </div>
-      <div className="flex justify-between">
-        <div className="h-5 w-28 skeleton" />
-        <div className="h-5 w-14 skeleton" />
-      </div>
-      <div className="flex justify-between">
-        <div className="h-5 w-16 skeleton" />
-        <div className="h-5 w-12 skeleton" />
-      </div>
       <div className="pt-3 mt-1 dividerBorder border-t flex justify-between">
         <div className="h-6 w-20 skeleton" />
         <div className="h-6 w-24 skeleton" />
       </div>
-    </div></div>);
+    </div>
+  </div>
+);
 
-// --- Sub-components for better organization ---
+// --- Sub-components ---
 
-// A reusable styled input component
 const FormInput = ({ label, ...props }) => (
   <div>
     <label className="block text-sm font-medium mb-2 primText ">
@@ -80,13 +63,12 @@ const FormInput = ({ label, ...props }) => (
   </div>
 )
 
-// A visually distinct payment option selector
 const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
   <button
     onClick={onClick}
     className={`w-full flex flex-col items-center justify-center gap-2 p-4 rounded-lg transition-all duration-200 ${isActive
-        ? 'modeChooseButton-selected'
-        : 'modeChooseButton-unselected'
+      ? 'modeChooseButton-selected'
+      : 'modeChooseButton-unselected'
       }`}
   >
     <Icon size={24} className={isActive ? '' : 'secText'} />
@@ -104,36 +86,37 @@ export default function Checkout() {
   const { user, customer, loading: authLoading, getDefaultAddress } = useContext(AuthContext)
   const { createOrder } = useOrdersContext()
   const navigate = useNavigate()
+  
+  // Accessibility
+  const { ascMode } = useAccessibility && useAccessibility() || {}
+  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
 
   // State Management
   const [orderLoading, setOrderLoading] = useState(false)
   const [orderError, setOrderError] = useState(null)
-  const [editingAddress, setEditingAddress] = useState(false)
-  // Initialize checkout address with default address (can be switched later)
-  const initialDefault = getDefaultAddress ? getDefaultAddress() : null
-  const [address, setAddress] = useState(() => initialDefault ? {
-    label: initialDefault.label || 'Home',
-    addressText: initialDefault.addressText || '',
-    lat: initialDefault.lat ?? null,
-    lng: initialDefault.lng ?? null,
-    addressId: initialDefault.addressId
-  } : { label: 'Home', addressText: '', lat: null, lng: null })
+  
+  // Address State
+  const [isSelectingAddress, setIsSelectingAddress] = useState(false)
+  const [address, setAddress] = useState(null)
 
-  // Keep in sync if customer addresses change and user is not editing
+  // Initialize Address from Context
   useEffect(() => {
-    if (!editingAddress) {
-      const def = getDefaultAddress ? getDefaultAddress() : null
-      if (def) {
-        setAddress({
-          label: def.label || 'Home',
-          addressText: def.addressText || '',
-          lat: def.lat ?? null,
-          lng: def.lng ?? null,
-          addressId: def.addressId
-        })
-      }
+    if (!address && customer && customer.addresses && customer.addresses.length > 0) {
+      const def = getDefaultAddress ? getDefaultAddress() : customer.addresses.find(a => a.isDefault);
+      const fallback = customer.addresses[0];
+      const target = def || fallback;
+      
+      setAddress({
+        label: target.label || 'Home',
+        addressText: target.addressText || '',
+        lat: target.lat ?? null,
+        lng: target.lng ?? null,
+        addressId: target.addressId
+      });
     }
-  }, [customer, editingAddress, getDefaultAddress])
+  }, [customer, getDefaultAddress, address]);
+
   const [instructions, setInstructions] = useState('')
   const [paymentMethod, setPaymentMethod] = useState({
     name: 'Cash on Delivery',
@@ -141,31 +124,16 @@ export default function Checkout() {
     last4Digits: ''
   })
   const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
-
-  // Accessibility voice input mode
-  const { ascMode } = useAccessibility && useAccessibility() || {}
-  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
-
-  // Voice modal state
-  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
-  const [voiceTarget, setVoiceTarget] = useState(null) // 'instructions' or 'address'
   
-  // Language direction (for button placement)
-  const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
+  // Voice Modal State
+  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
 
-  // Handle voice confirm for narrator mode
   const handleVoiceConfirm = useCallback((transcript) => {
-    if (!voiceTarget) return;
-    if (voiceTarget === 'instructions') {
-      setInstructions(transcript)
-    } else if (voiceTarget === 'address') {
-      setAddress(prev => ({ ...prev, addressText: transcript }))
-    }
+    setInstructions(transcript)
     setVoiceModalOpen(false);
-    setVoiceTarget(null);
-  }, [voiceTarget])
+  }, [])
 
-  // Example fees from your original code
+  // Calculation Logic
   const subtotal = cartTotal
   const serviceFee = 2.5
   const deliveryFee = 5.0
@@ -186,6 +154,11 @@ export default function Checkout() {
       alert('You must be logged in to place an order.')
       return
     }
+    
+    if (!address) {
+      alert(t('checkout.address.errorNoAddress') || 'Please select a delivery address');
+      return;
+    }
 
     const orderData = {
       customerId: user.customerId,
@@ -201,7 +174,7 @@ export default function Checkout() {
         quantity: item.quantity
       })),
       deliveryInstructions: instructions,
-      vouchersUsed: [] // Add voucher logic later
+      vouchersUsed: []
     }
 
     setOrderLoading(true)
@@ -222,18 +195,7 @@ export default function Checkout() {
     }
   }
 
-  // Header "Edit/Save" button
-  const EditAddressAction = () => (
-    <button
-      onClick={() => setEditingAddress(prev => !prev)}
-      className="flex items-center gap-1.5 text-sm font-medium accentPrimText hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
-    >
-      {editingAddress ? <Save size={16} /> : <Edit3 size={16} />}
-      {editingAddress ? t('checkout.address.saveButton') : t('checkout.address.editButton')}
-    </button>
-  )
-
-  // Show skeleton while cart is loading OR auth/customer still resolving
+  // Handle Loading States
   if (cartLoading || authLoading || (user && user.customerId && !customer)) {
     return (
       <Layout
@@ -247,7 +209,7 @@ export default function Checkout() {
     )
   }
 
-  // Footer action bar component (moved into Layout footer similar to Product/Cart pages)
+  // Footer Component
   const PlaceOrderFooter = () => (
     <div className="secBg dividerBorder border-t p-4">
       <button
@@ -258,7 +220,6 @@ export default function Checkout() {
         {orderLoading ? (
           <Loader2 className="animate-spin" />
         ) : (
-          // Use replace on translation string to inject formatted total
           t('checkout.actions.placeOrder')
             .replace('${{total}}', `${t('common.currencySymbol') }${formatCurrency(total)}`)
         )}
@@ -274,103 +235,166 @@ export default function Checkout() {
     >
       <main className="flex-1 overflow-y-auto primBg min-h-full">
         <div className="p-4 space-y-6">
-          {/* Address Section */}
-          <section className="secBg primBorder rounded-lg">
-            <div className="flex justify-between items-center p-4 dividerBorder">
-              <h2 className="text-lg font-semibold primText ">{t('checkout.address.title')}</h2>
-              <EditAddressAction />
+          
+          {/* --- ADDRESS SECTION (IMPROVED) --- */}
+          <section className="secBg primBorder rounded-lg overflow-hidden">
+            {/* Header: Clean Title + Action */}
+            <div className="flex justify-between items-center p-4 pb-2">
+              <h2 className="text-lg font-semibold primText">{t('checkout.address.title')}</h2>
+              <button
+                onClick={() => setIsSelectingAddress(!isSelectingAddress)}
+                className="text-sm font-semibold accentPrimText hover:underline px-2 py-1"
+              >
+                {isSelectingAddress 
+                  ? (t('common.done') || 'Done')
+                  : (t('checkout.address.changeButton') || 'Change')
+                }
+              </button>
             </div>
-            <div className="p-4 space-y-4">
-              {editingAddress ? (
-                <div className="space-y-3">
-                  {/* Address selector */}
-                  {Array.isArray(customer?.addresses) && customer.addresses.length > 0 && (
-                    <div>
-                      <label className="block text-sm font-medium mb-1 primText">Select Saved Address</label>
-                      <select
-                        value={address.addressId || ''}
-                        onChange={(e) => {
-                          const selected = customer.addresses.find(a => a.addressId === e.target.value)
-                          if (selected) {
-                            setAddress({
-                              label: selected.label || 'Home',
-                              addressText: selected.addressText || '',
-                              lat: selected.lat ?? null,
-                              lng: selected.lng ?? null,
-                              addressId: selected.addressId
-                            })
-                          }
-                        }}
-                        className="inputField"
-                      >
-                        {customer.addresses.map(a => (
-                          <option key={a.addressId} value={a.addressId}>
-                            {a.label || 'Address'}{a.isDefault ? ' (Default)' : ''}
-                          </option>
-                        ))}
-                      </select>
+
+            {/* Content Body */}
+            <div className="px-4 pb-4">
+              
+              {/* VIEW STATE 1: SELECTION LIST */}
+              {isSelectingAddress ? (
+                <div className="space-y-4 mb-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="flex justify-between items-center pt-2">
+                    <span className="text-xs font-medium secText uppercase tracking-wide">{t('checkout.address.savedAddresses') || 'Saved Addresses'}</span>
+                    <button 
+                       onClick={() => navigate('/address')}
+                       className="text-xs font-semibold accentPrimText flex items-center gap-1"
+                    >
+                      <Plus size={14} />
+                      {t('checkout.address.addNew') || 'Manage'}
+                    </button>
+                  </div>
+                  
+                  {/* Scrollable Container */}
+                  <div className="max-h-64 overflow-y-auto space-y-2 pr-1 -mr-1 custom-scrollbar">
+                    {customer?.addresses && customer.addresses.length > 0 ? (
+                      customer.addresses.map((addr) => {
+                        const isSelected = address?.addressId === addr.addressId;
+                        return (
+                          <button
+                            key={addr.addressId}
+                            onClick={() => {
+                              setAddress({
+                                label: addr.label || 'Home',
+                                addressText: addr.addressText || '',
+                                lat: addr.lat,
+                                lng: addr.lng,
+                                addressId: addr.addressId
+                              });
+                            }}
+                            className={`w-full text-left p-3 rounded-lg transition-all flex items-start gap-3
+                              ${isSelected 
+                                ? 'modeChooseButton-selected' 
+                                : 'modeChooseButton-unselected secHoverBg'
+                              }
+                            `}
+                          >
+                            {/* Radio Circle */}
+                            <div className={`mt-0.5 flex-shrink-0 ${isSelected ? 'accentPrimText' : 'secText'}`}>
+                              {isSelected ? (
+                                <div className="w-5 h-5 rounded-full accentPrimBg flex items-center justify-center text-white">
+                                    <Check size={12} strokeWidth={3} />
+                                </div>
+                              ) : (
+                                <Circle size={20} className="text-gray-300 dark:text-gray-600" />
+                              )}
+                            </div>
+                            
+                            <div className="flex-1">
+                                <div className="flex justify-between">
+                                    <p className={`font-bold text-sm mb-0.5 ${isSelected ? 'accentPrimText' : 'primText'}`}>
+                                        {addr.label}
+                                    </p>
+                                    {addr.isDefault && <span className="text-[10px] bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-gray-600 dark:text-gray-300">Default</span>}
+                                </div>
+                              <p className="text-sm secText line-clamp-2">{addr.addressText}</p>
+                            </div>
+                          </button>
+                        )
+                      })
+                    ) : (
+                      <div className="text-center py-6 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg">
+                        <p className="secText text-sm mb-3">{t('checkout.address.noAddresses') || 'No addresses found.'}</p>
+                        <button onClick={() => navigate('/address')} className="btnSecondary px-4 py-2 rounded-lg text-sm">
+                          {t('checkout.address.createFirst') || 'Add New Address'}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* VIEW STATE 2: SELECTED STATIC VIEW (Redesigned) */
+                <div className="mb-4">
+                  {address ? (
+                    <div className="flex items-start gap-3.5 py-1">
+                      {/* Icon Anchor */}
+                      <div className="mt-1.5 p-2 rounded-full secBg accentPrimText flex-shrink-0">
+                        <MapPin size={20} />
+                      </div>
+                      
+                      {/* Text Content */}
+                      <div className="flex-1">
+                        <p className="text-xs font-bold uppercase tracking-wider secText mb-1">
+                            {address.label}
+                        </p>
+                        <p className="text-lg font-medium primText leading-snug">
+                          {address.addressText}
+                        </p>
+                      </div>
                     </div>
+                  ) : (
+                     <button 
+                        onClick={() => setIsSelectingAddress(true)}
+                        className="w-full py-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                     >
+                        <Plus size={24} className="mb-2" />
+                        <span className="text-sm font-medium">{t('checkout.address.selectPrompt') || 'Select Delivery Address'}</span>
+                     </button>
                   )}
-                  <div className="relative">
-                    <textarea
-                      value={address.addressText}
-                      onChange={e => setAddress({ ...address, addressText: e.target.value })}
-                      rows={3}
-                      className="inputField pr-12 rtl:pl-12"
-                    />
+                </div>
+              )}
+
+              {/* Delivery Instructions - OUTSIDE Conditional so it stays visible */}
+              <div className="pt-4 border-t dividerBorder relative animate-in fade-in duration-300">
+                <label className="block text-sm font-medium mb-2 primText flex items-center gap-2">
+                   {t('checkout.address.instructionsLabel')}
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder={t('checkout.address.instructionsPlaceholder')}
+                    value={instructions}
+                    onChange={e => setInstructions(e.target.value)}
+                    className={`inputField transition-all duration-200 ${isRTL ? 'pl-12' : 'pr-12'}`}
+                  />
                   {isVoiceInput && (
                     <button
                       type="button"
-                      aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
-                      onClick={() => { setVoiceTarget('address'); setVoiceModalOpen(true); }}
-                      className={`absolute top-2 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
+                      aria-label={t('voiceModal.actions.openForInstructions') || 'Voice input for delivery instructions'}
+                      onClick={() => setVoiceModalOpen(true)}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
                       style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
                     >
                       <Mic size={20} className="primText" />
                     </button>
                   )}
-                  </div>
                 </div>
-              ) : (
-                <p className="text-base secText">{address.addressText}</p>
-              )}
-              <div className="relative">
-                <label className="block text-sm font-medium mb-2 primText ">
-                  {t('checkout.address.instructionsLabel')}
-                </label>
-                <input
-                  type="text"
-                  placeholder={t('checkout.address.instructionsPlaceholder')}
-                  value={instructions}
-                  onChange={e => setInstructions(e.target.value)}
-                  className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200 pr-12 rtl:pl-12"
-                />
-                {isVoiceInput && (
-                  <button
-                    type="button"
-                    aria-label={t('voiceModal.actions.openForInstructions') || 'Voice input for delivery instructions'}
-                    onClick={() => { setVoiceTarget('instructions'); setVoiceModalOpen(true); }}
-                    className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
-                    style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
-                  >
-                    <Mic size={20} className="primText" />
-                  </button>
-                )}
               </div>
+
             </div>
           </section>
 
-          {/* Voice Input Modal for narrator mode */}
+          {/* Voice Input Modal */}
           {isVoiceInput && voiceModalOpen && (
             <VoiceInputModal
               isOpen={voiceModalOpen}
-              onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+              onClose={() => setVoiceModalOpen(false)}
               onConfirm={handleVoiceConfirm}
-              confirmLabel={
-                voiceTarget === 'instructions' ? t('voiceModal.actions.confirmInstructions') :
-                voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
-                t('voiceModal.actions.confirm')
-              }
+              confirmLabel={t('voiceModal.actions.confirmInstructions')}
             />
           )}
 
