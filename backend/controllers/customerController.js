@@ -352,4 +352,148 @@ exports.removeFavorite = async (req, res) => {
   }
 };
 
+// --- Address Management APIs ---
+
+// Get all addresses for the current user
+exports.getAddresses = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    const customer = await Customer.findById(user.customerId, { addresses: 1 }).lean();
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    return res.json({ addresses: customer.addresses || [] });
+  } catch (err) {
+    console.error("getAddresses error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Add a new address
+exports.addAddress = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    const { label, addressText, lat, lng, isDefault } = req.body;
+    if (!addressText)
+      return res.status(400).json({ message: "addressText is required" });
+
+    const newAddress = {
+      addressId: new mongoose.Types.ObjectId().toString(),
+      label: label || 'Home',
+      addressText,
+      lat: lat || null,
+      lng: lng || null,
+      isDefault: isDefault || false
+    };
+
+    // If this is marked as default, unset all other defaults first
+    const updateQuery = isDefault
+      ? { $push: { addresses: newAddress }, $set: { 'addresses.$[].isDefault': false } }
+      : { $push: { addresses: newAddress } };
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      updateQuery,
+      { new: true, select: "addresses" }
+    ).lean();
+
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    // Fix: re-set the new address as default if needed (since $set above affects all)
+    if (isDefault) {
+      const updated = await Customer.findOneAndUpdate(
+        { _id: user.customerId, 'addresses.addressId': newAddress.addressId },
+        { $set: { 'addresses.$.isDefault': true } },
+        { new: true, select: "addresses" }
+      ).lean();
+      return res.json({ addresses: updated.addresses || [] });
+    }
+
+    return res.json({ addresses: customer.addresses || [] });
+  } catch (err) {
+    console.error("addAddress error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update an existing address by addressId
+exports.updateAddress = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    const { addressId, label, addressText, lat, lng, isDefault } = req.body;
+    if (!addressId)
+      return res.status(400).json({ message: "addressId is required" });
+
+    const customer = await Customer.findById(user.customerId).lean();
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    const addressExists = customer.addresses?.some(a => a.addressId === addressId);
+    if (!addressExists)
+      return res.status(404).json({ message: "Address not found" });
+
+    // Build update object for the matched address
+    const updateFields = {};
+    if (label !== undefined) updateFields['addresses.$.label'] = label;
+    if (addressText !== undefined) updateFields['addresses.$.addressText'] = addressText;
+    if (lat !== undefined) updateFields['addresses.$.lat'] = lat;
+    if (lng !== undefined) updateFields['addresses.$.lng'] = lng;
+    if (isDefault !== undefined) updateFields['addresses.$.isDefault'] = isDefault;
+
+    // If setting this as default, first unset all defaults
+    if (isDefault) {
+      await Customer.findByIdAndUpdate(
+        user.customerId,
+        { $set: { 'addresses.$[].isDefault': false } }
+      );
+    }
+
+    const updated = await Customer.findOneAndUpdate(
+      { _id: user.customerId, 'addresses.addressId': addressId },
+      { $set: updateFields },
+      { new: true, select: "addresses" }
+    ).lean();
+
+    if (!updated) return res.status(404).json({ message: "Customer not found" });
+
+    return res.json({ addresses: updated.addresses || [] });
+  } catch (err) {
+    console.error("updateAddress error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete an address by addressId
+exports.deleteAddress = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user || !user.customerId)
+      return res.status(401).json({ message: "Unauthorized" });
+
+    const { addressId } = req.body;
+    if (!addressId)
+      return res.status(400).json({ message: "addressId is required" });
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $pull: { addresses: { addressId } } },
+      { new: true, select: "addresses" }
+    ).lean();
+
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+
+    return res.json({ addresses: customer.addresses || [] });
+  } catch (err) {
+    console.error("deleteAddress error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 

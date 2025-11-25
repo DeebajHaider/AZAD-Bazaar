@@ -25,3 +25,6 @@ export const FAVORITES = (token = '') => `favorites_${token ? token.substring(0,
 // Order cache keys
 export const ORDERS_LIST = 'orders_list';
 export const ORDER_BY_ID = (id) => `order_${id}`;
+
+// Address cache keys (customer-specific)
+export const CUSTOMER_ADDRESSES = (customerId) => `addresses_${customerId}`;

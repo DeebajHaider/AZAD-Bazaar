@@ -54,4 +54,10 @@ router.get('/favorites', authMiddleware, customerCtrl.getFavorites);
 router.post('/favorites/add', authMiddleware, customerCtrl.addFavorite);
 router.post('/favorites/remove', authMiddleware, customerCtrl.removeFavorite);
 
+// Address management routes
+router.get('/addresses', authMiddleware, customerCtrl.getAddresses);
+router.post('/addresses', authMiddleware, customerCtrl.addAddress);
+router.put('/addresses', authMiddleware, customerCtrl.updateAddress);
+router.delete('/addresses', authMiddleware, customerCtrl.deleteAddress);
+
 module.exports = router;
