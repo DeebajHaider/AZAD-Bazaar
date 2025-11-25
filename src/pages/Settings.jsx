@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save, Info, Mic, Heart } from 'lucide-react'
+import { ChevronRight, LogOut, Save, Info, Mic, Heart, MapPin, RefreshCcw } from 'lucide-react'
+import { useAddress } from '../api/hooks/useAddress'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
 import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
@@ -27,20 +28,32 @@ const AccountInfoSkeleton = () => (
         <div className="h-11 w-full skeleton rounded-lg" />
       </div>
 
-      {/* Address Field */}
+      {/* Default Address (read-only display) */}
       <div className="space-y-2">
-        <div className="h-4 w-28 skeleton" />
-        <div className="h-16 w-full skeleton rounded-lg" />
+        <div className="h-4 w-32 skeleton" />
+        <div className="h-14 w-full skeleton rounded-lg" />
       </div>
 
-      {/* Save Button */}
+      {/* Manage Address Button */}
+      <div className="h-12 w-full skeleton rounded-lg" />
+      {/* Manage Favorites Button */}
+      <div className="h-12 w-full skeleton rounded-lg" />
+      {/* Save Button (Name only) */}
       <div className="h-12 w-full skeleton rounded-lg" />
     </div>
   </form>
 );
 
 export default function Settings() {
+  // Removed getDefaultAddress reliance (was causing stale default address)
   const { logout, customer, updateCustomer, loading: authLoading } = useAuth()
+  const { addresses, refreshAddresses } = useAddress()
+  // Auto refresh addresses ONCE when Settings mounts (avoid infinite loop due to unstable function reference)
+  useEffect(() => {
+  (async () => {
+        try { await refreshAddresses() } catch (e) { /* silent */ }
+      })()
+  }, [])
   const navigate = useNavigate()
   const { t, lang, setLang } = useI18n()
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
@@ -59,16 +72,19 @@ export default function Settings() {
   // Language direction
   const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur'
 
-  // Populate form from global customer when available
+  // Populate form (name/phone only). Address handled separately via getDefaultAddress()
   useEffect(() => {
     if (customer) {
-      setFormData({
+      setFormData(prev => ({
+        ...prev,
         name: customer.name || '',
-        phone: customer.phone || '',
-        address: (Array.isArray(customer.addresses) && customer.addresses[0]?.addressText) || ''
-      })
+        phone: customer.phone || ''
+      }))
     }
   }, [customer])
+
+  // Derive default address from latest addresses provided by useAddress hook
+  const defaultAddress = Array.isArray(addresses) ? (addresses.find(a => a.isDefault) || addresses[0] || null) : null
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -90,10 +106,8 @@ export default function Settings() {
     setSuccess(null)
     try {
       if (!customer?._id) throw new Error(t('settings.notifications.noCustomerError'))
-      const payload = {
-        name: formData.name,
-        address: formData.address // Backend will handle normalization
-      }
+      // Only update name here. Address management moved to /address page.
+      const payload = { name: formData.name }
       await updateCustomer(customer._id, payload)
       setSuccess(t('settings.notifications.updateSuccess'))
     } catch (err) {
@@ -210,33 +224,37 @@ export default function Settings() {
                   />
                 </div>
 
-                {/* Address Field */}
+                {/* Default Address (Read-only Display) */}
                 <div className="relative">
                   <label className="block text-sm font-medium mb-2 primText ">
-                    {t('settings.account.form.address.label')}
+                    {t('settings.account.form.address.defaultLabel') || t('settings.account.form.address.label')}
                   </label>
-                  <textarea
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    rows={3}
-                    placeholder={t('settings.account.form.address.placeholder')}
-                    className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
-                  />
-                  {isVoiceInput && (
-                    <button
-                      type="button"
-                      aria-label={t('voiceModal.actions.openForAddress') || 'Voice input for address'}
-                      onClick={() => { setVoiceTarget('address'); setVoiceModalOpen(true); }}
-                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
-                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
-                    >
-                      <Mic size={20} className="primText" />
-                    </button>
-                  )}
+                  <div className="w-full px-4 py-3 primBorder rounded-lg secBg secText text-sm">
+                    {defaultAddress?.addressText || t('settings.account.form.address.placeholder')}
+                  </div>
                 </div>
 
-                {/* Save Button */}
+                {/* Manage Address Button */}
+                <button
+                  type="button"
+                  onClick={() => navigate('/address')}
+                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+                >
+                  <MapPin size={18} />
+                  {t('settings.account.form.address.manageButton') || 'Manage Address'}
+                </button>
+
+                {/* Manage Favorites Button */}
+                <button
+                  type="button"
+                  onClick={() => navigate('/favorites')}
+                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+                >
+                  <Heart size={18} />
+                  {t('settings.account.favorites.manageButton') || 'Manage Favorites'}
+                </button>
+
+                {/* Save Button (Name only) */}
                 <button
                   type="submit"
                   disabled={isSaving}
@@ -249,19 +267,19 @@ export default function Settings() {
             </form>
           )}
 
-        {/* Voice Input Modal for narrator mode */}
-        {isVoiceInput && voiceModalOpen && (
-          <VoiceInputModal
-            isOpen={voiceModalOpen}
-            onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
-            onConfirm={handleVoiceConfirm}
-            confirmLabel={
-              voiceTarget === 'name' ? t('voiceModal.actions.confirmName') :
-              voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
-              t('voiceModal.actions.confirm')
-            }
-          />
-        )}
+          {/* Voice Input Modal for narrator mode */}
+          {isVoiceInput && voiceModalOpen && (
+            <VoiceInputModal
+              isOpen={voiceModalOpen}
+              onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+              onConfirm={handleVoiceConfirm}
+              confirmLabel={
+                voiceTarget === 'name' ? t('voiceModal.actions.confirmName') :
+                  voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
+                    t('voiceModal.actions.confirm')
+              }
+            />
+          )}
 
           {/* Card: Danger Zone / Sign Out */}
           <div className="secBg primBorder rounded-lg p-4">
@@ -271,17 +289,6 @@ export default function Settings() {
             >
               <LogOut size={18} />
               {t('settings.signOut.button')}
-            </button>
-          </div>
-
-          {/* Card: Favorites */}
-          <div className="secBg primBorder rounded-lg p-4">
-            <button
-              onClick={() => navigate('/favorites')}
-              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
-            >
-              <Heart size={18} />
-              Favorites
             </button>
           </div>
 

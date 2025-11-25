@@ -30,12 +30,17 @@
         },
         "address": {
           "label": "Address",
-          "placeholder": "Enter your primary address"
+          "placeholder": "Enter your primary address",
+          "manageButton": "Manage Address",
+          "defaultLabel": "Default Address"
         },
         "saveButton": {
           "default": "Save Changes",
           "saving": "Saving..."
         }
+      },
+      "favorites": {
+        "manageButton": "Manage Favorites"
       }
     },
     "signOut": {

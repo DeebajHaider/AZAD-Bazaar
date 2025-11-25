@@ -30,12 +30,17 @@
         },
         "address": {
           "label": "پتہ",
-          "placeholder": "اپنا بنیادی پتہ درج کریں"
+          "placeholder": "اپنا بنیادی پتہ درج کریں",
+          "manageButton": "پتہ منظم کریں",
+          "defaultLabel": "ڈیفالٹ پتہ"
         },
         "saveButton": {
           "default": "تبدیلیاں محفوظ کریں",
           "saving": "محفوظ کیا جا رہا ہے..."
         }
+      },
+      "favorites": {
+        "manageButton": "پسندیدہ منظم کریں"
       }
     },
     "signOut": {

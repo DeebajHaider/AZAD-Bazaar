@@ -245,6 +245,14 @@ export function AuthProvider({ children }) {
     // updated is array of addresses; ensure local state reflects isDefault flags
     setCustomer(prev => prev ? { ...prev, addresses: updated } : prev)
     try { localStorage.setItem('azad_customer', JSON.stringify({ ...(customer || {}), addresses: updated })) } catch (e) {}
+    
+    // Invalidate useAddress cache so all components see the update immediately
+    const { CUSTOMER_ADDRESSES } = await import('../api/cacheKeys')
+    const { invalidateCache } = await import('../api/cacheUtils')
+    if (customer?._id || customer?.id) {
+      invalidateCache(CUSTOMER_ADDRESSES(customer._id || customer.id))
+    }
+    
     return getDefaultAddress()
   }
 

@@ -211,9 +211,10 @@ export default function Favorites() {
       footer={<BottomNav />} 
       header={
         <HeaderWithName 
-            title={t('favorites.title') || "My Favorites"} 
-            to="/" 
-            rightAction={
+          title={t('favorites.title') || "My Favorites"} 
+          /* Use history back (-1) instead of hard routing to root */
+          to={-1} 
+          rightAction={
                 items.length > 0 && (
                     <span className="text-xs font-medium secBg primBorder px-2 py-1 rounded-full secText">
                         {items.length}

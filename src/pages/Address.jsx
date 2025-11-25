@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Plus, Edit2, Trash2, MapPin, X, Loader2 } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import useAddress from '../api/hooks/useAddress'
+import { useAuth } from '../context/AuthContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import { showToast } from '../utils/toast'
@@ -38,7 +39,9 @@ export default function Address() {
   const { lang } = useI18n()
   const t = (key) => languageStrings[lang][key] || languageStrings['en'][key]
 
-  const { addresses, loading, addAddress, updateAddress, deleteAddress } = useAddress()
+  const { addresses, loading, addAddress, updateAddress, deleteAddress, refreshAddresses } = useAddress()
+  // Auth context for propagating default selection globally
+  const { setDefaultAddress } = useAuth()
 
   const [showModal, setShowModal] = useState(false)
   const [editingAddress, setEditingAddress] = useState(null)
@@ -72,14 +75,33 @@ export default function Address() {
     setMutatingState({ type: 'save' })
     try {
       console.log('Submitting form data:', formData)
+      let updatedAddresses
       if (editingAddress) {
-        await updateAddress({ ...formData, addressId: editingAddress.addressId })
+        updatedAddresses = await updateAddress({ ...formData, addressId: editingAddress.addressId })
       } else {
-        await addAddress(formData)
+        updatedAddresses = await addAddress(formData)
       }
+
+      // If user marked this address as default, propagate using AuthContext so other pages (Home, Checkout, Settings) update immediately
+      if (formData.isDefault) {
+        const defaultId = editingAddress
+          ? editingAddress.addressId
+          : (Array.isArray(updatedAddresses) ? updatedAddresses.find(a => a.isDefault)?.addressId : null)
+        if (defaultId) {
+          try {
+            await setDefaultAddress(defaultId)
+          } catch (err) {
+            console.warn('Failed to set default via AuthContext:', err)
+          }
+        }
+      }
+
+      // Refresh local hook addresses to reflect any backend adjustments (e.g., unsetting previous default)
+      try { await refreshAddresses() } catch (e) { /* silent */ }
+
       console.log('Address saved successfully:', formData)
       showToast('success', t('saveSuccess'))
-      setShowModal(false) // FIX: Directly set state to close the modal
+      setShowModal(false)
     } catch (error) {
       showToast('error', error.message || t('saveError'))
     } finally {
