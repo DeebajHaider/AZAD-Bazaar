@@ -391,20 +391,24 @@ exports.addAddress = async (req, res) => {
       isDefault: isDefault || false
     };
 
-    // If this is marked as default, unset all other defaults first
-    const updateQuery = isDefault
-      ? { $push: { addresses: newAddress }, $set: { 'addresses.$[].isDefault': false } }
-      : { $push: { addresses: newAddress } };
-
-    const customer = await Customer.findByIdAndUpdate(
+    let customer;
+    if (isDefault) {
+      // Step 1: Unset all other defaults
+      await Customer.updateOne(
+        { _id: user.customerId },
+        { $set: { 'addresses.$[].isDefault': false } }
+      );
+    }
+    // Step 2: Push the new address
+    customer = await Customer.findByIdAndUpdate(
       user.customerId,
-      updateQuery,
+      { $push: { addresses: newAddress } },
       { new: true, select: "addresses" }
     ).lean();
 
     if (!customer) return res.status(404).json({ message: "Customer not found" });
 
-    // Fix: re-set the new address as default if needed (since $set above affects all)
+    // Step 3: If isDefault, set the new address as default
     if (isDefault) {
       const updated = await Customer.findOneAndUpdate(
         { _id: user.customerId, 'addresses.addressId': newAddress.addressId },
@@ -413,7 +417,6 @@ exports.addAddress = async (req, res) => {
       ).lean();
       return res.json({ addresses: updated.addresses || [] });
     }
-
     return res.json({ addresses: customer.addresses || [] });
   } catch (err) {
     console.error("addAddress error", err);
