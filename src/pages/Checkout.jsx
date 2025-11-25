@@ -101,7 +101,7 @@ const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
 export default function Checkout() {
   const { t, lang } = useI18n()
   const { items: cartItems, total: cartTotal, clearCart, loading: cartLoading } = useCart()
-  const { user, customer, loading: authLoading } = useContext(AuthContext)
+  const { user, customer, loading: authLoading, getDefaultAddress } = useContext(AuthContext)
   const { createOrder } = useOrdersContext()
   const navigate = useNavigate()
 
@@ -109,26 +109,31 @@ export default function Checkout() {
   const [orderLoading, setOrderLoading] = useState(false)
   const [orderError, setOrderError] = useState(null)
   const [editingAddress, setEditingAddress] = useState(false)
-  const [address, setAddress] = useState({
-    label: 'Home',
-    addressText: '',
-    lat: null,
-    lng: null
-  })
-    // Sync address from customer context when available
-    useEffect(() => {
-      if (customer && Array.isArray(customer.addresses) && customer.addresses.length) {
-        const defaultAddr = customer.addresses.find(a => a.isDefault) || customer.addresses[0]
-        // Only update if not editing to avoid wiping in-progress edits
-        if (!editingAddress) setAddress({
-          label: defaultAddr.label || 'Home',
-          addressText: defaultAddr.addressText || '',
-          lat: defaultAddr.lat ?? null,
-          lng: defaultAddr.lng ?? null,
-          addressId: defaultAddr.addressId
+  // Initialize checkout address with default address (can be switched later)
+  const initialDefault = getDefaultAddress ? getDefaultAddress() : null
+  const [address, setAddress] = useState(() => initialDefault ? {
+    label: initialDefault.label || 'Home',
+    addressText: initialDefault.addressText || '',
+    lat: initialDefault.lat ?? null,
+    lng: initialDefault.lng ?? null,
+    addressId: initialDefault.addressId
+  } : { label: 'Home', addressText: '', lat: null, lng: null })
+
+  // Keep in sync if customer addresses change and user is not editing
+  useEffect(() => {
+    if (!editingAddress) {
+      const def = getDefaultAddress ? getDefaultAddress() : null
+      if (def) {
+        setAddress({
+          label: def.label || 'Home',
+          addressText: def.addressText || '',
+          lat: def.lat ?? null,
+          lng: def.lng ?? null,
+          addressId: def.addressId
         })
       }
-    }, [customer, editingAddress])
+    }
+  }, [customer, editingAddress, getDefaultAddress])
   const [instructions, setInstructions] = useState('')
   const [paymentMethod, setPaymentMethod] = useState({
     name: 'Cash on Delivery',
@@ -277,13 +282,42 @@ export default function Checkout() {
             </div>
             <div className="p-4 space-y-4">
               {editingAddress ? (
-                <div className="relative">
-                  <textarea
-                    value={address.addressText}
-                    onChange={e => setAddress({ ...address, addressText: e.target.value })}
-                    rows={3}
-                    className="inputField pr-12 rtl:pl-12"
-                  />
+                <div className="space-y-3">
+                  {/* Address selector */}
+                  {Array.isArray(customer?.addresses) && customer.addresses.length > 0 && (
+                    <div>
+                      <label className="block text-sm font-medium mb-1 primText">Select Saved Address</label>
+                      <select
+                        value={address.addressId || ''}
+                        onChange={(e) => {
+                          const selected = customer.addresses.find(a => a.addressId === e.target.value)
+                          if (selected) {
+                            setAddress({
+                              label: selected.label || 'Home',
+                              addressText: selected.addressText || '',
+                              lat: selected.lat ?? null,
+                              lng: selected.lng ?? null,
+                              addressId: selected.addressId
+                            })
+                          }
+                        }}
+                        className="inputField"
+                      >
+                        {customer.addresses.map(a => (
+                          <option key={a.addressId} value={a.addressId}>
+                            {a.label || 'Address'}{a.isDefault ? ' (Default)' : ''}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                  <div className="relative">
+                    <textarea
+                      value={address.addressText}
+                      onChange={e => setAddress({ ...address, addressText: e.target.value })}
+                      rows={3}
+                      className="inputField pr-12 rtl:pl-12"
+                    />
                   {isVoiceInput && (
                     <button
                       type="button"
@@ -295,6 +329,7 @@ export default function Checkout() {
                       <Mic size={20} className="primText" />
                     </button>
                   )}
+                  </div>
                 </div>
               ) : (
                 <p className="text-base secText">{address.addressText}</p>

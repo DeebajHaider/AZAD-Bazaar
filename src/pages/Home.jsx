@@ -225,7 +225,7 @@ const BrandCard = ({ brand, onClick }) => {
 
 export default function Home() {
   const navigate = useNavigate()
-  const { customer } = useAuth()
+  const { customer, getDefaultAddress } = useAuth()
   const { mainCategories, brands, loading: dataLoading } = useData()
   const { orders, loading: ordersLoading, error: ordersError } = useOrdersContext() // Fetching real orders
   const { t, lang } = useI18n()
@@ -266,7 +266,10 @@ export default function Home() {
               <div className="min-w-0">
                 <p className="text-xs secText">{t('home.header.deliveryTo')}</p>
                 <p className="text-sm font-medium primText truncate">
-                  {customer?.addresses?.[0]?.addressText || t('home.header.setAddressPrompt')}
+                  {(() => {
+                    const def = getDefaultAddress && getDefaultAddress()
+                    return def?.addressText || t('home.header.setAddressPrompt')
+                  })()}
                 </p>
               </div>
             </button>
