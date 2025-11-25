@@ -354,6 +354,14 @@
       "title": "مشہور برانڈز",
       "brandName": "برانڈ {{brandNumber}}"
     }
+    ,
+    "modal": {
+      "selectAddressTitle": "ڈیلیوری کا پتہ منتخب کریں",
+      "noAddressesFound": "کوئی پتہ نہیں ملا",
+      "addOnePrompt": "خریداری جاری رکھنے کے لیے مقام شامل کریں۔",
+      "addAddressButton": "نیا پتہ شامل کریں",
+      "manageAll": "پتے منظم کریں"
+    }
   },
   "common": {
     "currencySymbol": "روپے",
@@ -364,6 +372,8 @@
     "items": "آئٹمز",
     "total": "کل",
     "loading": "لوڈ ہو رہا ہے...",
+    "saving": "محفوظ کیا جا رہا ہے...",
+    "default": "ڈیفالٹ",
     "error": {
       "title": "ایک خرابی پیش آگئی",
       "description": "کچھ غلط ہو گیا. براہ کرم بعد میں دوبارہ کوشش کریں.",

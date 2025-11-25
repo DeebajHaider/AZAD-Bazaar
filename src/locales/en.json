@@ -354,6 +354,14 @@
       "title": "Popular Brands",
       "brandName": "Brand {{brandNumber}}"
     }
+    ,
+    "modal": {
+      "selectAddressTitle": "Delivery Address",
+      "noAddressesFound": "No addresses found",
+      "addOnePrompt": "Add a delivery location to continue shopping.",
+      "addAddressButton": "Add New Address",
+      "manageAll": "Manage Addresses"
+    }
   },
   "common": {
     "currencySymbol": "Rs",
@@ -364,6 +372,8 @@
     "items": "items",
     "total": "Total",
     "loading": "Loading...",
+    "saving": "Saving...",
+    "default": "Default",
     "error": {
       "title": "An Error Occurred",
       "description": "Something went wrong. Please try again later.",

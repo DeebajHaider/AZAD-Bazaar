@@ -12,7 +12,7 @@ import ImageWithLoader from '../component/ImageWithLoader'
 import dayjs from 'dayjs' // Assuming dayjs is installed as per other files
 import VoiceInputModal from '../component/VoiceInputModal'
 import { useState } from 'react'
-
+import AddressSelectionModal from '../component/AddressSelectionModal';
 // --- Reusable Sub-components for the Home Screen ---
 
 // Skeleton Placeholders
@@ -63,19 +63,19 @@ const OrderImageGrid = ({ products }) => {
       {displayProducts.map((prod, idx) => {
         // Special layout for 3 items: First item takes full height on left
         const isThreeItemsLayout = count === 3;
-        const itemClass = isThreeItemsLayout && idx === 0 
-          ? "row-span-2 h-full" 
+        const itemClass = isThreeItemsLayout && idx === 0
+          ? "row-span-2 h-full"
           : "h-full w-full";
 
         return (
           <div key={idx} className={`relative overflow-hidden ${itemClass}`}>
-             {prod.photo ? (
-               <img src={prod.photo} alt="" className="w-full h-full object-cover" />
-             ) : (
-               <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-                 <Package size={12} className="secText opacity-50" />
-               </div>
-             )}
+            {prod.photo ? (
+              <img src={prod.photo} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                <Package size={12} className="secText opacity-50" />
+              </div>
+            )}
           </div>
         )
       })}
@@ -85,16 +85,16 @@ const OrderImageGrid = ({ products }) => {
 
 const RecentOrderCard = ({ order, onClick, t, lang }) => {
   const currency = t('common.currencySymbol') || '$';
-  
+
   // Calculate dates
   const createdAt = dayjs(order.createdAt);
   const deliveryTarget = createdAt.add(5, 'day');
   const now = dayjs();
   const daysLeft = deliveryTarget.diff(now, 'day');
-  
+
   // Status Logic
   const currentStatus = order.statusHistory?.[order.statusHistory.length - 1]?.status || order.status || 'pending';
-  
+
   const getStatusConfig = (status) => {
     const s = status.toLowerCase();
     if (s === 'delivered') return { color: 'text-green-700 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30', icon: CheckCircle, label: t('orders.status.delivered') };
@@ -113,7 +113,7 @@ const RecentOrderCard = ({ order, onClick, t, lang }) => {
   }).format(order.totalPaid);
 
   return (
-    <button 
+    <button
       onClick={onClick}
       className="w-full secBg primBorder secHoverBg rounded-xl p-3 flex gap-3 items-start text-left transition-all duration-200 active:scale-[0.99] group focusRing"
       aria-label={`${config.label}, ${currency}${formattedTotal}, ${t('home.recentOrders.orderTitle', { orderNumber: order._id.slice(-4) })}`}
@@ -123,31 +123,31 @@ const RecentOrderCard = ({ order, onClick, t, lang }) => {
 
       {/* Info Section */}
       <div className="flex-1 min-w-0 flex flex-col justify-between h-[72px]">
-        
+
         {/* Top: Status Badge (Primary Focus) */}
         <div className="flex justify-between items-start">
-           <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${config.bg} ${config.color}`}>
-             <StatusIcon size={12} />
-             <span>{config.label}</span>
-           </div>
+          <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${config.bg} ${config.color}`}>
+            <StatusIcon size={12} />
+            <span>{config.label}</span>
+          </div>
         </div>
 
         {/* Middle: Delivery Context (Natural Reading Flow) */}
         <div className="text-xs secText truncate mt-1">
           {currentStatus === 'delivered' ? (
-             <span>{t('orders.deliveredOn')} {dayjs(order.updatedAt).format('MMM D')}</span>
+            <span>{t('orders.deliveredOn')} {dayjs(order.updatedAt).format('MMM D')}</span>
           ) : currentStatus === 'cancelled' ? (
-             <span>{t('orders.cancelled')}</span>
+            <span>{t('orders.cancelled')}</span>
           ) : daysLeft > 0 ? (
-             (() => {
-               const raw = t('home.recentOrders.arrivingInDays') || 'Arriving in {{count}} days'
-               const text = raw.replace('{{count}}', daysLeft)
-               return (
-                 <span className="flex items-center gap-1">{text}</span>
-               )
-             })()
+            (() => {
+              const raw = t('home.recentOrders.arrivingInDays') || 'Arriving in {{count}} days'
+              const text = raw.replace('{{count}}', daysLeft)
+              return (
+                <span className="flex items-center gap-1">{text}</span>
+              )
+            })()
           ) : (
-             <span>{t('home.recentOrders.arrivingSoon')}</span>
+            <span>{t('home.recentOrders.arrivingSoon')}</span>
           )}
         </div>
 
@@ -156,7 +156,7 @@ const RecentOrderCard = ({ order, onClick, t, lang }) => {
           <span className="font-bold primText text-sm">
             {currency} {formattedTotal}
           </span>
-          
+
           {/* Demoted Order ID (Tertiary Info) */}
           <span className="text-[11px] secText opacity-60 font-mono tracking-wide">
             #{order._id.slice(-6).toUpperCase()}
@@ -240,10 +240,10 @@ export default function Home() {
 
   const displayCategories = mainCategories?.slice(0, 30) || []
   const displayBrands = brands?.slice(0, 30) || []
-  
+
   // Process Orders: Sort by Date Descending and take top 3
-  const recentOrders = orders 
-    ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3) 
+  const recentOrders = orders
+    ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3)
     : [];
 
   // Handle voice confirm (navigates and sets query)
@@ -254,147 +254,154 @@ export default function Home() {
       setVoiceModalOpen(false)
     }
   }
+  const [isAddressModalOpen, setAddressModalOpen] = useState(false);
 
   return (
-    <Layout footer={<BottomNav />}>
-      {/* Header */}
-      <header className="sticky top-0 z-20 primBg backdrop-blur-sm dividerBorder">
-        <div className="max-w-[430px] mx-auto p-4 space-y-3">
-          <div className="flex items-center justify-between gap-4">
-            <button onClick={() => navigate('/settings')} className="flex-1 flex items-center gap-2 text-left min-w-0 focusRing rounded-md">
-              <MapPin size={20} className="accentPrimText flex-shrink-0" />
-              <div className="min-w-0">
-                <p className="text-xs secText">{t('home.header.deliveryTo')}</p>
-                <p className="text-sm font-medium primText truncate">
-                  {(() => {
-                    const def = getDefaultAddress && getDefaultAddress()
-                    return def?.addressText || t('home.header.setAddressPrompt')
-                  })()}
-                </p>
-              </div>
-            </button>
-            <div className="flex-shrink-0">
-              <ImageWithLoader src="/Azad-Bazaar.svg" alt="Azad Bazaar logo" imageClassName="h-8 w-auto" />
-            </div>
-          </div>
-          <div className="relative w-full">
-            <button
-              onClick={() => navigate('/search-results?q=')}
-              className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing"
-              style={{ paddingRight: 48 }}
-            >
-              <Search size={18} className="secText" />
-              <span className="secText">{t('home.header.searchPlaceholder')}</span>
-            </button>
-            {/* Voice Search Button (absolute positioned) */}
-            <button
-              type="button"
-              aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
-              onClick={handleVoiceSearch}
-              className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors"
-              style={{ zIndex: 2 }}
-            >
-              <Mic size={20} className="primText" />
-            </button>
-          </div>
-          {/* VoiceInputModal is now handled in SearchResults page if voice=1 param is present */}
-        </div>
-      </header>
-
-      {/* Main content area */}
-      <main className="flex-1 overflow-y-auto primBg p-4 space-y-8 min-h-full">
-        {/* Categories Section */}
-        <section>
-          <h2 className="text-xl font-semibold primText mb-4">{t('home.categories.title')}</h2>
-          <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-            {dataLoading ? (
-              Array.from({ length: 8 }).map((_, i) => <CategoryCardSkeleton key={i} />)
-            ) : (
-              displayCategories.map(category => (
-                <CategoryCard
-                  key={category._id}
-                  category={category}
-                  onClick={() => navigate(`/search-results?category=${category._id}`)}
-                />
-              ))
-            )}
-          </div>
-        </section>
-
-        {/* Promotional Card */}
-        <section className="secBg primBorder rounded-xl p-4 flex items-center justify-center min-h-[120px]">
-          <ImageWithLoader
-            src="/Azad-Bazaar.svg"
-            alt="Azad Bazaar Offer"
-            imageClassName="h-28 w-auto"
-          />
-        </section>
-
-        {/* Recent Orders Section (Redesigned) */}
-        <section>
-          <div className="flex justify-between items-end mb-3">
-            <h2 className="text-xl font-semibold primText">{t('home.recentOrders.title')}</h2>
-            {recentOrders.length > 0 && (
-              <button 
-                onClick={() => navigate('/orders')} 
-                className="text-xs font-medium accentPrimText hover:underline pb-1"
-              >
-                {t('home.recentOrders.viewAll') || 'View All'}
+    <>
+      <Layout footer={<BottomNav />}>
+        {/* Header */}
+        <header className="sticky top-0 z-20 primBg backdrop-blur-sm dividerBorder">
+          <div className="max-w-[430px] mx-auto p-4 space-y-3">
+            <div className="flex items-center justify-between gap-4">
+              <button onClick={() => setAddressModalOpen(true)} className="flex-1 flex items-center gap-2 text-left min-w-0 focusRing rounded-md">
+                <MapPin size={20} className="accentPrimText flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-xs secText">{t('home.header.deliveryTo')}</p>
+                  <p className="text-sm font-medium primText truncate">
+                    {(() => {
+                      const def = getDefaultAddress && getDefaultAddress()
+                      return def?.addressText || t('home.header.setAddressPrompt')
+                    })()}
+                  </p>
+                </div>
               </button>
-            )}
-          </div>
-
-          {ordersLoading ? (
-            <div className="space-y-3">
-              {Array.from({ length: 2 }).map((_, i) => <RecentOrderSkeleton key={i} />)}
-            </div>
-          ) : recentOrders.length > 0 ? (
-            <div className="space-y-3">
-              {recentOrders.map(order => (
-                <RecentOrderCard 
-                  key={order._id} 
-                  order={order} 
-                  t={t}
-                  lang={lang}
-                  onClick={() => navigate(`/orders/${order._id}`)}
-                />
-              ))}
-            </div>
-          ) : (
-            /* Empty State CTA */
-            <div className="secBg primBorder rounded-xl p-6 flex flex-col items-center text-center space-y-3">
-              <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
-                <ShoppingBag className="accentPrimText w-6 h-6" />
+              <div className="flex-shrink-0">
+                <ImageWithLoader src="/Azad-Bazaar.svg" alt="Azad Bazaar logo" imageClassName="h-8 w-auto" />
               </div>
-              <div>
-                <p className="text-sm font-semibold primText">{t('home.recentOrders.emptyTitle') || "No orders yet"}</p>
-                <p className="text-xs secText mt-1">{t('home.recentOrders.emptyDesc') || "Start shopping to see your orders here."}</p>
-              </div>
-              <button 
-                onClick={() => navigate('/search-results')}
-                className="mt-2 btnPrimary text-sm px-6 py-2.5 rounded-lg w-full max-w-[200px]"
+            </div>
+            <div className="relative w-full">
+              <button
+                onClick={() => navigate('/search-results?q=')}
+                className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing"
+                style={{ paddingRight: 48 }}
               >
-                {t('home.recentOrders.startShopping') || "Start Shopping"}
+                <Search size={18} className="secText" />
+                <span className="secText">{t('home.header.searchPlaceholder')}</span>
+              </button>
+              {/* Voice Search Button (absolute positioned) */}
+              <button
+                type="button"
+                aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
+                onClick={handleVoiceSearch}
+                className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors"
+                style={{ zIndex: 2 }}
+              >
+                <Mic size={20} className="primText" />
               </button>
             </div>
-          )}
-        </section>
-
-        {/* Popular Brands Section */}
-        <section>
-          <h2 className="text-xl font-semibold primText mb-4">{t('home.popularBrands.title')}</h2>
-          <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-            {dataLoading ? (
-              Array.from({ length: 8 }).map((_, i) => <BrandCardSkeleton key={i} />)
-            ) : (
-              displayBrands.map(brand => (
-                <BrandCard key={brand._id} brand={brand} onClick={() => navigate(`/search-results?brand=${brand._id}`)} />
-              ))
-            )}
+            {/* VoiceInputModal is now handled in SearchResults page if voice=1 param is present */}
           </div>
-        </section>
+        </header>
 
-      </main>
-    </Layout>
+        {/* Main content area */}
+        <main className="flex-1 overflow-y-auto primBg p-4 space-y-8 min-h-full">
+          {/* Categories Section */}
+          <section>
+            <h2 className="text-xl font-semibold primText mb-4">{t('home.categories.title')}</h2>
+            <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+              {dataLoading ? (
+                Array.from({ length: 8 }).map((_, i) => <CategoryCardSkeleton key={i} />)
+              ) : (
+                displayCategories.map(category => (
+                  <CategoryCard
+                    key={category._id}
+                    category={category}
+                    onClick={() => navigate(`/search-results?category=${category._id}`)}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* Promotional Card */}
+          <section className="secBg primBorder rounded-xl p-4 flex items-center justify-center min-h-[120px]">
+            <ImageWithLoader
+              src="/Azad-Bazaar.svg"
+              alt="Azad Bazaar Offer"
+              imageClassName="h-28 w-auto"
+            />
+          </section>
+
+          {/* Recent Orders Section (Redesigned) */}
+          <section>
+            <div className="flex justify-between items-end mb-3">
+              <h2 className="text-xl font-semibold primText">{t('home.recentOrders.title')}</h2>
+              {recentOrders.length > 0 && (
+                <button
+                  onClick={() => navigate('/orders')}
+                  className="text-xs font-medium accentPrimText hover:underline pb-1"
+                >
+                  {t('home.recentOrders.viewAll') || 'View All'}
+                </button>
+              )}
+            </div>
+
+            {ordersLoading ? (
+              <div className="space-y-3">
+                {Array.from({ length: 2 }).map((_, i) => <RecentOrderSkeleton key={i} />)}
+              </div>
+            ) : recentOrders.length > 0 ? (
+              <div className="space-y-3">
+                {recentOrders.map(order => (
+                  <RecentOrderCard
+                    key={order._id}
+                    order={order}
+                    t={t}
+                    lang={lang}
+                    onClick={() => navigate(`/orders/${order._id}`)}
+                  />
+                ))}
+              </div>
+            ) : (
+              /* Empty State CTA */
+              <div className="secBg primBorder rounded-xl p-6 flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                  <ShoppingBag className="accentPrimText w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold primText">{t('home.recentOrders.emptyTitle') || "No orders yet"}</p>
+                  <p className="text-xs secText mt-1">{t('home.recentOrders.emptyDesc') || "Start shopping to see your orders here."}</p>
+                </div>
+                <button
+                  onClick={() => navigate('/search-results')}
+                  className="mt-2 btnPrimary text-sm px-6 py-2.5 rounded-lg w-full max-w-[200px]"
+                >
+                  {t('home.recentOrders.startShopping') || "Start Shopping"}
+                </button>
+              </div>
+            )}
+          </section>
+
+          {/* Popular Brands Section */}
+          <section>
+            <h2 className="text-xl font-semibold primText mb-4">{t('home.popularBrands.title')}</h2>
+            <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+              {dataLoading ? (
+                Array.from({ length: 8 }).map((_, i) => <BrandCardSkeleton key={i} />)
+              ) : (
+                displayBrands.map(brand => (
+                  <BrandCard key={brand._id} brand={brand} onClick={() => navigate(`/search-results?brand=${brand._id}`)} />
+                ))
+              )}
+            </div>
+          </section>
+
+        </main>
+      </Layout>
+      <AddressSelectionModal
+        isOpen={isAddressModalOpen}
+        onClose={() => setAddressModalOpen(false)}
+      />
+    </>
   )
 }
