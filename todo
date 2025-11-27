@@ -1,4 +1,4 @@
-Considering moving account settings into a new page which has both address and payment settings inside it. Adding address/payment will open a modal up-to 3-5 will be saved at max/
+Considering moving account settings into a new page which has both address and payment settings inside it. 
 
 Back button in orders takes you back to home, but back button in search takes you to last opened page, instead they should take back to last visited page , unless opened directly (via url) in which case it should be home
 

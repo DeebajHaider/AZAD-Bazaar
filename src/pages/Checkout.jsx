@@ -190,6 +190,7 @@ export default function Checkout() {
   const jazzCashWallet = mobileWallets?.find(w => w.provider === 'Jazzcash');
   const easypaisaWallet = mobileWallets?.find(w => w.provider === 'Easypaisa');
   const defaultCard = creditCards?.find(c => c.isDefault) || creditCards?.[0];
+  const [currentCard, setCurrentCard] = useState(defaultCard || null);
 
   // Logic: Handle Payment Selection
   const handlePaymentSelect = (type) => {
@@ -252,38 +253,29 @@ export default function Checkout() {
       return;
     }
 
-    // Prepare Payment Method Object based on Selection
-    let finalPaymentMethod = { type: selectedPaymentType };
+        // Prepare Payment Method Object based on Selection
+        let finalPaymentMethod = { type: selectedPaymentType };
 
-    if (selectedPaymentType === 'jazzcash') {
-      if (!jazzCashWallet) { alert('Please setup Jazzcash details'); return; }
-      finalPaymentMethod = { 
-        type: 'mobile_wallet', 
-        provider: 'Jazzcash', 
-        mobileNumber: jazzCashWallet.mobileNumber 
-      };
-    } else if (selectedPaymentType === 'easypaisa') {
-      if (!easypaisaWallet) { alert('Please setup Easypaisa details'); return; }
-      finalPaymentMethod = { 
-        type: 'mobile_wallet', 
-        provider: 'Easypaisa', 
-        mobileNumber: easypaisaWallet.mobileNumber 
-      };
-    } else if (selectedPaymentType === 'credit_card') {
-      if (!defaultCard) { alert('Please add a credit card'); return; }
-      finalPaymentMethod = {
-        type: 'credit_card',
-        last4Digits: defaultCard.last4Digits,
-        brand: defaultCard.brand
-      };
-    } else if (selectedPaymentType === 'card_on_delivery') {
-      finalPaymentMethod = { type: 'card_on_delivery', name: 'Card on Delivery' };
-    } else if (selectedPaymentType === 'cash_on_delivery') {
-      finalPaymentMethod = { type: 'cash_on_delivery', name: 'Cash on Delivery' };
-    } else {
-      // fallback for legacy
-      finalPaymentMethod = { type: 'cash', name: 'Cash on Delivery' };
-    }
+        // Add details for mobile wallets
+        if (selectedPaymentType === 'jazzcash' && jazzCashWallet) {
+          finalPaymentMethod.type = 'mobile_wallet';
+          finalPaymentMethod.provider = 'Jazzcash';
+          finalPaymentMethod.details = jazzCashWallet.mobileNumber;
+        } else if (selectedPaymentType === 'easypaisa' && easypaisaWallet) {
+          finalPaymentMethod.type = 'mobile_wallet';
+          finalPaymentMethod.provider = 'Easypaisa';
+          finalPaymentMethod.details = easypaisaWallet.mobileNumber;
+        } else if (selectedPaymentType === 'credit_card' && currentCard) {
+          finalPaymentMethod.provider = currentCard.brand;
+          finalPaymentMethod.details = `${currentCard.brand.toUpperCase()} •••• ${currentCard.last4Digits}`;
+        } else if (selectedPaymentType === 'card_on_delivery') {
+          finalPaymentMethod = { type: 'card_on_delivery', name: 'Card on Delivery' };
+        } else if (selectedPaymentType === 'cash_on_delivery') {
+          finalPaymentMethod = { type: 'cash_on_delivery', name: 'Cash on Delivery' };
+        } else {
+          // fallback for legacy
+          finalPaymentMethod = { type: 'cash', name: 'Cash on Delivery' };
+        }
 
     const orderData = {
       customerId: user.customerId,
@@ -548,15 +540,15 @@ export default function Checkout() {
               <PaymentRow 
                 icon={CreditCard}
                 label={t('checkout.payment.card')}
-                subLabel={defaultCard 
-                  ? `${defaultCard.brand.toUpperCase()} •••• ${defaultCard.last4Digits}`
+                subLabel={currentCard 
+                  ? `${currentCard.brand.toUpperCase()} •••• ${currentCard.last4Digits}`
                   : 'Add a card for online payment'
                 }
                 isSelected={selectedPaymentType === 'credit_card'}
                 onSelect={() => handlePaymentSelect('credit_card')}
                 iconColorClass="text-blue-600"
-                actionLabel={defaultCard ? 'Change' : 'Add'}
-                onAction={() => setModalState({ type: defaultCard ? 'cardList' : 'card' })}
+                actionLabel={currentCard ? 'Change' : 'Add'}
+                onAction={() => setModalState({ type: currentCard ? 'cardList' : 'card' })}
               />
 
             </div>
@@ -614,6 +606,7 @@ export default function Checkout() {
            onSave={addCreditCard}
            t={t}
            setSelectedPaymentType={setSelectedPaymentType}
+           setCurrentCard={setCurrentCard}
         />
       )}
 
@@ -623,13 +616,11 @@ export default function Checkout() {
           isOpen={true}
           onClose={() => setModalState({ type: null, data: null })}
           cards={creditCards}
+          setCurrentCard={setCurrentCard}
           onAddNew={() => setModalState({ type: 'card', data: null })}
-          onSelect={() => {
-            // Context automatically handles "default" card switching usually, 
-            // but for this UI we might just want to set the payment type.
-            // In a real app, selecting here might set the specific card ID for this order.
-            // For now, we assume the user manages defaults or we just select the type.
-            setSelectedPaymentType('online_card');
+          onSelect={(card) => {
+            setCurrentCard(card);
+            setSelectedPaymentType('credit_card');
             setModalState({ type: null, data: null });
           }}
           t={t}
@@ -701,7 +692,7 @@ function WalletModal({ onClose, provider, existingData, onSave, t, setSelectedPa
   );
 }
 
-function AddCardModal({ onClose, onSave, t, setSelectedPaymentType }) {
+function AddCardModal({ onClose, onSave, t, setSelectedPaymentType, setCurrentCard }) {
   const [formData, setFormData] = useState({ last4Digits: '', brand: '', expiryMonth: '', expiryYear: '', isDefault: true });
   const [loading, setLoading] = useState(false);
 
@@ -709,8 +700,9 @@ function AddCardModal({ onClose, onSave, t, setSelectedPaymentType }) {
     e.preventDefault();
     setLoading(true);
     try {
-      await onSave(formData);
-      setSelectedPaymentType('online_card');
+      const newCard = await onSave(formData);
+      setCurrentCard && setCurrentCard(formData);
+      setSelectedPaymentType('credit_card');
       onClose();
     } catch (error) {
       alert(error.message);
@@ -764,7 +756,7 @@ function AddCardModal({ onClose, onSave, t, setSelectedPaymentType }) {
   );
 }
 
-function CardListModal({ onClose, cards, onAddNew, onSelect, t }) {
+function CardListModal({ onClose, cards, onAddNew, onSelect, setCurrentCard, t }) {
   return (
     <ModalBackdrop onClose={onClose}>
        <div className="p-5 max-h-[80vh] flex flex-col">
@@ -775,7 +767,7 @@ function CardListModal({ onClose, cards, onAddNew, onSelect, t }) {
         
         <div className="overflow-y-auto space-y-3 flex-1 mb-4">
            {cards.map((card, idx) => (
-             <div key={idx} onClick={onSelect} className="p-4 rounded-xl primBorder secBg flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-800">
+             <div key={idx} onClick={() => onSelect(card)} className="p-4 rounded-xl primBorder secBg flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-800">
                 <div className="flex items-center gap-3">
                    <CreditCard className="text-blue-600" size={24} />
                    <div>
