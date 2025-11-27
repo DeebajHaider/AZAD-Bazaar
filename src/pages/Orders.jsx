@@ -46,6 +46,11 @@ export default function Orders() {
     </div>
   )
 
+  // Sort orders by most recent (descending by createdAt)
+  const sortedOrders = orders && Array.isArray(orders)
+    ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
+
   return (
     <Layout
       header={<HeaderWithName title={t('orders.title')} to="/" />}
@@ -54,7 +59,6 @@ export default function Orders() {
       <main className="flex-1 min-h-full overflow-y-auto primBg">
         {/* Add a subtle background variation for list area if needed, currently keeping generic primBg */}
         <div className="max-w-[430px] mx-auto w-full p-4 space-y-4">
-          
           {/* Loading State */}
           {loading && (
             Array.from({ length: 4 }).map((_, i) => <OrderItemCardSkeleton key={i} />)
@@ -64,8 +68,8 @@ export default function Orders() {
           {!loading && error && <ErrorState />}
 
           {/* Orders List */}
-          {!loading && !error && orders && orders.length > 0 && (
-            orders.map(order => (
+          {!loading && !error && sortedOrders && sortedOrders.length > 0 && (
+            sortedOrders.map(order => (
               <Link 
                 key={order._id} 
                 to={`/orders/${order._id}`} 
@@ -78,7 +82,7 @@ export default function Orders() {
           )}
 
           {/* Empty State */}
-          {!loading && !error && orders && orders.length === 0 && <EmptyState />}
+          {!loading && !error && sortedOrders && sortedOrders.length === 0 && <EmptyState />}
         </div>
       </main>
     </Layout>
