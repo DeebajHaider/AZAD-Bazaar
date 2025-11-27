@@ -1,6 +1,7 @@
-You are an expert UI redeisnger your goal is to make ui consister and match the given guideliens . You can also slight improve the design but you need to ask before hand, you can do suggestions and then when user confirms yuou will implement it.  Also if you introduce any new string, you will provide key value fr its lanagueg defintions for english and urdu
+You are an expert React+Tailwind CSS designer for mobile focused site. The site is a accesibilty in mind mobile grocery store site, you have vast experience in mobile design you even suggest ideas to imrpvoe it. You are given a guideline and css guide. You will be given old code having none to partialimplementaion of the giuven css. It will have tailwin but seeprate from the classes. You goal is to just focus on color related elemet,s like bg, color, hover color, border, hover border etc just dealidng with color. If you have suggestions to improve the UI qwhile keeping core functionality same, do ityou need to remove the indiciual olor elements and replace them clases in htis css . in the ened give a list of what things you replaved with what with 1 line reasoning YOU WILL USE ALL THE TAILWIND CLASSES FOR COLORS BORDERS HOVERS IN THE CSS GIVEN 
 
-Current app index.css @import "tailwindcss";
+
+@import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -8,7 +9,8 @@ Current app index.css @import "tailwindcss";
   --mobile-width: 430px;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -29,538 +31,2181 @@ body {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-
-
-# Mobile App Style Guidelines
-
-## 🎨 Color System
-
-### Light Mode
-- **Background:** `bg-white`
-- **Surface/Cards:** `bg-gray-50`
-- **Text Primary:** `text-gray-900`
-- **Text Secondary:** `text-gray-600`
-- **Borders:** `border-gray-200`
-
-### Dark Mode
-- **Background:** `dark:bg-slate-950`
-- **Surface/Cards:** `dark:bg-slate-900`
-- **Text Primary:** `dark:text-slate-50`
-- **Text Secondary:** `dark:text-slate-400`
-- **Borders:** `dark:border-slate-800`
-
-### Accent Colors
-- **Primary:** `bg-blue-500` / `dark:bg-blue-600`
-- **Success:** `bg-green-500` / `dark:bg-green-600`
-- **Danger:** `bg-red-500` / `dark:bg-red-600`
-- **Warning:** `bg-amber-500` / `dark:bg-amber-600`
-
-## 📏 Layout & Spacing
-
-### Container
-- **Max Width:** `max-w-[430px]`
-- **Full Height:** `h-screen` or `min-h-screen`
-- **Centering:** `mx-auto`
-
-### Padding
-- **Page/Screen:** `p-4` (16px)
-- **Cards/Sections:** `p-4` or `p-5` (16px or 20px)
-- **Buttons:** `px-6 py-3` (24px horizontal, 12px vertical)
-- **Small Elements:** `p-2` or `p-3` (8px or 12px)
-
-### Gaps & Margins
-- **Between sections:** `space-y-4` or `gap-4`
-- **Between elements:** `space-y-2` or `gap-2`
-- **Large spacing:** `space-y-6` or `gap-6`
-
-## 🔘 Interactive Elements
-
-### Buttons
-- **Minimum Height:** `min-h-12` (48px for touch targets)
-- **Padding:** `px-6 py-3`
-- **Border Radius:** `rounded-lg`
-- **Font:** `font-medium`
-- **Hover:** `hover:bg-opacity-90` or specific hover colors
-- **Transition:** `transition-all duration-200`
-
-### Touch Targets
-- All interactive elements should be **minimum 44-48px** in height/width
-- Use `min-h-12` or `min-h-11` for buttons and clickable areas
-
-## 🎯 Borders & Radius
-
-### Border Radius
-- **Small:** `rounded` (4px)
-- **Medium:** `rounded-lg` (8px)
-- **Large:** `rounded-xl` (12px)
-- **Full:** `rounded-full` (pills/circles)
-
-### Borders
-- **Standard:** `border border-gray-200 dark:border-slate-800`
-- **Dividers:** `border-b border-gray-200 dark:border-slate-800`
-- **Subtle:** `border border-gray-100 dark:border-slate-900`
-
-## 📝 Typography
-
-### Font Sizes
-- **Headings (h1):** `text-2xl` or `text-3xl`
-- **Subheadings (h2):** `text-xl`
-- **Body:** `text-base` (default)
-- **Small text:** `text-sm`
-- **Tiny text:** `text-xs`
-
-### Font Weights
-- **Headings:** `font-semibold` or `font-bold`
-- **Buttons:** `font-medium`
-- **Body:** `font-normal` (default)
-
-## 🎭 Common Patterns
-
-### Card Component
-```
-bg-gray-50 dark:bg-slate-900 
-border border-gray-200 dark:border-slate-800 
-rounded-lg p-4
-```
-
-### Input Fields
-```
-w-full px-4 py-3 
-border border-gray-200 dark:border-slate-800 
-rounded-lg 
-bg-white dark:bg-slate-950
-text-gray-900 dark:text-slate-50
-focus:ring-2 focus:ring-blue-500 focus:border-transparent
-```
-
-### Primary Button
-```
-min-h-12 px-6 py-3 
-bg-blue-500 hover:bg-blue-600 
-dark:bg-blue-600 dark:hover:bg-blue-700
-text-white font-medium rounded-lg 
-transition-all duration-200
-```
-
-### Secondary Button
-```
-min-h-12 px-6 py-3 
-bg-gray-100 hover:bg-gray-200 
-dark:bg-slate-800 dark:hover:bg-slate-700
-text-gray-900 dark:text-slate-50 
-font-medium rounded-lg 
-transition-all duration-200
-```
-
-## ⚡ Performance
-
-- Use `transition-all duration-200` for smooth interactions
-- Apply `will-change-transform` sparingly for heavy animations
-- Prefer `transform` and `opacity` for animations
-
-## 🌙 Dark Mode Implementation
-
-Always pair light and dark mode classes:
-```jsx
-className="bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50"
-```
-
-Use Tailwind's `dark:` prefix for all color-related utilities.
-
-## 📱 Mobile-Specific
-
-- **Viewport:** Set `max-w-[430px] mx-auto` on root container
-- **Safe Areas:** Consider using `pb-safe` if using iOS safe area insets
-- **Scrolling:** Use `overflow-y-auto` for scrollable content
-- **Fixed Elements:** Bottom nav should use `fixed bottom-0 w-full max-w-[430px]`
-
-## ✨ Shadows & Elevation
-
-- **Subtle:** `shadow-sm`
-- **Medium:** `shadow-md`
-- **Large:** `shadow-lg`
-- **Dark mode:** Shadows are less visible, consider using borders instead
-
-
-
-Here is some info
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import Home from './pages/Home'
-import Cart from './pages/Cart'
-import Checkout from './pages/Checkout'
-import Settings from './pages/Settings'
-import Search from './pages/Search'
-import SearchResults from './pages/SearchResults'
-import Address from './pages/Address'
-import Product from './pages/Product'
-import { ThemeProvider } from './context/ThemeContext'
-import { CartProvider } from './context/CartContext'
-import { DataProvider } from './context/DataContext'
-import { AuthProvider, useAuth } from './context/AuthContext'
-import Login from './pages/Login'
-import { AccessibilityProvider } from './context/AccessibilityContext'
-import AccessibilitySettings from './pages/AccessibilitySettings'
-import { I18nProvider } from './context/I18nContext'
-import LanguageSelection from './pages/LanguageSelection'
-
-export default function App() {
-  const AuthGate = () => {
-    const { user, loading } = useAuth()
-    // while auth is initializing, avoid flicker
-    if (loading) return <div className="p-4">Loading...</div>
-    if (!user) {
-      return (
-        <Router>
-          <div style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
-            <Routes>
-              <Route path="/*" element={<LanguageSelection />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/accessibility" element={<AccessibilitySettings />} />
-              <Route path="/language" element={<LanguageSelection />} />
-            </Routes>
-          </div>
-        </Router>
-      )
-    }
-
-    return (
-      <Router>
-        <div className="App" style={{ fontFamily: 'sans-serif', position: 'relative', height: '100%' }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/view-cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/search-results" element={<SearchResults />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/address" element={<Address />} />
-            <Route path="/accessibility" element={<AccessibilitySettings />} />
-            <Route path="/language" element={<LanguageSelection />} />
-            <Route path="/login" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
-      </Router>
-    )
+@layer utilities {
+  /* ==================== BACKGROUNDS ==================== */
+  
+  /* Primary Background (Main page background) */
+  .primBg {
+    @apply bg-white dark:bg-slate-950;
+  }
+  .highContrast .primBg {
+    @apply bg-white dark:bg-black;
+  }
+  .deuteranopia .primBg,
+  .protanopia .primBg,
+  .tritanopia .primBg {
+    @apply bg-white dark:bg-slate-950;
   }
 
+  /* Secondary Background (Cards/Surfaces) */
+  .secBg {
+    @apply bg-gray-50 dark:bg-slate-900;
+  }
+  .highContrast .secBg {
+    @apply bg-gray-100 dark:bg-gray-900;
+  }
+  .deuteranopia .secBg,
+  .protanopia .secBg,
+  .tritanopia .secBg {
+    @apply bg-gray-50 dark:bg-slate-900;
+  }
+
+  /* ==================== TEXT COLORS ==================== */
+  
+  /* Primary Text */
+  .primText {
+    @apply text-gray-900 dark:text-slate-50;
+  }
+  .highContrast .primText {
+    @apply text-black dark:text-white;
+  }
+  .deuteranopia .primText,
+  .protanopia .primText,
+  .tritanopia .primText {
+    @apply text-gray-900 dark:text-slate-50;
+  }
+
+  /* Secondary Text */
+  .secText {
+    @apply text-gray-600 dark:text-slate-400;
+  }
+  .highContrast .secText {
+    @apply text-gray-800 dark:text-gray-200;
+  }
+  .deuteranopia .secText,
+  .protanopia .secText,
+  .tritanopia .secText {
+    @apply text-gray-600 dark:text-slate-400;
+  }
+
+  /* ==================== BORDERS ==================== */
+  
+  /* Standard Border */
+  .primBorder {
+    @apply border border-gray-200 dark:border-slate-800;
+  }
+  .highContrast .primBorder {
+    @apply border-2 border-gray-900 dark:border-white;
+  }
+  .deuteranopia .primBorder,
+  .protanopia .primBorder,
+  .tritanopia .primBorder {
+    @apply border border-gray-200 dark:border-slate-800;
+  }
+
+  /* Divider Border */
+  .dividerBorder {
+    @apply border-b border-gray-200 dark:border-slate-800;
+  }
+  .highContrast .dividerBorder {
+    @apply border-b-2 border-gray-900 dark:border-white;
+  }
+  .deuteranopia .dividerBorder,
+  .protanopia .dividerBorder,
+  .tritanopia .dividerBorder {
+    @apply border-b border-gray-200 dark:border-slate-800;
+  }
+
+  /* ==================== ACCENT COLORS - PRIMARY ==================== */
+  
+  /* Primary Button/Accent Background */
+  .accentPrimBg {
+    @apply bg-blue-500 dark:bg-blue-600;
+  }
+  .highContrast .accentPrimBg {
+    @apply bg-blue-700 dark:bg-blue-400;
+  }
+  .deuteranopia .accentPrimBg {
+    @apply bg-blue-600 dark:bg-blue-500;
+  }
+  .protanopia .accentPrimBg {
+    @apply bg-blue-600 dark:bg-blue-500;
+  }
+  .tritanopia .accentPrimBg {
+    @apply bg-pink-600 dark:bg-pink-500;
+  }
+
+  /* Primary Button/Accent Hover */
+  .accentPrimHover {
+    @apply hover:bg-blue-600 dark:hover:bg-blue-700;
+  }
+  .highContrast .accentPrimHover {
+    @apply hover:bg-blue-800 dark:hover:bg-blue-300;
+  }
+  .deuteranopia .accentPrimHover {
+    @apply hover:bg-blue-700 dark:hover:bg-blue-400;
+  }
+  .protanopia .accentPrimHover {
+    @apply hover:bg-blue-700 dark:hover:bg-blue-400;
+  }
+  .tritanopia .accentPrimHover {
+    @apply hover:bg-pink-700 dark:hover:bg-pink-400;
+  }
+
+  /* Primary Text Color */
+  .accentPrimText {
+    @apply text-blue-500 dark:text-blue-400;
+  }
+  .highContrast .accentPrimText {
+    @apply text-blue-700 dark:text-blue-300;
+  }
+  .deuteranopia .accentPrimText {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  .protanopia .accentPrimText {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  .tritanopia .accentPrimText {
+    @apply text-pink-600 dark:text-pink-400;
+  }
+
+  /* ==================== ACCENT COLORS - SUCCESS ==================== */
+  
+  /* Success Background */
+  .accentSuccessBg {
+    @apply bg-green-500 dark:bg-green-600;
+  }
+  .highContrast .accentSuccessBg {
+    @apply bg-green-700 dark:bg-green-400;
+  }
+  .deuteranopia .accentSuccessBg {
+    @apply bg-sky-600 dark:bg-sky-500;
+  }
+  .protanopia .accentSuccessBg {
+    @apply bg-cyan-600 dark:bg-cyan-500;
+  }
+  .tritanopia .accentSuccessBg {
+    @apply bg-teal-700 dark:bg-teal-500;
+  }
+
+  /* Success Hover */
+  .accentSuccessHover {
+    @apply hover:bg-green-600 dark:hover:bg-green-700;
+  }
+  .highContrast .accentSuccessHover {
+    @apply hover:bg-green-800 dark:hover:bg-green-300;
+  }
+  .deuteranopia .accentSuccessHover {
+    @apply hover:bg-sky-700 dark:hover:bg-sky-400;
+  }
+  .protanopia .accentSuccessHover {
+    @apply hover:bg-cyan-700 dark:hover:bg-cyan-400;
+  }
+  .tritanopia .accentSuccessHover {
+    @apply hover:bg-teal-800 dark:hover:bg-teal-400;
+  }
+
+  /* Success Text */
+  .accentSuccessText {
+    @apply text-green-600 dark:text-green-400;
+  }
+  .highContrast .accentSuccessText {
+    @apply text-green-800 dark:text-green-300;
+  }
+  .deuteranopia .accentSuccessText {
+    @apply text-sky-600 dark:text-sky-400;
+  }
+  .protanopia .accentSuccessText {
+    @apply text-cyan-600 dark:text-cyan-400;
+  }
+  .tritanopia .accentSuccessText {
+    @apply text-teal-700 dark:text-teal-400;
+  }
+
+  /* ==================== ACCENT COLORS - DANGER ==================== */
+  
+  /* Danger Background */
+  .accentDangerBg {
+    @apply bg-red-500 dark:bg-red-600;
+  }
+  .highContrast .accentDangerBg {
+    @apply bg-red-700 dark:bg-red-400;
+  }
+  .deuteranopia .accentDangerBg {
+    @apply bg-orange-600 dark:bg-orange-500;
+  }
+  .protanopia .accentDangerBg {
+    @apply bg-amber-700 dark:bg-amber-500;
+  }
+  .tritanopia .accentDangerBg {
+    @apply bg-red-700 dark:bg-red-500;
+  }
+
+  /* Danger Hover */
+  .accentDangerHover {
+    @apply hover:bg-red-600 dark:hover:bg-red-700;
+  }
+  .highContrast .accentDangerHover {
+    @apply hover:bg-red-800 dark:hover:bg-red-300;
+  }
+  .deuteranopia .accentDangerHover {
+    @apply hover:bg-orange-700 dark:hover:bg-orange-400;
+  }
+  .protanopia .accentDangerHover {
+    @apply hover:bg-amber-800 dark:hover:bg-amber-400;
+  }
+  .tritanopia .accentDangerHover {
+    @apply hover:bg-red-800 dark:hover:bg-red-400;
+  }
+
+  /* Danger Text */
+  .accentDangerText {
+    @apply text-red-600 dark:text-red-400;
+  }
+  .highContrast .accentDangerText {
+    @apply text-red-800 dark:text-red-300;
+  }
+  .deuteranopia .accentDangerText {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+  .protanopia .accentDangerText {
+    @apply text-amber-700 dark:text-amber-400;
+  }
+  .tritanopia .accentDangerText {
+    @apply text-red-700 dark:text-red-400;
+  }
+
+  /* ==================== ACCENT COLORS - WARNING ==================== */
+  
+  /* Warning Background */
+  .accentWarningBg {
+    @apply bg-amber-500 dark:bg-amber-600;
+  }
+  .highContrast .accentWarningBg {
+    @apply bg-amber-700 dark:bg-amber-300;
+  }
+  .deuteranopia .accentWarningBg {
+    @apply bg-amber-600 dark:bg-amber-400;
+  }
+  .protanopia .accentWarningBg {
+    @apply bg-yellow-600 dark:bg-yellow-400;
+  }
+  .tritanopia .accentWarningBg {
+    @apply bg-rose-600 dark:bg-rose-500;
+  }
+
+  /* Warning Hover */
+  .accentWarningHover {
+    @apply hover:bg-amber-600 dark:hover:bg-amber-700;
+  }
+  .highContrast .accentWarningHover {
+    @apply hover:bg-amber-800 dark:hover:bg-amber-200;
+  }
+  .deuteranopia .accentWarningHover {
+    @apply hover:bg-amber-700 dark:hover:bg-amber-300;
+  }
+  .protanopia .accentWarningHover {
+    @apply hover:bg-yellow-700 dark:hover:bg-yellow-300;
+  }
+  .tritanopia .accentWarningHover {
+    @apply hover:bg-rose-700 dark:hover:bg-rose-400;
+  }
+
+  /* Warning Text */
+  .accentWarningText {
+    @apply text-amber-600 dark:text-amber-400;
+  }
+  .highContrast .accentWarningText {
+    @apply text-amber-800 dark:text-amber-200;
+  }
+  .deuteranopia .accentWarningText {
+    @apply text-amber-600 dark:text-amber-300;
+  }
+  .protanopia .accentWarningText {
+    @apply text-yellow-600 dark:text-yellow-300;
+  }
+  .tritanopia .accentWarningText {
+    @apply text-rose-600 dark:text-rose-400;
+  }
+
+  /* ==================== BUTTON STYLES ==================== */
+  
+  /* Primary Button - Default */
+  .btnPrimary {
+    @apply bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium;
+  }
+  
+  /* Primary Button - highContrast */
+  .highContrast .btnPrimary {
+    @apply bg-blue-700 hover:bg-blue-800 dark:bg-blue-400 dark:hover:bg-blue-300 text-white dark:text-black font-semibold border-2 border-black dark:border-white;
+  }
+  
+  /* Primary Button - Deuteranopia */
+  .deuteranopia .btnPrimary {
+    @apply bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400;
+  }
+  
+  /* Primary Button - Protanopia */
+  .protanopia .btnPrimary {
+    @apply bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400;
+  }
+  
+  /* Primary Button - Tritanopia */
+  .tritanopia .btnPrimary {
+    @apply bg-pink-600 hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-400;
+  }
+
+  /* Secondary Button - Default */
+  .btnSecondary {
+    @apply bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium;
+  }
+  
+  /* Secondary Button - highContrast */
+  .highContrast .btnSecondary {
+    @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white font-semibold border-2 border-black dark:border-white;
+  }
+  
+  /* Secondary Button - Color blind modes */
+  .deuteranopia .btnSecondary,
+  .protanopia .btnSecondary,
+  .tritanopia .btnSecondary {
+    @apply bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50;
+  }
+
+  /* Success Button - Default */
+  .btnSuccess {
+    @apply bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium;
+  }
+  
+  /* Success Button - highContrast */
+  .highContrast .btnSuccess {
+    @apply bg-green-700 hover:bg-green-800 dark:bg-green-400 dark:hover:bg-green-300 text-white dark:text-black font-semibold border-2 border-black dark:border-white;
+  }
+  
+  /* Success Button - Deuteranopia */
+  .deuteranopia .btnSuccess {
+    @apply bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-400;
+  }
+  
+  /* Success Button - Protanopia */
+  .protanopia .btnSuccess {
+    @apply bg-cyan-600 hover:bg-cyan-700 dark:bg-cyan-500 dark:hover:bg-cyan-400;
+  }
+  
+  /* Success Button - Tritanopia */
+  .tritanopia .btnSuccess {
+    @apply bg-teal-700 hover:bg-teal-800 dark:bg-teal-500 dark:hover:bg-teal-400;
+  }
+
+  /* Danger Button - Default */
+  .btnDanger {
+    @apply bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white font-medium;
+  }
+  
+  /* Danger Button - highContrast */
+  .highContrast .btnDanger {
+    @apply bg-red-700 hover:bg-red-800 dark:bg-red-400 dark:hover:bg-red-300 text-white dark:text-black font-semibold border-2 border-black dark:border-white;
+  }
+  
+  /* Danger Button - Deuteranopia */
+  .deuteranopia .btnDanger {
+    @apply bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400;
+  }
+  
+  /* Danger Button - Protanopia */
+  .protanopia .btnDanger {
+    @apply bg-amber-700 hover:bg-amber-800 dark:bg-amber-500 dark:hover:bg-amber-400;
+  }
+  
+  /* Danger Button - Tritanopia */
+  .tritanopia .btnDanger {
+    @apply bg-red-700 hover:bg-red-800 dark:bg-red-500 dark:hover:bg-red-400;
+  }
+
+  /* ==================== INPUT FIELDS ==================== */
+  
+  /* Standard Input */
+  .inputField {
+    @apply bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 border border-gray-200 dark:border-slate-800 rounded-lg px-4 py-3 w-full;
+    @apply focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none;
+  }
+  .highContrast .inputField {
+    @apply border-2 border-gray-900 dark:border-white focus:ring-4 focus:ring-blue-700;
+  }
+  .deuteranopia .inputField,
+  .protanopia .inputField {
+    @apply focus:ring-2 focus:ring-blue-500;
+  }
+  .tritanopia .inputField {
+    @apply focus:ring-2 focus:ring-pink-500;
+  }
+
+  /* ==================== CARDS ==================== */
+  
+  /* Standard Card */
+  .card {
+    @apply bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4;
+  }
+  .highContrast .card {
+    @apply bg-gray-100 dark:bg-gray-900 border-2 border-gray-900 dark:border-white;
+  }
+
+  /* ==================== LINKS ==================== */
+  
+  /* Standard Link */
+  .link {
+    @apply text-blue-500 dark:text-blue-400 underline hover:opacity-80;
+  }
+  .highContrast .link {
+    @apply text-blue-700 dark:text-blue-300 underline decoration-2;
+  }
+  .deuteranopia .link {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  .protanopia .link {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  .tritanopia .link {
+    @apply text-pink-600 dark:text-pink-400;
+  }
+
+  /* ==================== BADGES/PILLS ==================== */
+  
+  /* Success Badge */
+  .badgeSuccess {
+    @apply bg-green-500 dark:bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium;
+  }
+  .highContrast .badgeSuccess {
+    @apply bg-green-700 dark:bg-green-400 dark:text-black;
+  }
+  .deuteranopia .badgeSuccess {
+    @apply bg-sky-600 dark:bg-sky-500;
+  }
+  .protanopia .badgeSuccess {
+    @apply bg-cyan-600 dark:bg-cyan-500;
+  }
+  .tritanopia .badgeSuccess {
+    @apply bg-teal-700 dark:bg-teal-500;
+  }
+
+  /* Danger Badge */
+  .badgeDanger {
+    @apply bg-red-500 dark:bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium;
+  }
+  .highContrast .badgeDanger {
+    @apply bg-red-700 dark:bg-red-400 dark:text-black;
+  }
+  .deuteranopia .badgeDanger {
+    @apply bg-orange-600 dark:bg-orange-500;
+  }
+  .protanopia .badgeDanger {
+    @apply bg-amber-700 dark:bg-amber-500;
+  }
+  .tritanopia .badgeDanger {
+    @apply bg-red-700 dark:bg-red-500;
+  }
+
+  /* Warning Badge */
+  .badgeWarning {
+    @apply bg-amber-500 dark:bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium;
+  }
+  .highContrast .badgeWarning {
+    @apply bg-amber-700 dark:bg-amber-300 dark:text-black;
+  }
+  .deuteranopia .badgeWarning {
+    @apply bg-amber-600 dark:bg-amber-400;
+  }
+  .protanopia .badgeWarning {
+    @apply bg-yellow-600 dark:bg-yellow-400;
+  }
+  .tritanopia .badgeWarning {
+    @apply bg-rose-600 dark:bg-rose-500;
+  }
+
+  /* Primary Badge */
+  .badgePrimary {
+    @apply bg-blue-500 dark:bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium;
+  }
+  .highContrast .badgePrimary {
+    @apply bg-blue-700 dark:bg-blue-400 dark:text-black;
+  }
+  .deuteranopia .badgePrimary {
+    @apply bg-blue-600 dark:bg-blue-500;
+  }
+  .protanopia .badgePrimary {
+    @apply bg-blue-600 dark:bg-blue-500;
+  }
+  .tritanopia .badgePrimary {
+    @apply bg-pink-600 dark:bg-pink-500;
+  }
+
+  /* ==================== FOCUS RINGS ==================== */
+  
+  /* Focus Ring for Interactive Elements */
+  .focusRing {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+  .highContrast .focusRing {
+    @apply focus:ring-4 focus:ring-blue-700 focus:ring-offset-4;
+  }
+  .deuteranopia .focusRing,
+  .protanopia .focusRing {
+    @apply focus:ring-2 focus:ring-blue-500;
+  }
+  .tritanopia .focusRing {
+    @apply focus:ring-2 focus:ring-pink-500;
+  }
+
+  /* ==================== MODE CHOOSE BUTTONS ==================== */
+  
+  /* Mode Choose Button - Selected State - Default */
+  .modeChooseButton-selected {
+    @apply border-2 border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400;
+  }
+  
+  /* Mode Choose Button - Selected State - highContrast */
+  .highContrast .modeChooseButton-selected {
+    @apply border-3 border-blue-700 bg-blue-100 dark:border-blue-300 dark:bg-blue-900 text-blue-800 dark:text-blue-200;
+  }
+  
+  /* Mode Choose Button - Selected State - Deuteranopia */
+  .deuteranopia .modeChooseButton-selected {
+    @apply border-blue-600 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300;
+  }
+  
+  /* Mode Choose Button - Selected State - Protanopia */
+  .protanopia .modeChooseButton-selected {
+    @apply border-blue-600 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300;
+  }
+  
+  /* Mode Choose Button - Selected State - Tritanopia */
+  .tritanopia .modeChooseButton-selected {
+    @apply border-pink-600 bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300;
+  }
+
+  /* Mode Choose Button - Unselected State - Default */
+  .modeChooseButton-unselected {
+    @apply border-2 border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50;
+    @apply hover:border-gray-300 dark:hover:border-slate-700;
+  }
+  
+  /* Mode Choose Button - Unselected State - highContrast */
+  .highContrast .modeChooseButton-unselected {
+    @apply border-3 border-gray-900 dark:border-white bg-white dark:bg-black text-black dark:text-white;
+    @apply hover:border-gray-700 dark:hover:border-gray-300;
+  }
+  
+  /* Mode Choose Button - Unselected State - Color blind modes */
+  .deuteranopia .modeChooseButton-unselected,
+  .protanopia .modeChooseButton-unselected,
+  .tritanopia .modeChooseButton-unselected {
+    @apply border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50;
+    @apply hover:border-gray-300 dark:hover:border-slate-700;
+  }
+
+   /* Secondary Hover Background (for list items, counters, etc.) */
+  .secHoverBg {
+    @apply hover:bg-gray-100 dark:hover:bg-slate-800;
+  }
+  .highContrast .secHoverBg {
+    @apply hover:bg-gray-200 dark:hover:bg-gray-700;
+  }
+/* ==================== SKELETON LOADER (IMPROVED & ACCESSIBLE) ==================== */
+
+/* --- Base Skeleton Style --- */
+/* A subtle, low-contrast look for the default experience. */
+.skeleton {
+  @apply bg-gray-200 dark:bg-slate-800 animate-pulse rounded-md;
+}
+
+/* --- Nested Skeleton Style --- */
+/* Provides slightly more contrast for nested elements by default. */
+.skeleton .skeleton {
+  @apply bg-gray-300 dark:bg-slate-700;
+}
+
+
+/* --- High Contrast & Colorblindness Support --- */
+/*
+  This single block improves the experience for BOTH high-contrast users
+  and users with color vision deficiency. We don't need separate rules for
+  protanopia, deuteranopia, etc., because the issue is luminance contrast,
+  not color. A strong border solves this for everyone.
+*/
+.highContrast .skeleton,
+.deuteranopia .skeleton,
+.protanopia .skeleton,
+.tritanopia .skeleton {
+  /* Use a transparent background and a strong border. This creates a
+     very clear, unmistakable shape that relies on outlines, not fill color. */
+  @apply bg-transparent border-2 border-gray-400 dark:border-gray-600;
+}
+
+/* For nested skeletons in these modes, we make the border slightly
+   different to maintain the hierarchy. */
+.highContrast .skeleton .skeleton,
+.deuteranopia .skeleton .skeleton,
+.protanopia .skeleton .skeleton,
+.tritanopia .skeleton .skeleton {
+  @apply border-gray-500 dark:border-gray-500;
+}
+
+/* --- Image Skeleton Style --- */
+/* A borderless skeleton for use inside image containers that already have borders. */
+.image-skeleton {
+  @apply bg-gray-200 dark:bg-slate-800 animate-pulse;
+}
+
+/* In high contrast modes, we still want a fill, but no border. */
+.highContrast .image-skeleton,
+.deuteranopia .image-skeleton,
+.protanopia .image-skeleton,
+.tritanopia .image-skeleton {
+  @apply bg-gray-300 dark:bg-gray-700 border-none;
+}
+}
+
+/* Hide scrollbars globally but keep scrolling functional */
+/* WebKit browsers */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+main::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html, body, #root, main {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+/* Keep touch scrolling smooth on iOS */
+main {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Also hide scrollbars for all elements (covers horizontal scrollbars on inner containers) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+
+The apps uses this Layout class to fix header and footer 
+
+import React from 'react';
+
+export const Layout = React.forwardRef(({ 
+  children, 
+  header = null,
+  footer = null,
+}, ref) => {
   return (
-    <I18nProvider>
-      <ThemeProvider>
-        <AccessibilityProvider>
-          <AuthProvider>
-            <DataProvider>
-              <CartProvider>
-                <AuthGate />
-              </CartProvider>
-            </DataProvider>
-          </AuthProvider>
-        </AccessibilityProvider>
-      </ThemeProvider>
-    </I18nProvider>
+    <div className="flex flex-col h-screen">
+      {header}
+      
+      <main ref={ref} className="flex-1 overflow-y-auto">
+        {children}
+      </main>
+      
+      {footer}
+    </div>
+  );
+});
+
+Layout.displayName = 'Layout';
+
+
+for elements we need fixed in bottom, we pass them to footer, for top we give them in header
+
+for th center portoin to use full height, we give it the taiwlin class min-h-full, no need for bottom padding
+
+
+for cinssitnest in design this header is used 
+import { useNavigate } from 'react-router-dom'
+import { ChevronLeft } from 'lucide-react' // Using lucide-react for consistency
+
+export default function HeaderWithName({ title, to = -1, rightAction = null, overwriteNavButton = null }) {
+  const navigate = useNavigate()
+
+  return (
+    // Using secBg for the header background and dividerBorder for the bottom border
+    <header className="secBg dividerBorder p-4">
+      <div className="max-w-[430px] mx-auto flex items-center gap-3">
+        {/* Conditional Back Button */}
+        {overwriteNavButton === null ? (
+          <button
+            onClick={() => navigate(to)}
+            aria-label="Go back"
+            // btnSecondary is appropriate for a standard, non-primary action
+            className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary"
+          >
+            <ChevronLeft size={20} />
+          </button>
+        ) : (
+          // A placeholder to maintain layout if the button isn't rendered
+          // Added min-w-11 to perfectly match the button's footprint
+          <div className="min-h-11 min-w-11" >
+            {overwriteNavButton}
+          </div>
+        )}
+
+        {/* Title */}
+        <h1 className="text-xl font-semibold primText">
+          {title}
+        </h1>
+
+        {/* Right Action Slot */}
+        {rightAction && (
+          <div className="ml-auto">
+            {rightAction}
+          </div>
+        )}
+      </div>
+    </header>
   )
 }
 
 
-import React, { useState, useEffect } from 'react'
-import { useAuth } from '../context/AuthContext'
+Here are some done pages whic follow the guides 
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save } from 'lucide-react'
-import BottomNav from '../component/BottomNav'
+import { MapPin, Search, ShoppingBag, ChevronRight, Clock, Truck, CheckCircle, XCircle, Package, Mic } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
+import { useData } from '../context/DataContext'
+import { useOrdersContext } from '../context/OrderContext' // Added
 import { useI18n } from '../context/I18nContext'
-import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
-import HeaderWithName from '../component/HeaderWithName'
+import useTranslations from '../hooks/useTranslations'
+import { Layout } from '../Layout'
+import BottomNav from '../component/BottomNav'
+import ImageWithLoader from '../component/ImageWithLoader'
+import dayjs from 'dayjs' // Assuming dayjs is installed as per other files
+import VoiceInputModal from '../component/VoiceInputModal'
+import { useState } from 'react'
+import AddressSelectionModal from '../component/AddressSelectionModal';
+// --- Reusable Sub-components for the Home Screen ---
 
-export default function Settings() {
-  const { logout, customer, updateCustomer } = useAuth()
-  const navigate = useNavigate()
-  const { t, lang, setLang } = useI18n()
-  const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
-  const [isSaving, setIsSaving] = useState(false)
+// Skeleton Placeholders
+const CategoryCardSkeleton = () => (
+  <div className="w-20 flex flex-col items-center justify-start gap-2 text-center">
+    <div className="w-full aspect-square rounded-xl skeleton" />
+    <div className="h-4 w-16 skeleton" />
+  </div>
+)
 
-  // Populate form from global customer when available
-  useEffect(() => {
-    if (customer) {
-      setFormData({
-        name: customer.name || '',
-        phone: customer.phone || '',
-        address: (Array.isArray(customer.addresses) && customer.addresses[0]?.addressText) || ''
-      })
-    }
-  }, [customer])
+const BrandCardSkeleton = () => (
+  <div className="w-24 flex-shrink-0">
+    <div className="relative w-full aspect-square rounded-xl skeleton">
+      <div className="absolute bottom-2 left-2 right-2 h-4 skeleton rounded-md" />
+    </div>
+  </div>
+)
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+const RecentOrderSkeleton = () => (
+  <div className="w-full h-[100px] secBg primBorder rounded-xl p-3 flex gap-3 items-center">
+    <div className="w-[72px] h-[72px] skeleton rounded-lg flex-shrink-0" />
+    <div className="flex-1 space-y-2">
+      <div className="flex justify-between">
+        <div className="h-4 w-20 skeleton" />
+        <div className="h-4 w-16 skeleton" />
+      </div>
+      <div className="h-3 w-24 skeleton" />
+      <div className="h-5 w-12 skeleton" />
+    </div>
+  </div>
+)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSaving(true)
-    setError(null)
-    setSuccess(null)
-    try {
-      if (!customer?._id) throw new Error(t('settings.notifications.noCustomerError'))
-      const payload = {
-        name: formData.name,
-        address: formData.address // Backend will handle normalization
-      }
-      await updateCustomer(customer._id, payload)
-      setSuccess(t('settings.notifications.updateSuccess'))
-    } catch (err) {
-      console.error('Update customer failed', err)
-      setError(err.message || t('settings.notifications.updateFailed'))
-    } finally {
-      setIsSaving(false)
-    }
-  }
+// --- Component: Order Image Grid ---
+// Handles the visual representation of 1-4 items in a compact grid
+const OrderImageGrid = ({ products }) => {
+  const displayProducts = products.slice(0, 4);
+  const count = displayProducts.length;
 
-  const handleLogout = () => {
-    // Using a more modern confirm dialog would be better in a real app
-    if (window.confirm(t('settings.signOut.confirmDialog'))) {
-      logout()
-      navigate('/')
-    }
+  const getGridClass = () => {
+    if (count === 1) return 'grid-cols-1 grid-rows-1';
+    if (count === 2) return 'grid-cols-2 grid-rows-1';
+    if (count === 3) return 'grid-cols-2 grid-rows-2'; // Logic handled in render
+    return 'grid-cols-2 grid-rows-2';
+  };
+
+  return (
+    <div className={`w-[72px] h-[72px] rounded-lg overflow-hidden primBorder flex-shrink-0 bg-white dark:bg-slate-800 grid gap-[1px] ${getGridClass()}`}>
+      {displayProducts.map((prod, idx) => {
+        // Special layout for 3 items: First item takes full height on left
+        const isThreeItemsLayout = count === 3;
+        const itemClass = isThreeItemsLayout && idx === 0
+          ? "row-span-2 h-full"
+          : "h-full w-full";
+
+        return (
+          <div key={idx} className={`relative overflow-hidden ${itemClass}`}>
+            {prod.photo ? (
+              <img src={prod.photo} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                <Package size={12} className="secText opacity-50" />
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+const RecentOrderCard = ({ order, onClick, t, lang }) => {
+  const currency = t('common.currencySymbol') || '$';
+
+  // Calculate dates
+  const createdAt = dayjs(order.createdAt);
+  const deliveryTarget = createdAt.add(5, 'day');
+  const now = dayjs();
+  const daysLeft = deliveryTarget.diff(now, 'day');
+
+  // Status Logic
+  const currentStatus = order.statusHistory?.[order.statusHistory.length - 1]?.status || order.status || 'pending';
+
+  const getStatusConfig = (status) => {
+    const s = status.toLowerCase();
+    if (s === 'delivered') return { color: 'text-green-700 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-900/30', icon: CheckCircle, label: t('orders.status.delivered') };
+    if (['cancelled', 'failed'].includes(s)) return { color: 'text-red-700 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-900/30', icon: XCircle, label: t('orders.status.cancelled') };
+    if (s === 'shipped') return { color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30', icon: Truck, label: t('orders.status.shipped') };
+    return { color: 'text-amber-700 dark:text-amber-400', bg: 'bg-amber-100 dark:bg-amber-900/30', icon: Clock, label: t('orders.status.processing') };
+  };
+
+  const config = getStatusConfig(currentStatus);
+  const StatusIcon = config.icon;
+
+  // Formatting Cost
+  const formattedTotal = new Intl.NumberFormat(lang, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(order.totalPaid);
+
+  return (
+    <button
+      onClick={onClick}
+      className="w-full secBg primBorder secHoverBg rounded-xl p-3 flex gap-3 items-start text-left transition-all duration-200 active:scale-[0.99] group focusRing"
+      aria-label={`${config.label}, ${currency}${formattedTotal}, ${t('home.recentOrders.orderTitle', { orderNumber: order._id.slice(-4) })}`}
+    >
+      {/* Image Grid (Visual Anchor) */}
+      <OrderImageGrid products={order.products} />
+
+      {/* Info Section */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between h-[72px]">
+
+        {/* Top: Status Badge (Primary Focus) */}
+        <div className="flex justify-between items-start">
+          <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase px-2 py-1 rounded-md ${config.bg} ${config.color}`}>
+            <StatusIcon size={12} />
+            <span>{config.label}</span>
+          </div>
+        </div>
+
+        {/* Middle: Delivery Context (Natural Reading Flow) */}
+        <div className="text-xs secText truncate mt-1">
+          {currentStatus === 'delivered' ? (
+            <span>{t('orders.deliveredOn')} {dayjs(order.updatedAt).format('MMM D')}</span>
+          ) : currentStatus === 'cancelled' ? (
+            <span>{t('orders.cancelled')}</span>
+          ) : daysLeft > 0 ? (
+            (() => {
+              const raw = t('home.recentOrders.arrivingInDays') || 'Arriving in {{count}} days'
+              const text = raw.replace('{{count}}', daysLeft)
+              return (
+                <span className="flex items-center gap-1">{text}</span>
+              )
+            })()
+          ) : (
+            <span>{t('home.recentOrders.arrivingSoon')}</span>
+          )}
+        </div>
+
+        {/* Bottom: Price & Subtle ID */}
+        <div className="flex justify-between items-end mt-auto">
+          <span className="font-bold primText text-sm">
+            {currency} {formattedTotal}
+          </span>
+
+          {/* Demoted Order ID (Tertiary Info) */}
+          <span className="text-[11px] secText opacity-60 font-mono tracking-wide">
+            #{order._id.slice(-6).toUpperCase()}
+          </span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+
+// Category Card
+const CategoryCard = ({ category, onClick }) => {
+  const { lang } = useI18n()
+  const { translateDBVal } = useTranslations()
+
+  let displayName = translateDBVal('Category', 'name', category.name, lang)
+  if (lang === 'en' && displayName) {
+    displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1)
   }
 
   return (
-    <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
-      {/* Main container for the settings page */}
-      {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
-      <main className="min-h-screen flex-1 overflow-y-auto bg-white dark:bg-slate-950">
-        <div className="p-4 pb-24 space-y-6">
+    <button onClick={onClick} className="w-20 flex flex-col items-center justify-start gap-2 text-center group focusRing rounded-lg">
+      <ImageWithLoader
+        src={category.image}
+        alt={displayName}
+        containerClassName="w-full aspect-square rounded-xl secBg primBorder secHoverBg overflow-hidden transition-all duration-200"
+        imageClassName="w-full h-full object-cover"
+      />
+      <span className="text-xs font-medium primText leading-tight">{displayName}</span>
+    </button>
+  )
+}
 
-          {/* Card: Appearance & Accessibility */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
-            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
-              {t('settings.appearance.title')}
-            </h2>
-            <button
-              onClick={() => navigate('/accessibility')}
-              className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200"
-            >
-              <div>
-                <p className="font-medium text-gray-900 dark:text-slate-50">{t('settings.appearance.accessibility.title')}</p>
-                <p className="text-sm text-gray-600 dark:text-slate-400">{t('settings.appearance.accessibility.description')}</p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-gray-400 dark:text-slate-500" />
-            </button>
+// Brand Card
+const BrandCard = ({ brand, onClick }) => {
+  const imageUrl = brand.images?.[0]
+  const { lang } = useI18n()
+  const { translateDBVal } = useTranslations()
 
-            {/* Language Selection (visual hierarchy updated to match Accessibility) */}
-            <div className="p-4 border-t border-gray-100 dark:border-slate-800">
-              <p className="font-medium text-gray-900 dark:text-slate-50">    {t('settings.appearance.language.title')}</p>
-              <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">   {t('settings.appearance.language.description')}         </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  onClick={() => {setLang('en'); document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");}}
-                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'en'
-                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                    : 'border-gray-200 bg-white text-gray-900 hover:border-gray-300'
-                    }`}
-                >
-                  {t('settings.appearance.language.options.en')}
-                </button>
+  return (
+    <button onClick={onClick} className="w-24 flex-shrink-0 group focusRing rounded-lg">
+      <div className="relative w-full aspect-square rounded-xl secBg primBorder overflow-hidden flex items-center justify-center transition-all duration-200 group-hover:opacity-80">
+        {imageUrl ? (
+          <ImageWithLoader
+            src={imageUrl}
+            alt={brand.name}
+            containerClassName="w-full h-full"
+            imageClassName="w-full h-full object-cover"
+          />
+        ) : (
+          <span className="font-bold text-2xl secText">{brand.name.charAt(0)}</span>
+        )}
+        {/* Gradient Overlay for Text */}
+        <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent flex items-end p-2">
+          <span className="text-white text-xs font-semibold w-full text-center truncate">
+            {translateDBVal('Brand', 'name', brand.name, lang)}
+          </span>
+        </div>
+      </div>
+    </button>
+  )
+}
 
-                <button
-                  onClick={() => {setLang('ur'); document.getElementsByTagName('html')[0].setAttribute("dir", "rtl"); }}
-                  className={`min-h-16 px-4 py-3 rounded-lg border-2 font-medium transition-all duration-200 ${lang === 'ur'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                    : 'border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 hover:border-gray-300 dark:hover:border-slate-700'
-                    }`}
-                >
-                  {t('settings.appearance.language.options.ur')}
-                </button>
+// --- Main Home Screen Component ---
+
+export default function Home() {
+  const navigate = useNavigate()
+  const { customer, getDefaultAddress } = useAuth()
+  const { mainCategories, brands, loading: dataLoading } = useData()
+  const { orders, loading: ordersLoading, error: ordersError } = useOrdersContext() // Fetching real orders
+  const { t, lang } = useI18n()
+
+  // Voice modal state
+  const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+
+  // Handler for voice search button
+  const handleVoiceSearch = () => {
+    navigate('/search-results?q=&voice=1')
+  }
+
+  const displayCategories = mainCategories?.slice(0, 30) || []
+  const displayBrands = brands?.slice(0, 30) || []
+
+  // Process Orders: Sort by Date Descending and take top 3
+  const recentOrders = orders
+    ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3)
+    : [];
+
+  // Handle voice confirm (navigates and sets query)
+  const handleVoiceConfirm = (transcript) => {
+    const trimmed = transcript.trim()
+    if (trimmed) {
+      navigate(`/search-results?q=${encodeURIComponent(trimmed)}`)
+      setVoiceModalOpen(false)
+    }
+  }
+  const [isAddressModalOpen, setAddressModalOpen] = useState(false);
+
+  return (
+    <>
+      <Layout footer={<BottomNav />}>
+        {/* Header */}
+        <header className="sticky top-0 z-20 primBg backdrop-blur-sm dividerBorder">
+          <div className="max-w-[430px] mx-auto p-4 space-y-3">
+            <div className="flex items-center justify-between gap-4">
+              <button onClick={() => setAddressModalOpen(true)} className="flex-1 flex items-center gap-2 text-left min-w-0 focusRing rounded-md">
+                <MapPin size={20} className="accentPrimText flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-xs secText">{t('home.header.deliveryTo')}</p>
+                  <p className="text-sm font-medium primText truncate">
+                    {(() => {
+                      const def = getDefaultAddress && getDefaultAddress()
+                      return def?.addressText || t('home.header.setAddressPrompt')
+                    })()}
+                  </p>
+                </div>
+              </button>
+              <div className="flex-shrink-0">
+                <ImageWithLoader src="/Azad-Bazaar.svg" alt="Azad Bazaar logo" imageClassName="h-8 w-auto" />
               </div>
             </div>
-          </div>
-
-          {/* Card: Account Information Form */}
-          <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg">
-            <h2 className="p-4 text-xl font-semibold text-gray-900 dark:text-slate-50 border-b border-gray-200 dark:border-slate-800">
-              {t('settings.account.title')}
-            </h2>
-            <div className="p-4 space-y-4">
-              {/* Name Field */}
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  {t('settings.account.form.fullName.label')}
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder={t('settings.account.form.fullName.placeholder')}
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                />
-              </div>
-
-              {/* Phone Field (Read-only) */}
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  {t('settings.account.form.phone.label')}
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  readOnly
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 cursor-not-allowed"
-                  placeholder={t('settings.account.form.phone.placeholder')}
-                />
-              </div>
-
-              {/* Address Field */}
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-slate-50">
-                  {t('settings.account.form.address.label')}
-                </label>
-                <textarea
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  rows={3}
-                  placeholder={t('settings.account.form.address.placeholder')}
-                  className="w-full px-4 py-3 border border-gray-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                />
-              </div>
-
-              {/* Save Button */}
+            <div className="relative w-full">
               <button
-                type="submit"
-                disabled={isSaving}
-                className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => navigate('/search-results?q=')}
+                className="w-full h-12 flex items-center gap-3 px-4 secBg primBorder secHoverBg rounded-lg text-left transition-colors focusRing"
+                style={{ paddingRight: 48 }}
               >
-                <Save size={18} />
-                {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
+                <Search size={18} className="secText" />
+                <span className="secText">{t('home.header.searchPlaceholder')}</span>
+              </button>
+              {/* Voice Search Button (absolute positioned) */}
+              <button
+                type="button"
+                aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
+                onClick={handleVoiceSearch}
+                className="absolute right-0 top-0 h-12 w-12 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors"
+                style={{ zIndex: 2 }}
+              >
+                <Mic size={20} className="primText" />
               </button>
             </div>
-          </form>
-
-          {/* Card: Danger Zone / Sign Out */}
-          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg p-4">
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 bg-transparent border border-red-500/50 dark:border-red-500/40 text-red-600 dark:text-red-500 font-medium rounded-lg hover:bg-red-50 dark:hover:bg-red-950/50 transition-all duration-200"
-            >
-              <LogOut size={18} />
-              {t('settings.signOut.button')}
-            </button>
+            {/* VoiceInputModal is now handled in SearchResults page if voice=1 param is present */}
           </div>
+        </header>
 
+        {/* Main content area */}
+        <main className="flex-1 overflow-y-auto primBg p-4 space-y-8 min-h-full">
+          {/* Categories Section */}
+          <section>
+            <h2 className="text-xl font-semibold primText mb-4">{t('home.categories.title')}</h2>
+            <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+              {dataLoading ? (
+                Array.from({ length: 8 }).map((_, i) => <CategoryCardSkeleton key={i} />)
+              ) : (
+                displayCategories.map(category => (
+                  <CategoryCard
+                    key={category._id}
+                    category={category}
+                    onClick={() => navigate(`/search-results?category=${category._id}`)}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* Promotional Card */}
+          <section className="secBg primBorder rounded-xl p-4 flex items-center justify-center min-h-[120px]">
+            <ImageWithLoader
+              src="/Azad-Bazaar.svg"
+              alt="Azad Bazaar Offer"
+              imageClassName="h-28 w-auto"
+            />
+          </section>
+
+          {/* Recent Orders Section (Redesigned) */}
+          <section>
+            <div className="flex justify-between items-end mb-3">
+              <h2 className="text-xl font-semibold primText">{t('home.recentOrders.title')}</h2>
+              {recentOrders.length > 0 && (
+                <button
+                  onClick={() => navigate('/orders')}
+                  className="text-xs font-medium accentPrimText hover:underline pb-1"
+                >
+                  {t('home.recentOrders.viewAll') || 'View All'}
+                </button>
+              )}
+            </div>
+
+            {ordersLoading ? (
+              <div className="space-y-3">
+                {Array.from({ length: 2 }).map((_, i) => <RecentOrderSkeleton key={i} />)}
+              </div>
+            ) : recentOrders.length > 0 ? (
+              <div className="space-y-3">
+                {recentOrders.map(order => (
+                  <RecentOrderCard
+                    key={order._id}
+                    order={order}
+                    t={t}
+                    lang={lang}
+                    onClick={() => navigate(`/orders/${order._id}`)}
+                  />
+                ))}
+              </div>
+            ) : (
+              /* Empty State CTA */
+              <div className="secBg primBorder rounded-xl p-6 flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                  <ShoppingBag className="accentPrimText w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold primText">{t('home.recentOrders.emptyTitle') || "No orders yet"}</p>
+                  <p className="text-xs secText mt-1">{t('home.recentOrders.emptyDesc') || "Start shopping to see your orders here."}</p>
+                </div>
+                <button
+                  onClick={() => navigate('/search-results')}
+                  className="mt-2 btnPrimary text-sm px-6 py-2.5 rounded-lg w-full max-w-[200px]"
+                >
+                  {t('home.recentOrders.startShopping') || "Start Shopping"}
+                </button>
+              </div>
+            )}
+          </section>
+
+          {/* Popular Brands Section */}
+          <section>
+            <h2 className="text-xl font-semibold primText mb-4">{t('home.popularBrands.title')}</h2>
+            <div className="grid grid-flow-col grid-rows-2 gap-x-4 gap-y-5 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+              {dataLoading ? (
+                Array.from({ length: 8 }).map((_, i) => <BrandCardSkeleton key={i} />)
+              ) : (
+                displayBrands.map(brand => (
+                  <BrandCard key={brand._id} brand={brand} onClick={() => navigate(`/search-results?brand=${brand._id}`)} />
+                ))
+              )}
+            </div>
+          </section>
+
+        </main>
+      </Layout>
+      <AddressSelectionModal
+        isOpen={isAddressModalOpen}
+        onClose={() => setAddressModalOpen(false)}
+      />
+    </>
+  )
+}
+
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Layout } from '../Layout'
+import HeaderWithName from '../component/HeaderWithName'
+import BottomNav from '../component/BottomNav'
+import { useOrdersContext } from '../context/OrderContext'
+import { useI18n } from '../context/I18nContext'
+import OrderItemCard, { OrderItemCardSkeleton } from '../component/OrderItemCard'
+import { PackageX, AlertCircle } from 'lucide-react'
+
+export default function Orders() {
+  const { orders, loading, error } = useOrdersContext()
+  const { t } = useI18n()
+
+  // Improved Empty State with actionable button
+  const EmptyState = () => (
+    <div className="flex flex-1 flex-col items-center justify-center text-center p-8 min-h-[60vh]">
+      <div className="w-20 h-20 secBg rounded-full flex items-center justify-center mb-4">
+        <PackageX className="w-10 h-10 secText opacity-60" />
+      </div>
+      <h2 className="text-xl font-bold primText mb-2">{t('orders.empty.title')}</h2>
+      <p className="text-sm secText max-w-[250px] mx-auto mb-6">
+        {t('orders.empty.description')}
+      </p>
+      <Link 
+        to="/" 
+        className="btnPrimary px-6 py-3 rounded-lg shadow-sm min-h-12 flex items-center"
+      >
+        {t('cart.empty.cta') || "Start Shopping"}
+      </Link>
+    </div>
+  )
+
+  // Improved Error State
+  const ErrorState = () => (
+    <div className="flex flex-1 flex-col items-center justify-center text-center p-6 mt-10">
+      <AlertCircle className="w-12 h-12 accentDangerText mb-4" />
+      <h2 className="text-lg font-semibold primText mb-2">{t('common.error.title')}</h2>
+      <p className="text-sm secText mb-4">{error?.message || t('common.error.description')}</p>
+      <button 
+        onClick={() => window.location.reload()} 
+        className="btnSecondary px-4 py-2 rounded-lg text-sm"
+      >
+        {t('common.retry') || "Retry"}
+      </button>
+    </div>
+  )
+
+  return (
+    <Layout
+      header={<HeaderWithName title={t('orders.title')} to="/" />}
+      footer={<BottomNav />}
+    >
+      <main className="flex-1 min-h-full overflow-y-auto primBg">
+        {/* Add a subtle background variation for list area if needed, currently keeping generic primBg */}
+        <div className="max-w-[430px] mx-auto w-full p-4 space-y-4">
+          
+          {/* Loading State */}
+          {loading && (
+            Array.from({ length: 4 }).map((_, i) => <OrderItemCardSkeleton key={i} />)
+          )}
+
+          {/* Error State */}
+          {!loading && error && <ErrorState />}
+
+          {/* Orders List */}
+          {!loading && !error && orders && orders.length > 0 && (
+            orders.map(order => (
+              <Link 
+                key={order._id} 
+                to={`/orders/${order._id}`} 
+                state={{ order }} 
+                className="block focusRing rounded-lg" // Accessibility focus ring
+              >
+                <OrderItemCard order={order} />
+              </Link>
+            ))
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && orders && orders.length === 0 && <EmptyState />}
         </div>
       </main>
     </Layout>
   )
 }
 
-import React, { useState, useEffect } from 'react'
-import { Heart, Plus, Minus } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom' // Import Link for navigation
-import { useCart } from '../context/CartContext'
-import { useProduct } from '../api'
-import { useI18n } from '../context/I18nContext'
-import useTranslations from '../hooks/useTranslations'
+import React from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { MapPin, CreditCard, ChevronRight, Receipt, ShoppingBag } from 'lucide-react'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
-import { getCategoryById } from '../api/categoryService'
+import { useI18n } from '../context/I18nContext'
+import useOrder from '../api/hooks/useOrder'
+import OrderStatusStepper from '../component/OrderStatusStepper'
+import ImageWithLoader from '../component/ImageWithLoader'
+import { useAuth } from '../context/AuthContext'
 
-// --- Sub-components for better organization ---
+// Skeleton Layout - Adjusted to be more compact (w-12 images, p-3 paddings)
+const OrderDetailSkeleton = () => (
+  <div className="p-3 space-y-3 min-h-full animate-pulse max-w-[430px] mx-auto">
+    {/* Status Skeleton */}
+    <div className="secBg primBorder rounded-lg p-4">
+      <div className="space-y-4">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="flex gap-3">
+            <div className="w-6 h-6 rounded-full skeleton flex-shrink-0" />
+            <div className="space-y-2 pt-1 flex-1">
+              <div className="h-3 w-24 skeleton" />
+              {i === 1 && <div className="h-3 w-20 skeleton" />}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-// Component for the image gallery at the top
-const ProductGallery = ({ images, productName, format }) => {
-  const [activeIndex, setActiveIndex] = useState(0)
+    {/* Info Skeleton */}
+    <div className="secBg primBorder rounded-lg p-3 space-y-3">
+        <div className="h-10 w-full skeleton rounded-lg" />
+        <div className="h-10 w-full skeleton rounded-lg" />
+    </div>
 
-  useEffect(() => setActiveIndex(0), [images])
+    {/* Items Skeleton */}
+    <div className="secBg primBorder rounded-lg p-3">
+      <div className="h-4 w-20 skeleton mb-3" />
+      <div className="flex gap-3">
+        <div className="w-12 h-12 skeleton rounded-md" />
+        <div className="flex-1 space-y-2">
+          <div className="h-3 w-3/4 skeleton" />
+          <div className="h-3 w-1/4 skeleton" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
-  useEffect(() => {
-    if (images.length <= 1) return
-    const id = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % images.length)
-    }, 3000)
-    return () => clearInterval(id)
-  }, [images.length])
+export default function Order() {
+  const { token } = useAuth();
+  const { orderId } = useParams()
+  const { order, loading, error } = useOrder(orderId, token)
+  const { t, lang } = useI18n()
 
-  const mainImage = images[activeIndex] || images[0]
+  const formatCurrency = (amount) => {
+    if (typeof amount !== 'number') return '0.00'
+    return new Intl.NumberFormat(lang, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount)
+  }
+
+  if (loading) {
+    return (
+      <Layout header={<HeaderWithName title={t('order.title')} to="/orders" />} footer={<BottomNav />}>
+        <main className="flex-1 overflow-y-auto primBg min-h-full"><OrderDetailSkeleton /></main>
+      </Layout>
+    )
+  }
+
+  if (error || !order) {
+    return (
+      <Layout header={<HeaderWithName title={t('order.title')} to="/orders" />} footer={<BottomNav />}>
+        <main className="flex flex-1 items-center justify-center primBg p-4 min-h-full">
+          <div className="text-center max-w-xs">
+            <div className="w-16 h-16 bg-red-50 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+               <Receipt className="w-8 h-8 accentDangerText" />
+            </div>
+            <h2 className="text-xl font-bold primText mb-2">{t('common.error.title')}</h2>
+            <p className="secText text-sm">{error?.message || t('common.error.notFound')}</p>
+          </div>
+        </main>
+      </Layout>
+    )
+  }
+
+  const currentStatus = order?.statusHistory?.[order.statusHistory.length - 1]?.status || order.status;
 
   return (
-    // MODIFIED: Reduced height for a smaller image (fixed height)
-    <div className="relative w-full h-56 max-h-64 bg-gray-100 dark:bg-slate-900">
-      {mainImage ? (
-        <img
-          src={mainImage}
-          alt={format('productPage.gallery.mainImageAlt', { productName })}
-              className="w-full h-full object-contain"
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-slate-600">
-        </div>
-      )}
-      {images.length > 1 && (
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-2">
-          {images.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              aria-label={format('productPage.gallery.thumbnailAlt', { index: idx + 1, productName })}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-4 bg-blue-500' : 'bg-gray-300 dark:bg-slate-700'
-                }`}
+    <Layout
+      header={<HeaderWithName title={`${t('orders.card.orderId')} #${order._id.slice(-6).toUpperCase()}`} to="/orders" />}
+      footer={<BottomNav />}
+    >
+      <main className="flex-1 overflow-y-auto primBg min-h-full">
+        {/* Reduced global padding (p-3) and spacing (space-y-3) */}
+        <div className="max-w-[430px] mx-auto p-3 space-y-3 ">
+          
+          {/* 1. Tracking / Status Section */}
+          <section className="secBg primBorder rounded-xl p-4 shadow-sm">
+            <h2 className="text-xs font-bold secText uppercase tracking-wider mb-3">
+                {t('order.tracking.title')}
+            </h2>
+            <OrderStatusStepper 
+              currentStatus={currentStatus} 
+              history={order.statusHistory} 
             />
-          ))}
+          </section>
+
+          {/* 2. Delivery & Payment Info */}
+          <section className="secBg primBorder rounded-xl overflow-hidden">
+            {/* Address - Reduced padding to p-3.5 */}
+            <div className="p-3.5 flex gap-3 items-start dividerBorder">
+              <div className="mt-0.5 p-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex-shrink-0">
+                <MapPin size={18} />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-xs font-medium secText mb-0.5">{t('order.shipping.title')}</h3>
+                <p className="primText font-medium text-sm leading-snug break-words">
+                  {order.address.label && <span className="font-bold mr-1">{order.address.label}:</span>}
+                  {order.address.addressText}
+                </p>
+              </div>
+            </div>
+
+            {/* Payment - Reduced padding to p-3.5 */}
+            <div className="p-3.5 flex gap-3 items-center">
+              <div className="p-1.5 rounded-full bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex-shrink-0">
+                <CreditCard size={18} />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-xs font-medium secText mb-0.5">{t('order.payment.title')}</h3>
+                <p className="primText font-medium text-sm capitalize truncate">
+                  {order.paymentMethod.name} 
+                  {order.paymentMethod.last4Digits && ` •••• ${order.paymentMethod.last4Digits}`}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 3. Items List */}
+          <section className="secBg primBorder rounded-xl overflow-hidden">
+            <div className="px-3.5 py-3 dividerBorder flex items-center gap-2 bg-gray-50/50 dark:bg-slate-800/30">
+               <ShoppingBag size={16} className="secText" />
+               <h2 className="text-sm font-semibold primText">
+                  {t('order.items.title')} <span className="secText font-normal">({order.products.length})</span>
+               </h2>
+            </div>
+            
+            <div className="dividerBorder">
+              {order.products.map((item) => (
+                <Link 
+                  to={`/product/${item.productId}`}
+                  key={item.productId} 
+                  // Reduced padding: p-3 instead of p-4
+                  className="flex dividerBorder gap-3 p-3 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors group active:scale-[0.99]"
+                >
+                  {/* Smaller Image: w-12 h-12 (48px) instead of w-16 */}
+                  <ImageWithLoader
+                    src={item.photo}
+                    alt={item.name}
+                    containerClassName="w-12 h-12 flex-shrink-0 primBorder rounded-md overflow-hidden bg-white"
+                    imageClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="flex-1 min-w-0 flex flex-col justify-center">
+                    <div className="flex justify-between items-start gap-2">
+                      <p className="font-medium primText text-sm truncate leading-tight">{item.name}</p>
+                      <p className="font-bold accentPrimText text-sm whitespace-nowrap">
+                        {t('common.currencySymbol')}{formatCurrency(item.price)}
+                      </p>
+                    </div>
+                    <div className="flex items-center mt-1">
+                       <span className="text-xs secBg primBorder px-1.5 py-0.5 rounded text-gray-600 dark:text-gray-400">
+                         x{item.quantity}
+                       </span>
+                    </div>
+                  </div>
+                  <div className="self-center pl-1">
+                    <ChevronRight size={18} className="secText group-hover:translate-x-1 transition-transform opacity-50" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* 4. Order Summary / Billing */}
+          <section className="secBg primBorder rounded-xl p-4 space-y-2.5">
+            <h2 className="text-xs font-bold secText uppercase tracking-wider mb-2">{t('checkout.billing.title')}</h2>
+            
+            <div className="flex justify-between text-sm">
+              <span className="secText">{t('checkout.billing.subtotal')}</span>
+              <span className="font-medium primText">{t('common.currencySymbol')}{formatCurrency(order.subtotal)}</span>
+            </div>
+
+            {order.discountApplied > 0 && (
+               <div className="flex justify-between text-sm">
+                <span className="secText">{t('checkout.summary.discount')}</span>
+                <span className="font-medium accentSuccessText">
+                  - {t('common.currencySymbol')}{formatCurrency(order.discountApplied)}
+                </span>
+              </div>
+            )}
+
+            <div className="border-t-2 border-dotted border-gray-200 dark:border-slate-700 my-1" />
+
+            <div className="flex justify-between items-center pt-1">
+              <span className="font-bold primText text-base">{t('checkout.billing.total')}</span>
+              <span className="font-bold text-lg accentPrimText">
+                {t('common.currencySymbol')}{formatCurrency(order.totalPaid)}
+              </span>
+            </div>
+          </section>
+          
         </div>
-      )}
-    </div>
+      </main>
+    </Layout>
   )
 }
 
-// Component for the fixed action bar at the bottom
-const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
-  const { t } = useI18n()
-  const productIdForCart = product._id ?? product.id
+import React, { useEffect, useState } from 'react';
+import { X, MapPin, Loader2, Plus, Check, Settings } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useAddress } from '../api/hooks/useAddress';
+import { useI18n } from '../context/I18nContext';
+import { useNavigate } from 'react-router-dom';
 
-  if (!product) return null
+// Skeleton adjusted to match the card height
+const AddressItemSkeleton = () => (
+  <div className="w-full h-[88px] p-4 rounded-xl skeleton flex items-center gap-4">
+    <div className="w-10 h-10 rounded-full skeleton shrink-0" />
+    <div className="flex-1 space-y-2">
+      <div className="h-4 w-1/3 skeleton" />
+      <div className="h-3 w-3/4 skeleton" />
+    </div>
+  </div>
+);
+
+export default function AddressSelectionModal({ isOpen, onClose }) {
+  const { t } = useI18n();
+  const navigate = useNavigate();
+  const { getDefaultAddress, setDefaultAddress } = useAuth();
+  const { addresses, loading, refreshAddresses } = useAddress();
+
+  const currentDefaultAddress = getDefaultAddress();
+  const [selectedId, setSelectedId] = useState(currentDefaultAddress?.addressId);
+  const [confirming, setConfirming] = useState(false);
+
+  // Sync state when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedId(currentDefaultAddress?.addressId);
+    }
+  }, [isOpen, currentDefaultAddress]);
+
+  // Lock body scroll
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  const handleConfirm = async () => {
+    if (confirming || !selectedId) return;
+    
+    if (selectedId === currentDefaultAddress?.addressId) {
+      onClose();
+      return;
+    }
+
+    setConfirming(true);
+    try {
+      await setDefaultAddress(selectedId);
+      // Refresh addresses to reflect the updated default status immediately
+      await refreshAddresses();
+      onClose();
+    } catch (err) {
+      console.warn('Failed to set default address', err);
+    } finally {
+      setConfirming(false);
+    }
+  };
+  
+  const handleManageAddresses = () => {
+    onClose();
+    navigate('/address');
+  }
+
+  const isSelectionChanged = selectedId && selectedId !== currentDefaultAddress?.addressId;
 
   return (
-    <div className="bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 p-1">
-      <div className="mx-auto p-4">
-        {qty === 0 ? (
+    <>
+      {/* Backdrop - Darkened only, no blur */}
+      <div
+        onClick={confirming ? undefined : onClose}
+        className={`fixed inset-0 z-50 bg-black/70 transition-opacity duration-300
+          ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
+        }
+        aria-hidden={!isOpen}
+      />
+
+      {/* Bottom Sheet Panel */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={(e) => e.stopPropagation()}
+        className={`fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto 
+          primBg rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out
+          flex flex-col
+          ${isOpen ? 'translate-y-0' : 'translate-y-full'}`
+        }
+      >
+        {/* Drag Handle */}
+        <div className="w-full flex justify-center pt-3 pb-1" onClick={onClose}>
+          <div className="w-12 h-1.5 rounded-full bg-gray-300 dark:bg-gray-700 opacity-80" />
+        </div>
+
+        {/* Header */}
+        <header className="px-5 py-3 flex items-center justify-between flex-shrink-0">
+          <h2 id="modal-title" className="text-xl font-bold primText">
+            {t('home.modal.selectAddressTitle') || 'Delivery Address'}
+          </h2>
           <button
-            onClick={() => {
-              if (!inStock) return
-              addToCart(productIdForCart)
-            }}
-            disabled={!inStock}
-            className="w-full min-h-12 px-6 py-3 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={onClose}
+            disabled={confirming}
+            className="btnSecondary rounded-full p-2 h-10 w-10 flex items-center justify-center focusRing disabled:opacity-50"
+            aria-label={t('common.close')}
           >
-            {inStock ? t('productPage.actions.addToCart') : t('common.outOfStock')}
+            <X size={20} />
+          </button>
+        </header>
+
+        {/* 
+           Content - Scrollable Area 
+           max-h-[320px] is approximately 3 cards (88px each + gap).
+           This ensures the list is scrollable but doesn't take up the whole screen.
+        */}
+        <main className="flex-1 overflow-y-auto px-5 py-2 space-y-3 max-h-[320px] min-h-[150px]">
+          {loading ? (
+            <div className="space-y-3">
+              <AddressItemSkeleton />
+              <AddressItemSkeleton />
+            </div>
+          ) : addresses && addresses.length > 0 ? (
+            <div className="space-y-3 pb-4">
+              {addresses.map((address) => {
+                const isSelected = selectedId === address.addressId;
+                return (
+                  <button
+                    key={address.addressId}
+                    onClick={() => setSelectedId(address.addressId)}
+                    aria-pressed={isSelected}
+                    className={`w-full p-4 rounded-xl text-left transition-all duration-200 flex items-center gap-4 border-2 group
+                      ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`
+                    }
+                  >
+                    {/* Icon */}
+                    <div className={`
+                      w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors
+                      ${isSelected ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300' : 'secBg secText'}
+                    `}>
+                      <MapPin size={20} />
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className={`font-bold truncate ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'primText'}`}>
+                          {address.label}
+                        </span>
+                        {address.isDefault && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded badgeSecondary bg-gray-200 dark:bg-gray-700 secText uppercase tracking-wider font-bold">
+                            {t('common.default') || 'Default'}
+                          </span>
+                        )}
+                      </div>
+                      <p className={`text-sm truncate mt-0.5 ${isSelected ? 'text-blue-600/80 dark:text-blue-300/80' : 'secText'}`}>
+                        {address.addressText}
+                      </p>
+                    </div>
+
+                    {/* Checkmark */}
+                    <div className={`
+                      w-6 h-6 rounded-full flex items-center justify-center border-2 shrink-0 transition-colors
+                      ${isSelected 
+                        ? 'bg-blue-500 border-blue-500 text-white' 
+                        : 'border-gray-300 dark:border-slate-600 bg-transparent text-transparent group-hover:border-gray-400'}
+                    `}>
+                      <Check size={14} strokeWidth={3} />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            // Empty State
+            <div className="flex flex-col items-center justify-center py-8 text-center space-y-4 secBg primBorder rounded-xl border">
+               <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+                 <MapPin size={32} className="secText" />
+               </div>
+               <div>
+                 <p className="font-semibold primText text-lg">{t('home.modal.noAddressesFound') || 'No addresses found'}</p>
+                 <p className="text-sm secText max-w-[200px] mx-auto mt-1">{t('home.modal.addOnePrompt') || 'Add a delivery location to continue shopping.'}</p>
+               </div>
+            </div>
+          )}
+        </main>
+        
+        {/* Footer Actions */}
+        <footer className="px-5 py-4 border-t dividerBorder flex flex-col gap-3 flex-shrink-0 bg-inherit">
+          {/* Main Action */}
+          {addresses && addresses.length > 0 && (
+            <button
+              onClick={handleConfirm}
+              disabled={!isSelectionChanged || confirming}
+              className={`w-full min-h-12 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition-all shadow-sm
+                ${(!isSelectionChanged || confirming) 
+                  ? 'bg-gray-200 dark:bg-slate-800 text-gray-400 dark:text-slate-500 cursor-not-allowed' 
+                  : 'btnPrimary shadow-md transform active:scale-[0.98]'}`
+              }
+            >
+              {confirming && <Loader2 size={20} className="animate-spin" />}
+              {confirming ? (t('common.saving') || 'Saving...') : (t('common.confirm') || 'Confirm Address')}
+            </button>
+          )}
+
+          {/* Secondary Action */}
+          <button 
+            onClick={handleManageAddresses} 
+            className="w-full min-h-12 btnSecondary rounded-xl flex items-center justify-center gap-2 font-medium"
+          >
+            {(!addresses || addresses.length === 0) ? (
+              <>
+                <Plus size={18} />
+                {t('home.modal.addAddressButton') || 'Add New Address'}
+              </>
+            ) : (
+              <>
+                <Settings size={18} className="secText" />
+                <span className="secText">{t('home.modal.manageAll') || 'Manage Addresses'}</span>
+              </>
+            )}
+          </button>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Home, ShoppingCart, Settings, Search, Package } from 'lucide-react';
+import { useI18n } from '../context/I18nContext';
+
+// Sub-component for each navigation item
+const NavItem = ({ to, icon: Icon, label }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
+  // Base classes for all items
+  const baseClasses = "flex flex-col items-center justify-center gap-1 w-full min-h-12 py-2 rounded-lg transition-all duration-200";
+  
+  // Classes for the active item, using the system's "selected" class
+  // Note: modeChooseButton-selected does not have its own border, it relies on the unselected state to provide it.
+  // To prevent layout shift, we add a transparent border to the inactive state.
+  const activeClasses = "modeChooseButton-selected font-medium";
+  
+  // Classes for inactive items
+  const inactiveClasses = "secText hover:primText border-2 border-transparent";
+
+  return (
+    <Link 
+      to={to} 
+      className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+      aria-current={isActive ? 'page' : undefined}
+    >
+      <Icon size={24} />
+      <span className="text-xs">{label}</span>
+    </Link>
+  );
+};
+
+// Main BottomNav component
+export default function BottomNav() {
+  const { t } = useI18n();
+
+  return (
+    // Outer container handles the fixed positioning and background color.
+    // Use design tokens from index.css for background and border.
+    <header className="bottom-0 left-0 right-0 primBg primBorder">
+      <nav 
+        className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4 gap-2" // Added gap-2 for spacing
+        aria-label={t('bottomNav.ariaLabel')}
+      >
+        <NavItem to="/" icon={Home} label={t('bottomNav.home')} />
+        <NavItem to="/search-results" icon={Search} label={t('bottomNav.search')} />
+        <NavItem to="/cart" icon={ShoppingCart} label={t('bottomNav.cart')} />
+        <NavItem to="/orders" icon={Package} label={t('bottomNav.orders')} />
+        <NavItem to="/settings" icon={Settings} label={t('bottomNav.settings')} />
+      </nav>
+    </header>
+  );
+}
+
+import React from "react";
+import { Trash2, Plus, Minus, X, Loader2 } from "lucide-react";
+import { useI18n } from '../context/I18nContext';
+import useTranslations from '../hooks/useTranslations';
+import { useNavigate } from "react-router-dom";
+import ImageWithLoader from "./ImageWithLoader";
+
+/**
+ * Counter Component (Refined)
+ * - Minus button disables at 1 instead of changing to remove
+ * - Strictly handles Quantity Logic
+ */
+const Counter = ({ quantity, onIncrement, onDecrement, itemName, disabled }) => {
+  const { t } = useI18n();
+
+  // Disable decrement if quantity is 1 or if loading
+  const isDecrementDisabled = quantity <= 1 || disabled;
+
+  const decrementLabel = t('cart.a11y.decrement', { defaultValue: `Decrease quantity for ${itemName}` });
+  const incrementLabel = t('cart.a11y.increment', { defaultValue: `Increase quantity for ${itemName}` });
+
+  return (
+    <div className="flex items-center primBorder rounded-lg h-9 bg-white dark:bg-slate-950">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!isDecrementDisabled) onDecrement();
+        }}
+        disabled={isDecrementDisabled}
+        aria-label={decrementLabel}
+        className={`w-9 h-full flex items-center justify-center rounded-l-md transition-colors focusRing
+          ${isDecrementDisabled
+            ? 'opacity-30 cursor-not-allowed text-gray-400'
+            : 'secText hover:bg-gray-100 dark:hover:bg-slate-800 active:bg-gray-200'
+          }`}
+      >
+        <Minus size={16} />
+      </button>
+
+      <span
+        className="w-8 text-center font-medium primText text-sm tabular-nums select-none"
+        aria-live="polite"
+      >
+        {quantity}
+      </span>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onIncrement();
+        }}
+        disabled={disabled}
+        aria-label={incrementLabel}
+        className={`w-9 h-full flex items-center justify-center secText rounded-r-md transition-colors focusRing
+          ${disabled
+            ? 'opacity-50 cursor-not-allowed'
+            : 'hover:bg-gray-100 dark:hover:bg-slate-800 active:bg-gray-200'
+          }`}
+      >
+        <Plus size={16} />
+      </button>
+    </div>
+  );
+};
+
+export const CartItemSkeleton = () => (
+  <div className="card p-3 relative flex gap-3 h-[104px]">
+    <div className="w-20 h-20 flex-shrink-0 skeleton rounded-md"></div>
+    <div className="flex-1 space-y-3 py-1">
+      <div className="h-4 w-3/4 skeleton"></div>
+      <div className="h-4 w-1/4 skeleton"></div>
+    </div>
+    <div className="absolute bottom-3 right-3 rtl:right-auto rtl:left-3 w-24 h-9 skeleton rounded-lg"></div>
+  </div>
+);
+
+/**
+ * CartItem Component
+ * - Added dedicated Top-Right Remove Button
+ * - RTL Support via Tailwind logical classes
+ */
+const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
+  const { translateDBVal } = useTranslations();
+  const { lang, t } = useI18n();
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/product/${item.itemCode}`);
+  };
+
+  const handleRemoveClick = (e) => {
+    e.stopPropagation(); // Prevent navigation when clicking remove
+    onRemove(item.itemCode);
+  };
+
+  const itemName = translateDBVal("Product", "name", item.itemName, lang);
+
+  // Determine if RTL for manual logic if needed, 
+  // though Tailwind 'rtl:' classes usually handle this if dir="rtl" is set on HTML
+  const isRTL = lang === 'ur' || lang === 'ar';
+
+  return (
+    <div
+      onClick={!isUpdating ? handleNavigate : undefined}
+      className={`group relative flex items-start gap-3 card p-3 transition-all duration-200 ${
+        isUpdating ? 'cursor-not-allowed' : 'hover:shadow-md cursor-pointer'
+      }`}
+    >
+
+      {/* Loading Overlay */}
+      {isUpdating && (
+        <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/60 rounded-lg flex items-center justify-center z-20">
+          <Loader2 className="w-6 h-6 accentPrimText animate-spin" />
+        </div>
+      )}
+
+      {/* 
+        --- DEDICATED REMOVE BUTTON --- 
+        Positioned absolutely to the top-right (or top-left in RTL).
+        Using 'pe' (padding-end) on the text container ensures text doesn't overlap this button.
+      */}
+      <button
+        onClick={handleRemoveClick}
+        disabled={isUpdating}
+        aria-label={t('cart.actions.remove', { defaultValue: 'Remove item' })}
+        className={`absolute top-2 right-2 rtl:right-auto rtl:left-2 p-2 rounded-full accentDangerText transition-colors focusRing z-10 ${
+          isUpdating ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
+      >
+        <Trash2 size={18} />
+      </button>
+
+      {/* Image Section */}
+      <div className="flex-shrink-0 relative">
+        <ImageWithLoader
+          src={item.itemPhoto}
+          alt={itemName}
+          containerClassName="w-20 h-20 bg-white dark:bg-slate-950 primBorder rounded-md overflow-hidden"
+          imageClassName="w-full h-full object-contain p-1"
+        />
+        {/* Optional: Low stock indicator overlay could go here */}
+      </div>
+
+      {/* Details Section */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch min-h-[80px]">
+
+        {/* Header: Name (with padding-end to avoid delete button) */}
+        <div className="pe-8 rtl:ps-8 rtl:text-right rtl:pe-0 rtl:pr-0">
+          <h3 className="font-semibold primText text-sm leading-tight line-clamp-2 rtl:text-right">
+            {itemName}
+          </h3>
+        </div>
+
+        {/* Footer: Price & Controls */}
+        <div className="flex items-end justify-between gap-2 mt-2">
+
+          {/* Price Block */}
+          <div className="flex flex-col">
+            {item.itemOldPrice && (
+              <span className="text-[11px] secText line-through">
+                {t('common.currencySymbol')} {Number(item.itemOldPrice).toLocaleString()}
+              </span>
+            )}
+            <span className="font-bold accentPrimText text-base">
+              {t('common.currencySymbol')} {Number(item.itemPrice).toLocaleString()}
+            </span>
+          </div>
+
+          {/* Counter Block - onClick stopPropagation is handled inside Counter */}
+          <div className="flex-shrink-0">
+            <Counter
+              quantity={item.quantity || 1}
+              onIncrement={() => onIncrement(item.itemCode)}
+              onDecrement={() => onDecrement(item.itemCode)}
+              itemName={itemName}
+              disabled={isUpdating}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * CartItemList Component
+ */
+const CartItemList = ({ items, onIncrement, onDecrement, onRemove, updatingItems = [] }) => {
+  return (
+    <div className="space-y-3 pb-safe">
+      {items.map((item) => (
+        <CartItem
+          key={item.itemCode}
+          item={item}
+          onIncrement={onIncrement}
+          onDecrement={onDecrement}
+          onRemove={onRemove}
+          isUpdating={updatingItems.includes(item.itemCode)}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default CartItemList;
+
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Plus, Minus, ShoppingCart, Trash2, Loader2 } from 'lucide-react'
+import { useI18n } from '../context/I18nContext'
+import { useCart } from '../context/CartContext'
+import useTranslations from '../hooks/useTranslations'
+import ImageWithLoader from './ImageWithLoader'
+
+// Updated Skeleton to match the new 3-column layout
+export const ItemCardSkeleton = () => (
+  <div className="flex gap-3 p-3 rounded-lg secBg primBorder h-[120px] animate-pulse">
+    {/* Col 1: Image */}
+    <div className="w-24 h-full skeleton rounded-md flex-shrink-0"></div>
+    
+    {/* Col 2: Text Info */}
+    <div className="flex-1 flex flex-col justify-between py-1">
+      <div className="space-y-2">
+        <div className="h-5 w-3/4 skeleton rounded"></div>
+        <div className="h-4 w-12 skeleton rounded-full"></div>
+      </div>
+      <div className="h-6 w-20 skeleton rounded"></div>
+    </div>
+
+    {/* Col 3: Action Placeholder */}
+    <div className="w-[40px] flex items-end justify-center pb-1">
+      <div className="h-10 w-10 rounded-full skeleton"></div>
+    </div>
+  </div>
+);
+
+export default function ItemCard({ item }) {
+  const { translateDBVal } = useTranslations()
+  const { t, lang } = useI18n()
+  
+  const { items, addToCart, decrementProduct, isProductLoading } = useCart()
+  const navigate = useNavigate()
+
+  const cartItem = items.find((it) => it.itemCode === item.id)
+  const qty = cartItem ? cartItem.quantity : 0
+  
+  // Check if this specific product is loading
+  const isLoading = isProductLoading(item.id)
+
+  const format = (key, vars = {}) => {
+    let str = t(key)
+    Object.keys(vars).forEach(k => {
+      const re = new RegExp(`{{\\s*${k}\\s*}}`, 'g')
+      str = String(str).replace(re, vars[k])
+    })
+    return str
+  }
+  
+  const isOut = !item.inStock
+  const discountPercent = item.originalPrice 
+    ? Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)
+    : 0
+
+  // Format discount: always 2 digits unless 100
+  const discountDisplay = discountPercent === 100
+    ? '100'
+    : discountPercent.toString().padStart(2, '0');
+
+  // Determine badge position and border radius for RTL/LTR
+  const isRTL = lang === 'ur' || lang === 'ar' || lang === 'fa' || lang === 'he';
+  const badgePositionClass = isRTL ? 'top-0 right-0' : 'top-0 left-0';
+  const badgeBorderRadius = isRTL
+    ? { borderTopRightRadius: '0.5rem', borderBottomLeftRadius: '0.75rem', borderBottomRightRadius: 0, borderTopLeftRadius: 0, paddingLeft: 4, paddingRight: 4 }
+    : { borderTopLeftRadius: '0.5rem', borderBottomRightRadius: '0.75rem', borderBottomLeftRadius: 0, borderTopRightRadius: 0, paddingLeft: 4, paddingRight: 4 };
+
+  const handleAdd = (e) => {
+    e.preventDefault() 
+    e.stopPropagation()
+    if (!isLoading) {
+      addToCart(item.id)
+    }
+  }
+
+  const handleRemove = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!isLoading) {
+      decrementProduct(item.id)
+    }
+  }
+
+  // Touch target for the vertical buttons
+  const touchTarget = "w-full h-[36px] flex items-center justify-center transition-colors duration-200"
+
+  const handleNavigate = () => {
+    if (!isOut) navigate(`/product/${item.id}`)
+  }
+
+  const handleKey = (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !isOut) {
+      e.preventDefault()
+      handleNavigate()
+    }
+  }
+
+  return (
+    <div
+      className={`card p-3 flex gap-3 transition-all duration-200 cursor-pointer ${isOut ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900'}`}
+      onClick={handleNavigate}
+      onKeyDown={handleKey}
+      role="link"
+      tabIndex={0}
+      aria-disabled={isOut}
+      aria-label={format('itemCard.navigateToProduct', { title: item.title })}
+    >
+      
+      {/* COLUMN 1: Image (Fixed Width) */}
+      <div 
+        className="block flex-shrink-0 relative w-24 sm:w-28 group self-start"
+        tabIndex={-1}
+      >
+         <div className="aspect-square w-full rounded-lg overflow-hidden primBorder primBg flex items-center justify-center relative">
+          <ImageWithLoader
+            src={item.image}
+            alt={format('itemCard.productImageAlt', { title: item.title })}
+            imageClassName={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isOut ? 'grayscale' : ''}`}
+          />
+          
+          {/* Discount Badge - Top left (LTR) or Top right (RTL), with correct border radius */}
+          {item.originalPrice && discountPercent > 0 && !isOut && (
+            <span
+              className={`absolute ${badgePositionClass} badgeSuccess text-[10px] font-bold py-0.5 z-20 shadow-sm`}
+              style={badgeBorderRadius}
+            >
+              {discountDisplay}%
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* COLUMN 2: Info (Flexible width) */}
+      <div className="flex-1 flex flex-col min-w-0">
+        <div className="block group flex-grow">
+          <div className="space-y-1.5">
+            <h3 className={`font-semibold primText leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ${lang === 'ur' ? 'text-lg' : 'text-base'}`}>
+              {translateDBVal("Product", "name", item.title, lang)}
+            </h3>
+            
+            <span className="badgeCategory">
+               {translateDBVal("Category", "name", item.category, lang)}
+            </span>
+          </div>
+        </div>
+
+        {/* Price sits at the bottom of Col 2 */}
+        <div className="mt-auto pt-2 leading-none">
+           {item.originalPrice && (
+             <span className="secText line-through text-xs block mb-1">
+               {t('common.currencySymbol')} {Number(item.originalPrice).toLocaleString()}
+             </span>
+           )}
+           <span className="font-bold text-lg primText block">
+             {t('common.currencySymbol')} {Number(item.price).toLocaleString()}
+           </span>
+        </div>
+      </div>
+
+      {/* COLUMN 3: Action (Fixed width, Aligned Right) */}
+      <div className="flex-shrink-0 flex flex-col items-end justify-end min-w-[40px]" onClick={(e) => e.stopPropagation()}>
+        {isOut ? (
+           <div className="flex items-center justify-center h-full">
+             <span className="badgeDanger text-[10px] py-1 px-2 uppercase font-bold text-center writing-mode-vertical">
+               {t('common.outOfStock')}
+             </span>
+           </div>
+        ) : qty === 0 ? (
+          /* State A: Round Add Button */
+          <button
+            onClick={handleAdd}
+            disabled={isLoading}
+            aria-label={t('common.addToCart')}
+            className={`min-w-[40px] min-h-[40px] btnCartAction rounded-full shadow-sm flex items-center justify-center relative ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            {isLoading ? (
+              <Loader2 size={20} className="animate-spin" strokeWidth={2.5} />
+            ) : (
+              <ShoppingCart size={20} strokeWidth={2.5} />
+            )}
           </button>
         ) : (
-          <div className="w-full flex items-center justify-between gap-2">
-            <div className="flex items-center gap-4 rounded-lg bg-gray-100 dark:bg-slate-800 p-1">
-              <button
-                onClick={() => decrementProduct(productIdForCart)}
-                className="min-w-10 min-h-10 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-md transition-all duration-200"
-                aria-label={t('productPage.actions.decreaseQuantity')}
-              >
-                <Minus size={18} />
-              </button>
-              <div className="text-xl font-semibold text-gray-900 dark:text-slate-50 min-w-[2ch] text-center">{qty}</div>
-              <button
-                onClick={() => addToCart(productIdForCart)}
-                disabled={!inStock || (isFinite(availableStock) && qty >= availableStock)}
-                className="min-w-10 min-h-10 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-900 dark:text-slate-50 font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label={t('productPage.actions.increaseQuantity')}
-              >
-                <Plus size={18} />
-              </button>
-            </div>
-            {/* The primary button can still be shown, or replaced with a total price. For now, this is cleaner. */}
-            <div className="text-2xl font-bold text-gray-900 dark:text-slate-50">
-              {t('common.currencySymbol')} {(product.price * qty).toFixed(2)}
-            </div>
+          /* State B: Vertical Pill Stepper */
+          /* HCI Note: Vertical stacking maps perfectly to Up/Down logic */
+          <div className="flex flex-col items-center w-[40px] rounded-2xl primBorder secBg shadow-sm overflow-hidden relative">
+            {/* Loading Overlay */}
+            {isLoading && (
+              <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/60 rounded-2xl flex items-center justify-center z-20">
+                <Loader2 className="w-5 h-5 accentPrimText animate-spin" />
+              </div>
+            )}
+            
+            {/* Increase (Top) */}
+            <button
+              onClick={handleAdd}
+              disabled={isLoading}
+              className={`${touchTarget} hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 secText border-b dividerBorder ${
+                isLoading ? 'cursor-not-allowed' : ''
+              }`}
+              aria-label="Increase quantity"
+            >
+              <Plus size={16} strokeWidth={3} />
+            </button>
+            
+            {/* Quantity Display (Middle) */}
+            <span className="h-[30px] flex items-center justify-center font-bold primText text-sm select-none w-full bg-white dark:bg-slate-950/50">
+               {qty}
+            </span>
+
+            {/* Decrease (Bottom) */}
+            <button
+              onClick={handleRemove}
+              disabled={isLoading}
+              className={`${touchTarget} hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 secText border-t dividerBorder ${
+                isLoading ? 'cursor-not-allowed' : ''
+              }`}
+              aria-label="Decrease quantity"
+            >
+              {qty === 1 ? <Trash2 size={16} /> : <Minus size={16} strokeWidth={3} />}
+            </button>
           </div>
         )}
       </div>
@@ -568,359 +2213,617 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
   )
 }
 
-// NEW: Component for a single card in the related products list
-const RelatedProductCard = ({ product }) => {
-  const { t, lang } = useI18n()
-  const { translateDBVal } = useTranslations()
-  return (
-    <Link to={`/product/${product.id}`} state={{ product }} className="block w-36 flex-shrink-0">
-      <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg overflow-hidden transition-all duration-200 hover:border-blue-500 hover:shadow-sm">
-        <div className="aspect-square bg-gray-100 dark:bg-slate-800">
-          <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
-        </div>
-        <div className="p-2">
-          <h3 className="text-sm font-medium text-gray-900 dark:text-slate-50 truncate">{ translateDBVal("Product", "name", product.title, lang)}</h3>
-          <div className="flex items-baseline gap-1 mt-1">
-            <span className="text-base font-semibold text-gray-900 dark:text-slate-50">
-              {t('common.currencySymbol')} {product.price}
-            </span>
-            {product.originalPrice && (
-              <span className="text-xs text-gray-500 dark:text-slate-400 line-through">
-                {t('common.currencySymbol')} {product.originalPrice}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    </Link>
-  )
-}
 
-// NEW: Component for the entire related products section
-const RelatedProducts = () => {
-  const { t } = useI18n()
+import React, { useEffect, useRef, useState } from 'react'
+import { useI18n } from '../context/I18nContext'
+import { useNavigate } from 'react-router-dom'
+import { CheckCircle, Globe } from 'lucide-react'
+import { useTTS } from '../context/TTSContext'
 
-  // Hardcoded data as requested
-  const sampleRelatedProducts = [
-    { id: 'REL001', title: 'Fresh Organic Apples', price: 4.99, originalPrice: 6.99, image: 'https://via.placeholder.com/200x200?text=Apple' },
-    { id: 'REL002', title: 'Whole Wheat Bread', price: 3.49, image: 'https://via.placeholder.com/200x200?text=Bread' },
-    { id: 'REL003', title: 'Almond Milk (Unsweetened)', price: 2.99, originalPrice: 3.50, image: 'https://via.placeholder.com/200x200?text=Milk' },
-    { id: 'REL004', title: 'Cage-Free Brown Eggs', price: 5.99, image: 'https://via.placeholder.com/200x200?text=Eggs' },
-    { id: 'REL005', title: 'Greek Yogurt', price: 1.50, image: 'https://via.placeholder.com/200x200?text=Yogurt' }
+
+export default function LanguageSelection() {
+  const { lang, setLang } = useI18n()
+  const navigate = useNavigate()
+  const { speakText, stop } = useTTS()
+  const [isSpeaking, setIsSpeaking] = useState(false)
+  const speakingRef = useRef(false)
+
+
+  const languages = [
+    { code: 'en', name: 'English', nativeName: 'English' },
+    { code: 'ur', name: 'Urdu', nativeName: 'اردو' },
   ]
 
+
+  // This object is kept inside for simplicity, but could be defined outside the component.
+  const languageStrings = {
+    headerTitle: {
+      en: "Choose Your Language",
+      ur: "زبان منتخب کریں"
+    },
+    selectionConfirmation: {
+      en: "You have selected English",
+      ur: "آپ نے اردو منتخب کی ہے"
+    },
+    proceedButton: {
+      en: "Proceed",
+      ur: "آگے بڑھیں"
+    },
+    tts: {
+      chooseLangEn: "Choose your language",
+      chooseLangUr: "اپنی زبان منتخب کریں",
+      selectedEn: "You have selected English",
+      selectedUr: "آپ نے اردو منتخب کی ہے",
+      proceed: "آگے بڑھ رہے ہیں"
+    }
+  }
+
+  // Helper to handle speaking with indicator, sequential and cancel previous
+  const speakWithIndicator = async (text, options = {}) => {
+    setIsSpeaking(true)
+    speakingRef.current = true
+    try {
+      await stop(); // Cancel any current speech before starting new
+      await speakText(text, options)
+    } finally {
+      setIsSpeaking(false)
+      speakingRef.current = false
+    }
+  }
+
+  // On mount: play English, then Urdu prompt sequentially
+  useEffect(() => {
+    let cancelled = false
+    const playPrompts = async () => {
+      await speakWithIndicator(languageStrings.tts.chooseLangEn, { lang: 'en-US' })
+      if (cancelled) return
+      await speakWithIndicator(languageStrings.tts.chooseLangUr, { lang: 'ur-PK' })
+    }
+    playPrompts()
+    return () => {
+      cancelled = true
+      stop()
+      setIsSpeaking(false)
+      speakingRef.current = false
+    }
+    // eslint-disable-next-line
+  }, [])
+
   return (
-    <div className="py-6">
-      <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3 px-4">
-        {t('productPage.relatedProducts.title')}
-      </h2>
-      <div className="flex gap-3 overflow-x-auto pb-2 px-4 scrollbar-hide">
-        {sampleRelatedProducts.map(p => <RelatedProductCard key={p.id} product={p} />)}
+    <div className="min-h-screen flex items-center justify-center primBg p-4 relative">
+      {/* Speaking indicator */}
+      {isSpeaking && (
+        <div className="absolute top-4 right-4 z-50">
+          <span className="inline-block w-4 h-4 rounded-full bg-blue-500 animate-pulse border-2 border-white shadow"></span>
+        </div>
+      )}
+      <div className="w-full max-w-[430px] space-y-6">
+        {/* Page Header */}
+        <div className="text-center space-y-3">
+          <div className="flex justify-center">
+            <div className="w-16 h-16 secBg rounded-full flex items-center justify-center primBorder">
+              <Globe className="w-8 h-8 secText" />
+            </div>
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold primText ">{languageStrings.headerTitle.en}</h1>
+            <p className="mt-1 text-lg secText">{languageStrings.headerTitle.ur}</p>
+          </div>
+        </div>
+        {/* Main Content Card */}
+        <div className="secBg primBorder rounded-xl shadow-sm p-5 space-y-4">
+          {/* Language Options */}
+          <div className="space-y-3">
+            {languages.map((language) => {
+              const isSelected = lang === language.code
+              return (
+                <button
+                  key={language.code}
+                  onClick={async () => {
+                    setLang(language.code)
+                    // Cancel any current speech, then play TTS for selection
+                    if (language.code === 'en') {
+                      await speakWithIndicator(languageStrings.tts.selectedEn, { lang: 'en-US' })
+                    } else if (language.code === 'ur') {
+                      await speakWithIndicator(languageStrings.tts.selectedUr, { lang: 'ur-PK' })
+                    }
+                  }}
+                  className={`w-full min-h-16 p-4 rounded-lg transition-all duration-200 flex items-center justify-between text-left ${
+                    isSelected
+                      ? 'modeChooseButton-selected'
+                      : 'modeChooseButton-unselected'
+                  }`}
+                >
+                  <div>
+                    <p className={`font-semibold text-lg ${isSelected ? '' : 'primText'}`}>{language.name}</p>
+                    <p className={`text-sm ${isSelected ? '' : 'secText'}`}>{language.nativeName}</p>
+                  </div>
+                  {isSelected && <CheckCircle className="w-6 h-6 accentPrimText" />}
+                </button>
+              )
+            })}
+          </div>
+          {/* Confirmation Text */}
+          <div className="text-center pt-2">
+            <p className="text-sm secText">
+              {lang === 'ur' ? languageStrings.selectionConfirmation.ur : languageStrings.selectionConfirmation.en}
+            </p>
+          </div>
+          {/* Proceed Button */}
+          <button
+            onClick={() => {
+              navigate('/mode-selection')
+            }}
+            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
+          >
+            {lang === 'ur' ? languageStrings.proceedButton.ur : languageStrings.proceedButton.en}
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
+import React, { useState } from 'react'
+import { Plus, Edit2, Trash2, MapPin, X, Loader2 } from 'lucide-react'
+import { useI18n } from '../context/I18nContext'
+import useAddress from '../api/hooks/useAddress'
+import { useAuth } from '../context/AuthContext'
+import { Layout } from '../Layout'
+import HeaderWithName from '../component/HeaderWithName'
+import { showToast } from '../utils/toast'
 
-// --- Main Product Page Component ---
-export default function Product() {
-  const { t, lang } = useI18n()
-  const { translateDBVal } = useTranslations()
-  const { addToCart, decrementProduct, items: cartItems } = useCart()
-  const location = useLocation()
-  const [qty, setQty] = useState(0)
-  const [liked, setLiked] = useState(false)
-  const [subcategoryNames, setSubcategoryNames] = useState([]);
+// --- Language Constants (unchanged) ---
+const languageStrings = {
+  en: {
+    title: 'My Addresses', back: 'Go back', add: 'Add', loading: 'Loading addresses...', noAddresses: 'No addresses saved yet', addFirstAddress: 'Add Your First Address', defaultBadge: 'Default', edit: 'Edit', delete: 'Delete', confirmDelete: 'Are you sure you want to delete this address?', deleteSuccess: 'Address deleted successfully!', deleteError: 'Failed to delete address', modalEditTitle: 'Edit Address', modalAddTitle: 'Add New Address', labelPlaceholder: 'e.g., Home, Office', fullAddressLabel: 'Full Address', addressPlaceholder: 'Enter complete address with street, city, state, zip code, and country', captureLocation: 'Capture Current Location', locationCaptured: 'Location captured!', locationError: 'Unable to get location: ', geolocationUnsupported: 'Geolocation is not supported by your browser', setDefault: 'Set as default address', cancel: 'Cancel', update: 'Update', saving: 'Saving...', saveSuccess: 'Address saved successfully!', saveError: 'Failed to save address', cannotDeleteDefault: 'Default address cannot be deleted'
+  },
+  ur: {
+    title: 'میرے پتے', back: 'واپس جائیں', add: 'شامل کریں', loading: 'پتے لوڈ ہو رہے ہیں...', noAddresses: 'کوئی پتہ محفوظ نہیں ہے', addFirstAddress: 'اپنا پہلا پتہ شامل کریں', defaultBadge: 'ڈیفالٹ', edit: 'ترمیم', delete: 'حذف کریں', confirmDelete: 'کیا آپ واقعی اس پتے کو حذف کرنا چاہتے ہیں؟', deleteSuccess: 'پتہ کامیابی سے حذف ہو گیا!', deleteError: 'پتہ حذف کرنے میں ناکامی', modalEditTitle: 'پتے میں ترمیم کریں', modalAddTitle: 'نیا پتہ شامل کریں', labelPlaceholder: 'مثلاً، گھر، دفتر', fullAddressLabel: 'مکمل پتہ', addressPlaceholder: 'گلی، شہر، ریاست، زپ کوڈ، اور ملک کے ساتھ مکمل پتہ درج کریں', captureLocation: 'موجودہ مقام کیپچر کریں', locationCaptured: 'مقام کیپچر ہو گیا!', locationError: 'مقام حاصل کرنے سے قاصر: ', geolocationUnsupported: 'جغرافیائی محل وقوع آپ کے براؤزر کے ذریعے تعاون یافتہ نہیں ہے۔', setDefault: 'ڈیفالٹ پتہ کے طور پر سیٹ کریں', cancel: 'منسوخ', update: 'اپ ڈیٹ', saving: 'محفوظ کیا جا رہا ہے...', saveSuccess: 'پتہ کامیابی سے محفوظ ہو گیا!', saveError: 'پتہ محفوظ کرنے میں ناکامی', cannotDeleteDefault: 'ڈیفالٹ پتہ حذف نہیں کیا جا سکتا'
+  }
+}
 
+// --- Sub-components ---
 
-  const incoming = location.state?.product || null
-  const incomingId = incoming?._id || incoming?.id
-  const { data: fetchedProduct } = useProduct(incomingId, { immediate: !!incomingId && !incoming?.name })
+const AddressCardSkeleton = () => (
+  <div className="card space-y-3">
+    <div className="flex justify-between items-start">
+      <div className="w-1/2 h-6 skeleton" />
+      <div className="w-1/4 h-5 skeleton rounded-full" />
+    </div>
+    <div className="w-full h-10 skeleton" />
+    <div className="flex gap-2 pt-2">
+      <div className="flex-1 h-10 skeleton" />
+      <div className="flex-1 h-10 skeleton" />
+    </div>
+  </div>
+)
 
-  // MODIFIED: Added category and subcategories to fallback data
-  const fallback = {
-    _id: 'SAMPLE001',
-    title: 'Sample Product Title',
-    price: 299,
-    description: 'This is a sample product description. It provides details about the item, its features, and benefits. It is here to demonstrate how longer text wraps and flows within the designated component area.',
-    image: 'https://via.placeholder.com/400x400?text=Product',
-    inStock: true,
-    category: 'Pantry',
-    subcategories: ['Snacks', 'Organic']
+// --- Main Address Component ---
+
+export default function Address() {
+  const { lang } = useI18n()
+  const t = (key) => languageStrings[lang][key] || languageStrings['en'][key]
+
+  const { addresses, loading, addAddress, updateAddress, deleteAddress, refreshAddresses } = useAddress()
+  // Auth context for propagating default selection globally
+  const { setDefaultAddress } = useAuth()
+
+  const [showModal, setShowModal] = useState(false)
+  const [editingAddress, setEditingAddress] = useState(null)
+  const [formData, setFormData] = useState({ label: '', addressText: '', lat: null, lng: null, isDefault: false })
+  
+  const [mutatingState, setMutatingState] = useState({ id: null, type: null })
+  const isActionLoading = !!mutatingState.type
+
+  const handleOpenModal = (address = null) => {
+    if (isActionLoading) return
+    if (address) {
+      setEditingAddress(address)
+      setFormData({
+        label: address.label || '', addressText: address.addressText || '',
+        lat: address.lat || null, lng: address.lng || null, isDefault: address.isDefault || false
+      })
+    } else {
+      setEditingAddress(null)
+      setFormData({ label: '', addressText: '', lat: null, lng: null, isDefault: false })
+    }
+    setShowModal(true)
   }
 
-  const product = incoming || fetchedProduct || fallback
-  const productName = translateDBVal("Product", "name", product.name ?? product.title, lang)
-  const images = (product.images?.length) ? product.images : [product.image]
-  const availableStock = product.stockQuantity ?? (product.inStock ? Infinity : 0)
-  const inStock = availableStock > 0
-  const displayPrice = product.discountedPrice ?? product.price
-  const originalPrice = product.originalPrice
-
-  useEffect(() => {
-    const found = cartItems.find((it) => it.itemCode === product._id)
-    setQty(found ? found.quantity : 0)
-  }, [product._id, cartItems])
-
-  const format = (key, vars = {}) => {
-    let str = t(key)
-    Object.keys(vars).forEach(k => str = str.replace(`{{${k}}}`, vars[k]))
-    return str
+  const handleCloseModal = () => {
+    if (mutatingState.type === 'save') return
+    setShowModal(false)
   }
 
-  const FavoriteButton = () => (
-    <button
-      onClick={() => setLiked(v => !v)}
-      aria-label={liked ? t('productPage.actions.unfavoriteAriaLabel') : t('productPage.actions.favoriteAriaLabel')}
-      className="min-h-11 min-w-11 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200"
-    >
-      <Heart
-        size={20}
-        className={`transition-all ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-slate-400'}`}
-      />
-    </button>
-  )
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setMutatingState({ type: 'save' })
+    try {
+      console.log('Submitting form data:', formData)
+      let updatedAddresses
+      if (editingAddress) {
+        updatedAddresses = await updateAddress({ ...formData, addressId: editingAddress.addressId })
+      } else {
+        updatedAddresses = await addAddress(formData)
+      }
 
-  useEffect(() => {
-    if (!product.subcategories) return;
+      // If user marked this address as default, propagate using AuthContext so other pages (Home, Checkout, Settings) update immediately
+      if (formData.isDefault) {
+        const defaultId = editingAddress
+          ? editingAddress.addressId
+          : (Array.isArray(updatedAddresses) ? updatedAddresses.find(a => a.isDefault)?.addressId : null)
+        if (defaultId) {
+          try {
+            await setDefaultAddress(defaultId)
+          } catch (err) {
+            console.warn('Failed to set default via AuthContext:', err)
+          }
+        }
+      }
 
-    setSubcategoryNames([]); // reset before fetching new ones
+      // Refresh local hook addresses to reflect any backend adjustments (e.g., unsetting previous default)
+      try { await refreshAddresses() } catch (e) { /* silent */ }
 
-    Promise.all(product.subcategories.map(async subcategoryId => {
-      const res = await getCategoryById(subcategoryId);
-      return res.name;
-    })).then(names => {
-      setSubcategoryNames(names);
-    });
+      console.log('Address saved successfully:', formData)
+      showToast('success', t('saveSuccess'))
+      setShowModal(false)
+    } catch (error) {
+      showToast('error', error.message || t('saveError'))
+    } finally {
+      setMutatingState({ id: null, type: null })
+    }
+  }
 
-  }, [product.subcategories]);
+  const handleDelete = async (addressId) => {
+    if (isActionLoading) return
+    // Prevent deleting the default address
+    const target = Array.isArray(addresses) ? addresses.find(a => a.addressId === addressId) : null
+    if (target && target.isDefault) {
+      showToast('error', t('cannotDeleteDefault'))
+      return
+    }
+    if (window.confirm(t('confirmDelete'))) {
+      setMutatingState({ id: addressId, type: 'delete' })
+      try {
+        await deleteAddress(addressId)
+        showToast('success', t('deleteSuccess'))
+      } catch (error) {
+        showToast('error', error.message || t('deleteError'))
+      } finally {
+        setMutatingState({ id: null, type: null })
+      }
+    }
+  }
+
+  const handleCaptureLocation = () => {
+    if (isActionLoading) return
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setFormData(prev => ({ ...prev, lat: position.coords.latitude, lng: position.coords.longitude }))
+          showToast('success', t('locationCaptured'))
+        },
+        (error) => { showToast('error', t('locationError') + error.message) }
+      )
+    } else {
+      showToast('error', t('geolocationUnsupported'))
+    }
+  }
+
   return (
     <Layout
-      header={<HeaderWithName title={productName} rightAction={<FavoriteButton />} />}
-      footer={
-        <>
-          <ProductActionBar
-            qty={qty}
-            product={product}
-            addToCart={addToCart}
-            decrementProduct={decrementProduct}
-            inStock={inStock}
-            availableStock={availableStock}
-          />
-          <BottomNav /> 
-          </>}
+      header={
+        <HeaderWithName
+          title={t('title')}
+          rightAction={
+            <button
+              onClick={() => handleOpenModal()}
+              className="btnPrimary px-3 py-2 rounded-lg flex items-center gap-2 text-sm"
+              disabled={isActionLoading}
+            >
+              <Plus size={18} />
+              {t('add')}
+            </button>
+          }
+        />
+      }
     >
-      <main className="flex flex-1 flex-col bg-white dark:bg-slate-950 min-h-full">
-        <div className="flex-1  overflow-y-auto ">
-          <ProductGallery images={images} productName={productName} format={format} />
-
-          <div className="p-4 space-y-4">
-            {/* NEW: Category Badges */}
-            <div className="flex flex-wrap gap-2">
-              {product.category && (
-                <span className="px-2.5 py-1 text-xs font-medium text-blue-800 bg-blue-100 dark:text-blue-300 dark:bg-blue-900/50 rounded-full">
-                  {translateDBVal(
-                    "Category",
-                    "name",
-                    typeof product.category === 'string' ? product.category : (product.category.name ?? product.category._id ?? ''),
-                    lang
+      <main className="primBg flex-1 overflow-y-auto p-4 min-h-full">
+        {loading ? (
+          <div className="space-y-3">
+            <AddressCardSkeleton />
+            <AddressCardSkeleton />
+          </div>
+        ) : !Array.isArray(addresses) || addresses.length === 0 ? (
+          <div className="text-center py-16 secText">
+            <MapPin size={48} className="mx-auto mb-4 opacity-50" />
+            <p className="font-medium text-lg primText mb-2">{t('noAddresses')}</p>
+            <button onClick={() => handleOpenModal()} className="btnPrimary mt-4 px-5 py-2.5 rounded-lg text-sm">
+              {t('addFirstAddress')}
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {addresses.map((address) => {
+              const isDeleting = mutatingState.type === 'delete' && mutatingState.id === address.addressId;
+              return (
+                <div key={address.addressId} className={`card relative p-4 transition-opacity duration-300 ${isDeleting ? 'opacity-50' : ''}`}>
+                  {address.isDefault && (
+                    <span className="badgePrimary absolute top-3 right-3">{t('defaultBadge')}</span>
                   )}
-                </span>
-              )}
-              {subcategoryNames.map(sub => {
-                // we need to get categry name with this id
-                return (
-                  <span key={sub} className="px-2.5 py-1 text-xs font-medium text-gray-800 bg-gray-100 dark:text-slate-300 dark:bg-slate-800 rounded-full">
-                    {translateDBVal("Category", "name", sub, lang)}
-                  </span>
-                )
-              })}
-            </div>
-
-            <div className="flex justify-between items-start">
-              <div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-gray-900 dark:text-slate-50">
-                    {t('common.currencySymbol')} {displayPrice}
-                  </span>
-                  {originalPrice && (
-                    <span className="text-base text-gray-500 dark:text-slate-400 line-through">
-                      {t('common.currencySymbol')} {originalPrice}
-                    </span>
+                  <div className="mb-3 pr-20">
+                    <h3 className="text-md font-semibold mb-1 primText">{address.label}</h3>
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap secText">{address.addressText}</p>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <button onClick={() => handleOpenModal(address)} className="btnSecondary flex-1 py-2 rounded-lg flex items-center justify-center gap-2 text-sm" disabled={isActionLoading}>
+                      <Edit2 size={16} />{t('edit')}
+                    </button>
+                    <button onClick={() => {
+                      if (address.isDefault) showToast( t('cannotDeleteDefault'))
+                      else handleDelete(address.addressId)
+                    }} className={`btnDanger flex-1 py-2 rounded-lg flex items-center justify-center gap-2 text-sm ${address.isDefault ? 'opacity-50' : ''}`} disabled={isActionLoading} >
+                      <Trash2 size={16} />{t('delete')}
+                    </button>
+                  </div>
+                  {isDeleting && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-transparent rounded-lg">
+                      <Loader2 className="animate-spin primText" size={28} />
+                    </div>
                   )}
                 </div>
-              </div>
-              <div className="flex-shrink-0">
-                {!inStock ? (
-                  <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300">
-                    {t('common.outOfStock')}
-                  </span>
-                ) : (isFinite(availableStock) && availableStock <= 5) && (
-                  <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
-                    {format('productPage.stockStatus.lowStock_other', { count: availableStock })}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
-                {t('productPage.description.title')}
-              </h2>
-              <p className="text-base text-gray-600 dark:text-slate-400">
-                {translateDBVal("Product", "description", product.description, lang)}
-              </p>
-              {/* Spacer with physical height ~2cm to add visual separation */}
-              <div style={{ height: '1cm' }} />
-            </div>
+              );
+            })}
           </div>
-
-          {/* NEW: Related Products Section */}
-          <div className="border-t border-gray-200 dark:border-slate-800 mt-2">
-            <RelatedProducts />
-          </div>
-        </div>
+        )}
       </main>
 
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50" onClick={handleCloseModal}>
+          <div onClick={(e) => e.stopPropagation()} className="secBg w-full max-w-[430px] rounded-t-2xl max-h-[90vh] flex flex-col overflow-hidden" style={{animation:'slideUp 0.3s ease-out'}}>
+            <header className="secBg dividerBorder sticky top-0 p-4 flex items-center justify-between flex-shrink-0 rounded-t-2xl">
+              <h2 className="text-lg font-semibold primText">
+                {editingAddress ? t('modalEditTitle') : t('modalAddTitle')}
+              </h2>
+              <button onClick={handleCloseModal} className="btnSecondary rounded-full !p-0 h-9 w-9 flex items-center justify-center" aria-label="Close modal" disabled={mutatingState.type === 'save'}>
+                <X size={20} />
+              </button>
+            </header>
 
+            <form onSubmit={handleSubmit} className="p-4 overflow-y-auto flex-1">
+              <fieldset disabled={mutatingState.type === 'save'} className="flex flex-col gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2 primText">{t('labelPlaceholder')}</label>
+                  <input type="text" value={formData.label} onChange={(e) => setFormData(prev => ({...prev, label: e.target.value}))} required className="inputField" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 primText">{t('fullAddressLabel')}</label>
+                  <textarea value={formData.addressText} onChange={(e) => setFormData(prev => ({...prev, addressText: e.target.value}))} required rows={4} placeholder={t('addressPlaceholder')} className="inputField resize-y" />
+                  <button type="button" onClick={handleCaptureLocation} className="btnSecondary mt-2 px-3 py-2 rounded-lg text-sm flex items-center gap-2">
+                    <MapPin size={16} /> {t('captureLocation')}
+                  </button>
+                </div>
+                <div className="flex items-center gap-3 pt-2">
+                  <input type="checkbox" id="isDefault" checked={formData.isDefault} onChange={(e) => setFormData(prev => ({...prev, isDefault: e.target.checked}))} className="w-5 h-5 cursor-pointer accentPrimBg focusRing rounded" />
+                  <label htmlFor="isDefault" className="text-sm cursor-pointer primText">{t('setDefault')}</label>
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <button type="button" onClick={handleCloseModal} className="btnSecondary flex-1 py-3 rounded-lg text-sm font-medium">{t('cancel')}</button>
+                  <button type="submit" className="btnPrimary flex-1 py-3 rounded-lg text-sm font-medium flex items-center justify-center disabled:opacity-60">
+                    {mutatingState.type === 'save' ? <Loader2 size={20} className="animate-spin" /> : editingAddress ? t('update') : t('add')}
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <style>{`@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }`}</style>
     </Layout>
   )
 }
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
-import categoryService from '../api/categoryService'
-import brandService from '../api/brandService'
 
-const DataContext = createContext(null)
+import React from 'react'
+import { useAccessibility } from '../context/AccessibilityContext'
+import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext' // added import
+import { useI18n } from '../context/I18nContext'
+import { Layout } from '../Layout' // import Layout for consistent page structure
+import HeaderWithName from '../component/HeaderWithName'
 
-const FIVE_MIN = 5 * 60 * 1000
-
-export function DataProvider({ children }) {
-  const [categories, setCategories] = useState(null)
-  const [brands, setBrands] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const tsRef = useRef(0)
-
-  const isExpired = useCallback(() => {
-    return Date.now() - tsRef.current > FIVE_MIN
-  }, [])
-
-  const fetchCategories = useCallback(async (force = false) => {
-    if (!force && categories && !isExpired()) return categories
-    setLoading(true)
-    setError(null)
-    try {
-      const data = await categoryService.getCategories()
-      setCategories(data)
-      tsRef.current = Date.now()
-      return data
-    } catch (err) {
-      setError(err)
-      return null
-    } finally {
-      setLoading(false)
-    }
-  }, [categories, isExpired])
-
-  const fetchBrands = useCallback(async (force = false) => {
-    if (!force && brands && !isExpired()) return brands
-    setLoading(true)
-    setError(null)
-    try {
-      const data = await brandService.getBrands()
-      setBrands(data)
-      tsRef.current = Date.now()
-      return data
-    } catch (err) {
-      setError(err)
-      return null
-    } finally {
-      setLoading(false)
-    }
-  }, [brands, isExpired])
-
-  // Prefetch on mount
-  useEffect(() => {
-    let mounted = true
-    ;(async () => {
-      try {
-        setLoading(true)
-        const [cats, brs] = await Promise.all([categoryService.getCategories(), brandService.getBrands()])
-        if (!mounted) return
-        setCategories(cats)
-        setBrands(brs)
-        tsRef.current = Date.now()
-      } catch (err) {
-        if (!mounted) return
-        setError(err)
-      } finally {
-        if (mounted) setLoading(false)
+export default function AccessibilitySettings() {
+  const { fontSize, setFontSize, colorMode, setColorMode, ascMode, setAscMode, resetToDefaults } = useAccessibility()
+    // Voice Input toggle logic
+    const voiceInputEnabled = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+    const handleVoiceInputToggle = () => {
+      console.log('Toggling Voice Input From AccessibilitySettings. Currently enabled:', voiceInputEnabled)
+      if (voiceInputEnabled) {
+        // Remove 'voiceInput' from ascMode string
+        setAscMode((ascMode || '').replace('voiceInput', '').replace(/\s+/g, ' ').trim())
+        console.log('Voice Input Disabled')
+      } else {
+        setAscMode(((ascMode ? ascMode + ' ' : '') + 'voiceInput').replace(/\s+/g, ' ').trim())
+        console.log('Voice Input Enabled')
       }
-    })()
-    return () => { mounted = false }
-  }, [])
-
-  const value = {
-    categories,
-    brands,
-    loading,
-    error,
-    fetchCategories,
-    fetchBrands,
-  }
-
-  return <DataContext.Provider value={value}>{children}</DataContext.Provider>
-}
-
-export function useData() {
-  const ctx = useContext(DataContext)
-  if (!ctx) throw new Error('useData must be used within DataProvider')
-  return ctx
-}
-
-export default DataContext
-
-
-
-import { useState, useEffect, useCallback, useRef } from 'react';
-import productService from '../productService';
-
-/**
- * useProducts hook
- * params: object passed as query params to backend (name, categories, brands, instock, sort)
- * options: { immediate: boolean } - whether to fetch immediately
- */
-export default function useProducts(initialParams = {}, options = { immediate: true }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const paramsRef = useRef(initialParams);
-
-  const fetch = useCallback(async (overrideParams) => {
-    setLoading(true);
-    setError(null);
-    const params = overrideParams ?? paramsRef.current ?? {};
-    try {
-      const res = await productService.getProducts(params);
-      setData(res);
-      return res;
-    } catch (err) {
-      setError(err);
-      return null;
-    } finally {
-      setLoading(false);
     }
-  }, []);
+  const { theme, setTheme } = useTheme() // use ThemeContext
+  const { t } = useI18n()
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    paramsRef.current = initialParams;
-    if (options && options.immediate) {
-      fetch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(initialParams)]);
+  const fontSizes = [
+    { id: 'small', label: t('accessibility.fontSize.options.small'), size: 'text-sm' },
+    { id: 'normal', label: t('accessibility.fontSize.options.normal'), size: 'text-base' },
+    { id: 'large', label: t('accessibility.fontSize.options.large'), size: 'text-lg' },
+    { id: 'xlarge', label: t('accessibility.fontSize.options.xlarge'), size: 'text-xl' }
+  ]
 
-  const refetch = useCallback((overrideParams) => fetch(overrideParams), [fetch]);
+  // use the locale keys for option labels/descriptions
+  const colorModes = [
+    { id: 'default', label: t('accessibility.colorMode.options.default.label'), desc: t('accessibility.colorMode.options.default.description') },
+    { id: 'highContrast', label: t('accessibility.colorMode.options.highContrast.label'), desc: t('accessibility.colorMode.options.highContrast.description') },
+    { id: 'deuteranopia', label: t('accessibility.colorMode.options.deuteranopia.label'), desc: t('accessibility.colorMode.options.deuteranopia.description') },
+    { id: 'protanopia', label: t('accessibility.colorMode.options.protanopia.label'), desc: t('accessibility.colorMode.options.protanopia.description') },
+    { id: 'tritanopia', label: t('accessibility.colorMode.options.tritanopia.label'), desc: t('accessibility.colorMode.options.tritanopia.description') }
+  ]
 
-  return { data, loading, error, refetch };
+  return (
+    <Layout header={<HeaderWithName title={t('accessibility.header.title')} to={-1} />}>
+      <div className="min-h-screen primBg">
+        {/* Content */}
+        <div className="max-w-[430px] mx-auto p-4 space-y-6">
+
+          {/* Voice Input Mode Toggle */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText mb-2">
+              {t('accessibility.voiceInput.title') || 'Voice Input'}
+            </h2>
+            <p className="text-sm secText mb-4">
+              {t('accessibility.voiceInput.description') || 'Enable voice input features for text fields.'}
+            </p>
+            <button
+              onClick={handleVoiceInputToggle}
+              className={`w-full min-h-12 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${voiceInputEnabled ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'}`}
+              aria-pressed={voiceInputEnabled}
+            >
+              {voiceInputEnabled ? (t('accessibility.voiceInput.enabled') || 'Voice Input Enabled') : (t('accessibility.voiceInput.disabled') || 'Voice Input Disabled')}
+            </button>
+          </div>
+
+          {/* Font Size Section */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
+              {t('accessibility.fontSize.title')}
+            </h2>
+            <p className="text-sm secText mb-4">
+              {t('accessibility.fontSize.description')}
+            </p>
+
+            <div className="grid grid-cols-2 gap-2">
+              {fontSizes.map((size) => (
+                <button
+                  key={size.id}
+                  onClick={() => setFontSize(size.id)}
+                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${fontSize === size.id
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
+                    }`}
+                >
+                  <div className={size.size}>{size.label}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Theme Section: inserted directly after Font Size */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
+              {t('accessibility.theme.title')}
+            </h2>
+            <p className="text-sm secText mb-4">
+              {t('accessibility.theme.description')}
+            </p>
+
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setTheme('light')}
+                className={`min-h-16 px-4 py-3 rounded-lg  font-medium transition-all duration-200 ${theme === 'light'
+                  ? 'modeChooseButton-selected'
+                  : 'modeChooseButton-unselected'
+                  }`}
+              >
+                {t('accessibility.theme.options.light')}
+              </button>
+
+              <button
+                onClick={() => setTheme('dark')}
+                className={`min-h-16 px-4 py-3 rounded-lg  font-medium transition-all duration-200 ${theme === 'dark'
+                  ? 'modeChooseButton-selected'
+                  : 'modeChooseButton-unselected'
+                  }`}
+              >
+                {t('accessibility.theme.options.dark')}
+              </button>
+            </div>
+          </div>
+
+          {/* Color Mode Section */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-2">
+              {t('accessibility.colorMode.title')}
+            </h2>
+            <p className="text-sm secText mb-4">
+              {t('accessibility.colorMode.description')}
+            </p>
+
+            <div className="space-y-2">
+              {colorModes.map((mode) => (
+                <button
+                  key={mode.id}
+                  onClick={() => setColorMode(mode.id)}
+                  className={`w-full min-h-16 px-4 py-3 rounded-lg  text-left transition-all duration-200 ${colorMode === mode.id
+                    ? 'modeChooseButton-selected'
+                    : 'modeChooseButton-unselected'
+                    }`}
+                >
+                  <div className="font-medium primText  mb-1">
+                    {mode.label}
+                    {colorMode === mode.id && (
+                      <span className="ml-2 accentPrimText">✓</span>
+                    )}
+                  </div>
+                  <div className="text-xs secText">
+                    {mode.desc}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Preview Section */}
+          <div className="secBg primBorder rounded-xl p-5">
+            <h2 className="text-lg font-semibold primText  mb-4">
+              {t('accessibility.preview.title')}
+            </h2>
+
+            <div className="space-y-3">
+              <div className="p-4 primBg primBorder rounded-lg">
+                <p className="primText  mb-2">
+                  {t('accessibility.preview.mainText')}
+                </p>
+                <p className="text-sm secText">
+                  {t('accessibility.preview.secondaryText')}
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <button className="flex-1 min-h-12 px-4 py-3 btnPrimary rounded-lg transition-all duration-200">
+                  {t('accessibility.preview.primaryButton')}
+                </button>
+                <button className="flex-1 min-h-12 px-4 py-3 btnSuccess rounded-lg transition-all duration-200">
+                  {t('accessibility.preview.successButton')}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Reset Button */}
+          <button
+            onClick={resetToDefaults}
+            className="w-full min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+          >
+            {t('accessibility.actions.reset')}
+          </button>
+
+          {/* Info Note */}
+          <div className="text-center text-xs secText space-y-1">
+            <p>{t('accessibility.footer.autoSaveNote')}</p>
+            <p>{t('accessibility.footer.globalApplyNote')}</p>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  )
 }

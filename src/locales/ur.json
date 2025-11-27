@@ -56,7 +56,16 @@
       "button": "ہمارے بارے میں"
     },
     "managePayments": {
-      "button": "ادائیگیوں کا نظم کریں"
+      "last4Digits": "آخری 4 ہندسے",
+      "yyyy": "YYYY",
+      "mm": "MM",
+      "cardInDelivery": "ڈیلیوری پر کارڈ",
+      "jazzcash": "جاز کیش",
+      "easypaisa": "ایزی پیسہ",
+      "payViaPos": "POS کے ذریعے ادائیگی",
+      "linkAccount": "اکاؤنٹ لنک کریں",
+      "other": "دیگر",
+      "button": "ادائیگیاں منظم کریں"
     }
   },
   "login": {
@@ -294,7 +303,8 @@
         "expiryPlaceholder": "MM/YY",
         "cvvLabel": "CVV",
         "cvvPlaceholder": "123"
-      }
+      },
+      "mobileNumber": "موبائل نمبر"
     },
     "billing": {
       "title": "بلنگ",
@@ -397,7 +407,8 @@
     },
     "on": "چالو",
     "off": "بند",
-    "confirm": "تصدیق کریں"
+    "confirm": "تصدیق کریں", 
+    "save": "محفوظ کریں"
   },
   "itemCard": {
     "discountOff": "{{percent}}% کی چھوٹ",

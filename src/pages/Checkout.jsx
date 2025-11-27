@@ -505,8 +505,8 @@ export default function Checkout() {
               {/* 2. Card on Delivery */}
               <PaymentRow 
                 icon={CreditCard}
-                label="Card on Delivery"
-                subLabel="Pay via POS terminal at doorstep"
+                label={t('settings.managePayments.cardInDelivery')}
+                subLabel={t('settings.managePayments.payViaPos')}
                 isSelected={selectedPaymentType === 'card_on_delivery'}
                 onSelect={() => handlePaymentSelect('card_on_delivery')}
                 iconColorClass="text-orange-500"
@@ -515,24 +515,24 @@ export default function Checkout() {
               {/* 3. JazzCash */}
               <PaymentRow 
                 icon={Smartphone}
-                label="JazzCash"
-                subLabel={jazzCashWallet ? jazzCashWallet.mobileNumber : 'Link account to pay'}
+                label={t('settings.managePayments.jazzcash')}
+                subLabel={jazzCashWallet ? jazzCashWallet.mobileNumber : t('settings.managePayments.linkAccount')}
                 isSelected={selectedPaymentType === 'jazzcash'}
                 onSelect={() => handlePaymentSelect('jazzcash')}
                 iconColorClass="text-red-600"
-                actionLabel={!jazzCashWallet ? 'Setup' : null}
+                actionLabel={!jazzCashWallet ? t('settings.managePayments.other') : null}
                 onAction={() => setModalState({ type: 'wallet', data: { provider: 'Jazzcash' } })}
               />
 
               {/* 4. Easypaisa */}
               <PaymentRow 
                 icon={Smartphone}
-                label="Easypaisa"
-                subLabel={easypaisaWallet ? easypaisaWallet.mobileNumber : 'Link account to pay'}
+                label={t('settings.managePayments.easypaisa')}
+                subLabel={easypaisaWallet ? easypaisaWallet.mobileNumber : t('settings.managePayments.linkAccount')}
                 isSelected={selectedPaymentType === 'easypaisa'}
                 onSelect={() => handlePaymentSelect('easypaisa')}
                 iconColorClass="text-green-500"
-                actionLabel={!easypaisaWallet ? 'Setup' : null}
+                actionLabel={!easypaisaWallet ? t('settings.managePayments.other') : null}
                 onAction={() => setModalState({ type: 'wallet', data: { provider: 'Easypaisa' } })}
               />
 
@@ -542,12 +542,12 @@ export default function Checkout() {
                 label={t('checkout.payment.card')}
                 subLabel={currentCard 
                   ? `${currentCard.brand.toUpperCase()} •••• ${currentCard.last4Digits}`
-                  : 'Add a card for online payment'
+                  : t('settings.managePayments.linkAccount')
                 }
                 isSelected={selectedPaymentType === 'credit_card'}
                 onSelect={() => handlePaymentSelect('credit_card')}
                 iconColorClass="text-blue-600"
-                actionLabel={currentCard ? 'Change' : 'Add'}
+                actionLabel={currentCard ? t('settings.managePayments.other') : t('settings.managePayments.linkAccount')}
                 onAction={() => setModalState({ type: currentCard ? 'cardList' : 'card' })}
               />
 
@@ -664,7 +664,7 @@ function WalletModal({ onClose, provider, existingData, onSave, t, setSelectedPa
     <ModalBackdrop onClose={onClose}>
       <div className="p-5">
         <div className="flex justify-between items-center mb-5">
-          <h3 className="text-xl font-bold primText">{existingData ? `Update ${provider}` : `Setup ${provider}`}</h3>
+          <h3 className="text-xl font-bold primText">{existingData ? t('settings.managePayments.other') + ' ' + provider : t('settings.managePayments.linkAccount') + ' ' + provider}</h3>
           <button onClick={onClose} className="p-2 rounded-full secHoverBg"><X size={20} /></button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -720,35 +720,35 @@ function AddCardModal({ onClose, onSave, t, setSelectedPaymentType, setCurrentCa
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
            <div>
-              <label className="block text-sm font-semibold mb-2 primText">Card Brand</label>
+              <label className="block text-sm font-semibold mb-2 primText">{t('checkout.payment.cardDetails.nameLabel')}</label>
               <input type="text" placeholder="e.g. Visa" className="inputField" 
                 value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} required 
               />
            </div>
            <div>
-              <label className="block text-sm font-semibold mb-2 primText">Card Number</label>
+              <label className="block text-sm font-semibold mb-2 primText">{t('checkout.payment.cardDetails.numberLabel')}</label>
               <input type="tel" maxLength={16} placeholder="0000 0000 0000 0000" className="inputField font-mono" 
                  value={formData.last4Digits} onChange={e => setFormData({...formData, last4Digits: e.target.value.slice(-4)})} 
                  // Note: In real app we capture full, but here per schema only last4
               />
-              <p className="text-xs secText mt-1">For demo, just enter last 4 digits in state</p>
+              <p className="text-xs secText mt-1">{t('settings.managePayments.last4Digits')}</p>
            </div>
            <div className="flex gap-4">
               <div className="flex-1">
-                 <label className="block text-sm font-semibold mb-2 primText">Expiry MM</label>
-                 <input type="tel" maxLength={2} placeholder="MM" className="inputField text-center"
+                 <label className="block text-sm font-semibold mb-2 primText">{t('settings.managePayments.mm')}</label>
+                 <input type="tel" maxLength={2} placeholder={t('settings.managePayments.mm')} className="inputField text-center"
                    value={formData.expiryMonth} onChange={e => setFormData({...formData, expiryMonth: e.target.value})} required 
                  />
               </div>
               <div className="flex-1">
-                 <label className="block text-sm font-semibold mb-2 primText">Expiry YYYY</label>
-                 <input type="tel" maxLength={4} placeholder="YYYY" className="inputField text-center"
+                 <label className="block text-sm font-semibold mb-2 primText">{t('settings.managePayments.yyyy')}</label>
+                 <input type="tel" maxLength={4} placeholder={t('settings.managePayments.yyyy')} className="inputField text-center"
                    value={formData.expiryYear} onChange={e => setFormData({...formData, expiryYear: e.target.value})} required 
                  />
               </div>
            </div>
            <button type="submit" disabled={loading} className="w-full btnPrimary py-3.5 rounded-xl font-bold flex justify-center">
-            {loading ? <Loader2 className="animate-spin" /> : 'Add Card'}
+            {loading ? <Loader2 className="animate-spin" /> : t('settings.managePayments.other')}
           </button>
         </form>
       </div>
@@ -761,7 +761,7 @@ function CardListModal({ onClose, cards, onAddNew, onSelect, setCurrentCard, t }
     <ModalBackdrop onClose={onClose}>
        <div className="p-5 max-h-[80vh] flex flex-col">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold primText">Select Card</h3>
+          <h3 className="text-xl font-bold primText">{t('settings.managePayments.other')}</h3>
           <button onClick={onClose} className="p-2 rounded-full secHoverBg"><X size={20} /></button>
         </div>
         
@@ -781,7 +781,7 @@ function CardListModal({ onClose, cards, onAddNew, onSelect, setCurrentCard, t }
         </div>
 
         <button onClick={onAddNew} className="w-full py-3.5 border-2 border-dashed border-gray-300 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 font-semibold secText hover:primText transition-colors">
-            <Plus size={18} /> Add Another Card
+          <Plus size={18} /> {t('settings.managePayments.linkAccount')}
         </button>
       </div>
     </ModalBackdrop>

@@ -5,6 +5,7 @@ import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
+import useTranslations from '../hooks/useTranslations'
 import useOrder from '../api/hooks/useOrder'
 import OrderStatusStepper from '../component/OrderStatusStepper'
 import ImageWithLoader from '../component/ImageWithLoader'
@@ -53,6 +54,7 @@ export default function Order() {
   const { orderId } = useParams()
   const { order, loading, error } = useOrder(orderId, token)
   const { t, lang } = useI18n()
+  const { translateDBVal } = useTranslations()
 
   const formatCurrency = (amount) => {
     if (typeof amount !== 'number') return '0.00'
@@ -192,7 +194,7 @@ export default function Order() {
                   />
                   <div className="flex-1 min-w-0 flex flex-col justify-center">
                     <div className="flex justify-between items-start gap-2">
-                      <p className="font-medium primText text-sm truncate leading-tight">{item.name}</p>
+                      <p className="font-medium primText text-sm truncate leading-tight">{translateDBVal("Product", "name", item.name, lang)}</p>
                       <p className="font-bold accentPrimText text-sm whitespace-nowrap">
                         {t('common.currencySymbol')}{formatCurrency(item.price)}
                       </p>

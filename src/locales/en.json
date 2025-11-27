@@ -56,6 +56,15 @@
       "button": "About"
     },
     "managePayments": {
+      "last4Digits": "Last 4 digits",
+      "yyyy": "YYYY",
+      "mm": "MM",
+      "cardInDelivery": "Card in Delivery",
+      "jazzcash": "JazzCash",
+      "easypaisa": "Easypaisa",
+      "payViaPos": "Pay via POS",
+      "linkAccount": "Link Account",
+      "other": "Other",
       "button": "Manage Payments"
     }
   },
@@ -294,7 +303,8 @@
         "expiryPlaceholder": "MM/YY",
         "cvvLabel": "CVV",
         "cvvPlaceholder": "123"
-      }
+      },
+      "mobileNumber": "Mobile Number"
     },
     "billing": {
       "title": "Billing",
@@ -397,7 +407,8 @@
     },
     "on": "On",
     "off": "Off",
-    "confirm": "Confirm"
+    "confirm": "Confirm", 
+    "save": "Save"
   },
   "itemCard": {
     "discountOff": "{{percent}}% OFF",

@@ -40,7 +40,8 @@ const languageStrings = {
         saving: 'Processing...',
         saveSuccess: 'Saved successfully.',
         saveError: 'Could not save details.',
-        brandPlaceholder: 'e.g. Visa'
+        brandPlaceholder: 'e.g. Visa',
+        last4Digits: 'Last 4 digits'
     },
     ur: {
         title: 'ادائیگیوں کا نظم کریں',
@@ -73,7 +74,8 @@ const languageStrings = {
         saving: 'محفوظ ہو رہا ہے...',
         saveSuccess: 'محفوظ ہو گیا۔',
         saveError: 'محفوظ نہیں ہو سکا۔',
-        brandPlaceholder: 'مثلاً ویزا'
+        brandPlaceholder: 'مثلاً ویزا',
+        last4Digits: 'آخری 4 ہندسے'
     }
 };
 
@@ -138,6 +140,14 @@ const CreditCardItem = ({ card, onDelete, t }) => (
     </div>
 );
 
+// Helper to get correct logo extension for each provider
+function getWalletLogoSrc(provider) {
+    const lower = provider.toLowerCase();
+    if (lower === 'easypaisa') return '/easypaisa.png';
+    if (lower === 'jazzcash') return '/jazzcash.svg';
+    return `/${lower}.svg`;
+}
+
 // Wallet Row: Handles both Linked and Unlinked states
 const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
     const isLinked = !!wallet;
@@ -159,7 +169,7 @@ const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
                 ${!isLinked ? 'opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all' : ''}
             `}>
                 <ImageWithLoader 
-                    src={`/${provider.toLowerCase()}.svg`} 
+                    src={getWalletLogoSrc(provider)} 
                     alt={provider}
                     imageClassName="w-full h-full object-contain"
                     // Fallback icon if logo fails
@@ -410,7 +420,16 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
                         </div>
                         <div>
                             <label className="block text-sm font-semibold mb-2 primText">{t('cardNumber')}</label>
-                            <input type="text" inputMode="numeric" name="last4Digits" value={formData.last4Digits} onChange={(e) => handleChange({target: {name: 'last4Digits', value: e.target.value.replace(/\D/g, '')}})} required className="inputField font-mono tracking-widest" placeholder="Last 4 digits" />
+                            <input
+                                type="text"
+                                inputMode="numeric"
+                                name="last4Digits"
+                                value={formData.last4Digits}
+                                onChange={(e) => handleChange({target: {name: 'last4Digits', value: e.target.value.replace(/\D/g, '')}})}
+                                required
+                                className="inputField font-mono tracking-widest"
+                                placeholder={t('last4Digits')}
+                            />
                         </div>
                         <div>
                             <label className="block text-sm font-semibold mb-2 primText">{t('expiryDate')}</label>
@@ -479,7 +498,7 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
                         <div className="flex items-center gap-4 p-4 secBg primBorder rounded-xl bg-white dark:bg-slate-900">
                              <div className="w-10 h-10 rounded-lg bg-white dark:bg-white border border-gray-200 dark:border-gray-400 flex items-center justify-center p-1">
                                 <ImageWithLoader 
-                                    src={`/${formData.provider.toLowerCase()}.svg`} 
+                                    src={getWalletLogoSrc(formData.provider)} 
                                     alt={formData.provider}
                                     fallback={<Smartphone className="w-5 h-5 secText" />} 
                                 />
