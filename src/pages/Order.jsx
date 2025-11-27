@@ -119,9 +119,18 @@ export default function Order() {
     return name || provider || t('order.payment.unknown');
   };
 
+  // Replace {id} in translation with order short ID
+  const orderIdShort = order._id.slice(-6).toUpperCase();
+  let orderHeader = t('orders.card.orderId');
+  if (orderHeader.includes('{id}')) {
+    orderHeader = orderHeader.replace('{id}', orderIdShort);
+  } else {
+    orderHeader = `${orderHeader} #${orderIdShort}`;
+  }
+
   return (
     <Layout
-      header={<HeaderWithName title={`${t('orders.card.orderId')} #${order._id.slice(-6).toUpperCase()}`} to="/orders" />}
+      header={<HeaderWithName title={orderHeader} to="/orders" />}
       footer={<BottomNav />}
     >
       <main className="flex-1 overflow-y-auto primBg min-h-full">
