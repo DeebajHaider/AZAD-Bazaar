@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useMemo } from 'react'
 import useCartApi from '../hooks/useCart'
 import { useAuth } from './AuthContext'
 
@@ -23,6 +23,11 @@ export function CartProvider({ children }) {
   const isProductLoading = (itemCode) => {
     return productLoadingStates[itemCode] || false
   }
+
+  // Calculate total items for the badge
+  const totalItemsCount = useMemo(() => {
+    return (api.items || []).reduce((acc, item) => acc + (item.quantity || 0), 0)
+  }, [api.items])
 
   async function addItem(newItem) {
     if (!newItem) return
@@ -113,7 +118,8 @@ export function CartProvider({ children }) {
     reload: api.load,
     // New methods for per-product loading
     isProductLoading,
-    productLoadingStates
+    productLoadingStates,
+    totalItemsCount
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
