@@ -88,6 +88,35 @@ export default function Order() {
 
   const currentStatus = order?.statusHistory?.[order.statusHistory.length - 1]?.status || order.status;
 
+  // Helper to render payment info
+  const renderPaymentInfo = (paymentMethod) => {
+    if (!paymentMethod) return t('order.payment.unknown');
+    const { type, provider, name, details, last4Digits } = paymentMethod;
+    // Mobile Wallet
+    if (type === 'mobile_wallet') {
+      let info = provider ? provider : t('order.payment.mobileWallet');
+      if (details) info += ` (${details})`;
+      return info;
+    }
+    // Cash
+    if (type === 'cash') {
+      return name || t('order.payment.cash');
+    }
+    // Card on Delivery
+    if (type === 'card_on_delivery') {
+      return name || t('order.payment.cardOnDelivery');
+    }
+    // Credit Card
+    if (type === 'credit_card') {
+      if (details) return details;
+      let info = provider ? provider : t('order.payment.creditCard');
+      if (last4Digits) info += ` •••• ${last4Digits}`;
+      return info;
+    }
+    // Fallback
+    return name || provider || t('order.payment.unknown');
+  };
+
   return (
     <Layout
       header={<HeaderWithName title={`${t('orders.card.orderId')} #${order._id.slice(-6).toUpperCase()}`} to="/orders" />}
@@ -96,7 +125,6 @@ export default function Order() {
       <main className="flex-1 overflow-y-auto primBg min-h-full">
         {/* Reduced global padding (p-3) and spacing (space-y-3) */}
         <div className="max-w-[430px] mx-auto p-3 space-y-3 ">
-          
           {/* 1. Tracking / Status Section */}
           <section className="secBg primBorder rounded-xl p-4 shadow-sm">
             <h2 className="text-xs font-bold secText uppercase tracking-wider mb-3">
@@ -132,8 +160,7 @@ export default function Order() {
               <div className="min-w-0">
                 <h3 className="text-xs font-medium secText mb-0.5">{t('order.payment.title')}</h3>
                 <p className="primText font-medium text-sm capitalize truncate">
-                  {order.paymentMethod.name} 
-                  {order.paymentMethod.last4Digits && ` •••• ${order.paymentMethod.last4Digits}`}
+                  {renderPaymentInfo(order.paymentMethod)}
                 </p>
               </div>
             </div>
