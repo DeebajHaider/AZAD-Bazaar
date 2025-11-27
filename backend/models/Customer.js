@@ -1,5 +1,25 @@
 const mongoose = require('mongoose');
 
+// NEW: Sub-schema for saved mobile wallets
+const MobileWalletSchema = new mongoose.Schema({
+  provider: { 
+    type: String, 
+    required: true, 
+    enum: ['Jazzcash', 'Easypaisa'] // Ensures data consistency
+  },
+  mobileNumber: { type: String, required: true }
+}, { _id: false }); // _id is not needed here, as a customer will have max one of each provider
+
+// NEW: Sub-schema for saved credit cards
+const CreditCardSchema = new mongoose.Schema({
+  // We will let Mongoose automatically create a unique _id for each card
+  last4Digits: { type: String, required: true },
+  brand: { type: String, required: true }, // e.g., 'Visa', 'Mastercard'
+  expiryMonth: { type: Number, required: true },
+  expiryYear: { type: Number, required: true },
+  isDefault: { type: Boolean, default: false } // To track the default card
+});
+
 // Customer model updated to store addresses as an array (single-item for now)
 const AddressSchema = new mongoose.Schema({
   addressId: { type: String, required: true },
@@ -31,7 +51,11 @@ const CustomerSchema = new mongoose.Schema({
   addresses: { type: [AddressSchema], default: [] },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  favorites: { type: [mongoose.Schema.Types.ObjectId], ref: 'Product', default: [] }
+  favorites: { type: [mongoose.Schema.Types.ObjectId], ref: 'Product', default: [] }, 
+  paymentMethods: {
+    mobileWallets: { type: [MobileWalletSchema], default: [] },
+    creditCards: { type: [CreditCardSchema], default: [] }
+  },
 });
 
 // Keep updatedAt current

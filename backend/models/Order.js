@@ -30,9 +30,27 @@ const OrderSchema = new mongoose.Schema({
     lng: { type: Number, required: true }
   },
   paymentMethod: {
-    name: { type: String, required: true },
-    type: { type: String, required: true },
-    last4Digits: { type: String }
+    // --- New, More Structured Type Field ---
+    // We'll keep 'cash' from your old schema as a valid option
+    type: { 
+      type: String, 
+      required: true, 
+      enum: [
+        'cash_on_delivery', 
+        'card_on_delivery', 
+        'mobile_wallet', 
+        'credit_card',
+        'cash' // <-- THIS IS THE KEY for backward compatibility
+      ]
+    },
+
+    // --- Field for old orders ---
+    // We make `name` optional now. Old orders have it, new ones won't need it.
+    name: { type: String }, 
+
+    // --- New optional fields for more detail ---
+    provider: { type: String }, // e.g., 'Jazzcash', 'Visa'
+    details: { type: String }    // e.g., '...1234'
   },
   products: { type: [ProductSnapshotSchema], required: true, validate: v => Array.isArray(v) && v.length > 0 },
   deliveryInstructions: { type: String, default: '' },

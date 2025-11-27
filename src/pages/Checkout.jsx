@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Edit3, Save, Wallet, CreditCard, Loader2, Mic, MapPin, Plus, Check, Circle } from 'lucide-react'
+import { 
+  Edit3, Save, Wallet, CreditCard, Loader2, Mic, MapPin, 
+  Plus, Check, Circle, Smartphone, X, ChevronRight, Banknote 
+} from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCart } from '../context/CartContext'
 import AuthContext from '../context/AuthContext'
@@ -10,6 +13,8 @@ import HeaderWithName from '../component/HeaderWithName'
 import BottomNav from '../component/BottomNav'
 import VoiceInputModal from '../component/VoiceInputModal'
 import { useAccessibility } from '../context/AccessibilityContext'
+import { useMobileWallets, useCreditCards } from '../context/PaymentDataContext'
+import { showToast } from '../utils/toast'
 
 // --- Skeleton Components ---
 const CheckoutSkeleton = () => (
@@ -25,9 +30,12 @@ const CheckoutSkeleton = () => (
     </div>
     <div className="secBg primBorder rounded-lg p-4 space-y-4">
       <div className="h-6 w-32 skeleton" />
-      <div className="grid grid-cols-2 gap-4">
-        <div className="h-24 skeleton rounded-lg" />
-        <div className="h-24 skeleton rounded-lg" />
+      <div className="space-y-3">
+         <div className="h-14 skeleton rounded-lg" />
+         <div className="h-14 skeleton rounded-lg" />
+         <div className="h-14 skeleton rounded-lg" />
+         <div className="h-14 skeleton rounded-lg" />
+         <div className="h-14 skeleton rounded-lg" />
       </div>
     </div>
   </div>
@@ -51,31 +59,73 @@ const CheckoutBillingSkeleton = () => (
 
 // --- Sub-components ---
 
-const FormInput = ({ label, ...props }) => (
-  <div>
-    <label className="block text-sm font-medium mb-2 primText ">
-      {label}
-    </label>
-    <input
-      {...props}
-      className="inputField placeholder-gray-400 dark:placeholder-slate-500 transition-all duration-200"
-    />
-  </div>
-)
-
-const PaymentOption = ({ label, icon: Icon, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`w-full flex flex-col items-center justify-center gap-2 p-4 rounded-lg transition-all duration-200 ${isActive
-      ? 'modeChooseButton-selected'
-      : 'modeChooseButton-unselected'
-      }`}
+const PaymentRow = ({ 
+  icon: Icon, 
+  label, 
+  subLabel, 
+  isSelected, 
+  onSelect, 
+  actionLabel, 
+  onAction,
+  iconColorClass = "secText"
+}) => (
+  <div 
+    onClick={onSelect}
+    className={`
+      w-full flex items-center gap-3 p-3.5 rounded-lg transition-all duration-200 border-2 cursor-pointer
+      ${isSelected 
+        ? 'modeChooseButton-selected shadow-sm' 
+        : 'modeChooseButton-unselected border-transparent hover:bg-gray-50 dark:hover:bg-gray-800'
+      }
+    `}
   >
-    <Icon size={24} className={isActive ? '' : 'secText'} />
-    <span className="font-medium">
-      {label}
-    </span>
-  </button>
+    {/* Icon */}
+    <div className={`
+      w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
+      ${isSelected ? 'bg-white dark:bg-slate-950' : 'secBg'}
+    `}>
+      <Icon size={20} className={isSelected ? 'accentPrimText' : iconColorClass} />
+    </div>
+
+    {/* Text */}
+    <div className="flex-1 min-w-0">
+      <div className="flex items-center gap-2">
+        <span className={`font-semibold text-sm ${isSelected ? 'text-blue-900 dark:text-blue-100' : 'primText'}`}>
+          {label}
+        </span>
+      </div>
+      {subLabel && (
+        <p className={`text-xs truncate ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'secText'}`}>
+          {subLabel}
+        </p>
+      )}
+    </div>
+
+    {/* Selection / Action */}
+    <div>
+      {actionLabel ? (
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onAction();
+          }}
+          className="text-xs font-bold px-3 py-1.5 rounded-md bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+        >
+          {actionLabel}
+        </button>
+      ) : (
+        <div className={`
+          w-5 h-5 rounded-full border-2 flex items-center justify-center
+          ${isSelected 
+            ? 'border-blue-500 bg-blue-500 text-white' 
+            : 'border-gray-300 dark:border-gray-600 bg-transparent'
+          }
+        `}>
+          {isSelected && <Check size={12} strokeWidth={3} />}
+        </div>
+      )}
+    </div>
+  </div>
 )
 
 // --- Main Checkout Component ---
@@ -87,8 +137,12 @@ export default function Checkout() {
   const { createOrder } = useOrdersContext()
   const navigate = useNavigate()
   
+  // Payment Context
+  const { mobileWallets, loading: walletsLoading, addMobileWallet, updateMobileWallet } = useMobileWallets()
+  const { creditCards, loading: cardsLoading, addCreditCard } = useCreditCards()
+
   // Accessibility
-  const { ascMode } = useAccessibility && useAccessibility() || {}
+  const { ascMode } = useAccessibility() || {}
   const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
   const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
 
@@ -99,6 +153,13 @@ export default function Checkout() {
   // Address State
   const [isSelectingAddress, setIsSelectingAddress] = useState(false)
   const [address, setAddress] = useState(null)
+
+  // Payment State
+  // Use backend-compatible values for payment type
+  // 'cash_on_delivery', 'card_on_delivery', 'jazzcash', 'easypaisa', 'credit_card', 'cash'
+  const [selectedPaymentType, setSelectedPaymentType] = useState('cash_on_delivery')
+  const [modalState, setModalState] = useState({ type: null, data: null }) // type: 'wallet', 'card', 'cardList'
+  const [isSaving, setIsSaving] = useState(false)
 
   // Initialize Address from Context
   useEffect(() => {
@@ -118,20 +179,51 @@ export default function Checkout() {
   }, [customer, getDefaultAddress, address]);
 
   const [instructions, setInstructions] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState({
-    name: 'Cash on Delivery',
-    type: 'cash',
-    last4Digits: ''
-  })
-  const [cardDetails, setCardDetails] = useState({ name: '', number: '', expiry: '', cvv: '' })
-  
-  // Voice Modal State
   const [voiceModalOpen, setVoiceModalOpen] = useState(false)
 
   const handleVoiceConfirm = useCallback((transcript) => {
     setInstructions(transcript)
     setVoiceModalOpen(false);
   }, [])
+
+  // Derived Payment Data
+  const jazzCashWallet = mobileWallets?.find(w => w.provider === 'Jazzcash');
+  const easypaisaWallet = mobileWallets?.find(w => w.provider === 'Easypaisa');
+  const defaultCard = creditCards?.find(c => c.isDefault) || creditCards?.[0];
+
+  // Logic: Handle Payment Selection
+  const handlePaymentSelect = (type) => {
+    // 1. Wallets
+    if (type === 'jazzcash') {
+      if (jazzCashWallet) {
+        setSelectedPaymentType('jazzcash');
+      } else {
+        setModalState({ type: 'wallet', data: { provider: 'Jazzcash' } });
+      }
+      return;
+    }
+    if (type === 'easypaisa') {
+      if (easypaisaWallet) {
+        setSelectedPaymentType('easypaisa');
+      } else {
+        setModalState({ type: 'wallet', data: { provider: 'Easypaisa' } });
+      }
+      return;
+    }
+
+    // 2. Credit/Debit Card (Online)
+    if (type === 'credit_card') {
+      if (defaultCard) {
+        setSelectedPaymentType('credit_card');
+      } else {
+        setModalState({ type: 'card', data: null });
+      }
+      return;
+    }
+
+    // 3. COD and Card on Delivery
+    setSelectedPaymentType(type);
+  };
 
   // Calculation Logic
   const subtotal = cartTotal
@@ -160,6 +252,39 @@ export default function Checkout() {
       return;
     }
 
+    // Prepare Payment Method Object based on Selection
+    let finalPaymentMethod = { type: selectedPaymentType };
+
+    if (selectedPaymentType === 'jazzcash') {
+      if (!jazzCashWallet) { alert('Please setup Jazzcash details'); return; }
+      finalPaymentMethod = { 
+        type: 'mobile_wallet', 
+        provider: 'Jazzcash', 
+        mobileNumber: jazzCashWallet.mobileNumber 
+      };
+    } else if (selectedPaymentType === 'easypaisa') {
+      if (!easypaisaWallet) { alert('Please setup Easypaisa details'); return; }
+      finalPaymentMethod = { 
+        type: 'mobile_wallet', 
+        provider: 'Easypaisa', 
+        mobileNumber: easypaisaWallet.mobileNumber 
+      };
+    } else if (selectedPaymentType === 'credit_card') {
+      if (!defaultCard) { alert('Please add a credit card'); return; }
+      finalPaymentMethod = {
+        type: 'credit_card',
+        last4Digits: defaultCard.last4Digits,
+        brand: defaultCard.brand
+      };
+    } else if (selectedPaymentType === 'card_on_delivery') {
+      finalPaymentMethod = { type: 'card_on_delivery', name: 'Card on Delivery' };
+    } else if (selectedPaymentType === 'cash_on_delivery') {
+      finalPaymentMethod = { type: 'cash_on_delivery', name: 'Cash on Delivery' };
+    } else {
+      // fallback for legacy
+      finalPaymentMethod = { type: 'cash', name: 'Cash on Delivery' };
+    }
+
     const orderData = {
       customerId: user.customerId,
       customName: user.name,
@@ -168,7 +293,7 @@ export default function Checkout() {
         lat: address.lat ?? 0,
         lng: address.lng ?? 0
       },
-      paymentMethod: paymentMethod,
+      paymentMethod: finalPaymentMethod,
       products: cartItems.map(item => ({
         productId: item.itemCode,
         quantity: item.quantity
@@ -196,7 +321,7 @@ export default function Checkout() {
   }
 
   // Handle Loading States
-  if (cartLoading || authLoading || (user && user.customerId && !customer)) {
+  if (cartLoading || authLoading || (user && user.customerId && !customer) || walletsLoading || cardsLoading) {
     return (
       <Layout
         header={<HeaderWithName title={t('checkout.title')} to="/cart" />}
@@ -209,7 +334,6 @@ export default function Checkout() {
     )
   }
 
-  // Footer Component
   const PlaceOrderFooter = () => (
     <div className="secBg dividerBorder border-t p-4">
       <button
@@ -236,9 +360,8 @@ export default function Checkout() {
       <main className="flex-1 overflow-y-auto primBg min-h-full">
         <div className="p-4 space-y-6">
           
-          {/* --- ADDRESS SECTION (IMPROVED) --- */}
+          {/* --- ADDRESS SECTION --- */}
           <section className="secBg primBorder rounded-lg overflow-hidden">
-            {/* Header: Clean Title + Action */}
             <div className="flex justify-between items-center p-4 pb-2">
               <h2 className="text-lg font-semibold primText">{t('checkout.address.title')}</h2>
               <button
@@ -252,24 +375,15 @@ export default function Checkout() {
               </button>
             </div>
 
-            {/* Content Body */}
             <div className="px-4 pb-4">
-              
-              {/* VIEW STATE 1: SELECTION LIST */}
               {isSelectingAddress ? (
                 <div className="space-y-4 mb-4 animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="flex justify-between items-center pt-2">
                     <span className="text-xs font-medium secText uppercase tracking-wide">{t('checkout.address.savedAddresses') || 'Saved Addresses'}</span>
-                    <button 
-                       onClick={() => navigate('/address')}
-                       className="text-xs font-semibold accentPrimText flex items-center gap-1"
-                    >
-                      <Plus size={14} />
-                      {t('checkout.address.addNew') || 'Manage'}
+                    <button onClick={() => navigate('/address')} className="text-xs font-semibold accentPrimText flex items-center gap-1">
+                      <Plus size={14} /> {t('checkout.address.addNew') || 'Manage'}
                     </button>
                   </div>
-                  
-                  {/* Scrollable Container */}
                   <div className="max-h-64 overflow-y-auto space-y-2 pr-1 -mr-1 custom-scrollbar">
                     {customer?.addresses && customer.addresses.length > 0 ? (
                       customer.addresses.map((addr) => {
@@ -278,22 +392,12 @@ export default function Checkout() {
                           <button
                             key={addr.addressId}
                             onClick={() => {
-                              setAddress({
-                                label: addr.label || 'Home',
-                                addressText: addr.addressText || '',
-                                lat: addr.lat,
-                                lng: addr.lng,
-                                addressId: addr.addressId
-                              });
+                              setAddress({ ...addr });
                             }}
                             className={`w-full text-left p-3 rounded-lg transition-all flex items-start gap-3
-                              ${isSelected 
-                                ? 'modeChooseButton-selected' 
-                                : 'modeChooseButton-unselected secHoverBg'
-                              }
+                              ${isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected secHoverBg'}
                             `}
                           >
-                            {/* Radio Circle */}
                             <div className={`mt-0.5 flex-shrink-0 ${isSelected ? 'accentPrimText' : 'secText'}`}>
                               {isSelected ? (
                                 <div className="w-5 h-5 rounded-full accentPrimBg flex items-center justify-center text-white">
@@ -303,7 +407,6 @@ export default function Checkout() {
                                 <Circle size={20} className="text-gray-300 dark:text-gray-600" />
                               )}
                             </div>
-                            
                             <div className="flex-1">
                                 <div className="flex justify-between">
                                     <p className={`font-bold text-sm mb-0.5 ${isSelected ? 'accentPrimText' : 'primText'}`}>
@@ -327,23 +430,15 @@ export default function Checkout() {
                   </div>
                 </div>
               ) : (
-                /* VIEW STATE 2: SELECTED STATIC VIEW (Redesigned) */
                 <div className="mb-4">
                   {address ? (
                     <div className="flex items-start gap-3.5 py-1">
-                      {/* Icon Anchor */}
                       <div className="mt-1.5 p-2 rounded-full secBg accentPrimText flex-shrink-0">
                         <MapPin size={20} />
                       </div>
-                      
-                      {/* Text Content */}
                       <div className="flex-1">
-                        <p className="text-xs font-bold uppercase tracking-wider secText mb-1">
-                            {address.label}
-                        </p>
-                        <p className="text-lg font-medium primText leading-snug">
-                          {address.addressText}
-                        </p>
+                        <p className="text-xs font-bold uppercase tracking-wider secText mb-1">{address.label}</p>
+                        <p className="text-lg font-medium primText leading-snug">{address.addressText}</p>
                       </div>
                     </div>
                   ) : (
@@ -358,8 +453,7 @@ export default function Checkout() {
                 </div>
               )}
 
-              {/* Delivery Instructions - OUTSIDE Conditional so it stays visible */}
-              <div className="pt-4 border-t dividerBorder relative animate-in fade-in duration-300">
+              <div className="pt-4 border-t dividerBorder relative">
                 <label className="block text-sm font-medium mb-2 primText flex items-center gap-2">
                    {t('checkout.address.instructionsLabel')}
                 </label>
@@ -374,21 +468,18 @@ export default function Checkout() {
                   {isVoiceInput && (
                     <button
                       type="button"
-                      aria-label={t('voiceModal.actions.openForInstructions') || 'Voice input for delivery instructions'}
                       onClick={() => setVoiceModalOpen(true)}
                       className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
-                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
                     >
                       <Mic size={20} className="primText" />
                     </button>
                   )}
                 </div>
               </div>
-
             </div>
           </section>
 
-          {/* Voice Input Modal */}
+          {/* Voice Modal */}
           {isVoiceInput && voiceModalOpen && (
             <VoiceInputModal
               isOpen={voiceModalOpen}
@@ -398,41 +489,82 @@ export default function Checkout() {
             />
           )}
 
-          {/* Payment Section */}
+          {/* --- PAYMENT SECTION (NEW UNIFIED UI) --- */}
           <section className="secBg primBorder rounded-lg p-4 space-y-4">
-            <h2 className="text-lg font-semibold primText ">{t('checkout.payment.title')}</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <PaymentOption
-                label={t('checkout.payment.cashOnDelivery')}
-                icon={Wallet}
-                isActive={paymentMethod.type === 'cash'}
-                onClick={() => setPaymentMethod({ name: 'Cash on Delivery', type: 'cash', last4Digits: '' })}
-              />
-              <PaymentOption
-                label={t('checkout.payment.card')}
-                icon={CreditCard}
-                isActive={paymentMethod.type === 'card'}
-                onClick={() => setPaymentMethod({ name: 'Card', type: 'card', last4Digits: cardDetails.number.slice(-4) })}
-              />
-            </div>
-            {paymentMethod.type === 'card' && (
-              <div className="space-y-4 pt-4 dividerBorder border-t">
-                <FormInput label={t('checkout.payment.cardDetails.nameLabel')} placeholder="JOHN DOE" value={cardDetails.name} onChange={e => setCardDetails({ ...cardDetails, name: e.target.value })} />
-                <FormInput label={t('checkout.payment.cardDetails.numberLabel')} placeholder="0000 0000 0000 0000" value={cardDetails.number} onChange={e => {
-                  setCardDetails({ ...cardDetails, number: e.target.value })
-                  setPaymentMethod({ ...paymentMethod, last4Digits: e.target.value.slice(-4) })
-                }} />
-                <div className="grid grid-cols-2 gap-4">
-                  <FormInput label={t('checkout.payment.cardDetails.expiryLabel')} placeholder="MM/YY" value={cardDetails.expiry} onChange={e => setCardDetails({ ...cardDetails, expiry: e.target.value })} />
-                  <FormInput label={t('checkout.payment.cardDetails.cvvLabel')} placeholder="123" value={cardDetails.cvv} onChange={e => setCardDetails({ ...cardDetails, cvv: e.target.value })} />
-                </div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold primText">{t('checkout.payment.title')}</h2>
+              {/* Optional: Secure Badge */}
+              <div className="flex items-center gap-1 text-[10px] uppercase font-bold text-green-600 bg-green-50 dark:bg-green-900/30 dark:text-green-400 px-2 py-1 rounded">
+                 <Check size={10} strokeWidth={4} /> Secure
               </div>
-            )}
+            </div>
+
+            <div className="flex flex-col gap-1">
+              
+              {/* 1. Cash on Delivery */}
+              <PaymentRow 
+                icon={Banknote}
+                label={t('checkout.payment.cashOnDelivery')}
+                isSelected={selectedPaymentType === 'cash_on_delivery'}
+                onSelect={() => handlePaymentSelect('cash_on_delivery')}
+                iconColorClass="text-green-600 dark:text-green-400"
+              />
+
+              {/* 2. Card on Delivery */}
+              <PaymentRow 
+                icon={CreditCard}
+                label="Card on Delivery"
+                subLabel="Pay via POS terminal at doorstep"
+                isSelected={selectedPaymentType === 'card_on_delivery'}
+                onSelect={() => handlePaymentSelect('card_on_delivery')}
+                iconColorClass="text-orange-500"
+              />
+
+              {/* 3. JazzCash */}
+              <PaymentRow 
+                icon={Smartphone}
+                label="JazzCash"
+                subLabel={jazzCashWallet ? jazzCashWallet.mobileNumber : 'Link account to pay'}
+                isSelected={selectedPaymentType === 'jazzcash'}
+                onSelect={() => handlePaymentSelect('jazzcash')}
+                iconColorClass="text-red-600"
+                actionLabel={!jazzCashWallet ? 'Setup' : null}
+                onAction={() => setModalState({ type: 'wallet', data: { provider: 'Jazzcash' } })}
+              />
+
+              {/* 4. Easypaisa */}
+              <PaymentRow 
+                icon={Smartphone}
+                label="Easypaisa"
+                subLabel={easypaisaWallet ? easypaisaWallet.mobileNumber : 'Link account to pay'}
+                isSelected={selectedPaymentType === 'easypaisa'}
+                onSelect={() => handlePaymentSelect('easypaisa')}
+                iconColorClass="text-green-500"
+                actionLabel={!easypaisaWallet ? 'Setup' : null}
+                onAction={() => setModalState({ type: 'wallet', data: { provider: 'Easypaisa' } })}
+              />
+
+              {/* 5. Credit/Debit Card (Online) */}
+              <PaymentRow 
+                icon={CreditCard}
+                label={t('checkout.payment.card')}
+                subLabel={defaultCard 
+                  ? `${defaultCard.brand.toUpperCase()} •••• ${defaultCard.last4Digits}`
+                  : 'Add a card for online payment'
+                }
+                isSelected={selectedPaymentType === 'credit_card'}
+                onSelect={() => handlePaymentSelect('credit_card')}
+                iconColorClass="text-blue-600"
+                actionLabel={defaultCard ? 'Change' : 'Add'}
+                onAction={() => setModalState({ type: defaultCard ? 'cardList' : 'card' })}
+              />
+
+            </div>
           </section>
 
-          {/* Billing Section */}
+          {/* --- Billing Section --- */}
           <section className="secBg primBorder rounded-lg p-4 space-y-3">
-            <h2 className="text-lg font-semibold primText  mb-2">{t('checkout.billing.title')}</h2>
+            <h2 className="text-lg font-semibold primText mb-2">{t('checkout.billing.title')}</h2>
             <div className="flex justify-between text-base">
               <span className="secText">{t('checkout.billing.subtotal')}</span>
               <span className="font-medium primText ">{t('common.currencySymbol')}{subtotal.toFixed(2)}</span>
@@ -456,6 +588,210 @@ export default function Checkout() {
           </section>
         </div>
       </main>
+
+      {/* --- MODALS --- */}
+      
+      {/* 1. Wallet Setup Modal */}
+      {modalState.type === 'wallet' && (
+        <WalletModal 
+          isOpen={true}
+          onClose={() => setModalState({ type: null, data: null })}
+          provider={modalState.data?.provider}
+          existingData={
+            modalState.data?.provider === 'Jazzcash' ? jazzCashWallet : easypaisaWallet
+          }
+          onSave={modalState.data?.mobileNumber ? updateMobileWallet : addMobileWallet}
+          t={t}
+          setSelectedPaymentType={setSelectedPaymentType}
+        />
+      )}
+
+      {/* 2. Add New Card Modal */}
+      {modalState.type === 'card' && (
+        <AddCardModal 
+           isOpen={true}
+           onClose={() => setModalState({ type: null, data: null })}
+           onSave={addCreditCard}
+           t={t}
+           setSelectedPaymentType={setSelectedPaymentType}
+        />
+      )}
+
+      {/* 3. Card List Modal (for "Change" action) */}
+      {modalState.type === 'cardList' && (
+        <CardListModal 
+          isOpen={true}
+          onClose={() => setModalState({ type: null, data: null })}
+          cards={creditCards}
+          onAddNew={() => setModalState({ type: 'card', data: null })}
+          onSelect={() => {
+            // Context automatically handles "default" card switching usually, 
+            // but for this UI we might just want to set the payment type.
+            // In a real app, selecting here might set the specific card ID for this order.
+            // For now, we assume the user manages defaults or we just select the type.
+            setSelectedPaymentType('online_card');
+            setModalState({ type: null, data: null });
+          }}
+          t={t}
+        />
+      )}
+
     </Layout>
+  )
+}
+
+// --- Local Modal Components for Checkout Flow ---
+
+const ModalBackdrop = ({ children, onClose }) => (
+  <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="absolute inset-0 bg-black/60 transition-opacity" onClick={onClose} />
+    <div className="relative w-full max-w-[430px] secBg rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-xl animate-in slide-in-from-bottom-5">
+      {children}
+    </div>
+  </div>
+);
+
+function WalletModal({ onClose, provider, existingData, onSave, t, setSelectedPaymentType }) {
+  const [mobileNumber, setMobileNumber] = useState(existingData?.mobileNumber || '');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await onSave({ provider, mobileNumber });
+      setSelectedPaymentType(provider.toLowerCase()); // Auto-select after save
+      onClose();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <ModalBackdrop onClose={onClose}>
+      <div className="p-5">
+        <div className="flex justify-between items-center mb-5">
+          <h3 className="text-xl font-bold primText">{existingData ? `Update ${provider}` : `Setup ${provider}`}</h3>
+          <button onClick={onClose} className="p-2 rounded-full secHoverBg"><X size={20} /></button>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold mb-2 primText">{t('checkout.payment.mobileNumber') || 'Mobile Number'}</label>
+            <div className="relative">
+              <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 secText" size={18} />
+              <input 
+                type="tel" 
+                value={mobileNumber} 
+                onChange={e => setMobileNumber(e.target.value)} 
+                required 
+                className="inputField pl-10"
+                placeholder="03XX XXXXXXX"
+                autoFocus
+              />
+            </div>
+          </div>
+          <button type="submit" disabled={loading} className="w-full btnPrimary py-3.5 rounded-xl font-bold flex justify-center">
+            {loading ? <Loader2 className="animate-spin" /> : (t('common.save') || 'Save & Continue')}
+          </button>
+        </form>
+      </div>
+    </ModalBackdrop>
+  );
+}
+
+function AddCardModal({ onClose, onSave, t, setSelectedPaymentType }) {
+  const [formData, setFormData] = useState({ last4Digits: '', brand: '', expiryMonth: '', expiryYear: '', isDefault: true });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await onSave(formData);
+      setSelectedPaymentType('online_card');
+      onClose();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <ModalBackdrop onClose={onClose}>
+      <div className="p-5">
+        <div className="flex justify-between items-center mb-5">
+          <h3 className="text-xl font-bold primText">{t('checkout.payment.addCard') || 'Add New Card'}</h3>
+          <button onClick={onClose} className="p-2 rounded-full secHoverBg"><X size={20} /></button>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+           <div>
+              <label className="block text-sm font-semibold mb-2 primText">Card Brand</label>
+              <input type="text" placeholder="e.g. Visa" className="inputField" 
+                value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} required 
+              />
+           </div>
+           <div>
+              <label className="block text-sm font-semibold mb-2 primText">Card Number</label>
+              <input type="tel" maxLength={16} placeholder="0000 0000 0000 0000" className="inputField font-mono" 
+                 value={formData.last4Digits} onChange={e => setFormData({...formData, last4Digits: e.target.value.slice(-4)})} 
+                 // Note: In real app we capture full, but here per schema only last4
+              />
+              <p className="text-xs secText mt-1">For demo, just enter last 4 digits in state</p>
+           </div>
+           <div className="flex gap-4">
+              <div className="flex-1">
+                 <label className="block text-sm font-semibold mb-2 primText">Expiry MM</label>
+                 <input type="tel" maxLength={2} placeholder="MM" className="inputField text-center"
+                   value={formData.expiryMonth} onChange={e => setFormData({...formData, expiryMonth: e.target.value})} required 
+                 />
+              </div>
+              <div className="flex-1">
+                 <label className="block text-sm font-semibold mb-2 primText">Expiry YYYY</label>
+                 <input type="tel" maxLength={4} placeholder="YYYY" className="inputField text-center"
+                   value={formData.expiryYear} onChange={e => setFormData({...formData, expiryYear: e.target.value})} required 
+                 />
+              </div>
+           </div>
+           <button type="submit" disabled={loading} className="w-full btnPrimary py-3.5 rounded-xl font-bold flex justify-center">
+            {loading ? <Loader2 className="animate-spin" /> : 'Add Card'}
+          </button>
+        </form>
+      </div>
+    </ModalBackdrop>
+  );
+}
+
+function CardListModal({ onClose, cards, onAddNew, onSelect, t }) {
+  return (
+    <ModalBackdrop onClose={onClose}>
+       <div className="p-5 max-h-[80vh] flex flex-col">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold primText">Select Card</h3>
+          <button onClick={onClose} className="p-2 rounded-full secHoverBg"><X size={20} /></button>
+        </div>
+        
+        <div className="overflow-y-auto space-y-3 flex-1 mb-4">
+           {cards.map((card, idx) => (
+             <div key={idx} onClick={onSelect} className="p-4 rounded-xl primBorder secBg flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-800">
+                <div className="flex items-center gap-3">
+                   <CreditCard className="text-blue-600" size={24} />
+                   <div>
+                      <p className="font-bold primText uppercase">{card.brand}</p>
+                      <p className="text-sm secText">•••• {card.last4Digits}</p>
+                   </div>
+                </div>
+                {card.isDefault && <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Default</span>}
+             </div>
+           ))}
+        </div>
+
+        <button onClick={onAddNew} className="w-full py-3.5 border-2 border-dashed border-gray-300 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 font-semibold secText hover:primText transition-colors">
+            <Plus size={18} /> Add Another Card
+        </button>
+      </div>
+    </ModalBackdrop>
   )
 }

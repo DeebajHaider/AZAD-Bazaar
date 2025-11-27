@@ -1,12 +1,10 @@
-Payment cards should be saved: On checkout: choose saved card or add new one. Maybe add a section in the account settings
-
 Considering moving account settings into a new page which has both address and payment settings inside it. Adding address/payment will open a modal up-to 3-5 will be saved at max/
 
 Back button in orders takes you back to home, but back button in search takes you to last opened page, instead they should take back to last visited page , unless opened directly (via url) in which case it should be home
 
 Put English/Urdu toggle at the top of the Settings page.
 
-Clicking “Deliver To” on the home page currently opens Settings. Should instead open a new modal to choose addresses from. And button to add which should lead to an address adding page or we can just make a new account page with name/number/address/card option. ofc each address will have a name like home, work, etc.
+make a new account page with name/number/address/card option.
 
 Remove back button from Search page because bottom navigation is enough. Or maybe redirect it to the home page. Search mobile HCI elements for this also is a good observation and we can reasarch it on further pages
 

@@ -28,3 +28,7 @@ export const ORDER_BY_ID = (id) => `order_${id}`;
 
 // Address cache keys (customer-specific)
 export const CUSTOMER_ADDRESSES = (customerId) => `addresses_${customerId}`;
+
+// Payment cache keys (customer-specific)
+export const MOBILE_WALLETS = (token = '') => `mobile_wallets_${token ? token.substring(0, 10) : 'guest'}`;
+export const CREDIT_CARDS = (token = '') => `credit_cards_${token ? token.substring(0, 10) : 'guest'}`;

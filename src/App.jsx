@@ -32,6 +32,8 @@ import { Toaster } from 'react-hot-toast';
 import ModeSelection from './pages/ModeSelection'
 import Favorites from './pages/Favorites'
 import { FavoritesProvider } from './context/FavoritesContext'
+import { PaymentDataProvider } from './context/PaymentDataContext'
+import ManagePayments from './pages/ManagePayments'
 
 export default function App() {
   const AuthGate = () => {
@@ -102,6 +104,7 @@ export default function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:orderId" element={<Order />} />
           <Route path="/about" element={<About />} />
+          <Route path="/manage-payments" element={<ManagePayments />} />
         </Routes>
       </div>
     )
@@ -117,12 +120,13 @@ return (
               <CartProvider>
                 <OrderProvider>
                   <FavoritesProvider>
-
-                    {/* MOVED Router OUTSIDE AuthGate so useNavigate works inside Splash */}
-                    <Router>
-                      <Toaster position="bottom-center" />
-                      <AuthGate />
-                    </Router>
+                    <PaymentDataProvider>
+                      {/* MOVED Router OUTSIDE AuthGate so useNavigate works inside Splash */}
+                      <Router>
+                        <Toaster position="bottom-center" />
+                        <AuthGate />
+                      </Router>
+                    </PaymentDataProvider>
                   </FavoritesProvider>
                 </OrderProvider>
               </CartProvider>

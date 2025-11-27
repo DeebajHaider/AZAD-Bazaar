@@ -4,6 +4,7 @@ import categoryService from './categoryService';
 import brandService from './brandService';
 import orderService from './orderService';
 import favService from './favService';
+import paymentService from './paymentService';
 
 import useProducts from './hooks/useProducts';
 import useProduct from './hooks/useProduct';
@@ -19,6 +20,7 @@ export {
   brandService,
   orderService,
   favService,
+  paymentService,
   useProducts,
   useProduct,
   useCategories,
@@ -36,4 +38,5 @@ export default {
   brandService,
   orderService,
   favService,
+  paymentService,
 };

@@ -499,4 +499,353 @@ exports.deleteAddress = async (req, res) => {
   }
 };
 
+// --- Mobile Wallet Management APIs ---
+
+// Get all mobile wallets for the current user
+exports.getMobileWallets = async (req, res) => {
+  try {
+    console.log("getMobileWallets called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("getMobileWallets: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const customer = await Customer.findById(user.customerId, { 'paymentMethods.mobileWallets': 1 }).lean();
+    if (!customer) {
+      console.log("getMobileWallets: Customer not found", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("getMobileWallets: returning", { mobileWallets: customer.paymentMethods?.mobileWallets?.length });
+    return res.json({ mobileWallets: customer.paymentMethods?.mobileWallets || [] });
+  } catch (err) {
+    console.error("getMobileWallets error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Add a new mobile wallet (max 2: one Jazzcash, one Easypaisa)
+exports.addMobileWallet = async (req, res) => {
+  try {
+    console.log("addMobileWallet called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null, body: req.body });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("addMobileWallet: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { provider, mobileNumber } = req.body;
+    
+    if (!provider || !mobileNumber) {
+      console.log("addMobileWallet: provider and mobileNumber required", { provider, mobileNumber });
+      return res.status(400).json({ message: "provider and mobileNumber are required" });
+    }
+
+    if (!['Jazzcash', 'Easypaisa'].includes(provider)) {
+      console.log("addMobileWallet: Invalid provider", { provider });
+      return res.status(400).json({ message: "Invalid provider. Must be Jazzcash or Easypaisa" });
+    }
+
+    // Check if wallet with this provider already exists
+    const existingCustomer = await Customer.findById(user.customerId).lean();
+    if (!existingCustomer) {
+      console.log("addMobileWallet: Customer not found", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    const walletExists = existingCustomer.paymentMethods?.mobileWallets?.some(
+      wallet => wallet.provider === provider
+    );
+
+    if (walletExists) {
+      console.log("addMobileWallet: Wallet already exists", { provider });
+      return res.status(400).json({ message: `${provider} wallet already exists. You can only have one wallet per provider.` });
+    }
+
+    const newWallet = { provider, mobileNumber };
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $push: { 'paymentMethods.mobileWallets': newWallet } },
+      { new: true, select: 'paymentMethods.mobileWallets' }
+    ).lean();
+
+    if (!customer) {
+      console.log("addMobileWallet: Customer not found after update", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("addMobileWallet: returning", { mobileWallets: customer.paymentMethods?.mobileWallets?.length });
+    return res.json({ mobileWallets: customer.paymentMethods?.mobileWallets || [] });
+  } catch (err) {
+    console.error("addMobileWallet error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update mobile wallet - only allows changing the phone number
+exports.updateMobileWallet = async (req, res) => {
+  try {
+    console.log("updateMobileWallet called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null, body: req.body });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("updateMobileWallet: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { provider, mobileNumber } = req.body;
+    
+    if (!provider) {
+      console.log("updateMobileWallet: provider required");
+      return res.status(400).json({ message: "provider is required" });
+    }
+
+    if (!mobileNumber) {
+      console.log("updateMobileWallet: mobileNumber required");
+      return res.status(400).json({ message: "mobileNumber is required" });
+    }
+
+    if (!['Jazzcash', 'Easypaisa'].includes(provider)) {
+      console.log("updateMobileWallet: Invalid provider", { provider });
+      return res.status(400).json({ message: "Invalid provider. Must be Jazzcash or Easypaisa" });
+    }
+
+    const customer = await Customer.findById(user.customerId).lean();
+    if (!customer) {
+      console.log("updateMobileWallet: Customer not found", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    const walletExists = customer.paymentMethods?.mobileWallets?.some(
+      wallet => wallet.provider === provider
+    );
+
+    if (!walletExists) {
+      console.log("updateMobileWallet: Wallet not found", { provider });
+      return res.status(404).json({ message: "Mobile wallet not found" });
+    }
+
+    const updated = await Customer.findOneAndUpdate(
+      { _id: user.customerId, 'paymentMethods.mobileWallets.provider': provider },
+      { $set: { 'paymentMethods.mobileWallets.$.mobileNumber': mobileNumber } },
+      { new: true, select: 'paymentMethods.mobileWallets' }
+    ).lean();
+
+    if (!updated) {
+      console.log("updateMobileWallet: Customer not found after update", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("updateMobileWallet: returning", { mobileWallets: updated.paymentMethods?.mobileWallets?.length });
+    return res.json({ mobileWallets: updated.paymentMethods?.mobileWallets || [] });
+  } catch (err) {
+    console.error("updateMobileWallet error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete a mobile wallet by provider
+exports.deleteMobileWallet = async (req, res) => {
+  try {
+    console.log("deleteMobileWallet called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null, body: req.body });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("deleteMobileWallet: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { provider } = req.body;
+    
+    if (!provider) {
+      console.log("deleteMobileWallet: provider required");
+      return res.status(400).json({ message: "provider is required" });
+    }
+
+    if (!['Jazzcash', 'Easypaisa'].includes(provider)) {
+      console.log("deleteMobileWallet: Invalid provider", { provider });
+      return res.status(400).json({ message: "Invalid provider. Must be Jazzcash or Easypaisa" });
+    }
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $pull: { 'paymentMethods.mobileWallets': { provider } } },
+      { new: true, select: 'paymentMethods.mobileWallets' }
+    ).lean();
+
+    if (!customer) {
+      console.log("deleteMobileWallet: Customer not found after update", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("deleteMobileWallet: returning", { mobileWallets: customer.paymentMethods?.mobileWallets?.length });
+    return res.json({ mobileWallets: customer.paymentMethods?.mobileWallets || [] });
+  } catch (err) {
+    console.error("deleteMobileWallet error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// --- Credit Card Management APIs ---
+
+// Get all credit cards for the current user
+exports.getCreditCards = async (req, res) => {
+  try {
+    console.log("getCreditCards called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("getCreditCards: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const customer = await Customer.findById(user.customerId, { 'paymentMethods.creditCards': 1 }).lean();
+    if (!customer) {
+      console.log("getCreditCards: Customer not found", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("getCreditCards: returning", { creditCards: customer.paymentMethods?.creditCards?.length });
+    return res.json({ creditCards: customer.paymentMethods?.creditCards || [] });
+  } catch (err) {
+    console.error("getCreditCards error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Add a new credit card
+exports.addCreditCard = async (req, res) => {
+  try {
+    console.log("addCreditCard called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null, body: req.body });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("addCreditCard: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { last4Digits, brand, expiryMonth, expiryYear, isDefault } = req.body;
+    
+    if (!last4Digits || !brand || !expiryMonth || !expiryYear) {
+      console.log("addCreditCard: Required fields missing", { last4Digits, brand, expiryMonth, expiryYear });
+      return res.status(400).json({ message: "last4Digits, brand, expiryMonth, and expiryYear are required" });
+    }
+
+    // Validate last4Digits
+    if (!/^\d{4}$/.test(last4Digits)) {
+      console.log("addCreditCard: Invalid last4Digits", { last4Digits });
+      return res.status(400).json({ message: "last4Digits must be exactly 4 digits" });
+    }
+
+    // Validate expiry month and year
+    if (expiryMonth < 1 || expiryMonth > 12) {
+      console.log("addCreditCard: Invalid expiryMonth", { expiryMonth });
+      return res.status(400).json({ message: "expiryMonth must be between 1 and 12" });
+    }
+
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    
+    if (expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth)) {
+      console.log("addCreditCard: Card expired", { expiryMonth, expiryYear });
+      return res.status(400).json({ message: "Card has expired" });
+    }
+
+    const newCard = {
+      last4Digits,
+      brand,
+      expiryMonth,
+      expiryYear,
+      isDefault: isDefault || false
+    };
+
+    let customer;
+    // Ensure paymentMethods and creditCards array exist
+    let ensure = await Customer.findById(user.customerId).lean();
+    if (!ensure) {
+      console.log("addCreditCard: Customer not found for initialization", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+    let updateNeeded = false;
+    const setObj = {};
+    if (!ensure.paymentMethods) {
+      setObj['paymentMethods'] = { creditCards: [] };
+      updateNeeded = true;
+    } else if (!Array.isArray(ensure.paymentMethods.creditCards)) {
+      setObj['paymentMethods.creditCards'] = [];
+      updateNeeded = true;
+    }
+    if (updateNeeded) {
+      await Customer.updateOne({ _id: user.customerId }, { $set: setObj });
+      ensure = await Customer.findById(user.customerId).lean();
+    }
+
+    if (isDefault) {
+      // First, unset all other defaults
+      console.log("addCreditCard: Unsetting all other defaults");
+      await Customer.updateOne(
+        { _id: user.customerId },
+        { $set: { 'paymentMethods.creditCards.$[].isDefault': false } }
+      );
+    }
+
+    // Push the new card
+    customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $push: { 'paymentMethods.creditCards': newCard } },
+      { new: true, select: 'paymentMethods.creditCards' }
+    ).lean();
+
+    if (!customer) {
+      console.log("addCreditCard: Customer not found after update", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("addCreditCard: returning", { creditCards: customer.paymentMethods?.creditCards?.length });
+    return res.json({ creditCards: customer.paymentMethods?.creditCards || [] });
+  } catch (err) {
+    console.error("addCreditCard error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete a credit card by card _id
+exports.deleteCreditCard = async (req, res) => {
+  try {
+    console.log("deleteCreditCard called", { user: req.user ? { id: req.user._id, customerId: req.user.customerId } : null, body: req.body });
+    const user = req.user;
+    if (!user || !user.customerId) {
+      console.log("deleteCreditCard: Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { cardId } = req.body;
+    
+    if (!cardId) {
+      console.log("deleteCreditCard: cardId required");
+      return res.status(400).json({ message: "cardId is required" });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(cardId)) {
+      console.log("deleteCreditCard: Invalid cardId", { cardId });
+      return res.status(400).json({ message: "Invalid cardId" });
+    }
+
+    const customer = await Customer.findByIdAndUpdate(
+      user.customerId,
+      { $pull: { 'paymentMethods.creditCards': { _id: new mongoose.Types.ObjectId(cardId) } } },
+      { new: true, select: 'paymentMethods.creditCards' }
+    ).lean();
+
+    if (!customer) {
+      console.log("deleteCreditCard: Customer not found after update", { customerId: user.customerId });
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    console.log("deleteCreditCard: returning", { creditCards: customer.paymentMethods?.creditCards?.length });
+    return res.json({ creditCards: customer.paymentMethods?.creditCards || [] });
+  } catch (err) {
+    console.error("deleteCreditCard error", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 

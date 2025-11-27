@@ -60,4 +60,15 @@ router.post('/addresses', authMiddleware, customerCtrl.addAddress);
 router.put('/addresses', authMiddleware, customerCtrl.updateAddress);
 router.delete('/addresses', authMiddleware, customerCtrl.deleteAddress);
 
+// Mobile Wallet management routes (authenticated)
+router.get('/mobile-wallets', authMiddleware, customerCtrl.getMobileWallets);
+router.post('/mobile-wallets', authMiddleware, customerCtrl.addMobileWallet);
+router.put('/mobile-wallets', authMiddleware, customerCtrl.updateMobileWallet);
+router.delete('/mobile-wallets', authMiddleware, customerCtrl.deleteMobileWallet);
+
+// Credit Card management routes (authenticated)
+router.get('/credit-cards', authMiddleware, customerCtrl.getCreditCards);
+router.post('/credit-cards', authMiddleware, customerCtrl.addCreditCard);
+router.delete('/credit-cards', authMiddleware, customerCtrl.deleteCreditCard);
+
 module.exports = router;

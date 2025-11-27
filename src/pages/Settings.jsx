@@ -244,6 +244,16 @@ export default function Settings() {
                   {t('settings.account.form.address.manageButton') || 'Manage Address'}
                 </button>
 
+                {/* Manage Payments Button */}
+                <button
+                  type="button"
+                  onClick={() => navigate('/manage-payments')}
+                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
+                >
+                  <Info size={18} />
+                  {t('settings.managePayments.button')}
+                </button>
+
                 {/* Manage Favorites Button */}
                 <button
                   type="button"

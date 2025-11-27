@@ -54,6 +54,9 @@
     },
     "about": {
       "button": "About"
+    },
+    "managePayments": {
+      "button": "Manage Payments"
     }
   },
   "login": {

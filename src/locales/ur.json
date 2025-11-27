@@ -54,6 +54,9 @@
     },
     "about": {
       "button": "ہمارے بارے میں"
+    },
+    "managePayments": {
+      "button": "ادائیگیوں کا نظم کریں"
     }
   },
   "login": {
