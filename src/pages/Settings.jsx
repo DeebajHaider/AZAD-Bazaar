@@ -1,97 +1,114 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, LogOut, Save, Info, Mic, Heart, MapPin, RefreshCcw } from 'lucide-react'
+import { 
+  ChevronRight, 
+  LogOut, 
+  Save, 
+  Info, 
+  Mic, 
+  Heart, 
+  MapPin, 
+  User, 
+  Globe, 
+  Eye, 
+  CreditCard,
+  ChevronLeft
+} from 'lucide-react'
 import { useAddress } from '../api/hooks/useAddress'
 import BottomNav from '../component/BottomNav'
 import { useI18n } from '../context/I18nContext'
-import { Layout } from '../Layout' // <-- ADDED: import Layout used by SettingsLayout
+import { Layout } from '../Layout' 
 import HeaderWithName from '../component/HeaderWithName'
 import { useAccessibility } from '../context/AccessibilityContext'
 import VoiceInputModal from '../component/VoiceInputModal'
 
+// --- Sub-component: Skeleton ---
 const AccountInfoSkeleton = () => (
-  <form className="secBg primBorder rounded-lg animate-pulse">
-    <h2 className="p-4 text-xl font-semibold primText dividerBorder">
-      <div className="h-7 w-40 skeleton" />
-    </h2>
-    <div className="p-4 space-y-4">
-      {/* Name Field */}
-      <div className="space-y-2">
-        <div className="h-4 w-24 skeleton" />
-        <div className="h-11 w-full skeleton rounded-lg" />
-      </div>
+  <div className="space-y-3 p-4">
+    <div className="h-20 w-full skeleton rounded-xl" />
+    <div className="h-16 w-full skeleton rounded-xl" />
+    <div className="h-16 w-full skeleton rounded-xl" />
+  </div>
+);
 
-      {/* Phone Field (Read-only) */}
-      <div className="space-y-2">
-        <div className="h-4 w-20 skeleton" />
-        <div className="h-11 w-full skeleton rounded-lg" />
-      </div>
-
-      {/* Default Address (read-only display) */}
-      <div className="space-y-2">
-        <div className="h-4 w-32 skeleton" />
-        <div className="h-14 w-full skeleton rounded-lg" />
-      </div>
-
-      {/* Manage Address Button */}
-      <div className="h-12 w-full skeleton rounded-lg" />
-      {/* Manage Favorites Button */}
-      <div className="h-12 w-full skeleton rounded-lg" />
-      {/* Save Button (Name only) */}
-      <div className="h-12 w-full skeleton rounded-lg" />
+// --- Sub-component: Menu Item (Themed as a Card Button) ---
+// UPDATED: Now uses 'secBg primBorder secHoverBg rounded-xl' to match the rest of the app
+const MenuItem = ({ icon: Icon, title, description, onClick, isDestructive = false }) => (
+  <button
+    onClick={onClick}
+    className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-200 mb-3 group focusRing
+      ${isDestructive 
+        ? 'bg-red-50 dark:bg-red-900/10 border-red-100 dark:border-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/30' 
+        : 'secBg primBorder secHoverBg' 
+      }`}
+  >
+    {/* Icon Container */}
+    <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border 
+      ${isDestructive 
+        ? 'bg-white dark:bg-red-900/40 border-red-200 dark:border-red-800 text-red-600' 
+        : 'bg-white dark:bg-slate-800 border-gray-100 dark:border-slate-700 secText'}`}>
+      <Icon size={20} />
     </div>
-  </form>
+    
+    {/* Text Content */}
+    <div className="flex-1 text-left">
+      <h3 className={`font-bold text-sm ${isDestructive ? 'accentDangerText' : 'primText'}`}>
+        {title}
+      </h3>
+      {description && <p className="text-xs secText mt-0.5 opacity-80">{description}</p>}
+    </div>
+
+    {/* Chevron (Only for navigation items) */}
+    {!isDestructive && (
+      <ChevronRight size={18} className="secText opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all rtl:rotate-180" />
+    )}
+  </button>
 );
 
 export default function Settings() {
-  // Removed getDefaultAddress reliance (was causing stale default address)
   const { logout, customer, updateCustomer, loading: authLoading } = useAuth()
   const { addresses, refreshAddresses } = useAddress()
-  // Auto refresh addresses ONCE when Settings mounts (avoid infinite loop due to unstable function reference)
-  useEffect(() => {
-  (async () => {
-        try { await refreshAddresses() } catch (e) { /* silent */ }
-      })()
-  }, [])
   const navigate = useNavigate()
   const { t, lang, setLang } = useI18n()
-  const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
-  const [isSaving, setIsSaving] = useState(false)
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(null)
+  
+  // State for internal navigation (Menu vs Profile Form)
+  const [currentView, setCurrentView] = useState('menu') // 'menu' | 'profile'
 
-  // Accessibility voice input mode
+  // Form State
+  const [formData, setFormData] = useState({ name: '', phone: '' })
+  const [isSaving, setIsSaving] = useState(false)
+  const [successMsg, setSuccessMsg] = useState(null)
+  
+  // Accessibility & Voice
   const { ascMode } = useAccessibility()
   const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
-
-  // Voice modal state
   const [voiceModalOpen, setVoiceModalOpen] = useState(false)
-  const [voiceTarget, setVoiceTarget] = useState(null) // 'name' or 'address'
-
-  // Language direction
+  const [voiceTarget, setVoiceTarget] = useState(null)
   const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur'
 
-  // Populate form (name/phone only). Address handled separately via getDefaultAddress()
+  // Initialize Data
+  useEffect(() => {
+    (async () => {
+      try { await refreshAddresses() } catch (e) { /* silent */ }
+    })()
+  }, [])
+
   useEffect(() => {
     if (customer) {
-      setFormData(prev => ({
-        ...prev,
+      setFormData({
         name: customer.name || '',
         phone: customer.phone || ''
-      }))
+      })
     }
   }, [customer])
 
-  // Derive default address from latest addresses provided by useAddress hook
-  const defaultAddress = Array.isArray(addresses) ? (addresses.find(a => a.isDefault) || addresses[0] || null) : null
-
+  // Handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  // Handle voice confirm for narrator mode
   const handleVoiceConfirm = useCallback((transcript) => {
     if (!voiceTarget) return;
     setFormData(prev => ({ ...prev, [voiceTarget]: transcript }))
@@ -99,220 +116,238 @@ export default function Settings() {
     setVoiceTarget(null)
   }, [voiceTarget])
 
-  const handleSubmit = async (e) => {
+  const handleSubmitProfile = async (e) => {
     e.preventDefault()
     setIsSaving(true)
-    setError(null)
-    setSuccess(null)
+    setSuccessMsg(null)
     try {
       if (!customer?._id) throw new Error(t('settings.notifications.noCustomerError'))
-      // Only update name here. Address management moved to /address page.
-      const payload = { name: formData.name }
-      await updateCustomer(customer._id, payload)
-      setSuccess(t('settings.notifications.updateSuccess'))
+      await updateCustomer(customer._id, { name: formData.name })
+      setSuccessMsg(t('settings.notifications.updateSuccess'))
+      setTimeout(() => setSuccessMsg(null), 3000)
     } catch (err) {
-      console.error('Update customer failed', err)
-      setError(err.message || t('settings.notifications.updateFailed'))
+      console.error('Update failed', err)
     } finally {
       setIsSaving(false)
     }
   }
 
   const handleLogout = () => {
-    // Using a more modern confirm dialog would be better in a real app
     if (window.confirm(t('settings.signOut.confirmDialog'))) {
       logout()
       navigate('/')
     }
   }
 
-  return (
-    <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
-      {/* Main container for the settings page */}
-      {/* `flex-1` makes it take up remaining space, `overflow-y-auto` enables scrolling */}
-      <main className="min-h-screen flex-1 overflow-y-auto primBg">
-        <div className="p-4 space-y-6">
-
-          {/* Card: Appearance & Accessibility */}
-          <div className="secBg primBorder rounded-lg">
-            <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
-              {t('settings.appearance.title')}
-            </h2>
-            <button
-              onClick={() => navigate('/accessibility')}
-              className="flex items-center justify-between w-full p-4 text-left"
-            >
-              <div>
-                <p className="font-medium primText ">{t('settings.appearance.accessibility.title')}</p>
-                <p className="text-sm secText">{t('settings.appearance.accessibility.description')}</p>
-              </div>
-              <ChevronRight className="w-5 h-5 secText" />
-            </button>
-
-            {/* Language Selection (visual hierarchy updated to match Accessibility) */}
-            <div className="p-4 dividerBorder">
-              <p className="font-medium primText ">    {t('settings.appearance.language.title')}</p>
-              <p className="text-sm secText mb-3">   {t('settings.appearance.language.description')}         </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  onClick={() => { setLang('en') }}
-                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${lang === 'en'
-                    ? 'modeChooseButton-selected'
-                    : 'modeChooseButton-unselected'
-                    }`}
-                >
-                  {t('settings.appearance.language.options.en')}
-                </button>
-
-                <button
-                  onClick={() => { setLang('ur') }}
-                  className={`min-h-16 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${lang === 'ur'
-                    ? 'modeChooseButton-selected'
-                    : 'modeChooseButton-unselected'
-                    }`}
-                >
-                  {t('settings.appearance.language.options.ur')}
-                </button>
+  // --- VIEW: PROFILE EDIT FORM ---
+  if (currentView === 'profile') {
+    return (
+      <Layout 
+        footer={<BottomNav />} 
+        header={
+          <header className="secBg dividerBorder p-4">
+            <div className="max-w-[430px] mx-auto flex items-center gap-3">
+              <button
+                onClick={() => setCurrentView('menu')}
+                className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary"
+                aria-label="Back to Settings"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <h1 className="text-xl font-semibold primText">
+                {t('settings.account.form.fullName.label') || 'Profile Info'}
+              </h1>
+            </div>
+          </header>
+        }
+      >
+        <main className="min-h-screen flex-1 overflow-y-auto primBg p-4">
+          <form onSubmit={handleSubmitProfile} className="secBg primBorder rounded-xl p-4 space-y-5 max-w-[430px] mx-auto">
+            
+            {/* Avatar Placeholder */}
+            <div className="flex justify-center mb-2">
+              <div className="w-24 h-24 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-sm text-blue-500">
+                 <User size={40} />
               </div>
             </div>
-          </div>
 
-          {authLoading ? <AccountInfoSkeleton /> : (
-            <form onSubmit={handleSubmit} className="secBg primBorder rounded-lg">
-              <h2 className="p-4 text-xl font-semibold primText  dividerBorder">
-                {t('settings.account.title')}
-              </h2>
-              <div className="p-4 space-y-4">
-                {/* Name Field */}
-                <div className="relative">
-                  <label className="block text-sm font-medium mb-2 primText ">
-                    {t('settings.account.form.fullName.label')}
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder={t('settings.account.form.fullName.placeholder')}
-                    className="inputField transition-all duration-200 pr-12 rtl:pl-12" // add space for button
-                  />
-                  {isVoiceInput && (
+            {/* Name Input */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold primText">
+                {t('settings.account.form.fullName.label')}
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="inputField pr-12 rtl:pl-12"
+                  placeholder="Your Name"
+                />
+                 {isVoiceInput && (
                     <button
                       type="button"
-                      aria-label={t('voiceModal.actions.openForName') || 'Voice input for name'}
                       onClick={() => { setVoiceTarget('name'); setVoiceModalOpen(true); }}
-                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 flex items-center justify-center w-9 h-9 rounded-full accentPrimBg hover:opacity-90 transition-colors`}
-                      style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+                      className={`absolute top-1.5 ${isRTL ? 'left-2' : 'right-2'} z-10 w-9 h-9 flex items-center justify-center rounded-full accentPrimBg hover:opacity-90 transition-colors`}
                     >
-                      <Mic size={20} className="primText" />
+                      <Mic size={18} className="primText" />
                     </button>
                   )}
-                </div>
-
-                {/* Phone Field (Read-only) */}
-                <div>
-                  <label className="block text-sm font-medium mb-2 primText ">
-                    {t('settings.account.form.phone.label')}
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    readOnly
-                    className="w-full px-4 py-3 primBorder rounded-lg secBg secText cursor-not-allowed"
-                    placeholder={t('settings.account.form.phone.placeholder')}
-                  />
-                </div>
-
-                {/* Default Address (Read-only Display) */}
-                <div className="relative">
-                  <label className="block text-sm font-medium mb-2 primText ">
-                    {t('settings.account.form.address.defaultLabel') || t('settings.account.form.address.label')}
-                  </label>
-                  <div className="w-full px-4 py-3 primBorder rounded-lg secBg secText text-sm">
-                    {defaultAddress?.addressText || t('settings.account.form.address.placeholder')}
-                  </div>
-                </div>
-
-                {/* Manage Address Button */}
-                <button
-                  type="button"
-                  onClick={() => navigate('/address')}
-                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
-                >
-                  <MapPin size={18} />
-                  {t('settings.account.form.address.manageButton') || 'Manage Address'}
-                </button>
-
-                {/* Manage Payments Button */}
-                <button
-                  type="button"
-                  onClick={() => navigate('/manage-payments')}
-                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
-                >
-                  <Info size={18} />
-                  {t('settings.managePayments.button')}
-                </button>
-
-                {/* Manage Favorites Button */}
-                <button
-                  type="button"
-                  onClick={() => navigate('/favorites')}
-                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
-                >
-                  <Heart size={18} />
-                  {t('settings.account.favorites.manageButton') || 'Manage Favorites'}
-                </button>
-
-                {/* Save Button (Name only) */}
-                <button
-                  type="submit"
-                  disabled={isSaving}
-                  className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Save size={18} />
-                  {isSaving ? t('settings.account.form.saveButton.saving') : t('settings.account.form.saveButton.default')}
-                </button>
               </div>
-            </form>
-          )}
+            </div>
 
-          {/* Voice Input Modal for narrator mode */}
-          {isVoiceInput && voiceModalOpen && (
+            {/* Phone Input */}
+            <div className="space-y-2 opacity-70">
+              <label className="text-sm font-bold primText">
+                {t('settings.account.form.phone.label')}
+              </label>
+              <input
+                type="text"
+                value={formData.phone}
+                readOnly
+                className="inputField bg-gray-100 dark:bg-slate-800 cursor-not-allowed"
+              />
+            </div>
+
+            {/* Success Message */}
+            {successMsg && (
+              <div className="p-3 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium text-center">
+                {successMsg}
+              </div>
+            )}
+
+            {/* Save Button - Using btnPrimary class */}
+            <button
+              type="submit"
+              disabled={isSaving}
+              className="w-full btnPrimary min-h-12 rounded-lg font-bold text-lg shadow-sm mt-4 flex items-center justify-center gap-2"
+            >
+              <Save size={20} />
+              {isSaving ? t('common.saving') : t('common.save')}
+            </button>
+          </form>
+
+           {isVoiceInput && voiceModalOpen && (
             <VoiceInputModal
               isOpen={voiceModalOpen}
               onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
               onConfirm={handleVoiceConfirm}
-              confirmLabel={
-                voiceTarget === 'name' ? t('voiceModal.actions.confirmName') :
-                  voiceTarget === 'address' ? t('voiceModal.actions.confirmAddress') :
-                    t('voiceModal.actions.confirm')
-              }
             />
           )}
+        </main>
+      </Layout>
+    )
+  }
 
-          {/* Card: Danger Zone / Sign Out */}
-          <div className="secBg primBorder rounded-lg p-4">
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnDanger rounded-lg transition-all duration-200"
-            >
-              <LogOut size={18} />
-              {t('settings.signOut.button')}
-            </button>
+  // --- VIEW: MAIN SETTINGS MENU ---
+  return (
+    <Layout footer={<BottomNav />} header={<HeaderWithName title={t('settings.title')} to="/" />}>
+      <main className="min-h-screen flex-1 overflow-y-auto primBg">
+        <div className="max-w-[430px] mx-auto p-4 pb-24">
+          
+          {/* 1. Language Selection (Horizontal Grid) */}
+          <section className="mb-6">
+            <h2 className="text-sm font-bold secText uppercase tracking-wider mb-3 px-1">
+               {t('settings.appearance.language.title')}
+            </h2>
+            <div className="grid grid-cols-2 gap-3">
+              {/* Uses exact classes from AccessibilitySettings for consistency */}
+              <button
+                onClick={() => setLang('en')}
+                className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-all duration-200 
+                  ${lang === 'en' ? 'modeChooseButton-selected shadow-sm' : 'modeChooseButton-unselected'}`}
+              >
+                <span className="text-3xl">🇺🇸</span>
+                <span className="font-bold text-sm">English</span>
+              </button>
+              <button
+                onClick={() => setLang('ur')}
+                className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-all duration-200 
+                  ${lang === 'ur' ? 'modeChooseButton-selected shadow-sm' : 'modeChooseButton-unselected'}`}
+              >
+                <span className="text-3xl">🇵🇰</span>
+                <span className="font-bold text-sm">اردو</span>
+              </button>
+            </div>
+          </section>
+
+          {/* 2. Accessibility (Prominent Card) */}
+          <section className="mb-6">
+             <button
+                onClick={() => navigate('/accessibility')}
+                // Using secBg primBorder etc. to look like a Menu Item Card
+                className="w-full p-4 rounded-xl secBg primBorder secHoverBg flex items-center gap-4 group focusRing"
+              >
+                <div className="w-12 h-12 rounded-full bg-blue-500 dark:bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <Eye size={24} />
+                </div>
+                <div className="flex-1 text-left">
+                  <h3 className="font-bold text-lg primText">{t('settings.appearance.accessibility.title')}</h3>
+                  <p className="text-xs secText leading-tight mt-1 opacity-80">{t('settings.appearance.accessibility.description')}</p>
+                </div>
+                <ChevronRight size={20} className="secText opacity-50 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+              </button>
+          </section>
+
+          {/* 3. Account Settings (Individual Cards) */}
+          {authLoading ? <AccountInfoSkeleton /> : (
+            <section className="mb-6">
+              <h2 className="text-sm font-bold secText uppercase tracking-wider mb-3 px-1">
+                {t('settings.account.title')}
+              </h2>
+              
+              <MenuItem 
+                icon={User} 
+                title={t('settings.account.form.fullName.label') || "Profile Information"} 
+                description={customer?.name || t('settings.account.profileDesc')}
+                onClick={() => setCurrentView('profile')}
+              />
+              
+              <MenuItem 
+                icon={MapPin} 
+                title={t('settings.account.form.address.manageButton')} 
+                description={addresses?.length > 0 ? `${addresses.length} ${t('common.saved') || 'saved'}` : null}
+                onClick={() => navigate('/address')}
+              />
+
+              <MenuItem 
+                icon={CreditCard} 
+                title={t('settings.managePayments.button')} 
+                onClick={() => navigate('/manage-payments')}
+              />
+
+              <MenuItem 
+                icon={Heart} 
+                title={t('settings.account.favorites.manageButton')} 
+                onClick={() => navigate('/favorites')}
+              />
+            </section>
+          )}
+
+          {/* 4. App Info & Danger Zone */}
+          <section>
+             <h2 className="text-sm font-bold secText uppercase tracking-wider mb-3 px-1">
+               {t('common.more') || 'More'}
+             </h2>
+             <MenuItem 
+                icon={Info} 
+                title={t('settings.about.button')} 
+                onClick={() => navigate('/about')}
+              />
+             <MenuItem 
+                icon={LogOut} 
+                title={t('settings.signOut.button')} 
+                onClick={handleLogout}
+                isDestructive={true}
+              />
+          </section>
+
+          <div className="text-center pt-4">
+            <p className="text-[10px] secText uppercase tracking-widest opacity-40 font-semibold">
+              v1.0.2 • Azad Bazaar
+            </p>
           </div>
-
-          {/* Card: About App */}
-          <div className="secBg primBorder rounded-lg p-4">
-            <button
-              onClick={() => navigate('/about')}
-              className="w-full flex items-center justify-center gap-2 min-h-12 px-6 py-3 btnSecondary rounded-lg transition-all duration-200"
-            >
-              <Info size={18} />
-              {t('settings.about.button')}
-            </button>
-          </div>
-
 
         </div>
       </main>

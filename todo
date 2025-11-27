@@ -1,10 +1,4 @@
-Considering moving account settings into a new page which has both address and payment settings inside it. 
-
 Back button in orders takes you back to home, but back button in search takes you to last opened page, instead they should take back to last visited page , unless opened directly (via url) in which case it should be home
-
-Put English/Urdu toggle at the top of the Settings page.
-
-make a new account page with name/number/address/card option.
 
 Remove back button from Search page because bottom navigation is enough. Or maybe redirect it to the home page. Search mobile HCI elements for this also is a good observation and we can reasarch it on further pages
 
@@ -15,6 +9,3 @@ Add ability to increase quantity first, then “Add to Cart” once. Example: Pr
 Search result state is not preserved: Steps: search → apply category/type/sort → open product → go back All settings are reset; user gets a fresh search. Search should retain filters, sort, and typed text.
 
 add a map to show address
-
-optimziaiton 
-accouns page with linkn to settings, cards, 
