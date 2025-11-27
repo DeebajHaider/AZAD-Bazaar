@@ -1,22 +1,18 @@
 import React, { useEffect, useCallback } from 'react';
-import { Mic, X, Check, AlertCircle, Search } from 'lucide-react';
+import { Mic, X, AlertCircle, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import useSpeechRecognition from '../hooks/useSpeechRecognition';
 import { useI18n } from '../context/I18nContext';
 
 /**
- * A reusable, accessible, and mobile-friendly modal for voice input.
- * Redesigned for live feedback and a streamlined workflow.
- * @param {object} props
- * @param {boolean} props.isOpen - Controls the visibility of the modal.
- * @param {() => void} props.onClose - Function to call when the modal should be closed.
- * @param {(transcript: string) => void} props.onConfirm - Function called with the final transcript when confirmed.
+ * VoiceInputModal - Bottom Sheet Fixed
+ * Solves flickering by using stable keys for Framer Motion elements.
  */
 export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLabel }) {
   const { t } = useI18n();
   const { status, transcript, startListening, error, isSupported } = useSpeechRecognition();
 
-  // Close modal on 'Escape' key press
+  // Handle Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -27,7 +23,7 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Safely handle confirmation
+  // Handle Confirm
   const handleConfirm = useCallback(() => {
     if (transcript) {
       onConfirm(transcript);
@@ -44,17 +40,29 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
   const isListening = status === 'listening';
   const hasTranscript = transcript.trim().length > 0;
 
-  // Renders the main content, switching between the live view and a full-screen error
+  // Variants for the sheet animation
+  const sheetVariants = {
+    hidden: { y: "100%" },
+    visible: { y: 0, transition: { type: "spring", damping: 25, stiffness: 300 } },
+    exit: { y: "100%", transition: { duration: 0.2 } }
+  };
+
+  // Variants for the backdrop fade
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
+
   const renderContent = () => {
     if (status === 'error' || !isSupported) {
       return (
         <motion.div
-          key="error"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.2 }}
-          className="w-full flex flex-col items-center justify-center text-center"
+          key="error-view"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="w-full flex flex-col items-center justify-center text-center py-6"
         >
           <div className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center mb-4">
             <AlertCircle size={40} className="accentDangerText" />
@@ -62,7 +70,7 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
           <h3 className="font-bold text-lg primText mb-1">{t('voiceModal.error.title')}</h3>
           <p className="text-sm secText max-w-xs mb-6">{getErrorMessage()}</p>
           {isSupported && (
-             <button onClick={startListening} className="w-full min-h-12 px-6 py-3 btnSecondary rounded-lg">
+             <button onClick={startListening} className="w-full min-h-12 px-6 py-3 btnSecondary rounded-lg focusRing">
                 {t('voiceModal.actions.retry')}
              </button>
           )}
@@ -70,7 +78,6 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
       );
     }
 
-    // Default, unified view for idle, listening, and done states
     return (
       <motion.div
         key="live-view"
@@ -79,51 +86,51 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
         transition={{ duration: 0.3 }}
         className="w-full h-full flex flex-col"
       >
-        {/* Top: Live Transcript Area */}
-        <div className="flex-grow mb-4">
+        {/* Transcript Area */}
+        <div className="flex-grow mb-6">
           <h3 id="transcript-title" className="text-sm font-semibold primText mb-2">
             {t('voiceModal.liveTranscript.title')}
           </h3>
           <div
             aria-labelledby="transcript-title"
             aria-live="polite"
-            className="min-h-[7rem] w-full p-4 primBorder secBg rounded-lg text-lg primText"
+            className="min-h-[8rem] w-full p-4 border primBorder bg-gray-50 dark:bg-slate-900 rounded-lg text-lg primText"
             dir="auto"
           >
             {hasTranscript ? (
               transcript
             ) : (
-              <span className="secText opacity-70">
+              <span className="secText opacity-70 italic">
                 {isListening ? '...' : t('voiceModal.liveTranscript.placeholder')}
               </span>
             )}
           </div>
         </div>
 
-        {/* Middle: Microphone Button */}
-        <div className="flex-shrink-0 flex justify-center items-center py-4">
+        {/* Mic Button */}
+        <div className="flex-shrink-0 flex justify-center items-center pb-6">
           <div className="relative">
             {isListening && (
-              <div className="absolute inset-[-10px] rounded-full bg-blue-500/20 animate-ping" />
+              <div className="absolute inset-[-12px] rounded-full border-4 border-blue-500/30 animate-ping" />
             )}
             <button
               onClick={startListening}
               aria-label={isListening ? t('voiceModal.instructions.listening') : t('voiceModal.instructions.idle')}
-              className={`relative w-24 h-24 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 active:scale-95 hover:brightness-110
+              className={`relative w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-200 active:scale-95 focusRing
                 ${isListening ? 'btnDanger' : 'btnPrimary'}
               `}
             >
-              <Mic size={48} />
+              <Mic size={36} />
             </button>
           </div>
         </div>
         
-        {/* Bottom: Confirm Button */}
-        <div className="flex-shrink-0 pt-4 mt-auto">
+        {/* Confirm Button */}
+        <div className="flex-shrink-0 pt-2">
           <button
             onClick={handleConfirm}
             disabled={!hasTranscript || isListening}
-            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focusRing"
           >
             <Search size={20} />
             {confirmLabel || t('voiceModal.actions.confirm')}
@@ -137,42 +144,60 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
     <AnimatePresence>
       {isOpen && (
         <div
+          className="fixed inset-0 z-50 flex items-end justify-center"
+          style={{ bottom: 0, left: 0, right: 0, top: 0, height: '100vh', margin: 0, padding: 0 }}
           role="dialog"
           aria-modal="true"
-          aria-labelledby="voice-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
         >
-          {/* Overlay */}
+          {/* 
+            Backdrop 
+            Added key="voice-backdrop" to prevent re-rendering flicker
+          */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            key="voice-backdrop"
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             onClick={onClose}
             className="absolute inset-0 bg-black/60"
+            style={{ bottom: 0 }}
           />
 
-          {/* Modal Panel */}
+          {/* 
+            Bottom Sheet 
+            Added key="voice-sheet" to maintain instance during updates
+          */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="relative secBg rounded-2xl p-6 w-full max-w-sm flex flex-col min-h-[28rem] shadow-xl"
+            key="voice-sheet"
+            variants={sheetVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="relative secBg w-full max-w-[430px] rounded-t-2xl shadow-2xl flex flex-col max-h-[85vh] z-10"
+            style={{ marginBottom: 0 }}
           >
-            <header className="w-full flex items-center justify-between mb-4 flex-shrink-0">
-              <h2 id="voice-modal-title" className="text-xl font-bold primText">
+             {/* Drag Handle */}
+            <div className="w-full flex justify-center pt-3 pb-1" onClick={onClose}>
+                <div className="w-12 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+            </div>
+
+            {/* Header */}
+            <header className="w-full flex items-center justify-between px-5 pt-2 pb-2 border-b dividerBorder flex-shrink-0">
+              <h2 id="voice-modal-title" className="text-lg font-bold primText">
                 {t('voiceModal.title')}
               </h2>
               <button
                 onClick={onClose}
                 aria-label={t('voiceModal.actions.close')}
-                className="w-10 h-10 flex items-center justify-center btnSecondary rounded-full transition-transform active:scale-90"
+                className="w-9 h-9 flex items-center justify-center btnSecondary rounded-full focusRing"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </header>
 
-            <main className="flex-1 flex w-full">
+            {/* Content Container */}
+            <main className="flex-1 flex w-full p-5 overflow-y-auto">
               <AnimatePresence mode="wait">
                 {renderContent()}
               </AnimatePresence>
