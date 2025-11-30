@@ -19,6 +19,7 @@ export function ThemeProvider({ children }) {
       root.classList.add('dark')
     } else {
       root.classList.remove('dark')
+      root.classList.add('light')
     }
   }, [theme])
 useEffect(() => {

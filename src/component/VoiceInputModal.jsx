@@ -6,7 +6,7 @@ import { useI18n } from '../context/I18nContext';
 
 /**
  * VoiceInputModal - Bottom Sheet Fixed
- * Solves flickering by using stable keys for Framer Motion elements.
+ * MD3: Uses Surface Container High for sheet background.
  */
 export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLabel }) {
   const { t } = useI18n();
@@ -64,13 +64,14 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
           exit={{ opacity: 0 }}
           className="w-full flex flex-col items-center justify-center text-center py-6"
         >
-          <div className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center mb-4">
-            <AlertCircle size={40} className="accentDangerText" />
+          {/* Error Icon: Error Container */}
+          <div className="w-20 h-20 rounded-md bg-md-error-container flex items-center justify-center mb-4">
+            <AlertCircle size={40} className="text-md-on-error-container" />
           </div>
-          <h3 className="font-bold text-lg primText mb-1">{t('voiceModal.error.title')}</h3>
-          <p className="text-sm secText max-w-xs mb-6">{getErrorMessage()}</p>
+          <h3 className="font-bold text-lg text-md-on-surface mb-1">{t('voiceModal.error.title')}</h3>
+          <p className="text-sm text-md-on-surface-variant max-w-xs mb-6">{getErrorMessage()}</p>
           {isSupported && (
-             <button onClick={startListening} className="w-full min-h-12 px-6 py-3 btnSecondary rounded-lg focusRing">
+             <button onClick={startListening} className="w-full min-h-12 px-6 py-3 bg-md-secondary-container text-md-on-secondary-container font-medium rounded-lg hover:opacity-90 transition-opacity">
                 {t('voiceModal.actions.retry')}
              </button>
           )}
@@ -88,19 +89,20 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
       >
         {/* Transcript Area */}
         <div className="flex-grow mb-6">
-          <h3 id="transcript-title" className="text-sm font-semibold primText mb-2">
+          <h3 id="transcript-title" className="text-sm font-semibold text-md-on-surface-variant mb-2 uppercase tracking-wide">
             {t('voiceModal.liveTranscript.title')}
           </h3>
           <div
             aria-labelledby="transcript-title"
             aria-live="polite"
-            className="min-h-[8rem] w-full p-4 border primBorder bg-gray-50 dark:bg-slate-900 rounded-lg text-lg primText"
+            // Filled Input Style: Surface Container Highest
+            className="min-h-[10rem] w-full p-4 bg-md-surface-container-highest rounded-lg text-lg text-md-on-surface shadow-inner overflow-y-auto"
             dir="auto"
           >
             {hasTranscript ? (
               transcript
             ) : (
-              <span className="secText opacity-70 italic">
+              <span className="text-md-on-surface-variant/60 italic">
                 {isListening ? '...' : t('voiceModal.liveTranscript.placeholder')}
               </span>
             )}
@@ -111,13 +113,15 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
         <div className="flex-shrink-0 flex justify-center items-center pb-6">
           <div className="relative">
             {isListening && (
-              <div className="absolute inset-[-12px] rounded-full border-4 border-blue-500/30 animate-ping" />
+              // Pulse Ring: Primary Color with opacity
+              <div className="absolute inset-[-12px] rounded-full border-4 border-md-primary/30 animate-ping" />
             )}
             <button
               onClick={startListening}
               aria-label={isListening ? t('voiceModal.instructions.listening') : t('voiceModal.instructions.idle')}
-              className={`relative w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-200 active:scale-95 focusRing
-                ${isListening ? 'btnDanger' : 'btnPrimary'}
+              // State Switch: Listening = Error (Red), Idle = Primary (Blue/Brand)
+              className={`relative w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-200 active:scale-95 hover:shadow-xl
+                ${isListening ? 'bg-md-error text-md-on-error' : 'bg-md-primary text-md-on-primary'}
               `}
             >
               <Mic size={36} />
@@ -130,7 +134,7 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
           <button
             onClick={handleConfirm}
             disabled={!hasTranscript || isListening}
-            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focusRing"
+            className="w-full min-h-12 px-6 py-3 bg-md-primary text-md-on-primary font-bold rounded-lg flex items-center justify-center gap-2 shadow-md disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed transition-all"
           >
             <Search size={20} />
             {confirmLabel || t('voiceModal.actions.confirm')}
@@ -149,10 +153,7 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
           role="dialog"
           aria-modal="true"
         >
-          {/* 
-            Backdrop 
-            Added key="voice-backdrop" to prevent re-rendering flicker
-          */}
+          {/* Backdrop */}
           <motion.div
             key="voice-backdrop"
             variants={backdropVariants}
@@ -160,37 +161,35 @@ export default function VoiceInputModal({ isOpen, onClose, onConfirm, confirmLab
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             style={{ bottom: 0 }}
           />
 
-          {/* 
-            Bottom Sheet 
-            Added key="voice-sheet" to maintain instance during updates
-          */}
+          {/* Bottom Sheet: Surface Container High */}
           <motion.div
             key="voice-sheet"
             variants={sheetVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative secBg w-full max-w-[430px] rounded-t-2xl shadow-2xl flex flex-col max-h-[85vh] z-10"
+            className="relative bg-md-surface-container-high w-full max-w-[430px] rounded-t-2xl shadow-2xl flex flex-col max-h-[85vh] z-10"
             style={{ marginBottom: 0 }}
           >
              {/* Drag Handle */}
             <div className="w-full flex justify-center pt-3 pb-1" onClick={onClose}>
-                <div className="w-12 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <div className="w-12 h-1 rounded-md bg-md-on-surface-variant/40"></div>
             </div>
 
             {/* Header */}
-            <header className="w-full flex items-center justify-between px-5 pt-2 pb-2 border-b dividerBorder flex-shrink-0">
-              <h2 id="voice-modal-title" className="text-lg font-bold primText">
+            <header className="w-full flex items-center justify-between px-5 pt-2 pb-2 border-b border-md-outline-variant/30 flex-shrink-0">
+              <h2 id="voice-modal-title" className="text-xl font-bold text-md-on-surface">
                 {t('voiceModal.title')}
               </h2>
+              {/* Close: Tonal Button */}
               <button
                 onClick={onClose}
                 aria-label={t('voiceModal.actions.close')}
-                className="w-9 h-9 flex items-center justify-center btnSecondary rounded-full focusRing"
+                className="w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-80 transition-opacity"
               >
                 <X size={18} />
               </button>

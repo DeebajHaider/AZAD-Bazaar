@@ -1,26 +1,27 @@
 import React from "react";
-import { Trash2, Plus, Minus, X, Loader2 } from "lucide-react";
+import { Trash2, Plus, Minus, Loader2 } from "lucide-react";
 import { useI18n } from '../context/I18nContext';
 import useTranslations from '../hooks/useTranslations';
 import { useNavigate } from "react-router-dom";
 import ImageWithLoader from "./ImageWithLoader";
 
 /**
- * Counter Component (Refined)
- * - Minus button disables at 1 instead of changing to remove
- * - Strictly handles Quantity Logic
+ * Counter Component
+ * - Uses Outline Variant for borders to define the touch area.
+ * - Uses Surface color to distinguish from the Card background.
  */
 const Counter = ({ quantity, onIncrement, onDecrement, itemName, disabled }) => {
   const { t } = useI18n();
 
-  // Disable decrement if quantity is 1 or if loading
   const isDecrementDisabled = quantity <= 1 || disabled;
-
   const decrementLabel = t('cart.a11y.decrement', { defaultValue: `Decrease quantity for ${itemName}` });
   const incrementLabel = t('cart.a11y.increment', { defaultValue: `Increase quantity for ${itemName}` });
 
   return (
-    <div className="flex items-center primBorder rounded-lg h-9 bg-white dark:bg-slate-950">
+    // MD3: Outlined input group style
+    // border-md-outline-variant: Subtle border
+    // bg-md-surface: Sits on top of the card's "surface-container"
+    <div className="flex items-center border border-md-outline-variant rounded-md h-9 bg-md-surface overflow-hidden">
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -28,17 +29,18 @@ const Counter = ({ quantity, onIncrement, onDecrement, itemName, disabled }) => 
         }}
         disabled={isDecrementDisabled}
         aria-label={decrementLabel}
-        className={`w-9 h-full flex items-center justify-center rounded-l-md transition-colors focusRing
+        className={`w-9 h-full flex items-center justify-center transition-colors
           ${isDecrementDisabled
-            ? 'opacity-30 cursor-not-allowed text-gray-400'
-            : 'secText hover:bg-gray-100 dark:hover:bg-slate-800 active:bg-gray-200'
+            ? 'opacity-30 cursor-not-allowed text-md-on-surface-variant'
+            : 'text-md-on-surface-variant hover:bg-md-surface-variant/20 active:bg-md-surface-variant/40'
           }`}
       >
         <Minus size={16} />
       </button>
 
+      {/* Quantity Text: High Emphasis */}
       <span
-        className="w-8 text-center font-medium primText text-sm tabular-nums select-none"
+        className="w-8 text-center font-medium text-md-on-surface text-sm tabular-nums select-none"
         aria-live="polite"
       >
         {quantity}
@@ -51,10 +53,10 @@ const Counter = ({ quantity, onIncrement, onDecrement, itemName, disabled }) => 
         }}
         disabled={disabled}
         aria-label={incrementLabel}
-        className={`w-9 h-full flex items-center justify-center secText rounded-r-md transition-colors focusRing
+        className={`w-9 h-full flex items-center justify-center transition-colors
           ${disabled
-            ? 'opacity-50 cursor-not-allowed'
-            : 'hover:bg-gray-100 dark:hover:bg-slate-800 active:bg-gray-200'
+            ? 'opacity-50 cursor-not-allowed text-md-on-surface-variant'
+            : 'text-md-on-surface-variant hover:bg-md-surface-variant/20 active:bg-md-surface-variant/40'
           }`}
       >
         <Plus size={16} />
@@ -64,20 +66,19 @@ const Counter = ({ quantity, onIncrement, onDecrement, itemName, disabled }) => 
 };
 
 export const CartItemSkeleton = () => (
-  <div className="card p-3 relative flex gap-3 h-[104px]">
-    <div className="w-20 h-20 flex-shrink-0 skeleton rounded-md"></div>
+  // MD3 Skeleton: Surface Container as base, Surface Variant for pulse
+  <div className="p-3 relative flex gap-3 h-[104px] bg-md-surface-container rounded-md">
+    <div className="w-20 h-20 flex-shrink-0 bg-md-surface-variant/50 animate-pulse rounded-md"></div>
     <div className="flex-1 space-y-3 py-1">
-      <div className="h-4 w-3/4 skeleton"></div>
-      <div className="h-4 w-1/4 skeleton"></div>
+      <div className="h-4 w-3/4 bg-md-surface-variant/50 animate-pulse rounded"></div>
+      <div className="h-4 w-1/4 bg-md-surface-variant/50 animate-pulse rounded"></div>
     </div>
-    <div className="absolute bottom-3 right-3 rtl:right-auto rtl:left-3 w-24 h-9 skeleton rounded-lg"></div>
+    <div className="absolute bottom-3 right-3 rtl:right-auto rtl:left-3 w-24 h-9 bg-md-surface-variant/50 animate-pulse rounded-md"></div>
   </div>
 );
 
 /**
  * CartItem Component
- * - Added dedicated Top-Right Remove Button
- * - RTL Support via Tailwind logical classes
  */
 const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
   const { translateDBVal } = useTranslations();
@@ -89,42 +90,43 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
   };
 
   const handleRemoveClick = (e) => {
-    e.stopPropagation(); // Prevent navigation when clicking remove
+    e.stopPropagation();
     onRemove(item.itemCode);
   };
 
   const itemName = translateDBVal("Product", "name", item.itemName, lang);
 
-  // Determine if RTL for manual logic if needed, 
-  // though Tailwind 'rtl:' classes usually handle this if dir="rtl" is set on HTML
-  const isRTL = lang === 'ur' || lang === 'ar';
-
   return (
     <div
       onClick={!isUpdating ? handleNavigate : undefined}
-      className={`group relative flex items-start gap-3 card p-3 transition-all duration-200 ${
-        isUpdating ? 'cursor-not-allowed' : 'hover:shadow-md cursor-pointer'
+      // MD3 Card:
+      // bg-md-surface-container: Creates depth against the main background
+      // text-md-on-surface: Base text color
+      className={`group relative flex items-start gap-3 p-3 rounded-md transition-all duration-200 bg-md-surface-container border border-transparent ${
+        isUpdating ? 'cursor-not-allowed' : 'hover:shadow-md cursor-pointer hover:bg-md-surface-container-high'
       }`}
     >
 
-      {/* Loading Overlay */}
+      {/* Loading Overlay - Scrim */}
       {isUpdating && (
-        <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/60 rounded-lg flex items-center justify-center z-20">
-          <Loader2 className="w-6 h-6 accentPrimText animate-spin" />
+        <div className="absolute inset-0 bg-md-surface/60 rounded-md flex items-center justify-center z-20 backdrop-blur-[1px]">
+          <Loader2 className="w-6 h-6 text-md-primary animate-spin" />
         </div>
       )}
 
       {/* 
-        --- DEDICATED REMOVE BUTTON --- 
-        Positioned absolutely to the top-right (or top-left in RTL).
-        Using 'pe' (padding-end) on the text container ensures text doesn't overlap this button.
+        REMOVE BUTTON
+        - Default: Error color text
+        - Hover: Error Container background (Material standard for destructive icon buttons)
       */}
       <button
         onClick={handleRemoveClick}
         disabled={isUpdating}
         aria-label={t('cart.actions.remove', { defaultValue: 'Remove item' })}
-        className={`absolute top-2 right-2 rtl:right-auto rtl:left-2 p-2 rounded-full accentDangerText transition-colors focusRing z-10 ${
-          isUpdating ? 'opacity-50 cursor-not-allowed' : ''
+        className={`absolute top-2 right-2 rtl:right-auto rtl:left-2 p-2 rounded-full text-md-error transition-colors z-10 ${
+          isUpdating 
+            ? 'opacity-50 cursor-not-allowed' 
+            : 'hover:bg-md-error-container hover:text-md-on-error-container active:scale-95'
         }`}
       >
         <Trash2 size={18} />
@@ -135,18 +137,18 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
         <ImageWithLoader
           src={item.itemPhoto}
           alt={itemName}
-          containerClassName="w-20 h-20 bg-white dark:bg-slate-950 primBorder rounded-md overflow-hidden"
-          imageClassName="w-full h-full object-contain p-1"
+          // Container Highest provides a nice frame for images
+          containerClassName="w-20 h-20 bg-md-surface-container-highest rounded-md overflow-hidden"
+          imageClassName="w-full h-full object-contain p-1 mix-blend-multiply dark:mix-blend-normal"
         />
-        {/* Optional: Low stock indicator overlay could go here */}
       </div>
 
       {/* Details Section */}
       <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch min-h-[80px]">
 
-        {/* Header: Name (with padding-end to avoid delete button) */}
+        {/* Header: Name */}
         <div className="pe-8 rtl:ps-8 rtl:text-right rtl:pe-0 rtl:pr-0">
-          <h3 className="font-semibold primText text-sm leading-tight line-clamp-2 rtl:text-right">
+          <h3 className="font-semibold text-md-on-surface text-sm leading-tight line-clamp-2 rtl:text-right">
             {itemName}
           </h3>
         </div>
@@ -157,16 +159,16 @@ const CartItem = ({ item, onIncrement, onDecrement, onRemove, isUpdating }) => {
           {/* Price Block */}
           <div className="flex flex-col">
             {item.itemOldPrice && (
-              <span className="text-[11px] secText line-through">
+              <span className="text-[11px] text-md-on-surface-variant line-through">
                 {t('common.currencySymbol')} {Number(item.itemOldPrice).toLocaleString()}
               </span>
             )}
-            <span className="font-bold accentPrimText text-base">
+            <span className="font-bold text-md-on-surface text-base">
               {t('common.currencySymbol')} {Number(item.itemPrice).toLocaleString()}
             </span>
           </div>
 
-          {/* Counter Block - onClick stopPropagation is handled inside Counter */}
+          {/* Counter Block */}
           <div className="flex-shrink-0">
             <Counter
               quantity={item.quantity || 1}

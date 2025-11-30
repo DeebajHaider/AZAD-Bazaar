@@ -16,17 +16,18 @@ import { showToast } from '../utils/toast'
 
 // --- Sub-components ---
 
+// Skeleton: Surface Container Base
 const RelatedProductCardSkeleton = () => (
   <div className="w-40 flex-shrink-0 snap-start">
-    <div className="card p-3 flex flex-col h-[260px] space-y-3">
-      <div className="aspect-square w-full skeleton rounded-md" />
+    <div className="bg-md-surface-container p-3 flex flex-col h-[260px] space-y-3 rounded-md animate-pulse">
+      <div className="aspect-square w-full bg-md-surface-variant/50 rounded-md" />
       <div className="flex-1 flex flex-col space-y-2">
-        <div className="h-3.5 w-full skeleton rounded" />
-        <div className="h-3.5 w-2/3 skeleton rounded" />
+        <div className="h-3.5 w-full bg-md-surface-variant/50 rounded" />
+        <div className="h-3.5 w-2/3 bg-md-surface-variant/30 rounded" />
         <div className="flex-grow" />
         <div className="flex items-center justify-between">
-          <div className="h-5 w-16 skeleton rounded" />
-          <div className="h-4 w-8 skeleton rounded" />
+          <div className="h-5 w-16 bg-md-surface-variant/50 rounded" />
+          <div className="h-4 w-8 bg-md-surface-variant/30 rounded" />
         </div>
       </div>
     </div>
@@ -37,7 +38,7 @@ const RelatedProductsSkeleton = () => {
   const { t } = useI18n();
   return (
     <div className="py-6">
-      <h2 className="text-lg font-semibold primText mb-3 px-4">
+      <h2 className="text-lg font-bold text-md-on-surface mb-3 px-4">
         {t('productPage.relatedProducts.title')}
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-2 px-4 scrollbar-hide">
@@ -50,22 +51,22 @@ const RelatedProductsSkeleton = () => {
 };
 
 const ProductPageSkeleton = () => (
-  <div className="flex-1 primBg overflow-y-auto min-h-full">
-    <div className="relative w-full h-72 skeleton" />
+  <div className="flex-1 bg-md-surface overflow-y-auto min-h-full animate-pulse">
+    <div className="relative w-full h-72 bg-md-surface-variant/30" />
     <div className="p-4 space-y-6">
       {/* Price & Stock */}
       <div className="flex justify-between items-center">
-        <div className="h-8 w-32 skeleton" />
-        <div className="h-6 w-20 skeleton rounded-full" />
+        <div className="h-8 w-32 bg-md-surface-variant/50 rounded" />
+        <div className="h-6 w-20 bg-md-surface-variant/30 rounded-md" />
       </div>
       
       {/* Description/Cat Area */}
       <div className="space-y-3">
-         <div className="h-5 w-1/4 skeleton" />
+         <div className="h-5 w-1/4 bg-md-surface-variant/50 rounded" />
          <div className="space-y-2">
-            <div className="h-4 w-full skeleton" />
-            <div className="h-4 w-full skeleton" />
-            <div className="h-4 w-3/4 skeleton" />
+            <div className="h-4 w-full bg-md-surface-variant/30 rounded" />
+            <div className="h-4 w-full bg-md-surface-variant/30 rounded" />
+            <div className="h-4 w-3/4 bg-md-surface-variant/30 rounded" />
          </div>
       </div>
     </div>
@@ -80,7 +81,8 @@ const ProductGallery = ({ images, productName, format }) => {
   const mainImage = images[activeIndex] || images[0]
 
   return (
-    <div className="relative w-full h-72 secBg primBorder border-b">
+    // Gallery Container: Surface Container Low
+    <div className="relative w-full h-72 bg-md-surface-container-low border-b border-md-outline-variant/30">
       {mainImage ? (
         <ImageWithLoader
           src={mainImage}
@@ -89,7 +91,7 @@ const ProductGallery = ({ images, productName, format }) => {
           containerClassName="w-full h-full"
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center secText">
+        <div className="w-full h-full flex items-center justify-center text-md-on-surface-variant">
           {/* Placeholder */}
         </div>
       )}
@@ -101,7 +103,7 @@ const ProductGallery = ({ images, productName, format }) => {
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${activeIndex === idx ? 'w-6 accentPrimBg' : 'w-1.5 bg-gray-300 dark:bg-gray-600'}`}
+              className={`h-1.5 rounded-md transition-all duration-300 shadow-sm ${activeIndex === idx ? 'w-6 bg-md-primary' : 'w-1.5 bg-md-on-surface-variant/40'}`}
               aria-label={`View image ${idx + 1}`}
             />
           ))}
@@ -111,7 +113,7 @@ const ProductGallery = ({ images, productName, format }) => {
   )
 }
 
-// --- IMPROVED ACTION BAR ---
+// --- ACTION BAR ---
 const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, availableStock }) => {
   const { t } = useI18n()
   const [actionLoading, setActionLoading] = useState(false)
@@ -141,19 +143,20 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
   const decDisabled = actionLoading
 
   return (
-    <div className="secBg dividerBorder border-t p-3 pb-safe"> 
-      {/* pb-safe handles iPhone home bar if configured in Tailwind, otherwise p-3 is fine */}
+    // Sticky Footer: Surface + Border Top
+    <div className="bg-md-surface border-t border-md-outline-variant p-3 pb-safe"> 
       
       {qty === 0 ? (
-        /* STATE 1: Add To Cart Button */
+        /* STATE 1: Add To Cart Button (Primary) */
         <button
           onClick={() => { if (inStock) runWithLoading(() => addToCart(productIdForCart)) }}
           disabled={!inStock || actionLoading}
-          className="w-full min-h-[52px] btnPrimary rounded-xl shadow-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-between px-6"
+          className="w-full min-h-[52px] bg-md-primary text-md-on-primary rounded-xl shadow-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-between px-6 hover:shadow-lg"
         >
-           <span className="font-semibold text-base">
+           <span className="font-bold text-base">
              {inStock ? t('productPage.actions.addToCart') : t('common.outOfStock')}
            </span>
+           {/* Price Chip inside button: Surface/20 overlay */}
            <span className="font-medium bg-white/20 px-2 py-1 rounded text-sm">
              {t('common.currencySymbol')} {displayPrice.toLocaleString()}
            </span>
@@ -162,33 +165,35 @@ const ProductActionBar = ({ qty, product, addToCart, decrementProduct, inStock, 
       ) : (
         /* STATE 2: Quantity Stepper */
         <div className="flex items-center gap-4 h-[52px]">
-          {/* Left: Total Price Feedback */}
+          {/* Left: Total Price */}
           <div className="flex-1 flex flex-col justify-center pl-2">
-             <span className="text-xs secText">{t('productPage.labels.totalAmount')}</span>
-             <span className="text-xl font-bold primText">
+             <span className="text-xs text-md-on-surface-variant">{t('productPage.labels.totalAmount')}</span>
+             <span className="text-xl font-bold text-md-on-surface">
                {t('common.currencySymbol')}{totalAmount.toLocaleString()}
              </span>
           </div>
 
-          {/* Right: Stepper Controls */}
-          <div className="flex items-center gap-3 bg-white dark:bg-slate-950 primBorder rounded-xl p-1 shadow-sm h-full">
+          {/* Right: Stepper Controls - Surface Container High */}
+          <div className="flex items-center gap-3 bg-md-surface-container-high rounded-xl p-1 shadow-sm h-full border border-md-outline-variant/30">
             <button
               onClick={() => runWithLoading(() => decrementProduct(productIdForCart))}
               disabled={decDisabled}
-              className="w-12 h-full flex items-center justify-center secHoverBg rounded-lg text-gray-600 dark:text-gray-300 active:bg-gray-200 dark:active:bg-gray-700 transition-colors"
+              // Minus: Tonal/Ghost
+              className="w-12 h-full flex items-center justify-center rounded-lg text-md-on-surface-variant hover:bg-md-surface-container-highest transition-colors active:bg-md-surface-variant/50"
               aria-label="Decrease"
             >
               {actionLoading ? <Loader2 size={18} className="animate-spin" /> : <Minus size={20} />}
             </button>
             
-            <div className="w-8 text-center font-bold text-lg primText tabular-nums">
+            <div className="w-8 text-center font-bold text-lg text-md-on-surface tabular-nums">
               {qty}
             </div>
             
             <button
               onClick={() => runWithLoading(() => addToCart(productIdForCart))}
               disabled={addDisabled}
-              className="w-12 h-full flex items-center justify-center accentPrimBg text-white rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-sm"
+              // Plus: Primary Tonal
+              className="w-12 h-full flex items-center justify-center bg-md-primary text-md-on-primary rounded-lg hover:shadow-md active:scale-95 transition-all shadow-sm"
               aria-label="Increase"
             >
               {actionLoading ? <Loader2 size={18} className="animate-spin" /> : <Plus size={20} />}
@@ -206,32 +211,31 @@ const RelatedProductCard = ({ product }) => {
   
   const displayPrice = product.discountedPrice ?? product.price
   const originalPrice = product.originalPrice
-  // Calculate percentage off if applicable
   const percentOff = originalPrice && originalPrice > displayPrice 
     ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100) 
     : 0
 
-  // Fallback logic for image
   const image = (product.images && product.images.length) ? product.images[0] : product.image
 
   return (
     <Link 
       to={`/product/${product._id || product.id}`}
-      className="group block w-40 flex-shrink-0 snap-start focusRing rounded-lg"
+      className="group block w-40 flex-shrink-0 snap-start rounded-lg focus:outline-none focus:ring-2 focus:ring-md-primary"
     >
-      <div className="card p-3 h-[260px] flex flex-col transition-all duration-200 group-hover:border-blue-500 dark:group-hover:border-blue-400 relative group-active:scale-[0.98]">
+      {/* Card: Surface Container */}
+      <div className="bg-md-surface-container p-3 h-[260px] flex flex-col transition-all duration-200 rounded-lg hover:bg-md-surface-container-high hover:shadow-sm active:scale-[0.98]">
         
-        {/* Image Container */}
-        <div className="relative aspect-square w-full mb-3 bg-white dark:bg-white/5 rounded-md overflow-hidden">
+        {/* Image Container: Surface Container Highest */}
+        <div className="relative aspect-square w-full mb-3 bg-md-surface-container-highest rounded-md overflow-hidden">
           <ImageWithLoader
             src={image}
             alt={product.title}
             containerClassName="w-full h-full"
-            imageClassName="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+            imageClassName="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105 mix-blend-multiply dark:mix-blend-normal"
           />
-          {/* Discount Badge Overlay - High Visibility */}
+          {/* Discount Badge: Error (Red) for visibility */}
           {percentOff > 0 && (
-            <div className="absolute top-1 left-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+            <div className="absolute top-1 left-1 bg-md-error text-md-on-error text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
               -{percentOff}%
             </div>
           )}
@@ -239,18 +243,18 @@ const RelatedProductCard = ({ product }) => {
 
         {/* Content */}
         <div className="flex-1 flex flex-col">
-          <h3 className="text-sm font-medium primText line-clamp-2 mb-1 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <h3 className="text-sm font-medium text-md-on-surface line-clamp-2 mb-1 leading-tight group-hover:text-md-primary transition-colors">
             {translateDBVal("Product", "name", product.name ?? product.title, lang)}
           </h3>
           
           <div className="mt-auto pt-2">
             {originalPrice > displayPrice && (
-              <span className="text-xs secText line-through block">
+              <span className="text-xs text-md-on-surface-variant line-through block">
                 {t('common.currencySymbol')}{originalPrice.toLocaleString()}
               </span>
             )}
             <div className="flex items-center justify-between">
-              <span className="text-base font-bold primText">
+              <span className="text-base font-bold text-md-on-surface">
                 {t('common.currencySymbol')}<span className="text-lg">{displayPrice.toLocaleString()}</span>
               </span>
             </div>
@@ -283,8 +287,8 @@ const RelatedProducts = ({ productId }) => {
   if (!related || related.length === 0) return null
 
   return (
-    <div className="py-4 border-t dividerBorder mt-4 bg-gray-50/50 dark:bg-slate-900/20">
-      <h2 className="text-lg font-bold primText mb-3 px-4">
+    <div className="py-4 border-t border-md-outline-variant/30 mt-4 bg-md-surface-container-low/50">
+      <h2 className="text-lg font-bold text-md-on-surface mb-3 px-4">
         {t('productPage.relatedProducts.title')}
       </h2>
       <div className="flex gap-3 overflow-x-auto pb-4 px-4 scrollbar-hide">
@@ -342,14 +346,9 @@ export default function Product() {
     const toggleFav = async () => {
       if (!pid || favLoading) return
       try {
-        if (liked) {await remove(pid);
-          showToast(t('productPage.actions.removedFromFavorites'))
-        }
-        else {await add(pid);
-          showToast(t('productPage.actions.addedToFavorites'))
-        }
+        if (liked) {await remove(pid); showToast(t('productPage.actions.removedFromFavorites'))}
+        else {await add(pid); showToast(t('productPage.actions.addedToFavorites'))}
       } catch (e) {
-        // silent fail; could add toast later
         console.error('Favorite toggle failed', e)
       }
     }
@@ -360,9 +359,9 @@ export default function Product() {
           disabled={!pid || favLoading}
           aria-pressed={liked}
           aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
-          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-60"
+          className="p-2 rounded-md hover:bg-md-surface-container-high transition-colors disabled:opacity-60"
         >
-          <Heart size={22} className={`transition-all ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-gray-300'}`} />
+          <Heart size={22} className={`transition-all ${liked ? 'fill-md-error text-md-error' : 'text-md-on-surface-variant'}`} />
         </button>
       </div>
     )
@@ -378,7 +377,7 @@ export default function Product() {
       {(productLoading || !product) ? (
         <ProductPageSkeleton />
       ) : (
-        <main ref={mainContentRef} className="flex-1 primBg overflow-y-auto min-h-full">
+        <main ref={mainContentRef} className="flex-1 bg-md-surface overflow-y-auto min-h-full">
           <ProductGallery images={images} productName={productName} format={format} />
 
           <div className="p-5 pb-16">
@@ -386,16 +385,17 @@ export default function Product() {
             <div className="flex justify-between items-start mb-6">
               <div>
                  {originalPrice && (
-                    <span className="text-sm secText line-through block mb-0.5">
+                    <span className="text-sm text-md-on-surface-variant line-through block mb-0.5">
                       {t('common.currencySymbol')} {originalPrice.toLocaleString()}
                     </span>
                  )}
                  <div className="flex items-center gap-3">
-                   <span className="text-3xl font-bold primText tracking-tight">
+                   <span className="text-3xl font-bold text-md-on-surface tracking-tight">
                      {t('common.currencySymbol')} {displayPrice.toLocaleString()}
                    </span>
                    {originalPrice && (
-                     <span className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold px-2 py-0.5 rounded-md">
+                     // Sales Badge: Error Container (to grab attention, standard sales color)
+                     <span className="bg-md-error-container text-md-on-error-container text-xs font-bold px-2 py-0.5 rounded-md">
                         {Math.round(((originalPrice - displayPrice) / originalPrice) * 100)}% OFF
                      </span>
                    )}
@@ -403,39 +403,39 @@ export default function Product() {
               </div>
 
               <div className="flex-shrink-0 pt-1">
-                {!inStock ? (<span className="badgeDanger">{t('common.outOfStock')}</span>
+                {!inStock ? (
+                  <span className="bg-md-error text-md-on-error text-[10px] uppercase font-bold px-2 py-1 rounded-md">{t('common.outOfStock')}</span>
                 ) : (isFinite(availableStock) && availableStock <= 5) && (
-                  <span className="badgeWarning">{format('productPage.stockStatus.lowStock_other', { count: availableStock })}</span>
+                  // Warning: Tertiary Container
+                  <span className="bg-md-tertiary-container text-md-on-tertiary-container text-[10px] font-bold px-2 py-1 rounded-md">{format('productPage.stockStatus.lowStock_other', { count: availableStock })}</span>
                 )}
               </div>
             </div>
 
-            {/* Integrated Category Header & Description */}
-            {/* This replaces the literal "Description" header with useful Metadata */}
+            {/* Category Header & Description */}
             <div className="space-y-3">
-               <div className="flex flex-wrap items-baseline gap-2 pb-2 border-b dividerBorder">
-                  {/* Main Category: Highlighted */}
+               <div className="flex flex-wrap items-baseline gap-2 pb-2 border-b border-md-outline-variant/30">
+                  {/* Main Category: Primary Color */}
                   {product.category && (
-                    <span className="text-sm font-bold accentPrimText uppercase tracking-wider">
+                    <span className="text-sm font-bold text-md-primary uppercase tracking-wider">
                        {translateDBVal("Category", "name", product.category.name ?? product.category, lang)}
                     </span>
                   )}
                   
-                  {/* Separator if subs exist */}
                   {product.category && subcategoryNames.length > 0 && (
-                    <span className="text-gray-300 dark:text-gray-700">/</span>
+                    <span className="text-md-on-surface-variant/50">/</span>
                   )}
 
-                  {/* Sub Categories: Subtle Tags */}
+                  {/* Sub Categories: Secondary Container Tags */}
                   {subcategoryNames.map(sub => (
-                    <span key={sub} className="text-xs font-medium secText bg-gray-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
+                    <span key={sub} className="text-xs font-medium text-md-on-secondary-container bg-md-secondary-container px-2 py-0.5 rounded-md">
                       {translateDBVal("Category", "name", sub, lang)}
                     </span>
                   ))}
                </div>
 
-               {/* Description Text */}
-               <p className="text-base leading-relaxed secText">
+               {/* Description Text: On Surface Variant (Medium Emphasis) */}
+               <p className="text-base leading-relaxed text-md-on-surface-variant">
                  {translateDBVal("Product", "description", product.description, lang)}
                </p>
             </div>

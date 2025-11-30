@@ -86,28 +86,28 @@ const CustomCheckbox = ({ checked, onChange, label }) => (
         <div className={`
             relative w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center
             ${checked 
-                ? 'accentPrimBg border-transparent' 
-                : 'bg-transparent border-gray-300 dark:border-slate-600 group-hover:border-blue-400'}
+                ? 'bg-md-primary border-md-primary' 
+                : 'bg-transparent border-md-outline hover:border-md-primary'}
         `}>
-            {checked && <Check size={12} className="text-white" strokeWidth={3} />}
+            {checked && <Check size={12} className="text-md-on-primary" strokeWidth={3} />}
             <input type="checkbox" className="sr-only" checked={checked} onChange={onChange} />
         </div>
-        <span className="text-sm primText">{label}</span>
+        <span className="text-sm text-md-on-surface">{label}</span>
     </label>
 );
 
 // Improved Visual Card with Subtle Gradient
 const CreditCardItem = ({ card, onDelete, t }) => (
-    <div className="relative w-full aspect-[1.586/1] max-h-[190px] rounded-xl overflow-hidden primBorder group bg-white dark:bg-slate-900">
+    <div className="relative w-full aspect-[1.586/1] max-h-[190px] rounded-xl overflow-hidden border border-md-outline-variant group bg-gradient-to-br from-md-surface-container-high to-md-surface-container">
         <div className="relative h-full p-4 flex flex-col justify-between z-10">
             {/* Top */}
             <div className="flex justify-between items-start">
                 <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider secText opacity-70">{t('cardBrand')}</span>
-                    <div className="font-bold text-lg primText capitalize leading-tight">{card.brand}</div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-md-on-surface-variant opacity-70">{t('cardBrand')}</span>
+                    <div className="font-bold text-lg text-md-on-surface capitalize leading-tight">{card.brand}</div>
                 </div>
                 {card.isDefault && (
-                    <div className="flex items-center gap-1 badgeSuccess px-2 py-0.5 rounded-full border border-green-200 dark:border-green-800">
+                    <div className="flex items-center gap-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 px-2 py-0.5 rounded-full border border-green-200 dark:border-green-800">
                         <Star size={10} fill="currentColor" />
                         <span className="text-[10px] font-bold uppercase">{t('default')}</span>
                     </div>
@@ -116,22 +116,22 @@ const CreditCardItem = ({ card, onDelete, t }) => (
 
             {/* Middle */}
             <div className="flex items-center gap-2 mt-1">
-                <div className="flex gap-1 secText text-sm tracking-widest opacity-60">
+                <div className="flex gap-1 text-md-on-surface-variant text-sm tracking-widest opacity-60">
                     <span>••••</span><span>••••</span><span>••••</span>
                 </div>
-                <span className="font-mono text-xl font-bold primText tracking-widest">{card.last4Digits}</span>
+                <span className="font-mono text-xl font-bold text-md-on-surface tracking-widest">{card.last4Digits}</span>
             </div>
 
             {/* Bottom */}
             <div className="flex justify-between items-end">
                 <div>
-                    <span className="text-[10px] uppercase secText block mb-0.5 opacity-70">{t('expires')}</span>
-                    <span className="font-medium primText text-sm">{String(card.expiryMonth).padStart(2, '0')}/{card.expiryYear}</span>
+                    <span className="text-[10px] uppercase text-md-on-surface-variant block mb-0.5 opacity-70">{t('expires')}</span>
+                    <span className="font-medium text-md-on-surface text-sm">{String(card.expiryMonth).padStart(2, '0')}/{card.expiryYear}</span>
                 </div>
                 <button 
                     onClick={() => onDelete(card._id)} 
                     aria-label={t('delete')}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors focusRing"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-md-error-container hover:text-md-on-error-container text-md-error transition-colors focus:outline-none focus:ring-2 focus:ring-md-error"
                 >
                     <Trash2 size={16} />
                 </button>
@@ -158,14 +158,14 @@ const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
             className={`
                 w-full p-3 rounded-xl flex items-center gap-4 transition-all duration-200 relative
                 ${isLinked 
-                    ? 'secBg primBorder' 
-                    : 'bg-transparent border-2 border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 cursor-pointer group'}
+                    ? 'bg-md-surface-container border border-transparent' 
+                    : 'bg-transparent border border-md-outline-variant hover:border-md-primary hover:bg-md-surface-container-high cursor-pointer group'}
             `}
         >
             {/* Logo Section */}
             <div className={`
                 w-12 h-12 rounded-lg flex items-center justify-center p-1.5 flex-shrink-0
-                bg-white dark:bg-white border border-gray-200 dark:border-gray-400
+                bg-white border border-gray-200
                 ${!isLinked ? 'opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all' : ''}
             `}>
                 <ImageWithLoader 
@@ -173,19 +173,19 @@ const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
                     alt={provider}
                     imageClassName="w-full h-full object-contain"
                     // Fallback icon if logo fails
-                    fallback={<Smartphone className="w-6 h-6 secText" />} 
+                    fallback={<Smartphone className="w-6 h-6 text-gray-500" />} 
                 />
             </div>
 
             {/* Info Section */}
             <div className="flex-1 min-w-0">
-                <h3 className={`font-bold text-sm ${isLinked ? 'primText' : 'secText group-hover:primText'}`}>
+                <h3 className={`font-bold text-sm ${isLinked ? 'text-md-on-surface' : 'text-md-on-surface-variant group-hover:text-md-on-surface'}`}>
                     {provider}
                 </h3>
                 {isLinked ? (
-                    <p className="text-xs secText truncate font-mono mt-0.5">{wallet.mobileNumber}</p>
+                    <p className="text-xs text-md-on-surface-variant truncate font-mono mt-0.5">{wallet.mobileNumber}</p>
                 ) : (
-                    <p className="text-xs secText text-blue-500 dark:text-blue-400 font-medium mt-0.5 flex items-center gap-1">
+                    <p className="text-xs text-md-primary font-medium mt-0.5 flex items-center gap-1">
                         <Plus size={12} strokeWidth={3} /> {t('linkWallet')}
                     </p>
                 )}
@@ -196,14 +196,14 @@ const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
                 <div className="flex items-center gap-1">
                     <button 
                         onClick={() => onAction(wallet)}
-                        className="p-2 rounded-lg secHoverBg secText hover:primText transition-colors focusRing"
+                        className="p-2 rounded-lg hover:bg-md-secondary-container hover:text-md-on-secondary-container text-md-on-surface-variant transition-colors"
                         aria-label={t('edit')}
                     >
                         <Edit2 size={16} />
                     </button>
                     <button 
                         onClick={() => onDelete(wallet.provider)}
-                        className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors focusRing"
+                        className="p-2 rounded-lg hover:bg-md-error-container hover:text-md-on-error-container text-md-error transition-colors"
                         aria-label={t('delete')}
                     >
                         <Trash2 size={16} />
@@ -211,7 +211,7 @@ const WalletRow = ({ provider, wallet, onAction, onDelete, t }) => {
                 </div>
             ) : (
                 <div className="pr-2">
-                     <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-gray-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 group-hover:text-blue-600 transition-colors">
+                     <div className="w-8 h-8 rounded-full bg-md-surface-container-highest flex items-center justify-center text-md-on-surface-variant group-hover:bg-md-primary-container group-hover:text-md-on-primary-container transition-colors">
                         <LinkIcon size={16} />
                      </div>
                 </div>
@@ -256,20 +256,20 @@ export default function ManagePayments() {
 
     return (
         <Layout header={<HeaderWithName title={t('title')} />}>
-            <main className="primBg flex-1 overflow-y-auto min-h-full pb-safe">
+            <main className="bg-md-surface flex-1 overflow-y-auto min-h-full pb-safe">
                 <div className="max-w-[430px] mx-auto p-4">
                     
                     {/* --- 1. Mobile Wallets (Priority Section) --- */}
                     <section aria-labelledby="wallets-heading" className="space-y-4">
-                        <h2 id="wallets-heading" className="text-lg font-bold primText flex items-center gap-2">
-                            <Wallet size={20} className="accentPrimText" />
+                        <h2 id="wallets-heading" className="text-lg font-bold text-md-on-surface flex items-center gap-2">
+                            <Wallet size={20} className="text-md-primary" />
                             {t('mobileWallets')}
                         </h2>
 
                         {walletsLoading ? (
                             <div className="space-y-3">
-                                <div className="h-16 skeleton rounded-xl" />
-                                <div className="h-16 skeleton rounded-xl" />
+                                <div className="h-16 bg-md-surface-container-highest rounded-xl animate-pulse" />
+                                <div className="h-16 bg-md-surface-container-highest rounded-xl animate-pulse" />
                             </div>
                         ) : (
                             <div className="space-y-3">
@@ -291,21 +291,20 @@ export default function ManagePayments() {
                     </section>
 
                     {/* --- Divider --- */}
-                    {/* High visibility border for accessibility structure */}
-                    <div className="my-8" />
+                    <div className="my-8 border-t border-md-outline-variant/30" />
 
                     {/* --- 2. Credit Cards --- */}
                     <section aria-labelledby="cards-heading" className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <h2 id="cards-heading" className="text-lg font-bold primText flex items-center gap-2">
-                                <CreditCard size={20} className="accentPrimText" />
+                            <h2 id="cards-heading" className="text-lg font-bold text-md-on-surface flex items-center gap-2">
+                                <CreditCard size={20} className="text-md-primary" />
                                 {t('creditDebitCards')}
                             </h2>
                         </div>
 
                         {cardsLoading ? (
                             <div className="space-y-4">
-                                <div className="h-44 skeleton rounded-xl" />
+                                <div className="h-44 bg-md-surface-container-highest rounded-xl animate-pulse" />
                             </div>
                         ) : (
                             <div className="space-y-4">
@@ -319,15 +318,15 @@ export default function ManagePayments() {
                                         />
                                     ))
                                 ) : (
-                                    <div className="secBg primBorder border-dashed border-2 rounded-xl p-6 flex flex-col items-center text-center">
-                                        <CreditCard className="w-10 h-10 secText opacity-30 mb-2" />
-                                        <p className="text-xs secText">{t('noCards')}</p>
+                                    <div className="bg-md-surface-container border border-dashed border-md-outline-variant rounded-xl p-6 flex flex-col items-center text-center">
+                                        <CreditCard className="w-10 h-10 text-md-on-surface-variant opacity-30 mb-2" />
+                                        <p className="text-xs text-md-on-surface-variant">{t('noCards')}</p>
                                     </div>
                                 )}
                                 
                                 <button 
                                     onClick={() => handleOpenModal('card')}
-                                    className="w-full py-3.5 border-2 border-gray-300 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold secText hover:primText hover:border-gray-400 dark:hover:border-slate-500 transition-all focusRing bg-gray-50/50 dark:bg-slate-900/20"
+                                    className="w-full py-3.5 border border-dashed border-md-outline rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-md-on-surface-variant hover:bg-md-surface-container-high hover:text-md-primary transition-all"
                                 >
                                     <Plus size={18} />
                                     {t('addFirstCard')}
@@ -364,6 +363,7 @@ export default function ManagePayments() {
 }
 
 // --- Modal Sub-Components ---
+const inputClass = "w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface placeholder:text-md-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-md-primary transition-all";
 
 function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
     const [formData, setFormData] = useState({
@@ -398,28 +398,28 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
 
     return (
         <>
-            <div className="fixed inset-0 bg-black/60 z-50" onClick={onClose} />
+            <div className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm" onClick={onClose} />
             <div 
-                className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto secBg rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]"
+                className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto bg-md-surface-container-high rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
             >
-                <header className="dividerBorder p-5 flex items-center justify-between">
-                    <h2 className="text-xl font-bold primText">{t('addCardTitle')}</h2>
-                    <button onClick={onClose} className="btnSecondary rounded-full p-2 h-10 w-10 flex items-center justify-center" disabled={isSaving}>
+                <header className="border-b border-md-outline-variant/30 p-5 flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-md-on-surface">{t('addCardTitle')}</h2>
+                    <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-md-surface-container-highest text-md-on-surface-variant hover:bg-md-on-surface/10 transition-colors" disabled={isSaving}>
                         <X size={20} />
                     </button>
                 </header>
                 <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-5">
                     <fieldset disabled={isSaving} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-semibold mb-2 primText">{t('cardBrand')}</label>
+                            <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('cardBrand')}</label>
                             <div className="relative">
-                                <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 secText" size={18} />
-                                <input type="text" name="brand" value={formData.brand} onChange={handleChange} required placeholder={t('brandPlaceholder')} className="inputField pl-10" />
+                                <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 text-md-on-surface-variant" size={18} />
+                                <input type="text" name="brand" value={formData.brand} onChange={handleChange} required placeholder={t('brandPlaceholder')} className={`${inputClass} pl-10`} />
                             </div>
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold mb-2 primText">{t('cardNumber')}</label>
+                            <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('cardNumber')}</label>
                             <input
                                 type="text"
                                 inputMode="numeric"
@@ -427,24 +427,24 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
                                 value={formData.last4Digits}
                                 onChange={(e) => handleChange({target: {name: 'last4Digits', value: e.target.value.replace(/\D/g, '')}})}
                                 required
-                                className="inputField font-mono tracking-widest"
+                                className={`${inputClass} font-mono tracking-widest`}
                                 placeholder={t('last4Digits')}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold mb-2 primText">{t('expiryDate')}</label>
+                            <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('expiryDate')}</label>
                             <div className="flex gap-4">
-                                <input type="text" inputMode="numeric" name="expiryMonth" value={formData.expiryMonth} onChange={(e) => handleChange({target: {name: 'expiryMonth', value: e.target.value.replace(/\D/g, '')}})} required className="inputField text-center" placeholder="MM" />
-                                <span className="self-center text-xl secText">/</span>
-                                <input type="text" inputMode="numeric" name="expiryYear" value={formData.expiryYear} onChange={(e) => handleChange({target: {name: 'expiryYear', value: e.target.value.replace(/\D/g, '')}})} required className="inputField text-center" placeholder="YYYY" />
+                                <input type="text" inputMode="numeric" name="expiryMonth" value={formData.expiryMonth} onChange={(e) => handleChange({target: {name: 'expiryMonth', value: e.target.value.replace(/\D/g, '')}})} required className={`${inputClass} text-center`} placeholder="MM" />
+                                <span className="self-center text-xl text-md-on-surface-variant">/</span>
+                                <input type="text" inputMode="numeric" name="expiryYear" value={formData.expiryYear} onChange={(e) => handleChange({target: {name: 'expiryYear', value: e.target.value.replace(/\D/g, '')}})} required className={`${inputClass} text-center`} placeholder="YYYY" />
                             </div>
                         </div>
                         <div className="pt-2">
                             <CustomCheckbox checked={formData.isDefault} onChange={(e) => setFormData(prev => ({...prev, isDefault: e.target.checked}))} label={t('setAsDefault')} />
                         </div>
                         <div className="flex gap-3 pt-4">
-                            <button type="button" onClick={onClose} className="btnSecondary flex-1 py-3.5 rounded-xl font-medium">{t('cancel')}</button>
-                            <button type="submit" className="btnPrimary flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2">{isSaving ? <Loader2 size={20} className="animate-spin" /> : t('save')}</button>
+                            <button type="button" onClick={onClose} className="flex-1 py-3.5 rounded-md bg-md-secondary-container text-md-on-secondary-container font-medium hover:opacity-90 transition-opacity">{t('cancel')}</button>
+                            <button type="submit" className="flex-1 py-3.5 rounded-md bg-md-primary text-md-on-primary font-bold flex items-center justify-center gap-2 hover:shadow-md transition-shadow">{isSaving ? <Loader2 size={20} className="animate-spin" /> : t('save')}</button>
                         </div>
                     </fieldset>
                 </form>
@@ -454,7 +454,6 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
 }
 
 function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletData }) {
-    // walletData contains { provider } at minimum, even for new links
     const [formData, setFormData] = useState({
         provider: walletData?.provider || '',
         mobileNumber: walletData?.mobileNumber || '',
@@ -481,13 +480,13 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
     
     return (
         <>
-            <div className="fixed inset-0 bg-black/60 z-50" onClick={onClose} />
-            <div className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto secBg rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
-                <header className="dividerBorder p-5 flex items-center justify-between">
-                    <h2 className="text-xl font-bold primText">
+            <div className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm" onClick={onClose} />
+            <div className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto bg-md-surface-container-high rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+                <header className="border-b border-md-outline-variant/30 p-5 flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-md-on-surface">
                         {walletData?.mobileNumber ? t('editWalletTitle') : t('addWalletTitle')}
                     </h2>
-                    <button onClick={onClose} className="btnSecondary rounded-full p-2 h-10 w-10 flex items-center justify-center" disabled={isSaving}>
+                    <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-md-surface-container-highest text-md-on-surface-variant hover:bg-md-on-surface/10 transition-colors" disabled={isSaving}>
                         <X size={20} />
                     </button>
                 </header>
@@ -495,39 +494,39 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
                 <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-5">
                     <fieldset disabled={isSaving} className="space-y-4">
                         {/* Display Provider (Fixed) */}
-                        <div className="flex items-center gap-4 p-4 secBg primBorder rounded-xl bg-white dark:bg-slate-900">
-                             <div className="w-10 h-10 rounded-lg bg-white dark:bg-white border border-gray-200 dark:border-gray-400 flex items-center justify-center p-1">
+                        <div className="flex items-center gap-4 p-4 rounded-xl bg-md-surface-container border border-transparent">
+                             <div className="w-10 h-10 rounded-lg bg-white border border-gray-200 flex items-center justify-center p-1">
                                 <ImageWithLoader 
                                     src={getWalletLogoSrc(formData.provider)} 
                                     alt={formData.provider}
-                                    fallback={<Smartphone className="w-5 h-5 secText" />} 
+                                    fallback={<Smartphone className="w-5 h-5 text-gray-500" />} 
                                 />
                              </div>
                              <div>
-                                 <p className="text-xs secText uppercase tracking-wide font-bold">{t('walletProvider')}</p>
-                                 <p className="text-lg font-bold primText">{formData.provider}</p>
+                                 <p className="text-xs text-md-on-surface-variant uppercase tracking-wide font-bold">{t('walletProvider')}</p>
+                                 <p className="text-lg font-bold text-md-on-surface">{formData.provider}</p>
                              </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold mb-2 primText">{t('mobileNumber')}</label>
+                            <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('mobileNumber')}</label>
                             <div className="relative">
-                                <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 secText" size={18} />
+                                <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 text-md-on-surface-variant" size={18} />
                                 <input 
                                     type="tel" 
                                     name="mobileNumber" 
                                     value={formData.mobileNumber} 
                                     onChange={handleChange} 
                                     required 
-                                    className="inputField pl-10"
+                                    className={`${inputClass} pl-10`}
                                     placeholder="03XX XXXXXXX"
                                 />
                             </div>
                         </div>
 
                         <div className="flex gap-3 pt-4">
-                            <button type="button" onClick={onClose} className="btnSecondary flex-1 py-3.5 rounded-xl font-medium">{t('cancel')}</button>
-                            <button type="submit" className="btnPrimary flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2">
+                            <button type="button" onClick={onClose} className="flex-1 py-3.5 rounded-md bg-md-secondary-container text-md-on-secondary-container font-medium hover:opacity-90 transition-opacity">{t('cancel')}</button>
+                            <button type="submit" className="flex-1 py-3.5 rounded-md bg-md-primary text-md-on-primary font-bold flex items-center justify-center gap-2 hover:shadow-md transition-shadow">
                                 {isSaving ? <Loader2 size={20} className="animate-spin" /> : t('save')}
                             </button>
                         </div>

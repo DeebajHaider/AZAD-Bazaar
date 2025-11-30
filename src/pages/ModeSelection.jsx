@@ -8,39 +8,47 @@ import { Layout } from '../Layout';
 import HeaderWithName from '../component/HeaderWithName';
 
 // --- Sub-component: Selectable Mode Card ---
-const ModeOption = ({ id, isSelected, title, description, icon: Icon, accentClass, onClick }) => (
+const ModeOption = ({ id, isSelected, title, description, icon: Icon, accentColorClass, onClick }) => (
   <button
     onClick={() => onClick(id)}
+    // Card Style: Surface Container (Base), Primary Container (Selected)
     className={`w-full flex flex-row items-center gap-4 p-4 rounded-xl text-left transition-all duration-200 border-2 group
-      ${isSelected ? 'modeChooseButton-selected shadow-md' : 'modeChooseButton-unselected shadow-sm'}
+      ${isSelected 
+        ? 'bg-md-primary-container border-md-primary text-md-on-primary-container shadow-md' 
+        : 'bg-md-surface-container border-transparent hover:bg-md-surface-container-high hover:shadow-sm text-md-on-surface'
+      }
     `}
     aria-pressed={isSelected}
   >
     {/* Icon Container */}
     <div className={`
       w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 transition-colors
-      ${isSelected ? 'bg-white dark:bg-black' : 'secBg'}
+      ${isSelected ? 'bg-md-background text-md-primary' : 'bg-md-surface-container-highest text-md-on-surface-variant'}
     `}>
       <Icon 
         size={28} 
-        className={isSelected ? accentClass : 'secText group-hover:text-gray-900 dark:group-hover:text-gray-100'} 
+        // Use the accent color class if not selected to distinguish modes, 
+        // but if selected, force Primary color to match the container theme.
+        className={isSelected ? 'text-md-primary' : accentColorClass} 
       />
     </div>
 
     {/* Text Content */}
     <div className="flex-1">
-      <h3 className={`text-lg font-bold mb-1 ${isSelected ? 'text-inherit' : 'primText'}`}>
+      <h3 className="text-lg font-bold mb-1">
         {title}
       </h3>
-      <p className={`text-sm leading-tight ${isSelected ? 'text-inherit opacity-90' : 'secText'}`}>
+      <p className={`text-sm leading-tight ${isSelected ? 'text-md-on-primary-container/80' : 'text-md-on-surface-variant'}`}>
         {description}
       </p>
     </div>
 
-    {/* Selection Indicator (Checkmark) */}
+    {/* Selection Indicator */}
     <div className={`
-      w-6 h-6 rounded-full flex items-center justify-center border-2
-      ${isSelected ? 'bg-blue-500 border-blue-500 text-white' : 'border-gray-300 dark:border-slate-600 bg-transparent'}
+      w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all
+      ${isSelected 
+        ? 'bg-md-primary border-md-primary text-md-on-primary' 
+        : 'border-md-outline-variant bg-transparent'}
     `}>
       {isSelected && <Check size={14} strokeWidth={3} />}
     </div>
@@ -53,8 +61,6 @@ export default function ModeSelection() {
   const { speakText, stop } = useTTS();
   const navigate = useNavigate();
 
-  // Local state to track selection before confirming
-  // We initialize based on current context, defaulting to 'standard'
   const [selectedMode, setSelectedMode] = useState(() => {
     if (!ascMode || ascMode === 'standard') return 'standard';
     if (ascMode.includes('highContrast')) return 'highContrast';
@@ -62,7 +68,6 @@ export default function ModeSelection() {
     return 'standard';
   });
 
-  // Ensure colorMode and fontSize are set correctly on mount for highContrast
   React.useEffect(() => {
     if (selectedMode === 'highContrast') {
       if (colorMode !== 'highContrast') setColorMode('highContrast');
@@ -73,7 +78,6 @@ export default function ModeSelection() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const speakingRef = useRef(false);
 
-  // --- TTS Logic ---
   const speakWithIndicator = async (text, options = {}) => {
     setIsSpeaking(true);
     speakingRef.current = true;
@@ -87,7 +91,6 @@ export default function ModeSelection() {
   };
 
   useEffect(() => {
-    // Read instructions on mount
     const introText = t('tts.modeSelection.intro') || "Please select your display mode.";
     speakWithIndicator(introText);
     
@@ -98,10 +101,8 @@ export default function ModeSelection() {
     // eslint-disable-next-line
   }, []);
 
-  // --- Handlers ---
   const handleModeChange = (id) => {
     setSelectedMode(id);
-    // Always update context state, even if re-selecting same mode
     if (id === 'illiterate') {
       setAscMode('illiterate voiceInput');
       setFontSize('normal');
@@ -115,7 +116,7 @@ export default function ModeSelection() {
       setAscMode('standard');
       setFontSize('normal');
     }
-    // Speak the translated TTS label for the selected mode
+    
     let ttsKey = '';
     if (id === 'standard') ttsKey = 'tts.modeSelection.option1';
     else if (id === 'highContrast') ttsKey = 'tts.modeSelection.option2';
@@ -125,15 +126,15 @@ export default function ModeSelection() {
   };
 
   const handleConfirm = () => {
-    navigate('/theme-selection'); // Navigate to ThemeSelection page
+    navigate('/theme-selection');
   };
 
   // --- Footer Component ---
   const ConfirmFooter = () => (
-    <div className="secBg dividerBorder border-t p-4 pb-6">
+    <div className="bg-md-surface border-t border-md-outline-variant p-4 pb-6">
       <button
         onClick={handleConfirm}
-        className="w-full min-h-12 px-6 py-4 btnPrimary rounded-xl text-lg shadow-lg flex items-center justify-center gap-2"
+        className="w-full min-h-[56px] px-6 py-4 bg-md-primary text-md-on-primary font-bold rounded-xl text-lg shadow-md hover:shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2"
       >
         <span>{t('common.confirm') || 'Confirm & Continue'}</span>
       </button>
@@ -145,24 +146,24 @@ export default function ModeSelection() {
       header={<HeaderWithName title={t('modeSelection.title', 'Select View')} to={-1} />}
       footer={<ConfirmFooter />}
     >
-      {/* Speaking Indicator */}
+      {/* Speaking Indicator: Primary Color */}
       {isSpeaking && (
         <div className="fixed top-20 right-4 z-50 pointer-events-none">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500 text-white shadow-lg animate-pulse">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-md-primary text-md-on-primary shadow-lg animate-pulse">
             <Volume2 size={18} />
             <span className="text-xs font-bold">Speaking...</span>
           </div>
         </div>
       )}
 
-      <main className="flex-1 overflow-y-auto primBg h-full">
+      <main className="flex-1 overflow-y-auto bg-md-surface h-full">
         <div className="max-w-[430px] mx-auto p-4 space-y-6">
           
-          <div className="text-center space-y-2 py-2">
-            <h2 className="text-xl font-bold primText">
+          <div className="text-center space-y-2 py-4">
+            <h2 className="text-xl font-bold text-md-on-surface">
               {t('modeSelection.heading') || 'How should the app look?'}
             </h2>
-            <p className="text-sm secText">
+            <p className="text-sm text-md-on-surface-variant">
               {t('modeSelection.subHeading') || 'Choose the experience that works best for you.'}
             </p>
           </div>
@@ -176,7 +177,7 @@ export default function ModeSelection() {
               title={t('modeSelection.normal.title', 'Normal Mode')}
               description={t('modeSelection.normal.description', 'Default layout and colors.')}
               icon={User}
-              accentClass="text-blue-600 dark:text-blue-400"
+              accentColorClass="text-md-primary" // Use theme color
             />
 
             {/* 2. Assisted (High Contrast) */}
@@ -187,7 +188,9 @@ export default function ModeSelection() {
               title={t('modeSelection.assistance.title', 'Visual Assistance')}
               description={t('modeSelection.assistance.description', 'High contrast colors and larger text.')}
               icon={Eye}
-              accentClass="text-green-600 dark:text-green-400"
+              // Using a semantic color (e.g. Tertiary or Success-like) if available, 
+              // or just keep explicit classes if they map to your specific accessible palette.
+              accentColorClass="text-green-700 dark:text-green-300" 
             />
 
             {/* 3. Illiterate (Audio Guided) */}
@@ -198,7 +201,7 @@ export default function ModeSelection() {
               title={t('modeSelection.illiterate.title', 'Audio Guided')}
               description={t('modeSelection.illiterate.description', 'Enables voice commands and voice readout.')}
               icon={Ear}
-              accentClass="text-amber-600 dark:text-amber-400"
+              accentColorClass="text-md-tertiary" // Use Tertiary role
             />
           </div>
 

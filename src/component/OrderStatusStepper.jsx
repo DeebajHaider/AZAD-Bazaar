@@ -20,18 +20,19 @@ const OrderStatusStepper = ({ currentStatus, history = [] }) => {
   if (normalizedCurrent === 'processing') currentStepIndex = 1
   if (currentStepIndex === -1 && !isFailed) currentStepIndex = 0
 
-  // Compact Failed State
+  // --- 1. Failed State Theme ---
   if (isFailed) {
     return (
       <div className="flex items-center gap-3 py-2">
-        <div className="w-8 h-8 rounded-full accentDangerBg flex items-center justify-center text-white shadow-sm flex-shrink-0">
+        {/* Error Circle: bg-md-error / text-md-on-error */}
+        <div className="w-8 h-8 rounded-full bg-md-error flex items-center justify-center text-md-on-error shadow-sm flex-shrink-0">
           <X size={16} />
         </div>
         <div>
-          <p className="font-bold primText text-sm">
+          <p className="font-bold text-md-on-surface text-sm">
             {t(`orders.status.${normalizedCurrent}`, normalizedCurrent)}
           </p>
-          <p className="text-xs secText">
+          <p className="text-xs text-md-error">
             {t('orders.status.failedMessage', 'Order cancelled.')}
           </p>
         </div>
@@ -39,6 +40,7 @@ const OrderStatusStepper = ({ currentStatus, history = [] }) => {
     )
   }
 
+  // --- 2. Stepper Theme ---
   return (
     <div className="relative pl-1">
       {steps.map((step, index) => {
@@ -50,42 +52,48 @@ const OrderStatusStepper = ({ currentStatus, history = [] }) => {
         const timeString = historyEntry ? dayjs(historyEntry.timestamp).format('MMM D, HH:mm') : null
 
         return (
-          // Reduced vertical spacing: pb-4 instead of mb-6
           <div key={step.key} className={`flex gap-3 relative ${!isLast ? 'pb-5' : ''}`}>
             
             {/* Vertical Line */}
             {!isLast && (
-              // Adjusted for w-6 icons: Left 11px centers it (24px/2 - 1px)
               <div 
                 className={`absolute left-[11px] top-6 bottom-0 w-[2px] ${
-                  index < currentStepIndex ? 'accentPrimBg' : 'bg-gray-200 dark:bg-slate-700'
+                  index < currentStepIndex 
+                    ? 'bg-md-primary' // Active Line
+                    : 'bg-md-surface-container-highest' // Inactive Line (Subtle)
                 }`} 
               />
             )}
 
-            {/* Compact Icon (w-6 h-6) */}
+            {/* Icon Circle */}
             <div className="relative z-10 flex-shrink-0">
               <div 
-                className={`w-6 h-6 rounded-full flex items-center justify-center border-[1.5px] transition-colors duration-300 ${
+                className={`w-6 h-6 rounded-full flex items-center justify-center border-[1.5px] transition-all duration-300 ${
                   isCompleted 
-                    ? 'accentPrimBg border-transparent text-white' 
-                    : 'bg-white dark:bg-slate-950 primBorder secText'
-                } ${isCurrent ? 'ring-2 ring-blue-100 dark:ring-blue-900' : ''}`}
+                    // Completed: Primary Fill, No Border
+                    ? 'bg-md-primary border-transparent text-md-on-primary' 
+                    // Pending: Surface BG, Outline Border
+                    : 'bg-md-surface border-md-outline-variant text-md-on-surface-variant'
+                } ${
+                  // Current Ring: Primary color with opacity
+                  isCurrent ? 'ring-2 ring-md-primary/30' : ''
+                }`}
               >
-                {isCompleted ? <Check size={12} /> : <Circle size={8} />}
+                {isCompleted ? <Check size={12} strokeWidth={3} /> : <Circle size={8} />}
               </div>
             </div>
 
-            {/* Compact Text Content */}
-            <div className={`pt-0.5 flex-1 ${isCompleted ? 'opacity-100' : 'opacity-60'}`}>
+            {/* Text Content */}
+            <div className={`pt-0.5 flex-1 ${isCompleted ? 'opacity-100' : 'opacity-60 grayscale'}`}>
               <div className="flex justify-between items-baseline">
-                <p className={`leading-none ${isCurrent ? 'font-bold primText text-sm' : 'font-medium primText text-sm'}`}>
+                {/* Label: High Emphasis */}
+                <p className={`leading-none text-md-on-surface text-sm ${isCurrent ? 'font-bold' : 'font-medium'}`}>
                   {t(`orders.step.${step.label}`, step.label)}
                 </p>
                 
-                {/* Timestamp is now inline on the right to save vertical space */}
+                {/* Timestamp: Medium Emphasis */}
                 {timeString && (
-                  <span className="text-[10px] secText tabular-nums">
+                  <span className="text-[10px] text-md-on-surface-variant tabular-nums">
                     {timeString}
                   </span>
                 )}
@@ -93,7 +101,7 @@ const OrderStatusStepper = ({ currentStatus, history = [] }) => {
               
               {/* Current Status Indicator */}
               {isCurrent && (
-                 <p className="text-[11px] secText mt-1 animate-pulse leading-tight">
+                 <p className="text-[11px] text-md-primary mt-1 animate-pulse leading-tight font-medium">
                    {t('orders.status.inProgress', 'Processing...')}
                  </p>
               )}

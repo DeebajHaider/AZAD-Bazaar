@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { X, Search, Filter, Mic } from 'lucide-react'
+import { X, Search, Filter, Mic, Check } from 'lucide-react'
 import VoiceInputModal from './VoiceInputModal'
 
 const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, brands, t, lang, translateDBVal }) => {
@@ -71,58 +71,75 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
     setVoiceModalOpen(false)
   }
 
+  // --- Chip Component ---
+  // Reusable component for consistent filter chip styling
+  const FilterChip = ({ label, isSelected, onClick }) => (
+    <button
+      onClick={onClick}
+      className={`
+        px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2
+        ${isSelected 
+          ? 'bg-md-primary-container text-md-on-primary-container shadow-sm' 
+          : 'bg-md-surface-container-low text-md-on-surface hover:bg-md-surface-container-high'
+        }
+      `}
+    >
+      {isSelected && <Check size={14} className="flex-shrink-0" />}
+      <span>{label}</span>
+    </button>
+  );
+
   return (
-    // Outer backdrop: Flat dark overlay, no blur
+    // Outer backdrop: Scrim
     <div 
-      className="fixed inset-0 z-50 flex justify-center items-end bg-black/60 transition-opacity" 
+      className="fixed inset-0 z-50 flex justify-center items-end bg-black/60 transition-opacity backdrop-blur-sm" 
       role="dialog" 
       aria-modal="true" 
       aria-labelledby="filter-title"
       onClick={onClose}
     >
-      {/* Modal Container */}
+      {/* Modal Container: Surface Container High (Standard for Bottom Sheets) */}
       <div 
-        className="secBg w-full max-w-[430px] rounded-t-2xl flex flex-col max-h-[60vh] animate-in slide-in-from-bottom duration-200" 
+        className="bg-md-surface-container-high w-full max-w-[430px] rounded-t-2xl flex flex-col max-h-[75vh] animate-in slide-in-from-bottom duration-200 shadow-2xl" 
         onClick={e => e.stopPropagation()}
       >
         {/* --- Drag Handle --- */}
         <div className="w-full flex justify-center pt-3 pb-1" onClick={onClose}>
-          <div className="w-12 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+          <div className="w-12 h-1 rounded-md bg-md-on-surface-variant/40"></div>
         </div>
 
         {/* --- Header Section (Sticky) --- */}
-        <header className="px-5 pb-2 flex-shrink-0 space-y-3">
+        <header className="px-5 pb-2 flex-shrink-0 space-y-4">
           <div className="flex justify-between items-center">
-             <h2 id="filter-title" className="text-lg font-bold primText flex items-center gap-2">
-               <Filter size={18} className="accentPrimText"/>
+             <h2 id="filter-title" className="text-xl font-bold text-md-on-surface flex items-center gap-2">
+               <Filter size={20} className="text-md-primary"/>
                {t('searchResults.filterPanel.title')}
              </h2>
              <button 
                onClick={onClose} 
                aria-label={t('common.close')} 
-               className="btnSecondary rounded-full !p-0 h-9 w-9 flex items-center justify-center focusRing"
+               className="w-8 h-8 rounded-md flex items-center justify-center bg-md-surface-container hover:bg-md-surface-container-highest transition-colors text-md-on-surface-variant"
              >
                <X size={18} />
              </button>
           </div>
 
-          {/* Search Input */}
+          {/* Search Input: Filled Style */}
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 secText pointer-events-none" size={18} />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-md-on-surface-variant/70 pointer-events-none" size={18} />
             <input
               type="text"
               placeholder={t('searchResults.header.placeholder') || "Search..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              // Using standard inputField class
-              className="inputField !pl-10 pr-20 py-2 text-sm"
+              className="w-full h-11 rounded-md bg-md-surface-container-highest pl-10 pr-20 text-sm text-md-on-surface placeholder:text-md-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-md-primary transition-all"
               aria-label="Search categories and brands"
             />
             {/* Clear Button */}
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-12 top-1/2 -translate-y-1/2 p-1 rounded-full secHoverBg secText hover:primText transition-colors"
+                className="absolute right-12 top-1/2 -translate-y-1/2 p-1 rounded-md text-md-on-surface-variant hover:text-md-on-surface hover:bg-md-on-surface-variant/10 transition-colors"
                 aria-label={t('common.clear')}
               >
                 <X size={14} />
@@ -132,67 +149,52 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
             <button
               onClick={() => setVoiceModalOpen(true)}
               aria-label={t('searchResults.header.voiceButtonAriaLabel')}
-              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full accentPrimBg flex items-center justify-center hover:opacity-90 transition-colors"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 h-8 w-8 rounded-md bg-md-primary flex items-center justify-center hover:opacity-90 transition-opacity"
             >
-              <Mic size={16} className="primText text-white dark:text-white" />
+              <Mic size={16} className="text-md-on-primary" />
             </button>
           </div>
-          <div className="border-b dividerBorder"></div>
+          <div className="border-b border-md-outline-variant/30"></div>
         </header>
 
         {/* --- Main Content (Scrollable) --- */}
-        <main className="overflow-y-auto px-5 py-2 space-y-5 flex-grow">
+        <main className="overflow-y-auto px-5 py-2 space-y-6 flex-grow">
             {/* Quick Filters */}
             {!searchQuery && (
               <div className="animate-in slide-in-from-left-2 duration-300">
-                  <h3 className="text-xs font-bold uppercase tracking-wider secText mb-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-md-on-surface-variant mb-3">
                     {t('searchResults.filterPanel.quickFilters')}
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                      {specialFilters.map(filter => {
-                          const isSelected = tempCategories.includes(filter._id)
-                          return (
-                            <button 
-                              key={filter._id} 
-                              onClick={() => handleToggleCategory(filter._id)} 
-                              // Using modeChooseButton classes for consistent selected/unselected states
-                              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${
-                                isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'
-                              }`}
-                            >
-                              {filter.name}
-                            </button>
-                          )
-                      })}
+                      {specialFilters.map(filter => (
+                        <FilterChip 
+                          key={filter._id}
+                          label={filter.name}
+                          isSelected={tempCategories.includes(filter._id)}
+                          onClick={() => handleToggleCategory(filter._id)}
+                        />
+                      ))}
                   </div>
               </div>
             )}
 
             {/* Categories */}
             <div>
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-xs font-bold uppercase tracking-wider secText">
-                    {t('searchResults.filterPanel.categoryLabel')}
-                  </h3>
-                </div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-md-on-surface-variant mb-3">
+                  {t('searchResults.filterPanel.categoryLabel')}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                     {visibleCategories.length > 0 ? (
-                      visibleCategories.map(cat => {
-                           const isSelected = tempCategories.includes(cat._id)
-                           return (
-                             <button 
-                               key={cat._id} 
-                               onClick={() => handleToggleCategory(cat._id)} 
-                               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${
-                                 isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'
-                               }`}
-                             >
-                               {getName(cat, "Category")}
-                             </button>
-                           )
-                      })
+                      visibleCategories.map(cat => (
+                         <FilterChip
+                           key={cat._id}
+                           label={getName(cat, "Category")}
+                           isSelected={tempCategories.includes(cat._id)}
+                           onClick={() => handleToggleCategory(cat._id)}
+                         />
+                      ))
                     ) : (
-                      <p className="text-sm secText italic w-full text-center py-4">
+                      <p className="text-sm text-md-on-surface-variant/70 italic w-full text-center py-2">
                         {t('searchResults.results.noResults') || "No match"}
                       </p>
                     )}
@@ -201,29 +203,21 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
 
             {/* Brands */}
             <div>
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-xs font-bold uppercase tracking-wider secText">
-                    {t('searchResults.filterPanel.brandLabel')}
-                  </h3>
-                </div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-md-on-surface-variant mb-3">
+                  {t('searchResults.filterPanel.brandLabel')}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                     {visibleBrands.length > 0 ? (
-                      visibleBrands.map(brand => {
-                           const isSelected = tempBrands.includes(brand._id)
-                           return (
-                             <button 
-                               key={brand._id} 
-                               onClick={() => handleToggleBrand(brand._id)} 
-                               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${
-                                 isSelected ? 'modeChooseButton-selected' : 'modeChooseButton-unselected'
-                               }`}
-                             >
-                               {getName(brand, "Brand")}
-                             </button>
-                           )
-                      })
+                      visibleBrands.map(brand => (
+                         <FilterChip
+                           key={brand._id}
+                           label={getName(brand, "Brand")}
+                           isSelected={tempBrands.includes(brand._id)}
+                           onClick={() => handleToggleBrand(brand._id)}
+                         />
+                      ))
                     ) : (
-                      <p className="text-sm secText italic w-full text-center py-4">
+                      <p className="text-sm text-md-on-surface-variant/70 italic w-full text-center py-2">
                          {t('searchResults.results.noResults') || "No match"}
                       </p>
                     )}
@@ -233,23 +227,25 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
             <div className="h-4"></div>
         </main>
 
-        {/* --- Footer (Fixed at bottom of modal) --- */}
-        <footer className="flex gap-3 p-4 pt-3 border-t dividerBorder flex-shrink-0 bg-inherit pb-safe">
+        {/* --- Footer (Fixed) --- */}
+        <footer className="flex gap-3 p-5 border-t border-md-outline-variant/30 flex-shrink-0 bg-md-surface-container-high pb-safe">
+           {/* Clear: Tonal Button (Secondary) */}
            <button 
              onClick={handleClear} 
-             className="flex-1 min-h-[48px] btnSecondary rounded-lg font-medium active:scale-[0.98] transition-transform focusRing"
+             className="flex-1 min-h-[48px] rounded-md bg-md-secondary-container text-md-on-secondary-container font-semibold text-sm active:scale-[0.98] transition-transform hover:opacity-90"
            >
              {t('searchResults.activeFilters.clearAllButton')}
            </button>
+           {/* Apply: Primary Button */}
            <button 
              onClick={handleApply} 
-             className="flex-[2] min-h-[48px] btnPrimary rounded-lg font-semibold active:scale-[0.98] transition-transform focusRing"
+             className="flex-[2] min-h-[48px] rounded-md bg-md-primary text-md-on-primary font-semibold text-sm shadow-md active:scale-[0.98] transition-transform hover:shadow-lg"
            >
              {t('searchResults.filterPanel.applyButton')}
            </button>
         </footer>
 
-        {/* Voice Input Modal (moved inside modal container) */}
+        {/* Voice Input Modal */}
         <VoiceInputModal
           isOpen={isVoiceModalOpen}
           onClose={() => setVoiceModalOpen(false)}

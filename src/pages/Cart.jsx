@@ -40,17 +40,19 @@ export default function Cart() {
   };
 
   // Cart icon to display in header
+  // Matches the style of the Back button in HeaderWithName (Secondary Container)
   const CartIcon = () => (
-    <div className="min-h-11 min-w-11 flex items-center justify-center rounded-lg secBg primBorder">
-      <ShoppingCart className="  accentPrimText" />
+    <div className="min-h-11 min-w-11 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container">
+      <ShoppingCart size={20} />
     </div>
   )
 
   // Header button for clearing the cart
+  // Uses Error color for destructive action
   const ClearCartButton = () => (
     <button
       onClick={clearCart}
-      className="text-sm font-medium accentDangerText underline underline-offset-2 transition-opacity hover:opacity-80"
+      className="text-sm font-medium text-md-error hover:text-md-error/80 underline underline-offset-2 transition-opacity"
     >
       {t('cart.actions.clear')}
     </button>
@@ -59,16 +61,18 @@ export default function Cart() {
   // View to display when the cart is empty
   const EmptyCartView = () => (
     <div className="flex flex-1 flex-col items-center justify-center text-center p-4">
-      <ShoppingCart className="w-24 h-24 secText opacity-50 mb-4" />
-      <h2 className="text-xl font-semibold primText">
+      <div className="w-24 h-24 rounded-full bg-md-surface-container-highest flex items-center justify-center mb-4">
+        <ShoppingCart className="w-10 h-10 text-md-on-surface-variant/50" />
+      </div>
+      <h2 className="text-xl font-bold text-md-on-surface">
         {t('cart.empty.title')}
       </h2>
-      <p className="mt-2 secText">
+      <p className="mt-2 text-md-on-surface-variant max-w-[250px]">
         {t('cart.empty.description')}
       </p>
       <button
         onClick={() => navigate('/')}
-        className="mt-6 min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
+        className="mt-6 min-h-12 px-8 py-3 bg-md-primary text-md-on-primary font-medium rounded-md shadow-sm hover:shadow-md transition-all duration-200"
       >
         {t('cart.empty.cta')}
       </button>
@@ -95,28 +99,30 @@ export default function Cart() {
   )
 
   // Sticky footer for checkout summary
+  // Uses Surface Container Low/Surface for background + subtle Outline Variant border
   const CartSummaryFooter = () => (
-    <div className="secBg dividerBorder border-t p-4">
+    <div className="bg-md-surface border-t border-md-outline-variant p-4">
       <div className="space-y-4">
         <div className="space-y-2">
           {savings > 0 && (
             <div className="flex justify-between items-center text-sm">
-              <span className="secText">{t('cart.summary.savings')}</span>
-              <span className="font-medium accentSuccessText">
+              <span className="text-md-on-surface-variant">{t('cart.summary.savings')}</span>
+              {/* Green is standard for savings, distinct from Primary/Error */}
+              <span className="font-bold text-green-700 dark:text-green-300">
                 - {t('common.currencySymbol')}{formatCurrency(savings)}
               </span>
             </div>
           )}
           <div className="flex justify-between items-baseline">
-            <span className="font-semibold primText">{t('cart.summary.subtotal')}</span>
-            <span className="text-xl font-bold primText">
+            <span className="font-semibold text-md-on-surface">{t('cart.summary.subtotal')}</span>
+            <span className="text-xl font-bold text-md-on-surface">
               {t('common.currencySymbol')}{formatCurrency(total)}
             </span>
           </div>
         </div>
         <button
           onClick={() => navigate('/checkout')}
-          className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
+          className="w-full min-h-12 px-6 py-3 bg-md-primary text-md-on-primary font-semibold rounded-md shadow-sm hover:shadow-md active:opacity-90 transition-all duration-200"
         >
           {t('cart.actions.checkout')}
         </button>
@@ -136,7 +142,7 @@ export default function Cart() {
         />
       }
     >
-      <main className="flex flex-1 flex-col primBg min-h-full">
+      <main className="flex flex-1 flex-col bg-md-surface min-h-full">
         {cartItems.length > 0 ? <CartContents /> : <EmptyCartView />}
       </main>
     </Layout>

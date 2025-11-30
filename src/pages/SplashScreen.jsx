@@ -5,14 +5,7 @@ import ImageWithLoader from '../component/ImageWithLoader'
 
 /**
  * A splash screen component that shows a logo animation.
- * It checks localStorage for 'hasOnboarded' status and redirects accordingly.
- * 
- * Logic:
- * 1. hasOnboarded === 'true' -> Redirect to /login
- * 2. hasOnboarded !== 'true' -> Redirect to /language-selection
- *
- * @param {object} props
- * @param {number} [props.duration=2000] - Total time in milliseconds to show the splash screen.
+ * Theme: Material Design 3 Surface
  */
 export default function SplashScreen({ duration = 2000 }) {
   const { t } = useI18n()
@@ -24,7 +17,7 @@ export default function SplashScreen({ duration = 2000 }) {
 
     const navigationTimer = setTimeout(() => {
       const hasOnboarded = localStorage.getItem('hasOnboarded');
-      // Navigate based on onboarding status (theme now handled in index.html)
+      // Navigate based on onboarding status
       if (hasOnboarded === 'true') {
         navigate('/login', { replace: true });
       } else {
@@ -39,7 +32,8 @@ export default function SplashScreen({ duration = 2000 }) {
   }, [navigate, duration]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center primBg">
+    // Container: Surface Background
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-md-surface">
       <div className="flex flex-col items-center gap-4">
         {/* Logo with the fade-in and scale animation */}
         <ImageWithLoader
@@ -48,8 +42,8 @@ export default function SplashScreen({ duration = 2000 }) {
           imageClassName="h-40 w-auto animate-fade-in-scale"
         />
 
-        {/* Feedback text that fades in after a short delay */}
-        <p className={`text-base secText transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Feedback text: Medium Emphasis (On Surface Variant) */}
+        <p className={`text-base text-md-on-surface-variant transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
           {t('splash.loadingMessage')}
         </p>
       </div>

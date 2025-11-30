@@ -15,16 +15,21 @@ export default function Orders() {
   // Improved Empty State with actionable button
   const EmptyState = () => (
     <div className="flex flex-1 flex-col items-center justify-center text-center p-8 min-h-[60vh]">
-      <div className="w-20 h-20 secBg rounded-full flex items-center justify-center mb-4">
-        <PackageX className="w-10 h-10 secText opacity-60" />
+      {/* Icon: Surface Container Highest for neutral emphasis */}
+      <div className="w-24 h-24 rounded-full bg-md-surface-container-highest flex items-center justify-center mb-6">
+        <PackageX className="w-10 h-10 text-md-on-surface-variant/50" />
       </div>
-      <h2 className="text-xl font-bold primText mb-2">{t('orders.empty.title')}</h2>
-      <p className="text-sm secText max-w-[250px] mx-auto mb-6">
+      
+      {/* Typography: On Surface (Title) vs Variant (Body) */}
+      <h2 className="text-xl font-bold text-md-on-surface mb-2">{t('orders.empty.title')}</h2>
+      <p className="text-sm text-md-on-surface-variant max-w-[250px] mx-auto mb-8 leading-relaxed">
         {t('orders.empty.description')}
       </p>
+      
+      {/* CTA: Primary Button */}
       <Link 
         to="/" 
-        className="btnPrimary px-6 py-3 rounded-lg shadow-sm min-h-12 flex items-center"
+        className="min-h-[48px] px-8 py-3 rounded-full bg-md-primary text-md-on-primary font-bold shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center"
       >
         {t('cart.empty.cta') || "Start Shopping"}
       </Link>
@@ -34,12 +39,17 @@ export default function Orders() {
   // Improved Error State
   const ErrorState = () => (
     <div className="flex flex-1 flex-col items-center justify-center text-center p-6 mt-10">
-      <AlertCircle className="w-12 h-12 accentDangerText mb-4" />
-      <h2 className="text-lg font-semibold primText mb-2">{t('common.error.title')}</h2>
-      <p className="text-sm secText mb-4">{error?.message || t('common.error.description')}</p>
+      {/* Error Color Role */}
+      <div className="w-16 h-16 rounded-full bg-md-error-container flex items-center justify-center mb-4">
+        <AlertCircle className="w-8 h-8 text-md-on-error-container" />
+      </div>
+      <h2 className="text-lg font-bold text-md-on-surface mb-2">{t('common.error.title')}</h2>
+      <p className="text-sm text-md-on-surface-variant mb-6 max-w-xs">{error?.message || t('common.error.description')}</p>
+      
+      {/* Retry: Tonal Button (Secondary Container) */}
       <button 
         onClick={() => window.location.reload()} 
-        className="btnSecondary px-4 py-2 rounded-lg text-sm"
+        className="min-h-[40px] px-6 py-2 rounded-full bg-md-secondary-container text-md-on-secondary-container font-medium text-sm hover:opacity-80 transition-opacity"
       >
         {t('common.retry') || "Retry"}
       </button>
@@ -56,9 +66,9 @@ export default function Orders() {
       header={<HeaderWithName title={t('orders.title')} to="/" />}
       footer={<BottomNav />}
     >
-      <main className="flex-1 min-h-full overflow-y-auto primBg">
-        {/* Add a subtle background variation for list area if needed, currently keeping generic primBg */}
+      <main className="flex-1 min-h-full overflow-y-auto bg-md-surface">
         <div className="max-w-[430px] mx-auto w-full p-4 space-y-4">
+          
           {/* Loading State */}
           {loading && (
             Array.from({ length: 4 }).map((_, i) => <OrderItemCardSkeleton key={i} />)
@@ -74,7 +84,8 @@ export default function Orders() {
                 key={order._id} 
                 to={`/orders/${order._id}`} 
                 state={{ order }} 
-                className="block focusRing rounded-lg" // Accessibility focus ring
+                // Accessibility Ring matching Primary color
+                className="block rounded-lg focus:outline-none focus:ring-2 focus:ring-md-primary focus:ring-offset-2 focus:ring-offset-md-surface" 
               >
                 <OrderItemCard order={order} />
               </Link>

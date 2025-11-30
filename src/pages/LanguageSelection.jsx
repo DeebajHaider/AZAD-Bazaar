@@ -1,10 +1,8 @@
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useI18n } from '../context/I18nContext'
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle, Globe } from 'lucide-react'
 import { useTTS } from '../context/TTSContext'
-
 
 export default function LanguageSelection() {
   const { lang, setLang } = useI18n()
@@ -13,14 +11,11 @@ export default function LanguageSelection() {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const speakingRef = useRef(false)
 
-
   const languages = [
     { code: 'en', name: 'English', nativeName: 'English' },
     { code: 'ur', name: 'Urdu', nativeName: 'اردو' },
   ]
 
-
-  // This object is kept inside for simplicity, but could be defined outside the component.
   const languageStrings = {
     headerTitle: {
       en: "Choose Your Language",
@@ -43,12 +38,11 @@ export default function LanguageSelection() {
     }
   }
 
-  // Helper to handle speaking with indicator, sequential and cancel previous
   const speakWithIndicator = async (text, options = {}) => {
     setIsSpeaking(true)
     speakingRef.current = true
     try {
-      await stop(); // Cancel any current speech before starting new
+      await stop(); 
       await speakText(text, options)
     } finally {
       setIsSpeaking(false)
@@ -56,7 +50,6 @@ export default function LanguageSelection() {
     }
   }
 
-  // On mount: play English, then Urdu prompt sequentially
   useEffect(() => {
     let cancelled = false
     const playPrompts = async () => {
@@ -75,28 +68,32 @@ export default function LanguageSelection() {
   }, [])
 
   return (
-    <div className="min-h-screen flex items-center justify-center primBg p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-md-surface p-4 relative">
       {/* Speaking indicator */}
       {isSpeaking && (
         <div className="absolute top-4 right-4 z-50">
-          <span className="inline-block w-4 h-4 rounded-full bg-blue-500 animate-pulse border-2 border-white shadow"></span>
+          <span className="inline-block w-4 h-4 rounded-full bg-md-primary animate-pulse border-2 border-md-surface shadow-sm"></span>
         </div>
       )}
+      
       <div className="w-full max-w-[430px] space-y-6">
         {/* Page Header */}
         <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <div className="w-16 h-16 secBg rounded-full flex items-center justify-center primBorder">
-              <Globe className="w-8 h-8 secText" />
+            {/* Icon Container: Secondary Container */}
+            <div className="w-16 h-16 rounded-full bg-md-secondary-container flex items-center justify-center text-md-on-secondary-container shadow-sm">
+              <Globe className="w-8 h-8" />
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold primText ">{languageStrings.headerTitle.en}</h1>
-            <p className="mt-1 text-lg secText">{languageStrings.headerTitle.ur}</p>
+            <h1 className="text-2xl font-bold text-md-on-surface">{languageStrings.headerTitle.en}</h1>
+            <p className="mt-1 text-lg text-md-on-surface-variant">{languageStrings.headerTitle.ur}</p>
           </div>
         </div>
-        {/* Main Content Card */}
-        <div className="secBg primBorder rounded-xl shadow-sm p-5 space-y-4">
+
+        {/* Main Content Card: Surface Container */}
+        <div className="bg-md-surface-container rounded-md shadow-sm p-5 space-y-4">
+          
           {/* Language Options */}
           <div className="space-y-3">
             {languages.map((language) => {
@@ -106,40 +103,48 @@ export default function LanguageSelection() {
                   key={language.code}
                   onClick={async () => {
                     setLang(language.code)
-                    // Cancel any current speech, then play TTS for selection
                     if (language.code === 'en') {
                       await speakWithIndicator(languageStrings.tts.selectedEn, { lang: 'en-US' })
                     } else if (language.code === 'ur') {
                       await speakWithIndicator(languageStrings.tts.selectedUr, { lang: 'ur-PK' })
                     }
                   }}
-                  className={`w-full min-h-16 p-4 rounded-lg transition-all duration-200 flex items-center justify-between text-left ${
+                  // Button Styling:
+                  // Selected: Primary Container + Border Primary
+                  // Unselected: Surface Container High (Filled tonal look)
+                  className={`w-full min-h-[72px] p-4 rounded-md transition-all duration-200 flex items-center justify-between text-left border ${
                     isSelected
-                      ? 'modeChooseButton-selected'
-                      : 'modeChooseButton-unselected'
+                      ? 'bg-md-primary-container border-md-primary shadow-sm'
+                      : 'bg-md-surface-container-high border-transparent hover:bg-md-surface-container-highest'
                   }`}
                 >
                   <div>
-                    <p className={`font-semibold text-lg ${isSelected ? '' : 'primText'}`}>{language.name}</p>
-                    <p className={`text-sm ${isSelected ? '' : 'secText'}`}>{language.nativeName}</p>
+                    <p className={`font-bold text-lg ${isSelected ? 'text-md-on-primary-container' : 'text-md-on-surface'}`}>
+                      {language.name}
+                    </p>
+                    <p className={`text-sm ${isSelected ? 'text-md-on-primary-container/80' : 'text-md-on-surface-variant'}`}>
+                      {language.nativeName}
+                    </p>
                   </div>
-                  {isSelected && <CheckCircle className="w-6 h-6 accentPrimText" />}
+                  {isSelected && <CheckCircle className="w-6 h-6 text-md-primary" />}
                 </button>
               )
             })}
           </div>
+
           {/* Confirmation Text */}
           <div className="text-center pt-2">
-            <p className="text-sm secText">
+            <p className="text-sm text-md-on-surface-variant">
               {lang === 'ur' ? languageStrings.selectionConfirmation.ur : languageStrings.selectionConfirmation.en}
             </p>
           </div>
-          {/* Proceed Button */}
+
+          {/* Proceed Button: Primary */}
           <button
             onClick={() => {
               navigate('/mode-selection')
             }}
-            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200"
+            className="w-full min-h-[48px] px-6 py-3 bg-md-primary text-md-on-primary font-bold rounded-md shadow-md hover:shadow-lg transition-all active:scale-[0.98]"
           >
             {lang === 'ur' ? languageStrings.proceedButton.ur : languageStrings.proceedButton.en}
           </button>

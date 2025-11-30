@@ -19,16 +19,17 @@ const languageStrings = {
 
 // --- Sub-components ---
 
+// MD3 Skeleton: Surface Container as base
 const AddressCardSkeleton = () => (
-  <div className="card space-y-3">
+  <div className="bg-md-surface-container rounded-md p-4 space-y-3 animate-pulse">
     <div className="flex justify-between items-start">
-      <div className="w-1/2 h-6 skeleton" />
-      <div className="w-1/4 h-5 skeleton rounded-full" />
+      <div className="w-1/2 h-6 bg-md-surface-variant/50 rounded" />
+      <div className="w-1/4 h-5 bg-md-surface-variant/30 rounded-full" />
     </div>
-    <div className="w-full h-10 skeleton" />
+    <div className="w-full h-10 bg-md-surface-variant/30 rounded" />
     <div className="flex gap-2 pt-2">
-      <div className="flex-1 h-10 skeleton" />
-      <div className="flex-1 h-10 skeleton" />
+      <div className="flex-1 h-10 bg-md-surface-variant/50 rounded" />
+      <div className="flex-1 h-10 bg-md-surface-variant/50 rounded" />
     </div>
   </div>
 )
@@ -40,7 +41,6 @@ export default function Address() {
   const t = (key) => languageStrings[lang][key] || languageStrings['en'][key]
 
   const { addresses, loading, addAddress, updateAddress, deleteAddress, refreshAddresses } = useAddress()
-  // Auth context for propagating default selection globally
   const { setDefaultAddress } = useAuth()
 
   const [showModal, setShowModal] = useState(false)
@@ -74,7 +74,6 @@ export default function Address() {
     e.preventDefault()
     setMutatingState({ type: 'save' })
     try {
-      console.log('Submitting form data:', formData)
       let updatedAddresses
       if (editingAddress) {
         updatedAddresses = await updateAddress({ ...formData, addressId: editingAddress.addressId })
@@ -82,7 +81,6 @@ export default function Address() {
         updatedAddresses = await addAddress(formData)
       }
 
-      // If user marked this address as default, propagate using AuthContext so other pages (Home, Checkout, Settings) update immediately
       if (formData.isDefault) {
         const defaultId = editingAddress
           ? editingAddress.addressId
@@ -96,10 +94,8 @@ export default function Address() {
         }
       }
 
-      // Refresh local hook addresses to reflect any backend adjustments (e.g., unsetting previous default)
       try { await refreshAddresses() } catch (e) { /* silent */ }
 
-      console.log('Address saved successfully:', formData)
       showToast('success', t('saveSuccess'))
       setShowModal(false)
     } catch (error) {
@@ -111,7 +107,6 @@ export default function Address() {
 
   const handleDelete = async (addressId) => {
     if (isActionLoading) return
-    // Prevent deleting the default address
     const target = Array.isArray(addresses) ? addresses.find(a => a.addressId === addressId) : null
     if (target && target.isDefault) {
       showToast('error', t('cannotDeleteDefault'))
@@ -153,7 +148,8 @@ export default function Address() {
           rightAction={
             <button
               onClick={() => handleOpenModal()}
-              className="btnPrimary px-3 py-2 rounded-lg flex items-center gap-2 text-sm"
+              // Primary Button (Compact)
+              className="bg-md-primary text-md-on-primary px-3 py-2 rounded-md flex items-center gap-2 text-sm shadow-sm hover:shadow-md transition-all active:scale-95"
               disabled={isActionLoading}
             >
               <Plus size={18} />
@@ -163,17 +159,20 @@ export default function Address() {
         />
       }
     >
-      <main className="primBg flex-1 overflow-y-auto p-4 min-h-full">
+      <main className="bg-md-surface flex-1 overflow-y-auto p-4 min-h-full">
         {loading ? (
           <div className="space-y-3">
             <AddressCardSkeleton />
             <AddressCardSkeleton />
           </div>
         ) : !Array.isArray(addresses) || addresses.length === 0 ? (
-          <div className="text-center py-16 secText">
-            <MapPin size={48} className="mx-auto mb-4 opacity-50" />
-            <p className="font-medium text-lg primText mb-2">{t('noAddresses')}</p>
-            <button onClick={() => handleOpenModal()} className="btnPrimary mt-4 px-5 py-2.5 rounded-lg text-sm">
+          // Empty State
+          <div className="text-center py-16 flex flex-col items-center">
+            <div className="w-16 h-16 rounded-full bg-md-surface-container-highest flex items-center justify-center mb-4">
+               <MapPin size={32} className="text-md-on-surface-variant/50" />
+            </div>
+            <p className="font-medium text-lg text-md-on-surface mb-4">{t('noAddresses')}</p>
+            <button onClick={() => handleOpenModal()} className="bg-md-primary text-md-on-primary px-6 py-3 rounded-md text-sm font-semibold shadow-md hover:shadow-lg transition-all">
               {t('addFirstAddress')}
             </button>
           </div>
@@ -182,28 +181,30 @@ export default function Address() {
             {addresses.map((address) => {
               const isDeleting = mutatingState.type === 'delete' && mutatingState.id === address.addressId;
               return (
-                <div key={address.addressId} className={`card relative p-4 transition-opacity duration-300 ${isDeleting ? 'opacity-50' : ''}`}>
+                <div key={address.addressId} className={`relative p-4 rounded-md bg-md-surface-container transition-opacity duration-300 border border-transparent shadow-sm ${isDeleting ? 'opacity-50' : ''}`}>
                   {address.isDefault && (
-                    <span className="badgePrimary absolute top-3 right-3">{t('defaultBadge')}</span>
+                    <span className="absolute top-3 right-3 bg-md-tertiary-container text-md-on-tertiary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">{t('defaultBadge')}</span>
                   )}
                   <div className="mb-3 pr-20">
-                    <h3 className="text-md font-semibold mb-1 primText">{address.label}</h3>
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap secText">{address.addressText}</p>
+                    <h3 className="text-base font-bold mb-1 text-md-on-surface">{address.label}</h3>
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap text-md-on-surface-variant">{address.addressText}</p>
                   </div>
                   <div className="flex gap-2 mt-3">
-                    <button onClick={() => handleOpenModal(address)} className="btnSecondary flex-1 py-2 rounded-lg flex items-center justify-center gap-2 text-sm" disabled={isActionLoading}>
+                    {/* Edit: Secondary Container (Tonal) */}
+                    <button onClick={() => handleOpenModal(address)} className="flex-1 py-2 rounded-md bg-md-secondary-container text-md-on-secondary-container flex items-center justify-center gap-2 text-sm hover:opacity-90 transition-opacity" disabled={isActionLoading}>
                       <Edit2 size={16} />{t('edit')}
                     </button>
+                    {/* Delete: Error Container (Tonal) */}
                     <button onClick={() => {
                       if (address.isDefault) showToast( t('cannotDeleteDefault'))
                       else handleDelete(address.addressId)
-                    }} className={`btnDanger flex-1 py-2 rounded-lg flex items-center justify-center gap-2 text-sm ${address.isDefault ? 'opacity-50' : ''}`} disabled={isActionLoading} >
+                    }} className={`flex-1 py-2 rounded-md bg-md-error-container text-md-on-error-container flex items-center justify-center gap-2 text-sm hover:opacity-90 transition-opacity ${address.isDefault ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isActionLoading} >
                       <Trash2 size={16} />{t('delete')}
                     </button>
                   </div>
                   {isDeleting && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-transparent rounded-lg">
-                      <Loader2 className="animate-spin primText" size={28} />
+                    <div className="absolute inset-0 flex items-center justify-center bg-md-surface/50 rounded-md backdrop-blur-sm">
+                      <Loader2 className="animate-spin text-md-primary" size={28} />
                     </div>
                   )}
                 </div>
@@ -213,39 +214,53 @@ export default function Address() {
         )}
       </main>
 
-      {/* Modal */}
+      {/* Modal: Surface Container High */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50" onClick={handleCloseModal}>
-          <div onClick={(e) => e.stopPropagation()} className="secBg w-full max-w-[430px] rounded-t-2xl max-h-[90vh] flex flex-col overflow-hidden" style={{animation:'slideUp 0.3s ease-out'}}>
-            <header className="secBg dividerBorder sticky top-0 p-4 flex items-center justify-between flex-shrink-0 rounded-t-2xl">
-              <h2 className="text-lg font-semibold primText">
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50 backdrop-blur-sm" onClick={handleCloseModal}>
+          <div onClick={(e) => e.stopPropagation()} className="bg-md-surface-container-high w-full max-w-[430px] rounded-t-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl" style={{animation:'slideUp 0.3s ease-out'}}>
+            <header className="border-b border-md-outline-variant/30 sticky top-0 p-4 flex items-center justify-between flex-shrink-0 bg-inherit z-10">
+              <h2 className="text-lg font-bold text-md-on-surface">
                 {editingAddress ? t('modalEditTitle') : t('modalAddTitle')}
               </h2>
-              <button onClick={handleCloseModal} className="btnSecondary rounded-full !p-0 h-9 w-9 flex items-center justify-center" aria-label="Close modal" disabled={mutatingState.type === 'save'}>
+              <button onClick={handleCloseModal} className="w-9 h-9 flex items-center justify-center rounded-full bg-md-surface-container-highest text-md-on-surface-variant hover:bg-md-on-surface/10 transition-colors" aria-label="Close modal" disabled={mutatingState.type === 'save'}>
                 <X size={20} />
               </button>
             </header>
 
-            <form onSubmit={handleSubmit} className="p-4 overflow-y-auto flex-1">
+            <form onSubmit={handleSubmit} className="p-5 overflow-y-auto flex-1">
               <fieldset disabled={mutatingState.type === 'save'} className="flex flex-col gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2 primText">{t('labelPlaceholder')}</label>
-                  <input type="text" value={formData.label} onChange={(e) => setFormData(prev => ({...prev, label: e.target.value}))} required className="inputField" />
+                  <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('labelPlaceholder')}</label>
+                  <input 
+                    type="text" 
+                    value={formData.label} 
+                    onChange={(e) => setFormData(prev => ({...prev, label: e.target.value}))} 
+                    required 
+                    // Filled Input Style
+                    className="w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50" 
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2 primText">{t('fullAddressLabel')}</label>
-                  <textarea value={formData.addressText} onChange={(e) => setFormData(prev => ({...prev, addressText: e.target.value}))} required rows={4} placeholder={t('addressPlaceholder')} className="inputField resize-y" />
-                  <button type="button" onClick={handleCaptureLocation} className="btnSecondary mt-2 px-3 py-2 rounded-lg text-sm flex items-center gap-2">
+                  <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('fullAddressLabel')}</label>
+                  <textarea 
+                    value={formData.addressText} 
+                    onChange={(e) => setFormData(prev => ({...prev, addressText: e.target.value}))} 
+                    required 
+                    rows={4} 
+                    placeholder={t('addressPlaceholder')} 
+                    className="w-full rounded-md bg-md-surface-container-highest p-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50 resize-y" 
+                  />
+                  <button type="button" onClick={handleCaptureLocation} className="mt-3 px-3 py-2 rounded-md bg-md-secondary-container text-md-on-secondary-container text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <MapPin size={16} /> {t('captureLocation')}
                   </button>
                 </div>
                 <div className="flex items-center gap-3 pt-2">
-                  <input type="checkbox" id="isDefault" checked={formData.isDefault} onChange={(e) => setFormData(prev => ({...prev, isDefault: e.target.checked}))} className="w-5 h-5 cursor-pointer accentPrimBg focusRing rounded" />
-                  <label htmlFor="isDefault" className="text-sm cursor-pointer primText">{t('setDefault')}</label>
+                  <input type="checkbox" id="isDefault" checked={formData.isDefault} onChange={(e) => setFormData(prev => ({...prev, isDefault: e.target.checked}))} className="w-5 h-5 cursor-pointer accent-md-primary" />
+                  <label htmlFor="isDefault" className="text-sm cursor-pointer text-md-on-surface font-medium">{t('setDefault')}</label>
                 </div>
                 <div className="flex gap-3 pt-4">
-                  <button type="button" onClick={handleCloseModal} className="btnSecondary flex-1 py-3 rounded-lg text-sm font-medium">{t('cancel')}</button>
-                  <button type="submit" className="btnPrimary flex-1 py-3 rounded-lg text-sm font-medium flex items-center justify-center disabled:opacity-60">
+                  <button type="button" onClick={handleCloseModal} className="flex-1 py-3 rounded-md bg-md-surface-container-highest text-md-on-surface-variant font-medium hover:bg-md-on-surface/10 transition-colors text-sm">{t('cancel')}</button>
+                  <button type="submit" className="flex-1 py-3 rounded-md bg-md-primary text-md-on-primary text-sm font-bold flex items-center justify-center shadow-md hover:shadow-lg transition-all disabled:opacity-60">
                     {mutatingState.type === 'save' ? <Loader2 size={20} className="animate-spin" /> : editingAddress ? t('update') : t('add')}
                   </button>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, Search as SearchIcon, X, ChevronUp, ChevronDown, Mic } from 'lucide-react'
+import { ArrowLeft, Search as SearchIcon, X, ChevronUp, ChevronDown, Mic, Filter } from 'lucide-react'
 import ItemCard from '../component/ItemCard'
 import { useProducts, useBrands } from '../api'
 import fuzzysort from 'fuzzysort';
@@ -10,71 +10,79 @@ import useTranslations from '../hooks/useTranslations'
 import { Layout } from '../Layout'
 import BottomNav from '../component/BottomNav'
 import useDebounce from '../hooks/useDebounce'
-import MobilePagination from '../component/MobilePagination' // <-- STEP 1: IMPORT THE NEW COMPONENT
+import MobilePagination from '../component/MobilePagination'
 import FilterModal from '../component/FilterModal'
 
+// Skeleton: Surface Container as base
 const ItemCardSkeleton = () => (
-  <div className="flex items-start gap-4 p-3 rounded-lg secBg primBorder">
-    <div className="w-24 h-24 skeleton rounded-md flex-shrink-0"></div>
+  <div className="flex items-start gap-4 p-3 rounded-lg bg-md-surface-container animate-pulse">
+    <div className="w-24 h-24 bg-md-surface-variant/50 rounded-md flex-shrink-0"></div>
     <div className="flex-1 space-y-2">
-      <div className="h-5 w-3/4 skeleton"></div>
-      <div className="h-4 w-1/4 skeleton"></div>
-      <div className="h-6 w-1/2 skeleton"></div>
+      <div className="h-5 w-3/4 bg-md-surface-variant/50 rounded"></div>
+      <div className="h-4 w-1/4 bg-md-surface-variant/30 rounded"></div>
+      <div className="h-6 w-1/2 bg-md-surface-variant/50 rounded"></div>
     </div>
   </div>
 )
 
 import VoiceInputModal from '../component/VoiceInputModal';
+
 // Header component with search form and voice input
+// MD3: Surface Container background for top bar area
 const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate, onVoiceClick, isVoiceOpen, lang }) => {
-  // Determine if RTL
   const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
-  // Padding for input: left for RTL, right for LTR
-  const inputPadding = isRTL ? 'pl-20' : 'pr-20';
-  // Icon positions
-  const micBtnClass = isRTL ? 'absolute left-0 top-0' : 'absolute right-0 top-0';
-  const searchBtnClass = isRTL ? 'absolute left-11 top-0' : 'absolute right-11 top-0';
+  const inputPadding = isRTL ? 'pl-12' : 'pr-12'; // Adjusted padding for cleaner look
+  // Search Icon is now inside the input on the start side usually, but keeping your layout:
+  // Your layout: Back < Input (with Mic inside) > 
+  // Let's refine the input style to be "Filled" (Surface Container Highest) and rounded-md.
+
   return (
-    <header className="secBg dividerBorder p-4">
+    <header className="bg-md-surface-container p-4 shadow-sm z-10 sticky top-0">
       <div className="max-w-[430px] mx-auto">
         <form onSubmit={handleSearch} className="flex items-center gap-3">
-          <button type="button" onClick={() => navigate(-1)} aria-label={t('searchResults.header.backButtonAriaLabel')} className="min-h-11 min-w-11 flex items-center justify-center rounded-lg btnSecondary flex-shrink-0">
-            <ArrowLeft size={20} />
+          {/* Back Button */}
+          <button 
+            type="button" 
+            onClick={() => navigate(-1)} 
+            aria-label={t('searchResults.header.backButtonAriaLabel')} 
+            className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-md-on-surface/10 text-md-on-surface transition-colors flex-shrink-0"
+          >
+            <ArrowLeft size={24} />
           </button>
-          <div className="relative flex-1">
+          
+          <div className="relative flex-1 group">
             <input
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder={t('searchResults.header.placeholder')}
-              className={`inputField h-11 ${inputPadding} text-sm w-full`}
+              // MD3 Search Bar: Rounded Full, Surface Container Highest
+              className={`w-full h-12 rounded-md bg-md-surface-container-highest text-md-on-surface placeholder:text-md-on-surface-variant px-5 text-base focus:outline-none focus:ring-2 focus:ring-md-primary transition-all ${isRTL ? 'pl-12' : 'pr-12'}`}
               dir={isRTL ? 'rtl' : 'ltr'}
             />
 
-            <button
-              type="submit"
-              aria-label={t('searchResults.header.searchButtonAriaLabel')}
-              className={`${searchBtnClass} h-11 w-11 flex items-center justify-center secText hover:accentPrimText transition-colors`}
-            >
-              <SearchIcon size={20} />
-            </button>
+            {/* Mic Button (End side) */}
             <button
               type="button"
               aria-label={t('searchResults.header.voiceButtonAriaLabel') || 'Voice Search'}
               onClick={onVoiceClick}
-              className={`${micBtnClass} h-11 w-11 flex items-center justify-center accentPrimBg rounded-full hover:opacity-90 transition-colors`}
+              className={`absolute top-1 bottom-1 ${isRTL ? 'left-1' : 'right-1'} w-10 h-10 flex items-center justify-center rounded-md hover:bg-md-on-surface-variant/10 text-md-primary transition-colors`}
             >
-              <Mic size={20} className="primText" />
+              <Mic size={20} />
             </button>
+            
+            {/* We typically rely on "Enter" or the mobile keyboard "Go" for search submission in this UI style, 
+                but if you need a visible search icon inside, it's usually at the start. 
+                I'll keep it simple as per MD3 guidelines which often just show the input. 
+                If you really need a submit button, it could replace the mic when typing? 
+                For now, preserving your functional structure but cleaning visuals.
+            */}
           </div>
         </form>
       </div>
     </header>
   );
 }
-
-
-
 
 // --- Main Search Results Component ---
 
@@ -89,18 +97,16 @@ export default function SearchResults() {
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [currentPage, setCurrentPage] = useState(1)
   const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
-  // Open voice modal if ?voice=1 is present in URL
+
   useEffect(() => {
     if (searchParams.get('voice') === '1') {
       setVoiceModalOpen(true);
-      // Remove the voice param from the URL (replace, don't push history)
       const newParams = new URLSearchParams(searchParams);
       newParams.delete('voice');
       setTimeout(() => setSearchParams(newParams, { replace: true }), 0);
     }
   }, [searchParams, setSearchParams]);
 
-  // Refactored filter state for new UI
   const [filters, setFilters] = useState(() => {
     const initialCategories = searchParams.get('category') ? [searchParams.get('category')] : []
     const initialBrands = searchParams.get('brand') ? [searchParams.get('brand')] : []
@@ -139,11 +145,8 @@ export default function SearchResults() {
     }
   }, [])
 
-  // --- Core Logic (largely unchanged, adapted to new filter state) ---
-
   const handleSearch = (e) => {
     e.preventDefault()
-    // Force immediate search, bypassing debounce
     const trimmed = searchTerm.trim();
     const newSearchParams = new URLSearchParams(searchParams);
     if (trimmed) {
@@ -153,15 +156,13 @@ export default function SearchResults() {
     }
     setSearchParams(newSearchParams, { replace: true });
     setCurrentPage(1)
-    setSearchTerm(trimmed); // keep input trimmed
+    setSearchTerm(trimmed); 
   }
 
-  // Handle voice input confirm
   const handleVoiceConfirm = (transcript) => {
     const trimmed = transcript.trim();
     if (trimmed) {
       setSearchTerm(trimmed);
-      // Immediately search
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.set('q', trimmed);
       setSearchParams(newSearchParams, { replace: true });
@@ -169,11 +170,8 @@ export default function SearchResults() {
     }
   }
 
-  // TEMP: Always fetch all products (no search string)
   const apiParams = useMemo(() => {
     const p = {}
-    // const query = searchParams.get('q')
-    // if (query) p.name = query
     const realCategories = filters.categories.filter(c => c !== 'inStock' && c !== 'onDiscount')
     if (realCategories.length > 0) p.categories = realCategories.join(',')
     if (filters.brands.length > 0) p.brands = filters.brands.join(',')
@@ -183,42 +181,23 @@ export default function SearchResults() {
 
   const { data: apiData, loading: loadingProducts, error: productsError } = useProducts(apiParams, { immediate: true })
 
-  // Manual search using fuzzywuzzy and string match on translated name (supports Urdu and other languages)
   const filteredResults = useMemo(() => {
     let results = Array.isArray(apiData) ? apiData.slice() : []
     if (filters.categories.includes('onDiscount')) {
       results = results.filter(it => (it.discountedPrice ?? it.price) < (it.price ?? it.originalPrice))
     }
-    // Manual search
     const search = searchParams.get('q')?.trim();
     if (search) {
-      // Use translated name for matching
-      // Normalize both search and translated for Unicode (for Urdu, Arabic, etc.)
       const langCode = lang;
       const normalizedSearch = search.normalize('NFC').toLowerCase();
-      // Prepare list with translated names
       const withTranslated = results.map(item => {
         const translated = (translateDBVal('Product', 'name', item.name, langCode) || item.name || '').normalize('NFC');
-        return {
-          item,
-          translated,
-          translatedLower: translated.toLowerCase(),
-        };
+        return { item, translated, translatedLower: translated.toLowerCase() };
       });
-      // Fuzzywuzzy (fuzzysort) results
-      const fuzzy = fuzzysort.go(normalizedSearch, withTranslated, {
-        key: 'translated',
-        threshold: -90 // tighter: only stronger matches
-      });
-      // Collect unique ids from fuzzy
+      const fuzzy = fuzzysort.go(normalizedSearch, withTranslated, { key: 'translated', threshold: -90 });
       const fuzzyIds = new Set(fuzzy.map(f => f.obj.item._id));
-      // Substring match (case-insensitive, Unicode safe)
-      const substringMatches = withTranslated.filter(({ translatedLower }) =>
-        translatedLower.includes(normalizedSearch)
-      ).map(({ item }) => item._id);
-      // Merge ids
+      const substringMatches = withTranslated.filter(({ translatedLower }) => translatedLower.includes(normalizedSearch)).map(({ item }) => item._id);
       const allIds = new Set([...fuzzyIds, ...substringMatches]);
-      // Filter results by id, preserve original order
       results = results.filter(it => allIds.has(it._id));
     }
     return results;
@@ -281,20 +260,13 @@ export default function SearchResults() {
     }
   }
 
-  const clearCategoryFilters = () => {
-    setFilters(prev => ({ ...prev, categories: [] }))
-  }
-
-  const clearBrandFilters = () => {
-    setFilters(prev => ({ ...prev, brands: [] }))
-  }
+  const clearCategoryFilters = () => { setFilters(prev => ({ ...prev, categories: [] })) }
+  const clearBrandFilters = () => { setFilters(prev => ({ ...prev, brands: [] })) }
 
   const mapApiItemToCard = (it) => ({
     id: it._id,
     title: it.name,
-    // displayed price: prefer discountedPrice, fall back to price
     price: it.discountedPrice ?? it.price,
-    // originalPrice may be provided as `originalPrice`; fall back to `price` when absent
     originalPrice: it.originalPrice ?? it.price,
     category: it.category?.name,
     inStock: (it.stockQuantity - (it.reservedQuantity || 0) > 0),
@@ -311,41 +283,63 @@ export default function SearchResults() {
 
   // Main content component
   const SearchContent = () => (
-    <main className="flex-1 overflow-y-auto primBg min-h-full">
+    <main className="flex-1 overflow-y-auto bg-md-surface min-h-full">
       {/* New Filter & Sort Section */}
-      <section className="p-4 space-y-4 dividerBorder">
+      <section className="p-4 space-y-4 border-b border-md-outline-variant/30">
         <div className="flex items-center gap-2">
-          <button onClick={() => setFilterModalOpen(true)} className="btnSecondary px-4 py-2 rounded-lg">
+          {/* Filter Button: Tonal Button (Secondary Container) */}
+          <button 
+            onClick={() => setFilterModalOpen(true)} 
+            className="h-9 px-4 rounded-md bg-md-secondary-container text-md-on-secondary-container font-medium text-sm flex items-center gap-2 hover:opacity-90 transition-opacity"
+          >
+            <Filter size={16} />
             {t('searchResults.summary.filtersButton')}
           </button>
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 py-0.5">
+          
+          {/* Active Filter Chips */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1 py-0.5">
             {selectedCategoryObjects.map(cat => (
-              <span key={cat._id} className="badgePrimary flex-shrink-0 text-xs py-1 px-2.5">
+              <span key={cat._id} className="h-7 inline-flex items-center px-2.5 rounded-md bg-md-secondary-container text-md-on-secondary-container text-xs font-medium whitespace-nowrap">
                 {cat._id === 'inStock' || cat._id === 'onDiscount' ? cat.name : translateDBVal("Category", "name", cat.name, lang)}
               </span>
             ))}
             {selectedBrandObjects.map(brand => (
-              <span key={brand._id} className="badgePrimary flex-shrink-0 text-xs py-1 px-2.5">
+              <span key={brand._id} className="h-7 inline-flex items-center px-2.5 rounded-md bg-md-secondary-container text-md-on-secondary-container text-xs font-medium whitespace-nowrap">
                 {translateDBVal("Brand", "name", brand.name, lang)}
               </span>
             ))}
             {(selectedCategoryObjects.length > 0 || selectedBrandObjects.length > 0) && (
-              <button onClick={() => { clearCategoryFilters(); clearBrandFilters(); }} className="badgePrimary flex-shrink-0 !bg-red-500 !text-white hover:!bg-red-600 transition-colors text-xs py-1 px-2.5">
+              <button 
+                onClick={() => { clearCategoryFilters(); clearBrandFilters(); }} 
+                className="h-7 inline-flex items-center px-2.5 rounded-md bg-md-error text-md-on-error hover:bg-md-error/90 transition-colors text-xs font-bold whitespace-nowrap"
+              >
                 {t('common.clear')}
               </button>
             )}
           </div>
         </div>
+        
+        {/* Sort Options */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="primText font-medium text-sm">{t('searchResults.sorting.label')}</span>
+          <span className="text-md-on-surface-variant font-medium text-xs uppercase tracking-wide">{t('searchResults.sorting.label')}</span>
           <div className="flex gap-2">
             {['name', 'price', 'discount'].map(key => (
-              <button key={key} onClick={() => handleSortClick(key)} className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 ${filters.sortBy === key ? 'accentPrimBg text-white' : 'secBg primText primBorder secHoverBg'}`}>
+              <button 
+                key={key} 
+                onClick={() => handleSortClick(key)} 
+                className={`
+                  h-8 px-3 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1.5 border
+                  ${filters.sortBy === key 
+                    ? 'bg-md-secondary-container border-md-secondary-container text-md-on-secondary-container' // Active Sort
+                    : 'bg-md-surface border-md-outline-variant text-md-on-surface hover:bg-md-surface-container-high' // Inactive Sort
+                  }
+                `}
+              >
                 {t(`searchResults.sorting.${key}`)}
                 {filters.sortBy === key && (
                   filters.sortOrder === 'asc' ?
-                    <ChevronUp size={16} className="flex-shrink-0" /> :
-                    <ChevronDown size={16} className="flex-shrink-0" />
+                    <ChevronUp size={14} className="flex-shrink-0" /> :
+                    <ChevronDown size={14} className="flex-shrink-0" />
                 )}
               </button>
             ))}
@@ -356,7 +350,7 @@ export default function SearchResults() {
       {/* Results Info */}
       <section className="px-4 pt-4 pb-2">
         {loadingProducts ? (
-          <p className="primText font-medium flex items-center gap-2">
+          <p className="text-md-on-surface font-medium flex items-center gap-2">
             <span>{t('common.loading') || 'Loading'}</span>
             <span className="inline-flex gap-0.5">
               <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
@@ -365,12 +359,12 @@ export default function SearchResults() {
             </span>
           </p>
         ) : (
-          <p className="primText font-medium truncate">
+          <p className="text-md-on-surface font-medium truncate">
             {t(totalResults === 1 ? 'searchResults.summary.resultFound' : 'searchResults.summary.resultsFound').replace('{{count}}', totalResults)}
             {searchQuery && (
-              <span className="secText font-normal">
+              <span className="text-md-on-surface-variant font-normal">
                 {' '}{t('searchResults.summary.for')}{' '}
-                <span className="font-semibold italic">"{searchQuery}"</span>
+                <span className="font-semibold italic text-md-on-surface">"{searchQuery}"</span>
               </span>
             )}
           </p>
@@ -379,13 +373,13 @@ export default function SearchResults() {
 
       {/* Results List */}
       <section className="p-4">
-        <div className="space-y-4">
+        <div className="space-y-3">
           {loadingProducts ? (
             Array.from({ length: 5 }).map((_, i) => <ItemCardSkeleton key={i} />)
           ) : productsError ? (
-            <p className="text-center accentDangerText p-8">{t('searchResults.results.error')}</p>
+            <p className="text-center text-md-error p-8">{t('searchResults.results.error')}</p>
           ) : currentResults.length === 0 ? (
-            <p className="text-center secText p-8">{t('searchResults.results.noResults')}</p>
+            <p className="text-center text-md-on-surface-variant p-8 italic">{t('searchResults.results.noResults')}</p>
           ) : (
             currentResults.map((item) => (
               <div key={item._id}>

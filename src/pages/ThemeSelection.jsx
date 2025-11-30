@@ -55,7 +55,6 @@ export default function ThemeSelection() {
     }
   }, [setTheme])
 
-  // Helper function for translations
   const t = (key) => translations[key][lang] || translations[key]['en'];
 
   const themes = [
@@ -74,25 +73,27 @@ export default function ThemeSelection() {
   ]
 
   return (
-    <div className="min-h-screen flex items-center justify-center primBg p-4">
+    // Page Container: Surface Background
+    <div className="min-h-screen flex items-center justify-center bg-md-surface p-4">
       <div className="w-full max-w-[430px] space-y-6">
+        
         {/* Page Header */}
         <div className="text-center space-y-3">
           <div className="flex justify-center">
-            {/* Animated Icon Swap */}
-            <div className="w-16 h-16 secBg rounded-full flex items-center justify-center primBorder relative">
-              <Sun className={`w-8 h-8 accentPrimText transition-all duration-500 absolute ${theme === 'light' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
-              <Moon className={`w-8 h-8 accentPrimText transition-all duration-500 absolute ${theme === 'dark' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+            {/* Animated Icon Swap Container: Secondary Container */}
+            <div className="w-16 h-16 rounded-full bg-md-secondary-container flex items-center justify-center relative shadow-sm overflow-hidden">
+              <Sun className={`w-8 h-8 text-md-on-secondary-container transition-all duration-500 absolute ${theme === 'light' ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-90'}`} />
+              <Moon className={`w-8 h-8 text-md-on-secondary-container transition-all duration-500 absolute ${theme === 'dark' ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 rotate-90'}`} />
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold primText">{t('headerTitle')}</h1>
-            <p className="mt-1 text-base secText">{t('headerSubtitle')}</p>
+            <h1 className="text-2xl font-bold text-md-on-surface">{t('headerTitle')}</h1>
+            <p className="mt-1 text-base text-md-on-surface-variant">{t('headerSubtitle')}</p>
           </div>
         </div>
         
-        {/* Main Content Card */}
-        <div className="secBg primBorder rounded-xl shadow-sm p-5 space-y-4">
+        {/* Main Content Card: Surface Container */}
+        <div className="bg-md-surface-container rounded-md shadow-sm p-5 space-y-4">
           {/* Theme Options */}
           <div className="space-y-3">
             {themes.map((themeOption) => {
@@ -103,34 +104,43 @@ export default function ThemeSelection() {
                 <button
                   key={id}
                   onClick={() => setTheme(id)}
-                  className={`w-full min-h-16 p-4 rounded-lg transition-all duration-200 flex items-center justify-between text-left ${
+                  // Card Styling:
+                  // Selected: Primary Container + Border
+                  // Unselected: Surface Container High (Filled)
+                  className={`w-full min-h-[80px] p-4 rounded-md transition-all duration-200 flex items-center justify-between text-left border ${
                     isSelected
-                      ? 'modeChooseButton-selected'
-                      : 'modeChooseButton-unselected'
+                      ? 'bg-md-primary-container border-md-primary shadow-sm'
+                      : 'bg-md-surface-container-high border-transparent hover:bg-md-surface-container-highest'
                   }`}
                   aria-pressed={isSelected}
                   aria-label={`Select ${name} theme`}
                 >
                   <div className="flex items-center gap-4">
-                    <Icon className={`w-6 h-6 ${isSelected ? 'accentPrimText' : 'secText'}`} />
+                    {/* Icon: Adapts to container text color */}
+                    <Icon className={`w-6 h-6 ${isSelected ? 'text-md-on-primary-container' : 'text-md-on-surface-variant'}`} />
                     <div>
-                      <p className={`font-semibold text-lg ${isSelected ? '' : 'primText'}`}>{name}</p>
-                      <p className={`text-sm ${isSelected ? '' : 'secText'}`}>{description}</p>
+                      <p className={`font-semibold text-lg ${isSelected ? 'text-md-on-primary-container' : 'text-md-on-surface'}`}>
+                        {name}
+                      </p>
+                      <p className={`text-sm ${isSelected ? 'text-md-on-primary-container/80' : 'text-md-on-surface-variant'}`}>
+                        {description}
+                      </p>
                     </div>
                   </div>
-                  {isSelected && <CheckCircle className="w-6 h-6 accentPrimText flex-shrink-0" />}
+                  {/* Checkmark */}
+                  {isSelected && <CheckCircle className="w-6 h-6 text-md-primary flex-shrink-0" />}
                 </button>
               )
             })}
           </div>
           
-          {/* Proceed Button */}
+          {/* Proceed Button: Primary */}
           <button
             onClick={() => {
               localStorage.setItem('hasOnboarded', 'true');
               navigate('/login');
             }}
-            className="w-full min-h-12 px-6 py-3 btnPrimary rounded-lg transition-all duration-200 mt-4"
+            className="w-full min-h-[48px] px-6 py-3 bg-md-primary text-md-on-primary font-bold rounded-md shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4"
           >
             {t('proceedButton')}
           </button>
