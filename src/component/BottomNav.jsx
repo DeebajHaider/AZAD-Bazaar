@@ -84,7 +84,7 @@ export default function BottomNav() {
   const { totalItemsCount } = useCart();
 
   return (
-    <header className="bottom-0 left-0 right-0 primBg primBorder sticky z-50">
+    <header className="bottom-0 left-0 right-0 primBg primBorder sticky z-40">
       <nav 
         className="max-w-[430px] mx-auto flex justify-around items-center h-16 px-4 gap-2"
         aria-label={t('bottomNav.ariaLabel')}
