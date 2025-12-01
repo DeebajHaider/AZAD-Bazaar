@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import smartlookClient from 'smartlook-client'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -36,6 +37,16 @@ import { PaymentDataProvider } from './context/PaymentDataContext'
 import ManagePayments from './pages/ManagePayments'
 
 export default function App() {
+  useEffect(() => {
+    // This code runs once when the app starts.
+    // Initialize the Smartlook Web SDK for session recording and heatmaps.
+    // --- IMPORTANT ---
+    // Replace this with your actual project key from the Smartlook dashboard
+    smartlookClient.init('b667668399931a9cd9e2518fceab106b9ff5a13b', { region: 'eu' });
+    console.log('Smartlook Web SDK initialized.');
+    // The web SDK starts recording automatically after init.
+
+  }, []); // The empty array ensures this effect runs only once.
   const AuthGate = () => {
     const { user, loading } = useAuth()
 
