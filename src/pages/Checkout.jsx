@@ -457,7 +457,7 @@ export default function Checkout() {
 // --- Local Modal Components ---
 const ModalBackdrop = ({ children, onClose }) => (
   <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-    <div className="absolute inset-0 bg-black/60 transition-opacity backdrop-blur-sm" onClick={onClose} />
+    <div className="absolute inset-0 bg-black/60 transition-opacity" onClick={onClose} />
     <div className="relative w-full max-w-[430px] bg-md-surface text-md-on-surface rounded-t-2xl sm:rounded-md overflow-hidden shadow-xl animate-in slide-in-from-bottom-5">
       {children}
     </div>

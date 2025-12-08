@@ -398,7 +398,7 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
 
     return (
         <>
-            <div className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm" onClick={onClose} />
+            <div className="fixed inset-0 bg-black/60 z-50" onClick={onClose} />
             <div 
                 className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto bg-md-surface-container-high rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
@@ -480,7 +480,7 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
     
     return (
         <>
-            <div className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm" onClick={onClose} />
+            <div className="fixed inset-0 bg-black/60 z-50" onClick={onClose} />
             <div className="fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto bg-md-surface-container-high rounded-t-2xl shadow-2xl flex flex-col max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
                 <header className="border-b border-md-outline-variant/30 p-5 flex items-center justify-between">
                     <h2 className="text-xl font-bold text-md-on-surface">

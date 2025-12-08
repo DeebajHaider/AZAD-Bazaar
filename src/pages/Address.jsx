@@ -203,7 +203,7 @@ export default function Address() {
                     </button>
                   </div>
                   {isDeleting && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-md-surface/50 rounded-md backdrop-blur-sm">
+                    <div className="absolute inset-0 flex items-center justify-center bg-md-surface/50 rounded-md">
                       <Loader2 className="animate-spin text-md-primary" size={28} />
                     </div>
                   )}
@@ -216,7 +216,7 @@ export default function Address() {
 
       {/* Modal: Surface Container High */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50 backdrop-blur-sm" onClick={handleCloseModal}>
+        <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50" onClick={handleCloseModal}>
           <div onClick={(e) => e.stopPropagation()} className="bg-md-surface-container-high w-full max-w-[430px] rounded-t-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl" style={{animation:'slideUp 0.3s ease-out'}}>
             <header className="border-b border-md-outline-variant/30 sticky top-0 p-4 flex items-center justify-between flex-shrink-0 bg-inherit z-10">
               <h2 className="text-lg font-bold text-md-on-surface">
