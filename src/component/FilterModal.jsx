@@ -1,14 +1,34 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { X, Search, Filter, Mic, Check } from 'lucide-react'
 import VoiceInputModal from './VoiceInputModal'
 
 const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories, brands, t, lang, translateDBVal }) => {
-  if (!isOpen) return null
+  // Removed early return to allow CSS animations
+  // if (!isOpen) return null
 
   const [tempCategories, setTempCategories] = useState(initialFilters.categories)
   const [tempBrands, setTempBrands] = useState(initialFilters.brands)
   const [searchQuery, setSearchQuery] = useState('')
   const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+
+  // Sync state when modal opens (mimics unmount/remount behavior)
+  useEffect(() => {
+    if (isOpen) {
+      setTempCategories(initialFilters.categories)
+      setTempBrands(initialFilters.brands)
+      setSearchQuery('')
+    }
+  }, [isOpen, initialFilters])
+
+  // Lock body scroll
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
 
   // --- Helpers ---
   const getName = (item, type) => translateDBVal(type, "name", item.name, lang) || ''
@@ -90,18 +110,27 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
   );
 
   return (
-    // Outer backdrop: Scrim
-    <div 
-      className="fixed inset-0 z-50 flex justify-center items-end bg-black/60 transition-opacity backdrop-blur-sm" 
-      role="dialog" 
-      aria-modal="true" 
-      aria-labelledby="filter-title"
-      onClick={onClose}
-    >
-      {/* Modal Container: Surface Container High (Standard for Bottom Sheets) */}
-      <div 
-        className="bg-md-surface-container-high w-full max-w-[430px] rounded-t-2xl flex flex-col max-h-[75vh] animate-in slide-in-from-bottom duration-200 shadow-2xl" 
-        onClick={e => e.stopPropagation()}
+    <>
+      {/* Backdrop - Scrim Color */}
+      <div
+        onClick={onClose}
+        className={`fixed inset-0 z-50 bg-black/60 transition-opacity duration-300
+          ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
+        }
+        aria-hidden={!isOpen}
+      />
+
+      {/* Bottom Sheet Panel */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filter-title"
+        onClick={(e) => e.stopPropagation()}
+        className={`fixed bottom-0 left-0 right-0 z-50 max-w-[430px] mx-auto 
+          bg-md-surface-container-high rounded-t-2xl shadow-2xl transform transition-transform duration-300 ease-out
+          flex flex-col max-h-[75vh]
+          ${isOpen ? 'translate-y-0' : 'translate-y-full'}`
+        }
       >
         {/* --- Drag Handle --- */}
         <div className="w-full flex justify-center pt-3 pb-1" onClick={onClose}>
@@ -244,16 +273,16 @@ const FilterModal = ({ isOpen, onClose, initialFilters, applyFilters, categories
              {t('searchResults.filterPanel.applyButton')}
            </button>
         </footer>
-
-        {/* Voice Input Modal */}
+      </div>
+      {/* Voice Input Modal */}
         <VoiceInputModal
           isOpen={isVoiceModalOpen}
           onClose={() => setVoiceModalOpen(false)}
           onConfirm={handleVoiceConfirm}
           confirmLabel={t('voiceModal.actions.confirmSearch')}
         />
-      </div>
-    </div>
+
+    </>
   )
 }
 
