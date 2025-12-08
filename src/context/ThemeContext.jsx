@@ -83,41 +83,40 @@ useEffect(() => {
 
   const pickColorFromDOM = () => {
     const header = document.querySelector('header')
+    let targetVar = '--color-md-surface'
     
     if (header) {
-      // Try to get header's own background color
-      const headerStyle = window.getComputedStyle(header)
-      const headerBg = headerStyle.backgroundColor
-      
-      // Check if header has a non-transparent background
-      if (headerBg && !headerBg.includes('rgba(0, 0, 0, 0)') && headerBg !== 'transparent') {
-        const headerHex = cssColorToHex(headerBg)
-        if (headerHex) {
-          console.log('[StatusBar] Using header color:', headerHex)
-          return headerHex
-        }
-      }
-      
-      // Fallback to .secBg if header is transparent
-      const secBgEl = header.querySelector('.secBg')
-      if (secBgEl) {
-        const secBgStyle = window.getComputedStyle(secBgEl)
-        const secBgColor = secBgStyle.backgroundColor
-        const secBgHex = cssColorToHex(secBgColor)
-        if (secBgHex) {
-          console.log('[StatusBar] Using secBg color:', secBgHex)
-          return secBgHex
-        }
+      const rect = header.getBoundingClientRect()
+      // Check if header is at the top (allowing for small sub-pixel differences)
+      if (Math.abs(rect.top) < 1) {
+        targetVar = '--color-md-surface-container'
       }
     }
     
-    // Final fallback to .primBg or body
-    const el = document.querySelector('.primBg') || document.body
-    const cs = window.getComputedStyle(el)
-    const bgColor = cs.backgroundColor
-    const hex = cssColorToHex(bgColor) || (theme === 'dark' ? '#020617' : '#ffffff')
-    console.log('[StatusBar] Using fallback color:', hex)
-    return hex
+    try {
+      const temp = document.createElement('div')
+      temp.style.backgroundColor = `var(${targetVar})`
+      temp.style.position = 'absolute'
+      temp.style.visibility = 'hidden'
+      document.body.appendChild(temp)
+      
+      const computedStyle = window.getComputedStyle(temp)
+      const resolvedColor = computedStyle.backgroundColor
+      document.body.removeChild(temp)
+      
+      const resolvedHex = cssColorToHex(resolvedColor)
+      if (resolvedHex) {
+        console.log(`[StatusBar] Using ${targetVar}:`, resolvedHex)
+        return resolvedHex
+      }
+    } catch (e) {
+      console.warn(`[StatusBar] Error resolving ${targetVar}:`, e)
+    }
+    
+    // Final fallback
+    const fallback = theme === 'dark' ? '#11150D' : '#F8FBEE'
+    console.log('[StatusBar] Using hardcoded fallback:', fallback)
+    return fallback
   }
 
   const apply = async () => {
