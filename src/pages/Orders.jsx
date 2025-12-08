@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
@@ -6,11 +6,13 @@ import BottomNav from '../component/BottomNav'
 import { useOrdersContext } from '../context/OrderContext'
 import { useI18n } from '../context/I18nContext'
 import OrderItemCard, { OrderItemCardSkeleton } from '../component/OrderItemCard'
+import MobilePagination from '../component/MobilePagination'
 import { PackageX, AlertCircle } from 'lucide-react'
 
 export default function Orders() {
   const { orders, loading, error } = useOrdersContext()
   const { t } = useI18n()
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Improved Empty State with actionable button
   const EmptyState = () => (
@@ -61,6 +63,12 @@ export default function Orders() {
     ? [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     : [];
 
+  // Pagination logic
+  const pageSize = 5
+  const totalResults = sortedOrders.length
+  const totalPages = Math.max(1, Math.ceil(totalResults / pageSize))
+  const currentOrders = sortedOrders.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
   return (
     <Layout
       header={<HeaderWithName title={t('orders.title')} to="/" />}
@@ -79,7 +87,7 @@ export default function Orders() {
 
           {/* Orders List */}
           {!loading && !error && sortedOrders && sortedOrders.length > 0 && (
-            sortedOrders.map(order => (
+            currentOrders.map(order => (
               <Link 
                 key={order._id} 
                 to={`/orders/${order._id}`} 
@@ -95,6 +103,15 @@ export default function Orders() {
           {/* Empty State */}
           {!loading && !error && sortedOrders && sortedOrders.length === 0 && <EmptyState />}
         </div>
+
+        {/* Pagination */}
+        {totalResults > pageSize && (
+          <MobilePagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        )}
       </main>
     </Layout>
   )
