@@ -44,7 +44,7 @@ export default function App() {
     // Just show a simple static loader.
     if (loading) {
       return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center primBg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-md-surface">
            <img src="/Azad-Bazaar.svg" alt="Loading..." className="h-40 w-auto animate-pulse" />
         </div>
       )
