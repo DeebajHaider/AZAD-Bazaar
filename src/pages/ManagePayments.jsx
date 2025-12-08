@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { Plus, CreditCard, Smartphone, Edit2, Trash2, X, Loader2, Check, Star, Wallet, Link as LinkIcon, AlertCircle } from 'lucide-react'
+import React, { useState, useCallback } from 'react'
+import { Plus, CreditCard, Smartphone, Edit2, Trash2, X, Loader2, Check, Star, Wallet, Link as LinkIcon, AlertCircle, Mic } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import { useCreditCards, useMobileWallets } from '../context/PaymentDataContext' 
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import { showToast } from '../utils/toast'
 import ImageWithLoader from '../component/ImageWithLoader'
+import { useAccessibility } from '../context/AccessibilityContext'
+import VoiceInputModal from '../component/VoiceInputModal'
 
 // --- Language Strings ---
 const languageStrings = {
@@ -366,6 +368,10 @@ export default function ManagePayments() {
 const inputClass = "w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface placeholder:text-md-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-md-primary transition-all";
 
 function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
+    const { ascMode } = useAccessibility()
+    const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+    const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+    const [voiceTarget, setVoiceTarget] = useState(null)
     const [formData, setFormData] = useState({
         last4Digits: '',
         brand: '',
@@ -381,6 +387,13 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
         if (name === 'expiryYear' && value.length > 4) return;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
+
+    const handleVoiceConfirm = useCallback((transcript) => {
+        if (!voiceTarget) return;
+        setFormData(prev => ({ ...prev, [voiceTarget]: transcript }))
+        setVoiceModalOpen(false)
+        setVoiceTarget(null)
+    }, [voiceTarget])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -415,21 +428,41 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
                             <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('cardBrand')}</label>
                             <div className="relative">
                                 <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 text-md-on-surface-variant" size={18} />
-                                <input type="text" name="brand" value={formData.brand} onChange={handleChange} required placeholder={t('brandPlaceholder')} className={`${inputClass} pl-10`} />
+                                <input type="text" name="brand" value={formData.brand} onChange={handleChange} required placeholder={t('brandPlaceholder')} className={`${inputClass} pl-10 pr-12`} />
+                                {isVoiceInput && (
+                                    <button
+                                    type="button"
+                                    onClick={() => { setVoiceTarget('brand'); setVoiceModalOpen(true); }}
+                                    className="absolute top-1.5 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-90 transition-colors"
+                                    >
+                                    <Mic size={18} />
+                                    </button>
+                                )}
                             </div>
                         </div>
                         <div>
                             <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('cardNumber')}</label>
-                            <input
-                                type="text"
-                                inputMode="numeric"
-                                name="last4Digits"
-                                value={formData.last4Digits}
-                                onChange={(e) => handleChange({target: {name: 'last4Digits', value: e.target.value.replace(/\D/g, '')}})}
-                                required
-                                className={`${inputClass} font-mono tracking-widest`}
-                                placeholder={t('last4Digits')}
-                            />
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    name="last4Digits"
+                                    value={formData.last4Digits}
+                                    onChange={(e) => handleChange({target: {name: 'last4Digits', value: e.target.value.replace(/\D/g, '')}})}
+                                    required
+                                    className={`${inputClass} font-mono tracking-widest pr-12`}
+                                    placeholder={t('last4Digits')}
+                                />
+                                {isVoiceInput && (
+                                    <button
+                                    type="button"
+                                    onClick={() => { setVoiceTarget('last4Digits'); setVoiceModalOpen(true); }}
+                                    className="absolute top-1.5 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-90 transition-colors"
+                                    >
+                                    <Mic size={18} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
                         <div>
                             <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('expiryDate')}</label>
@@ -449,15 +482,33 @@ function CreditCardModal({ onClose, onSave, isSaving, setIsSaving, t }) {
                     </fieldset>
                 </form>
             </div>
+            {isVoiceInput && voiceModalOpen && (
+                <VoiceInputModal
+                isOpen={voiceModalOpen}
+                onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+                onConfirm={handleVoiceConfirm}
+                />
+            )}
         </>
     );
 }
 
 function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletData }) {
+    const { ascMode } = useAccessibility()
+    const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
+    const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+    const [voiceTarget, setVoiceTarget] = useState(null)
     const [formData, setFormData] = useState({
         provider: walletData?.provider || '',
         mobileNumber: walletData?.mobileNumber || '',
     });
+
+    const handleVoiceConfirm = useCallback((transcript) => {
+        if (!voiceTarget) return;
+        setFormData(prev => ({ ...prev, [voiceTarget]: transcript }))
+        setVoiceModalOpen(false)
+        setVoiceTarget(null)
+    }, [voiceTarget])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -518,9 +569,18 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
                                     value={formData.mobileNumber} 
                                     onChange={handleChange} 
                                     required 
-                                    className={`${inputClass} pl-10`}
+                                    className={`${inputClass} pl-10 pr-12`}
                                     placeholder="03XX XXXXXXX"
                                 />
+                                {isVoiceInput && (
+                                    <button
+                                    type="button"
+                                    onClick={() => { setVoiceTarget('mobileNumber'); setVoiceModalOpen(true); }}
+                                    className="absolute top-1.5 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-90 transition-colors"
+                                    >
+                                    <Mic size={18} />
+                                    </button>
+                                )}
                             </div>
                         </div>
 
@@ -533,6 +593,13 @@ function MobileWalletModal({ onClose, onSave, isSaving, setIsSaving, t, walletDa
                     </fieldset>
                 </form>
             </div>
+            {isVoiceInput && voiceModalOpen && (
+                <VoiceInputModal
+                isOpen={voiceModalOpen}
+                onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+                onConfirm={handleVoiceConfirm}
+                />
+            )}
         </>
     );
 }

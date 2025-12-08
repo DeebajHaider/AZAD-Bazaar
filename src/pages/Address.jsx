@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { Plus, Edit2, Trash2, MapPin, X, Loader2 } from 'lucide-react'
+import React, { useState, useCallback } from 'react'
+import { Plus, Edit2, Trash2, MapPin, X, Loader2, Mic } from 'lucide-react'
 import { useI18n } from '../context/I18nContext'
 import useAddress from '../api/hooks/useAddress'
 import { useAuth } from '../context/AuthContext'
 import { Layout } from '../Layout'
 import HeaderWithName from '../component/HeaderWithName'
 import { showToast } from '../utils/toast'
+import { useAccessibility } from '../context/AccessibilityContext'
+import VoiceInputModal from '../component/VoiceInputModal'
 
 // --- Language Constants (unchanged) ---
 const languageStrings = {
@@ -42,10 +44,15 @@ export default function Address() {
 
   const { addresses, loading, addAddress, updateAddress, deleteAddress, refreshAddresses } = useAddress()
   const { setDefaultAddress } = useAuth()
+  const { ascMode } = useAccessibility()
+  const isVoiceInput = typeof ascMode === 'string' && ascMode.includes('voiceInput')
 
   const [showModal, setShowModal] = useState(false)
   const [editingAddress, setEditingAddress] = useState(null)
   const [formData, setFormData] = useState({ label: '', addressText: '', lat: null, lng: null, isDefault: false })
+  const [voiceModalOpen, setVoiceModalOpen] = useState(false)
+  const [voiceTarget, setVoiceTarget] = useState(null)
+  
   
   const [mutatingState, setMutatingState] = useState({ id: null, type: null })
   const isActionLoading = !!mutatingState.type
@@ -124,6 +131,13 @@ export default function Address() {
       }
     }
   }
+
+  const handleVoiceConfirm = useCallback((transcript) => {
+    if (!voiceTarget) return;
+    setFormData(prev => ({ ...prev, [voiceTarget]: transcript }))
+    setVoiceModalOpen(false)
+    setVoiceTarget(null)
+  }, [voiceTarget])
 
   const handleCaptureLocation = () => {
     if (isActionLoading) return
@@ -231,25 +245,47 @@ export default function Address() {
               <fieldset disabled={mutatingState.type === 'save'} className="flex flex-col gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('labelPlaceholder')}</label>
-                  <input 
-                    type="text" 
-                    value={formData.label} 
-                    onChange={(e) => setFormData(prev => ({...prev, label: e.target.value}))} 
-                    required 
-                    // Filled Input Style
-                    className="w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50" 
-                  />
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      value={formData.label} 
+                      onChange={(e) => setFormData(prev => ({...prev, label: e.target.value}))} 
+                      required 
+                      // Filled Input Style
+                      className="w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50 pr-12" 
+                    />
+                    {isVoiceInput && (
+                        <button
+                          type="button"
+                          onClick={() => { setVoiceTarget('label'); setVoiceModalOpen(true); }}
+                          className="absolute top-1.5 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-90 transition-colors"
+                        >
+                          <Mic size={18} />
+                        </button>
+                    )}
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-2 text-md-on-surface">{t('fullAddressLabel')}</label>
-                  <textarea 
-                    value={formData.addressText} 
-                    onChange={(e) => setFormData(prev => ({...prev, addressText: e.target.value}))} 
-                    required 
-                    rows={4} 
-                    placeholder={t('addressPlaceholder')} 
-                    className="w-full rounded-md bg-md-surface-container-highest p-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50 resize-y" 
-                  />
+                  <div class="relative">
+                    <textarea 
+                      value={formData.addressText} 
+                      onChange={(e) => setFormData(prev => ({...prev, addressText: e.target.value}))} 
+                      required 
+                      rows={4} 
+                      placeholder={t('addressPlaceholder')} 
+                      className="w-full rounded-md bg-md-surface-container-highest p-4 text-md-on-surface focus:outline-none focus:ring-2 focus:ring-md-primary placeholder:text-md-on-surface-variant/50 resize-y pr-12" 
+                    />
+                    {isVoiceInput && (
+                        <button
+                          type="button"
+                          onClick={() => { setVoiceTarget('addressText'); setVoiceModalOpen(true); }}
+                          className="absolute top-1.5 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-md bg-md-secondary-container text-md-on-secondary-container hover:opacity-90 transition-colors"
+                        >
+                          <Mic size={18} />
+                        </button>
+                    )}
+                  </div>
                   <button type="button" onClick={handleCaptureLocation} className="mt-3 px-3 py-2 rounded-md bg-md-secondary-container text-md-on-secondary-container text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <MapPin size={16} /> {t('captureLocation')}
                   </button>
@@ -268,6 +304,14 @@ export default function Address() {
             </form>
           </div>
         </div>
+      )}
+
+      {isVoiceInput && voiceModalOpen && (
+        <VoiceInputModal
+          isOpen={voiceModalOpen}
+          onClose={() => { setVoiceModalOpen(false); setVoiceTarget(null); }}
+          onConfirm={handleVoiceConfirm}
+        />
       )}
 
       <style>{`@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }`}</style>
