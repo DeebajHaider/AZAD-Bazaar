@@ -29,7 +29,7 @@ import VoiceInputModal from '../component/VoiceInputModal';
 
 // Header component with search form and voice input
 // MD3: Surface Container background for top bar area
-const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate, onVoiceClick, isVoiceOpen, lang }) => {
+const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate, onVoiceClick, isVoiceOpen, lang, inputRef }) => {
   const isRTL = lang === 'ar' || lang === 'he' || lang === 'fa' || lang === 'ur';
   const inputPadding = isRTL ? 'pl-12' : 'pr-12'; // Adjusted padding for cleaner look
   // Search Icon is now inside the input on the start side usually, but keeping your layout:
@@ -52,6 +52,7 @@ const SearchHeader = ({ searchTerm, setSearchTerm, handleSearch, t, navigate, on
           
           <div className="relative flex-1 group">
             <input
+              ref={inputRef}
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -97,6 +98,8 @@ export default function SearchResults() {
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [currentPage, setCurrentPage] = useState(1)
   const [isVoiceModalOpen, setVoiceModalOpen] = useState(false)
+
+  const inputRef = React.useRef(null);
 
   useEffect(() => {
     if (searchParams.get('voice') === '1') {
@@ -145,8 +148,22 @@ export default function SearchResults() {
     }
   }, [])
 
+  useEffect(() => {
+  const hide = () => {
+    document.activeElement?.blur();
+  };
+  document.addEventListener("touchend", hide);
+  return () => document.removeEventListener("touchend", hide);
+}, []);
+
+
+
   const handleSearch = (e) => {
     e.preventDefault()
+
+    inputRef.current?.blur();  // hides keyboard on Android
+
+
     const trimmed = searchTerm.trim();
     const newSearchParams = new URLSearchParams(searchParams);
     if (trimmed) {
@@ -414,6 +431,7 @@ export default function SearchResults() {
             onVoiceClick={() => setVoiceModalOpen(true)}
             isVoiceOpen={isVoiceModalOpen}
             lang={lang}
+            inputRef={inputRef}
           />
           <VoiceInputModal
             isOpen={isVoiceModalOpen}

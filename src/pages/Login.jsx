@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '../context/I18nContext'
@@ -124,6 +124,22 @@ export default function Login() {
 
   // Reusable Input Style (Filled)
   const inputClass = "w-full h-12 rounded-md bg-md-surface-container-highest px-4 text-md-on-surface placeholder:text-md-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-md-primary transition-all";
+
+  const phoneInputRef = useRef(null)
+  const otpInputRef = useRef(null)
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (step === 'enter-phone') {
+        handleSendOtp(e);
+        phoneInputRef.current?.blur();
+      } else if (step === 'waiting-otp') {
+        handleVerifyOtp(e);
+        otpInputRef.current?.blur();
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-md-surface px-4">
@@ -273,10 +289,12 @@ export default function Login() {
                     {t('login.form.phone.label')}
                   </label>
                   <input
+                    ref={phoneInputRef}
                     type="tel"
                     inputMode="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+                    onKeyDown={handleKeyDown}
                     placeholder={t('login.form.phone.placeholder')}
                     className={`${inputClass} pr-12 rtl:pl-12`}
                   />
@@ -309,10 +327,12 @@ export default function Login() {
                     {t('login.form.otp.label')}
                   </label>
                   <input
+                    ref={otpInputRef}
                     type="tel"
                     inputMode="tel"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                    onKeyDown={handleKeyDown}
                     placeholder={t('login.form.otp.placeholder')}
                     maxLength={6}
                     className={`${inputClass} text-center text-2xl font-semibold tracking-widest pr-12 rtl:pl-12`}
