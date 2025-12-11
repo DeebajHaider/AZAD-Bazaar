@@ -12,17 +12,31 @@ const LANG_MAP = {
 export default function useSpeechRecognition() {
   const { lang } = useI18n();
   const [transcript, setTranscript] = useState('');
-  const [status, setStatus] = useState('idle'); // idle | listening | error | done
+  const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   
-  // Web-specific ref
   const webRecognitionRef = useRef(null);
-  
-  // Determine if we are on a native device (iOS/Android)
   const isNative = Capacitor.isNativePlatform();
 
-  // Check support: Native is always "supported" (checked via plugin), Web checks window object
   const isSupported = isNative || (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition));
+
+  // Initialize permissions on mount for native platforms
+  useEffect(() => {
+    if (isNative && !isInitialized) {
+      const initPermissions = async () => {
+        try {
+          const permissionStatus = await SpeechRecognition.requestPermissions();
+          if (permissionStatus.speechRecognition === 'granted') {
+            setIsInitialized(true);
+          }
+        } catch (e) {
+          console.error('Permission initialization error:', e);
+        }
+      };
+      initPermissions();
+    }
+  }, [isNative, isInitialized]);
 
   const startListening = useCallback(async () => {
     setError(null);
@@ -39,7 +53,16 @@ export default function useSpeechRecognition() {
     // --- NATIVE IMPLEMENTATION (CAPACITOR) ---
     if (isNative) {
       try {
-        // 1. Check/Request Permissions
+        // Stop any existing recognition first
+        await SpeechRecognition.stop().catch(() => {});
+        
+        // Small delay to ensure cleanup
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Remove any lingering listeners
+        await SpeechRecognition.removeAllListeners();
+
+        // Request permissions if not already granted
         const permissionStatus = await SpeechRecognition.requestPermissions();
         
         if (permissionStatus.speechRecognition !== 'granted' && permissionStatus.speechRecognition !== 'prompt') {
@@ -48,17 +71,14 @@ export default function useSpeechRecognition() {
           return;
         }
 
-        // 2. Remove any lingering listeners to avoid duplicates
-        await SpeechRecognition.removeAllListeners();
-
-        // 3. Listen for Partial Results (Updates transcript as you speak)
+        // Listen for Partial Results
         await SpeechRecognition.addListener('partialResults', (data) => {
           if (data.matches && data.matches.length > 0) {
             setTranscript(data.matches[0]);
           }
         });
 
-        // 4. Listen for State Changes (Detect when listening stops)
+        // Listen for State Changes
         await SpeechRecognition.addListener('listeningState', (data) => {
           if (data.status === 'stopped') {
             setStatus((prev) => prev === 'error' ? prev : 'idle');
@@ -67,30 +87,32 @@ export default function useSpeechRecognition() {
           }
         });
 
-        // 5. Start Listening
-        // We use partialResults: true to get real-time feedback
+        // Small delay before starting to ensure listeners are ready
+        await new Promise(resolve => setTimeout(resolve, 150));
+
+        // Start Listening with explicit language configuration
         await SpeechRecognition.start({
           language: LANG_MAP[lang] || 'en-US',
           maxResults: 1,
           partialResults: true,
-          popup: false, // Use false for invisible background listening
+          popup: false,
         });
 
       } catch (e) {
         console.error('Speech Recognition Error:', e);
         setStatus('error');
         setError(e.message || 'Native speech recognition failed');
-        await SpeechRecognition.stop();
+        await SpeechRecognition.stop().catch(() => {});
       }
       return;
     }
 
-    // --- WEB IMPLEMENTATION (ORIGINAL CODE) ---
+    // --- WEB IMPLEMENTATION ---
     const SpeechRecognitionWeb = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognitionWeb();
     
     recognition.lang = LANG_MAP[lang] || 'en-US';
-    recognition.interimResults = false; // Keep false to match your original logic, or true for live typing
+    recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
     recognition.onstart = () => setStatus('listening');
@@ -119,7 +141,6 @@ export default function useSpeechRecognition() {
     if (isNative) {
       try {
         await SpeechRecognition.stop();
-        // Remove listeners to clean up
         await SpeechRecognition.removeAllListeners();
         setStatus('idle');
       } catch (e) {
